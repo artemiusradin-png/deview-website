@@ -45,6 +45,29 @@ const stats = [
   { value: "24/7", label: "Expert support" },
 ];
 
+const services = [
+  {
+    title: "AI Customer Service",
+    description: "Intelligent, 24/7 customer support powered by AI. Handle tickets, resolve issues, and delight customers at scale—with human oversight when it matters.",
+    icon: "◉",
+  },
+  {
+    title: "AI Agentic",
+    description: "Autonomous AI agents that orchestrate workflows, make decisions, and execute tasks across your enterprise systems. Built for complex, multi-step operations.",
+    icon: "◎",
+  },
+  {
+    title: "AI Document Intelligence",
+    description: "Extract, classify, and analyze documents at enterprise scale. From contracts to invoices—automate your document workflows with AI.",
+    icon: "◇",
+  },
+  {
+    title: "AI Analytics & Insights",
+    description: "Turn your data into actionable intelligence. Natural language queries, predictive analytics, and automated reporting for your entire organization.",
+    icon: "◆",
+  },
+];
+
 export default function Home() {
   return (
     <div className="min-h-screen">
@@ -70,6 +93,12 @@ export default function Home() {
               className="text-sm text-[var(--muted)] transition-colors hover:text-[var(--green)]"
             >
               Features
+            </a>
+            <a
+              href="#services"
+              className="text-sm text-[var(--muted)] transition-colors hover:text-[var(--green)]"
+            >
+              Services
             </a>
             <a
               href="#contact"
@@ -124,8 +153,8 @@ export default function Home() {
               variants={fadeUp}
               className="mb-10 max-w-2xl text-lg leading-relaxed text-[var(--muted)]"
             >
-              Enterprise-grade infrastructure for your AI workloads. Deploy models,
-              manage GPU clusters, and scale inference—all with enterprise security
+              Enterprise-grade infrastructure and AI services for your business. Deploy models,
+              scale AI customer service, run agentic workflows—all with enterprise security
               and 99.99% uptime.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
@@ -251,6 +280,49 @@ export default function Home() {
                 </h3>
                 <p className="text-sm leading-relaxed text-[var(--muted)]">
                   {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section id="services" className="border-t border-[var(--line)] bg-[var(--surface)]/30 px-6 py-24">
+        <div className="mx-auto max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16 text-center"
+          >
+            <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-[var(--green)]">
+              Enterprise Solutions
+            </p>
+            <h2 className="text-3xl font-bold text-[var(--text)] sm:text-4xl">
+              AI services built for the enterprise
+            </h2>
+          </motion.div>
+
+          <div className="grid gap-6 sm:grid-cols-2">
+            {services.map((service, i) => (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -4 }}
+                className="group rounded-2xl border border-[var(--line)] bg-gradient-to-b from-[var(--surface)] to-[var(--surface-strong)] p-8 shadow-[0_24px_70px_rgba(0,0,0,0.28)] transition-colors hover:border-[var(--green)]/50"
+              >
+                <div className="mb-4 text-3xl text-[var(--green)] opacity-80 group-hover:opacity-100">
+                  {service.icon}
+                </div>
+                <h3 className="mb-3 text-xl font-semibold text-[var(--text)]">
+                  {service.title}
+                </h3>
+                <p className="text-[var(--muted)] leading-relaxed">
+                  {service.description}
                 </p>
               </motion.div>
             ))}
