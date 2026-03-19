@@ -307,6 +307,14 @@ export default function Home() {
             De<span className="text-[var(--green)]">View</span>
           </a>
           <div className="flex gap-8 text-sm text-[var(--muted)]">
+            <a
+              href="https://ai-consulting-task-manager.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-[var(--green)]"
+            >
+              Partners
+            </a>
             <a href="#" className="transition-colors hover:text-[var(--green)]">
               Privacy
             </a>
