@@ -7,49 +7,123 @@ const fade = {
   animate: { opacity: 1, y: 0 },
 };
 
-const destinations = [
+const services = [
   {
-    label: "DATA FOUNDATIONS",
-    vehicle: "Modern Data Stack",
-    duration: "8–12 weeks",
-    capacity: "Data platforms, warehouses, lakes",
-    body: "Design and implement the data architecture your AI systems depend on—governed, observable, and production-ready.",
-    availability: "Availability: Q2 / Q3 2026",
-    id: "data-foundations",
+    label: "AI STRATEGY",
+    title: "Opportunity mapping and roadmap design",
+    duration: "2-4 weeks",
+    scope: "Discovery, prioritization, business case",
+    body: "Assess where AI can create leverage across operations, customer experience, and internal workflows, then convert that into a focused execution roadmap.",
+    status: "Best for teams deciding where to start",
+    id: "strategy",
   },
   {
-    label: "AI SYSTEMS",
-    vehicle: "LLM & Agents",
-    duration: "6–10 weeks",
-    capacity: "Customer, operations, and product surfaces",
-    body: "Ship AI copilots, retrieval systems, and agentic workflows that plug into your existing products and tooling.",
-    availability: "Availability: Rolling admissions",
-    id: "ai-systems",
+    label: "CUSTOM SOLUTIONS",
+    title: "AI copilots, workflows, and internal tools",
+    duration: "6-12 weeks",
+    scope: "LLM apps, automation, retrieval, agents",
+    body: "Design and ship AI products tailored to your workflows, from customer support assistants to internal knowledge systems and operational automation.",
+    status: "Best for teams moving from pilot to product",
+    id: "custom-solutions",
   },
   {
-    label: "MLOPS",
-    vehicle: "Inference & Training",
-    duration: "4–8 weeks",
-    capacity: "Model serving, evaluation, monitoring",
-    body: "Stand up evaluation loops, safety guardrails, and observability pipelines so models behave reliably in production.",
-    availability: "Availability: Q2 2026",
-    id: "mlops",
+    label: "DATA & MLOPS",
+    title: "Production foundations for reliable AI",
+    duration: "4-10 weeks",
+    scope: "Pipelines, evals, monitoring, governance",
+    body: "Build the data, evaluation, and observability layer required to run AI systems safely and reliably in production.",
+    status: "Best for teams scaling beyond demos",
+    id: "data-mlops",
   },
   {
-    label: "AI ADOPTION",
-    vehicle: "Change & Enablement",
+    label: "ENABLEMENT",
+    title: "Training, change management, operating model",
     duration: "Ongoing",
-    capacity: "Teams, playbooks, capability building",
-    body: "Equip teams with patterns, playbooks, and training so AI becomes a durable capability—not a one-off pilot.",
-    availability: "Availability: Limited 2026 cohorts",
-    id: "ai-adoption",
+    scope: "Workshops, playbooks, team capability",
+    body: "Equip internal teams with the workflows, documentation, and operating habits needed to sustain AI adoption after the initial launch.",
+    status: "Best for orgs building durable capability",
+    id: "enablement",
+  },
+];
+
+const solutionAreas = [
+  {
+    sector: "CUSTOMER OPERATIONS",
+    title: "Support and service automation",
+    body: "Deploy AI assistants for support triage, knowledge retrieval, response drafting, and case summarization without breaking existing support workflows.",
+  },
+  {
+    sector: "INTERNAL KNOWLEDGE",
+    title: "Enterprise search and expert copilots",
+    body: "Turn fragmented documents, policies, and internal systems into trusted research, compliance, and decision-support interfaces.",
+  },
+  {
+    sector: "OPERATIONS",
+    title: "Workflow acceleration and exception handling",
+    body: "Automate repetitive review, classification, routing, and escalation tasks while keeping humans in the loop for judgment-heavy cases.",
+  },
+  {
+    sector: "DATA PRODUCTS",
+    title: "Analytics and intelligence layers",
+    body: "Build data-backed AI interfaces that surface business signals, summarize trends, and assist teams with better day-to-day decisions.",
+  },
+];
+
+const outcomes = [
+  {
+    label: "EFFICIENCY",
+    body: "Reduce manual work in repetitive internal processes and shorten the time from request to action.",
+  },
+  {
+    label: "SERVICE QUALITY",
+    body: "Improve response quality, consistency, and speed across customer-facing and internal support workflows.",
+  },
+  {
+    label: "DECISION SUPPORT",
+    body: "Give teams faster access to the right information so planning, review, and escalation decisions are made with better context.",
+  },
+  {
+    label: "COST CONTROL",
+    body: "Target automation where it lowers operating cost without adding brittle systems or unnecessary model spend.",
+  },
+];
+
+const processSteps = [
+  {
+    step: "01",
+    title: "Identify the business problem",
+    body: "We start with workflows, stakeholders, constraints, and available data rather than forcing a model-first solution.",
+  },
+  {
+    step: "02",
+    title: "Scope the engagement",
+    body: "Define the use case, expected value, implementation path, timeline, and commercial model before build work begins.",
+  },
+  {
+    step: "03",
+    title: "Design and build the solution",
+    body: "Develop the application, data flows, and evaluation framework needed to make the system useful in real operations.",
+  },
+  {
+    step: "04",
+    title: "Test with real users",
+    body: "Validate the system with live workflows, gather feedback, and tighten quality, safety, and usability before rollout.",
+  },
+  {
+    step: "05",
+    title: "Launch and support adoption",
+    body: "Ship the solution into production, document operating procedures, and train the internal team responsible for usage.",
+  },
+  {
+    step: "06",
+    title: "Monitor and improve",
+    body: "Maintain observability, evaluate performance, and iterate based on real usage patterns and business outcomes.",
   },
 ];
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-black bg-grid text-[var(--text)]">
-      {/* Fixed navigation */}
       <header className="fixed inset-x-0 top-0 z-40 border-b border-[var(--white-20)] bg-gradient-to-b from-[var(--black-80)] to-transparent">
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <a href="#" className="text-sm tracking-[0.25em] uppercase text-[var(--white-80)]">
@@ -59,14 +133,17 @@ export default function Home() {
             <a href="#hero" className="nav-item nav-item-active">
               AI CONSULTING
             </a>
-            <a href="#destinations" className="nav-item">
+            <a href="#services" className="nav-item">
               SERVICES
             </a>
-            <a href="#research" className="nav-item">
-              RESEARCH
+            <a href="#solutions" className="nav-item">
+              USE CASES
             </a>
-            <a href="#vehicles" className="nav-item">
-              PLATFORMS
+            <a href="#outcomes" className="nav-item">
+              OUTCOMES
+            </a>
+            <a href="#process" className="nav-item">
+              PROCESS
             </a>
             <a href="#contact" className="nav-item">
               INQUIRE
@@ -75,7 +152,6 @@ export default function Home() {
         </nav>
       </header>
 
-      {/* HERO – HUMAN SPACEFLIGHT → AI CONSULTING */}
       <section id="hero" className="section-fullscreen relative flex items-center justify-center px-6">
         <div className="absolute inset-0 hero-overlay" />
         <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col justify-between gap-16 md:flex-row">
@@ -83,17 +159,19 @@ export default function Home() {
             initial={fade.initial}
             animate={fade.animate}
             transition={{ duration: 0.6 }}
-            className="max-w-xl"
+            className="max-w-2xl"
           >
-            <p className="section-label mb-4">AI CONSULTING & DATA ENGINEERING</p>
-            <h1 className="hero-heading mb-6 text-4xl md:text-5xl lg:text-6xl text-[var(--white-100)]">
-              HUMAN‑CENTERED
+            <p className="section-label mb-4">AI CONSULTING, DELIVERY, AND ENABLEMENT</p>
+            <h1 className="hero-heading mb-6 text-4xl text-[var(--white-100)] md:text-5xl lg:text-6xl">
+              CUSTOM AI
               <br />
-              AI SYSTEMS
+              SOLUTIONS FOR
+              <br />
+              REAL OPERATIONS
             </h1>
-            <p className="max-w-xl text-sm md:text-base text-[var(--text-muted)]">
-              DeView partners with enterprises to design, build, and run AI systems—spanning data platforms,
-              LLM applications, and MLOps—so your teams can move from experiments to reliable production impact.
+            <p className="max-w-xl text-sm text-[var(--text-muted)] md:text-base">
+              DeView helps companies identify high-value AI opportunities, build custom solutions, and put the
+              right data and operating foundations in place so those systems deliver measurable results.
             </p>
           </motion.div>
 
@@ -103,29 +181,24 @@ export default function Home() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="flex flex-col items-end justify-between gap-10 text-right"
           >
-            <div className="space-y-2 text-xs text-[var(--white-60)] uppercase tracking-[0.18em]">
-              <div>DATA</div>
-              <div>AI ENGINEERING</div>
-              <div>MLOPS</div>
+            <div className="space-y-2 text-xs uppercase tracking-[0.18em] text-[var(--white-60)]">
+              <div>STRATEGY</div>
+              <div>SOLUTION DELIVERY</div>
+              <div>DATA & MLOPS</div>
+              <div>TEAM ENABLEMENT</div>
             </div>
             <div className="space-y-3 text-sm">
               <div className="flex items-baseline justify-end gap-4">
-                <span className="text-xs tracking-[0.2em] uppercase text-[var(--white-60)]">
-                  CLIENTS
-                </span>
-                <span className="text-base text-[var(--white-100)]">MID‑MARKET TO ENTERPRISE</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-[var(--white-60)]">CLIENTS</span>
+                <span className="text-base text-[var(--white-100)]">MID-MARKET TO ENTERPRISE</span>
               </div>
               <div className="flex items-baseline justify-end gap-4">
-                <span className="text-xs tracking-[0.2em] uppercase text-[var(--white-60)]">
-                  MODEL STACK
-                </span>
-                <span className="text-base text-[var(--white-100)]">OPEN‑SOURCE & PROPRIETARY</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-[var(--white-60)]">FOCUS</span>
+                <span className="text-base text-[var(--white-100)]">USEFUL AI, NOT DEMO THEATER</span>
               </div>
               <div className="flex items-baseline justify-end gap-4">
-                <span className="text-xs tracking-[0.2em] uppercase text-[var(--white-60)]">
-                  ENGAGEMENTS
-                </span>
-                <span className="text-base text-[var(--white-100)]">STRATEGY → DELIVERY → RUN</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-[var(--white-60)]">ENGAGEMENTS</span>
+                <span className="text-base text-[var(--white-100)]">DISCOVERY TO PRODUCTION</span>
               </div>
             </div>
             <div className="flex items-center gap-8">
@@ -134,7 +207,7 @@ export default function Home() {
               </a>
               <div className="flex flex-col items-end gap-3">
                 <div className="scroll-cue" />
-                <span className="text-[0.6rem] tracking-[0.2em] uppercase text-[var(--white-60)]">
+                <span className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
                   SCROLL
                 </span>
               </div>
@@ -143,56 +216,52 @@ export default function Home() {
         </div>
       </section>
 
-      {/* DESTINATIONS – AI ENGAGEMENTS */}
       <section
-        id="destinations"
+        id="services"
         className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-6"
       >
         <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
           <div>
-            <p className="section-label mb-3">WHERE DO WE START</p>
+            <p className="section-label mb-3">SERVICES</p>
             <div className="rule mb-6" />
             <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
-              <h2 className="text-2xl md:text-3xl text-[var(--white-100)]">
-                Engagements across data, AI systems,
+              <h2 className="text-2xl text-[var(--white-100)] md:text-3xl">
+                The service lines we can
                 <br />
-                and long‑term reliability.
+                present directly on the website.
               </h2>
-              <p className="max-w-md text-xs md:text-sm text-[var(--text-muted)]">
-                Four primary tracks structure how we work together. Each is modular and can be combined into
-                a broader transformation program.
+              <p className="max-w-md text-xs text-[var(--text-muted)] md:text-sm">
+                This is the core shift from the current page: make the offer legible to buyers by leading with
+                consulting services, then showing the technical capability underneath.
               </p>
             </div>
           </div>
 
-          <div className="grid gap-10 md:grid-cols-4">
-            {destinations.map((d) => (
+          <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-4">
+            {services.map((service) => (
               <motion.article
-                key={d.id}
+                key={service.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.4 }}
                 className="panel border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5"
               >
-                <p className="section-label mb-3 text-[0.6rem]">{d.label}</p>
+                <p className="section-label mb-3 text-[0.6rem]">{service.label}</p>
+                <p className="mb-3 text-sm text-[var(--white-100)]">{service.title}</p>
                 <div className="mb-4 space-y-1 text-[0.7rem] text-[var(--white-80)]">
                   <div className="flex justify-between gap-2">
-                    <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">VEHICLE</span>
-                    <span>{d.vehicle}</span>
-                  </div>
-                  <div className="flex justify-between gap-2">
                     <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">DURATION</span>
-                    <span>{d.duration}</span>
+                    <span>{service.duration}</span>
                   </div>
                   <div className="flex justify-between gap-2">
                     <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">SCOPE</span>
-                    <span className="text-right">{d.capacity}</span>
+                    <span className="text-right">{service.scope}</span>
                   </div>
                 </div>
-                <p className="mb-3 text-[0.75rem] leading-relaxed text-[var(--text-muted)]">{d.body}</p>
+                <p className="mb-3 text-[0.75rem] leading-relaxed text-[var(--text-muted)]">{service.body}</p>
                 <p className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)]">
-                  {d.availability}
+                  {service.status}
                 </p>
               </motion.article>
             ))}
@@ -200,253 +269,197 @@ export default function Home() {
         </div>
       </section>
 
-      {/* RESEARCH / SCIENCE – AI RESEARCH PROGRAMS */}
       <section
-        id="research"
+        id="solutions"
         className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-6"
       >
         <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
           <div>
-            <p className="section-label mb-3">RESEARCH</p>
+            <p className="section-label mb-3">USE CASES</p>
             <div className="rule mb-6" />
             <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
               <div>
-                <h2 className="mb-4 text-2xl md:text-3xl text-[var(--white-100)]">
-                  Applied AI research,
+                <h2 className="mb-4 text-2xl text-[var(--white-100)] md:text-3xl">
+                  Show buyers the kinds of
                   <br />
-                  grounded in your data.
+                  problems we solve.
                 </h2>
                 <p className="mb-4 text-sm text-[var(--text-muted)]">
-                  We work with product, data, and research teams to design experiments that advance your AI
-                  capabilities while respecting safety, governance, and real‑world constraints.
+                  Indonesia AI organizes demand by business sectors. We can do the same, but for DeView the
+                  cleaner framing is by workflow and function because it stays relevant across industries.
                 </p>
                 <p className="text-sm text-[var(--text-muted)]">
-                  Every engagement includes a structured experimentation plan, evaluation design, and clear
-                  decision gates—so research directly informs roadmaps instead of becoming a separate track.
+                  This makes the site easier to scan for a COO, product lead, or operations leader who is not
+                  shopping for “MLOps” but is shopping for a solved problem.
                 </p>
               </div>
               <div className="space-y-4 text-xs text-[var(--white-80)]">
-                <div className="flex justify-between">
-                  <span className="uppercase tracking-[0.2em] text-[var(--white-60)]">TRACKS</span>
-                  <span>Capability, Risk, Efficiency</span>
+                <div className="flex justify-between gap-4">
+                  <span className="uppercase tracking-[0.2em] text-[var(--white-60)]">FRAMING</span>
+                  <span className="text-right">Business workflows before model types</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="uppercase tracking-[0.2em] text-[var(--white-60)]">FOCUS</span>
-                  <span>Retrieval, agents, evals</span>
+                <div className="flex justify-between gap-4">
+                  <span className="uppercase tracking-[0.2em] text-[var(--white-60)]">POSITIONING</span>
+                  <span className="text-right">Custom systems integrated with real operations</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="uppercase tracking-[0.2em] text-[var(--white-60)]">OUTPUT</span>
-                  <span>Roadmaps, patterns, playbooks</span>
+                <div className="flex justify-between gap-4">
+                  <span className="uppercase tracking-[0.2em] text-[var(--white-60)]">DELIVERY</span>
+                  <span className="text-right">Strategy, build, and reliability in one engagement</span>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2">
-            <div className="panel border border-[var(--white-20)] bg-black px-5 py-6">
-              <p className="section-label mb-3 text-[0.65rem]">PRODUCT & CUSTOMER EXPERIENCE</p>
-              <p className="mb-3 text-sm text-[var(--white-100)]">
-                Customer‑facing AI research focuses on latency, reliability, and guardrails.
-              </p>
-              <p className="text-[0.8rem] text-[var(--text-muted)]">
-                We design experiments for AI copilots, search and retrieval, and support automation—measuring
-                containment, CSAT, and quality while protecting brand and safety.
-              </p>
-            </div>
-            <div className="panel border border-[var(--white-20)] bg-black px-5 py-6">
-              <p className="section-label mb-3 text-[0.65rem]">OPERATIONS & DATA</p>
-              <p className="mb-3 text-sm text-[var(--white-100)]">
-                Internal‑facing research strengthens data quality and operational efficiency.
-              </p>
-              <p className="text-[0.8rem] text-[var(--text-muted)]">
-                We evaluate how AI can accelerate analysts, engineers, and operators—building feedback loops
-                into the data and tooling they already use.
-              </p>
-            </div>
+            {solutionAreas.map((area) => (
+              <div key={area.title} className="panel border border-[var(--white-20)] bg-black px-5 py-6">
+                <p className="section-label mb-3 text-[0.65rem]">{area.sector}</p>
+                <p className="mb-3 text-sm text-[var(--white-100)]">{area.title}</p>
+                <p className="text-[0.8rem] text-[var(--text-muted)]">{area.body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* EQUIPMENT – TOOLING & STACK */}
       <section
-        id="equipment"
+        id="outcomes"
         className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-6"
       >
         <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
           <div>
-            <p className="section-label mb-3">TOOLING</p>
+            <p className="section-label mb-3">OUTCOMES</p>
             <div className="rule mb-6" />
             <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
               <div>
-                <h2 className="mb-4 text-2xl md:text-3xl text-[var(--white-100)]">
-                  The systems your teams
+                <h2 className="mb-4 text-2xl text-[var(--white-100)] md:text-3xl">
+                  Add a plain-language section
                   <br />
-                  live and build in.
+                  on business value.
                 </h2>
                 <p className="mb-4 text-sm text-[var(--text-muted)]">
-                  Every engagement includes recommendations—and, when needed, implementation—of the tools that
-                  sit closest to your teams: evaluation harnesses, experiment trackers, feature stores, and
-                  orchestration.
+                  One reason their page works is that it speaks directly to outcomes: more sales, better
+                  service, lower cost, stronger decisions. We should keep that clarity but use sharper,
+                  operator-focused language.
                 </p>
                 <p className="text-sm text-[var(--text-muted)]">
-                  Rather than pushing a single vendor, we help you select and integrate components into a
-                  cohesive stack that your engineers actually want to use.
+                  This section should reassure non-technical buyers that DeView is not only a build partner,
+                  but a partner tied to measurable operational improvement.
                 </p>
               </div>
               <div className="space-y-3 text-[0.8rem] text-[var(--white-80)]">
                 <div className="flex justify-between">
-                  <span className="uppercase tracking-[0.18em] text-[var(--white-60)]">
-                    EVALUATION
-                  </span>
-                  <span>Offline & online, human‑in‑the‑loop</span>
+                  <span className="uppercase tracking-[0.18em] text-[var(--white-60)]">BUYER SIGNAL</span>
+                  <span>Clear ROI narrative</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="uppercase tracking-[0.18em] text-[var(--white-60)]">OBSERVABILITY</span>
-                  <span>Tracing, logging, drift detection</span>
+                  <span className="uppercase tracking-[0.18em] text-[var(--white-60)]">TONE</span>
+                  <span>Practical, not hype-driven</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="uppercase tracking-[0.18em] text-[var(--white-60)]">SECURITY</span>
-                  <span>PII handling, access, isolation</span>
+                  <span className="uppercase tracking-[0.18em] text-[var(--white-60)]">PROOF</span>
+                  <span>Best paired with case studies later</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            <div className="panel border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5">
-              <p className="section-label mb-2 text-[0.6rem]">ENGINEERING</p>
-              <p className="text-[0.8rem] text-[var(--text-muted)]">
-                CI integrations, evaluation gates, and rollout strategies built into your existing pipelines.
-              </p>
-            </div>
-            <div className="panel border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5">
-              <p className="section-label mb-2 text-[0.6rem]">DATA</p>
-              <p className="text-[0.8rem] text-[var(--text-muted)]">
-                Data contracts, lineage, and quality baselines to keep models grounded in trustworthy data.
-              </p>
-            </div>
-            <div className="panel border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5">
-              <p className="section-label mb-2 text-[0.6rem]">TEAMS</p>
-              <p className="text-[0.8rem] text-[var(--text-muted)]">
-                Training, playbooks, and pairing sessions so internal teams can independently extend the work.
-              </p>
-            </div>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {outcomes.map((outcome) => (
+              <div key={outcome.label} className="panel border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5">
+                <p className="section-label mb-2 text-[0.6rem]">{outcome.label}</p>
+                <p className="text-[0.8rem] text-[var(--text-muted)]">{outcome.body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* VEHICLES – PLATFORMS */}
       <section
-        id="vehicles"
+        id="process"
         className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-6"
       >
         <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
           <div>
-            <p className="section-label mb-3">PLATFORMS</p>
+            <p className="section-label mb-3">PROCESS</p>
             <div className="rule mb-6" />
             <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
-              <h2 className="text-2xl md:text-3xl text-[var(--white-100)]">
-                Neutral on vendors,
+              <h2 className="text-2xl text-[var(--white-100)] md:text-3xl">
+                Make the engagement model
                 <br />
-                opinionated on architecture.
+                visible before the first call.
               </h2>
-              <p className="max-w-md text-xs md:text-sm text-[var(--text-muted)]">
-                We integrate with major cloud providers and model APIs while prioritizing portability,
-                evaluation, and long‑term optionality.
+              <p className="max-w-md text-xs text-[var(--text-muted)] md:text-sm">
+                Their page makes the buying process legible. We should do the same so prospects know what
+                happens after inquiry and how DeView moves from discovery to delivery and long-term support.
               </p>
             </div>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2">
-            <article className="panel flex flex-col justify-between border border-[var(--white-20)] bg-black px-5 py-6">
-              <div>
-                <p className="section-label mb-3 text-[0.65rem]">APPLICATION LAYER</p>
-                <h3 className="mb-3 text-sm text-[var(--white-100)]">LLM APPLICATIONS & AGENTS</h3>
-                <p className="mb-4 text-[0.8rem] text-[var(--text-muted)]">
-                  Design and ship retrieval, summarization, and agentic workflows that plug into your existing
-                  products—fronted by interfaces your customers and teams can trust.
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {processSteps.map((item) => (
+              <article key={item.step} className="panel border border-[var(--white-20)] bg-black px-5 py-6">
+                <p className="mb-3 text-[0.65rem] uppercase tracking-[0.24em] text-[var(--white-60)]">
+                  Step {item.step}
                 </p>
-              </div>
-              <a
-                href="#contact"
-                className="mt-4 inline-block text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-80)] underline underline-offset-4"
-              >
-                INQUIRE ABOUT APPLICATION WORK
-              </a>
-            </article>
-            <article className="panel flex flex-col justify-between border border-[var(--white-20)] bg-black px-5 py-6">
-              <div>
-                <p className="section-label mb-3 text-[0.65rem]">INFRASTRUCTURE LAYER</p>
-                <h3 className="mb-3 text-sm text-[var(--white-100)]">DATA & MLOPS FOUNDATIONS</h3>
-                <p className="mb-4 text-[0.8rem] text-[var(--text-muted)]">
-                  From ingestion and transformation to evaluation, serving, and monitoring, we help you define
-                  an opinionated reference architecture that can evolve with the ecosystem.
-                </p>
-              </div>
-              <a
-                href="#contact"
-                className="mt-4 inline-block text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-80)] underline underline-offset-4"
-              >
-                INQUIRE ABOUT PLATFORM WORK
-              </a>
-            </article>
+                <h3 className="mb-3 text-sm text-[var(--white-100)]">{item.title}</h3>
+                <p className="text-[0.8rem] text-[var(--text-muted)]">{item.body}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CONTACT / INQUIRE */}
-      <section
-        id="contact"
-        className="relative border-t border-[var(--white-20)] bg-black px-6 py-16"
-      >
+      <section id="contact" className="relative border-t border-[var(--white-20)] bg-black px-6 py-16">
         <div className="mx-auto max-w-3xl text-center">
           <p className="section-label mb-3">INQUIRE</p>
           <div className="rule mb-8" />
-          <h2 className="mb-4 text-2xl md:text-3xl text-[var(--white-100)]">
-            Ready to map your first—or next—AI mission?
+          <h2 className="mb-4 text-2xl text-[var(--white-100)] md:text-3xl">
+            Bring us the workflow, constraint,
+            <br />
+            or AI idea you want pressure-tested.
           </h2>
           <p className="mx-auto mb-10 max-w-2xl text-sm text-[var(--text-muted)]">
-            Share a brief description of your data, existing systems, and where you believe AI can create
-            leverage. We reply with a structured assessment and proposed tracks.
+            Share the business function, current process, available data, and desired outcome. We reply with a
+            structured view of fit, scope, and the right engagement path.
           </p>
           <div className="space-y-4 text-sm">
             <p className="uppercase tracking-[0.2em] text-[var(--white-60)]">PRIMARY CONTACT</p>
             <a
               href="mailto:hello@deview.ai"
-              className="text-lg md:text-xl text-[var(--white-100)] underline underline-offset-4"
+              className="text-lg text-[var(--white-100)] underline underline-offset-4 md:text-xl"
             >
               hello@deview.ai
             </a>
             <p className="text-[0.8rem] text-[var(--text-muted)]">
-              Include timelines, stakeholders, and any existing AI initiatives you would like us to build on.
+              Include timelines, stakeholders, and any existing internal tooling or AI initiatives we should
+              design around.
             </p>
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="border-t border-[var(--white-20)] bg-black px-6 py-8 text-[0.7rem]">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-6">
-            <span className="text-xs tracking-[0.25em] uppercase text-[var(--white-80)]">
-              DEVIEW
-            </span>
-            <span className="text-[var(--white-40)]">
-              © {new Date().getFullYear()} DeView. All rights reserved.
-            </span>
+            <span className="text-xs uppercase tracking-[0.25em] text-[var(--white-80)]">DEVIEW</span>
+            <span className="text-[var(--white-40)]">© {new Date().getFullYear()} DeView. All rights reserved.</span>
           </div>
           <div className="flex flex-wrap gap-5 text-[var(--white-60)]">
             <a href="#hero" className="uppercase tracking-[0.18em]">
               AI CONSULTING
             </a>
-            <a href="#destinations" className="uppercase tracking-[0.18em]">
+            <a href="#services" className="uppercase tracking-[0.18em]">
               SERVICES
             </a>
-            <a href="#research" className="uppercase tracking-[0.18em]">
-              RESEARCH
+            <a href="#solutions" className="uppercase tracking-[0.18em]">
+              USE CASES
             </a>
-            <a href="#vehicles" className="uppercase tracking-[0.18em]">
-              PLATFORMS
+            <a href="#outcomes" className="uppercase tracking-[0.18em]">
+              OUTCOMES
+            </a>
+            <a href="#process" className="uppercase tracking-[0.18em]">
+              PROCESS
             </a>
             <a href="#contact" className="uppercase tracking-[0.18em]">
               CONTACT
@@ -457,7 +470,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="uppercase tracking-[0.18em] underline underline-offset-4"
             >
-              TASK MANAGER
+              INTERNAL DASHBOARD
             </a>
           </div>
         </div>
