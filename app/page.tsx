@@ -454,6 +454,14 @@ export default function Home() {
             <a href="#contact" className="uppercase tracking-[0.18em]">
               CONTACT
             </a>
+            <a
+              href="https://ai-consulting-task-manager.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="uppercase tracking-[0.18em] underline underline-offset-4"
+            >
+              TASK MANAGER
+            </a>
           </div>
         </div>
       </footer>
