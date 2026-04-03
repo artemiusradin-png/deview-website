@@ -614,35 +614,40 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section id="contact" className="relative border-t border-[var(--white-20)] bg-black px-6 py-16">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="section-label mb-3">INQUIRE</p>
-          <div className="rule mb-8" />
-          <h2 className="mb-4 text-2xl text-[var(--white-100)] md:text-3xl">
-            Bring us the workflow, constraint,
-            <br />
-            or AI idea you want pressure-tested.
-          </h2>
-          <p className="mx-auto mb-10 max-w-2xl text-sm text-[var(--text-muted)]">
-            Share the business function, current process, available data, and desired outcome. We reply with a
-            structured view of fit, scope, and the right engagement path.
-          </p>
-          <div className="space-y-4 text-sm">
-            <p className="uppercase tracking-[0.2em] text-[var(--white-60)]">PRIMARY CONTACT</p>
-            <a
-              href="mailto:hello@deview.ai"
-              className="text-lg text-[var(--white-100)] underline underline-offset-4 md:text-xl"
-            >
-              hello@deview.ai
-            </a>
-            <p className="text-[0.8rem] text-[var(--text-muted)]">
-              Include timelines, stakeholders, and any existing internal tooling or AI initiatives we should
-              design around.
+      <section
+        id="contact"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-6"
+      >
+        <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-12">
+          <div className="max-w-md pt-2">
+            <p className="section-label mb-3">INQUIRE</p>
+            <div className="rule mb-6 max-w-[11rem]" />
+            <h2 className="mb-5 text-sm leading-relaxed text-[var(--white-100)]">
+              Bring us the workflow, constraint,
+              <br />
+              or AI idea you want pressure-tested.
+            </h2>
+            <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+              Share the business function, current process,
+              <br />
+              available data, and desired outcome.
             </p>
-            <div className="pt-3">
-              <a href="/contact" className="btn-outline">
-                CONTACT
+          </div>
+
+          <div className="flex flex-1 flex-col justify-end">
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <a
+                href="mailto:hello@deview.ai"
+                className="block leading-none text-[var(--white-80)] transition-colors duration-200 hover:text-[var(--white-100)]"
+              >
+                <span className="block text-[12vw] tracking-[-0.06em] md:text-[10vw]">hello</span>
+                <span className="block text-[12vw] tracking-[-0.06em] md:text-[10vw]">@deview.ai</span>
               </a>
+              <div className="pb-[1.2vw] md:pb-[1vw]">
+                <a href="/contact" className="btn-outline">
+                  SEND INQUIRY →
+                </a>
+              </div>
             </div>
           </div>
         </div>
