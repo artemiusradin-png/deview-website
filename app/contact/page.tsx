@@ -48,19 +48,21 @@ export default function ContactPage() {
             >
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                  Full Name
+                  Full Name <span className="text-red-500">*</span>
                   <input
                     type="text"
                     name="name"
+                    required
                     placeholder="Your name"
                     className="border border-[var(--white-20)] bg-black px-4 py-3 text-sm text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)]"
                   />
                 </label>
                 <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                  Work Email
+                  Work Email <span className="text-red-500">*</span>
                   <input
                     type="email"
                     name="email"
+                    required
                     placeholder="name@company.com"
                     className="border border-[var(--white-20)] bg-black px-4 py-3 text-sm text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)]"
                   />
@@ -78,9 +80,10 @@ export default function ContactPage() {
               </label>
 
               <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                What are you trying to solve?
+                What are you trying to solve? <span className="text-red-500">*</span>
                 <textarea
                   name="details"
+                  required
                   rows={6}
                   placeholder="Describe your use case, data context, and desired business outcome."
                   className="resize-none border border-[var(--white-20)] bg-black px-4 py-3 text-sm text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)]"

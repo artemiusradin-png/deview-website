@@ -28,6 +28,9 @@ const cardMotion = {
   whileInView: { opacity: 1, y: 0 },
 };
 
+const HERO_VIDEO_SRC = "/Abstract_Architectural_AI_Background_Video.mp4";
+const HERO_VIDEO_CROSSFADE_SECONDS = 0.9;
+
 const services = [
   {
     label: "AI STRATEGY",
@@ -143,20 +146,23 @@ const processSteps = [
 ];
 
 export default function Home() {
-  const heroVideoRef = useRef<HTMLVideoElement | null>(null);
+  const heroVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [heroVideoState, setHeroVideoState] = useState<"loading" | "playing" | "fallback">("loading");
+  const [activeHeroLayer, setActiveHeroLayer] = useState(0);
+  const standbyStartedRef = useRef(false);
 
   useEffect(() => {
-    const video = heroVideoRef.current;
+    const primaryVideo = heroVideoRefs.current[0];
 
-    if (!video) {
+    if (!primaryVideo) {
       setHeroVideoState("fallback");
       return;
     }
 
     const attemptPlayback = async () => {
       try {
-        await video.play();
+        primaryVideo.currentTime = 0;
+        await primaryVideo.play();
         setHeroVideoState("playing");
       } catch {
         setHeroVideoState("fallback");
@@ -165,6 +171,51 @@ export default function Home() {
 
     attemptPlayback();
   }, []);
+
+  const startStandbyLayer = async (currentLayer: number) => {
+    const nextLayer = currentLayer === 0 ? 1 : 0;
+    const standbyVideo = heroVideoRefs.current[nextLayer];
+
+    if (!standbyVideo || standbyStartedRef.current) {
+      return;
+    }
+
+    standbyStartedRef.current = true;
+
+    try {
+      standbyVideo.currentTime = 0;
+      await standbyVideo.play();
+      setHeroVideoState("playing");
+      setActiveHeroLayer(nextLayer);
+    } catch {
+      setHeroVideoState("fallback");
+    } finally {
+      const previousVideo = heroVideoRefs.current[currentLayer];
+      if (previousVideo) {
+        previousVideo.pause();
+        previousVideo.currentTime = 0;
+      }
+      standbyStartedRef.current = false;
+    }
+  };
+
+  const handleHeroTimeUpdate = (layerIndex: number) => {
+    if (layerIndex !== activeHeroLayer) {
+      return;
+    }
+
+    const activeVideo = heroVideoRefs.current[layerIndex];
+
+    if (!activeVideo || !Number.isFinite(activeVideo.duration) || activeVideo.duration <= 0) {
+      return;
+    }
+
+    const remaining = activeVideo.duration - activeVideo.currentTime;
+
+    if (remaining <= HERO_VIDEO_CROSSFADE_SECONDS) {
+      void startStandbyLayer(layerIndex);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-black bg-grid text-[var(--text)]">
@@ -198,23 +249,30 @@ export default function Home() {
 
       <section id="hero" className="section-fullscreen relative flex items-center justify-center px-6">
         <div className="hero-media absolute inset-0">
-          <video
-            ref={heroVideoRef}
-            className={`hero-video pointer-events-none absolute inset-0 h-full w-full object-cover ${
-              heroVideoState === "fallback" ? "hero-video-hidden" : "hero-video-visible"
-            }`}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            poster="/window.svg"
-            onLoadedData={() => setHeroVideoState((current) => (current === "fallback" ? current : "playing"))}
-            onPlay={() => setHeroVideoState("playing")}
-            onError={() => setHeroVideoState("fallback")}
-          >
-            <source src="/Abstract_Architectural_AI_Background_Video.mp4" type="video/mp4" />
-          </video>
+          {[0, 1].map((layerIndex) => (
+            <video
+              key={layerIndex}
+              ref={(node) => {
+                heroVideoRefs.current[layerIndex] = node;
+              }}
+              className={`hero-video pointer-events-none absolute inset-0 h-full w-full object-cover ${
+                heroVideoState === "playing" && activeHeroLayer === layerIndex
+                  ? "hero-video-visible"
+                  : "hero-video-hidden"
+              }`}
+              autoPlay={layerIndex === 0}
+              muted
+              playsInline
+              preload="auto"
+              onLoadedData={() => setHeroVideoState((current) => (current === "fallback" ? current : "playing"))}
+              onPlay={() => setHeroVideoState("playing")}
+              onTimeUpdate={() => handleHeroTimeUpdate(layerIndex)}
+              onEnded={() => void startStandbyLayer(layerIndex)}
+              onError={() => setHeroVideoState("fallback")}
+            >
+              <source src={HERO_VIDEO_SRC} type="video/mp4" />
+            </video>
+          ))}
           {heroVideoState === "fallback" ? (
             <div className="hero-fallback hero-fallback-visible absolute inset-0" aria-hidden="true">
               <div className="hero-fallback-grid" />
