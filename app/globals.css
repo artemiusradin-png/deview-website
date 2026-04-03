@@ -145,7 +145,8 @@ body {
 
 .hero-video {
   filter: grayscale(100%) saturate(0%) brightness(1.02) contrast(1.04);
-  transform: scale(1.06);
+  object-position: 44% 14%;
+  transform: scale(1.14);
   transform-origin: center top;
   transition:
     opacity 1500ms ease,
@@ -154,17 +155,17 @@ body {
 
 .hero-video-visible {
   opacity: 1;
-  transform: scale(1.06);
+  transform: scale(1.14);
 }
 
 .hero-video-fading {
   opacity: 0;
-  transform: scale(1.075);
+  transform: scale(1.155);
 }
 
 .hero-video-hidden {
   opacity: 0;
-  transform: scale(1.08);
+  transform: scale(1.16);
 }
 
 .hero-fallback {
@@ -401,4 +402,33 @@ body {
     transform: scaleY(1.08);
     transform-origin: top;
   }
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-fade-left,
+.carousel-fade-right {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  z-index: 5;
+}
+
+.carousel-fade-left {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.9), transparent);
+}
+
+.carousel-fade-right {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.9), transparent);
 }
