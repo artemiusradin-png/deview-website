@@ -145,7 +145,8 @@ body {
 
 .hero-video {
   filter: grayscale(100%) saturate(0%) brightness(1.02) contrast(1.04);
-  transform: scale(1.03);
+  transform: scale(1.06);
+  transform-origin: center top;
   transition:
     opacity 1500ms ease,
     transform 1800ms ease;
@@ -153,17 +154,17 @@ body {
 
 .hero-video-visible {
   opacity: 1;
-  transform: scale(1.03);
+  transform: scale(1.06);
 }
 
 .hero-video-fading {
   opacity: 0;
-  transform: scale(1.04);
+  transform: scale(1.075);
 }
 
 .hero-video-hidden {
   opacity: 0;
-  transform: scale(1.045);
+  transform: scale(1.08);
 }
 
 .hero-fallback {
