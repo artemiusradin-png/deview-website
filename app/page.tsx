@@ -665,7 +665,7 @@ export default function Home() {
 
       <section
         id="contact"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-6"
+        className="relative min-h-[88vh] border-t border-[var(--white-20)] bg-black px-6 pt-20 pb-6 md:min-h-[84vh] md:pt-20 md:pb-3"
       >
         <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-12">
           <div className="max-w-md pt-2">
@@ -687,7 +687,7 @@ export default function Home() {
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-8">
               <a
                 href="mailto:hello@deview.ai"
-                className="contact-monument min-w-0 flex-1 overflow-hidden leading-[0.9]"
+                className="contact-monument min-w-0 flex-1 pr-3 leading-[0.9] md:pr-8"
                 onMouseMove={handleContactMouseMove}
                 onMouseLeave={handleContactMouseLeave}
               >
