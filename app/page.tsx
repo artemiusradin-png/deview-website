@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const fade = {
@@ -143,7 +143,28 @@ const processSteps = [
 ];
 
 export default function Home() {
-  const [heroVideoFinished, setHeroVideoFinished] = useState(false);
+  const heroVideoRef = useRef<HTMLVideoElement | null>(null);
+  const [heroVideoState, setHeroVideoState] = useState<"loading" | "playing" | "fallback">("loading");
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+
+    if (!video) {
+      setHeroVideoState("fallback");
+      return;
+    }
+
+    const attemptPlayback = async () => {
+      try {
+        await video.play();
+        setHeroVideoState("playing");
+      } catch {
+        setHeroVideoState("fallback");
+      }
+    };
+
+    attemptPlayback();
+  }, []);
 
   return (
     <div className="min-h-screen bg-black bg-grid text-[var(--text)]">
@@ -178,32 +199,41 @@ export default function Home() {
       <section id="hero" className="section-fullscreen relative flex items-center justify-center px-6">
         <div className="hero-media absolute inset-0">
           <motion.video
+            ref={heroVideoRef}
             initial={false}
-            animate={{ opacity: heroVideoFinished ? 0 : 1 }}
+            animate={{ opacity: heroVideoState === "fallback" ? 0 : 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="hero-video pointer-events-none absolute inset-0 h-full w-full object-cover"
-            src="/Abstract_Architectural_AI_Background_Video.mp4"
             autoPlay
             muted
             playsInline
             preload="auto"
-            onEnded={() => setHeroVideoFinished(true)}
-            onError={() => setHeroVideoFinished(true)}
-          />
-          <motion.div
-            initial={false}
-            animate={{ opacity: heroVideoFinished ? 1 : 0.28 }}
-            transition={{ duration: 1.1, ease: "easeOut" }}
-            className="hero-fallback absolute inset-0"
-            aria-hidden="true"
+            poster="/window.svg"
+            onLoadedData={() => setHeroVideoState((current) => (current === "fallback" ? current : "playing"))}
+            onPlay={() => setHeroVideoState("playing")}
+            onEnded={() => setHeroVideoState("fallback")}
+            onError={() => setHeroVideoState("fallback")}
           >
-            <div className="hero-fallback-grid" />
-            <div className="hero-fallback-rings" />
-            <div className="hero-fallback-beam hero-fallback-beam-left" />
-            <div className="hero-fallback-beam hero-fallback-beam-right" />
-          </motion.div>
+            <source src="/Abstract_Architectural_AI_Background_Video.mp4" type="video/mp4" />
+          </motion.video>
+          {heroVideoState === "fallback" ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.1, ease: "easeOut" }}
+              className="hero-fallback absolute inset-0"
+              aria-hidden="true"
+            >
+              <div className="hero-fallback-grid" />
+              <div className="hero-fallback-rings" />
+              <div className="hero-fallback-beam hero-fallback-beam-left" />
+              <div className="hero-fallback-beam hero-fallback-beam-right" />
+            </motion.div>
+          ) : null}
         </div>
-        <div className="absolute inset-0 hero-overlay" />
+        <div
+          className={`absolute inset-0 ${heroVideoState === "fallback" ? "hero-overlay" : "hero-overlay hero-overlay-video"}`}
+        />
         <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col justify-between gap-16 md:flex-row">
           <motion.div
             initial={fade.initial}
@@ -223,6 +253,11 @@ export default function Home() {
               DeView helps companies identify high-value AI opportunities, build custom solutions, and put the
               right implementation foundations in place so those systems deliver measurable operational results.
             </p>
+            <div className="mt-8">
+              <a href="#contact" className="btn-outline">
+                CONTACT
+              </a>
+            </div>
           </motion.div>
 
           <motion.div
