@@ -687,7 +687,7 @@ export default function Home() {
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-8">
               <a
                 href="mailto:hello@deview.ai"
-                className="contact-monument min-w-0 flex-1 pr-3 leading-[0.9] md:pr-8"
+                className="contact-monument min-w-0 flex-1 pr-3 pb-2 leading-[0.98] md:pr-8"
                 onMouseMove={handleContactMouseMove}
                 onMouseLeave={handleContactMouseLeave}
               >
