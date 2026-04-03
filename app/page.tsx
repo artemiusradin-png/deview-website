@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { motion } from "framer-motion";
 
 const fade = {
@@ -251,6 +251,20 @@ export default function Home() {
       left: direction === "left" ? -amount : amount,
       behavior: "smooth",
     });
+  };
+
+  const handleContactMouseMove = (event: MouseEvent<HTMLAnchorElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+    event.currentTarget.style.setProperty("--contact-x", `${x}%`);
+    event.currentTarget.style.setProperty("--contact-y", `${y}%`);
+  };
+
+  const handleContactMouseLeave = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.currentTarget.style.setProperty("--contact-x", "50%");
+    event.currentTarget.style.setProperty("--contact-y", "50%");
   };
 
   return (
@@ -670,15 +684,17 @@ export default function Home() {
           </div>
 
           <div className="flex flex-1 flex-col justify-end">
-            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-8">
               <a
                 href="mailto:hello@deview.ai"
-                className="contact-monument block leading-none"
+                className="contact-monument min-w-0 flex-1 overflow-hidden leading-[0.9]"
+                onMouseMove={handleContactMouseMove}
+                onMouseLeave={handleContactMouseLeave}
               >
-                <span className="block text-[12vw] tracking-[-0.06em] md:text-[10vw]">hello</span>
-                <span className="block text-[12vw] tracking-[-0.06em] md:text-[10vw]">@deview.ai</span>
+                <span className="block text-[11vw] tracking-[-0.07em] md:text-[9.2vw]">hello</span>
+                <span className="block text-[11vw] tracking-[-0.07em] md:text-[9.2vw]">@deview.ai</span>
               </a>
-              <div className="pb-[1.2vw] md:pb-[1vw]">
+              <div className="shrink-0 pb-[1.2vw] md:pb-[1vw]">
                 <a href="/contact" className="btn-outline">
                   SEND INQUIRY →
                 </a>
