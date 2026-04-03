@@ -420,12 +420,12 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   border: 0;
   background: transparent;
   color: var(--white-40);
-  font-size: 0.8rem;
+  font-size: 1rem;
   line-height: 1;
   transform: translateY(-50%);
   transition:
