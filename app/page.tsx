@@ -95,18 +95,22 @@ const solutionAreas = [
 
 const outcomes = [
   {
+    number: "01",
     label: "EFFICIENCY",
     body: "Reduce manual work in repetitive internal processes and shorten the time from request to action.",
   },
   {
+    number: "02",
     label: "SERVICE QUALITY",
     body: "Improve response quality, consistency, and speed across customer-facing and internal support workflows.",
   },
   {
+    number: "03",
     label: "DECISION SUPPORT",
     body: "Give teams faster access to the right information so planning, review, and escalation decisions are made with better context.",
   },
   {
+    number: "04",
     label: "COST CONTROL",
     body: "Target automation where it lowers operating cost without adding brittle systems or unnecessary model spend.",
   },
@@ -512,34 +516,18 @@ export default function Home() {
           <div className="section-shell">
             <p className="section-label mb-3">OUTCOMES</p>
             <div className="rule mb-6" />
-            <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
+            <div className="grid gap-10 md:grid-cols-[1.4fr_1fr] md:items-end">
               <div>
-              <h2 className="mb-4 text-2xl text-[var(--white-100)] md:text-3xl">
+                <h2 className="mb-4 text-2xl text-[var(--white-100)] md:text-3xl">
                   Business value from
                   <br />
                   implemented AI systems.
                 </h2>
-                <p className="mb-4 text-sm text-[var(--text-muted)]">
-                  We focus on outcomes that matter to operators: lower manual load, faster service, stronger
-                  decision support, and tighter control over operational cost.
-                </p>
-                <p className="text-sm text-[var(--text-muted)]">
-                  Every implementation is scoped around measurable improvements, not generic AI activity.
-                </p>
               </div>
-              <div className="space-y-3 text-[0.8rem] text-[var(--white-80)]">
-                <div className="flex justify-between">
-                  <span className="uppercase tracking-[0.18em] text-[var(--white-60)]">BUYER SIGNAL</span>
-                  <span>Clear ROI narrative</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="uppercase tracking-[0.18em] text-[var(--white-60)]">TONE</span>
-                  <span>Practical, not hype-driven</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="uppercase tracking-[0.18em] text-[var(--white-60)]">PROOF</span>
-                  <span>Best paired with case studies later</span>
-                </div>
+              <div>
+                <p className="max-w-md text-sm text-[var(--text-muted)]">
+                  Four categories of measurable improvement that we scope every engagement around.
+                </p>
               </div>
             </div>
           </div>
@@ -549,19 +537,27 @@ export default function Home() {
             initial="initial"
             whileInView="whileInView"
             viewport={stagger.viewport}
-            className="grid gap-6 md:grid-cols-2 xl:grid-cols-4"
+            className="border-t border-[var(--white-20)]"
           >
             {outcomes.map((outcome) => (
-              <motion.div
+              <motion.article
                 key={outcome.label}
                 variants={cardMotion}
                 transition={{ duration: 0.45 }}
-                whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
-                className="panel panel-interactive border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5"
+                className="group border-b border-[var(--white-20)] transition-colors duration-200 hover:bg-[var(--surface)]"
               >
-                <p className="section-label mb-2 text-[0.6rem]">{outcome.label}</p>
-                <p className="text-[0.8rem] text-[var(--text-muted)]">{outcome.body}</p>
-              </motion.div>
+                <div className="grid gap-4 px-0 py-6 md:grid-cols-[80px_220px_1fr] md:items-start md:gap-6 md:py-7">
+                  <div className="text-[3.5rem] leading-none tracking-[-0.04em] text-[var(--white-10)] md:text-[4rem]">
+                    {outcome.number}
+                  </div>
+                  <div className="pt-1 text-base uppercase tracking-[0.2em] text-[var(--white-100)] md:text-lg">
+                    {outcome.label}
+                  </div>
+                  <div className="pt-1 text-sm leading-relaxed text-[var(--text-muted)] md:max-w-2xl">
+                    {outcome.body}
+                  </div>
+                </div>
+              </motion.article>
             ))}
           </motion.div>
         </motion.div>
