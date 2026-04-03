@@ -477,21 +477,25 @@ export default function Home() {
             initial="initial"
             whileInView="whileInView"
             viewport={stagger.viewport}
-            className="grid gap-8 md:grid-cols-2"
+            className="relative"
           >
-            {solutionAreas.map((area) => (
-              <motion.div
-                key={area.title}
-                variants={cardMotion}
-                transition={{ duration: 0.45 }}
-                whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
-                className="panel panel-interactive border border-[var(--white-20)] bg-black px-5 py-6"
-              >
-                <p className="section-label mb-3 text-[0.65rem]">{area.sector}</p>
-                <p className="mb-3 text-sm text-[var(--white-100)]">{area.title}</p>
-                <p className="text-[0.8rem] text-[var(--text-muted)]">{area.body}</p>
-              </motion.div>
-            ))}
+            <div className="carousel-fade-left" aria-hidden="true" />
+            <div className="carousel-fade-right" aria-hidden="true" />
+            <div className="hide-scrollbar -mx-2 flex snap-x snap-mandatory gap-6 overflow-x-auto px-2 pb-2">
+              {solutionAreas.map((area) => (
+                <motion.div
+                  key={area.title}
+                  variants={cardMotion}
+                  transition={{ duration: 0.45 }}
+                  whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
+                  className="panel panel-interactive min-w-[290px] snap-start border border-[var(--white-20)] bg-black px-5 py-6 sm:min-w-[360px] lg:min-w-[420px]"
+                >
+                  <p className="section-label mb-3 text-[0.65rem]">{area.sector}</p>
+                  <p className="mb-3 text-sm text-[var(--white-100)]">{area.title}</p>
+                  <p className="text-[0.8rem] text-[var(--text-muted)]">{area.body}</p>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </motion.div>
       </section>
@@ -679,7 +683,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="uppercase tracking-[0.18em] underline underline-offset-4"
             >
-              INTERNAL DASHBOARD
+              DASHBOARD
             </a>
           </div>
         </div>
