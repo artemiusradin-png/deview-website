@@ -1,20 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "DeView | AI Enterprise Infrastructure",
-  description: "Enterprise-grade AI infrastructure services. Scale your AI workloads with confidence.",
+  title: "DeView | AI Consulting & Data Engineering",
+  description: "DeView partners with enterprises to design, build, and scale AI systems and data platforms with production-grade reliability.",
 };
 
 export default function RootLayout({
@@ -23,8 +12,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+    <html lang="en" className="h-full antialiased">
+      <body className="min-h-full flex flex-col bg-black text-[var(--text)]">{children}</body>
     </html>
   );
 }

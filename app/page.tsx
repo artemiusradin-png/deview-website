@@ -2,338 +2,458 @@
 
 import { motion } from "framer-motion";
 
-const stagger = {
-  animate: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
+const fade = {
+  initial: { opacity: 0, y: 18 },
+  animate: { opacity: 1, y: 0 },
 };
-const fadeUp = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } };
 
-const features = [
+const destinations = [
   {
-    title: "AI Model Orchestration",
-    description: "Deploy and manage large language models at scale with our enterprise-grade orchestration platform.",
-    icon: "◇",
+    label: "DATA FOUNDATIONS",
+    vehicle: "Modern Data Stack",
+    duration: "8–12 weeks",
+    capacity: "Data platforms, warehouses, lakes",
+    body: "Design and implement the data architecture your AI systems depend on—governed, observable, and production-ready.",
+    availability: "Availability: Q2 / Q3 2026",
+    id: "data-foundations",
   },
   {
-    title: "GPU Infrastructure",
-    description: "Access dedicated GPU clusters optimized for training and inference workloads.",
-    icon: "◆",
+    label: "AI SYSTEMS",
+    vehicle: "LLM & Agents",
+    duration: "6–10 weeks",
+    capacity: "Customer, operations, and product surfaces",
+    body: "Ship AI copilots, retrieval systems, and agentic workflows that plug into your existing products and tooling.",
+    availability: "Availability: Rolling admissions",
+    id: "ai-systems",
   },
   {
-    title: "Enterprise Security",
-    description: "SOC 2 compliant infrastructure with end-to-end encryption and access controls.",
-    icon: "◈",
+    label: "MLOPS",
+    vehicle: "Inference & Training",
+    duration: "4–8 weeks",
+    capacity: "Model serving, evaluation, monitoring",
+    body: "Stand up evaluation loops, safety guardrails, and observability pipelines so models behave reliably in production.",
+    availability: "Availability: Q2 2026",
+    id: "mlops",
   },
   {
-    title: "99.99% Uptime SLA",
-    description: "Mission-critical reliability with redundant systems and 24/7 monitoring.",
-    icon: "◎",
+    label: "AI ADOPTION",
+    vehicle: "Change & Enablement",
+    duration: "Ongoing",
+    capacity: "Teams, playbooks, capability building",
+    body: "Equip teams with patterns, playbooks, and training so AI becomes a durable capability—not a one-off pilot.",
+    availability: "Availability: Limited 2026 cohorts",
+    id: "ai-adoption",
   },
-];
-
-const services = [
-  {
-    title: "AI Customer Service",
-    description: "Intelligent, 24/7 customer support powered by AI. Handle tickets, resolve issues, and delight customers at scale—with human oversight when it matters.",
-  },
-  {
-    title: "AI Agentic",
-    description: "Autonomous AI agents that orchestrate workflows, make decisions, and execute tasks across your enterprise systems. Built for complex, multi-step operations.",
-  },
-  {
-    title: "AI Document Intelligence",
-    description: "Extract, classify, and analyze documents at enterprise scale. From contracts to invoices—automate your document workflows with AI.",
-  },
-  {
-    title: "AI Analytics & Insights",
-    description: "Turn your data into actionable intelligence. Natural language queries, predictive analytics, and automated reporting for your entire organization.",
-  },
-];
-
-const stats = [
-  { value: "10x", label: "Faster inference" },
-  { value: "50%", label: "Cost reduction" },
-  { value: "99.99%", label: "Uptime SLA" },
 ];
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-grid overflow-hidden">
-      {/* Ambient glow */}
-      <div className="pointer-events-none fixed inset-0 z-0">
-        <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-[var(--accent)]/20 blur-[120px]" />
-        <div className="absolute top-1/2 -left-40 h-96 w-96 rounded-full bg-[var(--accent)]/10 blur-[100px]" />
-      </div>
-
-      {/* Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-[var(--border)]/50 bg-[var(--bg)]/80 backdrop-blur-xl">
+    <div className="min-h-screen bg-black bg-grid text-[var(--text)]">
+      {/* Fixed navigation */}
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-[var(--white-20)] bg-gradient-to-b from-[var(--black-80)] to-transparent">
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <motion.a
-            href="#"
-            className="text-xl font-semibold text-[var(--text)]"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            De<span className="text-[var(--accent)]">View</span>
-          </motion.a>
-          <div className="flex items-center gap-8">
-            <a href="#features" className="text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]">Features</a>
-            <a href="#services" className="text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]">Services</a>
-            <a href="#contact" className="text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]">Contact</a>
-            <motion.a
-              href="#contact"
-              className="rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-medium text-black transition-all hover:bg-[var(--accent-bright)]"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Get Started
-            </motion.a>
+          <a href="#" className="text-sm tracking-[0.25em] uppercase text-[var(--white-80)]">
+            DEVIEW
+          </a>
+          <div className="hidden gap-8 md:flex">
+            <a href="#hero" className="nav-item nav-item-active">
+              AI CONSULTING
+            </a>
+            <a href="#destinations" className="nav-item">
+              SERVICES
+            </a>
+            <a href="#research" className="nav-item">
+              RESEARCH
+            </a>
+            <a href="#vehicles" className="nav-item">
+              PLATFORMS
+            </a>
+            <a href="#contact" className="nav-item">
+              INQUIRE
+            </a>
           </div>
         </nav>
       </header>
 
-      {/* Hero */}
-      <section className="relative px-6 pt-36 pb-28">
-        <div className="relative z-10 mx-auto max-w-5xl">
-          <motion.div variants={stagger} initial="initial" animate="animate" className="text-center">
-            <motion.a
-              href="#features"
-              variants={fadeUp}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/30 bg-[var(--accent-muted)] px-4 py-1.5 text-sm font-medium text-[var(--accent)]"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent)] opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--accent)]" />
-              </span>
-              AI Enterprise Infrastructure
-            </motion.a>
-            <motion.h1
-              variants={fadeUp}
-              className="mb-6 text-5xl font-bold leading-[1.1] tracking-tight sm:text-6xl md:text-7xl"
-            >
-              <span className="text-[var(--text)]">AI infrastructure</span>
+      {/* HERO – HUMAN SPACEFLIGHT → AI CONSULTING */}
+      <section
+        id="hero"
+        className="section-fullscreen relative flex items-center justify-center px-6 pt-24 pb-10"
+      >
+        <div className="absolute inset-0 hero-overlay" />
+        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col justify-between gap-16 md:flex-row">
+          <motion.div
+            initial={fade.initial}
+            animate={fade.animate}
+            transition={{ duration: 0.6 }}
+            className="max-w-xl"
+          >
+            <p className="section-label mb-4">AI CONSULTING & DATA ENGINEERING</p>
+            <h1 className="hero-heading mb-6 text-4xl md:text-5xl lg:text-6xl text-[var(--white-100)]">
+              HUMAN‑CENTERED
               <br />
-              <span className="gradient-text">for the enterprise</span>
-            </motion.h1>
-            <motion.p
-              variants={fadeUp}
-              className="mx-auto mb-12 max-w-2xl text-lg text-[var(--text-muted)]"
-            >
-              Deploy models, scale AI customer service, run agentic workflows—all with enterprise security and 99.99% uptime.
-            </motion.p>
-            <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
-              <motion.a
-                href="#contact"
-                className="group inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-6 py-3.5 font-semibold text-black transition-all hover:bg-[var(--accent-bright)]"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Get Started
-                <span className="transition-transform group-hover:translate-x-1">→</span>
-              </motion.a>
-              <motion.a
-                href="#features"
-                className="inline-flex items-center rounded-xl border border-[var(--border)] px-6 py-3.5 font-medium text-[var(--text)] transition-all hover:border-[var(--accent)]/50 hover:text-[var(--accent)]"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                See the platform
-              </motion.a>
-            </motion.div>
+              AI SYSTEMS
+            </h1>
+            <p className="max-w-xl text-sm md:text-base text-[var(--text-muted)]">
+              DeView partners with enterprises to design, build, and run AI systems—spanning data platforms,
+              LLM applications, and MLOps—so your teams can move from experiments to reliable production impact.
+            </p>
           </motion.div>
 
-          {/* Hero visual - floating cards */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="mt-20 rounded-2xl border border-[var(--border)]/50 bg-[var(--surface)]/80 p-8 backdrop-blur-sm"
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="flex flex-col items-end justify-between gap-10 text-right"
           >
-            <div className="flex flex-wrap justify-center gap-3">
-              {["Model serving", "GPU clusters", "AI agents", "Auto-scaling", "Monitoring"].map((item, i) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.7 + i * 0.08 }}
-                  className="flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface-elevated)] px-4 py-2.5"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                  <span className="text-sm text-[var(--text-muted)]">{item}</span>
-                </motion.div>
-              ))}
+            <div className="space-y-2 text-xs text-[var(--white-60)] uppercase tracking-[0.18em]">
+              <div>DATA</div>
+              <div>AI ENGINEERING</div>
+              <div>MLOPS</div>
             </div>
-            <div className="mt-6 flex items-center gap-4">
-              <div className="h-2 flex-1 overflow-hidden rounded-full bg-[var(--border)]">
-                <motion.div
-                  className="h-full rounded-full bg-gradient-to-r from-[var(--accent)] to-[var(--accent-bright)]"
-                  initial={{ width: "0%" }}
-                  animate={{ width: "72%" }}
-                  transition={{ delay: 1, duration: 1.2 }}
-                />
+            <div className="space-y-3 text-sm">
+              <div className="flex items-baseline justify-end gap-4">
+                <span className="text-xs tracking-[0.2em] uppercase text-[var(--white-60)]">
+                  CLIENTS
+                </span>
+                <span className="text-base text-[var(--white-100)]">MID‑MARKET TO ENTERPRISE</span>
               </div>
-              <span className="text-xs text-[var(--text-muted)]">72% capacity</span>
+              <div className="flex items-baseline justify-end gap-4">
+                <span className="text-xs tracking-[0.2em] uppercase text-[var(--white-60)]">
+                  MODEL STACK
+                </span>
+                <span className="text-base text-[var(--white-100)]">OPEN‑SOURCE & PROPRIETARY</span>
+              </div>
+              <div className="flex items-baseline justify-end gap-4">
+                <span className="text-xs tracking-[0.2em] uppercase text-[var(--white-60)]">
+                  ENGAGEMENTS
+                </span>
+                <span className="text-base text-[var(--white-100)]">STRATEGY → DELIVERY → RUN</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-8">
+              <a href="#contact" className="btn-outline">
+                INQUIRE
+              </a>
+              <div className="flex flex-col items-end gap-3">
+                <div className="scroll-cue" />
+                <span className="text-[0.6rem] tracking-[0.2em] uppercase text-[var(--white-60)]">
+                  SCROLL
+                </span>
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="relative z-10 border-y border-[var(--border)]/50 bg-[var(--surface)]/30 px-6 py-16">
-        <div className="mx-auto max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-1 gap-12 sm:grid-cols-3"
-          >
-            {stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
+      {/* DESTINATIONS – AI ENGAGEMENTS */}
+      <section
+        id="destinations"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-6 py-16"
+      >
+        <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
+          <div>
+            <p className="section-label mb-3">WHERE DO WE START</p>
+            <div className="rule mb-6" />
+            <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
+              <h2 className="text-2xl md:text-3xl text-[var(--white-100)]">
+                Engagements across data, AI systems,
+                <br />
+                and long‑term reliability.
+              </h2>
+              <p className="max-w-md text-xs md:text-sm text-[var(--text-muted)]">
+                Four primary tracks structure how we work together. Each is modular and can be combined into
+                a broader transformation program.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-10 md:grid-cols-4">
+            {destinations.map((d) => (
+              <motion.article
+                key={d.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="text-center"
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.4 }}
+                className="panel border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5"
               >
-                <div className="text-4xl font-bold gradient-text sm:text-5xl">{stat.value}</div>
-                <div className="mt-1 text-sm text-[var(--text-muted)]">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Features - Bento grid */}
-      <section id="features" className="relative z-10 px-6 py-24">
-        <div className="mx-auto max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-16 text-center"
-          >
-            <p className="mb-3 text-sm font-medium uppercase tracking-widest text-[var(--accent)]">Platform</p>
-            <h2 className="text-3xl font-bold text-[var(--text)] sm:text-4xl">
-              Everything you need to run AI at scale
-            </h2>
-          </motion.div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {features.map((feature, i) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                whileHover={{ y: -6 }}
-                className="group relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 transition-all hover:border-[var(--accent)]/30 hover:shadow-[0_0_40px_-10px_rgba(34,197,94,0.15)]"
-              >
-                <div className="absolute -right-4 -top-4 text-6xl text-[var(--accent)]/10 transition-colors group-hover:text-[var(--accent)]/20">
-                  {feature.icon}
+                <p className="section-label mb-3 text-[0.6rem]">{d.label}</p>
+                <div className="mb-4 space-y-1 text-[0.7rem] text-[var(--white-80)]">
+                  <div className="flex justify-between gap-2">
+                    <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">VEHICLE</span>
+                    <span>{d.vehicle}</span>
+                  </div>
+                  <div className="flex justify-between gap-2">
+                    <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">DURATION</span>
+                    <span>{d.duration}</span>
+                  </div>
+                  <div className="flex justify-between gap-2">
+                    <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">SCOPE</span>
+                    <span className="text-right">{d.capacity}</span>
+                  </div>
                 </div>
-                <h3 className="relative mb-3 font-semibold text-[var(--text)]">{feature.title}</h3>
-                <p className="relative text-sm leading-relaxed text-[var(--text-muted)]">{feature.description}</p>
-              </motion.div>
+                <p className="mb-3 text-[0.75rem] leading-relaxed text-[var(--text-muted)]">{d.body}</p>
+                <p className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)]">
+                  {d.availability}
+                </p>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section id="services" className="relative z-10 border-t border-[var(--border)]/50 bg-[var(--surface)]/20 px-6 py-24">
-        <div className="mx-auto max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-16 text-center"
-          >
-            <p className="mb-3 text-sm font-medium uppercase tracking-widest text-[var(--accent)]">Enterprise Solutions</p>
-            <h2 className="text-3xl font-bold text-[var(--text)] sm:text-4xl">
-              AI services built for the enterprise
-            </h2>
-          </motion.div>
-
-          <div className="grid gap-6 sm:grid-cols-2">
-            {services.map((service, i) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                whileHover={{ y: -4 }}
-                className="group rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8 transition-all hover:border-[var(--accent)]/20"
-              >
-                <div className="mb-4 text-2xl font-semibold text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">
-                  {service.title}
+      {/* RESEARCH / SCIENCE – AI RESEARCH PROGRAMS */}
+      <section
+        id="research"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-6 py-16"
+      >
+        <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
+          <div>
+            <p className="section-label mb-3">RESEARCH</p>
+            <div className="rule mb-6" />
+            <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
+              <div>
+                <h2 className="mb-4 text-2xl md:text-3xl text-[var(--white-100)]">
+                  Applied AI research,
+                  <br />
+                  grounded in your data.
+                </h2>
+                <p className="mb-4 text-sm text-[var(--text-muted)]">
+                  We work with product, data, and research teams to design experiments that advance your AI
+                  capabilities while respecting safety, governance, and real‑world constraints.
+                </p>
+                <p className="text-sm text-[var(--text-muted)]">
+                  Every engagement includes a structured experimentation plan, evaluation design, and clear
+                  decision gates—so research directly informs roadmaps instead of becoming a separate track.
+                </p>
+              </div>
+              <div className="space-y-4 text-xs text-[var(--white-80)]">
+                <div className="flex justify-between">
+                  <span className="uppercase tracking-[0.2em] text-[var(--white-60)]">TRACKS</span>
+                  <span>Capability, Risk, Efficiency</span>
                 </div>
-                <p className="text-[var(--text-muted)] leading-relaxed">{service.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section id="contact" className="relative z-10 px-6 py-24">
-        <div className="mx-auto max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="relative overflow-hidden rounded-3xl border border-[var(--accent)]/20 bg-gradient-to-b from-[var(--surface)] to-[var(--surface-elevated)] p-12 text-center glow"
-          >
-            <div className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-[var(--accent)]/20 blur-[80px]" />
-            <div className="absolute -bottom-20 -left-20 h-40 w-40 rounded-full bg-[var(--accent)]/10 blur-[80px]" />
-            <div className="relative">
-              <h2 className="mb-4 text-3xl font-bold text-[var(--text)] sm:text-4xl">
-                Ready to scale your AI?
-              </h2>
-              <p className="mx-auto mb-10 max-w-xl text-[var(--text-muted)]">
-                Join enterprises that trust DeView. Start with a free trial—no credit card required.
-              </p>
-              <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-                <input
-                  type="email"
-                  placeholder="Enter your work email"
-                  className="rounded-xl border border-[var(--border)] bg-[var(--bg)] px-5 py-3.5 text-[var(--text)] outline-none placeholder:text-[var(--text-muted)] focus:border-[var(--accent)]"
-                />
-                <motion.button
-                  type="submit"
-                  className="rounded-xl bg-[var(--accent)] px-6 py-3.5 font-semibold text-black transition-all hover:bg-[var(--accent-bright)]"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Get Started
-                </motion.button>
-              </form>
+                <div className="flex justify-between">
+                  <span className="uppercase tracking-[0.2em] text-[var(--white-60)]">FOCUS</span>
+                  <span>Retrieval, agents, evals</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="uppercase tracking-[0.2em] text-[var(--white-60)]">OUTPUT</span>
+                  <span>Roadmaps, patterns, playbooks</span>
+                </div>
+              </div>
             </div>
-          </motion.div>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            <div className="panel border border-[var(--white-20)] bg-black px-5 py-6">
+              <p className="section-label mb-3 text-[0.65rem]">PRODUCT & CUSTOMER EXPERIENCE</p>
+              <p className="mb-3 text-sm text-[var(--white-100)]">
+                Customer‑facing AI research focuses on latency, reliability, and guardrails.
+              </p>
+              <p className="text-[0.8rem] text-[var(--text-muted)]">
+                We design experiments for AI copilots, search and retrieval, and support automation—measuring
+                containment, CSAT, and quality while protecting brand and safety.
+              </p>
+            </div>
+            <div className="panel border border-[var(--white-20)] bg-black px-5 py-6">
+              <p className="section-label mb-3 text-[0.65rem]">OPERATIONS & DATA</p>
+              <p className="mb-3 text-sm text-[var(--white-100)]">
+                Internal‑facing research strengthens data quality and operational efficiency.
+              </p>
+              <p className="text-[0.8rem] text-[var(--text-muted)]">
+                We evaluate how AI can accelerate analysts, engineers, and operators—building feedback loops
+                into the data and tooling they already use.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-[var(--border)] px-6 py-10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 sm:flex-row">
-          <a href="#" className="text-lg font-semibold text-[var(--text)]">
-            De<span className="text-[var(--accent)]">View</span>
-          </a>
-          <div className="flex gap-8 text-sm text-[var(--text-muted)]">
+      {/* EQUIPMENT – TOOLING & STACK */}
+      <section
+        id="equipment"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-6 py-16"
+      >
+        <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
+          <div>
+            <p className="section-label mb-3">TOOLING</p>
+            <div className="rule mb-6" />
+            <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
+              <div>
+                <h2 className="mb-4 text-2xl md:text-3xl text-[var(--white-100)]">
+                  The systems your teams
+                  <br />
+                  live and build in.
+                </h2>
+                <p className="mb-4 text-sm text-[var(--text-muted)]">
+                  Every engagement includes recommendations—and, when needed, implementation—of the tools that
+                  sit closest to your teams: evaluation harnesses, experiment trackers, feature stores, and
+                  orchestration.
+                </p>
+                <p className="text-sm text-[var(--text-muted)]">
+                  Rather than pushing a single vendor, we help you select and integrate components into a
+                  cohesive stack that your engineers actually want to use.
+                </p>
+              </div>
+              <div className="space-y-3 text-[0.8rem] text-[var(--white-80)]">
+                <div className="flex justify-between">
+                  <span className="uppercase tracking-[0.18em] text-[var(--white-60)]">
+                    EVALUATION
+                  </span>
+                  <span>Offline & online, human‑in‑the‑loop</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="uppercase tracking-[0.18em] text-[var(--white-60)]">OBSERVABILITY</span>
+                  <span>Tracing, logging, drift detection</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="uppercase tracking-[0.18em] text-[var(--white-60)]">SECURITY</span>
+                  <span>PII handling, access, isolation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="panel border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5">
+              <p className="section-label mb-2 text-[0.6rem]">ENGINEERING</p>
+              <p className="text-[0.8rem] text-[var(--text-muted)]">
+                CI integrations, evaluation gates, and rollout strategies built into your existing pipelines.
+              </p>
+            </div>
+            <div className="panel border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5">
+              <p className="section-label mb-2 text-[0.6rem]">DATA</p>
+              <p className="text-[0.8rem] text-[var(--text-muted)]">
+                Data contracts, lineage, and quality baselines to keep models grounded in trustworthy data.
+              </p>
+            </div>
+            <div className="panel border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5">
+              <p className="section-label mb-2 text-[0.6rem]">TEAMS</p>
+              <p className="text-[0.8rem] text-[var(--text-muted)]">
+                Training, playbooks, and pairing sessions so internal teams can independently extend the work.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* VEHICLES – PLATFORMS */}
+      <section
+        id="vehicles"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-6 py-16"
+      >
+        <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
+          <div>
+            <p className="section-label mb-3">PLATFORMS</p>
+            <div className="rule mb-6" />
+            <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
+              <h2 className="text-2xl md:text-3xl text-[var(--white-100)]">
+                Neutral on vendors,
+                <br />
+                opinionated on architecture.
+              </h2>
+              <p className="max-w-md text-xs md:text-sm text-[var(--text-muted)]">
+                We integrate with major cloud providers and model APIs while prioritizing portability,
+                evaluation, and long‑term optionality.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            <article className="panel flex flex-col justify-between border border-[var(--white-20)] bg-black px-5 py-6">
+              <div>
+                <p className="section-label mb-3 text-[0.65rem]">APPLICATION LAYER</p>
+                <h3 className="mb-3 text-sm text-[var(--white-100)]">LLM APPLICATIONS & AGENTS</h3>
+                <p className="mb-4 text-[0.8rem] text-[var(--text-muted)]">
+                  Design and ship retrieval, summarization, and agentic workflows that plug into your existing
+                  products—fronted by interfaces your customers and teams can trust.
+                </p>
+              </div>
+              <a
+                href="#contact"
+                className="mt-4 inline-block text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-80)] underline underline-offset-4"
+              >
+                INQUIRE ABOUT APPLICATION WORK
+              </a>
+            </article>
+            <article className="panel flex flex-col justify-between border border-[var(--white-20)] bg-black px-5 py-6">
+              <div>
+                <p className="section-label mb-3 text-[0.65rem]">INFRASTRUCTURE LAYER</p>
+                <h3 className="mb-3 text-sm text-[var(--white-100)]">DATA & MLOPS FOUNDATIONS</h3>
+                <p className="mb-4 text-[0.8rem] text-[var(--text-muted)]">
+                  From ingestion and transformation to evaluation, serving, and monitoring, we help you define
+                  an opinionated reference architecture that can evolve with the ecosystem.
+                </p>
+              </div>
+              <a
+                href="#contact"
+                className="mt-4 inline-block text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-80)] underline underline-offset-4"
+              >
+                INQUIRE ABOUT PLATFORM WORK
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT / INQUIRE */}
+      <section
+        id="contact"
+        className="relative border-t border-[var(--white-20)] bg-black px-6 py-16"
+      >
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="section-label mb-3">INQUIRE</p>
+          <div className="rule mb-8" />
+          <h2 className="mb-4 text-2xl md:text-3xl text-[var(--white-100)]">
+            Ready to map your first—or next—AI mission?
+          </h2>
+          <p className="mx-auto mb-10 max-w-2xl text-sm text-[var(--text-muted)]">
+            Share a brief description of your data, existing systems, and where you believe AI can create
+            leverage. We reply with a structured assessment and proposed tracks.
+          </p>
+          <div className="space-y-4 text-sm">
+            <p className="uppercase tracking-[0.2em] text-[var(--white-60)]">PRIMARY CONTACT</p>
             <a
-              href="https://ai-consulting-task-manager.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors hover:text-[var(--accent)]"
+              href="mailto:hello@deview.ai"
+              className="text-lg md:text-xl text-[var(--white-100)] underline underline-offset-4"
             >
-              Partners
+              hello@deview.ai
             </a>
-            <a href="#" className="transition-colors hover:text-[var(--accent)]">Privacy</a>
-            <a href="#" className="transition-colors hover:text-[var(--accent)]">Terms</a>
-            <a href="#" className="transition-colors hover:text-[var(--accent)]">Contact</a>
+            <p className="text-[0.8rem] text-[var(--text-muted)]">
+              Include timelines, stakeholders, and any existing AI initiatives you would like us to build on.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-[var(--white-20)] bg-black px-6 py-8 text-[0.7rem]">
+        <div className="mx-auto flex max-w-6xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-6">
+            <span className="text-xs tracking-[0.25em] uppercase text-[var(--white-80)]">
+              DEVIEW
+            </span>
+            <span className="text-[var(--white-40)]">
+              © {new Date().getFullYear()} DeView. All rights reserved.
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-5 text-[var(--white-60)]">
+            <a href="#hero" className="uppercase tracking-[0.18em]">
+              AI CONSULTING
+            </a>
+            <a href="#destinations" className="uppercase tracking-[0.18em]">
+              SERVICES
+            </a>
+            <a href="#research" className="uppercase tracking-[0.18em]">
+              RESEARCH
+            </a>
+            <a href="#vehicles" className="uppercase tracking-[0.18em]">
+              PLATFORMS
+            </a>
+            <a href="#contact" className="uppercase tracking-[0.18em]">
+              CONTACT
+            </a>
           </div>
         </div>
       </footer>
