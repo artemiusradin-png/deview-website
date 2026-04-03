@@ -10,10 +10,10 @@ const fade = {
 const services = [
   {
     label: "AI STRATEGY",
-    title: "Opportunity mapping and roadmap design",
+    title: "Use-case selection and implementation roadmap",
     duration: "2-4 weeks",
-    scope: "Discovery, prioritization, business case",
-    body: "Assess where AI can create leverage across operations, customer experience, and internal workflows, then convert that into a focused execution roadmap.",
+    scope: "Discovery, prioritization, implementation plan",
+    body: "Assess where AI can create the most operational leverage, then define the architecture, scope, and rollout path needed to implement the right solution.",
     status: "Best for teams deciding where to start",
     id: "strategy",
   },
@@ -27,22 +27,22 @@ const services = [
     id: "custom-solutions",
   },
   {
-    label: "DATA & MLOPS",
-    title: "Production foundations for reliable AI",
+    label: "AI IMPLEMENTATION",
+    title: "Production systems, integrations, and reliability",
     duration: "4-10 weeks",
-    scope: "Pipelines, evals, monitoring, governance",
-    body: "Build the data, evaluation, and observability layer required to run AI systems safely and reliably in production.",
+    scope: "Integrations, evals, monitoring, governance",
+    body: "Implement the infrastructure, integrations, evaluation, and observability required to make AI systems reliable in production.",
     status: "Best for teams scaling beyond demos",
-    id: "data-mlops",
+    id: "ai-implementation",
   },
   {
-    label: "ENABLEMENT",
-    title: "Training, change management, operating model",
-    duration: "Ongoing",
-    scope: "Workshops, playbooks, team capability",
-    body: "Equip internal teams with the workflows, documentation, and operating habits needed to sustain AI adoption after the initial launch.",
-    status: "Best for orgs building durable capability",
-    id: "enablement",
+    label: "SYSTEM INTEGRATION",
+    title: "Deployment into your existing stack",
+    duration: "3-8 weeks",
+    scope: "APIs, internal tools, workflows, handoff",
+    body: "Connect new AI capabilities to your current products, data systems, and operational processes so the solution works where your team already operates.",
+    status: "Best for teams integrating AI into live workflows",
+    id: "system-integration",
   },
 ];
 
@@ -111,8 +111,8 @@ const processSteps = [
   },
   {
     step: "05",
-    title: "Launch and support adoption",
-    body: "Ship the solution into production, document operating procedures, and train the internal team responsible for usage.",
+    title: "Launch into production",
+    body: "Deploy the solution into live workflows, connect it to the required systems, and make sure it performs under real operating conditions.",
   },
   {
     step: "06",
@@ -161,7 +161,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="max-w-2xl"
           >
-            <p className="section-label mb-4">AI CONSULTING, DELIVERY, AND ENABLEMENT</p>
+            <p className="section-label mb-4">AI STRATEGY, IMPLEMENTATION, AND INTEGRATION</p>
             <h1 className="hero-heading mb-6 text-4xl text-[var(--white-100)] md:text-5xl lg:text-6xl">
               CUSTOM AI
               <br />
@@ -171,7 +171,7 @@ export default function Home() {
             </h1>
             <p className="max-w-xl text-sm text-[var(--text-muted)] md:text-base">
               DeView helps companies identify high-value AI opportunities, build custom solutions, and put the
-              right data and operating foundations in place so those systems deliver measurable results.
+              right implementation foundations in place so those systems deliver measurable operational results.
             </p>
           </motion.div>
 
@@ -184,8 +184,8 @@ export default function Home() {
             <div className="space-y-2 text-xs uppercase tracking-[0.18em] text-[var(--white-60)]">
               <div>STRATEGY</div>
               <div>SOLUTION DELIVERY</div>
-              <div>DATA & MLOPS</div>
-              <div>TEAM ENABLEMENT</div>
+              <div>AI IMPLEMENTATION</div>
+              <div>SYSTEM INTEGRATION</div>
             </div>
             <div className="space-y-3 text-sm">
               <div className="flex items-baseline justify-end gap-4">
@@ -226,13 +226,13 @@ export default function Home() {
             <div className="rule mb-6" />
             <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
               <h2 className="text-2xl text-[var(--white-100)] md:text-3xl">
-                The service lines we can
+                End-to-end services for
                 <br />
-                present directly on the website.
+                implementing AI in business operations.
               </h2>
               <p className="max-w-md text-xs text-[var(--text-muted)] md:text-sm">
-                This is the core shift from the current page: make the offer legible to buyers by leading with
-                consulting services, then showing the technical capability underneath.
+                From selecting the right use case to building, integrating, and operating the final system, we
+                work across the full implementation lifecycle.
               </p>
             </div>
           </div>
@@ -279,18 +279,18 @@ export default function Home() {
             <div className="rule mb-6" />
             <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
               <div>
-                <h2 className="mb-4 text-2xl text-[var(--white-100)] md:text-3xl">
-                  Show buyers the kinds of
+              <h2 className="mb-4 text-2xl text-[var(--white-100)] md:text-3xl">
+                  AI solutions built around
                   <br />
-                  problems we solve.
+                  concrete operational problems.
                 </h2>
                 <p className="mb-4 text-sm text-[var(--text-muted)]">
-                  Indonesia AI organizes demand by business sectors. We can do the same, but for DeView the
-                  cleaner framing is by workflow and function because it stays relevant across industries.
+                  We focus on high-friction workflows where AI can reduce manual effort, improve response
+                  quality, and help teams move faster with better information.
                 </p>
                 <p className="text-sm text-[var(--text-muted)]">
-                  This makes the site easier to scan for a COO, product lead, or operations leader who is not
-                  shopping for “MLOps” but is shopping for a solved problem.
+                  Each solution is designed to fit into existing systems and processes rather than living as an
+                  isolated demo or experimental tool.
                 </p>
               </div>
               <div className="space-y-4 text-xs text-[var(--white-80)]">
@@ -304,7 +304,7 @@ export default function Home() {
                 </div>
                 <div className="flex justify-between gap-4">
                   <span className="uppercase tracking-[0.2em] text-[var(--white-60)]">DELIVERY</span>
-                  <span className="text-right">Strategy, build, and reliability in one engagement</span>
+                  <span className="text-right">Strategy, implementation, and rollout in one engagement</span>
                 </div>
               </div>
             </div>
@@ -332,19 +332,17 @@ export default function Home() {
             <div className="rule mb-6" />
             <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
               <div>
-                <h2 className="mb-4 text-2xl text-[var(--white-100)] md:text-3xl">
-                  Add a plain-language section
+              <h2 className="mb-4 text-2xl text-[var(--white-100)] md:text-3xl">
+                  Business value from
                   <br />
-                  on business value.
+                  implemented AI systems.
                 </h2>
                 <p className="mb-4 text-sm text-[var(--text-muted)]">
-                  One reason their page works is that it speaks directly to outcomes: more sales, better
-                  service, lower cost, stronger decisions. We should keep that clarity but use sharper,
-                  operator-focused language.
+                  We focus on outcomes that matter to operators: lower manual load, faster service, stronger
+                  decision support, and tighter control over operational cost.
                 </p>
                 <p className="text-sm text-[var(--text-muted)]">
-                  This section should reassure non-technical buyers that DeView is not only a build partner,
-                  but a partner tied to measurable operational improvement.
+                  Every implementation is scoped around measurable improvements, not generic AI activity.
                 </p>
               </div>
               <div className="space-y-3 text-[0.8rem] text-[var(--white-80)]">
@@ -385,13 +383,13 @@ export default function Home() {
             <div className="rule mb-6" />
             <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
               <h2 className="text-2xl text-[var(--white-100)] md:text-3xl">
-                Make the engagement model
+                A clear process for taking AI
                 <br />
-                visible before the first call.
+                from idea to live implementation.
               </h2>
               <p className="max-w-md text-xs text-[var(--text-muted)] md:text-sm">
-                Their page makes the buying process legible. We should do the same so prospects know what
-                happens after inquiry and how DeView moves from discovery to delivery and long-term support.
+                We keep the engagement model simple: identify the right problem, scope the build, implement the
+                system, validate it in real workflows, then improve it in production.
               </p>
             </div>
           </div>
