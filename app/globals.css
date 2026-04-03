@@ -67,10 +67,34 @@ body {
 
 /* Subtle scanline / grain background (monochrome, no color accents) */
 .bg-grid {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-grid::before {
+  content: "";
+  position: fixed;
+  inset: -40px;
+  pointer-events: none;
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
   background-size: 80px 80px;
+  opacity: 0.9;
+  mix-blend-mode: soft-light;
+  animation: grid-drift 40s linear infinite;
+}
+
+@keyframes grid-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-40px, -40px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 /* Uppercase section labels */
@@ -103,6 +127,15 @@ body {
 
 .section-fullscreen {
   min-height: 100vh;
+  padding-top: 5rem;
+  padding-bottom: 4rem;
+}
+
+@media (max-width: 961px) {
+  .section-fullscreen {
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+  }
 }
 
 /* No rounded corners, no shadows – hard edges only */

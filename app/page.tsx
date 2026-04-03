@@ -76,10 +76,7 @@ export default function Home() {
       </header>
 
       {/* HERO – HUMAN SPACEFLIGHT → AI CONSULTING */}
-      <section
-        id="hero"
-        className="section-fullscreen relative flex items-center justify-center px-6 pt-24 pb-10"
-      >
+      <section id="hero" className="section-fullscreen relative flex items-center justify-center px-6">
         <div className="absolute inset-0 hero-overlay" />
         <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col justify-between gap-16 md:flex-row">
           <motion.div
@@ -149,7 +146,7 @@ export default function Home() {
       {/* DESTINATIONS – AI ENGAGEMENTS */}
       <section
         id="destinations"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-6 py-16"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-6"
       >
         <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
           <div>
@@ -206,7 +203,7 @@ export default function Home() {
       {/* RESEARCH / SCIENCE – AI RESEARCH PROGRAMS */}
       <section
         id="research"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-6 py-16"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-6"
       >
         <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
           <div>
@@ -273,7 +270,7 @@ export default function Home() {
       {/* EQUIPMENT – TOOLING & STACK */}
       <section
         id="equipment"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-6 py-16"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-6"
       >
         <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
           <div>
@@ -341,7 +338,7 @@ export default function Home() {
       {/* VEHICLES – PLATFORMS */}
       <section
         id="vehicles"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-6 py-16"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-6"
       >
         <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
           <div>
