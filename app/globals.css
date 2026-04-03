@@ -420,12 +420,12 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   border: 0;
   background: transparent;
   color: var(--white-40);
-  font-size: 1rem;
+  font-size: 1.25rem;
   line-height: 1;
   transform: translateY(-50%);
   transition:
@@ -505,6 +505,11 @@ body {
 
 .contact-monument:hover {
   filter: brightness(1.06);
+}
+
+.contact-monument-line {
+  font-size: clamp(3.6rem, 9vw, 8.4rem);
+  letter-spacing: -0.07em;
 }
 
 @media (prefers-reduced-motion: reduce) {

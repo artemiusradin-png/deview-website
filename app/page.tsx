@@ -691,8 +691,8 @@ export default function Home() {
                 onMouseMove={handleContactMouseMove}
                 onMouseLeave={handleContactMouseLeave}
               >
-                <span className="block text-[11vw] tracking-[-0.07em] md:text-[9.2vw]">hello</span>
-                <span className="block text-[11vw] tracking-[-0.07em] md:text-[9.2vw]">@deview.ai</span>
+                <span className="contact-monument-line block">hello</span>
+                <span className="contact-monument-line block">@deview.ai</span>
               </a>
               <div className="shrink-0 pb-[1.2vw] md:pb-[1vw]">
                 <a href="/contact" className="btn-outline">
