@@ -508,7 +508,7 @@ body {
 }
 
 .contact-monument-line {
-  font-size: clamp(3.6rem, 9vw, 8.4rem);
+  font-size: clamp(4.25rem, 10vw, 9.5rem);
   letter-spacing: -0.07em;
 }
 
