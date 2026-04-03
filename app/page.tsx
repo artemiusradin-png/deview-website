@@ -683,7 +683,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="uppercase tracking-[0.18em] underline underline-offset-4"
             >
-              DASHBOARD
+              INTERNAL
             </a>
           </div>
         </div>
