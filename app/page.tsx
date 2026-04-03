@@ -149,7 +149,9 @@ export default function Home() {
   const heroVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [heroVideoState, setHeroVideoState] = useState<"loading" | "playing" | "fallback">("loading");
   const [activeHeroLayer, setActiveHeroLayer] = useState(0);
+  const [fadingHeroLayer, setFadingHeroLayer] = useState<number | null>(null);
   const standbyStartedRef = useRef(false);
+  const crossfadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const primaryVideo = heroVideoRefs.current[0];
@@ -170,6 +172,12 @@ export default function Home() {
     };
 
     attemptPlayback();
+
+    return () => {
+      if (crossfadeTimeoutRef.current) {
+        clearTimeout(crossfadeTimeoutRef.current);
+      }
+    };
   }, []);
 
   const startStandbyLayer = async (currentLayer: number) => {
@@ -186,17 +194,25 @@ export default function Home() {
       standbyVideo.currentTime = 0;
       await standbyVideo.play();
       setHeroVideoState("playing");
+      setFadingHeroLayer(currentLayer);
       setActiveHeroLayer(nextLayer);
     } catch {
       setHeroVideoState("fallback");
-    } finally {
+    }
+
+    if (crossfadeTimeoutRef.current) {
+      clearTimeout(crossfadeTimeoutRef.current);
+    }
+
+    crossfadeTimeoutRef.current = setTimeout(() => {
       const previousVideo = heroVideoRefs.current[currentLayer];
       if (previousVideo) {
         previousVideo.pause();
         previousVideo.currentTime = 0;
       }
+      setFadingHeroLayer((layer) => (layer === currentLayer ? null : layer));
       standbyStartedRef.current = false;
-    }
+    }, HERO_VIDEO_CROSSFADE_SECONDS * 1000);
   };
 
   const handleHeroTimeUpdate = (layerIndex: number) => {
@@ -258,7 +274,9 @@ export default function Home() {
               className={`hero-video pointer-events-none absolute inset-0 h-full w-full object-cover ${
                 heroVideoState === "playing" && activeHeroLayer === layerIndex
                   ? "hero-video-visible"
-                  : "hero-video-hidden"
+                  : fadingHeroLayer === layerIndex
+                    ? "hero-video-fading"
+                    : "hero-video-hidden"
               }`}
               autoPlay={layerIndex === 0}
               muted

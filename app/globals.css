@@ -156,6 +156,11 @@ body {
   transform: scale(1.03);
 }
 
+.hero-video-fading {
+  opacity: 0;
+  transform: scale(1.04);
+}
+
 .hero-video-hidden {
   opacity: 0;
   transform: scale(1.045);
