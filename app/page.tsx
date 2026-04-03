@@ -481,11 +481,11 @@ export default function Home() {
             initial="initial"
             whileInView="whileInView"
             viewport={stagger.viewport}
-            className="relative"
+            className="relative overflow-hidden"
           >
             <div className="carousel-fade-left" aria-hidden="true" />
             <div className="carousel-fade-right" aria-hidden="true" />
-            <div className="hide-scrollbar -mx-2 flex snap-x snap-mandatory gap-6 overflow-x-auto px-2 pb-2">
+            <div className="hide-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-2 md:px-8">
               {solutionAreas.map((area) => (
                 <motion.div
                   key={area.title}

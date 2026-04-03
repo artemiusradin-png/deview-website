@@ -417,32 +417,34 @@ body {
 .carousel-fade-right {
   pointer-events: none;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 120px;
-  z-index: 5;
+  top: -1px;
+  bottom: -1px;
+  width: 168px;
+  z-index: 10;
 }
 
 .carousel-fade-left {
-  left: 0;
+  left: -1px;
   background: linear-gradient(
     to right,
-    rgba(0, 0, 0, 0.96) 0%,
-    rgba(0, 0, 0, 0.9) 18%,
-    rgba(0, 0, 0, 0.68) 42%,
-    rgba(0, 0, 0, 0.32) 72%,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.98) 18%,
+    rgba(0, 0, 0, 0.88) 38%,
+    rgba(0, 0, 0, 0.58) 62%,
+    rgba(0, 0, 0, 0.22) 82%,
     rgba(0, 0, 0, 0) 100%
   );
 }
 
 .carousel-fade-right {
-  right: 0;
+  right: -1px;
   background: linear-gradient(
     to left,
-    rgba(0, 0, 0, 0.96) 0%,
-    rgba(0, 0, 0, 0.9) 18%,
-    rgba(0, 0, 0, 0.68) 42%,
-    rgba(0, 0, 0, 0.32) 72%,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.98) 18%,
+    rgba(0, 0, 0, 0.88) 38%,
+    rgba(0, 0, 0, 0.58) 62%,
+    rgba(0, 0, 0, 0.22) 82%,
     rgba(0, 0, 0, 0) 100%
   );
 }
