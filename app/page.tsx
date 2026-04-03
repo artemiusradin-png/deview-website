@@ -7,6 +7,26 @@ const fade = {
   animate: { opacity: 1, y: 0 },
 };
 
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+};
+
+const stagger = {
+  whileInView: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+  viewport: { once: true, amount: 0.15 },
+};
+
+const cardMotion = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+};
+
 const services = [
   {
     label: "AI STRATEGY",
@@ -153,8 +173,17 @@ export default function Home() {
       </header>
 
       <section id="hero" className="section-fullscreen relative flex items-center justify-center px-6">
+        {/* Background video: Data_Center_Corridor_Loop */}
+        <video
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          src="/Data_Center_Corridor_Loop.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
         <div className="absolute inset-0 hero-overlay" />
-        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col justify-between gap-16 md:flex-row">
+        <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col justify-between gap-16 md:flex-row">
           <motion.div
             initial={fade.initial}
             animate={fade.animate}
@@ -220,8 +249,12 @@ export default function Home() {
         id="services"
         className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-6"
       >
-        <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
-          <div>
+        <motion.div
+          {...reveal}
+          transition={{ duration: 0.5 }}
+          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16"
+        >
+          <div className="section-shell">
             <p className="section-label mb-3">SERVICES</p>
             <div className="rule mb-6" />
             <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
@@ -237,15 +270,20 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-4">
+          <motion.div
+            variants={stagger}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={stagger.viewport}
+            className="grid gap-10 md:grid-cols-2 xl:grid-cols-4"
+          >
             {services.map((service) => (
               <motion.article
                 key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.4 }}
-                className="panel border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5"
+                variants={cardMotion}
+                transition={{ duration: 0.45 }}
+                whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
+                className="panel panel-interactive border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5"
               >
                 <p className="section-label mb-3 text-[0.6rem]">{service.label}</p>
                 <p className="mb-3 text-sm text-[var(--white-100)]">{service.title}</p>
@@ -265,16 +303,20 @@ export default function Home() {
                 </p>
               </motion.article>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       <section
         id="solutions"
         className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-6"
       >
-        <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
-          <div>
+        <motion.div
+          {...reveal}
+          transition={{ duration: 0.5 }}
+          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16"
+        >
+          <div className="section-shell">
             <p className="section-label mb-3">USE CASES</p>
             <div className="rule mb-6" />
             <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
@@ -310,24 +352,40 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2">
+          <motion.div
+            variants={stagger}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={stagger.viewport}
+            className="grid gap-8 md:grid-cols-2"
+          >
             {solutionAreas.map((area) => (
-              <div key={area.title} className="panel border border-[var(--white-20)] bg-black px-5 py-6">
+              <motion.div
+                key={area.title}
+                variants={cardMotion}
+                transition={{ duration: 0.45 }}
+                whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
+                className="panel panel-interactive border border-[var(--white-20)] bg-black px-5 py-6"
+              >
                 <p className="section-label mb-3 text-[0.65rem]">{area.sector}</p>
                 <p className="mb-3 text-sm text-[var(--white-100)]">{area.title}</p>
                 <p className="text-[0.8rem] text-[var(--text-muted)]">{area.body}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       <section
         id="outcomes"
         className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-6"
       >
-        <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
-          <div>
+        <motion.div
+          {...reveal}
+          transition={{ duration: 0.5 }}
+          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16"
+        >
+          <div className="section-shell">
             <p className="section-label mb-3">OUTCOMES</p>
             <div className="rule mb-6" />
             <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
@@ -362,23 +420,39 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <motion.div
+            variants={stagger}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={stagger.viewport}
+            className="grid gap-6 md:grid-cols-2 xl:grid-cols-4"
+          >
             {outcomes.map((outcome) => (
-              <div key={outcome.label} className="panel border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5">
+              <motion.div
+                key={outcome.label}
+                variants={cardMotion}
+                transition={{ duration: 0.45 }}
+                whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
+                className="panel panel-interactive border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5"
+              >
                 <p className="section-label mb-2 text-[0.6rem]">{outcome.label}</p>
                 <p className="text-[0.8rem] text-[var(--text-muted)]">{outcome.body}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       <section
         id="process"
         className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-6"
       >
-        <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16">
-          <div>
+        <motion.div
+          {...reveal}
+          transition={{ duration: 0.5 }}
+          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16"
+        >
+          <div className="section-shell">
             <p className="section-label mb-3">PROCESS</p>
             <div className="rule mb-6" />
             <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
@@ -394,18 +468,30 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <motion.div
+            variants={stagger}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={stagger.viewport}
+            className="grid gap-6 md:grid-cols-2 xl:grid-cols-3"
+          >
             {processSteps.map((item) => (
-              <article key={item.step} className="panel border border-[var(--white-20)] bg-black px-5 py-6">
-                <p className="mb-3 text-[0.65rem] uppercase tracking-[0.24em] text-[var(--white-60)]">
+              <motion.article
+                key={item.step}
+                variants={cardMotion}
+                transition={{ duration: 0.45 }}
+                whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
+                className="panel panel-interactive process-card border border-[var(--white-20)] bg-black px-5 py-6"
+              >
+                <p className="process-step mb-3 text-[0.65rem] uppercase tracking-[0.24em] text-[var(--white-60)]">
                   Step {item.step}
                 </p>
                 <h3 className="mb-3 text-sm text-[var(--white-100)]">{item.title}</h3>
                 <p className="text-[0.8rem] text-[var(--text-muted)]">{item.body}</p>
-              </article>
+              </motion.article>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       <section id="contact" className="relative border-t border-[var(--white-20)] bg-black px-6 py-16">
