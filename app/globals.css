@@ -420,32 +420,29 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--white-20);
-  background: rgba(0, 0, 0, 0.78);
-  color: var(--white-90);
-  font-size: 1.2rem;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  background: transparent;
+  color: var(--white-40);
+  font-size: 0.8rem;
   line-height: 1;
   transform: translateY(-50%);
   transition:
-    border-color 180ms ease,
-    background-color 180ms ease,
+    opacity 180ms ease,
     color 180ms ease;
 }
 
 .carousel-arrow:hover {
-  border-color: var(--white-60);
-  background: rgba(0, 0, 0, 0.92);
-  color: var(--white-100);
+  color: var(--white-90);
 }
 
 .carousel-arrow-left {
-  left: 0.25rem;
+  left: 0.6rem;
 }
 
 .carousel-arrow-right {
-  right: 0.25rem;
+  right: 0.6rem;
 }
 
 .carousel-fade-left,
