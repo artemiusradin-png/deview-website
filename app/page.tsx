@@ -198,37 +198,30 @@ export default function Home() {
 
       <section id="hero" className="section-fullscreen relative flex items-center justify-center px-6">
         <div className="hero-media absolute inset-0">
-          <motion.video
+          <video
             ref={heroVideoRef}
-            initial={false}
-            animate={{ opacity: heroVideoState === "fallback" ? 0 : 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="hero-video pointer-events-none absolute inset-0 h-full w-full object-cover"
+            className={`hero-video pointer-events-none absolute inset-0 h-full w-full object-cover ${
+              heroVideoState === "fallback" ? "hero-video-hidden" : "hero-video-visible"
+            }`}
             autoPlay
             muted
+            loop
             playsInline
             preload="auto"
             poster="/window.svg"
             onLoadedData={() => setHeroVideoState((current) => (current === "fallback" ? current : "playing"))}
             onPlay={() => setHeroVideoState("playing")}
-            onEnded={() => setHeroVideoState("fallback")}
             onError={() => setHeroVideoState("fallback")}
           >
             <source src="/Abstract_Architectural_AI_Background_Video.mp4" type="video/mp4" />
-          </motion.video>
+          </video>
           {heroVideoState === "fallback" ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.1, ease: "easeOut" }}
-              className="hero-fallback absolute inset-0"
-              aria-hidden="true"
-            >
+            <div className="hero-fallback hero-fallback-visible absolute inset-0" aria-hidden="true">
               <div className="hero-fallback-grid" />
               <div className="hero-fallback-rings" />
               <div className="hero-fallback-beam hero-fallback-beam-left" />
               <div className="hero-fallback-beam hero-fallback-beam-right" />
-            </motion.div>
+            </div>
           ) : null}
         </div>
         <div
@@ -253,11 +246,6 @@ export default function Home() {
               DeView helps companies identify high-value AI opportunities, build custom solutions, and put the
               right implementation foundations in place so those systems deliver measurable operational results.
             </p>
-            <div className="mt-8">
-              <a href="#contact" className="btn-outline">
-                CONTACT
-              </a>
-            </div>
           </motion.div>
 
           <motion.div
@@ -575,6 +563,11 @@ export default function Home() {
               Include timelines, stakeholders, and any existing internal tooling or AI initiatives we should
               design around.
             </p>
+            <div className="pt-3">
+              <a href="/contact" className="btn-outline">
+                CONTACT
+              </a>
+            </div>
           </div>
         </div>
       </section>

@@ -1,0 +1,139 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+const rise = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+};
+
+export default function ContactPage() {
+  return (
+    <main className="min-h-screen bg-black bg-grid px-6 pb-16 pt-24 text-[var(--text)]">
+      <div className="mx-auto max-w-6xl">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7 }}
+          className="mb-10 flex items-center justify-between border-b border-[var(--white-20)] pb-5"
+        >
+          <a href="/" className="text-xs uppercase tracking-[0.24em] text-[var(--white-80)]">
+            DEVIEW
+          </a>
+          <a href="/" className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+            BACK TO HOME
+          </a>
+        </motion.div>
+
+        <div className="grid gap-10 md:grid-cols-[1.1fr_1fr]">
+          <motion.section
+            initial={rise.initial}
+            animate={rise.animate}
+            transition={{ duration: 0.55 }}
+            className="panel border border-[var(--white-20)] bg-[var(--surface)] p-6 md:p-8"
+          >
+            <p className="section-label mb-3">CONTACT FORM</p>
+            <div className="rule mb-6" />
+            <h1 className="hero-heading mb-4 text-3xl text-[var(--white-100)] md:text-4xl">START A PROJECT</h1>
+            <p className="mb-8 max-w-xl text-sm text-[var(--text-muted)]">
+              Share your current workflow, operational constraints, and expected outcomes. We reply with a
+              scoped recommendation and next steps.
+            </p>
+
+            <motion.form
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.55 }}
+              className="space-y-5"
+            >
+              <div className="grid gap-5 sm:grid-cols-2">
+                <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                  Full Name
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your name"
+                    className="border border-[var(--white-20)] bg-black px-4 py-3 text-sm text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)]"
+                  />
+                </label>
+                <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                  Work Email
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="name@company.com"
+                    className="border border-[var(--white-20)] bg-black px-4 py-3 text-sm text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)]"
+                  />
+                </label>
+              </div>
+
+              <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                Company
+                <input
+                  type="text"
+                  name="company"
+                  placeholder="Company name"
+                  className="border border-[var(--white-20)] bg-black px-4 py-3 text-sm text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)]"
+                />
+              </label>
+
+              <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                What are you trying to solve?
+                <textarea
+                  name="details"
+                  rows={6}
+                  placeholder="Describe your use case, data context, and desired business outcome."
+                  className="resize-none border border-[var(--white-20)] bg-black px-4 py-3 text-sm text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)]"
+                />
+              </label>
+
+              <motion.button
+                whileHover={{ y: -1 }}
+                whileTap={{ scale: 0.99 }}
+                type="submit"
+                className="btn-outline"
+              >
+                SUBMIT INQUIRY
+              </motion.button>
+            </motion.form>
+          </motion.section>
+
+          <motion.aside
+            initial={rise.initial}
+            animate={rise.animate}
+            transition={{ delay: 0.08, duration: 0.55 }}
+            className="panel border border-[var(--white-20)] bg-black p-6 md:p-8"
+          >
+            <p className="section-label mb-3">HOW WE RESPOND</p>
+            <div className="rule mb-6" />
+            <div className="space-y-6 text-sm">
+              <div>
+                <p className="mb-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                  RESPONSE WINDOW
+                </p>
+                <p className="text-[var(--white-90)]">Within 1-2 business days</p>
+              </div>
+              <div>
+                <p className="mb-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                  INITIAL OUTPUT
+                </p>
+                <p className="text-[var(--white-90)]">Fit assessment + scoped engagement options</p>
+              </div>
+              <div>
+                <p className="mb-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                  DIRECT EMAIL
+                </p>
+                <a
+                  href="mailto:hello@deview.ai"
+                  className="text-[var(--white-100)] underline underline-offset-4"
+                >
+                  hello@deview.ai
+                </a>
+              </div>
+            </div>
+          </motion.aside>
+        </div>
+      </div>
+    </main>
+  );
+}
