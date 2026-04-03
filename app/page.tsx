@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 const fade = {
@@ -142,6 +143,8 @@ const processSteps = [
 ];
 
 export default function Home() {
+  const [heroVideoFinished, setHeroVideoFinished] = useState(false);
+
   return (
     <div className="min-h-screen bg-black bg-grid text-[var(--text)]">
       <header className="fixed inset-x-0 top-0 z-40 border-b border-[var(--white-20)] bg-gradient-to-b from-[var(--black-80)] to-transparent">
@@ -173,15 +176,33 @@ export default function Home() {
       </header>
 
       <section id="hero" className="section-fullscreen relative flex items-center justify-center px-6">
-        {/* Background video: Data_Center_Corridor_Loop */}
-        <video
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-          src="/Data_Center_Corridor_Loop.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
+        <div className="hero-media absolute inset-0">
+          <motion.video
+            initial={false}
+            animate={{ opacity: heroVideoFinished ? 0 : 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="hero-video pointer-events-none absolute inset-0 h-full w-full object-cover"
+            src="/Abstract_Architectural_AI_Background_Video.mp4"
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            onEnded={() => setHeroVideoFinished(true)}
+            onError={() => setHeroVideoFinished(true)}
+          />
+          <motion.div
+            initial={false}
+            animate={{ opacity: heroVideoFinished ? 1 : 0.28 }}
+            transition={{ duration: 1.1, ease: "easeOut" }}
+            className="hero-fallback absolute inset-0"
+            aria-hidden="true"
+          >
+            <div className="hero-fallback-grid" />
+            <div className="hero-fallback-rings" />
+            <div className="hero-fallback-beam hero-fallback-beam-left" />
+            <div className="hero-fallback-beam hero-fallback-beam-right" />
+          </motion.div>
+        </div>
         <div className="absolute inset-0 hero-overlay" />
         <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col justify-between gap-16 md:flex-row">
           <motion.div
