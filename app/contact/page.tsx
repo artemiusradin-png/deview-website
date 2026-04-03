@@ -48,7 +48,9 @@ export default function ContactPage() {
             >
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                  Full Name <span className="text-red-500">*</span>
+                  <span>
+                    Full Name <span className="text-red-500">*</span>
+                  </span>
                   <input
                     type="text"
                     name="name"
@@ -58,7 +60,9 @@ export default function ContactPage() {
                   />
                 </label>
                 <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                  Work Email <span className="text-red-500">*</span>
+                  <span>
+                    Work Email <span className="text-red-500">*</span>
+                  </span>
                   <input
                     type="email"
                     name="email"
@@ -80,7 +84,9 @@ export default function ContactPage() {
               </label>
 
               <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                What are you trying to solve? <span className="text-red-500">*</span>
+                <span>
+                  What are you trying to solve? <span className="text-red-500">*</span>
+                </span>
                 <textarea
                   name="details"
                   required
