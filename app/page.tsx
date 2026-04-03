@@ -151,6 +151,7 @@ const processSteps = [
 
 export default function Home() {
   const heroVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const solutionCarouselRef = useRef<HTMLDivElement | null>(null);
   const [heroVideoState, setHeroVideoState] = useState<"loading" | "playing" | "fallback">("loading");
   const [activeHeroLayer, setActiveHeroLayer] = useState(0);
   const [fadingHeroLayer, setFadingHeroLayer] = useState<number | null>(null);
@@ -235,6 +236,21 @@ export default function Home() {
     if (remaining <= HERO_VIDEO_CROSSFADE_SECONDS) {
       void startStandbyLayer(layerIndex);
     }
+  };
+
+  const scrollSolutions = (direction: "left" | "right") => {
+    const carousel = solutionCarouselRef.current;
+
+    if (!carousel) {
+      return;
+    }
+
+    const amount = Math.max(carousel.clientWidth * 0.78, 320);
+
+    carousel.scrollBy({
+      left: direction === "left" ? -amount : amount,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -483,9 +499,28 @@ export default function Home() {
             viewport={stagger.viewport}
             className="relative overflow-hidden"
           >
+            <button
+              type="button"
+              aria-label="Scroll use cases left"
+              className="carousel-arrow carousel-arrow-left"
+              onClick={() => scrollSolutions("left")}
+            >
+              ←
+            </button>
+            <button
+              type="button"
+              aria-label="Scroll use cases right"
+              className="carousel-arrow carousel-arrow-right"
+              onClick={() => scrollSolutions("right")}
+            >
+              →
+            </button>
             <div className="carousel-fade-left" aria-hidden="true" />
             <div className="carousel-fade-right" aria-hidden="true" />
-            <div className="hide-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-2 md:px-8">
+            <div
+              ref={solutionCarouselRef}
+              className="hide-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-2 md:px-8"
+            >
               {solutionAreas.map((area) => (
                 <motion.div
                   key={area.title}
@@ -623,14 +658,14 @@ export default function Home() {
             <p className="section-label mb-3">INQUIRE</p>
             <div className="rule mb-6 max-w-[11rem]" />
             <h2 className="mb-5 text-sm leading-relaxed text-[var(--white-100)]">
-              Bring us the workflow, constraint,
+              Bring us the messy workflow, stubborn constraint,
               <br />
-              or AI idea you want pressure-tested.
+              or half-formed AI idea you want pressure-tested.
             </h2>
             <p className="text-sm leading-relaxed text-[var(--text-muted)]">
-              Share the business function, current process,
+              Send the business function, current process,
               <br />
-              available data, and desired outcome.
+              available data, and the outcome you want to unlock.
             </p>
           </div>
 
@@ -638,7 +673,7 @@ export default function Home() {
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <a
                 href="mailto:hello@deview.ai"
-                className="block leading-none text-[var(--white-80)] transition-colors duration-200 hover:text-[var(--white-100)]"
+                className="contact-monument block leading-none"
               >
                 <span className="block text-[12vw] tracking-[-0.06em] md:text-[10vw]">hello</span>
                 <span className="block text-[12vw] tracking-[-0.06em] md:text-[10vw]">@deview.ai</span>
