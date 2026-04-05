@@ -72,40 +72,52 @@ const services = [
 
 const enterprisePillars = [
   {
+    id: "scale",
     label: "SCALE",
+    summary: "The system has to keep performing when usage, concurrency, and data volume are no longer small-team problems.",
     points: ["100s-1000s of users", "24/7 availability", "TB-PB data volumes"],
   },
   {
+    id: "compliance",
     label: "COMPLIANCE",
+    summary: "Enterprise AI inherits the regulatory burden of the business function it supports.",
     points: ["HIPAA, SOX, GDPR", "Industry regulations", "Audit requirements"],
   },
   {
+    id: "integration",
     label: "INTEGRATION",
+    summary: "The model is only useful if it fits the systems, workflow handoffs, and governance already in place.",
     points: ["Legacy systems", "Existing workflows", "Data governance"],
   },
   {
+    id: "accountability",
     label: "ACCOUNTABILITY",
+    summary: "Outputs need to be reviewable, explainable, and controllable by the people responsible for outcomes.",
     points: ["Auditability", "Explainability", "Human oversight"],
   },
 ];
 
 const enterpriseModes = [
   {
+    id: "predictive",
     label: "PREDICTIVE",
     position: "Top",
     body: "Demand forecasting, churn, and maintenance planning for high-value operational decisions.",
   },
   {
+    id: "conversational",
     label: "CONVERSATIONAL",
     position: "Left",
     body: "Customer service, support copilots, and retrieval experiences that still fit enterprise controls.",
   },
   {
+    id: "generative",
     label: "GENERATIVE",
     position: "Right",
     body: "Document automation, code help, and content generation with workflows, review, and governance around them.",
   },
   {
+    id: "analytical",
     label: "ANALYTICAL",
     position: "Bottom",
     body: "Anomaly detection, risk analysis, and fraud workflows that turn model output into operational insight.",
@@ -234,6 +246,9 @@ export default function Home() {
 
     return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
   });
+  const [activeEnterprisePillar, setActiveEnterprisePillar] = useState(enterprisePillars[0].id);
+  const [activeEnterpriseMode, setActiveEnterpriseMode] = useState(enterpriseModes[0].id);
+  const [architectureFocus, setArchitectureFocus] = useState<"public" | "enterprise">("enterprise");
   const standbyStartedRef = useRef(false);
   const crossfadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -371,6 +386,8 @@ export default function Home() {
 
   const closeNav = () => setNavOpen(false);
   const toggleTheme = () => setTheme((current) => (current === "dark" ? "light" : "dark"));
+  const selectedPillar = enterprisePillars.find((pillar) => pillar.id === activeEnterprisePillar) ?? enterprisePillars[0];
+  const selectedMode = enterpriseModes.find((mode) => mode.id === activeEnterpriseMode) ?? enterpriseModes[0];
 
   return (
     <div className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid text-[var(--text)]">
@@ -621,6 +638,84 @@ export default function Home() {
                   complexity, and operational accountability — the real line between a demo and a production
                   deployment.
                 </p>
+
+                {/* Visual: interface-only vs operational AI */}
+                <motion.div
+                  variants={cardMotion}
+                  initial="initial"
+                  whileInView="whileInView"
+                  viewport={reveal.viewport}
+                  transition={{ duration: 0.45, delay: 0.1 }}
+                  className="mt-8 grid gap-px border border-[var(--white-20)] bg-[var(--white-20)] sm:grid-cols-2"
+                >
+                  {/* Left panel: interface only */}
+                  <div className="flex flex-col gap-5 bg-[var(--background)] p-5">
+                    <p className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-30)]">INTERFACE ONLY</p>
+
+                    <div className="space-y-2">
+                      <div className="flex justify-end">
+                        <div className="max-w-[82%] border border-[var(--white-10)] px-3 py-2">
+                          <p className="mb-1 text-[0.52rem] uppercase tracking-[0.14em] text-[var(--white-30)]">USER</p>
+                          <p className="text-[0.7rem] leading-snug text-[var(--white-40)]">What are our Q4 exposure risks?</p>
+                        </div>
+                      </div>
+                      <div className="flex justify-start">
+                        <div className="max-w-[82%] border border-[var(--white-10)] bg-[var(--surface)] px-3 py-2">
+                          <p className="mb-1 text-[0.52rem] uppercase tracking-[0.14em] text-[var(--white-30)]">AI</p>
+                          <p className="text-[0.7rem] leading-snug text-[var(--white-30)]">Based on general patterns, Q4 risks typically include supply chain pressure and budget cycles...</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-auto border-t border-[var(--white-10)] pt-4 space-y-1.5">
+                      {["No access to your systems", "No action taken", "Not monitored or measured"].map((item) => (
+                        <div key={item} className="flex items-center gap-2">
+                          <span className="shrink-0 text-[0.6rem] text-[var(--white-20)]">—</span>
+                          <span className="text-[0.62rem] uppercase tracking-[0.1em] text-[var(--white-30)]">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right panel: operational AI */}
+                  <div className="flex flex-col gap-5 bg-[var(--surface)] p-5">
+                    <p className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-80)]">OPERATIONAL AI</p>
+
+                    <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-2">
+                      <div className="space-y-1.5">
+                        <p className="mb-2 text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-40)]">INPUTS</p>
+                        {["CRM", "ERP", "SLACK", "DOCS"].map((src) => (
+                          <div key={src} className="border border-[var(--white-20)] px-2 py-1.5 text-center">
+                            <span className="text-[0.6rem] uppercase tracking-[0.12em] text-[var(--white-60)]">{src}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="flex flex-col items-center justify-center gap-1.5 px-1 pt-7">
+                        <span className="text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-60)]">AI</span>
+                        <span className="text-[0.7rem] leading-none text-[var(--white-40)]">→</span>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <p className="mb-2 text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-40)]">ACTIONS</p>
+                        {["TICKET", "ALERT", "REPORT", "ESCALATION"].map((out) => (
+                          <div key={out} className="border border-[var(--white-20)] px-2 py-1.5 text-center">
+                            <span className="text-[0.6rem] uppercase tracking-[0.12em] text-[var(--white-60)]">{out}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mt-auto border-t border-[var(--white-20)] pt-4 space-y-1.5">
+                      {["Reads from and writes to your systems", "Every action tracked and auditable", "Monitored and evaluated in production"].map((item) => (
+                        <div key={item} className="flex items-center gap-2">
+                          <span className="shrink-0 text-[0.6rem] text-[var(--white-60)]">+</span>
+                          <span className="text-[0.62rem] uppercase tracking-[0.1em] text-[var(--white-80)]">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
               </div>
               <aside className="enterprise-opener-aside flex flex-col justify-end border-t border-[var(--white-20)] pt-8 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
                 <div className="space-y-4 text-[0.72rem] text-[var(--white-80)] sm:text-xs">
@@ -669,9 +764,15 @@ export default function Home() {
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 {enterprisePillars.map((pillar) => (
-                  <article
+                  <button
                     key={pillar.label}
-                    className="enterprise-card border border-[var(--white-20)] bg-[var(--surface)] p-4"
+                    type="button"
+                    className={`enterprise-card enterprise-card-button border border-[var(--white-20)] bg-[var(--surface)] p-4 text-left ${
+                      activeEnterprisePillar === pillar.id ? "enterprise-card-active" : ""
+                    }`}
+                    onMouseEnter={() => setActiveEnterprisePillar(pillar.id)}
+                    onFocus={() => setActiveEnterprisePillar(pillar.id)}
+                    onClick={() => setActiveEnterprisePillar(pillar.id)}
                   >
                     <p className="mb-3 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">
                       {pillar.label}
@@ -683,8 +784,19 @@ export default function Home() {
                         </li>
                       ))}
                     </ul>
-                  </article>
+                  </button>
                 ))}
+              </div>
+              <div className="enterprise-detail mt-4 border-t border-[var(--white-20)] pt-4">
+                <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-6">
+                  <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[var(--white-60)]">Active Constraint</p>
+                  <div className="max-w-xl">
+                    <p className="mb-2 text-sm uppercase tracking-[0.18em] text-[var(--white-100)]">
+                      {selectedPillar.label}
+                    </p>
+                    <p className="text-[0.84rem] leading-relaxed text-[var(--text-muted)]">{selectedPillar.summary}</p>
+                  </div>
+                </div>
               </div>
             </motion.section>
 
@@ -710,16 +822,33 @@ export default function Home() {
                 <div className="enterprise-axis enterprise-axis-right">HIGH AUTOMATION</div>
                 <div className="enterprise-axis enterprise-axis-bottom">OPERATIONAL INSIGHT</div>
                 {enterpriseModes.map((mode) => (
-                  <article
+                  <button
                     key={mode.label}
-                    className={`enterprise-mode enterprise-mode-${mode.position.toLowerCase()}`}
+                    type="button"
+                    className={`enterprise-mode enterprise-mode-${mode.position.toLowerCase()} ${
+                      activeEnterpriseMode === mode.id ? "enterprise-mode-active" : ""
+                    }`}
+                    onMouseEnter={() => setActiveEnterpriseMode(mode.id)}
+                    onFocus={() => setActiveEnterpriseMode(mode.id)}
+                    onClick={() => setActiveEnterpriseMode(mode.id)}
                   >
                     <p className="mb-2 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">
                       {mode.label}
                     </p>
                     <p className="text-[0.8rem] leading-relaxed text-[var(--text-muted)]">{mode.body}</p>
-                  </article>
+                  </button>
                 ))}
+              </div>
+              <div className="enterprise-detail mt-4 border-t border-[var(--white-20)] pt-4">
+                <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-6">
+                  <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[var(--white-60)]">Current Mode</p>
+                  <div className="max-w-xl">
+                    <p className="mb-2 text-sm uppercase tracking-[0.18em] text-[var(--white-100)]">
+                      {selectedMode.label}
+                    </p>
+                    <p className="text-[0.84rem] leading-relaxed text-[var(--text-muted)]">{selectedMode.body}</p>
+                  </div>
+                </div>
               </div>
             </motion.section>
           </div>
@@ -743,8 +872,32 @@ export default function Home() {
                 This is where DeView moves clients from public AI usage to enterprise-grade deployment.
               </p>
             </div>
+            <div className="mb-4 flex flex-wrap gap-3">
+              <button
+                type="button"
+                className={`enterprise-chip ${architectureFocus === "public" ? "enterprise-chip-active" : ""}`}
+                onMouseEnter={() => setArchitectureFocus("public")}
+                onFocus={() => setArchitectureFocus("public")}
+                onClick={() => setArchitectureFocus("public")}
+              >
+                PUBLIC AI SERVICE
+              </button>
+              <button
+                type="button"
+                className={`enterprise-chip ${architectureFocus === "enterprise" ? "enterprise-chip-active" : ""}`}
+                onMouseEnter={() => setArchitectureFocus("enterprise")}
+                onFocus={() => setArchitectureFocus("enterprise")}
+                onClick={() => setArchitectureFocus("enterprise")}
+              >
+                ENTERPRISE AI DEPLOYMENT
+              </button>
+            </div>
             <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr] md:items-stretch">
-              <article className="enterprise-compare enterprise-compare-public">
+              <article
+                className={`enterprise-compare enterprise-compare-public ${
+                  architectureFocus === "public" ? "enterprise-compare-active" : "enterprise-compare-dim"
+                }`}
+              >
                 <p className="mb-4 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">
                   {architectureComparison.public.label}
                 </p>
@@ -756,10 +909,19 @@ export default function Home() {
                   ))}
                 </ul>
               </article>
-              <div className="enterprise-arrow" aria-hidden="true">
+              <div
+                className={`enterprise-arrow ${
+                  architectureFocus === "enterprise" ? "enterprise-arrow-enterprise" : "enterprise-arrow-public"
+                }`}
+                aria-hidden="true"
+              >
                 <span>→</span>
               </div>
-              <article className="enterprise-compare enterprise-compare-enterprise">
+              <article
+                className={`enterprise-compare enterprise-compare-enterprise ${
+                  architectureFocus === "enterprise" ? "enterprise-compare-active" : "enterprise-compare-dim"
+                }`}
+              >
                 <p className="mb-4 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">
                   {architectureComparison.enterprise.label}
                 </p>
