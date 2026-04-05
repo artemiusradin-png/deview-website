@@ -485,6 +485,11 @@ html[data-theme="light"] .hero-fallback {
 .enterprise-mode {
   position: relative;
   overflow: hidden;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease;
 }
 
 .enterprise-card::before,
@@ -518,6 +523,35 @@ html[data-theme="light"] .enterprise-mode::before {
   height: 0.35rem;
   border-radius: 0;
   background: var(--white-60);
+}
+
+.enterprise-card-button,
+.enterprise-mode,
+.enterprise-chip {
+  cursor: pointer;
+}
+
+.enterprise-card-button {
+  width: 100%;
+}
+
+.enterprise-card-button:hover,
+.enterprise-card-button:focus-visible,
+.enterprise-card-active {
+  border-color: var(--white-60);
+  transform: translateY(-2px);
+}
+
+.enterprise-mode:hover,
+.enterprise-mode:focus-visible,
+.enterprise-mode-active {
+  border-color: var(--white-60);
+  background: var(--background);
+  transform: translateY(-2px);
+}
+
+.enterprise-detail {
+  min-height: 5.5rem;
 }
 
 .enterprise-map {
@@ -579,6 +613,15 @@ html[data-theme="light"] .enterprise-mode::before {
   background: var(--surface-elevated);
 }
 
+.enterprise-compare-active {
+  border-color: var(--white-60);
+  transform: translateY(-2px);
+}
+
+.enterprise-compare-dim {
+  opacity: 0.6;
+}
+
 .enterprise-compare-enterprise {
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 48%),
@@ -597,6 +640,43 @@ html[data-theme="light"] .enterprise-compare-enterprise {
   justify-content: center;
   color: var(--white-60);
   font-size: 1.6rem;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.enterprise-arrow-enterprise {
+  color: var(--white-100);
+  transform: translateX(4px);
+}
+
+.enterprise-arrow-public {
+  color: var(--white-40);
+  transform: translateX(-4px);
+}
+
+.enterprise-chip {
+  border: 1px solid var(--white-20);
+  background: transparent;
+  color: var(--white-60);
+  padding: 0.65rem 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.62rem;
+  transition:
+    border-color 180ms ease,
+    color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.enterprise-chip:hover,
+.enterprise-chip:focus-visible,
+.enterprise-chip-active {
+  border-color: var(--white-60);
+  color: var(--white-100);
+  background: var(--surface-elevated);
+  transform: translateY(-1px);
 }
 
 @media (max-width: 961px) {
@@ -619,6 +699,14 @@ html[data-theme="light"] .enterprise-compare-enterprise {
   .enterprise-arrow {
     min-height: 2.5rem;
     transform: rotate(90deg);
+  }
+
+  .enterprise-arrow-enterprise {
+    transform: rotate(90deg) translateX(4px);
+  }
+
+  .enterprise-arrow-public {
+    transform: rotate(90deg) translateX(-4px);
   }
 }
 
