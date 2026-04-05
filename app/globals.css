@@ -470,6 +470,31 @@ html[data-theme="light"] .hero-fallback {
   margin: 0;
 }
 
+.type-line {
+  min-height: 2.5em;
+}
+
+.type-caret {
+  display: inline-block;
+  width: 0.5ch;
+  height: 1em;
+  margin-left: 0.08rem;
+  vertical-align: -0.14em;
+  background: currentColor;
+  animation: type-caret-blink 1s steps(1) infinite;
+}
+
+@keyframes type-caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
 .enterprise-system-compare {
   align-self: flex-start;
 }
@@ -486,7 +511,7 @@ html[data-theme="light"] .hero-fallback {
 
 @media (min-width: 1024px) {
   .enterprise-system-compare {
-    margin-left: -2rem;
+    margin-left: clamp(-7rem, -8vw, -3.5rem);
   }
 }
 

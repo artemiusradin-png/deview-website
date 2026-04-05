@@ -30,6 +30,9 @@ const cardMotion = {
 
 const HERO_VIDEO_SRC = "/Abstract_Architectural_AI_Background_Video.mp4";
 const HERO_VIDEO_CROSSFADE_SECONDS = 0.9;
+const INTERFACE_USER_MESSAGE = "What are our Q4 exposure risks?";
+const INTERFACE_AI_MESSAGE =
+  "Based on general patterns, Q4 risks typically include supply chain pressure and budget cycles...";
 
 const services = [
   {
@@ -249,6 +252,8 @@ export default function Home() {
   const [activeEnterprisePillar, setActiveEnterprisePillar] = useState(enterprisePillars[0].id);
   const [activeEnterpriseMode, setActiveEnterpriseMode] = useState(enterpriseModes[0].id);
   const [architectureFocus, setArchitectureFocus] = useState<"public" | "enterprise">("enterprise");
+  const [typedUserMessage, setTypedUserMessage] = useState("");
+  const [typedAiMessage, setTypedAiMessage] = useState("");
   const standbyStartedRef = useRef(false);
   const crossfadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -285,6 +290,70 @@ export default function Home() {
     return () => {
       if (crossfadeTimeoutRef.current) {
         clearTimeout(crossfadeTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+    let userTimeout: ReturnType<typeof setTimeout> | null = null;
+    let aiTimeout: ReturnType<typeof setTimeout> | null = null;
+    let restartTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    const runTypingLoop = () => {
+      let userIndex = 0;
+      let aiIndex = 0;
+
+      setTypedUserMessage("");
+      setTypedAiMessage("");
+
+      const typeUser = () => {
+        if (!mounted) {
+          return;
+        }
+
+        userIndex += 1;
+        setTypedUserMessage(INTERFACE_USER_MESSAGE.slice(0, userIndex));
+
+        if (userIndex < INTERFACE_USER_MESSAGE.length) {
+          userTimeout = setTimeout(typeUser, 42);
+          return;
+        }
+
+        aiTimeout = setTimeout(typeAi, 520);
+      };
+
+      const typeAi = () => {
+        if (!mounted) {
+          return;
+        }
+
+        aiIndex += 1;
+        setTypedAiMessage(INTERFACE_AI_MESSAGE.slice(0, aiIndex));
+
+        if (aiIndex < INTERFACE_AI_MESSAGE.length) {
+          aiTimeout = setTimeout(typeAi, 18);
+          return;
+        }
+
+        restartTimeout = setTimeout(runTypingLoop, 2600);
+      };
+
+      userTimeout = setTimeout(typeUser, 500);
+    };
+
+    runTypingLoop();
+
+    return () => {
+      mounted = false;
+      if (userTimeout) {
+        clearTimeout(userTimeout);
+      }
+      if (aiTimeout) {
+        clearTimeout(aiTimeout);
+      }
+      if (restartTimeout) {
+        clearTimeout(restartTimeout);
       }
     };
   }, []);
@@ -656,13 +725,19 @@ export default function Home() {
                       <div className="flex justify-end">
                         <div className="max-w-[82%] border border-[var(--white-10)] px-3 py-2">
                           <p className="mb-1 text-[0.52rem] uppercase tracking-[0.14em] text-[var(--white-30)]">USER</p>
-                          <p className="text-[0.7rem] leading-snug text-[var(--white-40)]">What are our Q4 exposure risks?</p>
+                          <p className="type-line text-[0.7rem] leading-snug text-[var(--white-40)]">
+                            {typedUserMessage}
+                            <span className="type-caret" aria-hidden="true" />
+                          </p>
                         </div>
                       </div>
                       <div className="flex justify-start">
                         <div className="max-w-[82%] border border-[var(--white-10)] bg-[var(--surface)] px-3 py-2">
                           <p className="mb-1 text-[0.52rem] uppercase tracking-[0.14em] text-[var(--white-30)]">AI</p>
-                          <p className="text-[0.7rem] leading-snug text-[var(--white-30)]">Based on general patterns, Q4 risks typically include supply chain pressure and budget cycles...</p>
+                          <p className="type-line text-[0.7rem] leading-snug text-[var(--white-30)]">
+                            {typedAiMessage}
+                            <span className="type-caret" aria-hidden="true" />
+                          </p>
                         </div>
                       </div>
                     </div>
