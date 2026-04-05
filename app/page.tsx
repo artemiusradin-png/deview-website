@@ -646,7 +646,7 @@ export default function Home() {
                   whileInView="whileInView"
                   viewport={reveal.viewport}
                   transition={{ duration: 0.45, delay: 0.1 }}
-                  className="mt-8 grid gap-px border border-[var(--white-20)] bg-[var(--white-20)] sm:grid-cols-2"
+                  className="enterprise-system-compare mt-8 grid gap-px border border-[var(--white-20)] bg-[var(--white-20)] sm:grid-cols-2"
                 >
                   {/* Left panel: interface only */}
                   <div className="flex flex-col gap-5 bg-[var(--background)] p-5">

@@ -470,6 +470,10 @@ html[data-theme="light"] .hero-fallback {
   margin: 0;
 }
 
+.enterprise-system-compare {
+  align-self: flex-start;
+}
+
 .enterprise-opener-aside {
   min-width: 0;
 }
@@ -477,6 +481,12 @@ html[data-theme="light"] .hero-fallback {
 @media (max-width: 1023px) {
   .enterprise-statement-stack {
     padding-left: 0.85rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .enterprise-system-compare {
+    margin-left: -2rem;
   }
 }
 
