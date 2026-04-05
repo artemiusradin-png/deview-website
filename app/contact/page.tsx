@@ -9,13 +9,13 @@ const rise = {
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-black bg-grid px-6 pb-16 pt-24 text-[var(--text)]">
+    <main className="min-h-screen overflow-x-clip bg-black bg-grid px-4 pb-12 pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:px-6 sm:pb-16 sm:pt-24">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7 }}
-          className="mb-10 flex items-center justify-between border-b border-[var(--white-20)] pb-5"
+          className="mb-8 flex flex-col gap-4 border-b border-[var(--white-20)] pb-5 sm:mb-10 sm:flex-row sm:items-center sm:justify-between sm:gap-0"
         >
           <a href="/" className="text-xs uppercase tracking-[0.24em] text-[var(--white-80)]">
             DEVIEW
@@ -25,16 +25,18 @@ export default function ContactPage() {
           </a>
         </motion.div>
 
-        <div className="grid gap-10 md:grid-cols-[1.1fr_1fr]">
+        <div className="grid gap-8 md:grid-cols-[1.1fr_1fr] md:gap-10">
           <motion.section
             initial={rise.initial}
             animate={rise.animate}
             transition={{ duration: 0.55 }}
-            className="panel border border-[var(--white-20)] bg-[var(--surface)] p-6 md:p-8"
+            className="panel border border-[var(--white-20)] bg-[var(--surface)] p-5 md:p-8"
           >
             <p className="section-label mb-3">CONTACT FORM</p>
             <div className="rule mb-6" />
-            <h1 className="hero-heading mb-4 text-3xl text-[var(--white-100)] md:text-4xl">START A PROJECT</h1>
+            <h1 className="hero-heading mb-4 text-[clamp(1.5rem,5vw,2rem)] text-[var(--white-100)] md:text-4xl">
+              START A PROJECT
+            </h1>
             <p className="mb-8 max-w-xl text-sm text-[var(--text-muted)]">
               Share your current workflow, operational constraints, and expected outcomes. We reply with a
               scoped recommendation and next steps.
@@ -56,7 +58,7 @@ export default function ContactPage() {
                     name="name"
                     required
                     placeholder="Your name"
-                    className="border border-[var(--white-20)] bg-black px-4 py-3 text-sm text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)]"
+                    className="min-h-11 border border-[var(--white-20)] bg-black px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
                   />
                 </label>
                 <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
@@ -68,7 +70,7 @@ export default function ContactPage() {
                     name="email"
                     required
                     placeholder="name@company.com"
-                    className="border border-[var(--white-20)] bg-black px-4 py-3 text-sm text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)]"
+                    className="min-h-11 border border-[var(--white-20)] bg-black px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
                   />
                 </label>
               </div>
@@ -79,7 +81,7 @@ export default function ContactPage() {
                   type="text"
                   name="company"
                   placeholder="Company name"
-                  className="border border-[var(--white-20)] bg-black px-4 py-3 text-sm text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)]"
+                  className="min-h-11 border border-[var(--white-20)] bg-black px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
                 />
               </label>
 
@@ -92,7 +94,7 @@ export default function ContactPage() {
                   required
                   rows={6}
                   placeholder="Describe your use case, data context, and desired business outcome."
-                  className="resize-none border border-[var(--white-20)] bg-black px-4 py-3 text-sm text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)]"
+                  className="resize-none border border-[var(--white-20)] bg-black px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:text-sm"
                 />
               </label>
 
@@ -100,7 +102,7 @@ export default function ContactPage() {
                 whileHover={{ y: -1 }}
                 whileTap={{ scale: 0.99 }}
                 type="submit"
-                className="btn-outline"
+                className="btn-outline w-full sm:w-auto"
               >
                 SUBMIT INQUIRY
               </motion.button>

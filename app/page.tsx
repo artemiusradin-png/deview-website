@@ -267,14 +267,45 @@ export default function Home() {
     event.currentTarget.style.setProperty("--contact-y", "50%");
   };
 
+  const [navOpen, setNavOpen] = useState(false);
+
+  useEffect(() => {
+    if (navOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [navOpen]);
+
+  const closeNav = () => setNavOpen(false);
+
   return (
-    <div className="min-h-screen bg-black bg-grid text-[var(--text)]">
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-[var(--white-20)] bg-gradient-to-b from-[var(--black-80)] to-transparent">
-        <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <a href="#" className="text-sm tracking-[0.25em] uppercase text-[var(--white-80)]">
+    <div className="min-h-screen overflow-x-clip bg-black bg-grid text-[var(--text)]">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--white-20)] bg-gradient-to-b from-[var(--black-80)] to-transparent pt-[env(safe-area-inset-top)]">
+        <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+          <a
+            href="#"
+            className="text-xs tracking-[0.25em] text-[var(--white-80)] sm:text-sm"
+            onClick={closeNav}
+          >
             DEVIEW
           </a>
-          <div className="hidden gap-8 md:flex">
+          <button
+            type="button"
+            className="nav-toggle"
+            aria-expanded={navOpen}
+            aria-controls="mobile-site-nav"
+            aria-label={navOpen ? "Close menu" : "Open menu"}
+            onClick={() => setNavOpen((open) => !open)}
+          >
+            <span className="nav-toggle-bar" />
+            <span className="nav-toggle-bar" />
+            <span className="nav-toggle-bar" />
+          </button>
+          <div className="hidden gap-6 lg:gap-8 md:flex">
             <a href="#hero" className="nav-item nav-item-active">
               AI CONSULTING
             </a>
@@ -297,7 +328,45 @@ export default function Home() {
         </nav>
       </header>
 
-      <section id="hero" className="section-fullscreen relative flex items-center justify-center px-6">
+      {navOpen ? (
+        <div
+          id="mobile-site-nav"
+          className="mobile-nav-overlay md:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site navigation"
+        >
+          <button type="button" className="mb-4 self-end text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]" onClick={closeNav}>
+            Close
+          </button>
+          <a href="#hero" className="nav-item-active" onClick={closeNav}>
+            AI CONSULTING
+          </a>
+          <a href="#services" onClick={closeNav}>
+            SERVICES
+          </a>
+          <a href="#solutions" onClick={closeNav}>
+            USE CASES
+          </a>
+          <a href="#outcomes" onClick={closeNav}>
+            OUTCOMES
+          </a>
+          <a href="#process" onClick={closeNav}>
+            PROCESS
+          </a>
+          <a href="#contact" onClick={closeNav}>
+            INQUIRE
+          </a>
+          <a href="/contact" onClick={closeNav}>
+            CONTACT FORM
+          </a>
+        </div>
+      ) : null}
+
+      <section
+        id="hero"
+        className="section-fullscreen section-fullscreen--hero relative flex items-center justify-center px-4 sm:px-6"
+      >
         <div className="hero-media absolute inset-0">
           {[0, 1].map((layerIndex) => (
             <video
@@ -337,7 +406,7 @@ export default function Home() {
         <div
           className={`absolute inset-0 ${heroVideoState === "fallback" ? "hero-overlay" : "hero-overlay hero-overlay-video"}`}
         />
-        <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col justify-between gap-16 md:flex-row">
+        <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col justify-between gap-12 md:flex-row md:gap-16">
           <motion.div
             initial={fade.initial}
             animate={fade.animate}
@@ -345,7 +414,7 @@ export default function Home() {
             className="max-w-2xl"
           >
             <p className="section-label mb-4">AI STRATEGY, IMPLEMENTATION, AND INTEGRATION</p>
-            <h1 className="hero-heading mb-6 text-4xl text-[var(--white-100)] md:text-5xl lg:text-6xl">
+            <h1 className="hero-heading mb-6 text-[clamp(1.75rem,6.5vw,2.75rem)] text-[var(--white-100)] md:text-5xl lg:text-6xl">
               CUSTOM AI
               <br />
               SOLUTIONS FOR
@@ -362,33 +431,39 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="flex flex-col items-end justify-between gap-10 text-right"
+            className="flex flex-col items-start justify-between gap-8 text-left md:items-end md:gap-10 md:text-right"
           >
-            <div className="space-y-2 text-xs uppercase tracking-[0.18em] text-[var(--white-60)]">
+            <div className="space-y-2 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)] sm:text-xs">
               <div>STRATEGY</div>
               <div>SOLUTION DELIVERY</div>
               <div>AI IMPLEMENTATION</div>
               <div>SYSTEM INTEGRATION</div>
             </div>
-            <div className="space-y-3 text-sm">
-              <div className="flex items-baseline justify-end gap-4">
-                <span className="text-xs uppercase tracking-[0.2em] text-[var(--white-60)]">CLIENTS</span>
-                <span className="text-base text-[var(--white-100)]">MID-MARKET TO ENTERPRISE</span>
+            <div className="w-full space-y-3 text-sm md:w-auto">
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-end sm:gap-4">
+                <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
+                  CLIENTS
+                </span>
+                <span className="text-sm text-[var(--white-100)] sm:text-base">MID-MARKET TO ENTERPRISE</span>
               </div>
-              <div className="flex items-baseline justify-end gap-4">
-                <span className="text-xs uppercase tracking-[0.2em] text-[var(--white-60)]">FOCUS</span>
-                <span className="text-base text-[var(--white-100)]">USEFUL AI, NOT DEMO THEATER</span>
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-end sm:gap-4">
+                <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
+                  FOCUS
+                </span>
+                <span className="text-sm text-[var(--white-100)] sm:text-base">USEFUL AI, NOT DEMO THEATER</span>
               </div>
-              <div className="flex items-baseline justify-end gap-4">
-                <span className="text-xs uppercase tracking-[0.2em] text-[var(--white-60)]">ENGAGEMENTS</span>
-                <span className="text-base text-[var(--white-100)]">DISCOVERY TO PRODUCTION</span>
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-end sm:gap-4">
+                <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
+                  ENGAGEMENTS
+                </span>
+                <span className="text-sm text-[var(--white-100)] sm:text-base">DISCOVERY TO PRODUCTION</span>
               </div>
             </div>
-            <div className="flex items-center gap-8">
+            <div className="flex w-full flex-wrap items-center gap-6 md:w-auto md:justify-end md:gap-8">
               <a href="#contact" className="btn-outline">
                 INQUIRE
               </a>
-              <div className="flex flex-col items-end gap-3">
+              <div className="ml-auto flex flex-col items-end gap-3 md:ml-0">
                 <div className="scroll-cue" />
                 <span className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
                   SCROLL
@@ -401,23 +476,23 @@ export default function Home() {
 
       <section
         id="services"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-6"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-4 sm:px-6"
       >
         <motion.div
           {...reveal}
           transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16"
+          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-10 md:gap-16"
         >
           <div className="section-shell">
             <p className="section-label mb-3">SERVICES</p>
             <div className="rule mb-6" />
             <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
-              <h2 className="text-2xl text-[var(--white-100)] md:text-3xl">
+              <h2 className="text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
                 End-to-end services for
                 <br />
                 implementing AI in business operations.
               </h2>
-              <p className="max-w-md text-xs text-[var(--text-muted)] md:text-sm">
+              <p className="max-w-md text-[0.8rem] text-[var(--text-muted)] md:text-sm">
                 From selecting the right use case to building, integrating, and operating the final system, we
                 work across the full implementation lifecycle.
               </p>
@@ -429,7 +504,7 @@ export default function Home() {
             initial="initial"
             whileInView="whileInView"
             viewport={stagger.viewport}
-            className="grid gap-10 md:grid-cols-2 xl:grid-cols-4"
+            className="grid gap-6 md:grid-cols-2 md:gap-10 xl:grid-cols-4"
           >
             {services.map((service) => (
               <motion.article
@@ -463,19 +538,19 @@ export default function Home() {
 
       <section
         id="solutions"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-6"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-4 sm:px-6"
       >
         <motion.div
           {...reveal}
           transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16"
+          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-10 md:gap-16"
         >
           <div className="section-shell">
             <p className="section-label mb-3">USE CASES</p>
             <div className="rule mb-6" />
             <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
               <div>
-              <h2 className="mb-4 text-2xl text-[var(--white-100)] md:text-3xl">
+              <h2 className="mb-4 text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
                   AI solutions built around
                   <br />
                   concrete operational problems.
@@ -489,18 +564,18 @@ export default function Home() {
                   isolated demo or experimental tool.
                 </p>
               </div>
-              <div className="space-y-4 text-xs text-[var(--white-80)]">
-                <div className="flex justify-between gap-4">
-                  <span className="uppercase tracking-[0.2em] text-[var(--white-60)]">FRAMING</span>
-                  <span className="text-right">Business workflows before model types</span>
+              <div className="space-y-4 text-[0.72rem] text-[var(--white-80)] sm:text-xs">
+                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
+                  <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">FRAMING</span>
+                  <span className="sm:text-right">Business workflows before model types</span>
                 </div>
-                <div className="flex justify-between gap-4">
-                  <span className="uppercase tracking-[0.2em] text-[var(--white-60)]">POSITIONING</span>
-                  <span className="text-right">Custom systems integrated with real operations</span>
+                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
+                  <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">POSITIONING</span>
+                  <span className="sm:text-right">Custom systems integrated with real operations</span>
                 </div>
-                <div className="flex justify-between gap-4">
-                  <span className="uppercase tracking-[0.2em] text-[var(--white-60)]">DELIVERY</span>
-                  <span className="text-right">Strategy, implementation, and rollout in one engagement</span>
+                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
+                  <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">DELIVERY</span>
+                  <span className="sm:text-right">Strategy, implementation, and rollout in one engagement</span>
                 </div>
               </div>
             </div>
@@ -516,7 +591,7 @@ export default function Home() {
             <button
               type="button"
               aria-label="Scroll use cases left"
-              className="carousel-arrow carousel-arrow-left"
+              className="carousel-arrow carousel-arrow-left hidden md:inline-flex"
               onClick={() => scrollSolutions("left")}
             >
               ←
@@ -524,7 +599,7 @@ export default function Home() {
             <button
               type="button"
               aria-label="Scroll use cases right"
-              className="carousel-arrow carousel-arrow-right"
+              className="carousel-arrow carousel-arrow-right hidden md:inline-flex"
               onClick={() => scrollSolutions("right")}
             >
               →
@@ -533,7 +608,7 @@ export default function Home() {
             <div className="carousel-fade-right" aria-hidden="true" />
             <div
               ref={solutionCarouselRef}
-              className="hide-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-2 md:px-8"
+              className="hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 pl-1 pr-4 [-webkit-overflow-scrolling:touch] sm:gap-6 sm:px-6 md:px-8"
             >
               {solutionAreas.map((area) => (
                 <motion.div
@@ -541,7 +616,7 @@ export default function Home() {
                   variants={cardMotion}
                   transition={{ duration: 0.45 }}
                   whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
-                  className="panel panel-interactive min-w-[290px] snap-start border border-[var(--white-20)] bg-black px-5 py-6 sm:min-w-[360px] lg:min-w-[420px]"
+                  className="panel panel-interactive min-w-[min(88vw,320px)] snap-start border border-[var(--white-20)] bg-black px-4 py-5 sm:min-w-[360px] sm:px-5 sm:py-6 lg:min-w-[420px]"
                 >
                   <p className="section-label mb-3 text-[0.65rem]">{area.sector}</p>
                   <p className="mb-3 text-sm text-[var(--white-100)]">{area.title}</p>
@@ -555,19 +630,19 @@ export default function Home() {
 
       <section
         id="outcomes"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-6"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-4 sm:px-6"
       >
         <motion.div
           {...reveal}
           transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16"
+          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-10 md:gap-16"
         >
           <div className="section-shell">
             <p className="section-label mb-3">OUTCOMES</p>
             <div className="rule mb-6" />
             <div className="grid gap-10 md:grid-cols-[1.4fr_1fr] md:items-end">
               <div>
-                <h2 className="mb-4 text-2xl text-[var(--white-100)] md:text-3xl">
+                <h2 className="mb-4 text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
                   Business value from
                   <br />
                   implemented AI systems.
@@ -595,14 +670,14 @@ export default function Home() {
                 transition={{ duration: 0.45 }}
                 className="group border-b border-[var(--white-20)] transition-colors duration-200 hover:bg-[var(--surface)]"
               >
-                <div className="grid gap-4 px-0 py-6 md:grid-cols-[80px_220px_1fr] md:items-start md:gap-6 md:py-7">
-                  <div className="text-[3.5rem] leading-none tracking-[-0.04em] text-[var(--white-10)] md:text-[4rem]">
+                <div className="grid gap-3 px-0 py-5 sm:gap-4 sm:py-6 md:grid-cols-[80px_220px_1fr] md:items-start md:gap-6 md:py-7">
+                  <div className="text-[2.75rem] leading-none tracking-[-0.04em] text-[var(--white-10)] sm:text-[3.5rem] md:text-[4rem]">
                     {outcome.number}
                   </div>
-                  <div className="pt-1 text-base uppercase tracking-[0.2em] text-[var(--white-100)] md:text-lg">
+                  <div className="pt-0 text-sm uppercase tracking-[0.2em] text-[var(--white-100)] sm:pt-1 sm:text-base md:text-lg">
                     {outcome.label}
                   </div>
-                  <div className="pt-1 text-sm leading-relaxed text-[var(--text-muted)] md:max-w-2xl">
+                  <div className="pt-0 text-[0.85rem] leading-relaxed text-[var(--text-muted)] sm:pt-1 sm:text-sm md:max-w-2xl">
                     {outcome.body}
                   </div>
                 </div>
@@ -614,23 +689,23 @@ export default function Home() {
 
       <section
         id="process"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-6"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-4 sm:px-6"
       >
         <motion.div
           {...reveal}
           transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-16"
+          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-10 md:gap-16"
         >
           <div className="section-shell">
             <p className="section-label mb-3">PROCESS</p>
             <div className="rule mb-6" />
             <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
-              <h2 className="text-2xl text-[var(--white-100)] md:text-3xl">
+              <h2 className="text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
                 A clear process for taking AI
                 <br />
                 from idea to live implementation.
               </h2>
-              <p className="max-w-md text-xs text-[var(--text-muted)] md:text-sm">
+              <p className="max-w-md text-[0.8rem] text-[var(--text-muted)] md:text-sm">
                 We keep the engagement model simple: identify the right problem, scope the build, implement the
                 system, validate it in real workflows, then improve it in production.
               </p>
@@ -665,7 +740,7 @@ export default function Home() {
 
       <section
         id="contact"
-        className="relative min-h-[88vh] border-t border-[var(--white-20)] bg-black px-6 pt-20 pb-6 md:min-h-[84vh] md:pt-20 md:pb-3"
+        className="relative min-h-[88vh] scroll-mt-20 border-t border-[var(--white-20)] bg-black px-4 pb-8 pt-20 sm:px-6 md:min-h-[84vh] md:pb-3 md:pt-20"
       >
         <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-12">
           <div className="max-w-md pt-2">
@@ -687,7 +762,7 @@ export default function Home() {
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-8">
               <a
                 href="mailto:hello@deview.ai"
-                className="contact-monument min-w-0 flex-1 pr-3 pb-2 leading-[0.98] md:pr-8"
+                className="contact-monument min-w-0 flex-1 break-words pr-0 pb-2 leading-[0.98] md:pr-8"
                 onMouseMove={handleContactMouseMove}
                 onMouseLeave={handleContactMouseLeave}
               >
@@ -704,13 +779,13 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-[var(--white-20)] bg-black px-6 py-8 text-[0.7rem]">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-6">
+      <footer className="border-t border-[var(--white-20)] bg-black px-4 py-8 text-[0.65rem] sm:px-6 sm:text-[0.7rem]">
+        <div className="mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-4">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
             <span className="text-xs uppercase tracking-[0.25em] text-[var(--white-80)]">DEVIEW</span>
             <span className="text-[var(--white-40)]">© {new Date().getFullYear()} DeView. All rights reserved.</span>
           </div>
-          <div className="flex flex-wrap gap-5 text-[var(--white-60)]">
+          <div className="flex flex-wrap gap-x-4 gap-y-3 text-[var(--white-60)] sm:gap-5">
             <a href="#hero" className="uppercase tracking-[0.18em]">
               AI CONSULTING
             </a>
