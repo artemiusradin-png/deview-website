@@ -588,33 +588,47 @@ export default function Home() {
           <div className="section-shell">
             <p className="section-label mb-3">ENTERPRISE AI</p>
             <div className="rule mb-6" />
-            <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-end">
-              <div>
-                <h2 className="mb-4 text-[clamp(1.25rem,4.8vw,1.9rem)] leading-snug text-[var(--white-100)] md:text-4xl">
-                  Enterprise AI is not just a smarter interface.
-                  <br />
-                  It is AI built to operate inside real companies.
-                </h2>
-                <p className="max-w-2xl text-sm text-[var(--text-muted)] md:text-base">
-                  DeView designs and implements enterprise AI systems that can survive scale, compliance,
-                  integration complexity, and operational accountability. That is the actual line between a demo
-                  and a production deployment.
+            <div className="grid gap-10 lg:grid-cols-[1.15fr_auto] lg:items-stretch lg:gap-14">
+              <div className="enterprise-opener">
+                <div className="enterprise-statement-stack">
+                  <p className="enterprise-statement-line hero-heading text-[var(--white-80)]">
+                    ENTERPRISE AI IS NOT JUST A SMARTER INTERFACE.
+                  </p>
+                  <div className="rule enterprise-statement-rule" />
+                  <p className="enterprise-statement-line hero-heading text-[var(--white-100)]">
+                    IT IS AI BUILT TO OPERATE INSIDE REAL COMPANIES.
+                  </p>
+                </div>
+                <p className="enterprise-opener-body max-w-2xl text-[0.88rem] leading-relaxed text-[var(--text-muted)] md:text-[0.95rem]">
+                  DeView designs and implements enterprise AI systems that survive scale, compliance, integration
+                  complexity, and operational accountability — the real line between a demo and a production
+                  deployment.
                 </p>
               </div>
-              <div className="space-y-3 text-[0.72rem] text-[var(--white-80)] sm:text-xs">
-                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
-                  <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">WE DO</span>
-                  <span className="sm:text-right">Strategy, architecture, deployment, and integration</span>
+              <aside className="enterprise-opener-aside flex flex-col justify-end border-t border-[var(--white-20)] pt-8 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
+                <div className="space-y-4 text-[0.72rem] text-[var(--white-80)] sm:text-xs">
+                  <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-6 lg:flex-col lg:gap-1">
+                    <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">WE DO</span>
+                    <span className="lg:text-[0.78rem] lg:leading-snug lg:text-[var(--white-80)]">
+                      Strategy, architecture, deployment, and integration
+                    </span>
+                  </div>
+                  <div className="rule opacity-60 lg:hidden" />
+                  <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-6 lg:flex-col lg:gap-1">
+                    <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">FOCUS</span>
+                    <span className="lg:text-[0.78rem] lg:leading-snug lg:text-[var(--white-80)]">
+                      Reliable AI for enterprise workflows, not generic tools
+                    </span>
+                  </div>
+                  <div className="rule opacity-60 lg:hidden" />
+                  <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-6 lg:flex-col lg:gap-1">
+                    <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">BOTTOM LINE</span>
+                    <span className="lg:text-[0.78rem] lg:leading-snug lg:text-[var(--white-80)]">
+                      This is why infrastructure matters
+                    </span>
+                  </div>
                 </div>
-                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
-                  <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">FOCUS</span>
-                  <span className="sm:text-right">Reliable AI for enterprise workflows, not generic tools</span>
-                </div>
-                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
-                  <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">BOTTOM LINE</span>
-                  <span className="sm:text-right">This is why infrastructure matters</span>
-                </div>
-              </div>
+              </aside>
             </div>
           </div>
 
@@ -742,9 +756,9 @@ export default function Home() {
               </article>
             </div>
             <div className="mt-6 border-t border-[var(--white-20)] pt-5">
-              <p className="text-sm uppercase tracking-[0.18em] text-[var(--white-100)]">Bottom line</p>
-              <p className="mt-2 max-w-2xl text-sm text-[var(--text-muted)]">
-                This is why infrastructure matters. Enterprise AI is not only about model quality. It is about
+              <p className="section-label mb-2 text-[0.65rem]">BOTTOM LINE</p>
+              <p className="max-w-2xl text-[0.88rem] leading-relaxed text-[var(--text-muted)] md:text-sm">
+                This is why infrastructure matters. Enterprise AI is not only about model quality — it is about
                 data control, uptime, compliance posture, system integration, and accountability in the workflow.
               </p>
             </div>

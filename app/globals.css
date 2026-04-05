@@ -83,6 +83,11 @@ body {
   line-height: 26px;
 }
 
+::selection {
+  background: var(--white-20);
+  color: var(--text);
+}
+
 @media (max-width: 961px) {
   body {
     font-size: 15px;
@@ -435,6 +440,46 @@ html[data-theme="light"] .hero-fallback {
   background: linear-gradient(to bottom, var(--white-60), transparent);
 }
 
+/* Enterprise AI section — statement stack aligned with hero / outcomes rhythm */
+.enterprise-opener {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.enterprise-statement-stack {
+  position: relative;
+  max-width: 52rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--white-20);
+}
+
+.enterprise-statement-line {
+  margin: 0;
+  font-size: clamp(1.05rem, 3.4vw, 1.85rem);
+  line-height: 1.18;
+}
+
+.enterprise-statement-rule {
+  margin: 1.15rem 0;
+  max-width: 20rem;
+  opacity: 0.85;
+}
+
+.enterprise-opener-body {
+  margin: 0;
+}
+
+.enterprise-opener-aside {
+  min-width: 0;
+}
+
+@media (max-width: 1023px) {
+  .enterprise-statement-stack {
+    padding-left: 0.85rem;
+  }
+}
+
 .enterprise-card,
 .enterprise-compare,
 .enterprise-mode {
@@ -469,10 +514,10 @@ html[data-theme="light"] .enterprise-mode::before {
   position: absolute;
   left: 0;
   top: 0.62rem;
-  width: 0.38rem;
-  height: 0.38rem;
-  border-radius: 999px;
-  background: var(--white-40);
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 0;
+  background: var(--white-60);
 }
 
 .enterprise-map {
