@@ -417,8 +417,17 @@ export default function Home() {
             <a href="#contact" className="nav-item">
               INQUIRE
             </a>
-            <button type="button" className="theme-toggle" onClick={toggleTheme} aria-label="Toggle bright mode">
-              {theme === "dark" ? "BRIGHT MODE" : "DARK MODE"}
+            <button
+              type="button"
+              className="theme-toggle"
+              onClick={toggleTheme}
+              aria-label={theme === "dark" ? "Switch to bright mode" : "Switch to dark mode"}
+              title={theme === "dark" ? "Switch to bright mode" : "Switch to dark mode"}
+            >
+              <span className={`theme-icon theme-icon-sun ${theme === "light" ? "theme-icon-active" : ""}`} aria-hidden="true">
+                <span className="theme-icon-sun-core" />
+              </span>
+              <span className={`theme-icon theme-icon-moon ${theme === "dark" ? "theme-icon-active" : ""}`} aria-hidden="true" />
             </button>
           </div>
         </nav>
@@ -459,8 +468,16 @@ export default function Home() {
           <a href="/contact" onClick={closeNav}>
             CONTACT FORM
           </a>
-          <button type="button" className="theme-toggle mt-4" onClick={toggleTheme}>
-            {theme === "dark" ? "BRIGHT MODE" : "DARK MODE"}
+          <button
+            type="button"
+            className="theme-toggle mt-4"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to bright mode" : "Switch to dark mode"}
+          >
+            <span className={`theme-icon theme-icon-sun ${theme === "light" ? "theme-icon-active" : ""}`} aria-hidden="true">
+              <span className="theme-icon-sun-core" />
+            </span>
+            <span className={`theme-icon theme-icon-moon ${theme === "dark" ? "theme-icon-active" : ""}`} aria-hidden="true" />
           </button>
         </div>
       ) : null}
