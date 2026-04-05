@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const rise = {
   initial: { opacity: 0, y: 20 },
@@ -9,7 +10,7 @@ const rise = {
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen overflow-x-clip bg-black bg-grid px-4 pb-12 pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:px-6 sm:pb-16 sm:pt-24">
+    <main className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid px-4 pb-12 pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:px-6 sm:pb-16 sm:pt-24">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0 }}
@@ -17,12 +18,12 @@ export default function ContactPage() {
           transition={{ duration: 0.7 }}
           className="mb-8 flex flex-col gap-4 border-b border-[var(--white-20)] pb-5 sm:mb-10 sm:flex-row sm:items-center sm:justify-between sm:gap-0"
         >
-          <a href="/" className="text-xs uppercase tracking-[0.24em] text-[var(--white-80)]">
+          <Link href="/" className="text-xs uppercase tracking-[0.24em] text-[var(--white-80)]">
             DEVIEW
-          </a>
-          <a href="/" className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+          </Link>
+          <Link href="/" className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
             BACK TO HOME
-          </a>
+          </Link>
         </motion.div>
 
         <div className="grid gap-8 md:grid-cols-[1.1fr_1fr] md:gap-10">
@@ -58,7 +59,7 @@ export default function ContactPage() {
                     name="name"
                     required
                     placeholder="Your name"
-                    className="min-h-11 border border-[var(--white-20)] bg-black px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
+                    className="min-h-11 border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
                   />
                 </label>
                 <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
@@ -70,7 +71,7 @@ export default function ContactPage() {
                     name="email"
                     required
                     placeholder="name@company.com"
-                    className="min-h-11 border border-[var(--white-20)] bg-black px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
+                    className="min-h-11 border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
                   />
                 </label>
               </div>
@@ -81,7 +82,7 @@ export default function ContactPage() {
                   type="text"
                   name="company"
                   placeholder="Company name"
-                  className="min-h-11 border border-[var(--white-20)] bg-black px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
+                  className="min-h-11 border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
                 />
               </label>
 
@@ -94,7 +95,7 @@ export default function ContactPage() {
                   required
                   rows={6}
                   placeholder="Describe your use case, data context, and desired business outcome."
-                  className="resize-none border border-[var(--white-20)] bg-black px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:text-sm"
+                  className="resize-none border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:text-sm"
                 />
               </label>
 
@@ -113,7 +114,7 @@ export default function ContactPage() {
             initial={rise.initial}
             animate={rise.animate}
             transition={{ delay: 0.08, duration: 0.55 }}
-            className="panel border border-[var(--white-20)] bg-black p-6 md:p-8"
+            className="panel border border-[var(--white-20)] bg-[var(--surface-elevated)] p-6 md:p-8"
           >
             <p className="section-label mb-3">HOW WE RESPOND</p>
             <div className="rule mb-6" />

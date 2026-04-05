@@ -70,6 +70,73 @@ const services = [
   },
 ];
 
+const enterprisePillars = [
+  {
+    label: "SCALE",
+    points: ["100s-1000s of users", "24/7 availability", "TB-PB data volumes"],
+  },
+  {
+    label: "COMPLIANCE",
+    points: ["HIPAA, SOX, GDPR", "Industry regulations", "Audit requirements"],
+  },
+  {
+    label: "INTEGRATION",
+    points: ["Legacy systems", "Existing workflows", "Data governance"],
+  },
+  {
+    label: "ACCOUNTABILITY",
+    points: ["Auditability", "Explainability", "Human oversight"],
+  },
+];
+
+const enterpriseModes = [
+  {
+    label: "PREDICTIVE",
+    position: "Top",
+    body: "Demand forecasting, churn, and maintenance planning for high-value operational decisions.",
+  },
+  {
+    label: "CONVERSATIONAL",
+    position: "Left",
+    body: "Customer service, support copilots, and retrieval experiences that still fit enterprise controls.",
+  },
+  {
+    label: "GENERATIVE",
+    position: "Right",
+    body: "Document automation, code help, and content generation with workflows, review, and governance around them.",
+  },
+  {
+    label: "ANALYTICAL",
+    position: "Bottom",
+    body: "Anomaly detection, risk analysis, and fraud workflows that turn model output into operational insight.",
+  },
+];
+
+const architectureComparison = {
+  public: {
+    label: "PUBLIC AI SERVICE",
+    points: [
+      "Shared infrastructure",
+      "No data control",
+      "No customization",
+      "Best-effort",
+      "Limited compliance",
+      "Pay-per-use",
+    ],
+  },
+  enterprise: {
+    label: "ENTERPRISE AI DEPLOYMENT",
+    points: [
+      "Dedicated/isolated infrastructure",
+      "Full data sovereignty",
+      "Fully customizable",
+      "SLA-driven (99.9% uptime)",
+      "HIPAA/SOX/GDPR certified",
+      "Predictable enterprise costs",
+    ],
+  },
+};
+
 const solutionAreas = [
   {
     sector: "CUSTOMER OPERATIONS",
@@ -155,15 +222,37 @@ export default function Home() {
   const [heroVideoState, setHeroVideoState] = useState<"loading" | "playing" | "fallback">("loading");
   const [activeHeroLayer, setActiveHeroLayer] = useState(0);
   const [fadingHeroLayer, setFadingHeroLayer] = useState<number | null>(null);
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    if (typeof window === "undefined") {
+      return "dark";
+    }
+
+    const storedTheme = window.localStorage.getItem("deview-theme");
+    if (storedTheme === "light" || storedTheme === "dark") {
+      return storedTheme;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  });
   const standbyStartedRef = useRef(false);
   const crossfadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem("deview-theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     const primaryVideo = heroVideoRefs.current[0];
 
     if (!primaryVideo) {
-      setHeroVideoState("fallback");
-      return;
+      const fallbackTimeout = window.setTimeout(() => {
+        setHeroVideoState("fallback");
+      }, 0);
+
+      return () => {
+        window.clearTimeout(fallbackTimeout);
+      };
     }
 
     const attemptPlayback = async () => {
@@ -176,7 +265,7 @@ export default function Home() {
       }
     };
 
-    attemptPlayback();
+    void attemptPlayback();
 
     return () => {
       if (crossfadeTimeoutRef.current) {
@@ -281,9 +370,10 @@ export default function Home() {
   }, [navOpen]);
 
   const closeNav = () => setNavOpen(false);
+  const toggleTheme = () => setTheme((current) => (current === "dark" ? "light" : "dark"));
 
   return (
-    <div className="min-h-screen overflow-x-clip bg-black bg-grid text-[var(--text)]">
+    <div className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid text-[var(--text)]">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--white-20)] bg-gradient-to-b from-[var(--black-80)] to-transparent pt-[env(safe-area-inset-top)]">
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
           <a
@@ -305,9 +395,12 @@ export default function Home() {
             <span className="nav-toggle-bar" />
             <span className="nav-toggle-bar" />
           </button>
-          <div className="hidden gap-6 lg:gap-8 md:flex">
+          <div className="hidden items-center gap-6 md:flex lg:gap-8">
             <a href="#hero" className="nav-item nav-item-active">
               AI CONSULTING
+            </a>
+            <a href="#enterprise-ai" className="nav-item">
+              ENTERPRISE AI
             </a>
             <a href="#services" className="nav-item">
               SERVICES
@@ -324,6 +417,9 @@ export default function Home() {
             <a href="#contact" className="nav-item">
               INQUIRE
             </a>
+            <button type="button" className="theme-toggle" onClick={toggleTheme} aria-label="Toggle bright mode">
+              {theme === "dark" ? "BRIGHT MODE" : "DARK MODE"}
+            </button>
           </div>
         </nav>
       </header>
@@ -341,6 +437,9 @@ export default function Home() {
           </button>
           <a href="#hero" className="nav-item-active" onClick={closeNav}>
             AI CONSULTING
+          </a>
+          <a href="#enterprise-ai" onClick={closeNav}>
+            ENTERPRISE AI
           </a>
           <a href="#services" onClick={closeNav}>
             SERVICES
@@ -360,6 +459,9 @@ export default function Home() {
           <a href="/contact" onClick={closeNav}>
             CONTACT FORM
           </a>
+          <button type="button" className="theme-toggle mt-4" onClick={toggleTheme}>
+            {theme === "dark" ? "BRIGHT MODE" : "DARK MODE"}
+          </button>
         </div>
       ) : null}
 
@@ -475,8 +577,184 @@ export default function Home() {
       </section>
 
       <section
+        id="enterprise-ai"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-4 sm:px-6"
+      >
+        <motion.div
+          {...reveal}
+          transition={{ duration: 0.5 }}
+          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-10 md:gap-16"
+        >
+          <div className="section-shell">
+            <p className="section-label mb-3">ENTERPRISE AI</p>
+            <div className="rule mb-6" />
+            <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+              <div>
+                <h2 className="mb-4 text-[clamp(1.25rem,4.8vw,1.9rem)] leading-snug text-[var(--white-100)] md:text-4xl">
+                  Enterprise AI is not just a smarter interface.
+                  <br />
+                  It is AI built to operate inside real companies.
+                </h2>
+                <p className="max-w-2xl text-sm text-[var(--text-muted)] md:text-base">
+                  DeView designs and implements enterprise AI systems that can survive scale, compliance,
+                  integration complexity, and operational accountability. That is the actual line between a demo
+                  and a production deployment.
+                </p>
+              </div>
+              <div className="space-y-3 text-[0.72rem] text-[var(--white-80)] sm:text-xs">
+                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
+                  <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">WE DO</span>
+                  <span className="sm:text-right">Strategy, architecture, deployment, and integration</span>
+                </div>
+                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
+                  <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">FOCUS</span>
+                  <span className="sm:text-right">Reliable AI for enterprise workflows, not generic tools</span>
+                </div>
+                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
+                  <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">BOTTOM LINE</span>
+                  <span className="sm:text-right">This is why infrastructure matters</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+            <motion.section
+              variants={cardMotion}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={reveal.viewport}
+              transition={{ duration: 0.45 }}
+              className="panel border border-[var(--white-20)] bg-[var(--surface-elevated)] p-5 md:p-6"
+            >
+              <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                <div>
+                  <p className="section-label mb-2">WHAT MAKES IT ENTERPRISE</p>
+                  <h3 className="text-lg text-[var(--white-100)] md:text-2xl">The deployment constraints are the product requirements.</h3>
+                </div>
+                <p className="max-w-sm text-[0.8rem] text-[var(--text-muted)]">
+                  Enterprise AI has to hold up under technical, legal, and operational pressure.
+                </p>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {enterprisePillars.map((pillar) => (
+                  <article
+                    key={pillar.label}
+                    className="enterprise-card border border-[var(--white-20)] bg-[var(--surface)] p-4"
+                  >
+                    <p className="mb-3 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">
+                      {pillar.label}
+                    </p>
+                    <ul className="space-y-2 text-[0.82rem] text-[var(--text-muted)]">
+                      {pillar.points.map((point) => (
+                        <li key={point} className="enterprise-list-item">
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </motion.section>
+
+            <motion.section
+              variants={cardMotion}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={reveal.viewport}
+              transition={{ duration: 0.45, delay: 0.06 }}
+              className="panel border border-[var(--white-20)] bg-[var(--surface-elevated)] p-5 md:p-6"
+            >
+              <p className="section-label mb-2">WHAT IS ENTERPRISE AI</p>
+              <h3 className="mb-3 text-lg text-[var(--white-100)] md:text-2xl">
+                Four operating modes across interaction, automation, strategic value, and insight.
+              </h3>
+              <p className="mb-6 max-w-xl text-[0.82rem] text-[var(--text-muted)]">
+                The useful implementations usually combine multiple modes. We scope the right mix based on the
+                workflow, the decision point, and the level of control required.
+              </p>
+              <div className="enterprise-map">
+                <div className="enterprise-axis enterprise-axis-top">HIGH STRATEGIC VALUE</div>
+                <div className="enterprise-axis enterprise-axis-left">USER INTERACTION</div>
+                <div className="enterprise-axis enterprise-axis-right">HIGH AUTOMATION</div>
+                <div className="enterprise-axis enterprise-axis-bottom">OPERATIONAL INSIGHT</div>
+                {enterpriseModes.map((mode) => (
+                  <article
+                    key={mode.label}
+                    className={`enterprise-mode enterprise-mode-${mode.position.toLowerCase()}`}
+                  >
+                    <p className="mb-2 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">
+                      {mode.label}
+                    </p>
+                    <p className="text-[0.8rem] leading-relaxed text-[var(--text-muted)]">{mode.body}</p>
+                  </article>
+                ))}
+              </div>
+            </motion.section>
+          </div>
+
+          <motion.section
+            variants={cardMotion}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={reveal.viewport}
+            transition={{ duration: 0.45, delay: 0.1 }}
+            className="panel border border-[var(--white-20)] bg-[var(--background)] p-5 md:p-6"
+          >
+            <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="section-label mb-2">ARCHITECTURE REALITY CHECK</p>
+                <h3 className="text-lg text-[var(--white-100)] md:text-2xl">
+                  Infrastructure determines whether the system belongs in an enterprise at all.
+                </h3>
+              </div>
+              <p className="max-w-sm text-[0.8rem] text-[var(--text-muted)]">
+                This is where DeView moves clients from public AI usage to enterprise-grade deployment.
+              </p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr] md:items-stretch">
+              <article className="enterprise-compare enterprise-compare-public">
+                <p className="mb-4 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">
+                  {architectureComparison.public.label}
+                </p>
+                <ul className="space-y-2 text-[0.82rem] text-[var(--text-muted)]">
+                  {architectureComparison.public.points.map((point) => (
+                    <li key={point} className="enterprise-list-item">
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+              <div className="enterprise-arrow" aria-hidden="true">
+                <span>→</span>
+              </div>
+              <article className="enterprise-compare enterprise-compare-enterprise">
+                <p className="mb-4 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">
+                  {architectureComparison.enterprise.label}
+                </p>
+                <ul className="space-y-2 text-[0.82rem] text-[var(--text-muted)]">
+                  {architectureComparison.enterprise.points.map((point) => (
+                    <li key={point} className="enterprise-list-item">
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </div>
+            <div className="mt-6 border-t border-[var(--white-20)] pt-5">
+              <p className="text-sm uppercase tracking-[0.18em] text-[var(--white-100)]">Bottom line</p>
+              <p className="mt-2 max-w-2xl text-sm text-[var(--text-muted)]">
+                This is why infrastructure matters. Enterprise AI is not only about model quality. It is about
+                data control, uptime, compliance posture, system integration, and accountability in the workflow.
+              </p>
+            </div>
+          </motion.section>
+        </motion.div>
+      </section>
+
+      <section
         id="services"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-4 sm:px-6"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--background)] px-4 sm:px-6"
       >
         <motion.div
           {...reveal}
@@ -616,7 +894,7 @@ export default function Home() {
                   variants={cardMotion}
                   transition={{ duration: 0.45 }}
                   whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
-                  className="panel panel-interactive min-w-[min(88vw,320px)] snap-start border border-[var(--white-20)] bg-black px-4 py-5 sm:min-w-[360px] sm:px-5 sm:py-6 lg:min-w-[420px]"
+                  className="panel panel-interactive min-w-[min(88vw,320px)] snap-start border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-5 sm:min-w-[360px] sm:px-5 sm:py-6 lg:min-w-[420px]"
                 >
                   <p className="section-label mb-3 text-[0.65rem]">{area.sector}</p>
                   <p className="mb-3 text-sm text-[var(--white-100)]">{area.title}</p>
@@ -630,7 +908,7 @@ export default function Home() {
 
       <section
         id="outcomes"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-black px-4 sm:px-6"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--background)] px-4 sm:px-6"
       >
         <motion.div
           {...reveal}
@@ -725,7 +1003,7 @@ export default function Home() {
                 variants={cardMotion}
                 transition={{ duration: 0.45 }}
                 whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
-                className="panel panel-interactive process-card border border-[var(--white-20)] bg-black px-5 py-6"
+                className="panel panel-interactive process-card border border-[var(--white-20)] bg-[var(--surface-elevated)] px-5 py-6"
               >
                 <p className="process-step mb-3 text-[0.65rem] uppercase tracking-[0.24em] text-[var(--white-60)]">
                   Step {item.step}
@@ -740,7 +1018,7 @@ export default function Home() {
 
       <section
         id="contact"
-        className="relative min-h-[88vh] scroll-mt-20 border-t border-[var(--white-20)] bg-black px-4 pb-8 pt-20 sm:px-6 md:min-h-[84vh] md:pb-3 md:pt-20"
+        className="relative min-h-[88vh] scroll-mt-20 border-t border-[var(--white-20)] bg-[var(--background)] px-4 pb-8 pt-20 sm:px-6 md:min-h-[84vh] md:pb-3 md:pt-20"
       >
         <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-12">
           <div className="max-w-md pt-2">
@@ -779,7 +1057,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-[var(--white-20)] bg-black px-4 py-8 text-[0.65rem] sm:px-6 sm:text-[0.7rem]">
+      <footer className="border-t border-[var(--white-20)] bg-[var(--background)] px-4 py-8 text-[0.65rem] sm:px-6 sm:text-[0.7rem]">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-4">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
             <span className="text-xs uppercase tracking-[0.25em] text-[var(--white-80)]">DEVIEW</span>

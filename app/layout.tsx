@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeSync } from "./theme-sync";
 
 export const metadata: Metadata = {
   title: "DeView | AI Consulting & Data Engineering",
@@ -13,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col bg-black text-[var(--text)]">{children}</body>
+      <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--text)]">
+        <ThemeSync />
+        {children}
+      </body>
     </html>
   );
 }
