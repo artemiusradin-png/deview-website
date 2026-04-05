@@ -542,7 +542,7 @@ export default function Home() {
         <div
           className={`absolute inset-0 ${heroVideoState === "fallback" ? "hero-overlay" : "hero-overlay hero-overlay-video"}`}
         />
-        <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col justify-between gap-12 md:flex-row md:gap-16">
+        <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col justify-between gap-10 md:flex-row md:gap-12">
           <motion.div
             initial={fade.initial}
             animate={fade.animate}
@@ -617,12 +617,12 @@ export default function Home() {
         <motion.div
           {...reveal}
           transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-10 md:gap-16"
+          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
         >
           <div className="section-shell">
             <p className="section-label mb-3">ENTERPRISE AI</p>
             <div className="rule mb-6" />
-            <div className="grid gap-10 lg:grid-cols-[1.15fr_auto] lg:items-stretch lg:gap-14">
+            <div className="grid gap-6 lg:grid-cols-[1.15fr_auto] lg:items-stretch lg:gap-10">
               <div className="enterprise-opener">
                 <div className="enterprise-statement-stack">
                   <p className="enterprise-statement-line hero-heading text-[var(--white-80)]">
@@ -952,12 +952,12 @@ export default function Home() {
         <motion.div
           {...reveal}
           transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-10 md:gap-16"
+          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
         >
           <div className="section-shell">
             <p className="section-label mb-3">SERVICES</p>
             <div className="rule mb-6" />
-            <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
+            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
               <h2 className="text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
                 End-to-end services for
                 <br />
@@ -1014,12 +1014,12 @@ export default function Home() {
         <motion.div
           {...reveal}
           transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-10 md:gap-16"
+          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
         >
           <div className="section-shell">
             <p className="section-label mb-3">USE CASES</p>
             <div className="rule mb-6" />
-            <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
+            <div className="grid gap-6 md:grid-cols-[1.4fr_1fr]">
               <div>
               <h2 className="mb-4 text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
                   AI solutions built around
@@ -1079,7 +1079,7 @@ export default function Home() {
             <div className="carousel-fade-right" aria-hidden="true" />
             <div
               ref={solutionCarouselRef}
-              className="hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 pl-1 pr-4 [-webkit-overflow-scrolling:touch] sm:gap-6 sm:px-6 md:px-8"
+              className="hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-0 pl-1 pr-4 [-webkit-overflow-scrolling:touch] sm:gap-6 sm:px-6 md:px-8"
             >
               {solutionAreas.map((area) => (
                 <motion.div
@@ -1106,12 +1106,12 @@ export default function Home() {
         <motion.div
           {...reveal}
           transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-10 md:gap-16"
+          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
         >
           <div className="section-shell">
             <p className="section-label mb-3">OUTCOMES</p>
             <div className="rule mb-6" />
-            <div className="grid gap-10 md:grid-cols-[1.4fr_1fr] md:items-end">
+            <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
               <div>
                 <h2 className="mb-4 text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
                   Business value from
@@ -1165,12 +1165,12 @@ export default function Home() {
         <motion.div
           {...reveal}
           transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-10 md:gap-16"
+          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
         >
           <div className="section-shell">
             <p className="section-label mb-3">PROCESS</p>
             <div className="rule mb-6" />
-            <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
+            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
               <h2 className="text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
                 A clear process for taking AI
                 <br />
@@ -1211,9 +1211,9 @@ export default function Home() {
 
       <section
         id="contact"
-        className="relative min-h-[88vh] scroll-mt-20 border-t border-[var(--white-20)] bg-[var(--background)] px-4 pb-8 pt-20 sm:px-6 md:min-h-[84vh] md:pb-3 md:pt-20"
+        className="relative min-h-[88vh] scroll-mt-20 border-t border-[var(--white-20)] bg-[var(--background)] px-4 pb-4 pt-20 sm:px-6 md:min-h-[84vh] md:pb-2 md:pt-20"
       >
-        <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-12">
+        <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-8">
           <div className="max-w-md pt-2">
             <p className="section-label mb-3">INQUIRE</p>
             <div className="rule mb-6 max-w-[11rem]" />
@@ -1250,7 +1250,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-[var(--white-20)] bg-[var(--background)] px-4 py-8 text-[0.65rem] sm:px-6 sm:text-[0.7rem]">
+      <footer className="border-t border-[var(--white-20)] bg-[var(--background)] px-4 py-5 text-[0.65rem] sm:px-6 sm:text-[0.7rem]">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-4">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
             <span className="text-xs uppercase tracking-[0.25em] text-[var(--white-80)]">DEVIEW</span>
