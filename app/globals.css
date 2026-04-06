@@ -646,7 +646,7 @@ html[data-theme="light"] .enterprise-mode::before {
 }
 
 .enterprise-detail {
-  min-height: 5.5rem;
+  min-height: 4rem;
 }
 
 .enterprise-scroll-copy {
@@ -677,10 +677,11 @@ html[data-theme="light"] .enterprise-mode::before {
 
 .enterprise-axis {
   position: absolute;
-  font-size: 0.62rem;
+  font-size: 0.57rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--white-60);
+  color: var(--white-40);
+  white-space: nowrap;
 }
 
 .enterprise-axis-top {
@@ -712,7 +713,32 @@ html[data-theme="light"] .enterprise-mode::before {
 .enterprise-mode {
   border: 1px solid var(--white-20);
   background: var(--surface-elevated);
-  padding: 1rem;
+  padding: 0.85rem 1rem;
+  text-align: left;
+}
+
+.enterprise-mode-label {
+  margin: 0 0 0.3rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--white-100);
+  transition: color 180ms ease;
+}
+
+.enterprise-mode-axis {
+  margin: 0;
+  font-size: 0.54rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--white-40);
+  transition: color 180ms ease;
+}
+
+.enterprise-mode:hover .enterprise-mode-axis,
+.enterprise-mode:focus-visible .enterprise-mode-axis,
+.enterprise-mode-active .enterprise-mode-axis {
+  color: var(--white-60);
 }
 
 .enterprise-map-center {
