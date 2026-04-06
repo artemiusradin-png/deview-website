@@ -1153,7 +1153,7 @@ html[data-theme="light"] .carousel-fade-right {
 }
 
 .solutions-marquee-top {
-  top: 0;
+  top: calc(env(safe-area-inset-top) + 4rem);
 }
 
 .solutions-marquee-bottom {
