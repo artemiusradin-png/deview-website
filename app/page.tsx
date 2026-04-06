@@ -243,6 +243,7 @@ export default function Home() {
   const heroVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const solutionCarouselRef = useRef<HTMLDivElement | null>(null);
   const solutionCardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const solutionsSectionRef = useRef<HTMLElement | null>(null);
   const [heroVideoState, setHeroVideoState] = useState<"loading" | "playing" | "fallback">("loading");
   const [activeHeroLayer, setActiveHeroLayer] = useState(0);
   const [fadingHeroLayer, setFadingHeroLayer] = useState<number | null>(null);
@@ -262,6 +263,8 @@ export default function Home() {
   const [activeEnterpriseMode, setActiveEnterpriseMode] = useState(enterpriseModes[0].id);
   const [architectureFocus, setArchitectureFocus] = useState<"public" | "enterprise">("enterprise");
   const [activeSolutionIndex, setActiveSolutionIndex] = useState(0);
+  const [solutionsMarqueeOffset, setSolutionsMarqueeOffset] = useState(0);
+  const [isSolutionsInView, setIsSolutionsInView] = useState(false);
   const [typedUserMessage, setTypedUserMessage] = useState("");
   const [typedAiMessage, setTypedAiMessage] = useState("");
   const standbyStartedRef = useRef(false);
@@ -409,6 +412,39 @@ export default function Home() {
       window.removeEventListener("resize", updateActiveSolution);
     };
   }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    const section = solutionsSectionRef.current;
+
+    if (!section) {
+      return;
+    }
+
+    const updateMarqueeOffset = () => {
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
+      const clampedProgress = Math.min(Math.max(progress, 0), 1);
+      const offset = (clampedProgress - 0.5) * -220;
+      const inView = rect.bottom > 0 && rect.top < viewportHeight;
+
+      setSolutionsMarqueeOffset(offset);
+      setIsSolutionsInView(inView);
+    };
+
+    updateMarqueeOffset();
+    window.addEventListener("scroll", updateMarqueeOffset, { passive: true });
+    window.addEventListener("resize", updateMarqueeOffset);
+
+    return () => {
+      window.removeEventListener("scroll", updateMarqueeOffset);
+      window.removeEventListener("resize", updateMarqueeOffset);
+    };
+  }, [prefersReducedMotion]);
 
   const startStandbyLayer = async (currentLayer: number) => {
     const nextLayer = currentLayer === 0 ? 1 : 0;
@@ -1138,19 +1174,22 @@ export default function Home() {
 
       <section
         id="solutions"
+        ref={solutionsSectionRef}
         className="solutions-section section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-4 sm:px-6"
         style={
           {
             "--solutions-accent": activeSolution.accent,
+            "--solutions-marquee-offset": `${solutionsMarqueeOffset}%`,
           } as CSSProperties
         }
       >
-        <div className="solutions-marquee-container" aria-hidden="true">
-          {["top", "right", "bottom", "left"].map((position) => (
+        <div
+          className={`solutions-marquee-container ${isSolutionsInView ? "solutions-marquee-container-visible" : ""}`}
+          aria-hidden="true"
+        >
+          {["top", "bottom"].map((position) => (
             <div key={`${position}-${activeSolution.id}`} className={`solutions-marquee solutions-marquee-${position}`}>
-              <div
-                className={`solutions-marquee-track ${prefersReducedMotion ? "solutions-marquee-track-static" : ""}`}
-              >
+              <div className="solutions-marquee-track">
                 {marqueeContent}
               </div>
             </div>

@@ -1095,6 +1095,7 @@ html[data-theme="light"] .carousel-fade-right {
 
 .solutions-section {
   --solutions-accent: rgba(148, 214, 255, 0.16);
+  --solutions-marquee-offset: 0%;
   transition: background-color 300ms ease;
 }
 
@@ -1116,11 +1117,17 @@ html[data-theme="light"] .carousel-fade-right {
 }
 
 .solutions-marquee-container {
-  position: absolute;
+  position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 1;
+  z-index: 20;
   overflow: hidden;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.solutions-marquee-container-visible {
+  opacity: 1;
 }
 
 .solutions-marquee {
@@ -1154,40 +1161,6 @@ html[data-theme="light"] .carousel-fade-right {
   transform: rotate(180deg);
 }
 
-.solutions-marquee-left,
-.solutions-marquee-right {
-  top: 0;
-  width: 3rem;
-  height: 100%;
-  border-left: 1px solid var(--white-10);
-  border-right: 1px solid var(--white-10);
-}
-
-.solutions-marquee-left {
-  left: 0;
-}
-
-.solutions-marquee-right {
-  right: 0;
-}
-
-.solutions-marquee-left .solutions-marquee-track,
-.solutions-marquee-right .solutions-marquee-track {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 100vh;
-  transform-origin: center;
-}
-
-.solutions-marquee-left .solutions-marquee-track {
-  transform: translate(-50%, -50%) rotate(-90deg);
-}
-
-.solutions-marquee-right .solutions-marquee-track {
-  transform: translate(-50%, -50%) rotate(90deg);
-}
-
 .solutions-marquee-top .solutions-marquee-track,
 .solutions-marquee-bottom .solutions-marquee-track {
   display: inline-block;
@@ -1196,39 +1169,8 @@ html[data-theme="light"] .carousel-fade-right {
 }
 
 .solutions-marquee-track {
-  animation: solutions-marquee-x 24s linear infinite;
-}
-
-.solutions-marquee-left .solutions-marquee-track,
-.solutions-marquee-right .solutions-marquee-track {
-  animation-name: solutions-marquee-y;
-  animation-duration: 28s;
-}
-
-.solutions-marquee-track-static {
-  animation: none;
-}
-
-@keyframes solutions-marquee-x {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@keyframes solutions-marquee-y {
-  from {
-    transform: translate(-50%, -50%) rotate(-90deg) translateX(0);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(-90deg) translateX(-50%);
-  }
-}
-
-.solutions-marquee-right .solutions-marquee-track {
-  animation-direction: reverse;
+  transform: translate3d(var(--solutions-marquee-offset), 0, 0);
+  will-change: transform;
 }
 
 .solutions-card {
@@ -1287,11 +1229,6 @@ html[data-theme="light"] .carousel-fade-right {
 
   .carousel-fade-right {
     right: -8px;
-  }
-
-  .solutions-marquee-left,
-  .solutions-marquee-right {
-    display: none;
   }
 
   .solutions-marquee-top,
