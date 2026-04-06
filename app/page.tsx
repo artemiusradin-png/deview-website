@@ -619,15 +619,15 @@ export default function Home() {
   const marqueeContent = `${activeSolution.title} • `.repeat(14);
   const displayedUserMessage = prefersReducedMotion ? INTERFACE_USER_MESSAGE : typedUserMessage;
   const displayedAiMessage = prefersReducedMotion ? INTERFACE_AI_MESSAGE : typedAiMessage;
-  const enterpriseIntroY = useTransform(enterpriseModesProgress, [0, 0.45, 1], prefersReducedMotion ? [0, 0, 0] : [0, -54, -92]);
-  const enterpriseIntroBlur = useTransform(enterpriseModesProgress, [0, 0.45, 1], prefersReducedMotion ? [0, 0, 0] : [0, 8, 14]);
-  const enterpriseIntroOpacity = useTransform(enterpriseModesProgress, [0, 0.22, 0.5], prefersReducedMotion ? [1, 1, 1] : [1, 0.82, 0.26]);
-  const enterpriseMapScale = useTransform(enterpriseModesProgress, [0, 0.25, 0.6, 1], prefersReducedMotion ? [1, 1, 1, 1] : [0.82, 0.95, 1.02, 1.06]);
-  const enterpriseMapRotateX = useTransform(enterpriseModesProgress, [0, 0.45], prefersReducedMotion ? [0, 0] : [18, 0]);
-  const enterpriseMapY = useTransform(enterpriseModesProgress, [0, 0.28, 1], prefersReducedMotion ? [0, 0, 0] : [48, 10, -12]);
-  const enterpriseMapBlur = useTransform(enterpriseModesProgress, [0, 0.22], prefersReducedMotion ? [0, 0] : [14, 0]);
-  const enterpriseDetailY = useTransform(enterpriseModesProgress, [0.18, 0.45], prefersReducedMotion ? [0, 0] : [34, 0]);
-  const enterpriseDetailOpacity = useTransform(enterpriseModesProgress, [0.12, 0.4], prefersReducedMotion ? [1, 1] : [0.2, 1]);
+  const enterpriseIntroY = useTransform(enterpriseModesProgress, [0, 0.38, 0.72, 1], prefersReducedMotion ? [0, 0, 0, 0] : [0, -72, -132, -168]);
+  const enterpriseIntroBlur = useTransform(enterpriseModesProgress, [0, 0.4, 0.8, 1], prefersReducedMotion ? [0, 0, 0, 0] : [0, 10, 16, 18]);
+  const enterpriseIntroOpacity = useTransform(enterpriseModesProgress, [0, 0.18, 0.42, 0.7], prefersReducedMotion ? [1, 1, 1, 1] : [1, 0.86, 0.36, 0.08]);
+  const enterpriseMapScale = useTransform(enterpriseModesProgress, [0, 0.18, 0.52, 1], prefersReducedMotion ? [1, 1, 1, 1] : [0.74, 0.9, 1.04, 1.12]);
+  const enterpriseMapRotateX = useTransform(enterpriseModesProgress, [0, 0.34], prefersReducedMotion ? [0, 0] : [24, 0]);
+  const enterpriseMapY = useTransform(enterpriseModesProgress, [0, 0.22, 0.6, 1], prefersReducedMotion ? [0, 0, 0, 0] : [92, 26, -10, -28]);
+  const enterpriseMapBlur = useTransform(enterpriseModesProgress, [0, 0.18], prefersReducedMotion ? [0, 0] : [18, 0]);
+  const enterpriseDetailY = useTransform(enterpriseModesProgress, [0.22, 0.5, 1], prefersReducedMotion ? [0, 0, 0] : [52, 0, -10]);
+  const enterpriseDetailOpacity = useTransform(enterpriseModesProgress, [0.16, 0.42], prefersReducedMotion ? [1, 1] : [0.12, 1]);
   const enterpriseRailFill = useTransform(enterpriseModesProgress, [0, 1], ["0%", "100%"]);
   const enterpriseIntroFilter = useTransform(enterpriseIntroBlur, (v) => `blur(${v}px)`);
   const enterpriseMapFilter = useTransform(enterpriseMapBlur, (v) => `blur(${v}px)`);
@@ -1095,27 +1095,45 @@ export default function Home() {
               <div className="enterprise-scroll-rail" aria-hidden="true">
                 <motion.div className="enterprise-scroll-rail-fill" style={{ height: enterpriseRailFill }} />
               </div>
-              <div className="enterprise-map enterprise-map-expanded">
-                <div className="enterprise-axis enterprise-axis-top">HIGH STRATEGIC VALUE</div>
-                <div className="enterprise-axis enterprise-axis-left">USER INTERACTION</div>
-                <div className="enterprise-axis enterprise-axis-right">HIGH AUTOMATION</div>
-                <div className="enterprise-axis enterprise-axis-bottom">OPERATIONAL INSIGHT</div>
-                <div className="enterprise-map-center" aria-hidden="true" />
-                {enterpriseModes.map((mode) => (
-                  <button
-                    key={mode.label}
-                    type="button"
-                    className={`enterprise-mode enterprise-mode-${mode.position.toLowerCase()} ${
-                      activeEnterpriseMode === mode.id ? "enterprise-mode-active" : ""
-                    }`}
-                    onMouseEnter={() => setActiveEnterpriseMode(mode.id)}
-                    onFocus={() => setActiveEnterpriseMode(mode.id)}
-                    onClick={() => setActiveEnterpriseMode(mode.id)}
+              <div className="enterprise-mode-text-stage">
+                <div className="enterprise-mode-text-axes" aria-hidden="true">
+                  <span>HIGH STRATEGIC VALUE</span>
+                  <span>USER INTERACTION</span>
+                  <span>HIGH AUTOMATION</span>
+                  <span>OPERATIONAL INSIGHT</span>
+                </div>
+                <div className="enterprise-mode-text-main">
+                  <motion.p
+                    key={selectedMode.id}
+                    initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                    className="enterprise-mode-text-label"
                   >
-                    <p className="enterprise-mode-label">{mode.label}</p>
-                    <p className="enterprise-mode-axis">{mode.axis}</p>
-                  </button>
-                ))}
+                    {selectedMode.label}
+                  </motion.p>
+                  <motion.p
+                    key={`${selectedMode.id}-axis`}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.28, delay: 0.06 }}
+                    className="enterprise-mode-text-axis"
+                  >
+                    {selectedMode.axis}
+                  </motion.p>
+                </div>
+                <div className="enterprise-mode-text-list" aria-hidden="true">
+                  {enterpriseModes.map((mode) => (
+                    <div
+                      key={mode.id}
+                      className={`enterprise-mode-text-list-item ${
+                        activeEnterpriseMode === mode.id ? "enterprise-mode-text-list-item-active" : ""
+                      }`}
+                    >
+                      {mode.label}
+                    </div>
+                  ))}
+                </div>
               </div>
             </motion.div>
             <motion.div
