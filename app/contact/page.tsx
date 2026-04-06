@@ -10,7 +10,7 @@ const rise = {
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid px-4 pb-8 pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:px-6 sm:pb-10 sm:pt-24">
+    <main className="section-gutter min-h-screen overflow-x-clip bg-[var(--background)] bg-grid pb-[max(2rem,env(safe-area-inset-bottom))] pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:pb-10 sm:pt-24">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0 }}

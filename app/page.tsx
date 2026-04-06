@@ -267,6 +267,7 @@ export default function Home() {
   const [isSolutionsInView, setIsSolutionsInView] = useState(false);
   const [typedUserMessage, setTypedUserMessage] = useState("");
   const [typedAiMessage, setTypedAiMessage] = useState("");
+  const [heroVideoPreload, setHeroVideoPreload] = useState<"auto" | "metadata">("metadata");
   const standbyStartedRef = useRef(false);
   const crossfadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -275,6 +276,14 @@ export default function Home() {
     document.documentElement.dataset.theme = theme;
     window.localStorage.setItem("deview-theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const apply = () => setHeroVideoPreload(mq.matches ? "auto" : "metadata");
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
 
   useEffect(() => {
     const primaryVideo = heroVideoRefs.current[0];
@@ -309,6 +318,12 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    if (prefersReducedMotion) {
+      setTypedUserMessage(INTERFACE_USER_MESSAGE);
+      setTypedAiMessage(INTERFACE_AI_MESSAGE);
+      return;
+    }
+
     let mounted = true;
     let userTimeout: ReturnType<typeof setTimeout> | null = null;
     let aiTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -370,7 +385,7 @@ export default function Home() {
         clearTimeout(restartTimeout);
       }
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   useEffect(() => {
     const carousel = solutionCarouselRef.current;
@@ -424,25 +439,34 @@ export default function Home() {
       return;
     }
 
+    const wideMq = window.matchMedia("(min-width: 768px)");
+
     const updateMarqueeOffset = () => {
       const rect = section.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
+      const inView = rect.bottom > 0 && rect.top < viewportHeight;
+      setIsSolutionsInView(inView);
+
+      if (!wideMq.matches) {
+        setSolutionsMarqueeOffset(0);
+        return;
+      }
+
       const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
       const clampedProgress = Math.min(Math.max(progress, 0), 1);
       const offset = (clampedProgress - 0.5) * -220;
-      const inView = rect.bottom > 0 && rect.top < viewportHeight;
-
       setSolutionsMarqueeOffset(offset);
-      setIsSolutionsInView(inView);
     };
 
     updateMarqueeOffset();
     window.addEventListener("scroll", updateMarqueeOffset, { passive: true });
     window.addEventListener("resize", updateMarqueeOffset);
+    wideMq.addEventListener("change", updateMarqueeOffset);
 
     return () => {
       window.removeEventListener("scroll", updateMarqueeOffset);
       window.removeEventListener("resize", updateMarqueeOffset);
+      wideMq.removeEventListener("change", updateMarqueeOffset);
     };
   }, [prefersReducedMotion]);
 
@@ -506,7 +530,8 @@ export default function Home() {
       return;
     }
 
-    const amount = Math.max(carousel.clientWidth * 0.78, 320);
+    const frac = carousel.clientWidth < 640 ? 0.9 : 0.78;
+    const amount = Math.max(carousel.clientWidth * frac, Math.min(320, carousel.clientWidth - 32));
 
     carousel.scrollBy({
       left: direction === "left" ? -amount : amount,
@@ -551,7 +576,7 @@ export default function Home() {
   return (
     <div className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid text-[var(--text)]">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--white-20)] bg-gradient-to-b from-[var(--black-80)] to-transparent pt-[env(safe-area-inset-top)]">
-        <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+        <nav className="section-gutter mx-auto flex h-16 max-w-6xl items-center justify-between">
           <a
             href="#"
             className="text-xs tracking-[0.25em] text-[var(--white-80)] sm:text-sm"
@@ -660,7 +685,7 @@ export default function Home() {
 
       <section
         id="hero"
-        className="section-fullscreen section-fullscreen--hero relative flex items-center justify-center px-4 sm:px-6"
+        className="section-fullscreen section-fullscreen--hero relative flex items-center justify-center section-gutter py-12 md:py-0"
       >
         <div className="hero-media absolute inset-0">
           {[0, 1].map((layerIndex) => (
@@ -679,7 +704,7 @@ export default function Home() {
               autoPlay={layerIndex === 0}
               muted
               playsInline
-              preload="auto"
+              preload={heroVideoPreload}
               onLoadedData={() => setHeroVideoState((current) => (current === "fallback" ? current : "playing"))}
               onPlay={() => setHeroVideoState("playing")}
               onTimeUpdate={() => handleHeroTimeUpdate(layerIndex)}
@@ -771,7 +796,7 @@ export default function Home() {
 
       <section
         id="enterprise-ai"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-4 sm:px-6"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter"
       >
         <motion.div
           {...reveal}
@@ -846,8 +871,8 @@ export default function Home() {
                   <div className="flex flex-col gap-5 bg-[var(--surface)] p-5">
                     <p className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-80)]">OPERATIONAL AI</p>
 
-                    <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-2">
-                      <div className="space-y-1.5">
+                    <div className="grid min-w-0 grid-cols-[1fr_auto_1fr] items-start gap-1.5 sm:gap-2">
+                      <div className="min-w-0 space-y-1.5">
                         <p className="mb-2 text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-40)]">INPUTS</p>
                         {["CRM", "ERP", "SLACK", "DOCS"].map((src) => (
                           <div key={src} className="border border-[var(--white-20)] px-2 py-1.5 text-center">
@@ -861,7 +886,7 @@ export default function Home() {
                         <span className="text-[0.7rem] leading-none text-[var(--white-40)]">→</span>
                       </div>
 
-                      <div className="space-y-1.5">
+                      <div className="min-w-0 space-y-1.5">
                         <p className="mb-2 text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-40)]">ACTIONS</p>
                         {["TICKET", "ALERT", "REPORT", "ESCALATION"].map((out) => (
                           <div key={out} className="border border-[var(--white-20)] px-2 py-1.5 text-center">
@@ -1112,7 +1137,7 @@ export default function Home() {
 
       <section
         id="services"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--background)] px-4 sm:px-6"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter"
       >
         <motion.div
           {...reveal}
@@ -1175,7 +1200,7 @@ export default function Home() {
       <section
         id="solutions"
         ref={solutionsSectionRef}
-        className="solutions-section section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-4 sm:px-6"
+        className="solutions-section section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter"
         style={
           {
             "--solutions-accent": activeSolution.accent,
@@ -1263,7 +1288,7 @@ export default function Home() {
             <div className="carousel-fade-right" aria-hidden="true" />
             <div
               ref={solutionCarouselRef}
-              className="hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-0 pl-1 pr-4 [-webkit-overflow-scrolling:touch] sm:gap-6 sm:px-6 md:px-8"
+              className="hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-0 ps-1 pe-[max(1rem,env(safe-area-inset-right))] [-webkit-overflow-scrolling:touch] sm:gap-6 sm:px-6 sm:pe-4 md:px-8"
             >
               {solutionAreas.map((area) => (
                 <motion.div
@@ -1276,7 +1301,7 @@ export default function Home() {
                   whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
                   onMouseEnter={() => setActiveSolutionIndex(solutionAreas.findIndex((item) => item.id === area.id))}
                   onFocusCapture={() => setActiveSolutionIndex(solutionAreas.findIndex((item) => item.id === area.id))}
-                  className={`solutions-card panel panel-interactive min-w-[min(88vw,320px)] snap-start border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-5 sm:min-w-[360px] sm:px-5 sm:py-6 lg:min-w-[420px] ${
+                  className={`solutions-card panel panel-interactive min-w-[min(85vw,calc(100vw-2.5rem))] max-w-[calc(100vw-2rem)] snap-start border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-5 sm:min-w-[360px] sm:max-w-none sm:px-5 sm:py-6 lg:min-w-[420px] ${
                     activeSolution.id === area.id ? "solutions-card-active" : "solutions-card-inactive"
                   }`}
                 >
@@ -1296,7 +1321,7 @@ export default function Home() {
 
       <section
         id="outcomes"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--background)] px-4 sm:px-6"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter"
       >
         <motion.div
           {...reveal}
@@ -1355,7 +1380,7 @@ export default function Home() {
 
       <section
         id="process"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-4 sm:px-6"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter"
       >
         <motion.div
           {...reveal}
@@ -1406,7 +1431,7 @@ export default function Home() {
 
       <section
         id="contact"
-        className="relative min-h-[88vh] scroll-mt-20 border-t border-[var(--white-20)] bg-[var(--background)] px-4 pb-4 pt-20 sm:px-6 md:min-h-[84vh] md:pb-2 md:pt-20"
+        className="relative min-h-[88vh] scroll-mt-20 border-t border-[var(--white-20)] bg-[var(--background)] section-gutter pb-[max(1rem,env(safe-area-inset-bottom))] pt-20 md:min-h-[84vh] md:pb-[max(0.5rem,env(safe-area-inset-bottom))] md:pt-20"
       >
         <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-8">
           <div className="max-w-md pt-2">
@@ -1445,7 +1470,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-[var(--white-20)] bg-[var(--background)] px-4 py-5 text-[0.65rem] sm:px-6 sm:text-[0.7rem]">
+      <footer className="section-gutter border-t border-[var(--white-20)] bg-[var(--background)] pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-5 text-[0.65rem] sm:text-[0.7rem]">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-4">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
             <span className="text-xs uppercase tracking-[0.25em] text-[var(--white-80)]">DEVIEW</span>
