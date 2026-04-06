@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties, type MouseEvent } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 const fade = {
   initial: { opacity: 0, y: 18 },
@@ -104,24 +104,28 @@ const enterpriseModes = [
   {
     id: "predictive",
     label: "PREDICTIVE",
+    axis: "HIGH STRATEGIC VALUE",
     position: "Top",
     body: "Demand forecasting, churn, and maintenance planning for high-value operational decisions.",
   },
   {
     id: "conversational",
     label: "CONVERSATIONAL",
+    axis: "USER INTERACTION",
     position: "Left",
     body: "Customer service, support copilots, and retrieval experiences that still fit enterprise controls.",
   },
   {
     id: "generative",
     label: "GENERATIVE",
+    axis: "HIGH AUTOMATION",
     position: "Right",
     body: "Document automation, code help, and content generation with workflows, review, and governance around them.",
   },
   {
     id: "analytical",
     label: "ANALYTICAL",
+    axis: "OPERATIONAL INSIGHT",
     position: "Bottom",
     body: "Anomaly detection, risk analysis, and fraud workflows that turn model output into operational insight.",
   },
@@ -244,6 +248,7 @@ export default function Home() {
   const solutionCarouselRef = useRef<HTMLDivElement | null>(null);
   const solutionCardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const solutionsSectionRef = useRef<HTMLElement | null>(null);
+  const enterpriseModesSectionRef = useRef<HTMLElement | null>(null);
   const [heroVideoState, setHeroVideoState] = useState<"loading" | "playing" | "fallback">("loading");
   const [activeHeroLayer, setActiveHeroLayer] = useState(0);
   const [fadingHeroLayer, setFadingHeroLayer] = useState<number | null>(null);
@@ -271,6 +276,10 @@ export default function Home() {
   const standbyStartedRef = useRef(false);
   const crossfadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prefersReducedMotion = useReducedMotion();
+  const { scrollYProgress: enterpriseModesProgress } = useScroll({
+    target: enterpriseModesSectionRef,
+    offset: ["start 80%", "end 35%"],
+  });
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -319,8 +328,6 @@ export default function Home() {
 
   useEffect(() => {
     if (prefersReducedMotion) {
-      setTypedUserMessage(INTERFACE_USER_MESSAGE);
-      setTypedAiMessage(INTERFACE_AI_MESSAGE);
       return;
     }
 
@@ -470,6 +477,23 @@ export default function Home() {
     };
   }, [prefersReducedMotion]);
 
+  useMotionValueEvent(enterpriseModesProgress, "change", (latest) => {
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    const nextModeId =
+      latest < 0.25
+        ? enterpriseModes[0].id
+        : latest < 0.5
+          ? enterpriseModes[1].id
+          : latest < 0.75
+            ? enterpriseModes[2].id
+            : enterpriseModes[3].id;
+
+    setActiveEnterpriseMode((current) => (current === nextModeId ? current : nextModeId));
+  });
+
   const startStandbyLayer = async (currentLayer: number) => {
     const nextLayer = currentLayer === 0 ? 1 : 0;
     const standbyVideo = heroVideoRefs.current[nextLayer];
@@ -572,6 +596,15 @@ export default function Home() {
   const selectedMode = enterpriseModes.find((mode) => mode.id === activeEnterpriseMode) ?? enterpriseModes[0];
   const activeSolution = solutionAreas[activeSolutionIndex] ?? solutionAreas[0];
   const marqueeContent = `${activeSolution.title} • `.repeat(14);
+  const displayedUserMessage = prefersReducedMotion ? INTERFACE_USER_MESSAGE : typedUserMessage;
+  const displayedAiMessage = prefersReducedMotion ? INTERFACE_AI_MESSAGE : typedAiMessage;
+  const enterpriseIntroY = useTransform(enterpriseModesProgress, [0, 1], prefersReducedMotion ? [0, 0] : [0, -28]);
+  const enterpriseIntroBlur = useTransform(enterpriseModesProgress, [0, 1], prefersReducedMotion ? [0, 0] : [0, 5]);
+  const enterpriseMapScale = useTransform(enterpriseModesProgress, [0, 0.35, 1], prefersReducedMotion ? [1, 1, 1] : [0.92, 1, 1.03]);
+  const enterpriseMapRotateX = useTransform(enterpriseModesProgress, [0, 1], prefersReducedMotion ? [0, 0] : [10, 0]);
+  const enterpriseMapBlur = useTransform(enterpriseModesProgress, [0, 0.25], prefersReducedMotion ? [0, 0] : [8, 0]);
+  const enterpriseDetailY = useTransform(enterpriseModesProgress, [0.15, 0.45], prefersReducedMotion ? [0, 0] : [22, 0]);
+  const enterpriseDetailOpacity = useTransform(enterpriseModesProgress, [0.1, 0.32], prefersReducedMotion ? [1, 1] : [0.35, 1]);
 
   return (
     <div className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid text-[var(--text)]">
@@ -841,7 +874,7 @@ export default function Home() {
                         <div className="max-w-[82%] border border-[var(--white-10)] px-3 py-2">
                           <p className="mb-1 text-[0.52rem] uppercase tracking-[0.14em] text-[var(--white-30)]">USER</p>
                           <p className="type-line text-[0.7rem] leading-snug text-[var(--white-40)]">
-                            {typedUserMessage}
+                            {displayedUserMessage}
                             <span className="type-caret" aria-hidden="true" />
                           </p>
                         </div>
@@ -850,7 +883,7 @@ export default function Home() {
                         <div className="max-w-[82%] border border-[var(--white-10)] bg-[var(--surface)] px-3 py-2">
                           <p className="mb-1 text-[0.52rem] uppercase tracking-[0.14em] text-[var(--white-30)]">AI</p>
                           <p className="type-line text-[0.7rem] leading-snug text-[var(--white-30)]">
-                            {typedAiMessage}
+                            {displayedAiMessage}
                             <span className="type-caret" aria-hidden="true" />
                           </p>
                         </div>
@@ -991,6 +1024,7 @@ export default function Home() {
             </motion.section>
 
             <motion.section
+              ref={enterpriseModesSectionRef}
               variants={cardMotion}
               initial="initial"
               whileInView="whileInView"
@@ -998,19 +1032,36 @@ export default function Home() {
               transition={{ duration: 0.45, delay: 0.06 }}
               className="panel border border-[var(--white-20)] bg-[var(--surface-elevated)] p-5 md:p-6"
             >
-              <p className="section-label mb-2">WHAT IS ENTERPRISE AI</p>
-              <h3 className="mb-3 text-lg text-[var(--white-100)] md:text-2xl">
-                Four operating modes across interaction, automation, strategic value, and insight.
-              </h3>
-              <p className="mb-6 max-w-xl text-[0.82rem] text-[var(--text-muted)]">
-                The useful implementations usually combine multiple modes. We scope the right mix based on the
-                workflow, the decision point, and the level of control required.
-              </p>
+              <motion.div
+                style={{
+                  y: enterpriseIntroY,
+                  filter: enterpriseIntroBlur.to((value) => `blur(${value}px)`),
+                }}
+                className="enterprise-scroll-copy"
+              >
+                <p className="section-label mb-2">WHAT IS ENTERPRISE AI</p>
+                <h3 className="mb-3 text-lg text-[var(--white-100)] md:text-2xl">
+                  Four operating modes across interaction, automation, strategic value, and insight.
+                </h3>
+                <p className="mb-6 max-w-xl text-[0.82rem] text-[var(--text-muted)]">
+                  The useful implementations usually combine multiple modes. We scope the right mix based on the
+                  workflow, the decision point, and the level of control required.
+                </p>
+              </motion.div>
+              <motion.div
+                style={{
+                  scale: enterpriseMapScale,
+                  rotateX: enterpriseMapRotateX,
+                  filter: enterpriseMapBlur.to((value) => `blur(${value}px)`),
+                }}
+                className="enterprise-map-shell"
+              >
               <div className="enterprise-map">
                 <div className="enterprise-axis enterprise-axis-top">HIGH STRATEGIC VALUE</div>
                 <div className="enterprise-axis enterprise-axis-left">USER INTERACTION</div>
                 <div className="enterprise-axis enterprise-axis-right">HIGH AUTOMATION</div>
                 <div className="enterprise-axis enterprise-axis-bottom">OPERATIONAL INSIGHT</div>
+                <div className="enterprise-map-center" aria-hidden="true" />
                 {enterpriseModes.map((mode) => (
                   <button
                     key={mode.label}
@@ -1022,24 +1073,29 @@ export default function Home() {
                     onFocus={() => setActiveEnterpriseMode(mode.id)}
                     onClick={() => setActiveEnterpriseMode(mode.id)}
                   >
-                    <p className="mb-2 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">
-                      {mode.label}
-                    </p>
-                    <p className="text-[0.8rem] leading-relaxed text-[var(--text-muted)]">{mode.body}</p>
+                    <p className="enterprise-mode-label">{mode.label}</p>
+                    <p className="enterprise-mode-axis">{mode.axis}</p>
                   </button>
                 ))}
               </div>
-              <div className="enterprise-detail mt-4 border-t border-[var(--white-20)] pt-4">
-                <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-6">
-                  <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[var(--white-60)]">Current Mode</p>
-                  <div className="max-w-xl">
-                    <p className="mb-2 text-sm uppercase tracking-[0.18em] text-[var(--white-100)]">
-                      {selectedMode.label}
-                    </p>
-                    <p className="text-[0.84rem] leading-relaxed text-[var(--text-muted)]">{selectedMode.body}</p>
-                  </div>
+              </motion.div>
+              <motion.div
+                key={selectedMode.id}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.22 }}
+                style={{ y: enterpriseDetailY, opacity: enterpriseDetailOpacity }}
+                className="enterprise-detail mt-4 grid gap-4 border-t border-[var(--white-20)] pt-5 md:grid-cols-[minmax(0,1fr)_2fr]"
+              >
+                <div>
+                  <p className="mb-2 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">ACTIVE MODE</p>
+                  <p className="text-base uppercase tracking-[0.16em] text-[var(--white-100)]">{selectedMode.label}</p>
+                  <p className="mt-1 text-[0.6rem] uppercase tracking-[0.16em] text-[var(--white-40)]">{selectedMode.axis}</p>
                 </div>
-              </div>
+                <p className="border-t border-[var(--white-20)] pt-4 text-[0.88rem] leading-relaxed text-[var(--text-muted)] md:border-t-0 md:border-l md:pl-6 md:pt-0">
+                  {selectedMode.body}
+                </p>
+              </motion.div>
             </motion.section>
           </div>
 

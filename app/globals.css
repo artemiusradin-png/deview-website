@@ -649,6 +649,18 @@ html[data-theme="light"] .enterprise-mode::before {
   min-height: 5.5rem;
 }
 
+.enterprise-scroll-copy {
+  transform-origin: center top;
+  will-change: transform, filter;
+}
+
+.enterprise-map-shell {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  will-change: transform, filter;
+}
+
 .enterprise-map {
   position: relative;
   display: grid;
@@ -660,6 +672,7 @@ html[data-theme="light"] .enterprise-mode::before {
     linear-gradient(var(--white-10), var(--white-10)) center/1px calc(100% - 3rem) no-repeat,
     linear-gradient(90deg, var(--white-10), var(--white-10)) center/calc(100% - 3rem) 1px no-repeat,
     var(--surface);
+  transform-style: preserve-3d;
 }
 
 .enterprise-axis {
@@ -700,6 +713,35 @@ html[data-theme="light"] .enterprise-mode::before {
   border: 1px solid var(--white-20);
   background: var(--surface-elevated);
   padding: 1rem;
+}
+
+.enterprise-map-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0.8rem;
+  height: 0.8rem;
+  border: 1px solid var(--white-20);
+  background: var(--surface);
+  transform: translate(-50%, -50%) rotate(45deg);
+  pointer-events: none;
+}
+
+.enterprise-mode-label {
+  margin-bottom: 0.5rem;
+  font-size: 0.74rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--white-100);
+}
+
+.enterprise-mode-axis {
+  font-size: 0.58rem;
+  line-height: 1.45;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--white-40);
 }
 
 .enterprise-compare {
