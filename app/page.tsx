@@ -999,7 +999,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+          <div className="grid gap-6">
             <motion.section
               variants={cardMotion}
               initial="initial"
@@ -1055,45 +1055,47 @@ export default function Home() {
               </div>
             </motion.section>
 
-            <motion.section
-              ref={enterpriseModesSectionRef}
-              variants={cardMotion}
-              initial="initial"
-              whileInView="whileInView"
-              viewport={reveal.viewport}
-              transition={{ duration: 0.45, delay: 0.06 }}
-              className="panel border border-[var(--white-20)] bg-[var(--surface-elevated)] p-5 md:p-6"
+          </div>
+
+          <motion.section
+            ref={enterpriseModesSectionRef}
+            variants={cardMotion}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={reveal.viewport}
+            transition={{ duration: 0.45, delay: 0.06 }}
+            className="enterprise-mode-stage panel border border-[var(--white-20)] bg-[var(--surface-elevated)]"
+          >
+            <motion.div
+              style={{
+                y: enterpriseIntroY,
+                opacity: enterpriseIntroOpacity,
+                filter: enterpriseIntroFilter,
+              }}
+              className="enterprise-scroll-copy enterprise-mode-stage-copy"
             >
-              <motion.div
-                style={{
-                  y: enterpriseIntroY,
-                  opacity: enterpriseIntroOpacity,
-                  filter: enterpriseIntroFilter,
-                }}
-                className="enterprise-scroll-copy"
-              >
-                <p className="section-label mb-2">WHAT IS ENTERPRISE AI</p>
-                <h3 className="mb-3 text-lg text-[var(--white-100)] md:text-2xl">
-                  Four operating modes across interaction, automation, strategic value, and insight.
-                </h3>
-                <p className="mb-6 max-w-xl text-[0.82rem] text-[var(--text-muted)]">
-                  The useful implementations usually combine multiple modes. We scope the right mix based on the
-                  workflow, the decision point, and the level of control required.
-                </p>
-              </motion.div>
-              <motion.div
-                style={{
-                  scale: enterpriseMapScale,
-                  rotateX: enterpriseMapRotateX,
-                  y: enterpriseMapY,
-                  filter: enterpriseMapFilter,
-                }}
-                className="enterprise-map-shell"
-              >
+              <p className="section-label mb-3">WHAT IS ENTERPRISE AI</p>
+              <h3 className="enterprise-mode-stage-title text-[var(--white-100)]">
+                Four operating modes across interaction, automation, strategic value, and insight.
+              </h3>
+              <p className="enterprise-mode-stage-body text-[var(--text-muted)]">
+                The useful implementations usually combine multiple modes. We scope the right mix based on the
+                workflow, the decision point, and the level of control required.
+              </p>
+            </motion.div>
+            <motion.div
+              style={{
+                scale: enterpriseMapScale,
+                rotateX: enterpriseMapRotateX,
+                y: enterpriseMapY,
+                filter: enterpriseMapFilter,
+              }}
+              className="enterprise-map-shell enterprise-mode-stage-shell"
+            >
               <div className="enterprise-scroll-rail" aria-hidden="true">
                 <motion.div className="enterprise-scroll-rail-fill" style={{ height: enterpriseRailFill }} />
               </div>
-              <div className="enterprise-map">
+              <div className="enterprise-map enterprise-map-expanded">
                 <div className="enterprise-axis enterprise-axis-top">HIGH STRATEGIC VALUE</div>
                 <div className="enterprise-axis enterprise-axis-left">USER INTERACTION</div>
                 <div className="enterprise-axis enterprise-axis-right">HIGH AUTOMATION</div>
@@ -1115,26 +1117,23 @@ export default function Home() {
                   </button>
                 ))}
               </div>
-              </motion.div>
-              <motion.div
-                key={selectedMode.id}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.22 }}
-                style={{ y: enterpriseDetailY, opacity: enterpriseDetailOpacity }}
-                className="enterprise-detail mt-4 grid gap-4 border-t border-[var(--white-20)] pt-5 md:grid-cols-[minmax(0,1fr)_2fr]"
-              >
-                <div>
-                  <p className="mb-2 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">ACTIVE MODE</p>
-                  <p className="text-base uppercase tracking-[0.16em] text-[var(--white-100)]">{selectedMode.label}</p>
-                  <p className="mt-1 text-[0.6rem] uppercase tracking-[0.16em] text-[var(--white-40)]">{selectedMode.axis}</p>
-                </div>
-                <p className="border-t border-[var(--white-20)] pt-4 text-[0.88rem] leading-relaxed text-[var(--text-muted)] md:border-t-0 md:border-l md:pl-6 md:pt-0">
-                  {selectedMode.body}
-                </p>
-              </motion.div>
-            </motion.section>
-          </div>
+            </motion.div>
+            <motion.div
+              key={selectedMode.id}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.22 }}
+              style={{ y: enterpriseDetailY, opacity: enterpriseDetailOpacity }}
+              className="enterprise-detail enterprise-mode-stage-detail"
+            >
+              <div>
+                <p className="mb-2 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">ACTIVE MODE</p>
+                <p className="text-base uppercase tracking-[0.16em] text-[var(--white-100)]">{selectedMode.label}</p>
+                <p className="mt-1 text-[0.6rem] uppercase tracking-[0.16em] text-[var(--white-40)]">{selectedMode.axis}</p>
+              </div>
+              <p className="enterprise-mode-stage-detail-copy text-[var(--text-muted)]">{selectedMode.body}</p>
+            </motion.div>
+          </motion.section>
 
           <motion.section
             variants={cardMotion}

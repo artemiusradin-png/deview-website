@@ -649,6 +649,34 @@ html[data-theme="light"] .enterprise-mode::before {
   min-height: 4rem;
 }
 
+.enterprise-mode-stage {
+  min-height: min(100vh, 100dvh);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem 1.25rem;
+}
+
+.enterprise-mode-stage-copy {
+  max-width: 56rem;
+}
+
+.enterprise-mode-stage-title {
+  max-width: 16ch;
+  font-size: clamp(2rem, 5vw, 4.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.enterprise-mode-stage-body {
+  margin-top: 1rem;
+  max-width: 44rem;
+  font-size: clamp(0.95rem, 1.35vw, 1.15rem);
+  line-height: 1.65;
+}
+
 .enterprise-scroll-copy {
   transform-origin: center top;
   will-change: transform, filter;
@@ -661,6 +689,12 @@ html[data-theme="light"] .enterprise-mode::before {
   will-change: transform, filter;
   position: relative;
   padding-left: 1.25rem;
+}
+
+.enterprise-mode-stage-shell {
+  flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 .enterprise-scroll-rail {
@@ -689,6 +723,13 @@ html[data-theme="light"] .enterprise-mode::before {
     linear-gradient(90deg, var(--white-10), var(--white-10)) center/calc(100% - 3rem) 1px no-repeat,
     var(--surface);
   transform-style: preserve-3d;
+}
+
+.enterprise-map-expanded {
+  width: 100%;
+  min-height: min(54rem, 64vh);
+  padding: clamp(4.25rem, 7vw, 6rem) clamp(1.25rem, 2.5vw, 2.25rem);
+  gap: clamp(1rem, 2vw, 1.5rem);
 }
 
 .enterprise-axis {
@@ -781,7 +822,7 @@ html[data-theme="light"] .enterprise-mode::before {
 
 .enterprise-mode-label {
   margin-bottom: 0.5rem;
-  font-size: 0.74rem;
+  font-size: clamp(0.84rem, 1vw, 1rem);
   line-height: 1.2;
   text-transform: uppercase;
   letter-spacing: 0.2em;
@@ -789,11 +830,26 @@ html[data-theme="light"] .enterprise-mode::before {
 }
 
 .enterprise-mode-axis {
-  font-size: 0.58rem;
+  font-size: clamp(0.62rem, 0.75vw, 0.74rem);
   line-height: 1.45;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--white-40);
+}
+
+.enterprise-mode-stage-detail {
+  display: grid;
+  gap: 1rem;
+  border-top: 1px solid var(--white-20);
+  padding-top: 1.25rem;
+  grid-template-columns: minmax(0, 18rem) 1fr;
+}
+
+.enterprise-mode-stage-detail-copy {
+  border-left: 1px solid var(--white-20);
+  padding-left: 1.5rem;
+  font-size: clamp(1rem, 1.35vw, 1.12rem);
+  line-height: 1.7;
 }
 
 .enterprise-compare {
@@ -869,9 +925,37 @@ html[data-theme="light"] .enterprise-compare-enterprise {
 }
 
 @media (max-width: 961px) {
+  .enterprise-mode-stage {
+    min-height: auto;
+    padding: 1.25rem;
+  }
+
+  .enterprise-mode-stage-copy {
+    max-width: none;
+  }
+
+  .enterprise-mode-stage-title {
+    max-width: none;
+    font-size: clamp(1.5rem, 8vw, 2.4rem);
+    line-height: 1;
+  }
+
+  .enterprise-mode-stage-body {
+    font-size: 0.92rem;
+  }
+
+  .enterprise-mode-stage-shell {
+    display: block;
+  }
+
   .enterprise-map {
     gap: 0.85rem;
     padding: 2.8rem 0.85rem;
+  }
+
+  .enterprise-map-expanded {
+    min-height: auto;
+    padding: 3.2rem 0.9rem;
   }
 
   .enterprise-axis-left,
@@ -896,6 +980,17 @@ html[data-theme="light"] .enterprise-compare-enterprise {
 
   .enterprise-arrow-public {
     transform: rotate(90deg) translateX(-4px);
+  }
+
+  .enterprise-mode-stage-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .enterprise-mode-stage-detail-copy {
+    border-left: 0;
+    border-top: 1px solid var(--white-20);
+    padding-left: 0;
+    padding-top: 1rem;
   }
 }
 
