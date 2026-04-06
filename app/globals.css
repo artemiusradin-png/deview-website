@@ -650,20 +650,24 @@ html[data-theme="light"] .enterprise-mode::before {
 }
 
 .enterprise-mode-stage {
-  min-height: min(100vh, 100dvh);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  min-height: 240vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: start;
   gap: 2rem;
   width: calc(100% + 8rem);
   margin-left: -4rem;
   margin-right: -4rem;
   padding: 2rem clamp(1.25rem, 4vw, 3rem);
+  position: relative;
 }
 
 .enterprise-mode-stage-copy {
   max-width: none;
   width: 100%;
+  position: sticky;
+  top: 5.5rem;
+  z-index: 2;
 }
 
 .enterprise-mode-stage-title {

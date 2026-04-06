@@ -619,9 +619,6 @@ export default function Home() {
   const marqueeContent = `${activeSolution.title} • `.repeat(14);
   const displayedUserMessage = prefersReducedMotion ? INTERFACE_USER_MESSAGE : typedUserMessage;
   const displayedAiMessage = prefersReducedMotion ? INTERFACE_AI_MESSAGE : typedAiMessage;
-  const enterpriseIntroY = useTransform(enterpriseModesProgress, [0, 0.38, 0.72, 1], prefersReducedMotion ? [0, 0, 0, 0] : [0, -72, -132, -168]);
-  const enterpriseIntroBlur = useTransform(enterpriseModesProgress, [0, 0.4, 0.8, 1], prefersReducedMotion ? [0, 0, 0, 0] : [0, 10, 16, 18]);
-  const enterpriseIntroOpacity = useTransform(enterpriseModesProgress, [0, 0.18, 0.42, 0.7], prefersReducedMotion ? [1, 1, 1, 1] : [1, 0.86, 0.36, 0.08]);
   const enterpriseMapScale = useTransform(enterpriseModesProgress, [0, 0.18, 0.52, 1], prefersReducedMotion ? [1, 1, 1, 1] : [0.74, 0.9, 1.04, 1.12]);
   const enterpriseMapRotateX = useTransform(enterpriseModesProgress, [0, 0.34], prefersReducedMotion ? [0, 0] : [24, 0]);
   const enterpriseMapY = useTransform(enterpriseModesProgress, [0, 0.22, 0.6, 1], prefersReducedMotion ? [0, 0, 0, 0] : [92, 26, -10, -28]);
@@ -629,7 +626,6 @@ export default function Home() {
   const enterpriseDetailY = useTransform(enterpriseModesProgress, [0.22, 0.5, 1], prefersReducedMotion ? [0, 0, 0] : [52, 0, -10]);
   const enterpriseDetailOpacity = useTransform(enterpriseModesProgress, [0.16, 0.42], prefersReducedMotion ? [1, 1] : [0.12, 1]);
   const enterpriseRailFill = useTransform(enterpriseModesProgress, [0, 1], ["0%", "100%"]);
-  const enterpriseIntroFilter = useTransform(enterpriseIntroBlur, (v) => `blur(${v}px)`);
   const enterpriseMapFilter = useTransform(enterpriseMapBlur, (v) => `blur(${v}px)`);
 
   return (
@@ -1066,14 +1062,7 @@ export default function Home() {
             transition={{ duration: 0.45, delay: 0.06 }}
             className="enterprise-mode-stage panel border border-[var(--white-20)] bg-[var(--surface-elevated)]"
           >
-            <motion.div
-              style={{
-                y: enterpriseIntroY,
-                opacity: enterpriseIntroOpacity,
-                filter: enterpriseIntroFilter,
-              }}
-              className="enterprise-scroll-copy enterprise-mode-stage-copy"
-            >
+            <div className="enterprise-mode-stage-copy">
               <p className="section-label mb-3">WHAT IS ENTERPRISE AI</p>
               <h3 className="enterprise-mode-stage-title text-[var(--white-100)]">
                 Four operating modes across interaction, automation, strategic value, and insight.
@@ -1082,7 +1071,7 @@ export default function Home() {
                 The useful implementations usually combine multiple modes. We scope the right mix based on the
                 workflow, the decision point, and the level of control required.
               </p>
-            </motion.div>
+            </div>
             <motion.div
               style={{
                 scale: enterpriseMapScale,
