@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState, type MouseEvent } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState, type CSSProperties, type MouseEvent } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 const fade = {
   initial: { opacity: 0, y: 18 },
@@ -154,24 +154,32 @@ const architectureComparison = {
 
 const solutionAreas = [
   {
+    id: "customer-operations",
     sector: "CUSTOMER OPERATIONS",
     title: "Support and service automation",
     body: "Deploy AI assistants for support triage, knowledge retrieval, response drafting, and case summarization without breaking existing support workflows.",
+    accent: "rgba(148, 214, 255, 0.16)",
   },
   {
+    id: "internal-knowledge",
     sector: "INTERNAL KNOWLEDGE",
     title: "Enterprise search and expert copilots",
     body: "Turn fragmented documents, policies, and internal systems into trusted research, compliance, and decision-support interfaces.",
+    accent: "rgba(255, 214, 138, 0.16)",
   },
   {
+    id: "operations",
     sector: "OPERATIONS",
     title: "Workflow acceleration and exception handling",
     body: "Automate repetitive review, classification, routing, and escalation tasks while keeping humans in the loop for judgment-heavy cases.",
+    accent: "rgba(157, 247, 198, 0.14)",
   },
   {
+    id: "data-products",
     sector: "DATA PRODUCTS",
     title: "Analytics and intelligence layers",
     body: "Build data-backed AI interfaces that surface business signals, summarize trends, and assist teams with better day-to-day decisions.",
+    accent: "rgba(205, 177, 255, 0.16)",
   },
 ];
 
@@ -234,6 +242,7 @@ const processSteps = [
 export default function Home() {
   const heroVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const solutionCarouselRef = useRef<HTMLDivElement | null>(null);
+  const solutionCardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [heroVideoState, setHeroVideoState] = useState<"loading" | "playing" | "fallback">("loading");
   const [activeHeroLayer, setActiveHeroLayer] = useState(0);
   const [fadingHeroLayer, setFadingHeroLayer] = useState<number | null>(null);
@@ -252,10 +261,12 @@ export default function Home() {
   const [activeEnterprisePillar, setActiveEnterprisePillar] = useState(enterprisePillars[0].id);
   const [activeEnterpriseMode, setActiveEnterpriseMode] = useState(enterpriseModes[0].id);
   const [architectureFocus, setArchitectureFocus] = useState<"public" | "enterprise">("enterprise");
+  const [activeSolutionIndex, setActiveSolutionIndex] = useState(0);
   const [typedUserMessage, setTypedUserMessage] = useState("");
   const [typedAiMessage, setTypedAiMessage] = useState("");
   const standbyStartedRef = useRef(false);
   const crossfadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -358,6 +369,47 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const carousel = solutionCarouselRef.current;
+
+    if (!carousel) {
+      return;
+    }
+
+    const updateActiveSolution = () => {
+      const carouselRect = carousel.getBoundingClientRect();
+      const targetCenter = carouselRect.left + carouselRect.width / 2;
+      let nextIndex = 0;
+      let nearestDistance = Number.POSITIVE_INFINITY;
+
+      solutionCardRefs.current.forEach((card, index) => {
+        if (!card) {
+          return;
+        }
+
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const distance = Math.abs(cardCenter - targetCenter);
+
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nextIndex = index;
+        }
+      });
+
+      setActiveSolutionIndex((current) => (current === nextIndex ? current : nextIndex));
+    };
+
+    updateActiveSolution();
+    carousel.addEventListener("scroll", updateActiveSolution, { passive: true });
+    window.addEventListener("resize", updateActiveSolution);
+
+    return () => {
+      carousel.removeEventListener("scroll", updateActiveSolution);
+      window.removeEventListener("resize", updateActiveSolution);
+    };
+  }, []);
+
   const startStandbyLayer = async (currentLayer: number) => {
     const nextLayer = currentLayer === 0 ? 1 : 0;
     const standbyVideo = heroVideoRefs.current[nextLayer];
@@ -457,6 +509,8 @@ export default function Home() {
   const toggleTheme = () => setTheme((current) => (current === "dark" ? "light" : "dark"));
   const selectedPillar = enterprisePillars.find((pillar) => pillar.id === activeEnterprisePillar) ?? enterprisePillars[0];
   const selectedMode = enterpriseModes.find((mode) => mode.id === activeEnterpriseMode) ?? enterpriseModes[0];
+  const activeSolution = solutionAreas[activeSolutionIndex] ?? solutionAreas[0];
+  const marqueeContent = `${activeSolution.title} • `.repeat(14);
 
   return (
     <div className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid text-[var(--text)]">
@@ -1084,12 +1138,28 @@ export default function Home() {
 
       <section
         id="solutions"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-4 sm:px-6"
+        className="solutions-section section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] px-4 sm:px-6"
+        style={
+          {
+            "--solutions-accent": activeSolution.accent,
+          } as CSSProperties
+        }
       >
+        <div className="solutions-marquee-container" aria-hidden="true">
+          {["top", "right", "bottom", "left"].map((position) => (
+            <div key={`${position}-${activeSolution.id}`} className={`solutions-marquee solutions-marquee-${position}`}>
+              <div
+                className={`solutions-marquee-track ${prefersReducedMotion ? "solutions-marquee-track-static" : ""}`}
+              >
+                {marqueeContent}
+              </div>
+            </div>
+          ))}
+        </div>
         <motion.div
           {...reveal}
           transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
+          className="solutions-content mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
         >
           <div className="section-shell">
             <p className="section-label mb-3">USE CASES</p>
@@ -1159,13 +1229,24 @@ export default function Home() {
               {solutionAreas.map((area) => (
                 <motion.div
                   key={area.title}
+                  ref={(node) => {
+                    solutionCardRefs.current[solutionAreas.findIndex((item) => item.id === area.id)] = node;
+                  }}
                   variants={cardMotion}
                   transition={{ duration: 0.45 }}
                   whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
-                  className="panel panel-interactive min-w-[min(88vw,320px)] snap-start border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-5 sm:min-w-[360px] sm:px-5 sm:py-6 lg:min-w-[420px]"
+                  onMouseEnter={() => setActiveSolutionIndex(solutionAreas.findIndex((item) => item.id === area.id))}
+                  onFocusCapture={() => setActiveSolutionIndex(solutionAreas.findIndex((item) => item.id === area.id))}
+                  className={`solutions-card panel panel-interactive min-w-[min(88vw,320px)] snap-start border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-5 sm:min-w-[360px] sm:px-5 sm:py-6 lg:min-w-[420px] ${
+                    activeSolution.id === area.id ? "solutions-card-active" : "solutions-card-inactive"
+                  }`}
                 >
                   <p className="section-label mb-3 text-[0.65rem]">{area.sector}</p>
-                  <p className="mb-3 text-sm text-[var(--white-100)]">{area.title}</p>
+                  <p className={`solutions-card-title mb-3 text-sm text-[var(--white-100)] ${
+                    activeSolution.id === area.id ? "solutions-card-title-active" : ""
+                  }`}>
+                    {area.title}
+                  </p>
                   <p className="text-[0.8rem] text-[var(--text-muted)]">{area.body}</p>
                 </motion.div>
               ))}

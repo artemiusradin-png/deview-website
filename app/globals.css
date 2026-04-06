@@ -1093,6 +1093,188 @@ html[data-theme="light"] .carousel-fade-right {
   );
 }
 
+.solutions-section {
+  --solutions-accent: rgba(148, 214, 255, 0.16);
+  transition: background-color 300ms ease;
+}
+
+.solutions-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 20%, var(--solutions-accent), transparent 32%),
+    radial-gradient(circle at 82% 76%, color-mix(in srgb, var(--solutions-accent) 70%, transparent), transparent 28%);
+  opacity: 1;
+  transition: background 300ms ease;
+}
+
+.solutions-content {
+  position: relative;
+  z-index: 2;
+}
+
+.solutions-marquee-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.solutions-marquee {
+  position: absolute;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: clamp(0.58rem, 1vw, 0.82rem);
+  line-height: 1;
+  color: var(--white-60);
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  border-color: var(--white-10);
+  white-space: nowrap;
+}
+
+.solutions-marquee-top,
+.solutions-marquee-bottom {
+  left: 0;
+  width: 100%;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--white-10);
+  border-bottom: 1px solid var(--white-10);
+}
+
+.solutions-marquee-top {
+  top: 0;
+}
+
+.solutions-marquee-bottom {
+  bottom: 0;
+  transform: rotate(180deg);
+}
+
+.solutions-marquee-left,
+.solutions-marquee-right {
+  top: 0;
+  width: 3rem;
+  height: 100%;
+  border-left: 1px solid var(--white-10);
+  border-right: 1px solid var(--white-10);
+}
+
+.solutions-marquee-left {
+  left: 0;
+}
+
+.solutions-marquee-right {
+  right: 0;
+}
+
+.solutions-marquee-left .solutions-marquee-track,
+.solutions-marquee-right .solutions-marquee-track {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100vh;
+  transform-origin: center;
+}
+
+.solutions-marquee-left .solutions-marquee-track {
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.solutions-marquee-right .solutions-marquee-track {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.solutions-marquee-top .solutions-marquee-track,
+.solutions-marquee-bottom .solutions-marquee-track {
+  display: inline-block;
+  min-width: max-content;
+  padding-left: 1.5rem;
+}
+
+.solutions-marquee-track {
+  animation: solutions-marquee-x 24s linear infinite;
+}
+
+.solutions-marquee-left .solutions-marquee-track,
+.solutions-marquee-right .solutions-marquee-track {
+  animation-name: solutions-marquee-y;
+  animation-duration: 28s;
+}
+
+.solutions-marquee-track-static {
+  animation: none;
+}
+
+@keyframes solutions-marquee-x {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes solutions-marquee-y {
+  from {
+    transform: translate(-50%, -50%) rotate(-90deg) translateX(0);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(-90deg) translateX(-50%);
+  }
+}
+
+.solutions-marquee-right .solutions-marquee-track {
+  animation-direction: reverse;
+}
+
+.solutions-card {
+  transition:
+    border-color 220ms ease,
+    background-color 220ms ease,
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.solutions-card-inactive {
+  opacity: 0.58;
+}
+
+.solutions-card-active {
+  border-color: var(--white-60);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--solutions-accent) 55%, transparent), transparent 45%),
+    var(--surface-elevated);
+  opacity: 1;
+}
+
+.solutions-card-title {
+  transform-origin: 50% 100%;
+}
+
+.solutions-card-title-active {
+  animation: solutions-card-activate 600ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+@keyframes solutions-card-activate {
+  25% {
+    color: color-mix(in srgb, var(--white-100) 72%, #ecf232);
+    transform: translateY(-10px);
+  }
+  45% {
+    transform: translateY(2px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 767px) {
   .carousel-fade-left,
   .carousel-fade-right {
@@ -1105,6 +1287,18 @@ html[data-theme="light"] .carousel-fade-right {
 
   .carousel-fade-right {
     right: -8px;
+  }
+
+  .solutions-marquee-left,
+  .solutions-marquee-right {
+    display: none;
+  }
+
+  .solutions-marquee-top,
+  .solutions-marquee-bottom {
+    padding: 0.75rem 0;
+    font-size: 0.56rem;
+    letter-spacing: 0.18em;
   }
 }
 
