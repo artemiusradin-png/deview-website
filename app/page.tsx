@@ -270,6 +270,7 @@ export default function Home() {
   const [activeSolutionIndex, setActiveSolutionIndex] = useState(0);
   const [solutionsMarqueeOffset, setSolutionsMarqueeOffset] = useState(0);
   const [isSolutionsInView, setIsSolutionsInView] = useState(false);
+  const [navVisible, setNavVisible] = useState(true);
   const [typedUserMessage, setTypedUserMessage] = useState("");
   const [typedAiMessage, setTypedAiMessage] = useState("");
   const [heroVideoPreload, setHeroVideoPreload] = useState<"auto" | "metadata">("metadata");
@@ -590,6 +591,26 @@ export default function Home() {
     };
   }, [navOpen]);
 
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const updateNavVisibility = () => {
+      const currentScrollY = window.scrollY;
+      const scrollingUp = currentScrollY < lastScrollY;
+      const nearTop = currentScrollY < 40;
+
+      setNavVisible(nearTop || scrollingUp || navOpen);
+      lastScrollY = currentScrollY;
+    };
+
+    updateNavVisibility();
+    window.addEventListener("scroll", updateNavVisibility, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", updateNavVisibility);
+    };
+  }, [navOpen]);
+
   const closeNav = () => setNavOpen(false);
   const toggleTheme = () => setTheme((current) => (current === "dark" ? "light" : "dark"));
   const selectedPillar = enterprisePillars.find((pillar) => pillar.id === activeEnterprisePillar) ?? enterprisePillars[0];
@@ -598,25 +619,36 @@ export default function Home() {
   const marqueeContent = `${activeSolution.title} • `.repeat(14);
   const displayedUserMessage = prefersReducedMotion ? INTERFACE_USER_MESSAGE : typedUserMessage;
   const displayedAiMessage = prefersReducedMotion ? INTERFACE_AI_MESSAGE : typedAiMessage;
-  const enterpriseIntroY = useTransform(enterpriseModesProgress, [0, 1], prefersReducedMotion ? [0, 0] : [0, -28]);
-  const enterpriseIntroBlur = useTransform(enterpriseModesProgress, [0, 1], prefersReducedMotion ? [0, 0] : [0, 5]);
-  const enterpriseMapScale = useTransform(enterpriseModesProgress, [0, 0.35, 1], prefersReducedMotion ? [1, 1, 1] : [0.92, 1, 1.03]);
-  const enterpriseMapRotateX = useTransform(enterpriseModesProgress, [0, 1], prefersReducedMotion ? [0, 0] : [10, 0]);
-  const enterpriseMapBlur = useTransform(enterpriseModesProgress, [0, 0.25], prefersReducedMotion ? [0, 0] : [8, 0]);
-  const enterpriseDetailY = useTransform(enterpriseModesProgress, [0.15, 0.45], prefersReducedMotion ? [0, 0] : [22, 0]);
-  const enterpriseDetailOpacity = useTransform(enterpriseModesProgress, [0.1, 0.32], prefersReducedMotion ? [1, 1] : [0.35, 1]);
+  const enterpriseIntroY = useTransform(enterpriseModesProgress, [0, 0.45, 1], prefersReducedMotion ? [0, 0, 0] : [0, -54, -92]);
+  const enterpriseIntroBlur = useTransform(enterpriseModesProgress, [0, 0.45, 1], prefersReducedMotion ? [0, 0, 0] : [0, 8, 14]);
+  const enterpriseIntroOpacity = useTransform(enterpriseModesProgress, [0, 0.22, 0.5], prefersReducedMotion ? [1, 1, 1] : [1, 0.82, 0.26]);
+  const enterpriseMapScale = useTransform(enterpriseModesProgress, [0, 0.25, 0.6, 1], prefersReducedMotion ? [1, 1, 1, 1] : [0.82, 0.95, 1.02, 1.06]);
+  const enterpriseMapRotateX = useTransform(enterpriseModesProgress, [0, 0.45], prefersReducedMotion ? [0, 0] : [18, 0]);
+  const enterpriseMapY = useTransform(enterpriseModesProgress, [0, 0.28, 1], prefersReducedMotion ? [0, 0, 0] : [48, 10, -12]);
+  const enterpriseMapBlur = useTransform(enterpriseModesProgress, [0, 0.22], prefersReducedMotion ? [0, 0] : [14, 0]);
+  const enterpriseDetailY = useTransform(enterpriseModesProgress, [0.18, 0.45], prefersReducedMotion ? [0, 0] : [34, 0]);
+  const enterpriseDetailOpacity = useTransform(enterpriseModesProgress, [0.12, 0.4], prefersReducedMotion ? [1, 1] : [0.2, 1]);
+  const enterpriseRailFill = useTransform(enterpriseModesProgress, [0, 1], ["0%", "100%"]);
+  const enterpriseIntroFilter = useTransform(enterpriseIntroBlur, (v) => `blur(${v}px)`);
+  const enterpriseMapFilter = useTransform(enterpriseMapBlur, (v) => `blur(${v}px)`);
 
   return (
     <div className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid text-[var(--text)]">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--white-20)] bg-gradient-to-b from-[var(--black-80)] to-transparent pt-[env(safe-area-inset-top)]">
+      <a
+        href="#"
+        className="brand-mark fixed left-0 top-0 z-50 px-4 pt-[calc(env(safe-area-inset-top)+1.35rem)] text-xs tracking-[0.25em] text-[var(--white-80)] sm:px-6 sm:text-sm"
+        onClick={closeNav}
+      >
+        DEVIEW
+      </a>
+
+      <header
+        className={`nav-shell fixed inset-x-0 top-0 z-40 border-b border-[var(--white-20)] bg-gradient-to-b from-[var(--black-80)] to-transparent pt-[env(safe-area-inset-top)] ${
+          navVisible ? "nav-shell-visible" : "nav-shell-hidden"
+        }`}
+      >
         <nav className="section-gutter mx-auto flex h-16 max-w-6xl items-center justify-between">
-          <a
-            href="#"
-            className="text-xs tracking-[0.25em] text-[var(--white-80)] sm:text-sm"
-            onClick={closeNav}
-          >
-            DEVIEW
-          </a>
+          <div className="nav-shell-spacer" aria-hidden="true" />
           <button
             type="button"
             className="nav-toggle"
@@ -1035,7 +1067,8 @@ export default function Home() {
               <motion.div
                 style={{
                   y: enterpriseIntroY,
-                  filter: enterpriseIntroBlur.to((value) => `blur(${value}px)`),
+                  opacity: enterpriseIntroOpacity,
+                  filter: enterpriseIntroFilter,
                 }}
                 className="enterprise-scroll-copy"
               >
@@ -1052,10 +1085,14 @@ export default function Home() {
                 style={{
                   scale: enterpriseMapScale,
                   rotateX: enterpriseMapRotateX,
-                  filter: enterpriseMapBlur.to((value) => `blur(${value}px)`),
+                  y: enterpriseMapY,
+                  filter: enterpriseMapFilter,
                 }}
                 className="enterprise-map-shell"
               >
+              <div className="enterprise-scroll-rail" aria-hidden="true">
+                <motion.div className="enterprise-scroll-rail-fill" style={{ height: enterpriseRailFill }} />
+              </div>
               <div className="enterprise-map">
                 <div className="enterprise-axis enterprise-axis-top">HIGH STRATEGIC VALUE</div>
                 <div className="enterprise-axis enterprise-axis-left">USER INTERACTION</div>
