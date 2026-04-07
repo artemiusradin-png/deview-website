@@ -1158,49 +1158,51 @@ export default function Home() {
                     {selectedMode.axis}
                   </motion.p>
                 </div>
-                <div className="enterprise-mode-sequence" aria-hidden="true">
-                  <motion.p
-                    key={`${selectedMode.id}-position`}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.26 }}
-                    className="enterprise-mode-text-position"
-                  >
-                    {selectedMode.position}
-                  </motion.p>
-                  <div className="enterprise-mode-text-list">
-                    {enterpriseModes.map((mode, index) => (
-                      <button
-                        type="button"
-                        key={mode.id}
-                        className={`enterprise-mode-text-list-item ${
-                          activeEnterpriseMode === mode.id ? "enterprise-mode-text-list-item-active" : ""
-                        }`}
-                        onClick={() => setActiveEnterpriseMode(mode.id)}
-                        aria-current={activeEnterpriseMode === mode.id ? "true" : undefined}
-                      >
-                        <span className="enterprise-mode-text-list-index">{String(index + 1).padStart(2, "0")}</span>
-                        <span>{mode.label}</span>
-                      </button>
-                    ))}
+                <div className="enterprise-mode-card-footer">
+                  <div className="enterprise-mode-sequence">
+                    <motion.p
+                      key={`${selectedMode.id}-position`}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.26 }}
+                      className="enterprise-mode-text-position"
+                      aria-hidden="true"
+                    >
+                      {selectedMode.position}
+                    </motion.p>
+                    <div className="enterprise-mode-text-list">
+                      {enterpriseModes.map((mode, index) => (
+                        <button
+                          type="button"
+                          key={mode.id}
+                          className={`enterprise-mode-text-list-item ${
+                            activeEnterpriseMode === mode.id ? "enterprise-mode-text-list-item-active" : ""
+                          }`}
+                          onClick={() => setActiveEnterpriseMode(mode.id)}
+                          aria-current={activeEnterpriseMode === mode.id ? "true" : undefined}
+                        >
+                          <span className="enterprise-mode-text-list-index">{String(index + 1).padStart(2, "0")}</span>
+                          <span>{mode.label}</span>
+                        </button>
+                      ))}
+                    </div>
                   </div>
+                  <motion.div
+                    key={selectedMode.id}
+                    style={{ y: enterpriseDetailY, opacity: enterpriseDetailOpacity }}
+                    className="enterprise-mode-stage-detail enterprise-mode-stage-detail--in-card"
+                  >
+                    <div className="enterprise-mode-stage-detail-meta">
+                      <p className="mb-2 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">ACTIVE MODE</p>
+                      <p className="text-base uppercase tracking-[0.16em] text-[var(--white-100)]">{selectedMode.label}</p>
+                      <p className="mt-1 text-[0.6rem] uppercase tracking-[0.16em] text-[var(--white-40)]">
+                        {selectedMode.axis}
+                      </p>
+                    </div>
+                    <p className="enterprise-mode-stage-detail-copy text-[var(--text-muted)]">{selectedMode.body}</p>
+                  </motion.div>
                 </div>
               </div>
-            </motion.div>
-            <motion.div
-              key={selectedMode.id}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.22 }}
-              style={{ y: enterpriseDetailY, opacity: enterpriseDetailOpacity }}
-              className="enterprise-detail enterprise-mode-stage-detail"
-            >
-              <div>
-                <p className="mb-2 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">ACTIVE MODE</p>
-                <p className="text-base uppercase tracking-[0.16em] text-[var(--white-100)]">{selectedMode.label}</p>
-                <p className="mt-1 text-[0.6rem] uppercase tracking-[0.16em] text-[var(--white-40)]">{selectedMode.axis}</p>
-              </div>
-              <p className="enterprise-mode-stage-detail-copy text-[var(--text-muted)]">{selectedMode.body}</p>
             </motion.div>
           </section>
       </div>
