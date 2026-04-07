@@ -249,6 +249,8 @@ export default function Home() {
   const solutionCardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const solutionsSectionRef = useRef<HTMLElement | null>(null);
   const enterpriseModesSectionRef = useRef<HTMLDivElement | null>(null);
+  const enterpriseStagePanelRef = useRef<HTMLElement | null>(null);
+  const [enterprisePinState, setEnterprisePinState] = useState<"before" | "pinned" | "past">("before");
   const [heroVideoState, setHeroVideoState] = useState<"loading" | "playing" | "fallback">("loading");
   const [activeHeroLayer, setActiveHeroLayer] = useState(0);
   const [fadingHeroLayer, setFadingHeroLayer] = useState<number | null>(null);
@@ -477,6 +479,40 @@ export default function Home() {
       wideMq.removeEventListener("change", updateMarqueeOffset);
     };
   }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    const wrapper = enterpriseModesSectionRef.current;
+
+    if (!wrapper) {
+      return;
+    }
+
+    const NAV_HEIGHT = 64;
+
+    const update = () => {
+      const wrapperTop = wrapper.getBoundingClientRect().top + window.scrollY;
+      const wrapperHeight = wrapper.offsetHeight;
+      const panelHeight = window.innerHeight - NAV_HEIGHT;
+      const scrollY = window.scrollY;
+
+      if (scrollY < wrapperTop) {
+        setEnterprisePinState("before");
+      } else if (scrollY >= wrapperTop + wrapperHeight - panelHeight) {
+        setEnterprisePinState("past");
+      } else {
+        setEnterprisePinState("pinned");
+      }
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
 
   useMotionValueEvent(enterpriseModesProgress, "change", (latest) => {
     if (prefersReducedMotion) {
@@ -1062,7 +1098,8 @@ export default function Home() {
         className="enterprise-stage-scroll-wrapper"
       >
         <section
-          className="enterprise-mode-stage border-t border-[var(--white-20)] bg-[var(--surface-elevated)]"
+          ref={enterpriseStagePanelRef}
+          className={`enterprise-mode-stage border-t border-[var(--white-20)] bg-[var(--surface-elevated)] enterprise-mode-stage--${enterprisePinState}`}
         >
             <div className="enterprise-mode-stage-copy">
               <p className="section-label mb-3">WHAT IS ENTERPRISE AI</p>
