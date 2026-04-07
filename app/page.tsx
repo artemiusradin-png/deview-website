@@ -655,11 +655,10 @@ export default function Home() {
   const marqueeContent = `${activeSolution.title} • `.repeat(14);
   const displayedUserMessage = prefersReducedMotion ? INTERFACE_USER_MESSAGE : typedUserMessage;
   const displayedAiMessage = prefersReducedMotion ? INTERFACE_AI_MESSAGE : typedAiMessage;
-  const enterpriseMapScale = useTransform(enterpriseModesProgress, [0, 0.18, 0.52, 1], prefersReducedMotion ? [1, 1, 1, 1] : [0.74, 0.9, 1.04, 1.12]);
-  const enterpriseMapRotateX = useTransform(enterpriseModesProgress, [0, 0.34], prefersReducedMotion ? [0, 0] : [24, 0]);
-  const enterpriseMapY = useTransform(enterpriseModesProgress, [0, 0.22, 0.6, 1], prefersReducedMotion ? [0, 0, 0, 0] : [92, 26, -10, -28]);
-  const enterpriseMapBlur = useTransform(enterpriseModesProgress, [0, 0.18], prefersReducedMotion ? [0, 0] : [18, 0]);
-  const enterpriseDetailY = useTransform(enterpriseModesProgress, [0.22, 0.5, 1], prefersReducedMotion ? [0, 0, 0] : [52, 0, -10]);
+  const enterpriseMapScale = useTransform(enterpriseModesProgress, [0, 0.2, 0.55, 1], prefersReducedMotion ? [1, 1, 1, 1] : [0.9, 0.97, 1, 1]);
+  const enterpriseMapRotateX = useTransform(enterpriseModesProgress, [0, 0.35], prefersReducedMotion ? [0, 0] : [12, 0]);
+  const enterpriseMapY = useTransform(enterpriseModesProgress, [0, 0.25, 0.65, 1], prefersReducedMotion ? [0, 0, 0, 0] : [28, 8, 0, -4]);
+  const enterpriseMapBlur = useTransform(enterpriseModesProgress, [0, 0.2], prefersReducedMotion ? [0, 0] : [10, 0]);
   const enterpriseDetailOpacity = useTransform(enterpriseModesProgress, [0.16, 0.42], prefersReducedMotion ? [1, 1] : [0.12, 1]);
   const enterpriseRailFill = useTransform(enterpriseModesProgress, [0, 1], ["0%", "100%"]);
   const enterpriseMapFilter = useTransform(enterpriseMapBlur, (v) => `blur(${v}px)`);
@@ -1097,7 +1096,7 @@ export default function Home() {
       >
         <section
           ref={enterpriseStagePanelRef}
-          className={`enterprise-mode-stage border-t border-[var(--white-20)] bg-[var(--surface-elevated)] enterprise-mode-stage--${enterprisePinState}`}
+          className={`enterprise-mode-stage bg-[var(--surface-elevated)] enterprise-mode-stage--${enterprisePinState}`}
         >
             <motion.div
               className="enterprise-mode-stage-copy"
@@ -1189,7 +1188,7 @@ export default function Home() {
                   </div>
                   <motion.div
                     key={selectedMode.id}
-                    style={{ y: enterpriseDetailY, opacity: enterpriseDetailOpacity }}
+                    style={{ opacity: enterpriseDetailOpacity }}
                     className="enterprise-mode-stage-detail enterprise-mode-stage-detail--in-card"
                   >
                     <div className="enterprise-mode-stage-detail-meta">
@@ -1652,91 +1651,65 @@ export default function Home() {
 
             <div className="flex shrink-0 flex-col items-start gap-3 lg:items-end">
               <span className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">Start with a real workflow</span>
-              <a href="/contact" className="btn-outline">
-                SEND INQUIRY →
-              </a>
+              <div className="flex flex-wrap gap-3">
+                <a href="/contact" className="btn-outline">
+                  SEND INQUIRY →
+                </a>
+                <a
+                  href="https://ai-consulting-task-manager.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline"
+                >
+                  INTERNAL
+                </a>
+              </div>
             </div>
           </div>
 
           <div className="footer-divider" />
 
-          <div className="grid gap-8 md:grid-cols-3 md:gap-6">
-            <div>
-              <p className="footer-column-title">Navigation</p>
-              <ul className="footer-link-list">
+          <div className="footer-summary-grid">
+            <article className="footer-summary-card">
+              <p className="footer-column-title">What We Do</p>
+              <p className="footer-summary-copy">
+                We help companies identify high-value AI opportunities, scope the right system, and implement
+                custom solutions that fit real operational constraints.
+              </p>
+              <ul className="footer-detail-list">
+                <li>AI strategy and use-case selection</li>
+                <li>Custom copilots, workflows, and internal tools</li>
+                <li>Production implementation and integration</li>
+              </ul>
+            </article>
+
+            <article className="footer-summary-card">
+              <p className="footer-column-title">How We Deliver</p>
+              <p className="footer-summary-copy">
+                Engagements move from problem definition to production rollout with evaluation, reliability,
+                and business utility treated as first-order requirements.
+              </p>
+              <ul className="footer-detail-list">
+                <li>Discovery, scoping, and implementation planning</li>
+                <li>Build, test, and launch in live workflows</li>
+                <li>Monitoring, iteration, and operational handoff</li>
+              </ul>
+            </article>
+
+            <article className="footer-summary-card">
+              <p className="footer-column-title">Who It&apos;s For</p>
+              <p className="footer-summary-copy">
+                Built for mid-market and enterprise teams dealing with scale, compliance, legacy systems, and
+                the need for accountable outputs.
+              </p>
+              <ul className="footer-detail-list">
+                <li>Enterprise AI beyond demos</li>
+                <li>Integration into existing stacks and processes</li>
                 <li>
-                  <a href="#hero">AI Consulting</a>
-                </li>
-                <li>
-                  <a href="#enterprise-ai">Enterprise AI</a>
-                </li>
-                <li>
-                  <a href="#services">Services</a>
-                </li>
-                <li>
-                  <a href="#solutions">Use Cases</a>
+                  Contact: <a href="mailto:hello@deview.ai">hello@deview.ai</a>
                 </li>
               </ul>
-            </div>
-
-            <div>
-              <p className="footer-column-title">Delivery</p>
-              <ul className="footer-link-list">
-                <li>
-                  <a href="#outcomes">Outcomes</a>
-                </li>
-                <li>
-                  <a href="#process">Process</a>
-                </li>
-                <li>
-                  <a href="#contact">Contact</a>
-                </li>
-                <li>
-                  <a href="mailto:hello@deview.ai">hello@deview.ai</a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <p className="footer-column-title">Access</p>
-              <ul className="footer-link-list">
-                <li>
-                  <a href="/contact">Contact Form</a>
-                </li>
-                <li>
-                  <a href="https://ai-consulting-task-manager.vercel.app/" target="_blank" rel="noopener noreferrer">
-                    Internal Workspace
-                  </a>
-                </li>
-                <li>
-                  <span>Mid-market to enterprise</span>
-                </li>
-                <li>
-                  <span>Discovery to production</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="footer-nav-shell">
-            <a href="#hero" className="footer-pill footer-pill-active">
-              <span>AI Consulting</span>
-            </a>
-            <a href="#services" className="footer-pill">
-              <span>Services</span>
-            </a>
-            <a href="#solutions" className="footer-pill">
-              <span>Use Cases</span>
-            </a>
-            <a href="#outcomes" className="footer-pill">
-              <span>Outcomes</span>
-            </a>
-            <a href="#process" className="footer-pill">
-              <span>Process</span>
-            </a>
-            <a href="#contact" className="footer-pill">
-              <span>Contact</span>
-            </a>
+            </article>
           </div>
 
           <div className="footer-divider" />
