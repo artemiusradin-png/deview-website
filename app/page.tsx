@@ -853,8 +853,6 @@ export default function Home() {
         </div>
       </section>
 
-      <RetroFeatureCards />
-
       <section
         id="enterprise-ai"
         className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter"
@@ -1115,6 +1113,8 @@ export default function Home() {
             </motion.div>
           </section>
       </div>
+
+      <RetroFeatureCards />
 
       <section className="relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter py-10 md:py-14">
         <div className="mx-auto max-w-6xl">
