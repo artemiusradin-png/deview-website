@@ -38,8 +38,8 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
   };
 
   return (
-    <footer className="site-footer-inspired section-gutter overflow-x-hidden pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-8 sm:pt-10">
-      <div className="footer-card mx-auto flex max-w-6xl flex-col gap-8 px-5 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
+    <footer className="site-footer-inspired overflow-x-hidden pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-10 sm:pt-12">
+      <div className="section-gutter mx-auto flex max-w-7xl flex-col gap-8 px-1 sm:gap-10">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="footer-inspired-lead max-w-2xl">
             <p className="footer-inspired-eyebrow mb-3">DeView</p>
@@ -52,7 +52,7 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
             </p>
           </div>
 
-          <div className="footer-cta-panel">
+          <div className="footer-cta-panel lg:max-w-sm">
             <span className="footer-inspired-cta-label">Start with a real workflow</span>
             <p className="footer-cta-copy">
               Share the process, current bottleneck, and desired outcome. We respond with a scoped next step.

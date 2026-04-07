@@ -2137,20 +2137,13 @@ footer.site-footer-inspired {
   background:
     radial-gradient(circle at 14% 0%, rgba(148, 214, 255, 0.08), transparent 28%),
     radial-gradient(circle at 88% 100%, rgba(255, 214, 138, 0.08), transparent 26%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
     var(--background);
   border-top: 1px solid var(--white-10);
 }
 
 footer.site-footer-inspired .footer-card {
   color: var(--white-90);
-  background:
-    radial-gradient(circle at top left, rgba(148, 214, 255, 0.09), transparent 26%),
-    radial-gradient(circle at bottom right, rgba(255, 214, 138, 0.08), transparent 22%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015));
-  border: 1px solid var(--white-10);
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(14px);
 }
 
 footer.site-footer-inspired .footer-inspired-eyebrow {
@@ -2176,9 +2169,7 @@ footer.site-footer-inspired .footer-inspired-intro {
 footer.site-footer-inspired .footer-cta-panel {
   display: grid;
   gap: 1rem;
-  padding: 1.15rem;
-  border: 1px solid var(--white-10);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015));
+  align-content: start;
 }
 
 footer.site-footer-inspired .footer-cta-copy {
@@ -2243,10 +2234,7 @@ footer.site-footer-inspired .footer-third-row {
   gap: 0.35rem;
   list-style: none;
   margin: 0;
-  padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 50px;
-  border: 1px solid var(--white-10);
+  padding: 0;
 }
 
 footer.site-footer-inspired .footer-third-row li {
@@ -2256,7 +2244,7 @@ footer.site-footer-inspired .footer-third-row li {
 
 footer.site-footer-inspired .footer-third-row a {
   display: block;
-  padding: 0.65rem 1rem;
+  padding: 0.45rem 0;
   border-radius: 999px;
   text-decoration: none !important;
   color: inherit;
@@ -2271,11 +2259,11 @@ footer.site-footer-inspired .footer-third-row li span {
 }
 
 footer.site-footer-inspired .footer-third-row li.active-1 {
-  background: var(--white-100);
+  background: transparent;
 }
 
 footer.site-footer-inspired .footer-third-row li.active-1 span {
-  color: var(--background) !important;
+  color: var(--white-100) !important;
 }
 
 footer.site-footer-inspired .footer-inspired-line.footer-divider {
@@ -2330,9 +2318,16 @@ footer.site-footer-inspired .footer-structure-block {
   display: grid;
   gap: 0.95rem;
   min-width: 0;
-  padding: 1.15rem 1.1rem;
-  border: 1px solid var(--white-10);
-  background: rgba(255, 255, 255, 0.025);
+  padding: 0;
+}
+
+footer.site-footer-inspired .footer-structure-block--brand {
+  padding-right: 1.5rem;
+}
+
+footer.site-footer-inspired .footer-structure-grid > .footer-structure-block:not(:first-child) {
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--white-10);
 }
 
 footer.site-footer-inspired .footer-brand-mark {
@@ -2426,8 +2421,8 @@ footer.site-footer-inspired .footer-social-link {
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
-  border: 1px solid var(--white-10);
-  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--white-20);
+  background: transparent;
   color: var(--white-90);
   font-size: 1rem;
   transition:
@@ -2453,10 +2448,10 @@ footer.site-footer-inspired .footer-form {
 footer.site-footer-inspired .footer-form input {
   min-height: 2.75rem;
   padding: 0 0.95rem;
-  border: 1px solid var(--white-10);
+  border: 1px solid var(--white-20);
   border-right: none;
   border-radius: 1rem 0 0 1rem;
-  background: rgba(255, 255, 255, 0.035);
+  background: transparent;
   color: var(--white-90);
   outline: none;
 }
@@ -2470,9 +2465,9 @@ footer.site-footer-inspired .footer-form input::placeholder {
 footer.site-footer-inspired .footer-form button {
   min-height: 2.75rem;
   padding: 0 1rem;
-  border: 1px solid var(--white-10);
+  border: 1px solid var(--white-20);
   border-radius: 0 1rem 1rem 0;
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
   color: var(--white-100);
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -2507,12 +2502,6 @@ html[data-theme="light"] footer.site-footer-inspired {
 
 html[data-theme="light"] footer.site-footer-inspired .footer-card {
   color: rgba(19, 31, 47, 0.94);
-  background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.85), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(171, 215, 255, 0.22), transparent 24%),
-    linear-gradient(180deg, rgba(255, 253, 247, 0.92), rgba(251, 247, 238, 0.92));
-  border-color: rgba(19, 31, 47, 0.08);
-  box-shadow: 0 28px 70px rgba(19, 31, 47, 0.08);
 }
 
 html[data-theme="light"] footer.site-footer-inspired .footer-inspired-eyebrow,
@@ -2545,14 +2534,6 @@ html[data-theme="light"] footer.site-footer-inspired .footer-chip {
   border-color: rgba(19, 31, 47, 0.1);
 }
 
-html[data-theme="light"] footer.site-footer-inspired .footer-cta-panel,
-html[data-theme="light"] footer.site-footer-inspired .footer-third-row,
-html[data-theme="light"] footer.site-footer-inspired .footer-structure-block,
-html[data-theme="light"] footer.site-footer-inspired .footer-social-link,
-html[data-theme="light"] footer.site-footer-inspired .footer-form input {
-  background: rgba(255, 255, 255, 0.5) !important;
-}
-
 html[data-theme="light"] footer.site-footer-inspired .footer-third-row li span,
 html[data-theme="light"] footer.site-footer-inspired .footer-chip,
 html[data-theme="light"] footer.site-footer-inspired .footer-social-link,
@@ -2566,7 +2547,7 @@ html[data-theme="light"] footer.site-footer-inspired .footer-third-row li.active
 }
 
 html[data-theme="light"] footer.site-footer-inspired .footer-third-row li.active-1 span {
-  color: #f3eee2 !important;
+  color: rgba(19, 31, 47, 0.98) !important;
 }
 
 html[data-theme="light"] footer.site-footer-inspired .footer-inspired-btn {
@@ -2608,20 +2589,17 @@ html[data-theme="light"] footer.site-footer-inspired .footer-structure-title::af
 }
 
 @media (max-width: 640px) {
-  footer.site-footer-inspired .footer-card {
-    border-radius: 1.5rem;
-  }
-
   footer.site-footer-inspired .footer-inspired-headline {
     font-size: clamp(1.35rem, 1.05rem + 1.4vw, 1.9rem);
   }
 
-  footer.site-footer-inspired .footer-cta-panel {
-    padding: 1rem;
-  }
-
   footer.site-footer-inspired .footer-links-columns {
     grid-template-columns: 1fr;
+  }
+
+  footer.site-footer-inspired .footer-structure-grid > .footer-structure-block:not(:first-child) {
+    padding-left: 0;
+    border-left: none;
   }
 }
 
