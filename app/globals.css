@@ -114,7 +114,6 @@ body {
 /* Subtle scanline / grain background (monochrome, no color accents) */
 .bg-grid {
   position: relative;
-  overflow: hidden;
   background:
     radial-gradient(circle at top left, rgba(182, 214, 255, 0.08), transparent 34%),
     radial-gradient(circle at bottom right, rgba(255, 208, 149, 0.08), transparent 30%),
