@@ -24,6 +24,9 @@
 
   --background: var(--bg);
   --foreground: var(--text);
+
+  /* Fixed header = safe-area + 4rem nav — must match anchor scroll and sticky panels */
+  --header-stack-height: calc(4rem + env(safe-area-inset-top, 0px));
 }
 
 html[data-theme="light"] {
@@ -59,6 +62,7 @@ html[data-theme="light"] {
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-stack-height);
   overflow-x: clip;
 }
 
@@ -186,6 +190,11 @@ html[data-theme="light"] .bg-grid::before {
   position: relative;
 }
 
+/* Sections reached by in-page links (not using .section-fullscreen scroll-margin) */
+.scroll-margin-header {
+  scroll-margin-top: var(--header-stack-height);
+}
+
 /* Horizontal inset: respects notches + home indicator on phones */
 .section-gutter {
   padding-left: max(1rem, env(safe-area-inset-left, 0px));
@@ -265,7 +274,8 @@ html[data-theme="light"] .hero-video {
   background:
     radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent 34%),
     radial-gradient(circle at bottom right, rgba(255, 214, 138, 0.08), transparent 28%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
+    var(--background);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
 }
 
@@ -273,7 +283,8 @@ html[data-theme="light"] .footer-card {
   background:
     radial-gradient(circle at top left, rgba(255, 255, 255, 0.72), transparent 36%),
     radial-gradient(circle at bottom right, rgba(171, 215, 255, 0.18), transparent 30%),
-    linear-gradient(180deg, rgba(255, 253, 247, 0.96), rgba(251, 247, 238, 0.94));
+    linear-gradient(180deg, rgba(255, 253, 247, 0.96), rgba(251, 247, 238, 0.94)),
+    var(--background);
   box-shadow: 0 24px 70px rgba(19, 31, 47, 0.08);
 }
 
@@ -314,42 +325,73 @@ html[data-theme="light"] .footer-summary-card {
   color: var(--text-muted);
 }
 
-.footer-detail-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.footer-link-stack {
   display: grid;
   gap: 0.7rem;
 }
 
-.footer-detail-list li,
-.footer-detail-list a {
+.footer-link-row {
+  display: flex;
+  align-items: center;
+  min-height: 2.9rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--white-10);
+  background: rgba(255, 255, 255, 0.02);
   font-size: 0.82rem;
   line-height: 1.45;
   color: var(--text-muted);
   text-decoration: none;
-  transition: color 180ms ease, transform 180ms ease;
+  transition:
+    color 180ms ease,
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
 }
 
-.footer-detail-list li {
-  padding-left: 1rem;
-  position: relative;
+html[data-theme="light"] .footer-link-row {
+  background: rgba(255, 255, 255, 0.42);
 }
 
-.footer-detail-list li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.65rem;
-  width: 0.35rem;
-  height: 0.35rem;
-  border-radius: 999px;
-  background: var(--white-40);
-}
-
-.footer-detail-list a:hover,
-.footer-detail-list a:focus-visible {
+.footer-link-row:hover,
+.footer-link-row:focus-visible {
   color: var(--white-100);
+  border-color: var(--white-20);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(4px);
+}
+
+.footer-button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.footer-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.6rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--white-20);
+  border-radius: 999px;
+  color: var(--white-80);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.66rem;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.footer-chip:hover,
+.footer-chip:focus-visible {
+  color: var(--background);
+  background: var(--white-100);
+  border-color: var(--white-100);
+  transform: translateY(-1px);
 }
 
 @media (max-width: 640px) {
@@ -504,7 +546,7 @@ html[data-theme="light"] .hero-fallback {
   min-height: 100dvh;
   padding-top: 5rem;
   padding-bottom: 1.75rem;
-  scroll-margin-top: 4.5rem;
+  scroll-margin-top: var(--header-stack-height);
 }
 
 .section-fullscreen--hero {
@@ -517,7 +559,7 @@ html[data-theme="light"] .hero-fallback {
     min-height: auto;
     padding-top: 4.5rem;
     padding-bottom: 1.25rem;
-    scroll-margin-top: 4rem;
+    scroll-margin-top: var(--header-stack-height);
   }
 
   .section-fullscreen--hero {
@@ -663,7 +705,7 @@ html[data-theme="light"] .hero-fallback {
 }
 
 .pillar-row-outer--active {
-  background: var(--surface);
+  background: var(--white-10);
 }
 
 /* The wipe cover — starts full width, collapses to the right */
@@ -835,7 +877,7 @@ html[data-theme="light"] .enterprise-mode::before {
 .enterprise-card-button:focus-visible,
 .enterprise-card-active {
   transform: translateY(-2px);
-  background: var(--surface-elevated);
+  background: var(--white-10);
 }
 
 .enterprise-mode:hover,
@@ -864,8 +906,8 @@ html[data-theme="light"] .enterprise-mode::before {
   margin-left: calc(-50vw + 50%);
   padding: 2rem clamp(1.25rem, 4vw, 3rem);
   box-sizing: border-box;
-  height: calc(100vh - 4rem);
-  height: calc(100dvh - 4rem);
+  height: calc(100vh - var(--header-stack-height));
+  height: calc(100dvh - var(--header-stack-height));
   border-top: none;
 }
 
@@ -882,7 +924,7 @@ html[data-theme="light"] .enterprise-mode::before {
 /* JS-driven pin: fixed to viewport while scrolling through wrapper */
 .enterprise-mode-stage--pinned {
   position: fixed;
-  top: 4rem;
+  top: var(--header-stack-height);
   left: 0;
   right: 0;
   width: 100vw;
@@ -974,11 +1016,10 @@ html[data-theme="light"] .enterprise-mode::before {
     clamp(5.5rem, 11vh, 9rem)
     clamp(2.25rem, 4vw, 4rem)
     clamp(1rem, 2vh, 1.5rem);
-  border: 1px solid var(--white-20);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 28%),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03), transparent 28%),
-    var(--surface);
+    var(--background);
   border: none;
   overflow: hidden;
   box-sizing: border-box;
@@ -1228,12 +1269,12 @@ html[data-theme="light"] .enterprise-mode::before {
 .enterprise-compare {
   border: none;
   padding: 1.1rem 1rem;
-  background: var(--surface-elevated);
+  background: var(--background);
 }
 
 .enterprise-compare-active {
   transform: translateY(-2px);
-  background: var(--surface);
+  background: var(--background);
 }
 
 .enterprise-compare-dim {
@@ -1243,13 +1284,13 @@ html[data-theme="light"] .enterprise-mode::before {
 .enterprise-compare-enterprise {
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 48%),
-    var(--surface-elevated);
+    var(--background);
 }
 
 html[data-theme="light"] .enterprise-compare-enterprise {
   background:
     linear-gradient(135deg, rgba(255, 208, 149, 0.22), transparent 46%),
-    var(--surface-elevated);
+    var(--background);
 }
 
 .enterprise-arrow {
@@ -1291,7 +1332,7 @@ html[data-theme="light"] .enterprise-compare-enterprise {
 .enterprise-chip:focus-visible,
 .enterprise-chip-active {
   color: var(--white-100);
-  background: var(--surface-elevated);
+  background: var(--white-20);
   transform: translateY(-1px);
 }
 
@@ -1638,7 +1679,7 @@ html[data-theme="light"] .btn-outline:hover {
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 1px solid var(--white-40);
+  border: none;
   background: transparent;
   color: var(--white-90);
   cursor: pointer;
@@ -1685,7 +1726,6 @@ html[data-theme="light"] .mobile-nav-overlay {
 .mobile-nav-overlay a {
   display: block;
   padding: 0.85rem 0;
-  border-bottom: 1px solid var(--white-10);
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.65rem;
@@ -1881,8 +1921,7 @@ html[data-theme="light"] .carousel-fade-right {
   font-size: clamp(0.58rem, 1vw, 0.82rem);
   line-height: 1;
   color: var(--white-60);
-  background: color-mix(in srgb, var(--surface) 90%, transparent);
-  border-color: var(--white-10);
+  background: color-mix(in srgb, var(--background) 90%, transparent);
   white-space: nowrap;
 }
 
@@ -1891,8 +1930,6 @@ html[data-theme="light"] .carousel-fade-right {
   left: 0;
   width: 100%;
   padding: 0.9rem 0;
-  border-top: 1px solid var(--white-10);
-  border-bottom: 1px solid var(--white-10);
 }
 
 .solutions-marquee-top {
@@ -1955,7 +1992,7 @@ html[data-theme="light"] .carousel-fade-right {
 .solutions-card-active {
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--solutions-accent) 55%, transparent), transparent 45%),
-    var(--surface-elevated);
+    var(--background);
   opacity: 1;
 }
 
