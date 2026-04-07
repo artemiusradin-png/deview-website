@@ -651,7 +651,7 @@ html[data-theme="light"] .enterprise-mode::before {
 /* Tall scroll-distance wrapper — gives scroll room for the sticky panel */
 .enterprise-stage-scroll-wrapper {
   position: relative;
-  height: 300vh;
+  height: 450vh;
 }
 
 /* Panel sticks to viewport until wrapper is fully scrolled past */
