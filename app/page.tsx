@@ -688,7 +688,7 @@ export default function Home() {
       </a>
 
       <header
-        className={`nav-shell fixed inset-x-0 top-0 z-40 bg-gradient-to-b from-[var(--black-80)] to-transparent pt-[env(safe-area-inset-top)] ${
+        className={`nav-shell fixed inset-x-0 top-0 z-40 border-b border-[var(--white-20)] bg-gradient-to-b from-[var(--black-80)] to-transparent pt-[env(safe-area-inset-top)] ${
           navVisible ? "nav-shell-visible" : "nav-shell-hidden"
         }`}
       >
@@ -906,7 +906,7 @@ export default function Home() {
 
       <section
         id="enterprise-ai"
-        className="section-fullscreen relative bg-[var(--background)] section-gutter"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter"
       >
         <motion.div
           {...reveal}
@@ -940,7 +940,7 @@ export default function Home() {
                   whileInView="whileInView"
                   viewport={reveal.viewport}
                   transition={{ duration: 0.45, delay: 0.1 }}
-                  className="enterprise-system-compare mt-8 grid gap-6 sm:grid-cols-2 sm:gap-8"
+                  className="enterprise-system-compare mt-8 grid gap-px border border-[var(--white-20)] bg-[var(--white-20)] sm:grid-cols-2"
                 >
                   {/* Left panel: interface only */}
                   <div className="flex flex-col gap-5 bg-[var(--background)] p-5">
@@ -948,7 +948,7 @@ export default function Home() {
 
                     <div className="space-y-2">
                       <div className="flex justify-end">
-                        <div className="max-w-[82%] bg-[var(--white-10)] px-3 py-2">
+                        <div className="max-w-[82%] border border-[var(--white-10)] px-3 py-2">
                           <p className="mb-1 text-[0.52rem] uppercase tracking-[0.14em] text-[var(--white-30)]">USER</p>
                           <p className="type-line text-[0.7rem] leading-snug text-[var(--white-40)]">
                             {displayedUserMessage}
@@ -957,7 +957,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="flex justify-start">
-                        <div className="max-w-[82%] bg-[var(--background)] px-3 py-2">
+                        <div className="max-w-[82%] border border-[var(--white-10)] bg-[var(--surface)] px-3 py-2">
                           <p className="mb-1 text-[0.52rem] uppercase tracking-[0.14em] text-[var(--white-30)]">AI</p>
                           <p className="type-line text-[0.7rem] leading-snug text-[var(--white-30)]">
                             {displayedAiMessage}
@@ -967,7 +967,7 @@ export default function Home() {
                       </div>
                     </div>
 
-                    <div className="mt-auto pt-4 space-y-1.5">
+                    <div className="mt-auto border-t border-[var(--white-10)] pt-4 space-y-1.5">
                       {["No access to your systems", "No action taken", "Not monitored or measured"].map((item) => (
                         <div key={item} className="flex items-center gap-2">
                           <span className="shrink-0 text-[0.6rem] text-[var(--white-20)]">—</span>
@@ -978,14 +978,14 @@ export default function Home() {
                   </div>
 
                   {/* Right panel: operational AI */}
-                  <div className="flex flex-col gap-5 bg-[var(--background)] p-5">
+                  <div className="flex flex-col gap-5 bg-[var(--surface)] p-5">
                     <p className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-80)]">OPERATIONAL AI</p>
 
                     <div className="grid min-w-0 grid-cols-[1fr_auto_1fr] items-start gap-1.5 sm:gap-2">
                       <div className="min-w-0 space-y-1.5">
                         <p className="mb-2 text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-40)]">INPUTS</p>
                         {["CRM", "ERP", "SLACK", "DOCS"].map((src) => (
-                          <div key={src} className="bg-[var(--white-10)] px-2 py-1.5 text-center">
+                          <div key={src} className="border border-[var(--white-20)] px-2 py-1.5 text-center">
                             <span className="text-[0.6rem] uppercase tracking-[0.12em] text-[var(--white-60)]">{src}</span>
                           </div>
                         ))}
@@ -999,14 +999,14 @@ export default function Home() {
                       <div className="min-w-0 space-y-1.5">
                         <p className="mb-2 text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-40)]">ACTIONS</p>
                         {["TICKET", "ALERT", "REPORT", "ESCALATION"].map((out) => (
-                          <div key={out} className="bg-[var(--white-10)] px-2 py-1.5 text-center">
+                          <div key={out} className="border border-[var(--white-20)] px-2 py-1.5 text-center">
                             <span className="text-[0.6rem] uppercase tracking-[0.12em] text-[var(--white-60)]">{out}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    <div className="mt-auto pt-4 space-y-1.5">
+                    <div className="mt-auto border-t border-[var(--white-20)] pt-4 space-y-1.5">
                       {["Reads from and writes to your systems", "Every action tracked and auditable", "Monitored and evaluated in production"].map((item) => (
                         <div key={item} className="flex items-center gap-2">
                           <span className="shrink-0 text-[0.6rem] text-[var(--white-60)]">+</span>
@@ -1017,7 +1017,7 @@ export default function Home() {
                   </div>
                 </motion.div>
               </div>
-              <aside className="enterprise-opener-aside flex flex-col justify-end pt-8 lg:pt-0 lg:pl-10">
+              <aside className="enterprise-opener-aside flex flex-col justify-end border-t border-[var(--white-20)] pt-8 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
                 <div className="space-y-4 text-[0.72rem] text-[var(--white-80)] sm:text-xs">
                   <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-6 lg:flex-col lg:gap-1">
                     <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">WE DO</span>
@@ -1100,7 +1100,7 @@ export default function Home() {
       >
         <section
           ref={enterpriseStagePanelRef}
-          className={`enterprise-mode-stage bg-[var(--background)] enterprise-mode-stage--${enterprisePinState}`}
+          className={`enterprise-mode-stage enterprise-mode-stage--frameless bg-[var(--background)] enterprise-mode-stage--${enterprisePinState}`}
         >
             <motion.div
               className="enterprise-mode-stage-copy"
@@ -1210,7 +1210,7 @@ export default function Home() {
           </section>
       </div>
 
-      <section className="relative bg-[var(--background)] section-gutter py-10 md:py-16">
+      <section className="relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter py-10 md:py-16">
         <div className="mx-auto max-w-6xl">
           <motion.section
             variants={cardMotion}
@@ -1218,7 +1218,7 @@ export default function Home() {
             whileInView="whileInView"
             viewport={reveal.viewport}
             transition={{ duration: 0.45, delay: 0.1 }}
-            className="panel bg-[var(--background)] p-5 md:p-6"
+            className="panel border border-[var(--white-20)] bg-[var(--background)] p-5 md:p-6"
           >
             <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
@@ -1293,7 +1293,7 @@ export default function Home() {
                 </ul>
               </article>
             </div>
-            <div className="mt-6 pt-2">
+            <div className="mt-6 border-t border-[var(--white-20)] pt-5">
               <p className="section-label mb-2 text-[0.65rem]">BOTTOM LINE</p>
               <p className="max-w-2xl text-[0.88rem] leading-relaxed text-[var(--text-muted)] md:text-sm">
                 This is why infrastructure matters. Enterprise AI is not only about model quality — it is about
@@ -1306,7 +1306,7 @@ export default function Home() {
 
       <section
         id="services"
-        className="section-fullscreen relative bg-[var(--background)] section-gutter"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter"
       >
         <motion.div
           {...reveal}
@@ -1341,8 +1341,8 @@ export default function Home() {
                 key={service.id}
                 variants={cardMotion}
                 transition={{ duration: 0.45 }}
-                whileHover={{ y: -4 }}
-                className="panel panel-interactive bg-[var(--background)] px-4 py-5"
+                whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
+                className="panel panel-interactive border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5"
               >
                 <p className="section-label mb-3 text-[0.6rem]">{service.label}</p>
                 <p className="mb-3 text-sm text-[var(--white-100)]">{service.title}</p>
@@ -1369,7 +1369,7 @@ export default function Home() {
       <section
         id="solutions"
         ref={solutionsSectionRef}
-        className="solutions-section section-fullscreen relative bg-[var(--background)] section-gutter"
+        className="solutions-section section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter"
         style={
           {
             "--solutions-accent": activeSolution.accent,
@@ -1467,10 +1467,10 @@ export default function Home() {
                   }}
                   variants={cardMotion}
                   transition={{ duration: 0.45 }}
-                  whileHover={{ y: -4 }}
+                  whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
                   onMouseEnter={() => setActiveSolutionIndex(solutionAreas.findIndex((item) => item.id === area.id))}
                   onFocusCapture={() => setActiveSolutionIndex(solutionAreas.findIndex((item) => item.id === area.id))}
-                  className={`solutions-card panel panel-interactive min-w-[min(85vw,calc(100vw-2.5rem))] max-w-[calc(100vw-2rem)] snap-start bg-[var(--background)] px-4 py-5 sm:min-w-[360px] sm:max-w-none sm:px-5 sm:py-6 lg:min-w-[420px] ${
+                  className={`solutions-card panel panel-interactive min-w-[min(85vw,calc(100vw-2.5rem))] max-w-[calc(100vw-2rem)] snap-start border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-5 sm:min-w-[360px] sm:max-w-none sm:px-5 sm:py-6 lg:min-w-[420px] ${
                     activeSolution.id === area.id ? "solutions-card-active" : "solutions-card-inactive"
                   }`}
                 >
@@ -1490,7 +1490,7 @@ export default function Home() {
 
       <section
         id="outcomes"
-        className="section-fullscreen relative bg-[var(--background)] section-gutter"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter"
       >
         <motion.div
           {...reveal}
@@ -1521,13 +1521,14 @@ export default function Home() {
             initial="initial"
             whileInView="whileInView"
             viewport={stagger.viewport}
+            className="border-t border-[var(--white-20)]"
           >
             {outcomes.map((outcome) => (
               <motion.article
                 key={outcome.label}
                 variants={cardMotion}
                 transition={{ duration: 0.45 }}
-                className="group transition-colors duration-200 hover:bg-[var(--white-10)]"
+                className="group border-b border-[var(--white-20)] transition-colors duration-200 hover:bg-[var(--surface)]"
               >
                 <div className="grid gap-3 px-0 py-5 sm:gap-4 sm:py-6 md:grid-cols-[80px_220px_1fr] md:items-start md:gap-6 md:py-7">
                   <div className="text-[2.75rem] leading-none tracking-[-0.04em] text-[var(--white-10)] sm:text-[3.5rem] md:text-[4rem]">
@@ -1548,7 +1549,7 @@ export default function Home() {
 
       <section
         id="process"
-        className="section-fullscreen relative bg-[var(--background)] section-gutter"
+        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter"
       >
         <motion.div
           {...reveal}
@@ -1583,8 +1584,8 @@ export default function Home() {
                 key={item.step}
                 variants={cardMotion}
                 transition={{ duration: 0.45 }}
-                whileHover={{ y: -4 }}
-                className="panel panel-interactive process-card bg-[var(--background)] px-5 py-6"
+                whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
+                className="panel panel-interactive process-card border border-[var(--white-20)] bg-[var(--surface-elevated)] px-5 py-6"
               >
                 <p className="process-step mb-3 text-[0.65rem] uppercase tracking-[0.24em] text-[var(--white-60)]">
                   Step {item.step}
@@ -1599,7 +1600,7 @@ export default function Home() {
 
       <section
         id="contact"
-        className="scroll-margin-header relative min-h-[88vh] bg-[var(--background)] section-gutter pb-[max(1rem,env(safe-area-inset-bottom))] pt-20 md:min-h-[84vh] md:pb-[max(0.5rem,env(safe-area-inset-bottom))] md:pt-20"
+        className="scroll-margin-header relative min-h-[88vh] border-t border-[var(--white-20)] bg-[var(--background)] section-gutter pb-[max(1rem,env(safe-area-inset-bottom))] pt-20 md:min-h-[84vh] md:pb-[max(0.5rem,env(safe-area-inset-bottom))] md:pt-20"
       >
         <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-8">
           <div className="max-w-md pt-2">
@@ -1638,8 +1639,8 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="section-gutter bg-[var(--background)] pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4 sm:pt-6">
-        <div className="footer-card flex w-full max-w-none flex-col gap-8 overflow-hidden px-2 py-6 sm:px-3 sm:py-7 lg:px-4">
+      <footer className="section-gutter border-t border-[var(--white-20)] bg-[var(--background)] pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4 sm:pt-6">
+        <div className="footer-card mx-auto flex max-w-6xl flex-col gap-8 overflow-hidden px-5 py-6 sm:px-6 sm:py-7 lg:px-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-xl">
               <p className="mb-3 text-[0.72rem] uppercase tracking-[0.26em] text-[var(--white-60)]">DeView</p>

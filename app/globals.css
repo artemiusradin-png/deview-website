@@ -269,13 +269,12 @@ html[data-theme="light"] .hero-video {
 }
 
 .footer-card {
-  border: none;
-  border-radius: 0;
+  border: 1px solid var(--white-20);
+  border-radius: 2rem;
   background:
     radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent 34%),
     radial-gradient(circle at bottom right, rgba(255, 214, 138, 0.08), transparent 28%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
-    var(--background);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
 }
 
@@ -283,8 +282,7 @@ html[data-theme="light"] .footer-card {
   background:
     radial-gradient(circle at top left, rgba(255, 255, 255, 0.72), transparent 36%),
     radial-gradient(circle at bottom right, rgba(171, 215, 255, 0.18), transparent 30%),
-    linear-gradient(180deg, rgba(255, 253, 247, 0.96), rgba(251, 247, 238, 0.94)),
-    var(--background);
+    linear-gradient(180deg, rgba(255, 253, 247, 0.96), rgba(251, 247, 238, 0.94));
   box-shadow: 0 24px 70px rgba(19, 31, 47, 0.08);
 }
 
@@ -308,14 +306,14 @@ html[data-theme="light"] .footer-card {
 }
 
 .footer-summary-card {
-  padding: 1.15rem 1.1rem 1.15rem 0;
-  border: none;
-  border-radius: 0;
-  background: transparent;
+  padding: 1.15rem 1.1rem;
+  border: 1px solid var(--white-10);
+  border-radius: 1.35rem;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 html[data-theme="light"] .footer-summary-card {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.48);
 }
 
 .footer-summary-copy {
@@ -396,7 +394,7 @@ html[data-theme="light"] .footer-link-row {
 
 @media (max-width: 640px) {
   .footer-card {
-    border-radius: 0;
+    border-radius: 1.5rem;
   }
 }
 
@@ -610,6 +608,7 @@ html[data-theme="light"] .hero-fallback {
   position: relative;
   transition:
     transform 180ms ease,
+    border-color 180ms ease,
     background-color 180ms ease,
     opacity 180ms ease;
 }
@@ -705,7 +704,7 @@ html[data-theme="light"] .hero-fallback {
 }
 
 .pillar-row-outer--active {
-  background: var(--white-10);
+  background: var(--surface);
 }
 
 /* The wipe cover — starts full width, collapses to the right */
@@ -877,7 +876,7 @@ html[data-theme="light"] .enterprise-mode::before {
 .enterprise-card-button:focus-visible,
 .enterprise-card-active {
   transform: translateY(-2px);
-  background: var(--white-10);
+  background: var(--surface-elevated);
 }
 
 .enterprise-mode:hover,
@@ -993,18 +992,22 @@ html[data-theme="light"] .enterprise-mode::before {
 
 .enterprise-mode-stage-shell {
   display: flex;
-  align-items: center;
+  align-items: stretch;
+  gap: clamp(0.85rem, 2.2vw, 1.35rem);
   min-height: 100%;
   height: 100%;
   max-height: 100%;
   width: 100%;
   max-width: 100%;
+  min-height: 0;
   overflow: hidden;
   box-sizing: border-box;
 }
 
 .enterprise-mode-text-stage {
   position: relative;
+  flex: 1 1 0;
+  min-width: 0;
   width: 100%;
   min-height: 100%;
   height: 100%;
@@ -1123,6 +1126,7 @@ html[data-theme="light"] .enterprise-mode::before {
   align-self: center;
   padding: 0.75rem 0 1.25rem;
   box-sizing: border-box;
+  container-type: inline-size;
 }
 
 .enterprise-mode-card-footer {
@@ -1155,12 +1159,15 @@ html[data-theme="light"] .enterprise-mode::before {
 
 .enterprise-mode-text-label {
   margin: 0;
-  font-size: clamp(3.25rem, 11vw, 12rem);
+  /* Scale with the text block width so long labels (e.g. CONVERSATIONAL) stay on one line */
+  font-size: clamp(2.5rem, min(8vw, 8.2cqw), 9.25rem);
   line-height: 0.9;
   letter-spacing: -0.06em;
   text-transform: uppercase;
   color: var(--white-100);
-  max-width: min(100%, 95vw);
+  max-width: 100%;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .enterprise-mode-text-axis {
@@ -1229,13 +1236,28 @@ html[data-theme="light"] .enterprise-mode::before {
   color: var(--white-60);
 }
 
+/* Scroll progress through enterprise modes: track + fill (tied to enterpriseModesProgress) */
 .enterprise-scroll-rail {
-  display: none;
+  position: relative;
+  flex: 0 0 auto;
+  align-self: stretch;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--white-10);
+  overflow: hidden;
 }
 
 .enterprise-scroll-rail-fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
   width: 100%;
+  border-radius: 999px;
   background: linear-gradient(to bottom, var(--white-40), var(--white-100));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--white-100) 15%, transparent);
+  transform-origin: top center;
+  pointer-events: none;
 }
 
 .enterprise-mode-stage-detail {
@@ -1269,12 +1291,12 @@ html[data-theme="light"] .enterprise-mode::before {
 .enterprise-compare {
   border: none;
   padding: 1.1rem 1rem;
-  background: var(--background);
+  background: var(--surface-elevated);
 }
 
 .enterprise-compare-active {
   transform: translateY(-2px);
-  background: var(--background);
+  background: var(--surface);
 }
 
 .enterprise-compare-dim {
@@ -1284,13 +1306,13 @@ html[data-theme="light"] .enterprise-mode::before {
 .enterprise-compare-enterprise {
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 48%),
-    var(--background);
+    var(--surface-elevated);
 }
 
 html[data-theme="light"] .enterprise-compare-enterprise {
   background:
     linear-gradient(135deg, rgba(255, 208, 149, 0.22), transparent 46%),
-    var(--background);
+    var(--surface-elevated);
 }
 
 .enterprise-arrow {
@@ -1332,7 +1354,7 @@ html[data-theme="light"] .enterprise-compare-enterprise {
 .enterprise-chip:focus-visible,
 .enterprise-chip-active {
   color: var(--white-100);
-  background: var(--white-20);
+  background: var(--surface-elevated);
   transform: translateY(-1px);
 }
 
@@ -1439,9 +1461,9 @@ html[data-theme="light"] .enterprise-compare-enterprise {
   }
 
   .enterprise-mode-text-label {
-    font-size: clamp(2rem, 9vw, 3.5rem);
+    font-size: clamp(1.85rem, min(7.5vw, 7.25cqw), 3.25rem);
     line-height: 0.95;
-    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   .enterprise-mode-text-axis {
@@ -1679,7 +1701,7 @@ html[data-theme="light"] .btn-outline:hover {
   width: 44px;
   height: 44px;
   padding: 0;
-  border: none;
+  border: 1px solid var(--white-40);
   background: transparent;
   color: var(--white-90);
   cursor: pointer;
@@ -1726,6 +1748,7 @@ html[data-theme="light"] .mobile-nav-overlay {
 .mobile-nav-overlay a {
   display: block;
   padding: 0.85rem 0;
+  border-bottom: 1px solid var(--white-10);
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.65rem;
@@ -1921,7 +1944,8 @@ html[data-theme="light"] .carousel-fade-right {
   font-size: clamp(0.58rem, 1vw, 0.82rem);
   line-height: 1;
   color: var(--white-60);
-  background: color-mix(in srgb, var(--background) 90%, transparent);
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  border-color: var(--white-10);
   white-space: nowrap;
 }
 
@@ -1930,6 +1954,8 @@ html[data-theme="light"] .carousel-fade-right {
   left: 0;
   width: 100%;
   padding: 0.9rem 0;
+  border-top: 1px solid var(--white-10);
+  border-bottom: 1px solid var(--white-10);
 }
 
 .solutions-marquee-top {
@@ -1980,6 +2006,7 @@ html[data-theme="light"] .carousel-fade-right {
 
 .solutions-card {
   transition:
+    border-color 220ms ease,
     background-color 220ms ease,
     opacity 220ms ease,
     transform 220ms ease;
@@ -1990,9 +2017,10 @@ html[data-theme="light"] .carousel-fade-right {
 }
 
 .solutions-card-active {
+  border-color: var(--white-60);
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--solutions-accent) 55%, transparent), transparent 45%),
-    var(--background);
+    var(--surface-elevated);
   opacity: 1;
 }
 
@@ -2099,4 +2127,26 @@ html[data-theme="light"] .contact-monument {
   .contact-monument {
     transition: none;
   }
+}
+
+/* Pinned enterprise modes ("WHAT IS ENTERPRISE AI") — keep frameless; rest of site uses borders/surfaces above */
+.enterprise-mode-stage--frameless,
+.enterprise-mode-stage--frameless .enterprise-map-shell,
+.enterprise-mode-stage--frameless .enterprise-mode-stage-shell {
+  border: none;
+  box-shadow: none;
+}
+
+.enterprise-mode-stage--frameless .enterprise-mode-text-stage {
+  border: none;
+}
+
+.enterprise-mode-stage--frameless .enterprise-mode-text-list-item {
+  border: none;
+}
+
+.enterprise-mode-stage--frameless .enterprise-mode-stage-detail,
+.enterprise-mode-stage--frameless .enterprise-mode-stage-detail--in-card,
+.enterprise-mode-stage--frameless .enterprise-mode-stage-detail-copy {
+  border: none;
 }

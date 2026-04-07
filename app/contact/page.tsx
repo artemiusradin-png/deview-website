@@ -16,7 +16,7 @@ export default function ContactPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7 }}
-          className="mb-8 flex flex-col gap-4 pb-5 sm:mb-10 sm:flex-row sm:items-center sm:justify-between sm:gap-0"
+          className="mb-8 flex flex-col gap-4 border-b border-[var(--white-20)] pb-5 sm:mb-10 sm:flex-row sm:items-center sm:justify-between sm:gap-0"
         >
           <Link href="/" className="text-xs uppercase tracking-[0.24em] text-[var(--white-80)]">
             DEVIEW
@@ -31,7 +31,7 @@ export default function ContactPage() {
             initial={rise.initial}
             animate={rise.animate}
             transition={{ duration: 0.55 }}
-            className="panel bg-[var(--background)] p-5 md:p-8"
+            className="panel border border-[var(--white-20)] bg-[var(--surface)] p-5 md:p-8"
           >
             <p className="section-label mb-3">CONTACT FORM</p>
             <div className="rule mb-6" />
@@ -59,7 +59,7 @@ export default function ContactPage() {
                     name="name"
                     required
                     placeholder="Your name"
-                    className="min-h-11 w-full border-0 border-b border-[var(--white-20)] bg-transparent px-0 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
+                    className="min-h-11 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
                   />
                 </label>
                 <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
@@ -71,7 +71,7 @@ export default function ContactPage() {
                     name="email"
                     required
                     placeholder="name@company.com"
-                    className="min-h-11 w-full border-0 border-b border-[var(--white-20)] bg-transparent px-0 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
+                    className="min-h-11 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
                   />
                 </label>
               </div>
@@ -82,7 +82,7 @@ export default function ContactPage() {
                   type="text"
                   name="company"
                   placeholder="Company name"
-                  className="min-h-11 w-full border-0 border-b border-[var(--white-20)] bg-transparent px-0 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
+                  className="min-h-11 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
                 />
               </label>
 
@@ -95,7 +95,7 @@ export default function ContactPage() {
                   required
                   rows={6}
                   placeholder="Describe your use case, data context, and desired business outcome."
-                  className="w-full resize-none border-0 border-b border-[var(--white-20)] bg-transparent px-0 py-3 text-base text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:text-sm"
+                  className="w-full resize-none border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:text-sm"
                 />
               </label>
 
@@ -114,7 +114,7 @@ export default function ContactPage() {
             initial={rise.initial}
             animate={rise.animate}
             transition={{ delay: 0.08, duration: 0.55 }}
-            className="panel bg-[var(--background)] p-6 md:p-8"
+            className="panel border border-[var(--white-20)] bg-[var(--surface-elevated)] p-6 md:p-8"
           >
             <p className="section-label mb-3">HOW WE RESPOND</p>
             <div className="rule mb-6" />
