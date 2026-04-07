@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState, type CSSProperties, type MouseEvent } from "react";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { SiteFooter } from "../components/SiteFooter";
+import { ArchitectureRealityPanel } from "../components/ArchitectureRealityPanel";
+import { RetroFeatureCards } from "../components/RetroFeatureCards";
 import { EnterpriseArchitectureDiagram } from "./components/EnterpriseArchitectureDiagram";
 
 const fade = {
@@ -105,31 +107,6 @@ const enterpriseModes = [
     body: "Operational insight means algorithms don’t just score or classify for a dashboard once—they stay wired into live processes so teams can see what is changing, why it matters, and what to do next. That includes anomaly and drift detection, risk and fraud monitoring, throughput and quality signals, and explainable alerts tied to owners and SLAs. Static reporting is not the finish line: analytical AI should connect to ticketing, incident workflows, and control reviews so responders get evidence, suggested hypotheses, and clear next steps rather than another chart to interpret alone. The goal is a closed loop—signals from production routed to the right people with enough context to decide, escalate, or automate while preserving accountability and auditability.",
   },
 ];
-
-const architectureComparison = {
-  public: {
-    label: "PUBLIC AI SERVICE",
-    points: [
-      "Shared infrastructure",
-      "No data control",
-      "No customization",
-      "Best-effort",
-      "Limited compliance",
-      "Pay-per-use",
-    ],
-  },
-  enterprise: {
-    label: "ENTERPRISE AI DEPLOYMENT",
-    points: [
-      "Dedicated/isolated infrastructure",
-      "Full data sovereignty",
-      "Fully customizable",
-      "SLA-driven (99.9% uptime)",
-      "HIPAA/SOX/GDPR certified",
-      "Predictable enterprise costs",
-    ],
-  },
-};
 
 const solutionAreas = [
   {
@@ -242,7 +219,6 @@ export default function Home() {
     return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
   });
   const [activeEnterpriseMode, setActiveEnterpriseMode] = useState(enterpriseModes[0].id);
-  const [architectureFocus, setArchitectureFocus] = useState<"public" | "enterprise">("enterprise");
   const [activeSolutionIndex, setActiveSolutionIndex] = useState(0);
   const [solutionsMarqueeOffset, setSolutionsMarqueeOffset] = useState(0);
   const [isSolutionsInView, setIsSolutionsInView] = useState(false);
@@ -877,6 +853,8 @@ export default function Home() {
         </div>
       </section>
 
+      <RetroFeatureCards />
+
       <section
         id="enterprise-ai"
         className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter"
@@ -1022,6 +1000,7 @@ export default function Home() {
 
       {/* Full-bleed scroll-pinned enterprise mode stage */}
       <div
+        id="enterprise-modes"
         ref={enterpriseModesSectionRef}
         className="enterprise-stage-scroll-wrapper"
       >
@@ -1162,95 +1141,7 @@ export default function Home() {
 
       <section className="relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter py-10 md:py-16">
         <div className="mx-auto max-w-6xl">
-          <motion.section
-            variants={cardMotion}
-            initial="initial"
-            whileInView="whileInView"
-            viewport={reveal.viewport}
-            transition={{ duration: 0.45, delay: 0.1 }}
-            className="panel border border-[var(--white-20)] bg-[var(--background)] p-5 md:p-6"
-          >
-            <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-              <div>
-                <p className="section-label mb-2">ARCHITECTURE REALITY CHECK</p>
-                <h3 className="text-lg text-[var(--white-100)] md:text-2xl">
-                  Infrastructure determines whether the system belongs in an enterprise at all.
-                </h3>
-              </div>
-              <p className="max-w-sm text-[0.8rem] text-[var(--text-muted)]">
-                This is where DeView moves clients from public AI usage to enterprise-grade deployment.
-              </p>
-            </div>
-            <div className="mb-4 flex flex-wrap gap-3">
-              <button
-                type="button"
-                className={`enterprise-chip ${architectureFocus === "public" ? "enterprise-chip-active" : ""}`}
-                onMouseEnter={() => setArchitectureFocus("public")}
-                onFocus={() => setArchitectureFocus("public")}
-                onClick={() => setArchitectureFocus("public")}
-              >
-                PUBLIC AI SERVICE
-              </button>
-              <button
-                type="button"
-                className={`enterprise-chip ${architectureFocus === "enterprise" ? "enterprise-chip-active" : ""}`}
-                onMouseEnter={() => setArchitectureFocus("enterprise")}
-                onFocus={() => setArchitectureFocus("enterprise")}
-                onClick={() => setArchitectureFocus("enterprise")}
-              >
-                ENTERPRISE AI DEPLOYMENT
-              </button>
-            </div>
-            <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr] md:items-stretch">
-              <article
-                className={`enterprise-compare enterprise-compare-public ${
-                  architectureFocus === "public" ? "enterprise-compare-active" : "enterprise-compare-dim"
-                }`}
-              >
-                <p className="mb-4 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">
-                  {architectureComparison.public.label}
-                </p>
-                <ul className="space-y-2 text-[0.82rem] text-[var(--text-muted)]">
-                  {architectureComparison.public.points.map((point) => (
-                    <li key={point} className="enterprise-list-item">
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-              <div
-                className={`enterprise-arrow ${
-                  architectureFocus === "enterprise" ? "enterprise-arrow-enterprise" : "enterprise-arrow-public"
-                }`}
-                aria-hidden="true"
-              >
-                <span>→</span>
-              </div>
-              <article
-                className={`enterprise-compare enterprise-compare-enterprise ${
-                  architectureFocus === "enterprise" ? "enterprise-compare-active" : "enterprise-compare-dim"
-                }`}
-              >
-                <p className="mb-4 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">
-                  {architectureComparison.enterprise.label}
-                </p>
-                <ul className="space-y-2 text-[0.82rem] text-[var(--text-muted)]">
-                  {architectureComparison.enterprise.points.map((point) => (
-                    <li key={point} className="enterprise-list-item">
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            </div>
-            <div className="mt-6 border-t border-[var(--white-20)] pt-5">
-              <p className="section-label mb-2 text-[0.65rem]">BOTTOM LINE</p>
-              <p className="max-w-2xl text-[0.88rem] leading-relaxed text-[var(--text-muted)] md:text-sm">
-                This is why infrastructure matters. Enterprise AI is not only about model quality — it is about
-                data control, uptime, compliance posture, system integration, and accountability in the workflow.
-              </p>
-            </div>
-          </motion.section>
+          <ArchitectureRealityPanel />
         </div>
       </section>
 
@@ -1550,13 +1441,13 @@ export default function Home() {
 
       <section
         id="contact"
-        className="scroll-margin-header relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter pb-[max(1rem,env(safe-area-inset-bottom))] pt-12 md:pb-[max(0.75rem,env(safe-area-inset-bottom))] md:pt-14"
+        className="scroll-margin-header relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter pb-[max(4rem,env(safe-area-inset-bottom))] pt-14 md:pb-[max(5.5rem,env(safe-area-inset-bottom))] md:pt-20"
       >
-        <div className="mx-auto flex max-w-6xl flex-col gap-8 md:gap-10">
+        <div className="mx-auto flex max-w-6xl flex-col gap-14 md:gap-[4.5rem]">
           <div className="max-w-md">
-            <p className="section-label mb-2">INQUIRE</p>
-            <div className="rule mb-4 max-w-[11rem]" />
-            <h2 className="mb-3 text-sm leading-snug text-[var(--white-100)]">
+            <p className="section-label mb-4">INQUIRE</p>
+            <div className="rule mb-8 max-w-[11rem]" />
+            <h2 className="mb-6 text-sm leading-snug text-[var(--white-100)]">
               Bring us the messy workflow, stubborn constraint,
               <br />
               or half-formed AI idea you want pressure-tested.

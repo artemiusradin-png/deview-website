@@ -28,7 +28,7 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
   };
 
   return (
-    <footer className="site-footer-inspired w-full overflow-x-hidden pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-6 sm:pt-7 md:pt-8">
+    <footer className="site-footer-inspired w-full overflow-x-hidden pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-12 sm:pt-14 md:pt-16">
       <div className="section-gutter flex w-full min-w-0 max-w-none flex-col gap-5 md:gap-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between lg:gap-6 xl:gap-8">
           <div className="footer-inspired-lead min-w-0 flex-1 lg:max-w-none">

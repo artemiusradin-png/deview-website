@@ -246,6 +246,28 @@ export function EnterpriseArchitectureDiagram({ className = "" }: { className?: 
   const busY = bizBoxY + bizBoxH / 2;
   const appY = alBoxY + alBoxH / 2;
 
+  /** Left column zone: x ∈ [pad, c1w], use geometric center for vertical connector */
+  const c1cx = pad + (c1w - pad) / 2;
+
+  /** Data foundation stack (matches ArchBox y/h) */
+  const dfY1 = pad + 22;
+  const dfH1 = 72;
+  const dfY2 = pad + 114;
+  const dfH2 = 58;
+  const dfY3 = pad + 192;
+  const dfH3 = 72;
+  /** Right edge of data-foundation boxes (padding inside zone), not column boundary */
+  const dfRightInner = dfBX + dfBW;
+  const dfLakeMidY = dfY3 + dfH3 / 2;
+
+  const aiMidY = aiBoxY + aiBoxH / 2;
+  const aiLeft = c3x + hPad;
+  const aiBoxRight = c3x + hPad + aiBoxW;
+
+  const bizBoxBottom = bizBoxY + bizBoxH;
+  const appBoxTop = alBoxY;
+  const infraBoxBottom = infY + infH;
+
   return (
     <figure className={`enterprise-arch-diagram ${className}`.trim()} aria-labelledby="arch-title">
       <figcaption id="arch-title" className="sr-only">
@@ -300,11 +322,11 @@ export function EnterpriseArchitectureDiagram({ className = "" }: { className?: 
         <ArchBox x={pad + 6} y={alBoxY} w={126} h={alBoxH} t1="USER" t2="INTERFACES" />
         <ArchBox x={pad + 144} y={alBoxY} w={126} h={alBoxH} t1="ENTERPRISE" t2="APPS" sub="ERP · CRM · …" />
 
-        <ArchBox x={dfBX} y={pad + 22} w={dfBW} h={72} t1="DATA SOURCES" sub="Internal &amp; external" />
-        <ArchArrow x1={dfCx} y1={pad + 98} x2={dfCx} y2={pad + 112} />
-        <ArchBox x={dfBX} y={pad + 114} w={dfBW} h={58} t1="ETL / PIPELINES" />
-        <ArchArrow x1={dfCx} y1={pad + 176} x2={dfCx} y2={pad + 190} />
-        <ArchBox x={dfBX} y={pad + 192} w={dfBW} h={72} t1="DATA LAKE /" t2="WAREHOUSE" />
+        <ArchBox x={dfBX} y={dfY1} w={dfBW} h={dfH1} t1="DATA SOURCES" sub="Internal &amp; external" />
+        <ArchArrow x1={dfCx} y1={dfY1 + dfH1} x2={dfCx} y2={dfY2} />
+        <ArchBox x={dfBX} y={dfY2} w={dfBW} h={dfH2} t1="ETL / PIPELINES" />
+        <ArchArrow x1={dfCx} y1={dfY2 + dfH2} x2={dfCx} y2={dfY3} />
+        <ArchBox x={dfBX} y={dfY3} w={dfBW} h={dfH3} t1="DATA LAKE /" t2="WAREHOUSE" />
 
         <ArchBox x={inf1X} y={infY} w={infW} h={infH} t1="SECURITY" t2="&amp; GOVERNANCE" fontSize={7} />
         <ArchBox x={inf2X} y={infY} w={infW} h={infH} t1="CLOUD /" t2="ON-PREM" fontSize={7} />
@@ -317,27 +339,27 @@ export function EnterpriseArchitectureDiagram({ className = "" }: { className?: 
         <ArchBox x={srvX} y={regY} w={srvW} h={aiBoxH} t1="MODEL SERVING" bright />
 
         <ArchPathArrow
-          d={`M ${srvX + srvW} ${regY + aiBoxH / 2} L ${c3x + c3w - 8} ${regY + aiBoxH / 2} L ${c3x + c3w - 8} ${aiBoxY + aiBoxH / 2} L ${c3x + hPad + aiBoxW + 4} ${aiBoxY + aiBoxH / 2}`}
+          d={`M ${srvX + srvW} ${regY + aiBoxH / 2} H ${c3x + c3w - 6} V ${aiMidY} H ${aiBoxRight}`}
           dashed
           faint
         />
 
-        {/* Left column: business ↔ application */}
-        <ArchArrow x1={c1w / 2} y1={topH} x2={c1w / 2} y2={midY} faint />
+        {/* Business layer → application layer (stacked zones) */}
+        <ArchArrow x1={c1cx} y1={bizBoxBottom} x2={c1cx} y2={appBoxTop} faint />
 
-        {/* Into data foundation */}
+        {/* Business / application → data foundation */}
         <ArchArrow x1={c1w} y1={busY} x2={c2x} y2={busY} faint />
         <ArchArrow x1={c1w} y1={appY} x2={c2x} y2={appY} faint />
 
-        {/* Data foundation → AI / ML core */}
+        {/* Data lake / warehouse → AI models */}
         <ArchPathArrow
-          d={`M ${c2x + c2w} ${pad + 220} L ${c3x} ${pad + 220} L ${c3x} ${aiBoxY + aiBoxH / 2} L ${c3x + hPad} ${aiBoxY + aiBoxH / 2}`}
+          d={`M ${dfRightInner} ${dfLakeMidY} H ${c3x} V ${aiMidY} H ${aiLeft}`}
         />
 
-        {/* Infrastructure → AI / ML core (governance lines) */}
-        <ArchArrow x1={inf1X + infW / 2} y1={topH} x2={inf1X + infW / 2} y2={midY} faint />
-        <ArchArrow x1={inf2X + infW / 2} y1={topH} x2={inf2X + infW / 2} y2={midY} faint />
-        <ArchArrow x1={inf3X + infW / 2} y1={topH} x2={inf3X + infW / 2} y2={midY} faint />
+        {/* Infrastructure boxes → AI / ML models row */}
+        <ArchArrow x1={inf1X + infW / 2} y1={infraBoxBottom} x2={inf1X + infW / 2} y2={aiBoxY} faint />
+        <ArchArrow x1={inf2X + infW / 2} y1={infraBoxBottom} x2={inf2X + infW / 2} y2={aiBoxY} faint />
+        <ArchArrow x1={inf3X + infW / 2} y1={infraBoxBottom} x2={inf3X + infW / 2} y2={aiBoxY} faint />
       </svg>
 
       <div className="flex flex-col gap-2.5 md:hidden">
