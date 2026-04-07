@@ -1123,14 +1123,30 @@ export default function Home() {
               <div className="enterprise-scroll-rail" aria-hidden="true">
                 <motion.div className="enterprise-scroll-rail-fill" style={{ height: enterpriseRailFill }} />
               </div>
-              <div className="enterprise-mode-text-stage">
-                <div className="enterprise-mode-text-axes" aria-hidden="true">
+              <div className={`enterprise-mode-text-stage enterprise-mode-text-stage-${selectedMode.id}`}>
+                <div className={`enterprise-mode-ambient enterprise-mode-ambient-${selectedMode.id}`} aria-hidden="true" />
+                <div className="enterprise-mode-text-axes enterprise-mode-text-axes-top" aria-hidden="true">
                   <span>HIGH STRATEGIC VALUE</span>
+                </div>
+                <div className="enterprise-mode-text-axes enterprise-mode-text-axes-left" aria-hidden="true">
                   <span>USER INTERACTION</span>
+                </div>
+                <div className="enterprise-mode-text-axes enterprise-mode-text-axes-right" aria-hidden="true">
                   <span>HIGH AUTOMATION</span>
+                </div>
+                <div className="enterprise-mode-text-axes enterprise-mode-text-axes-bottom" aria-hidden="true">
                   <span>OPERATIONAL INSIGHT</span>
                 </div>
                 <div className="enterprise-mode-text-main">
+                  <motion.p
+                    key={`${selectedMode.id}-position`}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.26 }}
+                    className="enterprise-mode-text-position"
+                  >
+                    {selectedMode.position}
+                  </motion.p>
                   <motion.p
                     key={selectedMode.id}
                     initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
@@ -1151,14 +1167,15 @@ export default function Home() {
                   </motion.p>
                 </div>
                 <div className="enterprise-mode-text-list" aria-hidden="true">
-                  {enterpriseModes.map((mode) => (
+                  {enterpriseModes.map((mode, index) => (
                     <div
                       key={mode.id}
                       className={`enterprise-mode-text-list-item ${
                         activeEnterpriseMode === mode.id ? "enterprise-mode-text-list-item-active" : ""
                       }`}
                     >
-                      {mode.label}
+                      <span className="enterprise-mode-text-list-index">{String(index + 1).padStart(2, "0")}</span>
+                      <span>{mode.label}</span>
                     </div>
                   ))}
                 </div>
