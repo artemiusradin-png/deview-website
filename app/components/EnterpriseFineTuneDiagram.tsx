@@ -219,8 +219,8 @@ export function EnterpriseFineTuneDiagram({ className = "" }: { className?: stri
   );
 }
 
-function FineTuneDiagramMobile() {
-  const Step = ({ children, dark }: { children: ReactNode; dark?: boolean }) => (
+function FineTuneMobileStep({ children, dark }: { children: ReactNode; dark?: boolean }) {
+  return (
     <div
       className={`rounded-md px-3 py-2 text-center text-[0.65rem] font-medium uppercase tracking-wide ${
         dark
@@ -231,11 +231,15 @@ function FineTuneDiagramMobile() {
       {children}
     </div>
   );
+}
 
-  const Edge = ({ children }: { children: ReactNode }) => (
+function FineTuneMobileEdge({ children }: { children: ReactNode }) {
+  return (
     <p className="text-center text-[0.5rem] uppercase tracking-wider text-[var(--white-40)]">{children}</p>
   );
+}
 
+function FineTuneDiagramMobile() {
   return (
     <div className="flex flex-col gap-2">
       <div className="rounded-lg border border-[var(--white-10)] bg-[var(--surface-elevated)] p-2">
@@ -253,28 +257,28 @@ function FineTuneDiagramMobile() {
           ))}
         </div>
       </div>
-      <Step>Foundation Model</Step>
+      <FineTuneMobileStep>Foundation Model</FineTuneMobileStep>
       <div className="flex items-stretch gap-2">
-        <Step>Curated Dataset ⧉</Step>
+        <FineTuneMobileStep>Curated Dataset ⧉</FineTuneMobileStep>
         <span className="flex items-center text-[var(--white-40)]" aria-hidden>
           →
         </span>
-        <Step>Tokenization</Step>
+        <FineTuneMobileStep>Tokenization</FineTuneMobileStep>
       </div>
-      <Edge>Into training</Edge>
-      <Step dark>Train</Step>
-      <Edge>Prompt + Model Response</Edge>
-      <Step dark>Evaluate</Step>
-      <Edge>Model Checkpoint + Score</Edge>
-      <Step dark>Monitor</Step>
+      <FineTuneMobileEdge>Into training</FineTuneMobileEdge>
+      <FineTuneMobileStep dark>Train</FineTuneMobileStep>
+      <FineTuneMobileEdge>Prompt + Model Response</FineTuneMobileEdge>
+      <FineTuneMobileStep dark>Evaluate</FineTuneMobileStep>
+      <FineTuneMobileEdge>Model Checkpoint + Score</FineTuneMobileEdge>
+      <FineTuneMobileStep dark>Monitor</FineTuneMobileStep>
       <p className="text-center text-[0.55rem] text-[var(--white-40)]">Loop back → Train</p>
-      <Step>Model Monitor DB ⧉</Step>
-      <Edge>Tokenizer + Updated Parameters</Edge>
-      <Step dark>Deploy</Step>
-      <Step>Fine Tuned Model</Step>
-      <Edge>User Prompt + Model Response (to Monitor)</Edge>
-      <Edge>Prompt ↑ / Response ↓</Edge>
-      <Step>Query ⌕</Step>
+      <FineTuneMobileStep>Model Monitor DB ⧉</FineTuneMobileStep>
+      <FineTuneMobileEdge>Tokenizer + Updated Parameters</FineTuneMobileEdge>
+      <FineTuneMobileStep dark>Deploy</FineTuneMobileStep>
+      <FineTuneMobileStep>Fine Tuned Model</FineTuneMobileStep>
+      <FineTuneMobileEdge>User Prompt + Model Response (to Monitor)</FineTuneMobileEdge>
+      <FineTuneMobileEdge>Prompt ↑ / Response ↓</FineTuneMobileEdge>
+      <FineTuneMobileStep>Query ⌕</FineTuneMobileStep>
     </div>
   );
 }
