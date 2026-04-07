@@ -936,9 +936,11 @@ html[data-theme="light"] .enterprise-mode::before {
   top: 2rem;
   left: clamp(1.25rem, 4vw, 3rem);
   right: clamp(1.25rem, 4vw, 3rem);
-  z-index: 4;
+  z-index: 6;
   max-width: 58rem;
   width: auto;
+  pointer-events: none;
+  will-change: transform, opacity;
 }
 
 .enterprise-mode-stage-title {
@@ -1298,6 +1300,7 @@ html[data-theme="light"] .enterprise-compare-enterprise {
 @media (max-width: 1100px) {
   .enterprise-stage-scroll-wrapper {
     height: auto;
+    min-height: 260vh;
   }
 
   .enterprise-mode-stage {
@@ -1316,9 +1319,13 @@ html[data-theme="light"] .enterprise-compare-enterprise {
   }
 
   .enterprise-mode-stage-copy {
-    position: static;
+    position: absolute;
+    top: max(1.25rem, env(safe-area-inset-top, 0px));
+    left: max(1.25rem, env(safe-area-inset-left, 0px));
+    right: max(1.25rem, env(safe-area-inset-right, 0px));
     max-width: none;
-    width: 100%;
+    width: auto;
+    z-index: 6;
   }
 
   .enterprise-mode-stage-title {

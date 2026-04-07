@@ -663,6 +663,16 @@ export default function Home() {
   const enterpriseDetailOpacity = useTransform(enterpriseModesProgress, [0.16, 0.42], prefersReducedMotion ? [1, 1] : [0.12, 1]);
   const enterpriseRailFill = useTransform(enterpriseModesProgress, [0, 1], ["0%", "100%"]);
   const enterpriseMapFilter = useTransform(enterpriseMapBlur, (v) => `blur(${v}px)`);
+  const enterpriseStageIntroOpacity = useTransform(
+    enterpriseModesProgress,
+    prefersReducedMotion ? [0, 0.035, 0.055] : [0, 0.055, 0.13],
+    prefersReducedMotion ? [1, 1, 0] : [1, 0.92, 0],
+  );
+  const enterpriseStageIntroY = useTransform(
+    enterpriseModesProgress,
+    [0, 0.11],
+    prefersReducedMotion ? [0, 0] : [0, -28],
+  );
 
   return (
     <div className="min-h-screen bg-[var(--background)] bg-grid text-[var(--text)]">
@@ -1089,7 +1099,10 @@ export default function Home() {
           ref={enterpriseStagePanelRef}
           className={`enterprise-mode-stage border-t border-[var(--white-20)] bg-[var(--surface-elevated)] enterprise-mode-stage--${enterprisePinState}`}
         >
-            <div className="enterprise-mode-stage-copy">
+            <motion.div
+              className="enterprise-mode-stage-copy"
+              style={{ opacity: enterpriseStageIntroOpacity, y: enterpriseStageIntroY }}
+            >
               <p className="section-label mb-3">WHAT IS ENTERPRISE AI</p>
               <h3 className="enterprise-mode-stage-title text-[var(--white-100)]">
                 Four operating modes across interaction, automation, strategic value, and insight.
@@ -1098,7 +1111,7 @@ export default function Home() {
                 The useful implementations usually combine multiple modes. We scope the right mix based on the
                 workflow, the decision point, and the level of control required.
               </p>
-            </div>
+            </motion.div>
             <motion.div
               style={{
                 scale: enterpriseMapScale,
