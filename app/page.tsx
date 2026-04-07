@@ -1149,17 +1149,20 @@ export default function Home() {
                     {selectedMode.position}
                   </motion.p>
                   <div className="enterprise-mode-text-list">
-                  {enterpriseModes.map((mode, index) => (
-                    <div
-                      key={mode.id}
-                      className={`enterprise-mode-text-list-item ${
-                        activeEnterpriseMode === mode.id ? "enterprise-mode-text-list-item-active" : ""
-                      }`}
-                    >
-                      <span className="enterprise-mode-text-list-index">{String(index + 1).padStart(2, "0")}</span>
-                      <span>{mode.label}</span>
-                    </div>
-                  ))}
+                    {enterpriseModes.map((mode, index) => (
+                      <button
+                        type="button"
+                        key={mode.id}
+                        className={`enterprise-mode-text-list-item ${
+                          activeEnterpriseMode === mode.id ? "enterprise-mode-text-list-item-active" : ""
+                        }`}
+                        onClick={() => setActiveEnterpriseMode(mode.id)}
+                        aria-current={activeEnterpriseMode === mode.id ? "true" : undefined}
+                      >
+                        <span className="enterprise-mode-text-list-index">{String(index + 1).padStart(2, "0")}</span>
+                        <span>{mode.label}</span>
+                      </button>
+                    ))}
                   </div>
                 </div>
               </div>
