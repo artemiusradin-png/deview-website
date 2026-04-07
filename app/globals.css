@@ -562,6 +562,82 @@ html[data-theme="light"] .hero-fallback {
   min-width: 0;
 }
 
+/* Pillar rows — WHAT MAKES IT ENTERPRISE */
+.pillar-row {
+  display: grid;
+  grid-template-columns: 3rem 14rem 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--white-20);
+  cursor: default;
+  transition: background-color 160ms ease;
+}
+
+.pillar-row--active {
+  background: var(--surface);
+  margin: 0 -1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.pillar-row-num {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--white-40);
+  font-variant-numeric: tabular-nums;
+}
+
+.pillar-row-label {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--white-100);
+}
+
+.pillar-row-summary {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.pillar-row-points {
+  display: flex;
+  gap: 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.pillar-row-points li {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--white-60);
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .pillar-row {
+    grid-template-columns: 2.5rem 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.5rem 1rem;
+  }
+
+  .pillar-row-summary {
+    grid-column: 2;
+  }
+
+  .pillar-row-points {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+  }
+}
+
 @media (max-width: 1023px) {
   .enterprise-statement-stack {
     padding-left: 0.85rem;
@@ -751,12 +827,13 @@ html[data-theme="light"] .enterprise-mode::before {
   min-height: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding:
-    clamp(12rem, 18vh, 15rem)
-    clamp(3rem, 5vw, 5rem)
-    clamp(10rem, 16vh, 13rem);
+    clamp(8rem, 14vh, 12rem)
+    clamp(2.25rem, 4vw, 4rem)
+    clamp(7rem, 12vh, 11rem);
   border: 1px solid var(--white-20);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 28%),
@@ -797,6 +874,8 @@ html[data-theme="light"] .enterprise-mode::before {
 .enterprise-mode-text-axes {
   position: absolute;
   z-index: 1;
+  pointer-events: none;
+  max-width: min(42vw, 12rem);
 }
 
 .enterprise-mode-text-axes span,
@@ -808,33 +887,42 @@ html[data-theme="light"] .enterprise-mode::before {
 }
 
 .enterprise-mode-text-axes span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--white-40);
 }
 
 .enterprise-mode-text-axes-top {
-  top: 1.5rem;
+  top: 1.25rem;
   left: 50%;
   transform: translateX(-50%);
+  max-width: min(90%, 28rem);
+  text-align: center;
 }
 
 .enterprise-mode-text-axes-bottom {
-  bottom: 1.5rem;
+  bottom: 1.25rem;
   left: 50%;
   transform: translateX(-50%);
+  max-width: min(90%, 28rem);
+  text-align: center;
 }
 
 .enterprise-mode-text-axes-left {
   top: 50%;
-  left: 1.5rem;
+  left: clamp(0.75rem, 2.5vw, 1.75rem);
+  max-width: 10rem;
   transform: translateY(-50%) rotate(-90deg);
-  transform-origin: left top;
+  transform-origin: left center;
 }
 
 .enterprise-mode-text-axes-right {
   top: 50%;
-  right: 1.5rem;
+  right: clamp(0.75rem, 2.5vw, 1.75rem);
+  max-width: 10rem;
   transform: translateY(-50%) rotate(90deg);
-  transform-origin: right top;
+  transform-origin: right center;
 }
 
 .enterprise-mode-text-main {
@@ -853,10 +941,10 @@ html[data-theme="light"] .enterprise-mode::before {
 
 .enterprise-mode-sequence {
   position: absolute;
-  left: clamp(1.5rem, 3vw, 2.5rem);
-  right: clamp(1.5rem, 3vw, 2.5rem);
-  bottom: clamp(6.25rem, 9vh, 7.25rem);
-  z-index: 1;
+  left: clamp(1.25rem, 3vw, 2.5rem);
+  right: clamp(1.25rem, 3vw, 2.5rem);
+  bottom: clamp(5.5rem, 10vh, 8rem);
+  z-index: 3;
 }
 
 .enterprise-mode-text-position {
@@ -866,11 +954,12 @@ html[data-theme="light"] .enterprise-mode::before {
 
 .enterprise-mode-text-label {
   margin: 0;
-  font-size: clamp(4.8rem, 14vw, 12rem);
-  line-height: 0.82;
-  letter-spacing: -0.08em;
+  font-size: clamp(3.25rem, 11vw, 12rem);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
   text-transform: uppercase;
   color: var(--white-100);
+  max-width: min(100%, 95vw);
 }
 
 .enterprise-mode-text-axis {
@@ -885,7 +974,13 @@ html[data-theme="light"] .enterprise-mode::before {
 .enterprise-mode-text-list {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 0.75rem 1rem;
+}
+
+@media (min-width: 1101px) and (max-width: 1320px) {
+  .enterprise-mode-text-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .enterprise-mode-text-list-item {
@@ -1031,7 +1126,7 @@ html[data-theme="light"] .enterprise-compare-enterprise {
   transform: translateY(-1px);
 }
 
-@media (max-width: 961px) {
+@media (max-width: 1100px) {
   .enterprise-stage-scroll-wrapper {
     height: auto;
   }
@@ -1047,6 +1142,8 @@ html[data-theme="light"] .enterprise-compare-enterprise {
     margin-left: 0;
     margin-right: 0;
     padding: 1.25rem;
+    padding-left: max(1.25rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
   }
 
   .enterprise-mode-stage-copy {
@@ -1058,7 +1155,7 @@ html[data-theme="light"] .enterprise-compare-enterprise {
   .enterprise-mode-stage-title {
     max-width: none;
     font-size: clamp(1.5rem, 8vw, 2.4rem);
-    line-height: 1;
+    line-height: 1.08;
   }
 
   .enterprise-mode-stage-body {
@@ -1069,51 +1166,43 @@ html[data-theme="light"] .enterprise-compare-enterprise {
     display: block;
     min-height: auto;
     height: auto;
+    padding-left: 0;
+  }
+
+  .enterprise-scroll-rail {
+    display: none;
   }
 
   .enterprise-mode-text-stage {
     min-height: auto;
     height: auto;
-    display: grid;
-    justify-items: stretch;
-    gap: 1.25rem;
-    padding: 2.25rem 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    padding: 1.75rem 1rem 1.5rem;
   }
 
   .enterprise-mode-ambient {
-    inset: 16% 8%;
-    filter: blur(52px);
+    inset: 8% 4%;
+    filter: blur(48px);
+    opacity: 0.18;
   }
 
+  /* Decorative quadrant titles — redundant with .enterprise-mode-text-axis; hiding prevents overlap */
   .enterprise-mode-text-axes {
-    position: static;
-    transform: none;
-  }
-
-  .enterprise-mode-text-axes-top,
-  .enterprise-mode-text-axes-bottom,
-  .enterprise-mode-text-axes-left,
-  .enterprise-mode-text-axes-right {
-    width: 100%;
-  }
-
-  .enterprise-mode-text-axes-top,
-  .enterprise-mode-text-axes-bottom {
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  .enterprise-mode-text-axes-left,
-  .enterprise-mode-text-axes-right {
-    display: none;
+    display: none !important;
   }
 
   .enterprise-mode-text-main {
     align-items: flex-start;
     text-align: left;
-    min-height: auto;
+    min-height: 0;
     width: 100%;
-    padding: 1rem 0 0;
+    padding: 0;
+    order: 1;
+    gap: 0.65rem;
   }
 
   .enterprise-mode-sequence {
@@ -1122,41 +1211,40 @@ html[data-theme="light"] .enterprise-compare-enterprise {
     right: auto;
     bottom: auto;
     width: 100%;
+    order: 2;
   }
 
   .enterprise-mode-text-position {
-    font-size: 0.58rem;
+    display: none;
   }
 
   .enterprise-mode-text-label {
-    font-size: clamp(2.8rem, 14vw, 5rem);
+    font-size: clamp(2rem, 9vw, 3.5rem);
+    line-height: 0.95;
+    word-break: break-word;
   }
 
   .enterprise-mode-text-axis {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    max-width: 100%;
   }
 
   .enterprise-mode-text-list {
     width: 100%;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem 1rem;
+    gap: 0.65rem 0.85rem;
+  }
+
+  .enterprise-mode-text-list-item {
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    padding-top: 0.6rem;
+    word-break: break-word;
   }
 
   .enterprise-mode-text-list-item-active {
-    transform: translateY(-0.1rem);
-  }
-
-  .enterprise-arrow {
-    min-height: 2.5rem;
-    transform: rotate(90deg);
-  }
-
-  .enterprise-arrow-enterprise {
-    transform: rotate(90deg) translateX(4px);
-  }
-
-  .enterprise-arrow-public {
-    transform: rotate(90deg) translateX(-4px);
+    transform: translateY(-0.08rem);
   }
 
   .enterprise-mode-stage-detail {

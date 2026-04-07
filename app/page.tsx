@@ -1031,62 +1031,43 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid gap-6">
-            <motion.section
-              variants={cardMotion}
+          <div>
+            <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="section-label mb-2">WHAT MAKES IT ENTERPRISE</p>
+                <h3 className="text-lg text-[var(--white-100)] md:text-2xl">Enterprise AI works when the deployment is built for enterprise reality.</h3>
+              </div>
+              <p className="max-w-sm text-[0.8rem] text-[var(--text-muted)]">
+                DeView designs for scale, compliance, integration, and accountability from the start.
+              </p>
+            </div>
+            <div className="rule" />
+            <motion.div
+              variants={stagger}
               initial="initial"
               whileInView="whileInView"
-              viewport={reveal.viewport}
-              transition={{ duration: 0.45 }}
-              className="panel border border-[var(--white-20)] bg-[var(--surface-elevated)] p-5 md:p-6"
+              viewport={stagger.viewport}
             >
-                <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                <div>
-                  <p className="section-label mb-2">WHAT MAKES IT ENTERPRISE</p>
-                  <h3 className="text-lg text-[var(--white-100)] md:text-2xl">Enterprise AI works when the deployment is built for enterprise reality.</h3>
-                </div>
-                <p className="max-w-sm text-[0.8rem] text-[var(--text-muted)]">
-                  DeView designs for scale, compliance, integration, and accountability from the start.
-                </p>
-              </div>
-              <div className="grid gap-4 md:grid-cols-2">
-                {enterprisePillars.map((pillar) => (
-                  <button
-                    key={pillar.label}
-                    type="button"
-                    className={`enterprise-card enterprise-card-button border border-[var(--white-20)] bg-[var(--surface)] p-4 text-left ${
-                      activeEnterprisePillar === pillar.id ? "enterprise-card-active" : ""
-                    }`}
-                    onMouseEnter={() => setActiveEnterprisePillar(pillar.id)}
-                    onFocus={() => setActiveEnterprisePillar(pillar.id)}
-                    onClick={() => setActiveEnterprisePillar(pillar.id)}
-                  >
-                    <p className="mb-3 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">
-                      {pillar.label}
-                    </p>
-                    <ul className="space-y-2 text-[0.82rem] text-[var(--text-muted)]">
-                      {pillar.points.map((point) => (
-                        <li key={point} className="enterprise-list-item">
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  </button>
-                ))}
-              </div>
-              <div className="enterprise-detail mt-4 border-t border-[var(--white-20)] pt-4">
-                <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-6">
-                  <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[var(--white-60)]">What We Handle</p>
-                  <div className="max-w-xl">
-                    <p className="mb-2 text-sm uppercase tracking-[0.18em] text-[var(--white-100)]">
-                      {selectedPillar.label}
-                    </p>
-                    <p className="text-[0.84rem] leading-relaxed text-[var(--text-muted)]">{selectedPillar.summary}</p>
-                  </div>
-                </div>
-              </div>
-            </motion.section>
-
+              {enterprisePillars.map((pillar, i) => (
+                <motion.div
+                  key={pillar.id}
+                  variants={cardMotion}
+                  transition={{ duration: 0.4 }}
+                  className={`pillar-row${activeEnterprisePillar === pillar.id ? " pillar-row--active" : ""}`}
+                  onMouseEnter={() => setActiveEnterprisePillar(pillar.id)}
+                  onFocus={() => setActiveEnterprisePillar(pillar.id)}
+                >
+                  <span className="pillar-row-num">0{i + 1}</span>
+                  <span className="pillar-row-label">{pillar.label}</span>
+                  <span className="pillar-row-summary">{pillar.summary}</span>
+                  <ul className="pillar-row-points">
+                    {pillar.points.map((pt) => (
+                      <li key={pt}>{pt}</li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
 
         </motion.div>
