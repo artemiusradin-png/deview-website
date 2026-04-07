@@ -1042,32 +1042,39 @@ export default function Home() {
               </p>
             </div>
             <div className="rule" />
-            <motion.div
-              variants={stagger}
-              initial="initial"
-              whileInView="whileInView"
-              viewport={stagger.viewport}
-            >
+            <div>
               {enterprisePillars.map((pillar, i) => (
-                <motion.div
+                <div
                   key={pillar.id}
-                  variants={cardMotion}
-                  transition={{ duration: 0.4 }}
-                  className={`pillar-row${activeEnterprisePillar === pillar.id ? " pillar-row--active" : ""}`}
+                  className={`pillar-row-outer${activeEnterprisePillar === pillar.id ? " pillar-row-outer--active" : ""}`}
                   onMouseEnter={() => setActiveEnterprisePillar(pillar.id)}
                   onFocus={() => setActiveEnterprisePillar(pillar.id)}
                 >
-                  <span className="pillar-row-num">0{i + 1}</span>
-                  <span className="pillar-row-label">{pillar.label}</span>
-                  <span className="pillar-row-summary">{pillar.summary}</span>
-                  <ul className="pillar-row-points">
-                    {pillar.points.map((pt) => (
-                      <li key={pt}>{pt}</li>
-                    ))}
-                  </ul>
-                </motion.div>
+                  {/* Content — revealed by the wipe */}
+                  <div className="pillar-row">
+                    <span className="pillar-row-num">0{i + 1}</span>
+                    <span className="pillar-row-label">{pillar.label}</span>
+                    <span className="pillar-row-summary">{pillar.summary}</span>
+                    <ul className="pillar-row-points">
+                      {pillar.points.map((pt) => (
+                        <li key={pt}>{pt}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  {/* Wipe cover — collapses left→right on scroll into view */}
+                  <motion.div
+                    className="pillar-row-wipe"
+                    initial={{ scaleX: 1 }}
+                    whileInView={{ scaleX: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: i * 0.07 }}
+                    aria-hidden="true"
+                  />
+                  {/* Large background number */}
+                  <span className="pillar-row-bg-num" aria-hidden="true">0{i + 1}</span>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
         </motion.div>
@@ -1614,39 +1621,114 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="section-gutter border-t border-[var(--white-20)] bg-[var(--background)] pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-5 text-[0.65rem] sm:text-[0.7rem]">
-        <div className="mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-4">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
-            <span className="text-xs uppercase tracking-[0.25em] text-[var(--white-80)]">DEVIEW</span>
-            <span className="text-[var(--white-40)]">© {new Date().getFullYear()} DeView. All rights reserved.</span>
+      <footer className="section-gutter border-t border-[var(--white-20)] bg-[var(--background)] pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-6 sm:pt-8">
+        <div className="footer-card mx-auto flex max-w-6xl flex-col gap-8 overflow-hidden px-5 py-6 sm:px-6 sm:py-7 lg:px-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+            <div className="max-w-xl">
+              <p className="mb-3 text-[0.72rem] uppercase tracking-[0.26em] text-[var(--white-60)]">DeView</p>
+              <h3 className="max-w-lg text-[clamp(1.15rem,2.2vw,1.75rem)] leading-[1.05] text-[var(--white-100)]">
+                Enterprise AI work that fits the constraints of real operations.
+              </h3>
+              <p className="mt-4 max-w-md text-[0.86rem] leading-relaxed text-[var(--text-muted)]">
+                Strategy, implementation, and system integration for teams that need useful AI in production,
+                not another internal demo.
+              </p>
+            </div>
+
+            <div className="flex shrink-0 flex-col items-start gap-3 lg:items-end">
+              <span className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">Start with a real workflow</span>
+              <a href="/contact" className="btn-outline">
+                SEND INQUIRY →
+              </a>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-x-4 gap-y-3 text-[var(--white-60)] sm:gap-5">
-            <a href="#hero" className="uppercase tracking-[0.18em]">
-              AI CONSULTING
+
+          <div className="footer-divider" />
+
+          <div className="grid gap-8 md:grid-cols-3 md:gap-6">
+            <div>
+              <p className="footer-column-title">Navigation</p>
+              <ul className="footer-link-list">
+                <li>
+                  <a href="#hero">AI Consulting</a>
+                </li>
+                <li>
+                  <a href="#enterprise-ai">Enterprise AI</a>
+                </li>
+                <li>
+                  <a href="#services">Services</a>
+                </li>
+                <li>
+                  <a href="#solutions">Use Cases</a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <p className="footer-column-title">Delivery</p>
+              <ul className="footer-link-list">
+                <li>
+                  <a href="#outcomes">Outcomes</a>
+                </li>
+                <li>
+                  <a href="#process">Process</a>
+                </li>
+                <li>
+                  <a href="#contact">Contact</a>
+                </li>
+                <li>
+                  <a href="mailto:hello@deview.ai">hello@deview.ai</a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <p className="footer-column-title">Access</p>
+              <ul className="footer-link-list">
+                <li>
+                  <a href="/contact">Contact Form</a>
+                </li>
+                <li>
+                  <a href="https://ai-consulting-task-manager.vercel.app/" target="_blank" rel="noopener noreferrer">
+                    Internal Workspace
+                  </a>
+                </li>
+                <li>
+                  <span>Mid-market to enterprise</span>
+                </li>
+                <li>
+                  <span>Discovery to production</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="footer-nav-shell">
+            <a href="#hero" className="footer-pill footer-pill-active">
+              <span>AI Consulting</span>
             </a>
-            <a href="#services" className="uppercase tracking-[0.18em]">
-              SERVICES
+            <a href="#services" className="footer-pill">
+              <span>Services</span>
             </a>
-            <a href="#solutions" className="uppercase tracking-[0.18em]">
-              USE CASES
+            <a href="#solutions" className="footer-pill">
+              <span>Use Cases</span>
             </a>
-            <a href="#outcomes" className="uppercase tracking-[0.18em]">
-              OUTCOMES
+            <a href="#outcomes" className="footer-pill">
+              <span>Outcomes</span>
             </a>
-            <a href="#process" className="uppercase tracking-[0.18em]">
-              PROCESS
+            <a href="#process" className="footer-pill">
+              <span>Process</span>
             </a>
-            <a href="#contact" className="uppercase tracking-[0.18em]">
-              CONTACT
+            <a href="#contact" className="footer-pill">
+              <span>Contact</span>
             </a>
-            <a
-              href="https://ai-consulting-task-manager.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="uppercase tracking-[0.18em] underline underline-offset-4"
-            >
-              INTERNAL
-            </a>
+          </div>
+
+          <div className="footer-divider" />
+
+          <div className="flex flex-col gap-3 text-[0.68rem] text-[var(--white-60)] sm:flex-row sm:items-center sm:justify-between">
+            <span className="uppercase tracking-[0.2em] text-[var(--white-80)]">© {new Date().getFullYear()} DeView</span>
+            <span>AI consulting and data engineering for production-grade systems.</span>
           </div>
         </div>
       </footer>

@@ -259,6 +259,129 @@ html[data-theme="light"] .hero-video {
   transform: scale(1.14);
 }
 
+.footer-card {
+  border: 1px solid var(--white-20);
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent 34%),
+    radial-gradient(circle at bottom right, rgba(255, 214, 138, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+}
+
+html[data-theme="light"] .footer-card {
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.72), transparent 36%),
+    radial-gradient(circle at bottom right, rgba(171, 215, 255, 0.18), transparent 30%),
+    linear-gradient(180deg, rgba(255, 253, 247, 0.96), rgba(251, 247, 238, 0.94));
+  box-shadow: 0 24px 70px rgba(19, 31, 47, 0.08);
+}
+
+.footer-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--white-20), transparent);
+}
+
+.footer-column-title {
+  margin: 0 0 1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--white-80);
+}
+
+.footer-link-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.footer-link-list a,
+.footer-link-list span {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.footer-link-list a:hover,
+.footer-link-list a:focus-visible {
+  color: var(--white-100);
+  transform: translateX(3px);
+}
+
+.footer-nav-shell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  padding: 0.5rem;
+  border: 1px solid var(--white-20);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+html[data-theme="light"] .footer-nav-shell {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.footer-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  color: var(--text-muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.68rem;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease,
+    border-color 180ms ease;
+}
+
+.footer-pill:hover,
+.footer-pill:focus-visible {
+  color: var(--white-100);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+.footer-pill-active {
+  background: var(--white-100);
+  color: var(--background);
+  font-weight: 700;
+}
+
+.footer-pill-active:hover,
+.footer-pill-active:focus-visible {
+  color: var(--background);
+  background: var(--white-100);
+}
+
+@media (max-width: 640px) {
+  .footer-card {
+    border-radius: 1.5rem;
+  }
+
+  .footer-nav-shell {
+    border-radius: 1.5rem;
+  }
+
+  .footer-pill {
+    width: 100%;
+    justify-content: flex-start;
+    padding-left: 1rem;
+  }
+}
+
 .hero-video-fading {
   opacity: 0;
   transform: scale(1.155);
@@ -563,22 +686,56 @@ html[data-theme="light"] .hero-fallback {
 }
 
 /* Pillar rows — WHAT MAKES IT ENTERPRISE */
+.pillar-row-outer {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--white-20);
+  transition: background-color 200ms ease;
+}
+
+.pillar-row-outer--active {
+  background: var(--surface);
+}
+
+/* The wipe cover — starts full width, collapses to the right */
+.pillar-row-wipe {
+  position: absolute;
+  inset: 0;
+  background: var(--background);
+  transform-origin: left center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Large decorative number behind each row */
+.pillar-row-bg-num {
+  position: absolute;
+  right: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  line-height: 1;
+  color: var(--white-10);
+  pointer-events: none;
+  letter-spacing: -0.04em;
+  user-select: none;
+  z-index: 0;
+  transition: color 200ms ease;
+}
+
+.pillar-row-outer--active .pillar-row-bg-num {
+  color: var(--white-20);
+}
+
 .pillar-row {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 3rem 14rem 1fr auto;
   align-items: center;
   gap: 2rem;
   padding: 1.4rem 0;
-  border-bottom: 1px solid var(--white-20);
   cursor: default;
-  transition: background-color 160ms ease;
-}
-
-.pillar-row--active {
-  background: var(--surface);
-  margin: 0 -1.5rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
 }
 
 .pillar-row-num {
