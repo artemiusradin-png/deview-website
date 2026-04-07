@@ -1139,15 +1139,6 @@ export default function Home() {
                 </div>
                 <div className="enterprise-mode-text-main">
                   <motion.p
-                    key={`${selectedMode.id}-position`}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.26 }}
-                    className="enterprise-mode-text-position"
-                  >
-                    {selectedMode.position}
-                  </motion.p>
-                  <motion.p
                     key={selectedMode.id}
                     initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
                     animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -1166,7 +1157,17 @@ export default function Home() {
                     {selectedMode.axis}
                   </motion.p>
                 </div>
-                <div className="enterprise-mode-text-list" aria-hidden="true">
+                <div className="enterprise-mode-sequence" aria-hidden="true">
+                  <motion.p
+                    key={`${selectedMode.id}-position`}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.26 }}
+                    className="enterprise-mode-text-position"
+                  >
+                    {selectedMode.position}
+                  </motion.p>
+                  <div className="enterprise-mode-text-list">
                   {enterpriseModes.map((mode, index) => (
                     <div
                       key={mode.id}
@@ -1178,6 +1179,7 @@ export default function Home() {
                       <span>{mode.label}</span>
                     </div>
                   ))}
+                  </div>
                 </div>
               </div>
             </motion.div>

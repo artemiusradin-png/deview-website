@@ -800,7 +800,6 @@ html[data-theme="light"] .enterprise-mode::before {
 }
 
 .enterprise-mode-text-axes span,
-.enterprise-mode-text-list-item,
 .enterprise-mode-text-position {
   font-size: 0.64rem;
   line-height: 1.5;
@@ -852,7 +851,16 @@ html[data-theme="light"] .enterprise-mode::before {
   padding: 0;
 }
 
+.enterprise-mode-sequence {
+  position: absolute;
+  left: clamp(1.5rem, 3vw, 2.5rem);
+  right: clamp(1.5rem, 3vw, 2.5rem);
+  bottom: clamp(6.25rem, 9vh, 7.25rem);
+  z-index: 1;
+}
+
 .enterprise-mode-text-position {
+  margin: 0 0 0.85rem;
   color: var(--white-50);
 }
 
@@ -875,17 +883,16 @@ html[data-theme="light"] .enterprise-mode::before {
 }
 
 .enterprise-mode-text-list {
-  position: absolute;
-  left: clamp(1.5rem, 3vw, 2.5rem);
-  right: clamp(1.5rem, 3vw, 2.5rem);
-  bottom: clamp(6.25rem, 9vh, 7.25rem);
-  z-index: 1;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
 }
 
 .enterprise-mode-text-list-item {
+  font-size: 0.64rem;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
   display: flex;
   align-items: baseline;
   gap: 0.55rem;
@@ -1109,6 +1116,14 @@ html[data-theme="light"] .enterprise-compare-enterprise {
     padding: 1rem 0 0;
   }
 
+  .enterprise-mode-sequence {
+    position: static;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+  }
+
   .enterprise-mode-text-position {
     font-size: 0.58rem;
   }
@@ -1122,10 +1137,6 @@ html[data-theme="light"] .enterprise-compare-enterprise {
   }
 
   .enterprise-mode-text-list {
-    position: static;
-    left: auto;
-    right: auto;
-    bottom: auto;
     width: 100%;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem 1rem;
