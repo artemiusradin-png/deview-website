@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties, type MouseEvent } from "react";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { SiteFooter } from "../components/SiteFooter";
+import { EnterpriseFineTuneDiagram } from "./components/EnterpriseFineTuneDiagram";
 
 const fade = {
   initial: { opacity: 0, y: 18 },
@@ -1049,6 +1050,7 @@ export default function Home() {
             <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="section-label mb-2">WHAT MAKES IT ENTERPRISE</p>
+                <EnterpriseFineTuneDiagram className="my-5 md:my-6" />
                 <h3 className="text-lg text-[var(--white-100)] md:text-2xl">Enterprise AI works when the deployment is built for enterprise reality.</h3>
               </div>
               <p className="max-w-sm text-[0.8rem] text-[var(--text-muted)]">

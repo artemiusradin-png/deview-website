@@ -2357,3 +2357,61 @@ footer.site-footer-inspired a {
 .enterprise-mode-stage--frameless .enterprise-mode-stage-detail-copy {
   border: none;
 }
+
+/* Enterprise fine-tuning lifecycle diagram (SVG) */
+.enterprise-ft-svg .enterprise-ft-panel {
+  fill: color-mix(in srgb, var(--surface-elevated) 88%, var(--white-100) 12%);
+  stroke: var(--white-10);
+}
+
+.enterprise-ft-svg .enterprise-ft-panel-text {
+  fill: var(--text);
+}
+
+.enterprise-ft-svg .enterprise-ft-panel-title {
+  fill: var(--text-muted);
+}
+
+.enterprise-ft-svg .enterprise-ft-panel-muted {
+  fill: var(--text-muted);
+}
+
+.enterprise-ft-svg .enterprise-ft-nested {
+  fill: var(--background);
+  stroke: var(--white-10);
+  stroke-width: 0.9;
+}
+
+.enterprise-ft-svg .enterprise-ft-nested-text {
+  fill: var(--text);
+}
+
+.enterprise-ft-svg .enterprise-ft-process {
+  fill: #0c0c0e;
+  stroke: var(--white-10);
+  stroke-width: 0.85;
+}
+
+html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-process {
+  fill: #0a0a0f;
+}
+
+.enterprise-ft-svg .enterprise-ft-process-label {
+  fill: #f4f4f8;
+}
+
+html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-process-label {
+  fill: #faf8f3;
+}
+
+.enterprise-ft-svg .enterprise-ft-edges-stroke {
+  stroke: var(--white-20);
+}
+
+.enterprise-ft-svg .enterprise-ft-arrowhead-fill {
+  fill: var(--white-20);
+}
+
+.enterprise-ft-svg .enterprise-ft-edge-labels {
+  fill: var(--text-muted);
+}
