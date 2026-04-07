@@ -629,7 +629,7 @@ export default function Home() {
   const enterpriseMapFilter = useTransform(enterpriseMapBlur, (v) => `blur(${v}px)`);
 
   return (
-    <div className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid text-[var(--text)]">
+    <div className="min-h-screen bg-[var(--background)] bg-grid text-[var(--text)]">
       <a
         href="#"
         className="brand-mark fixed left-0 top-0 z-50 px-4 pt-[calc(env(safe-area-inset-top)+1.35rem)] text-xs tracking-[0.25em] text-[var(--white-80)] sm:px-6 sm:text-sm"

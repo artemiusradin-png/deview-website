@@ -895,7 +895,13 @@ html[data-theme="light"] .enterprise-compare-enterprise {
 }
 
 @media (max-width: 961px) {
+  .enterprise-stage-scroll-wrapper {
+    height: auto;
+  }
+
   .enterprise-mode-stage {
+    position: relative;
+    height: auto;
     min-height: auto;
     width: 100%;
     margin-left: 0;
