@@ -1017,21 +1017,6 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="pt-2">
-            <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-              <div>
-                <p className="section-label mb-2">WHAT MAKES IT ENTERPRISE</p>
-                <h3 className="text-lg text-[var(--white-100)] md:text-2xl">Architecture across business systems, data foundation, infrastructure, and AI/ML operations.</h3>
-              </div>
-              <p className="max-w-sm text-[0.8rem] text-[var(--text-muted)]">
-                The deployment has to connect strategy, enterprise applications, data pipelines, infrastructure,
-                and model operations in one controlled system.
-              </p>
-            </div>
-            <div className="rule mb-5" />
-            <EnterpriseArchitectureDiagram className="my-2 md:my-4" />
-          </div>
-
         </motion.div>
       </section>
 
@@ -1151,6 +1136,29 @@ export default function Home() {
             </motion.div>
           </section>
       </div>
+
+      <section className="relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter py-10 md:py-14">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="section-label mb-2">WHAT MAKES IT ENTERPRISE</p>
+              <h3 className="text-lg text-[var(--white-100)] md:text-2xl">
+                Architecture across business systems, data foundation, infrastructure, and AI/ML operations.
+              </h3>
+            </div>
+            <p className="max-w-sm text-[0.8rem] text-[var(--text-muted)]">
+              The deployment has to connect strategy, enterprise applications, data pipelines, infrastructure, and model
+              operations in one controlled system.
+            </p>
+          </div>
+          <p className="mb-5 max-w-3xl text-[0.8rem] leading-relaxed text-[var(--text-muted)] md:mb-6">
+            Enterprise AI Architecture: Business Layer and Application Layer feed data into a central Data Foundation
+            pipeline, which drives an AI/ML Core. Infrastructure spans and governs the AI layer.
+          </p>
+          <div className="rule mb-5" />
+          <EnterpriseArchitectureDiagram className="my-2 md:my-4" />
+        </div>
+      </section>
 
       <section className="relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter py-10 md:py-16">
         <div className="mx-auto max-w-6xl">
@@ -1542,40 +1550,38 @@ export default function Home() {
 
       <section
         id="contact"
-        className="scroll-margin-header relative min-h-[88vh] border-t border-[var(--white-20)] bg-[var(--background)] section-gutter pb-[max(1rem,env(safe-area-inset-bottom))] pt-20 md:min-h-[84vh] md:pb-[max(0.5rem,env(safe-area-inset-bottom))] md:pt-20"
+        className="scroll-margin-header relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter pb-[max(1rem,env(safe-area-inset-bottom))] pt-12 md:pb-[max(0.75rem,env(safe-area-inset-bottom))] md:pt-14"
       >
-        <div className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-8">
-          <div className="max-w-md pt-2">
-            <p className="section-label mb-3">INQUIRE</p>
-            <div className="rule mb-6 max-w-[11rem]" />
-            <h2 className="mb-5 text-sm leading-relaxed text-[var(--white-100)]">
+        <div className="mx-auto flex max-w-6xl flex-col gap-8 md:gap-10">
+          <div className="max-w-md">
+            <p className="section-label mb-2">INQUIRE</p>
+            <div className="rule mb-4 max-w-[11rem]" />
+            <h2 className="mb-3 text-sm leading-snug text-[var(--white-100)]">
               Bring us the messy workflow, stubborn constraint,
               <br />
               or half-formed AI idea you want pressure-tested.
             </h2>
-            <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+            <p className="text-sm leading-snug text-[var(--text-muted)]">
               Send the business function, current process,
               <br />
               available data, and the outcome you want to unlock.
             </p>
           </div>
 
-          <div className="flex flex-1 flex-col justify-end">
-            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-8">
-              <a
-                href="mailto:hello@deview.ai"
-                className="contact-monument min-w-0 flex-1 break-words pr-0 pb-2 leading-[0.98] md:pr-8"
-                onMouseMove={handleContactMouseMove}
-                onMouseLeave={handleContactMouseLeave}
-              >
-                <span className="contact-monument-line block">hello</span>
-                <span className="contact-monument-line block">@deview.ai</span>
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-6">
+            <a
+              href="mailto:hello@deview.ai"
+              className="contact-monument min-w-0 flex-1 break-words pr-0 leading-[0.92] md:pr-6"
+              onMouseMove={handleContactMouseMove}
+              onMouseLeave={handleContactMouseLeave}
+            >
+              <span className="contact-monument-line block">hello</span>
+              <span className="contact-monument-line block">@deview.ai</span>
+            </a>
+            <div className="shrink-0 self-start md:self-end">
+              <a href="/contact" className="btn-outline">
+                SEND INQUIRY →
               </a>
-              <div className="shrink-0 pb-[1.2vw] md:pb-[1vw]">
-                <a href="/contact" className="btn-outline">
-                  SEND INQUIRY →
-                </a>
-              </div>
             </div>
           </div>
         </div>

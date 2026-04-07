@@ -28,15 +28,15 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
   };
 
   return (
-    <footer className="site-footer-inspired w-full overflow-x-hidden pb-[max(1rem,env(safe-area-inset-bottom))] pt-8 sm:pt-10 md:pt-11">
-      <div className="section-gutter flex w-full min-w-0 max-w-none flex-col gap-8 sm:gap-9 md:gap-10">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-8 xl:gap-10">
+    <footer className="site-footer-inspired w-full overflow-x-hidden pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-6 sm:pt-7 md:pt-8">
+      <div className="section-gutter flex w-full min-w-0 max-w-none flex-col gap-5 md:gap-6">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between lg:gap-6 xl:gap-8">
           <div className="footer-inspired-lead min-w-0 flex-1 lg:max-w-none">
-            <p className="section-label mb-2">DeView</p>
+            <p className="section-label mb-1">DeView</p>
             <h3 className="footer-inspired-headline max-w-[min(100%,52rem)] xl:max-w-[60rem]">
               Enterprise AI built for real operations.
             </h3>
-            <p className="footer-inspired-intro mt-3 max-w-[min(100%,36rem)] xl:max-w-[40rem]">
+            <p className="footer-inspired-intro mt-2 max-w-[min(100%,36rem)] xl:max-w-[40rem]">
               Strategy, build, and integration — reliable, accountable, workflow-aligned.
             </p>
           </div>
@@ -133,7 +133,7 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
 
         <div className="rule footer-rule" aria-hidden="true" />
 
-        <div className="footer-inspired-meta flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+        <div className="footer-inspired-meta flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3">
           <small className="footer-inspired-copyright">© {new Date().getFullYear()} DeView</small>
           <p className="footer-inspired-tagline m-0">
             AI consulting and data engineering for production systems.

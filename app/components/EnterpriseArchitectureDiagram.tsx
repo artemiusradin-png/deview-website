@@ -3,6 +3,8 @@
 import type { ReactNode } from "react";
 
 const FONT = "D-DIN, Arial, sans-serif";
+const BOX_RX = 2;
+const ZONE_RX = 4;
 
 function ArchBox({
   x,
@@ -26,7 +28,7 @@ function ArchBox({
   fontSize?: number;
 }) {
   const cx = x + w / 2;
-  const baseY = t2 ? y + h / 2 - 7 : y + h / 2 + 4;
+  const baseY = t2 ? y + h / 2 - 6 : y + h / 2 + 3;
   return (
     <g>
       <rect
@@ -34,6 +36,7 @@ function ArchBox({
         y={y}
         width={w}
         height={h}
+        rx={BOX_RX}
         fill={bright ? "var(--enterprise-arch-box-fill-strong)" : "var(--enterprise-arch-box-fill)"}
         stroke="var(--enterprise-arch-box-stroke)"
         strokeWidth="1"
@@ -43,23 +46,23 @@ function ArchBox({
         y={baseY}
         textAnchor="middle"
         fontSize={fontSize}
-        letterSpacing="0.11em"
+        letterSpacing="0.1em"
         fill="var(--enterprise-arch-text)"
         fontFamily={FONT}
-        fontWeight={bright ? "600" : "400"}
+        fontWeight={bright ? "600" : "450"}
       >
         {t1}
       </text>
       {t2 && (
         <text
           x={cx}
-          y={baseY + 14}
+          y={baseY + 12}
           textAnchor="middle"
           fontSize={fontSize}
-          letterSpacing="0.11em"
+          letterSpacing="0.1em"
           fill="var(--enterprise-arch-text)"
           fontFamily={FONT}
-          fontWeight={bright ? "600" : "400"}
+          fontWeight={bright ? "600" : "450"}
         >
           {t2}
         </text>
@@ -67,10 +70,10 @@ function ArchBox({
       {sub && (
         <text
           x={cx}
-          y={(t2 ? baseY + 14 : baseY) + 13}
+          y={(t2 ? baseY + 12 : baseY) + 11}
           textAnchor="middle"
-          fontSize={7}
-          letterSpacing="0.08em"
+          fontSize={6.75}
+          letterSpacing="0.06em"
           fill="var(--enterprise-arch-subtext)"
           fontFamily={FONT}
         >
@@ -82,14 +85,25 @@ function ArchBox({
 }
 
 function ArchZone({ x, y, w, h, label }: { x: number; y: number; w: number; h: number; label: string }) {
+  const cx = x + w / 2;
   return (
     <g>
-      <rect x={x} y={y} width={w} height={h} fill="none" stroke="var(--enterprise-arch-zone-stroke)" strokeWidth="1" />
+      <rect
+        x={x}
+        y={y}
+        width={w}
+        height={h}
+        rx={ZONE_RX}
+        fill="none"
+        stroke="var(--enterprise-arch-zone-stroke)"
+        strokeWidth="1"
+      />
       <text
-        x={x + 10}
-        y={y + 15}
-        fontSize="7"
-        letterSpacing="0.18em"
+        x={cx}
+        y={y + 13}
+        textAnchor="middle"
+        fontSize="6.5"
+        letterSpacing="0.16em"
         fill="var(--enterprise-arch-zone-label)"
         fontFamily={FONT}
       >
@@ -121,9 +135,10 @@ function ArchArrow({
       x2={x2}
       y2={y2}
       stroke={faint ? "var(--enterprise-arch-arrow-faint)" : "var(--enterprise-arch-arrow)"}
-      strokeWidth="1"
-      strokeDasharray={dashed ? "4 3" : undefined}
-      markerEnd={faint ? "url(#ah-faint)" : "url(#ah)"}
+      strokeWidth={faint ? 0.85 : 1}
+      strokeLinecap="round"
+      strokeDasharray={dashed ? "3 3" : undefined}
+      markerEnd={faint ? "url(#arch-ah-faint)" : "url(#arch-ah)"}
     />
   );
 }
@@ -134,17 +149,21 @@ function ArchPathArrow({ d, faint = false, dashed = false }: { d: string; faint?
       d={d}
       fill="none"
       stroke={faint ? "var(--enterprise-arch-arrow-faint)" : "var(--enterprise-arch-arrow)"}
-      strokeWidth="1"
-      strokeDasharray={dashed ? "4 3" : undefined}
-      markerEnd={faint ? "url(#ah-faint)" : "url(#ah)"}
+      strokeWidth={faint ? 0.85 : 1}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeDasharray={dashed ? "3 3" : undefined}
+      markerEnd={faint ? "url(#arch-ah-faint)" : "url(#arch-ah)"}
     />
   );
 }
 
 function MZone({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div className="border border-[var(--enterprise-arch-zone-stroke)] p-2.5">
-      <p className="mb-2 text-[0.48rem] uppercase tracking-[0.18em] text-[var(--enterprise-arch-zone-label)]">{label}</p>
+    <div className="enterprise-arch-mzone rounded-sm border border-[var(--enterprise-arch-zone-stroke)] bg-[var(--enterprise-arch-bg)] p-2.5">
+      <p className="mb-2 text-center text-[0.52rem] uppercase tracking-[0.14em] text-[var(--enterprise-arch-zone-label)]">
+        {label}
+      </p>
       <div className="flex flex-wrap gap-1.5">{children}</div>
     </div>
   );
@@ -163,61 +182,69 @@ function MBox({
 }) {
   return (
     <div
-      className={`border px-3 py-2 ${full ? "w-full" : "min-w-[120px] flex-1"} ${
+      className={`rounded-sm border px-2.5 py-2 ${full ? "w-full" : "min-w-[118px] flex-1"} ${
         bright
           ? "border-[var(--enterprise-arch-box-stroke)] bg-[var(--enterprise-arch-box-fill-strong)]"
           : "border-[var(--enterprise-arch-box-stroke)] bg-[var(--enterprise-arch-box-fill)]"
       }`}
     >
-      <span className="block text-[0.62rem] uppercase tracking-[0.1em] text-[var(--enterprise-arch-text)]">
+      <span className="block text-[0.6rem] uppercase tracking-[0.08em] text-[var(--enterprise-arch-text)]">
         {children}
       </span>
-      {sub && <span className="block text-[0.5rem] tracking-wide text-[var(--enterprise-arch-subtext)]">{sub}</span>}
+      {sub && <span className="mt-0.5 block text-[0.5rem] tracking-wide text-[var(--enterprise-arch-subtext)]">{sub}</span>}
     </div>
   );
 }
 
 /**
- * Enterprise AI Architecture Diagram
- * Monochromatic — matches DeView design system (no color, no border-radius).
+ * Enterprise AI architecture: business & application layers, data foundation, infrastructure, AI/ML core.
  */
 export function EnterpriseArchitectureDiagram({ className = "" }: { className?: string }) {
-  const W = 940;
-  const H = 420;
+  const W = 920;
+  const H = 400;
 
-  const c1w = 298;
-  const g = 18;
+  const pad = 12;
+  const c1w = 288;
+  const g = 22;
   const c2x = c1w + g;
-  const c2w = 204;
+  const c2w = 196;
   const c3x = c2x + c2w + g;
-  const c3w = W - c3x;
+  const c3w = W - pad - c3x;
 
-  const topH = 138;
-  const rg = 14;
+  const topH = 128;
+  const rg = 16;
   const midY = topH + rg;
-  const midH = H - midY;
+  const midH = H - pad - midY;
 
   const dfCx = c2x + c2w / 2;
-  const dfBW = c2w - 20;
-  const dfBX = c2x + 10;
+  const dfBW = c2w - 18;
+  const dfBX = c2x + 9;
 
-  const alBoxY = midY + 26;
-  const alBoxH = 98;
+  const bizBoxY = pad + 22;
+  const bizBoxH = topH - 38;
+  const alBoxY = midY + 20;
+  const alBoxH = midH - 36;
 
-  const infW = Math.floor((c3w - 30) / 3);
-  const inf1X = c3x + 10;
+  const infPad = 8;
+  const infW = Math.floor((c3w - infPad * 2 - 10) / 3);
+  const inf1X = c3x + infPad;
   const inf2X = inf1X + infW + 5;
   const inf3X = inf2X + infW + 5;
-  const infY = 26;
-  const infH = topH - 36;
+  const infY = pad + 22;
+  const infH = topH - 38;
 
-  const aiBoxH = 80;
-  const aiBoxY = midY + 30;
-  const regY = aiBoxY + aiBoxH + 22;
-  const aiBoxW = 144;
-  const regW = 144;
-  const srvX = c3x + aiBoxW + 18 + 10;
-  const srvW = c3w - aiBoxW - 18 - 20;
+  const aiBoxH = 72;
+  const aiBoxY = midY + 28;
+  const stackGap = 18;
+  const regY = aiBoxY + aiBoxH + stackGap;
+  const aiBoxW = 136;
+  const regW = 136;
+  const hPad = 12;
+  const srvX = c3x + hPad + aiBoxW + 14;
+  const srvW = Math.max(120, c3x + c3w - srvX - hPad);
+
+  const busY = bizBoxY + bizBoxH / 2;
+  const appY = alBoxY + alBoxH / 2;
 
   return (
     <figure className={`enterprise-arch-diagram ${className}`.trim()} aria-labelledby="arch-title">
@@ -226,122 +253,118 @@ export function EnterpriseArchitectureDiagram({ className = "" }: { className?: 
         pipeline, which drives an AI/ML Core. Infrastructure spans and governs the AI layer.
       </figcaption>
 
-      <svg className="hidden w-full md:block" viewBox={`0 0 ${W} ${H}`} role="img" aria-hidden>
+      <svg
+        className="enterprise-arch-svg hidden w-full md:block"
+        viewBox={`0 0 ${W} ${H}`}
+        role="img"
+        aria-hidden
+      >
         <defs>
-          <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+          <marker
+            id="arch-ah"
+            viewBox="0 0 8 8"
+            refX="7"
+            refY="4"
+            markerWidth="4.5"
+            markerHeight="4.5"
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+          >
             <path d="M0,0 L8,4 L0,8 Z" fill="var(--enterprise-arch-arrow)" />
           </marker>
-          <marker id="ah-faint" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+          <marker
+            id="arch-ah-faint"
+            viewBox="0 0 8 8"
+            refX="7"
+            refY="4"
+            markerWidth="4"
+            markerHeight="4"
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+          >
             <path d="M0,0 L8,4 L0,8 Z" fill="var(--enterprise-arch-arrow-faint)" />
           </marker>
         </defs>
 
-        <rect x="0" y="0" width={W} height={H} fill="var(--enterprise-arch-bg)" />
+        <rect x="0" y="0" width={W} height={H} rx="6" fill="var(--enterprise-arch-bg)" />
 
-        <ArchZone x={0} y={0} w={c1w} h={topH} label="BUSINESS LAYER" />
-        <ArchZone x={0} y={midY} w={c1w} h={midH} label="APPLICATION LAYER" />
-        <ArchZone x={c2x} y={0} w={c2w} h={H} label="DATA FOUNDATION" />
-        <ArchZone x={c3x} y={0} w={c3w} h={topH} label="INFRASTRUCTURE" />
+        <ArchZone x={pad} y={pad} w={c1w - pad} h={topH} label="BUSINESS LAYER" />
+        <ArchZone x={pad} y={midY} w={c1w - pad} h={midH} label="APPLICATION LAYER" />
+        <ArchZone x={c2x} y={pad} w={c2w} h={H - pad * 2} label="DATA FOUNDATION" />
+        <ArchZone x={c3x} y={pad} w={c3w} h={topH} label="INFRASTRUCTURE" />
         <ArchZone x={c3x} y={midY} w={c3w} h={midH} label="AI / ML CORE" />
 
-        <ArchBox x={10} y={28} w={132} h={100} t1="BUSINESS" t2="PROCESSES" />
-        <ArchBox x={156} y={28} w={132} h={100} t1="STRATEGIC" t2="GOALS" />
+        <ArchBox x={pad + 6} y={bizBoxY} w={126} h={bizBoxH} t1="BUSINESS" t2="PROCESSES" />
+        <ArchBox x={pad + 144} y={bizBoxY} w={126} h={bizBoxH} t1="STRATEGIC" t2="GOALS" />
 
-        <ArchBox x={10} y={alBoxY} w={132} h={alBoxH} t1="USER" t2="INTERFACES" />
-        <ArchBox x={156} y={alBoxY} w={132} h={alBoxH} t1="ENTERPRISE" t2="APPS" sub="ERP · CRM · etc." />
+        <ArchBox x={pad + 6} y={alBoxY} w={126} h={alBoxH} t1="USER" t2="INTERFACES" />
+        <ArchBox x={pad + 144} y={alBoxY} w={126} h={alBoxH} t1="ENTERPRISE" t2="APPS" sub="ERP · CRM · …" />
 
-        <ArchBox x={dfBX} y={26} w={dfBW} h={82} t1="DATA SOURCES" sub="Internal &amp; External" />
-        <ArchArrow x1={dfCx} y1={108} x2={dfCx} y2={130} />
-        <ArchBox x={dfBX} y={132} w={dfBW} h={66} t1="ETL PIPELINES" />
-        <ArchArrow x1={dfCx} y1={198} x2={dfCx} y2={220} />
-        <ArchBox x={dfBX} y={222} w={dfBW} h={82} t1="DATA LAKE /" t2="WAREHOUSE" />
+        <ArchBox x={dfBX} y={pad + 22} w={dfBW} h={72} t1="DATA SOURCES" sub="Internal &amp; external" />
+        <ArchArrow x1={dfCx} y1={pad + 98} x2={dfCx} y2={pad + 112} />
+        <ArchBox x={dfBX} y={pad + 114} w={dfBW} h={58} t1="ETL / PIPELINES" />
+        <ArchArrow x1={dfCx} y1={pad + 176} x2={dfCx} y2={pad + 190} />
+        <ArchBox x={dfBX} y={pad + 192} w={dfBW} h={72} t1="DATA LAKE /" t2="WAREHOUSE" />
 
-        <ArchBox x={inf1X} y={infY} w={infW} h={infH} t1="SECURITY &amp;" t2="GOVERNANCE" fontSize={7.5} />
-        <ArchBox x={inf2X} y={infY} w={infW} h={infH} t1="CLOUD /" t2="ON-PREM COMPUTE" fontSize={7.5} />
-        <ArchBox x={inf3X} y={infY} w={infW} h={infH} t1="MONITORING &amp;" t2="MLOPS" fontSize={7.5} />
+        <ArchBox x={inf1X} y={infY} w={infW} h={infH} t1="SECURITY" t2="&amp; GOVERNANCE" fontSize={7} />
+        <ArchBox x={inf2X} y={infY} w={infW} h={infH} t1="CLOUD /" t2="ON-PREM" fontSize={7} />
+        <ArchBox x={inf3X} y={infY} w={infW} h={infH} t1="MONITORING" t2="&amp; MLOPS" fontSize={7} />
 
-        <ArchBox x={c3x + 10} y={aiBoxY} w={aiBoxW} h={aiBoxH} t1="AI MODELS" bright />
-        <ArchArrow x1={c3x + 10 + aiBoxW / 2} y1={aiBoxY + aiBoxH} x2={c3x + 10 + aiBoxW / 2} y2={regY} />
-        <ArchBox x={c3x + 10} y={regY} w={regW} h={aiBoxH} t1="MODEL" t2="REGISTRY" bright />
-
-        <ArchArrow x1={c3x + 10 + regW} y1={regY + aiBoxH / 2} x2={srvX} y2={regY + aiBoxH / 2} />
+        <ArchBox x={c3x + hPad} y={aiBoxY} w={aiBoxW} h={aiBoxH} t1="AI MODELS" bright />
+        <ArchArrow x1={c3x + hPad + aiBoxW / 2} y1={aiBoxY + aiBoxH} x2={c3x + hPad + aiBoxW / 2} y2={regY} />
+        <ArchBox x={c3x + hPad} y={regY} w={regW} h={aiBoxH} t1="MODEL" t2="REGISTRY" bright />
+        <ArchArrow x1={c3x + hPad + regW} y1={regY + aiBoxH / 2} x2={srvX} y2={regY + aiBoxH / 2} />
         <ArchBox x={srvX} y={regY} w={srvW} h={aiBoxH} t1="MODEL SERVING" bright />
 
         <ArchPathArrow
-          d={`M ${srvX + srvW} ${regY + aiBoxH / 2} L ${c3x + c3w - 6} ${regY + aiBoxH / 2} L ${c3x + c3w - 6} ${aiBoxY + aiBoxH / 2} L ${c3x + aiBoxW + 10 + 6} ${aiBoxY + aiBoxH / 2}`}
+          d={`M ${srvX + srvW} ${regY + aiBoxH / 2} L ${c3x + c3w - 8} ${regY + aiBoxH / 2} L ${c3x + c3w - 8} ${aiBoxY + aiBoxH / 2} L ${c3x + hPad + aiBoxW + 4} ${aiBoxY + aiBoxH / 2}`}
           dashed
           faint
         />
 
-        <ArchArrow x1={149} y1={topH} x2={149} y2={midY + 18} faint />
+        {/* Left column: business ↔ application */}
+        <ArchArrow x1={c1w / 2} y1={topH} x2={c1w / 2} y2={midY} faint />
 
+        {/* Into data foundation */}
+        <ArchArrow x1={c1w} y1={busY} x2={c2x} y2={busY} faint />
+        <ArchArrow x1={c1w} y1={appY} x2={c2x} y2={appY} faint />
+
+        {/* Data foundation → AI / ML core */}
         <ArchPathArrow
-          d={`M ${10 + 132} ${alBoxY + alBoxH / 2} L ${srvX - 18} ${alBoxY + alBoxH / 2} L ${srvX - 18} ${regY + aiBoxH / 2} L ${srvX} ${regY + aiBoxH / 2}`}
-          faint
+          d={`M ${c2x + c2w} ${pad + 220} L ${c3x} ${pad + 220} L ${c3x} ${aiBoxY + aiBoxH / 2} L ${c3x + hPad} ${aiBoxY + aiBoxH / 2}`}
         />
 
-        <ArchArrow
-          x1={156 + 132}
-          y1={alBoxY + alBoxH / 2}
-          x2={c3x + 10}
-          y2={aiBoxY + aiBoxH / 2}
-        />
-
-        <ArchPathArrow
-          d={`M ${c2x + c2w} 263 L ${c3x} 263 L ${c3x} ${aiBoxY + aiBoxH / 2} L ${c3x + 10} ${aiBoxY + aiBoxH / 2}`}
-        />
-
+        {/* Infrastructure → AI / ML core (governance lines) */}
         <ArchArrow x1={inf1X + infW / 2} y1={topH} x2={inf1X + infW / 2} y2={midY} faint />
         <ArchArrow x1={inf2X + infW / 2} y1={topH} x2={inf2X + infW / 2} y2={midY} faint />
         <ArchArrow x1={inf3X + infW / 2} y1={topH} x2={inf3X + infW / 2} y2={midY} faint />
       </svg>
 
-      <div className="flex flex-col gap-2 md:hidden">
+      <div className="flex flex-col gap-2.5 md:hidden">
         <MZone label="BUSINESS LAYER">
-          <MBox>Business Processes</MBox>
-          <MBox>Strategic Goals</MBox>
+          <MBox>Business processes</MBox>
+          <MBox>Strategic goals</MBox>
         </MZone>
-        <div className="text-center text-[0.5rem] text-[var(--enterprise-arch-arrow-faint)]" aria-hidden>
-          ↓
-        </div>
         <MZone label="APPLICATION LAYER">
-          <MBox>User Interfaces</MBox>
-          <MBox sub="ERP · CRM · etc.">Enterprise Apps</MBox>
+          <MBox>User interfaces</MBox>
+          <MBox sub="ERP · CRM · …">Enterprise apps</MBox>
         </MZone>
-        <div className="text-center text-[0.5rem] text-[var(--enterprise-arch-arrow-faint)]" aria-hidden>
-          ↓
-        </div>
         <MZone label="DATA FOUNDATION">
-          <MBox full>Data Sources — Internal &amp; External</MBox>
-          <div className="text-center text-[0.5rem] text-[var(--enterprise-arch-arrow-faint)]" aria-hidden>
-            ↓
-          </div>
-          <MBox full>ETL Pipelines</MBox>
-          <div className="text-center text-[0.5rem] text-[var(--enterprise-arch-arrow-faint)]" aria-hidden>
-            ↓
-          </div>
-          <MBox full>Data Lake / Warehouse</MBox>
+          <MBox full>Data sources</MBox>
+          <MBox full>ETL / pipelines</MBox>
+          <MBox full>Data lake / warehouse</MBox>
         </MZone>
-        <div className="text-center text-[0.5rem] text-[var(--enterprise-arch-arrow-faint)]" aria-hidden>
-          ↓
-        </div>
         <MZone label="INFRASTRUCTURE">
-          <MBox>Security &amp; Governance</MBox>
-          <MBox>Cloud / On-Prem Compute</MBox>
-          <MBox>Monitoring &amp; MLOps</MBox>
+          <MBox>Security</MBox>
+          <MBox>Cloud / on-prem</MBox>
+          <MBox>MLOps</MBox>
         </MZone>
-        <div className="text-center text-[0.5rem] text-[var(--enterprise-arch-arrow-faint)]" aria-hidden>
-          ↓
-        </div>
         <MZone label="AI / ML CORE">
           <MBox full bright>
-            AI Models
+            AI models
           </MBox>
-          <div className="text-center text-[0.5rem] text-[var(--enterprise-arch-arrow-faint)]" aria-hidden>
-            ↓
-          </div>
-          <MBox bright>Model Registry</MBox>
-          <MBox bright>Model Serving</MBox>
+          <MBox bright>Registry</MBox>
+          <MBox bright>Serving</MBox>
         </MZone>
       </div>
     </figure>
