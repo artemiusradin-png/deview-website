@@ -657,18 +657,18 @@ html[data-theme="light"] .enterprise-mode::before {
 /* Panel sticks to viewport until wrapper is fully scrolled past */
 .enterprise-mode-stage {
   position: sticky;
-  top: 0;
-  height: 100vh;
-  height: 100dvh;
-  overflow: hidden;
+  top: 4rem;
+  height: calc(100vh - 4rem);
+  height: calc(100dvh - 4rem);
   display: grid;
   grid-template-rows: auto 1fr auto;
-  align-items: start;
-  gap: 2rem;
+  align-items: stretch;
+  gap: 0;
   /* Full viewport bleed */
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   padding: 2rem clamp(1.25rem, 4vw, 3rem);
+  box-sizing: border-box;
 }
 
 .enterprise-mode-stage-copy {
@@ -900,8 +900,11 @@ html[data-theme="light"] .enterprise-compare-enterprise {
 
   .enterprise-mode-stage {
     position: relative;
+    top: auto;
     height: auto;
     min-height: auto;
+    align-items: start;
+    gap: 2rem;
     width: 100%;
     margin-left: 0;
     margin-right: 0;
