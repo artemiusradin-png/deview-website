@@ -2133,9 +2133,19 @@ html[data-theme="light"] .contact-monument {
 footer.site-footer-inspired {
   font-family: inherit;
   position: relative;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  box-sizing: border-box;
   color: var(--text);
-  background: var(--surface);
+  /* Slightly lifted grey vs page background — full-bleed band */
+  background: color-mix(in srgb, var(--surface) 88%, rgb(148, 152, 162) 12%);
   border-top: 1px solid var(--white-20);
+}
+
+html[data-theme="light"] footer.site-footer-inspired {
+  background: color-mix(in srgb, var(--surface) 82%, rgb(138, 145, 158) 18%);
+  border-top-color: rgba(19, 31, 47, 0.1);
 }
 
 footer.site-footer-inspired .footer-rule {

@@ -28,21 +28,21 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
   };
 
   return (
-    <footer className="site-footer-inspired overflow-x-hidden pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-10 sm:pt-14 md:pt-16">
-      <div className="section-gutter mx-auto flex max-w-6xl flex-col gap-10 sm:gap-12 md:gap-14">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
-          <div className="footer-inspired-lead min-w-0 max-w-2xl lg:max-w-[42rem]">
+    <footer className="site-footer-inspired w-full overflow-x-hidden pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-10 sm:pt-14 md:pt-16">
+      <div className="section-gutter flex w-full min-w-0 max-w-none flex-col gap-10 sm:gap-12 md:gap-14">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-10 xl:gap-14">
+          <div className="footer-inspired-lead min-w-0 flex-1 lg:max-w-none">
             <p className="section-label mb-3">DeView</p>
-            <h3 className="footer-inspired-headline max-w-xl lg:max-w-2xl">
+            <h3 className="footer-inspired-headline max-w-[min(100%,52rem)] xl:max-w-[60rem]">
               Enterprise AI systems built for real operational environments.
             </h3>
-            <p className="footer-inspired-intro mt-4 max-w-xl">
+            <p className="footer-inspired-intro mt-4 max-w-[min(100%,36rem)] xl:max-w-[40rem]">
               Strategy, implementation, and integration for teams that need useful AI with reliability,
               accountability, and workflow fit.
             </p>
           </div>
 
-          <div className="footer-cta-panel w-full min-w-0 lg:max-w-[22rem] lg:shrink-0">
+          <div className="footer-cta-panel w-full min-w-0 shrink-0 lg:w-[min(100%,26rem)] xl:w-[min(100%,28rem)]">
             <span className="section-label footer-cta-label">Start with a real workflow</span>
             <p className="footer-cta-copy">
               Share the process, current bottleneck, and desired outcome. We respond with a scoped next step.
@@ -64,7 +64,7 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
           <section className="footer-structure-block footer-structure-block--brand">
             <p className="footer-structure-copy footer-structure-copy--strong">DeView AI consulting</p>
             <p className="footer-structure-copy">
-              Kharkiv, Ukraine and remote delivery for North American and European teams.
+              Hong Kong and remote delivery for North American and European teams.
             </p>
             <p className="footer-structure-copy">
               We design production-grade AI systems, internal tools, and operational workflows that can be
