@@ -25,32 +25,30 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
 
   return (
     <footer className="site-footer-inspired section-gutter overflow-x-hidden pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-8 sm:pt-10">
-      <div className="footer-card mx-auto flex max-w-6xl flex-col gap-8 px-5 py-6 sm:px-6 sm:py-7 lg:px-8">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-          <div className="footer-inspired-lead max-w-xl">
-            <p className="footer-inspired-eyebrow mb-3">DeView</p>
-            <h3 className="footer-inspired-headline max-w-lg leading-[1.05]">
-              Enterprise AI work that fits the constraints of real operations.
+      <div className="footer-card mx-auto flex max-w-6xl flex-col gap-8 px-5 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
+        <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.9fr)] lg:items-end">
+          <div className="footer-inspired-lead max-w-2xl">
+            <p className="footer-inspired-eyebrow mb-3">DeView / AI Consulting</p>
+            <h3 className="footer-inspired-headline max-w-3xl leading-[0.98]">
+              Production-grade AI systems for companies that need reliability, integration, and business utility.
             </h3>
-            <p className="footer-inspired-intro mt-4 max-w-md leading-relaxed">
-              Strategy, implementation, and system integration for teams that need useful AI in production,
-              not another internal demo.
+            <p className="footer-inspired-intro mt-4 max-w-xl leading-relaxed">
+              We scope, build, and deploy enterprise AI with operational discipline, from use-case definition
+              to production rollout.
             </p>
           </div>
 
-          <div className="flex shrink-0 flex-col items-start gap-3 lg:items-end">
+          <div className="footer-cta-panel">
             <span className="footer-inspired-cta-label">Start with a real workflow</span>
-            <div className="flex flex-wrap gap-3">
+            <p className="footer-cta-copy">
+              Send the process, constraints, and intended outcome. We reply with a scoped next step.
+            </p>
+            <div className="footer-cta-actions">
               <a href="/contact" className="btn-outline footer-inspired-btn">
-                Send inquiry →
+                Start a project
               </a>
-              <a
-                href="https://ai-consulting-task-manager.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline footer-inspired-btn footer-inspired-btn--muted"
-              >
-                Internal
+              <a href="mailto:hello@deview.ai" className="btn-outline footer-inspired-btn footer-inspired-btn--muted">
+                hello@deview.ai
               </a>
             </div>
           </div>
@@ -70,10 +68,9 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
 
         <div className="footer-summary-grid">
           <article className="footer-summary-card">
-            <p className="footer-column-title">What We Do</p>
+            <p className="footer-column-title">Services</p>
             <p className="footer-summary-copy">
-              We help companies identify high-value AI opportunities, scope the right system, and implement
-              custom solutions that fit real operational constraints.
+              Advisory and implementation work for teams moving from exploration to production.
             </p>
             <div className="footer-link-stack">
               <a href={resolveHref("#services")} className="footer-link-row">
@@ -89,10 +86,9 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
           </article>
 
           <article className="footer-summary-card">
-            <p className="footer-column-title">How We Deliver</p>
+            <p className="footer-column-title">Delivery</p>
             <p className="footer-summary-copy">
-              Engagements move from problem definition to production rollout with evaluation, reliability,
-              and business utility treated as first-order requirements.
+              Work is structured around measurable business outcomes, live workflow fit, and system reliability.
             </p>
             <div className="footer-link-stack">
               <a href={resolveHref("#process")} className="footer-link-row">
@@ -108,24 +104,24 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
           </article>
 
           <article className="footer-summary-card">
-            <p className="footer-column-title">Who It&apos;s For</p>
+            <p className="footer-column-title">Contact</p>
             <p className="footer-summary-copy">
-              Built for mid-market and enterprise teams dealing with scale, compliance, legacy systems, and
-              the need for accountable outputs.
+              Best fit for mid-market and enterprise organizations with operational complexity, legacy systems,
+              or compliance requirements.
             </p>
             <div className="footer-link-stack">
-              <a href={resolveHref("#enterprise-ai")} className="footer-link-row">
-                <span>Enterprise AI beyond demos</span>
+              <a href="mailto:hello@deview.ai" className="footer-link-row">
+                <span>hello@deview.ai</span>
               </a>
-              <a href={resolveHref("#enterprise-ai")} className="footer-link-row">
-                <span>Integration into existing stacks and processes</span>
+              <a href="/contact" className="footer-link-row">
+                <span>Project inquiry form</span>
               </a>
               <div className="footer-button-row">
                 <a href="mailto:hello@deview.ai" className="footer-chip">
-                  hello@deview.ai
+                  Email
                 </a>
                 <a href="/contact" className="footer-chip">
-                  Contact Form
+                  Contact
                 </a>
               </div>
             </div>
