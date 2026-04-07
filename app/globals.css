@@ -568,21 +568,8 @@ html[data-theme="light"] .hero-fallback {
   position: relative;
   transition:
     transform 180ms ease,
-    border-color 180ms ease,
-    background-color 180ms ease;
-}
-
-.panel-interactive::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  border-top: 1px solid transparent;
-  transition: border-color 180ms ease;
-}
-
-.panel-interactive:hover::after {
-  border-top-color: var(--white-40);
+    background-color 180ms ease,
+    opacity 180ms ease;
 }
 
 .process-card {
@@ -614,8 +601,7 @@ html[data-theme="light"] .hero-fallback {
 .enterprise-statement-stack {
   position: relative;
   max-width: 52rem;
-  padding-left: 1rem;
-  border-left: 1px solid var(--white-20);
+  padding-left: 0;
 }
 
 .enterprise-statement-line {
@@ -671,8 +657,9 @@ html[data-theme="light"] .hero-fallback {
 .pillar-row-outer {
   position: relative;
   overflow: hidden;
-  border-bottom: 1px solid var(--white-20);
   transition: background-color 200ms ease;
+  margin-right: calc(-50vw + 50%);
+  padding-right: calc(50vw - 50%);
 }
 
 .pillar-row-outer--active {
@@ -794,8 +781,8 @@ html[data-theme="light"] .hero-fallback {
 .enterprise-mode {
   position: relative;
   overflow: hidden;
+  border: none;
   transition:
-    border-color 180ms ease,
     background-color 180ms ease,
     opacity 180ms ease,
     transform 180ms ease;
@@ -847,14 +834,13 @@ html[data-theme="light"] .enterprise-mode::before {
 .enterprise-card-button:hover,
 .enterprise-card-button:focus-visible,
 .enterprise-card-active {
-  border-color: var(--white-60);
   transform: translateY(-2px);
+  background: var(--surface-elevated);
 }
 
 .enterprise-mode:hover,
 .enterprise-mode:focus-visible,
 .enterprise-mode-active {
-  border-color: var(--white-60);
   background: var(--background);
   transform: translateY(-2px);
 }
@@ -880,7 +866,7 @@ html[data-theme="light"] .enterprise-mode::before {
   box-sizing: border-box;
   height: calc(100vh - 4rem);
   height: calc(100dvh - 4rem);
-  border-top: 1px solid var(--white-20);
+  border-top: none;
 }
 
 /* JS-driven pin: before entering — sits at top of wrapper */
@@ -958,7 +944,7 @@ html[data-theme="light"] .enterprise-mode::before {
   max-height: 100%;
   width: 100%;
   max-width: 100%;
-  padding-left: 1.75rem;
+  padding-left: 0;
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -993,6 +979,7 @@ html[data-theme="light"] .enterprise-mode::before {
     linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 28%),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03), transparent 28%),
     var(--surface);
+  border: none;
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -1162,8 +1149,7 @@ html[data-theme="light"] .enterprise-mode::before {
   font: inherit;
   text-align: left;
   background: none;
-  border: 0;
-  border-top: 1px solid var(--white-10);
+  border: none;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
@@ -1179,7 +1165,7 @@ html[data-theme="light"] .enterprise-mode::before {
     transform 180ms ease,
     opacity 180ms ease;
   color: var(--white-40);
-  padding: 0.75rem 0 0;
+  padding: 0.5rem 0;
   opacity: 0.42;
 }
 
@@ -1203,12 +1189,7 @@ html[data-theme="light"] .enterprise-mode::before {
 }
 
 .enterprise-scroll-rail {
-  position: absolute;
-  left: 0;
-  top: 0.5rem;
-  bottom: 0.5rem;
-  width: 2px;
-  background: var(--white-10);
+  display: none;
 }
 
 .enterprise-scroll-rail-fill {
@@ -1218,7 +1199,7 @@ html[data-theme="light"] .enterprise-mode::before {
 
 .enterprise-mode-stage-detail {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem 2rem;
   align-items: start;
   grid-template-columns: minmax(0, 20rem) 1fr;
 }
@@ -1226,8 +1207,8 @@ html[data-theme="light"] .enterprise-mode::before {
 .enterprise-mode-stage-detail--in-card {
   width: 100%;
   margin: 0;
-  padding: 1.15rem 0 0;
-  border-top: 1px solid var(--white-20);
+  padding: 1.25rem 0 0;
+  border: none;
   background: transparent;
   box-sizing: border-box;
 }
@@ -1238,25 +1219,21 @@ html[data-theme="light"] .enterprise-mode::before {
 
 .enterprise-mode-stage-detail-copy {
   margin: 0;
-  border-left: 1px solid var(--white-20);
-  padding-left: 1.75rem;
+  border: none;
+  padding-left: 0;
   font-size: clamp(0.95rem, 1.35vw, 1.12rem);
   line-height: 1.65;
 }
 
-html[data-theme="light"] .enterprise-mode-stage-detail-copy {
-  border-left-color: var(--white-20);
-}
-
 .enterprise-compare {
-  border: 1px solid var(--white-20);
+  border: none;
   padding: 1.1rem 1rem;
   background: var(--surface-elevated);
 }
 
 .enterprise-compare-active {
-  border-color: var(--white-60);
   transform: translateY(-2px);
+  background: var(--surface);
 }
 
 .enterprise-compare-dim {
@@ -1297,15 +1274,14 @@ html[data-theme="light"] .enterprise-compare-enterprise {
 }
 
 .enterprise-chip {
-  border: 1px solid var(--white-20);
-  background: transparent;
+  border: none;
+  background: var(--white-10);
   color: var(--white-60);
   padding: 0.65rem 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-size: 0.62rem;
   transition:
-    border-color 180ms ease,
     color 180ms ease,
     background-color 180ms ease,
     transform 180ms ease;
@@ -1314,7 +1290,6 @@ html[data-theme="light"] .enterprise-compare-enterprise {
 .enterprise-chip:hover,
 .enterprise-chip:focus-visible,
 .enterprise-chip-active {
-  border-color: var(--white-60);
   color: var(--white-100);
   background: var(--surface-elevated);
   transform: translateY(-1px);
@@ -1457,10 +1432,7 @@ html[data-theme="light"] .enterprise-compare-enterprise {
   }
 
   .enterprise-mode-stage-detail-copy {
-    border-left: 0;
-    border-top: 1px solid var(--white-20);
-    padding-left: 0;
-    padding-top: 1rem;
+    padding-top: 0.35rem;
   }
 }
 
@@ -1971,7 +1943,6 @@ html[data-theme="light"] .carousel-fade-right {
 
 .solutions-card {
   transition:
-    border-color 220ms ease,
     background-color 220ms ease,
     opacity 220ms ease,
     transform 220ms ease;
@@ -1982,7 +1953,6 @@ html[data-theme="light"] .carousel-fade-right {
 }
 
 .solutions-card-active {
-  border-color: var(--white-60);
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--solutions-accent) 55%, transparent), transparent 45%),
     var(--surface-elevated);
