@@ -649,25 +649,32 @@ html[data-theme="light"] .enterprise-mode::before {
   min-height: 4rem;
 }
 
+/* Tall scroll-distance wrapper — gives scroll room for the sticky panel */
+.enterprise-stage-scroll-wrapper {
+  position: relative;
+  height: 300vh;
+}
+
+/* Panel sticks to viewport until wrapper is fully scrolled past */
 .enterprise-mode-stage {
-  min-height: 240vh;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr auto;
   align-items: start;
   gap: 2rem;
-  width: calc(100% + 8rem);
-  margin-left: -4rem;
-  margin-right: -4rem;
+  /* Full viewport bleed */
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   padding: 2rem clamp(1.25rem, 4vw, 3rem);
-  position: relative;
 }
 
 .enterprise-mode-stage-copy {
   max-width: none;
   width: 100%;
-  position: sticky;
-  top: 5.5rem;
-  z-index: 2;
 }
 
 .enterprise-mode-stage-title {

@@ -77,25 +77,25 @@ const enterprisePillars = [
   {
     id: "scale",
     label: "SCALE",
-    summary: "The system has to keep performing when usage, concurrency, and data volume are no longer small-team problems.",
+    summary: "We architect for enterprise load, uptime, and data volume so the system keeps performing under real operational demand.",
     points: ["100s-1000s of users", "24/7 availability", "TB-PB data volumes"],
   },
   {
     id: "compliance",
     label: "COMPLIANCE",
-    summary: "Enterprise AI inherits the regulatory burden of the business function it supports.",
+    summary: "We build around the compliance, audit, and regulatory requirements your workflows already operate under.",
     points: ["HIPAA, SOX, GDPR", "Industry regulations", "Audit requirements"],
   },
   {
     id: "integration",
     label: "INTEGRATION",
-    summary: "The model is only useful if it fits the systems, workflow handoffs, and governance already in place.",
+    summary: "We connect AI into legacy systems, existing workflows, and governance models so it works inside the real stack.",
     points: ["Legacy systems", "Existing workflows", "Data governance"],
   },
   {
     id: "accountability",
     label: "ACCOUNTABILITY",
-    summary: "Outputs need to be reviewable, explainable, and controllable by the people responsible for outcomes.",
+    summary: "We make outputs reviewable, explainable, and controllable by the people responsible for outcomes.",
     points: ["Auditability", "Explainability", "Human oversight"],
   },
 ];
@@ -248,7 +248,7 @@ export default function Home() {
   const solutionCarouselRef = useRef<HTMLDivElement | null>(null);
   const solutionCardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const solutionsSectionRef = useRef<HTMLElement | null>(null);
-  const enterpriseModesSectionRef = useRef<HTMLElement | null>(null);
+  const enterpriseModesSectionRef = useRef<HTMLDivElement | null>(null);
   const [heroVideoState, setHeroVideoState] = useState<"loading" | "playing" | "fallback">("loading");
   const [activeHeroLayer, setActiveHeroLayer] = useState(0);
   const [fadingHeroLayer, setFadingHeroLayer] = useState<number | null>(null);
@@ -279,7 +279,7 @@ export default function Home() {
   const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress: enterpriseModesProgress } = useScroll({
     target: enterpriseModesSectionRef,
-    offset: ["start 80%", "end 35%"],
+    offset: ["start start", "end end"],
   });
 
   useEffect(() => {
@@ -1004,13 +1004,13 @@ export default function Home() {
               transition={{ duration: 0.45 }}
               className="panel border border-[var(--white-20)] bg-[var(--surface-elevated)] p-5 md:p-6"
             >
-              <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                 <div>
                   <p className="section-label mb-2">WHAT MAKES IT ENTERPRISE</p>
-                  <h3 className="text-lg text-[var(--white-100)] md:text-2xl">The deployment constraints are the product requirements.</h3>
+                  <h3 className="text-lg text-[var(--white-100)] md:text-2xl">Enterprise AI works when the deployment is built for enterprise reality.</h3>
                 </div>
                 <p className="max-w-sm text-[0.8rem] text-[var(--text-muted)]">
-                  Enterprise AI has to hold up under technical, legal, and operational pressure.
+                  DeView designs for scale, compliance, integration, and accountability from the start.
                 </p>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
@@ -1040,7 +1040,7 @@ export default function Home() {
               </div>
               <div className="enterprise-detail mt-4 border-t border-[var(--white-20)] pt-4">
                 <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-6">
-                  <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[var(--white-60)]">Active Constraint</p>
+                  <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[var(--white-60)]">What We Handle</p>
                   <div className="max-w-xl">
                     <p className="mb-2 text-sm uppercase tracking-[0.18em] text-[var(--white-100)]">
                       {selectedPillar.label}
@@ -1053,15 +1053,17 @@ export default function Home() {
 
           </div>
 
-          <motion.section
-            ref={enterpriseModesSectionRef}
-            variants={cardMotion}
-            initial="initial"
-            whileInView="whileInView"
-            viewport={reveal.viewport}
-            transition={{ duration: 0.45, delay: 0.06 }}
-            className="enterprise-mode-stage panel border border-[var(--white-20)] bg-[var(--surface-elevated)]"
-          >
+        </motion.div>
+      </section>
+
+      {/* Full-bleed scroll-pinned enterprise mode stage */}
+      <div
+        ref={enterpriseModesSectionRef}
+        className="enterprise-stage-scroll-wrapper"
+      >
+        <section
+          className="enterprise-mode-stage border-t border-[var(--white-20)] bg-[var(--surface-elevated)]"
+        >
             <div className="enterprise-mode-stage-copy">
               <p className="section-label mb-3">WHAT IS ENTERPRISE AI</p>
               <h3 className="enterprise-mode-stage-title text-[var(--white-100)]">
@@ -1140,8 +1142,11 @@ export default function Home() {
               </div>
               <p className="enterprise-mode-stage-detail-copy text-[var(--text-muted)]">{selectedMode.body}</p>
             </motion.div>
-          </motion.section>
+          </section>
+      </div>
 
+      <section className="relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter py-10 md:py-16">
+        <div className="mx-auto max-w-6xl">
           <motion.section
             variants={cardMotion}
             initial="initial"
@@ -1231,7 +1236,7 @@ export default function Home() {
               </p>
             </div>
           </motion.section>
-        </motion.div>
+        </div>
       </section>
 
       <section
