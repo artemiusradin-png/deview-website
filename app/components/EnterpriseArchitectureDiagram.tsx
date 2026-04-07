@@ -2,17 +2,6 @@
 
 import type { ReactNode } from "react";
 
-/* ─── palette (module scope for static subcomponents) ─────── */
-const BG = "#0a0a0a";
-const ZONE = "rgba(240,240,250,0.18)";
-const BOX = "rgba(240,240,250,0.40)";
-const BOXF = "rgba(240,240,250,0.05)";
-const BOXF2 = "rgba(240,240,250,0.09)";
-const ZLBL = "rgba(240,240,250,0.45)";
-const TXT = "rgba(240,240,250,0.92)";
-const SUB = "rgba(240,240,250,0.50)";
-const ARR = "rgba(240,240,250,0.55)";
-const ARRF = "rgba(240,240,250,0.28)";
 const FONT = "D-DIN, Arial, sans-serif";
 
 function ArchBox({
@@ -40,14 +29,22 @@ function ArchBox({
   const baseY = t2 ? y + h / 2 - 7 : y + h / 2 + 4;
   return (
     <g>
-      <rect x={x} y={y} width={w} height={h} fill={bright ? BOXF2 : BOXF} stroke={BOX} strokeWidth="1" />
+      <rect
+        x={x}
+        y={y}
+        width={w}
+        height={h}
+        fill={bright ? "var(--enterprise-arch-box-fill-strong)" : "var(--enterprise-arch-box-fill)"}
+        stroke="var(--enterprise-arch-box-stroke)"
+        strokeWidth="1"
+      />
       <text
         x={cx}
         y={baseY}
         textAnchor="middle"
         fontSize={fontSize}
         letterSpacing="0.11em"
-        fill={TXT}
+        fill="var(--enterprise-arch-text)"
         fontFamily={FONT}
         fontWeight={bright ? "600" : "400"}
       >
@@ -60,7 +57,7 @@ function ArchBox({
           textAnchor="middle"
           fontSize={fontSize}
           letterSpacing="0.11em"
-          fill={TXT}
+          fill="var(--enterprise-arch-text)"
           fontFamily={FONT}
           fontWeight={bright ? "600" : "400"}
         >
@@ -74,7 +71,7 @@ function ArchBox({
           textAnchor="middle"
           fontSize={7}
           letterSpacing="0.08em"
-          fill={SUB}
+          fill="var(--enterprise-arch-subtext)"
           fontFamily={FONT}
         >
           {sub}
@@ -87,8 +84,15 @@ function ArchBox({
 function ArchZone({ x, y, w, h, label }: { x: number; y: number; w: number; h: number; label: string }) {
   return (
     <g>
-      <rect x={x} y={y} width={w} height={h} fill="none" stroke={ZONE} strokeWidth="1" />
-      <text x={x + 10} y={y + 15} fontSize="7" letterSpacing="0.18em" fill={ZLBL} fontFamily={FONT}>
+      <rect x={x} y={y} width={w} height={h} fill="none" stroke="var(--enterprise-arch-zone-stroke)" strokeWidth="1" />
+      <text
+        x={x + 10}
+        y={y + 15}
+        fontSize="7"
+        letterSpacing="0.18em"
+        fill="var(--enterprise-arch-zone-label)"
+        fontFamily={FONT}
+      >
         {label}
       </text>
     </g>
@@ -116,7 +120,7 @@ function ArchArrow({
       y1={y1}
       x2={x2}
       y2={y2}
-      stroke={faint ? ARRF : ARR}
+      stroke={faint ? "var(--enterprise-arch-arrow-faint)" : "var(--enterprise-arch-arrow)"}
       strokeWidth="1"
       strokeDasharray={dashed ? "4 3" : undefined}
       markerEnd={faint ? "url(#ah-faint)" : "url(#ah)"}
@@ -129,7 +133,7 @@ function ArchPathArrow({ d, faint = false, dashed = false }: { d: string; faint?
     <path
       d={d}
       fill="none"
-      stroke={faint ? ARRF : ARR}
+      stroke={faint ? "var(--enterprise-arch-arrow-faint)" : "var(--enterprise-arch-arrow)"}
       strokeWidth="1"
       strokeDasharray={dashed ? "4 3" : undefined}
       markerEnd={faint ? "url(#ah-faint)" : "url(#ah)"}
@@ -139,8 +143,8 @@ function ArchPathArrow({ d, faint = false, dashed = false }: { d: string; faint?
 
 function MZone({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div className="border border-[rgba(240,240,250,0.18)] p-2.5">
-      <p className="mb-2 text-[0.48rem] uppercase tracking-[0.18em] text-[rgba(240,240,250,0.45)]">{label}</p>
+    <div className="border border-[var(--enterprise-arch-zone-stroke)] p-2.5">
+      <p className="mb-2 text-[0.48rem] uppercase tracking-[0.18em] text-[var(--enterprise-arch-zone-label)]">{label}</p>
       <div className="flex flex-wrap gap-1.5">{children}</div>
     </div>
   );
@@ -161,14 +165,14 @@ function MBox({
     <div
       className={`border px-3 py-2 ${full ? "w-full" : "min-w-[120px] flex-1"} ${
         bright
-          ? "border-[rgba(240,240,250,0.45)] bg-[rgba(240,240,250,0.09)]"
-          : "border-[rgba(240,240,250,0.30)] bg-[rgba(240,240,250,0.04)]"
+          ? "border-[var(--enterprise-arch-box-stroke)] bg-[var(--enterprise-arch-box-fill-strong)]"
+          : "border-[var(--enterprise-arch-box-stroke)] bg-[var(--enterprise-arch-box-fill)]"
       }`}
     >
-      <span className="block text-[0.62rem] uppercase tracking-[0.1em] text-[rgba(240,240,250,0.92)]">
+      <span className="block text-[0.62rem] uppercase tracking-[0.1em] text-[var(--enterprise-arch-text)]">
         {children}
       </span>
-      {sub && <span className="block text-[0.5rem] tracking-wide text-[rgba(240,240,250,0.48)]">{sub}</span>}
+      {sub && <span className="block text-[0.5rem] tracking-wide text-[var(--enterprise-arch-subtext)]">{sub}</span>}
     </div>
   );
 }
@@ -216,7 +220,7 @@ export function EnterpriseArchitectureDiagram({ className = "" }: { className?: 
   const srvW = c3w - aiBoxW - 18 - 20;
 
   return (
-    <figure className={`${className}`.trim()} aria-labelledby="arch-title">
+    <figure className={`enterprise-arch-diagram ${className}`.trim()} aria-labelledby="arch-title">
       <figcaption id="arch-title" className="sr-only">
         Enterprise AI Architecture: Business Layer and Application Layer feed data into a central Data Foundation
         pipeline, which drives an AI/ML Core. Infrastructure spans and governs the AI layer.
@@ -225,14 +229,14 @@ export function EnterpriseArchitectureDiagram({ className = "" }: { className?: 
       <svg className="hidden w-full md:block" viewBox={`0 0 ${W} ${H}`} role="img" aria-hidden>
         <defs>
           <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
-            <path d="M0,0 L8,4 L0,8 Z" fill={ARR} />
+            <path d="M0,0 L8,4 L0,8 Z" fill="var(--enterprise-arch-arrow)" />
           </marker>
           <marker id="ah-faint" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
-            <path d="M0,0 L8,4 L0,8 Z" fill={ARRF} />
+            <path d="M0,0 L8,4 L0,8 Z" fill="var(--enterprise-arch-arrow-faint)" />
           </marker>
         </defs>
 
-        <rect x="0" y="0" width={W} height={H} fill={BG} />
+        <rect x="0" y="0" width={W} height={H} fill="var(--enterprise-arch-bg)" />
 
         <ArchZone x={0} y={0} w={c1w} h={topH} label="BUSINESS LAYER" />
         <ArchZone x={0} y={midY} w={c1w} h={midH} label="APPLICATION LAYER" />
@@ -269,8 +273,19 @@ export function EnterpriseArchitectureDiagram({ className = "" }: { className?: 
           faint
         />
 
-        <ArchArrow x1={c1w} y1={78} x2={c2x} y2={78} faint />
-        <ArchArrow x1={c1w} y1={midY + 72} x2={c2x} y2={midY + 72} faint />
+        <ArchArrow x1={149} y1={topH} x2={149} y2={midY + 18} faint />
+
+        <ArchPathArrow
+          d={`M ${10 + 132} ${alBoxY + alBoxH / 2} L ${srvX - 18} ${alBoxY + alBoxH / 2} L ${srvX - 18} ${regY + aiBoxH / 2} L ${srvX} ${regY + aiBoxH / 2}`}
+          faint
+        />
+
+        <ArchArrow
+          x1={156 + 132}
+          y1={alBoxY + alBoxH / 2}
+          x2={c3x + 10}
+          y2={aiBoxY + aiBoxH / 2}
+        />
 
         <ArchPathArrow
           d={`M ${c2x + c2w} 263 L ${c3x} 263 L ${c3x} ${aiBoxY + aiBoxH / 2} L ${c3x + 10} ${aiBoxY + aiBoxH / 2}`}
@@ -286,28 +301,28 @@ export function EnterpriseArchitectureDiagram({ className = "" }: { className?: 
           <MBox>Business Processes</MBox>
           <MBox>Strategic Goals</MBox>
         </MZone>
-        <div className="text-center text-[0.5rem] text-[rgba(240,240,250,0.3)]" aria-hidden>
+        <div className="text-center text-[0.5rem] text-[var(--enterprise-arch-arrow-faint)]" aria-hidden>
           ↓
         </div>
         <MZone label="APPLICATION LAYER">
           <MBox>User Interfaces</MBox>
           <MBox sub="ERP · CRM · etc.">Enterprise Apps</MBox>
         </MZone>
-        <div className="text-center text-[0.5rem] text-[rgba(240,240,250,0.3)]" aria-hidden>
+        <div className="text-center text-[0.5rem] text-[var(--enterprise-arch-arrow-faint)]" aria-hidden>
           ↓
         </div>
         <MZone label="DATA FOUNDATION">
           <MBox full>Data Sources — Internal &amp; External</MBox>
-          <div className="text-center text-[0.5rem] text-[rgba(240,240,250,0.3)]" aria-hidden>
+          <div className="text-center text-[0.5rem] text-[var(--enterprise-arch-arrow-faint)]" aria-hidden>
             ↓
           </div>
           <MBox full>ETL Pipelines</MBox>
-          <div className="text-center text-[0.5rem] text-[rgba(240,240,250,0.3)]" aria-hidden>
+          <div className="text-center text-[0.5rem] text-[var(--enterprise-arch-arrow-faint)]" aria-hidden>
             ↓
           </div>
           <MBox full>Data Lake / Warehouse</MBox>
         </MZone>
-        <div className="text-center text-[0.5rem] text-[rgba(240,240,250,0.3)]" aria-hidden>
+        <div className="text-center text-[0.5rem] text-[var(--enterprise-arch-arrow-faint)]" aria-hidden>
           ↓
         </div>
         <MZone label="INFRASTRUCTURE">
@@ -315,14 +330,14 @@ export function EnterpriseArchitectureDiagram({ className = "" }: { className?: 
           <MBox>Cloud / On-Prem Compute</MBox>
           <MBox>Monitoring &amp; MLOps</MBox>
         </MZone>
-        <div className="text-center text-[0.5rem] text-[rgba(240,240,250,0.3)]" aria-hidden>
+        <div className="text-center text-[0.5rem] text-[var(--enterprise-arch-arrow-faint)]" aria-hidden>
           ↓
         </div>
         <MZone label="AI / ML CORE">
           <MBox full bright>
             AI Models
           </MBox>
-          <div className="text-center text-[0.5rem] text-[rgba(240,240,250,0.3)]" aria-hidden>
+          <div className="text-center text-[0.5rem] text-[var(--enterprise-arch-arrow-faint)]" aria-hidden>
             ↓
           </div>
           <MBox bright>Model Registry</MBox>

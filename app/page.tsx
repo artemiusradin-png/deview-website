@@ -75,33 +75,6 @@ const services = [
   },
 ];
 
-const enterprisePillars = [
-  {
-    id: "scale",
-    label: "SCALE",
-    summary: "We architect for enterprise load, uptime, and data volume so the system keeps performing under real operational demand.",
-    points: ["100s-1000s of users", "24/7 availability", "TB-PB data volumes"],
-  },
-  {
-    id: "compliance",
-    label: "COMPLIANCE",
-    summary: "We build around the compliance, audit, and regulatory requirements your workflows already operate under.",
-    points: ["HIPAA, SOX, GDPR", "Industry regulations", "Audit requirements"],
-  },
-  {
-    id: "integration",
-    label: "INTEGRATION",
-    summary: "We connect AI into legacy systems, existing workflows, and governance models so it works inside the real stack.",
-    points: ["Legacy systems", "Existing workflows", "Data governance"],
-  },
-  {
-    id: "accountability",
-    label: "ACCOUNTABILITY",
-    summary: "We make outputs reviewable, explainable, and controllable by the people responsible for outcomes.",
-    points: ["Auditability", "Explainability", "Human oversight"],
-  },
-];
-
 const enterpriseModes = [
   {
     id: "predictive",
@@ -268,7 +241,6 @@ export default function Home() {
 
     return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
   });
-  const [activeEnterprisePillar, setActiveEnterprisePillar] = useState(enterprisePillars[0].id);
   const [activeEnterpriseMode, setActiveEnterpriseMode] = useState(enterpriseModes[0].id);
   const [architectureFocus, setArchitectureFocus] = useState<"public" | "enterprise">("enterprise");
   const [activeSolutionIndex, setActiveSolutionIndex] = useState(0);
@@ -1045,51 +1017,19 @@ export default function Home() {
             </div>
           </div>
 
-          <div>
-            <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+          <div className="pt-2">
+            <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="section-label mb-2">WHAT MAKES IT ENTERPRISE</p>
-                <EnterpriseArchitectureDiagram className="my-5 md:my-6" />
-                <h3 className="text-lg text-[var(--white-100)] md:text-2xl">Enterprise AI works when the deployment is built for enterprise reality.</h3>
+                <h3 className="text-lg text-[var(--white-100)] md:text-2xl">Architecture across business systems, data foundation, infrastructure, and AI/ML operations.</h3>
               </div>
               <p className="max-w-sm text-[0.8rem] text-[var(--text-muted)]">
-                DeView designs for scale, compliance, integration, and accountability from the start.
+                The deployment has to connect strategy, enterprise applications, data pipelines, infrastructure,
+                and model operations in one controlled system.
               </p>
             </div>
-            <div className="rule" />
-            <div>
-              {enterprisePillars.map((pillar, i) => (
-                <div
-                  key={pillar.id}
-                  className={`pillar-row-outer${activeEnterprisePillar === pillar.id ? " pillar-row-outer--active" : ""}`}
-                  onMouseEnter={() => setActiveEnterprisePillar(pillar.id)}
-                  onFocus={() => setActiveEnterprisePillar(pillar.id)}
-                >
-                  {/* Content — revealed by the wipe */}
-                  <div className="pillar-row">
-                    <span className="pillar-row-num">0{i + 1}</span>
-                    <span className="pillar-row-label">{pillar.label}</span>
-                    <span className="pillar-row-summary">{pillar.summary}</span>
-                    <ul className="pillar-row-points">
-                      {pillar.points.map((pt) => (
-                        <li key={pt}>{pt}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  {/* Wipe cover — collapses left→right on scroll into view */}
-                  <motion.div
-                    className="pillar-row-wipe"
-                    initial={{ scaleX: 1 }}
-                    whileInView={{ scaleX: 0 }}
-                    viewport={{ once: true, margin: "-60px" }}
-                    transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: i * 0.07 }}
-                    aria-hidden="true"
-                  />
-                  {/* Large background number */}
-                  <span className="pillar-row-bg-num" aria-hidden="true">0{i + 1}</span>
-                </div>
-              ))}
-            </div>
+            <div className="rule mb-5" />
+            <EnterpriseArchitectureDiagram className="my-2 md:my-4" />
           </div>
 
         </motion.div>
