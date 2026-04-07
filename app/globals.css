@@ -260,8 +260,8 @@ html[data-theme="light"] .hero-video {
 }
 
 .footer-card {
-  border: 1px solid var(--white-20);
-  border-radius: 2rem;
+  border: none;
+  border-radius: 0;
   background:
     radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent 34%),
     radial-gradient(circle at bottom right, rgba(255, 214, 138, 0.08), transparent 28%),
@@ -297,14 +297,14 @@ html[data-theme="light"] .footer-card {
 }
 
 .footer-summary-card {
-  padding: 1.15rem 1.1rem;
-  border: 1px solid var(--white-10);
-  border-radius: 1.35rem;
-  background: rgba(255, 255, 255, 0.02);
+  padding: 1.15rem 1.1rem 1.15rem 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
 }
 
 html[data-theme="light"] .footer-summary-card {
-  background: rgba(255, 255, 255, 0.48);
+  background: transparent;
 }
 
 .footer-summary-copy {
@@ -354,7 +354,7 @@ html[data-theme="light"] .footer-summary-card {
 
 @media (max-width: 640px) {
   .footer-card {
-    border-radius: 1.5rem;
+    border-radius: 0;
   }
 }
 

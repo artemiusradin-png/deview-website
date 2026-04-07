@@ -1635,7 +1635,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="section-gutter border-t border-[var(--white-20)] bg-[var(--background)] pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-6 sm:pt-8">
+      <footer className="section-gutter bg-[var(--background)] pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-6 sm:pt-8">
         <div className="footer-card mx-auto flex max-w-6xl flex-col gap-8 overflow-hidden px-5 py-6 sm:px-6 sm:py-7 lg:px-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-xl">
