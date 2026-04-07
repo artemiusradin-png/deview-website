@@ -8,6 +8,20 @@ const footerQuickLinks = [
   { id: "inquire", label: "Inquire", href: "/contact" },
 ] as const;
 
+const companyLinks = [
+  { label: "AI strategy", href: "#services" },
+  { label: "Custom solutions", href: "#solutions" },
+  { label: "Enterprise AI", href: "#enterprise-ai" },
+  { label: "Contact", href: "/contact" },
+] as const;
+
+const helpLinks = [
+  { label: "Process", href: "#process" },
+  { label: "Outcomes", href: "#outcomes" },
+  { label: "Use cases", href: "#solutions" },
+  { label: "Send inquiry", href: "/contact" },
+] as const;
+
 type SiteFooterProps = {
   rootPrefix?: string;
 };
@@ -26,29 +40,29 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
   return (
     <footer className="site-footer-inspired section-gutter overflow-x-hidden pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-8 sm:pt-10">
       <div className="footer-card mx-auto flex max-w-6xl flex-col gap-8 px-5 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
-        <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.9fr)] lg:items-end">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="footer-inspired-lead max-w-2xl">
-            <p className="footer-inspired-eyebrow mb-3">DeView / AI Consulting</p>
+            <p className="footer-inspired-eyebrow mb-3">DeView</p>
             <h3 className="footer-inspired-headline max-w-3xl leading-[0.98]">
-              Production-grade AI systems for companies that need reliability, integration, and business utility.
+              Enterprise AI systems built for real operational environments.
             </h3>
             <p className="footer-inspired-intro mt-4 max-w-xl leading-relaxed">
-              We scope, build, and deploy enterprise AI with operational discipline, from use-case definition
-              to production rollout.
+              Strategy, implementation, and integration for teams that need useful AI with reliability,
+              accountability, and workflow fit.
             </p>
           </div>
 
           <div className="footer-cta-panel">
             <span className="footer-inspired-cta-label">Start with a real workflow</span>
             <p className="footer-cta-copy">
-              Send the process, constraints, and intended outcome. We reply with a scoped next step.
+              Share the process, current bottleneck, and desired outcome. We respond with a scoped next step.
             </p>
             <div className="footer-cta-actions">
               <a href="/contact" className="btn-outline footer-inspired-btn">
-                Start a project
+                Contact us
               </a>
               <a href="mailto:hello@deview.ai" className="btn-outline footer-inspired-btn footer-inspired-btn--muted">
-                hello@deview.ai
+                Email direct
               </a>
             </div>
           </div>
@@ -66,66 +80,73 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
 
         <div className="footer-divider footer-inspired-line" />
 
-        <div className="footer-summary-grid">
-          <article className="footer-summary-card">
-            <p className="footer-column-title">Services</p>
-            <p className="footer-summary-copy">
-              Advisory and implementation work for teams moving from exploration to production.
+        <div className="footer-structure-grid">
+          <section className="footer-structure-block footer-structure-block--brand">
+            <div className="footer-brand-mark">DV</div>
+            <p className="footer-structure-copy footer-structure-copy--strong">DeView AI Consulting</p>
+            <p className="footer-structure-copy">
+              Kharkiv, Ukraine and remote delivery for North American and European teams.
             </p>
-            <div className="footer-link-stack">
-              <a href={resolveHref("#services")} className="footer-link-row">
-                <span>AI strategy and use-case selection</span>
-              </a>
-              <a href={resolveHref("#solutions")} className="footer-link-row">
-                <span>Custom copilots, workflows, and internal tools</span>
-              </a>
-              <a href={resolveHref("#enterprise-ai")} className="footer-link-row">
-                <span>Production implementation and integration</span>
-              </a>
-            </div>
-          </article>
+            <p className="footer-structure-copy">
+              We design production-grade AI systems, internal tools, and operational workflows that can be
+              deployed into existing environments.
+            </p>
+          </section>
 
-          <article className="footer-summary-card">
-            <p className="footer-column-title">Delivery</p>
-            <p className="footer-summary-copy">
-              Work is structured around measurable business outcomes, live workflow fit, and system reliability.
+          <section className="footer-structure-block">
+            <h4 className="footer-structure-title">About Company</h4>
+            <p className="footer-structure-copy">
+              We work with organizations that need more than a prototype: clear scope, live integrations,
+              evaluation, and production reliability.
             </p>
-            <div className="footer-link-stack">
-              <a href={resolveHref("#process")} className="footer-link-row">
-                <span>Discovery, scoping, and implementation planning</span>
+            <div className="footer-button-row">
+              <a href="/contact" className="footer-chip">
+                More info
               </a>
-              <a href={resolveHref("#process")} className="footer-link-row">
-                <span>Build, test, and launch in live workflows</span>
-              </a>
-              <a href={resolveHref("#outcomes")} className="footer-link-row">
-                <span>Monitoring, iteration, and operational handoff</span>
+              <a href="mailto:hello@deview.ai" className="footer-chip">
+                Contact us
               </a>
             </div>
-          </article>
+          </section>
 
-          <article className="footer-summary-card">
-            <p className="footer-column-title">Contact</p>
-            <p className="footer-summary-copy">
-              Best fit for mid-market and enterprise organizations with operational complexity, legacy systems,
-              or compliance requirements.
-            </p>
-            <div className="footer-link-stack">
-              <a href="mailto:hello@deview.ai" className="footer-link-row">
-                <span>hello@deview.ai</span>
-              </a>
-              <a href="/contact" className="footer-link-row">
-                <span>Project inquiry form</span>
-              </a>
-              <div className="footer-button-row">
-                <a href="mailto:hello@deview.ai" className="footer-chip">
-                  Email
-                </a>
-                <a href="/contact" className="footer-chip">
-                  Contact
-                </a>
-              </div>
+          <section className="footer-structure-block">
+            <h4 className="footer-structure-title">Help Us</h4>
+            <div className="footer-links-columns">
+              <ul className="footer-links-list">
+                {companyLinks.map((item) => (
+                  <li key={item.label}>
+                    <a href={resolveHref(item.href)}>{item.label}</a>
+                  </li>
+                ))}
+              </ul>
+              <ul className="footer-links-list">
+                {helpLinks.map((item) => (
+                  <li key={item.label}>
+                    <a href={resolveHref(item.href)}>{item.label}</a>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </article>
+          </section>
+
+          <section className="footer-structure-block">
+            <h4 className="footer-structure-title">Newsletter</h4>
+            <div className="footer-social-row" aria-label="Social links">
+              <a href="mailto:hello@deview.ai" className="footer-social-link" aria-label="Email DeView">
+                @
+              </a>
+              <a href="/contact" className="footer-social-link" aria-label="Open contact form">
+                →
+              </a>
+            </div>
+            <form className="footer-form" onSubmit={(event) => event.preventDefault()}>
+              <input type="email" name="email" placeholder="your email" aria-label="Email address" />
+              <button type="submit">Go</button>
+            </form>
+            <p className="footer-structure-copy">
+              Use the inquiry form for projects, or email directly for introductions and partnership questions.
+            </p>
+          </section>
         </div>
 
         <div className="footer-divider footer-inspired-line" />

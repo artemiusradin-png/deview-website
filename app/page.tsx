@@ -108,28 +108,28 @@ const enterpriseModes = [
     label: "PREDICTIVE",
     axis: "HIGH STRATEGIC VALUE",
     position: "Top",
-    body: "Demand forecasting, churn, and maintenance planning for high-value operational decisions.",
+    body: "Predictive enterprise AI turns historical and live signals into forward-looking scores leaders can plan against—demand and inventory forecasts, churn and renewal risk, equipment failure and maintenance windows, fraud or credit propensity, and staffing or capacity projections tied to SLAs. The real work is rarely a prototype model: governed features, reproducible training, champion–challenger evaluation, and production monitoring for drift, staleness, and fairness must hold up in regulated and audited environments. Forecasts should land next to decision thresholds, owners, and playbooks—not only in notebooks—so finance, operations, and field teams know when to trust the number, when to override, and when to trigger a retrain.",
   },
   {
     id: "conversational",
     label: "CONVERSATIONAL",
     axis: "USER INTERACTION",
     position: "Left",
-    body: "Customer service, support copilots, and retrieval experiences that still fit enterprise controls.",
+    body: "Conversational modes put natural language between people and your systems—support triage and case summarization, HR and policy Q&A, sales enablement, and internal research copilots grounded in approved sources. In the enterprise, identity, tenancy, and document permissions must flow through every turn: retrieval, citations, and tool calls should only expose what the user is allowed to see, with full logging for security and downstream review. Useful implementations pair fast answers with escalation paths, human approval for sensitive actions, and guardrails on tone, claims, and regulated content so assistance feels responsive without bypassing privacy, retention, or brand standards.",
   },
   {
     id: "generative",
     label: "GENERATIVE",
     axis: "HIGH AUTOMATION",
     position: "Right",
-    body: "Document automation, code help, and content generation with workflows, review, and governance around them.",
+    body: "Generative deployments produce new text, structure, or media at scale—first drafts of contracts and policies, RFP and executive brief assembly, localized customer communications, code suggestions in your toolchain, and creative variants inside brand guidelines. Enterprise value shows up when prompts, tools, and templates mirror real workflows and when outputs pass through review, redaction, versioning, and release checks before anything customer- or regulator-facing ships. Ownership of IP, sensitive data, and attribution matters as much as base model choice; we design so teams draft faster with broader leverage while legal, security, and quality gates stay explicit and repeatable.",
   },
   {
     id: "analytical",
     label: "ANALYTICAL",
     axis: "OPERATIONAL INSIGHT",
     position: "Bottom",
-    body: "Operational insight means algorithms don’t just score or classify for a dashboard once—they stay wired into live processes so teams can see what is changing, why it matters, and what to do next. That includes anomaly and drift detection, risk and fraud monitoring, throughput and quality signals, and explainable alerts tied to owners and SLAs. The goal is a closed loop: measurable signals from production, routed to the right people, with enough context to decide, escalate, or automate without losing accountability.",
+    body: "Operational insight means algorithms don’t just score or classify for a dashboard once—they stay wired into live processes so teams can see what is changing, why it matters, and what to do next. That includes anomaly and drift detection, risk and fraud monitoring, throughput and quality signals, and explainable alerts tied to owners and SLAs. Static reporting is not the finish line: analytical AI should connect to ticketing, incident workflows, and control reviews so responders get evidence, suggested hypotheses, and clear next steps rather than another chart to interpret alone. The goal is a closed loop—signals from production routed to the right people with enough context to decide, escalate, or automate while preserving accountability and auditability.",
   },
 ];
 
