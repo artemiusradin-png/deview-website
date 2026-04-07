@@ -1,13 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
-const footerQuickLinks = [
-  { id: "services", label: "Services", href: "#services" },
-  { id: "solutions", label: "Use cases", href: "#solutions" },
-  { id: "inquire", label: "Inquire", href: "/contact" },
-] as const;
-
 const companyLinks = [
   { label: "AI strategy", href: "#services" },
   { label: "Custom solutions", href: "#solutions" },
@@ -27,8 +19,6 @@ type SiteFooterProps = {
 };
 
 export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
-  const [footerQuickActive, setFooterQuickActive] = useState<(typeof footerQuickLinks)[number]["id"]>("services");
-
   const resolveHref = (href: string) => {
     if (href.startsWith("#")) {
       return `${rootPrefix}${href}`;
@@ -68,21 +58,10 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
           </div>
         </div>
 
-        <ul className="footer-third-row" aria-label="Quick links">
-          {footerQuickLinks.map((item) => (
-            <li key={item.id} className={footerQuickActive === item.id ? "active-1" : ""}>
-              <a href={resolveHref(item.href)} onClick={() => setFooterQuickActive(item.id)}>
-                <span>{item.label}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-
         <div className="footer-divider footer-inspired-line" />
 
         <div className="footer-structure-grid">
           <section className="footer-structure-block footer-structure-block--brand">
-            <div className="footer-brand-mark">DV</div>
             <p className="footer-structure-copy footer-structure-copy--strong">DeView AI Consulting</p>
             <p className="footer-structure-copy">
               Kharkiv, Ukraine and remote delivery for North American and European teams.
