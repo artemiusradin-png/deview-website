@@ -131,6 +131,12 @@ const enterpriseModes = [
   },
 ];
 
+const footerQuickLinks = [
+  { id: "services" as const, label: "Services", href: "#services" },
+  { id: "solutions" as const, label: "Use cases", href: "#solutions" },
+  { id: "inquire" as const, label: "Inquire", href: "/contact" },
+];
+
 const architectureComparison = {
   public: {
     label: "PUBLIC AI SERVICE",
@@ -273,6 +279,7 @@ export default function Home() {
   const [solutionsMarqueeOffset, setSolutionsMarqueeOffset] = useState(0);
   const [isSolutionsInView, setIsSolutionsInView] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
+  const [footerQuickActive, setFooterQuickActive] = useState<(typeof footerQuickLinks)[number]["id"]>("services");
   const [typedUserMessage, setTypedUserMessage] = useState("");
   const [typedAiMessage, setTypedAiMessage] = useState("");
   const [heroVideoPreload, setHeroVideoPreload] = useState<"auto" | "metadata">("metadata");
@@ -1639,39 +1646,49 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="section-gutter border-t border-[var(--white-20)] bg-[var(--background)] pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4 sm:pt-6">
-        <div className="footer-card mx-auto flex max-w-6xl flex-col gap-8 overflow-hidden px-5 py-6 sm:px-6 sm:py-7 lg:px-8">
+      <footer className="site-footer-inspired section-gutter overflow-x-hidden pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-8 sm:pt-10">
+        <div className="footer-card mx-auto flex max-w-6xl flex-col gap-8 px-5 py-6 sm:px-6 sm:py-7 lg:px-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-            <div className="max-w-xl">
-              <p className="mb-3 text-[0.72rem] uppercase tracking-[0.26em] text-[var(--white-60)]">DeView</p>
-              <h3 className="max-w-lg text-[clamp(1.15rem,2.2vw,1.75rem)] leading-[1.05] text-[var(--white-100)]">
+            <div className="max-w-xl footer-inspired-lead">
+              <p className="footer-inspired-eyebrow mb-3">DeView</p>
+              <h3 className="footer-inspired-headline max-w-lg leading-[1.05]">
                 Enterprise AI work that fits the constraints of real operations.
               </h3>
-              <p className="mt-4 max-w-md text-[0.86rem] leading-relaxed text-[var(--text-muted)]">
+              <p className="footer-inspired-intro mt-4 max-w-md leading-relaxed">
                 Strategy, implementation, and system integration for teams that need useful AI in production,
                 not another internal demo.
               </p>
             </div>
 
             <div className="flex shrink-0 flex-col items-start gap-3 lg:items-end">
-              <span className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">Start with a real workflow</span>
+              <span className="footer-inspired-cta-label">Start with a real workflow</span>
               <div className="flex flex-wrap gap-3">
-                <a href="/contact" className="btn-outline">
-                  SEND INQUIRY →
+                <a href="/contact" className="btn-outline footer-inspired-btn">
+                  Send inquiry →
                 </a>
                 <a
                   href="https://ai-consulting-task-manager.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-outline"
+                  className="btn-outline footer-inspired-btn footer-inspired-btn--muted"
                 >
-                  INTERNAL
+                  Internal
                 </a>
               </div>
             </div>
           </div>
 
-          <div className="footer-divider" />
+          <ul className="footer-third-row" aria-label="Quick links">
+            {footerQuickLinks.map((item) => (
+              <li key={item.id} className={footerQuickActive === item.id ? "active-1" : ""}>
+                <a href={item.href} onClick={() => setFooterQuickActive(item.id)}>
+                  <span>{item.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div className="footer-divider footer-inspired-line" />
 
           <div className="footer-summary-grid">
             <article className="footer-summary-card">
@@ -1737,11 +1754,11 @@ export default function Home() {
             </article>
           </div>
 
-          <div className="footer-divider" />
+          <div className="footer-divider footer-inspired-line" />
 
-          <div className="flex flex-col gap-3 text-[0.68rem] text-[var(--white-60)] sm:flex-row sm:items-center sm:justify-between">
-            <span className="uppercase tracking-[0.2em] text-[var(--white-80)]">© {new Date().getFullYear()} DeView</span>
-            <span>AI consulting and data engineering for production-grade systems.</span>
+          <div className="footer-inspired-meta flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <small className="footer-inspired-copyright">© {new Date().getFullYear()} DeView</small>
+            <p className="footer-inspired-tagline m-0">AI consulting and data engineering for production-grade systems.</p>
           </div>
         </div>
       </footer>

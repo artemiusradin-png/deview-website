@@ -2129,6 +2129,213 @@ html[data-theme="light"] .contact-monument {
   }
 }
 
+/* ---------- Footer inspired layout (Mulish ≈ legacy Muli, light band — scoped, does not affect global body) ---------- */
+footer.site-footer-inspired {
+  font-family: var(--font-footer-mulish), system-ui, sans-serif;
+  background-color: #efeff9;
+  color: #546e7a;
+  border-top: 1px solid rgba(204, 204, 204, 0.85);
+}
+
+footer.site-footer-inspired .footer-card {
+  color: #383431;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 36%),
+    radial-gradient(circle at bottom right, rgba(225, 229, 245, 0.45), transparent 32%),
+    #ffffff;
+  border: 1px solid rgba(56, 52, 49, 0.12);
+  box-shadow: 0 20px 56px rgba(84, 110, 122, 0.14);
+}
+
+footer.site-footer-inspired .footer-inspired-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #546e7a;
+}
+
+footer.site-footer-inspired .footer-inspired-headline {
+  margin: 0;
+  font-size: clamp(1.1rem, 0.95rem + 0.55vw, 1.5rem);
+  font-weight: 700;
+  color: #383431;
+}
+
+footer.site-footer-inspired .footer-inspired-intro {
+  font-size: clamp(0.72rem, 0.66rem + 0.2vw, 0.92rem);
+  color: #546e7a;
+}
+
+footer.site-footer-inspired .footer-inspired-cta-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #546e7a;
+}
+
+footer.site-footer-inspired .footer-inspired-btn {
+  font-size: clamp(0.8125rem, 0.78rem + 0.15vw, 1rem);
+  border-radius: 0 !important;
+  padding-left: clamp(1.15rem, 0.95rem + 0.65vw, 1.75rem);
+  padding-right: clamp(1.15rem, 0.95rem + 0.65vw, 1.75rem);
+  padding-top: clamp(0.55rem, 0.48rem + 0.2vw, 0.75rem);
+  padding-bottom: clamp(0.55rem, 0.48rem + 0.2vw, 0.75rem);
+  background: #383431 !important;
+  border: none !important;
+  color: #fff !important;
+  text-transform: none;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+footer.site-footer-inspired .footer-inspired-btn:hover {
+  background: #2d2a28 !important;
+  color: #fff !important;
+}
+
+footer.site-footer-inspired .footer-inspired-btn--muted {
+  background: #42443e !important;
+}
+
+footer.site-footer-inspired .footer-inspired-btn:focus-visible {
+  outline: 2px solid #42443e;
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+footer.site-footer-inspired .footer-third-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0;
+  padding: clamp(0.35rem, 0.8vh, 0.65rem) clamp(0.75rem, 2.7vh, 1.25rem);
+  background: #ffffff;
+  border-radius: 50px;
+  border: 1px solid rgba(66, 68, 62, 0.12);
+}
+
+footer.site-footer-inspired .footer-third-row li {
+  margin: 0;
+  border-radius: 999px;
+}
+
+footer.site-footer-inspired .footer-third-row a {
+  display: block;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  text-decoration: none !important;
+  color: inherit;
+}
+
+footer.site-footer-inspired .footer-third-row li span {
+  font-size: clamp(0.5625rem, 0.5rem + 0.2vw, 0.75rem);
+  font-weight: 600;
+  color: #383431;
+}
+
+footer.site-footer-inspired .footer-third-row li.active-1 {
+  background: #42443e;
+}
+
+footer.site-footer-inspired .footer-third-row li.active-1 span {
+  color: #fff !important;
+}
+
+footer.site-footer-inspired .footer-inspired-line.footer-divider {
+  height: 1px;
+  width: 92%;
+  margin-left: auto;
+  margin-right: auto;
+  background: #ccc !important;
+  border: none;
+  border-radius: 0;
+}
+
+footer.site-footer-inspired .footer-column-title {
+  margin: 0 0 1.1rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #383431;
+}
+
+footer.site-footer-inspired .footer-summary-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(66, 68, 62, 0.14);
+  color: #383431;
+}
+
+footer.site-footer-inspired .footer-summary-copy {
+  color: #546e7a;
+  font-size: clamp(0.72rem, 0.68rem + 0.15vw, 0.86rem);
+}
+
+footer.site-footer-inspired .footer-link-stack {
+  gap: 0.5rem;
+}
+
+footer.site-footer-inspired .footer-link-row {
+  margin-top: 0;
+  margin-bottom: 0;
+  cursor: pointer;
+  border-radius: 2px;
+  border-color: rgba(66, 68, 62, 0.22);
+  background: rgba(255, 255, 255, 0.96);
+  color: #546e7a;
+}
+
+footer.site-footer-inspired .footer-link-row span {
+  font-size: clamp(0.8125rem, 0.78rem + 0.12vw, 0.9rem);
+}
+
+footer.site-footer-inspired .footer-link-row:hover,
+footer.site-footer-inspired .footer-link-row:focus-visible {
+  color: #383431;
+  border-color: #42443e;
+  background: rgba(239, 239, 249, 0.65);
+  transform: none;
+}
+
+footer.site-footer-inspired .footer-chip {
+  border-radius: 0;
+  border: none;
+  background: #42443e !important;
+  color: #fff !important;
+  letter-spacing: 0.1em;
+}
+
+footer.site-footer-inspired .footer-chip:hover,
+footer.site-footer-inspired .footer-chip:focus-visible {
+  background: #383431 !important;
+  color: #fff !important;
+  border-color: transparent;
+}
+
+footer.site-footer-inspired .footer-inspired-meta small.footer-inspired-copyright {
+  font-size: clamp(0.75rem, 0.7rem + 0.15vw, 0.875rem);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #546e7a;
+}
+
+footer.site-footer-inspired .footer-inspired-tagline {
+  font-size: clamp(0.68rem, 0.64rem + 0.12vw, 0.8rem);
+  color: #546e7a;
+}
+
+footer.site-footer-inspired a {
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  footer.site-footer-inspired .footer-card {
+    border-radius: 1.5rem;
+  }
+}
+
 /* Pinned enterprise modes ("WHAT IS ENTERPRISE AI") — keep frameless; rest of site uses borders/surfaces above */
 .enterprise-mode-stage--frameless,
 .enterprise-mode-stage--frameless .enterprise-map-shell,

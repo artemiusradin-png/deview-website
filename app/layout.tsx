@@ -1,6 +1,14 @@
 import type { Metadata, Viewport } from "next";
+import { Mulish } from "next/font/google";
 import "./globals.css";
 import { ThemeSync } from "./theme-sync";
+
+const footerMulish = Mulish({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-footer-mulish",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "DeView | AI Consulting & Data Engineering",
@@ -23,8 +31,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--text)]">
+    <html lang="en" className={`h-full antialiased ${footerMulish.variable}`}>
+      <body className={`min-h-full flex flex-col bg-[var(--background)] text-[var(--text)] ${footerMulish.variable}`}>
         <ThemeSync />
         {children}
       </body>
