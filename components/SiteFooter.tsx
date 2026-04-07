@@ -28,24 +28,23 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
   };
 
   return (
-    <footer className="site-footer-inspired w-full overflow-x-hidden pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-10 sm:pt-14 md:pt-16">
-      <div className="section-gutter flex w-full min-w-0 max-w-none flex-col gap-10 sm:gap-12 md:gap-14">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-10 xl:gap-14">
+    <footer className="site-footer-inspired w-full overflow-x-hidden pb-[max(1rem,env(safe-area-inset-bottom))] pt-8 sm:pt-10 md:pt-11">
+      <div className="section-gutter flex w-full min-w-0 max-w-none flex-col gap-8 sm:gap-9 md:gap-10">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-8 xl:gap-10">
           <div className="footer-inspired-lead min-w-0 flex-1 lg:max-w-none">
-            <p className="section-label mb-3">DeView</p>
+            <p className="section-label mb-2">DeView</p>
             <h3 className="footer-inspired-headline max-w-[min(100%,52rem)] xl:max-w-[60rem]">
-              Enterprise AI systems built for real operational environments.
+              Enterprise AI built for real operations.
             </h3>
-            <p className="footer-inspired-intro mt-4 max-w-[min(100%,36rem)] xl:max-w-[40rem]">
-              Strategy, implementation, and integration for teams that need useful AI with reliability,
-              accountability, and workflow fit.
+            <p className="footer-inspired-intro mt-3 max-w-[min(100%,36rem)] xl:max-w-[40rem]">
+              Strategy, build, and integration — reliable, accountable, workflow-aligned.
             </p>
           </div>
 
           <div className="footer-cta-panel w-full min-w-0 shrink-0 lg:w-[min(100%,26rem)] xl:w-[min(100%,28rem)]">
-            <span className="section-label footer-cta-label">Start with a real workflow</span>
+            <span className="section-label footer-cta-label">Start with a workflow</span>
             <p className="footer-cta-copy">
-              Share the process, current bottleneck, and desired outcome. We respond with a scoped next step.
+              Send the process, bottleneck, and goal — we reply with a scoped next step.
             </p>
             <div className="footer-cta-actions">
               <a href={resolveHref("/contact")} className="btn-outline">
@@ -64,19 +63,17 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
           <section className="footer-structure-block footer-structure-block--brand">
             <p className="footer-structure-copy footer-structure-copy--strong">DeView AI consulting</p>
             <p className="footer-structure-copy">
-              Hong Kong and remote delivery for North American and European teams.
+              Hong Kong · remote for North America and Europe.
             </p>
             <p className="footer-structure-copy">
-              We design production-grade AI systems, internal tools, and operational workflows that can be
-              deployed into existing environments.
+              Production-grade AI, tools, and workflows in your existing stack.
             </p>
           </section>
 
           <section className="footer-structure-block">
             <h4 className="footer-structure-title">About</h4>
             <p className="footer-structure-copy">
-              We work with organizations that need more than a prototype: clear scope, live integrations,
-              evaluation, and production reliability.
+              Beyond prototypes: clear scope, live integrations, and production reliability.
             </p>
             <div className="footer-button-row">
               <a href={resolveHref("/contact")} className="footer-chip">
@@ -129,17 +126,17 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
               <button type="submit">Subscribe</button>
             </form>
             <p className="footer-structure-copy footer-structure-copy--compact">
-              Use the inquiry form for projects; email for introductions and partnership questions.
+              Form for projects; email for intros and partnerships.
             </p>
           </section>
         </div>
 
         <div className="rule footer-rule" aria-hidden="true" />
 
-        <div className="footer-inspired-meta flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+        <div className="footer-inspired-meta flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
           <small className="footer-inspired-copyright">© {new Date().getFullYear()} DeView</small>
           <p className="footer-inspired-tagline m-0">
-            AI consulting and data engineering for production-grade systems.
+            AI consulting and data engineering for production systems.
           </p>
         </div>
       </div>
