@@ -4,11 +4,7 @@ import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { SiteFooter } from "../components/SiteFooter";
-import { ArchitectureRealityPanel } from "../components/ArchitectureRealityPanel";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
-import { EnterpriseArchitectureDiagram } from "./components/EnterpriseArchitectureDiagram";
-import { HomeServicesSection } from "../components/HomeServicesSection";
-import { HomeSolutionsSection } from "../components/HomeSolutionsSection";
 
 const fade = {
   initial: { opacity: 0, y: 18 },
@@ -961,38 +957,6 @@ export default function Home() {
 
       <RetroFeatureCards />
 
-      <section className="relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter py-10 md:py-14">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="section-label mb-2">WHAT MAKES IT ENTERPRISE</p>
-              <h3 className="text-lg text-[var(--white-100)] md:text-2xl">
-                Architecture across business systems, data foundation, infrastructure, and AI/ML operations.
-              </h3>
-            </div>
-            <p className="max-w-sm text-[0.8rem] text-[var(--text-muted)]">
-              The deployment has to connect strategy, enterprise applications, data pipelines, infrastructure, and model
-              operations in one controlled system.
-            </p>
-          </div>
-          <p className="mb-5 max-w-3xl text-[0.8rem] leading-relaxed text-[var(--text-muted)] md:mb-6">
-            Enterprise AI Architecture: Business Layer and Application Layer feed data into a central Data Foundation
-            pipeline, which drives an AI/ML Core. Infrastructure spans and governs the AI layer.
-          </p>
-          <div className="rule mb-5" />
-          <EnterpriseArchitectureDiagram className="my-2 md:my-4" />
-        </div>
-      </section>
-
-      <section className="relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter py-10 md:py-16">
-        <div className="mx-auto max-w-6xl">
-          <ArchitectureRealityPanel />
-        </div>
-      </section>
-
-      <HomeServicesSection />
-      <HomeSolutionsSection />
-
       <section
         id="outcomes"
         className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter"
@@ -1123,10 +1087,10 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-6">
+          <div className="flex flex-col gap-4 overflow-visible md:flex-row md:items-end md:justify-between md:gap-6">
             <a
               href="mailto:hello@deview.ai"
-              className="contact-monument min-w-0 flex-1 break-words pr-0 leading-[0.92] md:pr-6"
+              className="contact-monument flex-1 overflow-visible break-words pl-[0.04em] pr-[0.08em] leading-normal md:pr-[0.12em]"
               onMouseMove={handleContactMouseMove}
               onMouseLeave={handleContactMouseLeave}
             >
