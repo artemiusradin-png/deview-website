@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+/** Hash target for “back to home” from card detail pages (`/${this}#…`). */
+export const RETRO_FEATURE_CARDS_ID = "retro-feature-cards";
+
 type RetroCardProps = {
   href: string;
   imageUrl: string;
@@ -12,7 +15,7 @@ function RetroCard({ href, imageUrl, eyebrow, title, className = "" }: RetroCard
   return (
     <Link
       href={href}
-      className={`group relative block overflow-hidden rounded-[10px] ${className}`}
+      className={`group relative block overflow-hidden rounded-none ${className}`}
     >
       <div
         className="absolute inset-0 z-0 origin-center scale-105 bg-cover bg-center bg-no-repeat transition-transform duration-300 ease-in-out group-hover:scale-110"
@@ -33,9 +36,12 @@ function RetroCard({ href, imageUrl, eyebrow, title, className = "" }: RetroCard
 
 export function RetroFeatureCards() {
   return (
-    <section className="relative border-t border-[var(--white-20)] bg-[var(--surface)] py-10 md:py-14">
-      <div className="section-gutter mx-auto max-w-6xl">
-        <div className="flex flex-col gap-[30px] md:flex-row md:items-stretch">
+    <section
+      id={RETRO_FEATURE_CARDS_ID}
+      className="scroll-margin-header relative w-full border-t border-[var(--white-20)] bg-[var(--surface)] py-10 md:py-14"
+    >
+      <div className="w-full pl-[max(0px,env(safe-area-inset-left))] pr-[max(0px,env(safe-area-inset-right))]">
+        <div className="flex w-full flex-col gap-[30px] md:flex-row md:items-stretch">
           <div className="flex flex-1 flex-col gap-[30px] md:basis-1/3">
             <RetroCard
               href="/what-makes-it-enterprise"
@@ -54,7 +60,7 @@ export function RetroFeatureCards() {
           </div>
           <div className="md:basis-1/3">
             <RetroCard
-              href="/#services"
+              href="/services"
               imageUrl="https://untree.co/demos/blogy/images/img_1_vertical.jpg"
               eyebrow="SERVICES"
               title={"End-to-end services for\nimplementing AI in business operations."}
@@ -63,7 +69,7 @@ export function RetroFeatureCards() {
           </div>
           <div className="md:basis-1/3">
             <RetroCard
-              href="/#solutions"
+              href="/use-cases"
               imageUrl="https://untree.co/demos/blogy/images/img_3_horizontal.jpg"
               eyebrow="USE CASES"
               title={"AI solutions built around\nconcrete operational problems."}

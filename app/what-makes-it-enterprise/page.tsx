@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteFooter } from "../../components/SiteFooter";
+import { RETRO_FEATURE_CARDS_ID } from "../../components/RetroFeatureCards";
 import { EnterpriseArchitectureDiagram } from "../components/EnterpriseArchitectureDiagram";
+
+const homeWithRetroCards = `/#${RETRO_FEATURE_CARDS_ID}`;
 
 export const metadata: Metadata = {
   title: "What makes it enterprise | DeView",
@@ -18,7 +21,7 @@ export default function WhatMakesItEnterprisePage() {
             <Link href="/" className="text-xs uppercase tracking-[0.24em] text-[var(--white-80)]">
               DEVIEW
             </Link>
-            <Link href="/" className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+            <Link href={homeWithRetroCards} className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
               BACK TO HOME
             </Link>
           </div>

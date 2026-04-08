@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { SiteFooter } from "../../components/SiteFooter";
 import { ArchitectureRealityPanel } from "../../components/ArchitectureRealityPanel";
+import { RETRO_FEATURE_CARDS_ID } from "../../components/RetroFeatureCards";
+
+const homeWithRetroCards = `/#${RETRO_FEATURE_CARDS_ID}`;
 
 const rise = {
   initial: { opacity: 0, y: 20 },
@@ -24,7 +27,7 @@ export default function ArchitectureRealityCheckPage() {
             <Link href="/" className="text-xs uppercase tracking-[0.24em] text-[var(--white-80)]">
               DEVIEW
             </Link>
-            <Link href="/" className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+            <Link href={homeWithRetroCards} className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
               BACK TO HOME
             </Link>
           </motion.div>

@@ -1,11 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { SiteFooter } from "../components/SiteFooter";
 import { ArchitectureRealityPanel } from "../components/ArchitectureRealityPanel";
-import { RetroFeatureCards } from "../components/RetroFeatureCards";
+import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
 import { EnterpriseArchitectureDiagram } from "./components/EnterpriseArchitectureDiagram";
+import { HomeServicesSection } from "../components/HomeServicesSection";
+import { HomeSolutionsSection } from "../components/HomeSolutionsSection";
 
 const fade = {
   initial: { opacity: 0, y: 18 },
@@ -38,45 +41,6 @@ const INTERFACE_USER_MESSAGE = "What are our Q4 exposure risks?";
 const INTERFACE_AI_MESSAGE =
   "Based on general patterns, Q4 risks typically include supply chain pressure and budget cycles...";
 
-const services = [
-  {
-    label: "AI STRATEGY",
-    title: "Use-case selection and implementation roadmap",
-    duration: "2-4 weeks",
-    scope: "Discovery, prioritization, implementation plan",
-    body: "Assess where AI can create the most operational leverage, then define the architecture, scope, and rollout path needed to implement the right solution.",
-    status: "Best for teams deciding where to start",
-    id: "strategy",
-  },
-  {
-    label: "CUSTOM SOLUTIONS",
-    title: "AI copilots, workflows, and internal tools",
-    duration: "6-12 weeks",
-    scope: "LLM apps, automation, retrieval, agents",
-    body: "Design and ship AI products tailored to your workflows, from customer support assistants to internal knowledge systems and operational automation.",
-    status: "Best for teams moving from pilot to product",
-    id: "custom-solutions",
-  },
-  {
-    label: "AI IMPLEMENTATION",
-    title: "Production systems, integrations, and reliability",
-    duration: "4-10 weeks",
-    scope: "Integrations, evals, monitoring, governance",
-    body: "Implement the infrastructure, integrations, evaluation, and observability required to make AI systems reliable in production.",
-    status: "Best for teams scaling beyond demos",
-    id: "ai-implementation",
-  },
-  {
-    label: "SYSTEM INTEGRATION",
-    title: "Deployment into your existing stack",
-    duration: "3-8 weeks",
-    scope: "APIs, internal tools, workflows, handoff",
-    body: "Connect new AI capabilities to your current products, data systems, and operational processes so the solution works where your team already operates.",
-    status: "Best for teams integrating AI into live workflows",
-    id: "system-integration",
-  },
-];
-
 const enterpriseModes = [
   {
     id: "predictive",
@@ -105,37 +69,6 @@ const enterpriseModes = [
     axis: "OPERATIONAL INSIGHT",
     position: "Bottom",
     body: "Operational insight means algorithms don’t just score or classify for a dashboard once—they stay wired into live processes so teams can see what is changing, why it matters, and what to do next. That includes anomaly and drift detection, risk and fraud monitoring, throughput and quality signals, and explainable alerts tied to owners and SLAs. Static reporting is not the finish line: analytical AI should connect to ticketing, incident workflows, and control reviews so responders get evidence, suggested hypotheses, and clear next steps rather than another chart to interpret alone. The goal is a closed loop—signals from production routed to the right people with enough context to decide, escalate, or automate while preserving accountability and auditability.",
-  },
-];
-
-const solutionAreas = [
-  {
-    id: "customer-operations",
-    sector: "CUSTOMER OPERATIONS",
-    title: "Support and service automation",
-    body: "Deploy AI assistants for support triage, knowledge retrieval, response drafting, and case summarization without breaking existing support workflows.",
-    accent: "rgba(148, 214, 255, 0.16)",
-  },
-  {
-    id: "internal-knowledge",
-    sector: "INTERNAL KNOWLEDGE",
-    title: "Enterprise search and expert copilots",
-    body: "Turn fragmented documents, policies, and internal systems into trusted research, compliance, and decision-support interfaces.",
-    accent: "rgba(255, 214, 138, 0.16)",
-  },
-  {
-    id: "operations",
-    sector: "OPERATIONS",
-    title: "Workflow acceleration and exception handling",
-    body: "Automate repetitive review, classification, routing, and escalation tasks while keeping humans in the loop for judgment-heavy cases.",
-    accent: "rgba(157, 247, 198, 0.14)",
-  },
-  {
-    id: "data-products",
-    sector: "DATA PRODUCTS",
-    title: "Analytics and intelligence layers",
-    body: "Build data-backed AI interfaces that surface business signals, summarize trends, and assist teams with better day-to-day decisions.",
-    accent: "rgba(205, 177, 255, 0.16)",
   },
 ];
 
@@ -197,9 +130,6 @@ const processSteps = [
 
 export default function Home() {
   const heroVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-  const solutionCarouselRef = useRef<HTMLDivElement | null>(null);
-  const solutionCardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const solutionsSectionRef = useRef<HTMLElement | null>(null);
   const enterpriseModesSectionRef = useRef<HTMLDivElement | null>(null);
   const enterpriseStagePanelRef = useRef<HTMLElement | null>(null);
   const [enterprisePinState, setEnterprisePinState] = useState<"before" | "pinned" | "past">("before");
@@ -219,9 +149,6 @@ export default function Home() {
     return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
   });
   const [activeEnterpriseMode, setActiveEnterpriseMode] = useState(enterpriseModes[0].id);
-  const [activeSolutionIndex, setActiveSolutionIndex] = useState(0);
-  const [solutionsMarqueeOffset, setSolutionsMarqueeOffset] = useState(0);
-  const [isSolutionsInView, setIsSolutionsInView] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
   const [typedUserMessage, setTypedUserMessage] = useState("");
   const [typedAiMessage, setTypedAiMessage] = useState("");
@@ -233,6 +160,25 @@ export default function Home() {
     target: enterpriseModesSectionRef,
     offset: ["start start", "end end"],
   });
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (pathname !== "/") return;
+    const scrollToRetroCards = () => {
+      if (window.location.hash !== `#${RETRO_FEATURE_CARDS_ID}`) return;
+      document.getElementById(RETRO_FEATURE_CARDS_ID)?.scrollIntoView({
+        block: "start",
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+      });
+    };
+    scrollToRetroCards();
+    const t0 = window.setTimeout(scrollToRetroCards, 0);
+    const t1 = window.setTimeout(scrollToRetroCards, 100);
+    return () => {
+      window.clearTimeout(t0);
+      window.clearTimeout(t1);
+    };
+  }, [pathname, prefersReducedMotion]);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -348,89 +294,6 @@ export default function Home() {
   }, [prefersReducedMotion]);
 
   useEffect(() => {
-    const carousel = solutionCarouselRef.current;
-
-    if (!carousel) {
-      return;
-    }
-
-    const updateActiveSolution = () => {
-      const carouselRect = carousel.getBoundingClientRect();
-      const targetCenter = carouselRect.left + carouselRect.width / 2;
-      let nextIndex = 0;
-      let nearestDistance = Number.POSITIVE_INFINITY;
-
-      solutionCardRefs.current.forEach((card, index) => {
-        if (!card) {
-          return;
-        }
-
-        const rect = card.getBoundingClientRect();
-        const cardCenter = rect.left + rect.width / 2;
-        const distance = Math.abs(cardCenter - targetCenter);
-
-        if (distance < nearestDistance) {
-          nearestDistance = distance;
-          nextIndex = index;
-        }
-      });
-
-      setActiveSolutionIndex((current) => (current === nextIndex ? current : nextIndex));
-    };
-
-    updateActiveSolution();
-    carousel.addEventListener("scroll", updateActiveSolution, { passive: true });
-    window.addEventListener("resize", updateActiveSolution);
-
-    return () => {
-      carousel.removeEventListener("scroll", updateActiveSolution);
-      window.removeEventListener("resize", updateActiveSolution);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      return;
-    }
-
-    const section = solutionsSectionRef.current;
-
-    if (!section) {
-      return;
-    }
-
-    const wideMq = window.matchMedia("(min-width: 768px)");
-
-    const updateMarqueeOffset = () => {
-      const rect = section.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const inView = rect.bottom > 0 && rect.top < viewportHeight;
-      setIsSolutionsInView(inView);
-
-      if (!wideMq.matches) {
-        setSolutionsMarqueeOffset(0);
-        return;
-      }
-
-      const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
-      const clampedProgress = Math.min(Math.max(progress, 0), 1);
-      const offset = (clampedProgress - 0.5) * -220;
-      setSolutionsMarqueeOffset(offset);
-    };
-
-    updateMarqueeOffset();
-    window.addEventListener("scroll", updateMarqueeOffset, { passive: true });
-    window.addEventListener("resize", updateMarqueeOffset);
-    wideMq.addEventListener("change", updateMarqueeOffset);
-
-    return () => {
-      window.removeEventListener("scroll", updateMarqueeOffset);
-      window.removeEventListener("resize", updateMarqueeOffset);
-      wideMq.removeEventListener("change", updateMarqueeOffset);
-    };
-  }, [prefersReducedMotion]);
-
-  useEffect(() => {
     const wrapper = enterpriseModesSectionRef.current;
 
     if (!wrapper) {
@@ -538,22 +401,6 @@ export default function Home() {
     }
   };
 
-  const scrollSolutions = (direction: "left" | "right") => {
-    const carousel = solutionCarouselRef.current;
-
-    if (!carousel) {
-      return;
-    }
-
-    const frac = carousel.clientWidth < 640 ? 0.9 : 0.78;
-    const amount = Math.max(carousel.clientWidth * frac, Math.min(320, carousel.clientWidth - 32));
-
-    carousel.scrollBy({
-      left: direction === "left" ? -amount : amount,
-      behavior: "smooth",
-    });
-  };
-
   const handleContactMouseMove = (event: MouseEvent<HTMLAnchorElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
     const x = ((event.clientX - rect.left) / rect.width) * 100;
@@ -604,8 +451,6 @@ export default function Home() {
   const closeNav = () => setNavOpen(false);
   const toggleTheme = () => setTheme((current) => (current === "dark" ? "light" : "dark"));
   const selectedMode = enterpriseModes.find((mode) => mode.id === activeEnterpriseMode) ?? enterpriseModes[0];
-  const activeSolution = solutionAreas[activeSolutionIndex] ?? solutionAreas[0];
-  const marqueeContent = `${activeSolution.title} • `.repeat(14);
   const displayedUserMessage = prefersReducedMotion ? INTERFACE_USER_MESSAGE : typedUserMessage;
   const displayedAiMessage = prefersReducedMotion ? INTERFACE_AI_MESSAGE : typedAiMessage;
   const enterpriseMapScale = useTransform(enterpriseModesProgress, [0, 0.2, 0.55, 1], prefersReducedMotion ? [1, 1, 1, 1] : [0.9, 0.97, 1, 1]);
@@ -1145,189 +990,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section
-        id="services"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter"
-      >
-        <motion.div
-          {...reveal}
-          transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
-        >
-          <div className="section-shell">
-            <p className="section-label mb-3">SERVICES</p>
-            <div className="rule mb-6" />
-            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-              <h2 className="text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
-                End-to-end services for
-                <br />
-                implementing AI in business operations.
-              </h2>
-              <p className="max-w-md text-[0.8rem] text-[var(--text-muted)] md:text-sm">
-                From selecting the right use case to building, integrating, and operating the final system, we
-                work across the full implementation lifecycle.
-              </p>
-            </div>
-          </div>
-
-          <motion.div
-            variants={stagger}
-            initial="initial"
-            whileInView="whileInView"
-            viewport={stagger.viewport}
-            className="grid gap-6 md:grid-cols-2 md:gap-10 xl:grid-cols-4"
-          >
-            {services.map((service) => (
-              <motion.article
-                key={service.id}
-                variants={cardMotion}
-                transition={{ duration: 0.45 }}
-                whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
-                className="panel panel-interactive border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5"
-              >
-                <p className="section-label mb-3 text-[0.6rem]">{service.label}</p>
-                <p className="mb-3 text-sm text-[var(--white-100)]">{service.title}</p>
-                <div className="mb-4 space-y-1 text-[0.7rem] text-[var(--white-80)]">
-                  <div className="flex justify-between gap-2">
-                    <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">DURATION</span>
-                    <span>{service.duration}</span>
-                  </div>
-                  <div className="flex justify-between gap-2">
-                    <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">SCOPE</span>
-                    <span className="text-right">{service.scope}</span>
-                  </div>
-                </div>
-                <p className="mb-3 text-[0.75rem] leading-relaxed text-[var(--text-muted)]">{service.body}</p>
-                <p className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)]">
-                  {service.status}
-                </p>
-              </motion.article>
-            ))}
-          </motion.div>
-        </motion.div>
-      </section>
-
-      <section
-        id="solutions"
-        ref={solutionsSectionRef}
-        className="solutions-section section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter"
-        style={
-          {
-            "--solutions-accent": activeSolution.accent,
-            "--solutions-marquee-offset": `${solutionsMarqueeOffset}%`,
-          } as CSSProperties
-        }
-      >
-        <div
-          className={`solutions-marquee-container ${isSolutionsInView ? "solutions-marquee-container-visible" : ""}`}
-          aria-hidden="true"
-        >
-          {["top", "bottom"].map((position) => (
-            <div key={`${position}-${activeSolution.id}`} className={`solutions-marquee solutions-marquee-${position}`}>
-              <div className="solutions-marquee-track">
-                {marqueeContent}
-              </div>
-            </div>
-          ))}
-        </div>
-        <motion.div
-          {...reveal}
-          transition={{ duration: 0.5 }}
-          className="solutions-content mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
-        >
-          <div className="section-shell">
-            <p className="section-label mb-3">USE CASES</p>
-            <div className="rule mb-6" />
-            <div className="grid gap-6 md:grid-cols-[1.4fr_1fr]">
-              <div>
-              <h2 className="mb-4 text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
-                  AI solutions built around
-                  <br />
-                  concrete operational problems.
-                </h2>
-                <p className="mb-4 text-sm text-[var(--text-muted)]">
-                  We focus on high-friction workflows where AI can reduce manual effort, improve response
-                  quality, and help teams move faster with better information.
-                </p>
-                <p className="text-sm text-[var(--text-muted)]">
-                  Each solution is designed to fit into existing systems and processes rather than living as an
-                  isolated demo or experimental tool.
-                </p>
-              </div>
-              <div className="space-y-4 text-[0.72rem] text-[var(--white-80)] sm:text-xs">
-                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
-                  <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">FRAMING</span>
-                  <span className="sm:text-right">Business workflows before model types</span>
-                </div>
-                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
-                  <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">POSITIONING</span>
-                  <span className="sm:text-right">Custom systems integrated with real operations</span>
-                </div>
-                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
-                  <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">DELIVERY</span>
-                  <span className="sm:text-right">Strategy, implementation, and rollout in one engagement</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <motion.div
-            variants={stagger}
-            initial="initial"
-            whileInView="whileInView"
-            viewport={stagger.viewport}
-            className="relative overflow-hidden"
-          >
-            <button
-              type="button"
-              aria-label="Scroll use cases left"
-              className="carousel-arrow carousel-arrow-left hidden md:inline-flex"
-              onClick={() => scrollSolutions("left")}
-            >
-              ←
-            </button>
-            <button
-              type="button"
-              aria-label="Scroll use cases right"
-              className="carousel-arrow carousel-arrow-right hidden md:inline-flex"
-              onClick={() => scrollSolutions("right")}
-            >
-              →
-            </button>
-            <div className="carousel-fade-left" aria-hidden="true" />
-            <div className="carousel-fade-right" aria-hidden="true" />
-            <div
-              ref={solutionCarouselRef}
-              className="hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-0 ps-1 pe-[max(1rem,env(safe-area-inset-right))] [-webkit-overflow-scrolling:touch] sm:gap-6 sm:px-6 sm:pe-4 md:px-8"
-            >
-              {solutionAreas.map((area) => (
-                <motion.div
-                  key={area.title}
-                  ref={(node) => {
-                    solutionCardRefs.current[solutionAreas.findIndex((item) => item.id === area.id)] = node;
-                  }}
-                  variants={cardMotion}
-                  transition={{ duration: 0.45 }}
-                  whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
-                  onMouseEnter={() => setActiveSolutionIndex(solutionAreas.findIndex((item) => item.id === area.id))}
-                  onFocusCapture={() => setActiveSolutionIndex(solutionAreas.findIndex((item) => item.id === area.id))}
-                  className={`solutions-card panel panel-interactive min-w-[min(85vw,calc(100vw-2.5rem))] max-w-[calc(100vw-2rem)] snap-start border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-5 sm:min-w-[360px] sm:max-w-none sm:px-5 sm:py-6 lg:min-w-[420px] ${
-                    activeSolution.id === area.id ? "solutions-card-active" : "solutions-card-inactive"
-                  }`}
-                >
-                  <p className="section-label mb-3 text-[0.65rem]">{area.sector}</p>
-                  <p className={`solutions-card-title mb-3 text-sm text-[var(--white-100)] ${
-                    activeSolution.id === area.id ? "solutions-card-title-active" : ""
-                  }`}>
-                    {area.title}
-                  </p>
-                  <p className="text-[0.8rem] text-[var(--text-muted)]">{area.body}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
-      </section>
+      <HomeServicesSection />
+      <HomeSolutionsSection />
 
       <section
         id="outcomes"

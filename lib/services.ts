@@ -1,0 +1,38 @@
+export const homeServices = [
+  {
+    label: "AI STRATEGY",
+    title: "Use-case selection and implementation roadmap",
+    duration: "2-4 weeks",
+    scope: "Discovery, prioritization, implementation plan",
+    body: "Assess where AI can create the most operational leverage, then define the architecture, scope, and rollout path needed to implement the right solution.",
+    status: "Best for teams deciding where to start",
+    id: "strategy",
+  },
+  {
+    label: "CUSTOM SOLUTIONS",
+    title: "AI copilots, workflows, and internal tools",
+    duration: "6-12 weeks",
+    scope: "LLM apps, automation, retrieval, agents",
+    body: "Design and ship AI products tailored to your workflows, from customer support assistants to internal knowledge systems and operational automation.",
+    status: "Best for teams moving from pilot to product",
+    id: "custom-solutions",
+  },
+  {
+    label: "AI IMPLEMENTATION",
+    title: "Production systems, integrations, and reliability",
+    duration: "4-10 weeks",
+    scope: "Integrations, evals, monitoring, governance",
+    body: "Implement the infrastructure, integrations, evaluation, and observability required to make AI systems reliable in production.",
+    status: "Best for teams scaling beyond demos",
+    id: "ai-implementation",
+  },
+  {
+    label: "SYSTEM INTEGRATION",
+    title: "Deployment into your existing stack",
+    duration: "3-8 weeks",
+    scope: "APIs, internal tools, workflows, handoff",
+    body: "Connect new AI capabilities to your current products, data systems, and operational processes so the solution works where your team already operates.",
+    status: "Best for teams integrating AI into live workflows",
+    id: "system-integration",
+  },
+] as const;
