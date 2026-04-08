@@ -42,15 +42,16 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
           </div>
 
           <div className="footer-cta-panel w-full min-w-0 shrink-0 lg:w-[min(100%,26rem)] xl:w-[min(100%,28rem)]">
+            <div className="footer-cta-kicker" aria-hidden="true" />
             <span className="section-label footer-cta-label">Start with a workflow</span>
             <p className="footer-cta-copy">
               Send the process, bottleneck, and goal — we reply with a scoped next step.
             </p>
             <div className="footer-cta-actions">
-              <a href={resolveHref("/contact")} className="btn-outline">
+              <a href={resolveHref("/contact")} className="btn-outline footer-cta-primary">
                 Contact us
               </a>
-              <a href="mailto:hello@deview.ai" className="btn-outline footer-btn-secondary">
+              <a href="mailto:hello@deview.ai" className="btn-outline footer-cta-secondary">
                 Email direct
               </a>
             </div>
