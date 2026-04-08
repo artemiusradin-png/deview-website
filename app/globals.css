@@ -1995,6 +1995,8 @@ html[data-theme="light"] .carousel-fade-right {
 .contact-monument {
   --contact-x: 50%;
   --contact-y: 50%;
+  /* Do not clip gradient text; glyphs can extend past em box with tight tracking */
+  overflow: visible;
   color: transparent;
   background-image:
     radial-gradient(
@@ -2034,14 +2036,17 @@ html[data-theme="light"] .contact-monument {
 
 .contact-monument-line {
   font-size: clamp(3.5rem, 8.5vw, 8rem);
-  letter-spacing: -0.07em;
-  line-height: 0.9;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  overflow: visible;
+  /* Side bearing so @ and tight kerning are not cut off by parent or background-clip */
+  padding-inline: 0.03em;
 }
 
 @media (max-width: 767px) {
   .contact-monument-line {
     font-size: clamp(2.2rem, 10vw, 3.75rem);
-    letter-spacing: -0.05em;
+    letter-spacing: -0.04em;
     word-break: break-word;
   }
 }
