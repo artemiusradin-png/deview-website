@@ -3,8 +3,11 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { HomeServicesSection } from "../components/HomeServicesSection";
+import { HomeSolutionsSection } from "../components/HomeSolutionsSection";
 import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
+import { useLocaleContext } from "@/lib/i18n/locale-context";
 
 const fade = {
   initial: { opacity: 0, y: 18 },
@@ -33,98 +36,21 @@ const cardMotion = {
 
 const HERO_VIDEO_SRC = "/Abstract_Architectural_AI_Background_Video.mp4";
 const HERO_VIDEO_CROSSFADE_SECONDS = 0.9;
-const INTERFACE_USER_MESSAGE = "What are our Q4 exposure risks?";
-const INTERFACE_AI_MESSAGE =
-  "Based on general patterns, Q4 risks typically include supply chain pressure and budget cycles...";
 
-const enterpriseModes = [
-  {
-    id: "predictive",
-    label: "PREDICTIVE",
-    axis: "HIGH STRATEGIC VALUE",
-    position: "Top",
-    body: "Predictive enterprise AI turns historical and live signals into forward-looking scores leaders can plan against—demand and inventory forecasts, churn and renewal risk, equipment failure and maintenance windows, fraud or credit propensity, and staffing or capacity projections tied to SLAs. The real work is rarely a prototype model: governed features, reproducible training, champion–challenger evaluation, and production monitoring for drift, staleness, and fairness must hold up in regulated and audited environments. Forecasts should land next to decision thresholds, owners, and playbooks—not only in notebooks—so finance, operations, and field teams know when to trust the number, when to override, and when to trigger a retrain.",
-  },
-  {
-    id: "conversational",
-    label: "CONVERSATIONAL",
-    axis: "USER INTERACTION",
-    position: "Left",
-    body: "Conversational modes put natural language between people and your systems—support triage and case summarization, HR and policy Q&A, sales enablement, and internal research copilots grounded in approved sources. In the enterprise, identity, tenancy, and document permissions must flow through every turn: retrieval, citations, and tool calls should only expose what the user is allowed to see, with full logging for security and downstream review. Useful implementations pair fast answers with escalation paths, human approval for sensitive actions, and guardrails on tone, claims, and regulated content so assistance feels responsive without bypassing privacy, retention, or brand standards.",
-  },
-  {
-    id: "generative",
-    label: "GENERATIVE",
-    axis: "HIGH AUTOMATION",
-    position: "Right",
-    body: "Generative deployments produce new text, structure, or media at scale—first drafts of contracts and policies, RFP and executive brief assembly, localized customer communications, code suggestions in your toolchain, and creative variants inside brand guidelines. Enterprise value shows up when prompts, tools, and templates mirror real workflows and when outputs pass through review, redaction, versioning, and release checks before anything customer- or regulator-facing ships. Ownership of IP, sensitive data, and attribution matters as much as base model choice; we design so teams draft faster with broader leverage while legal, security, and quality gates stay explicit and repeatable.",
-  },
-  {
-    id: "analytical",
-    label: "ANALYTICAL",
-    axis: "OPERATIONAL INSIGHT",
-    position: "Bottom",
-    body: "Operational insight means algorithms don’t just score or classify for a dashboard once—they stay wired into live processes so teams can see what is changing, why it matters, and what to do next. That includes anomaly and drift detection, risk and fraud monitoring, throughput and quality signals, and explainable alerts tied to owners and SLAs. Static reporting is not the finish line: analytical AI should connect to ticketing, incident workflows, and control reviews so responders get evidence, suggested hypotheses, and clear next steps rather than another chart to interpret alone. The goal is a closed loop—signals from production routed to the right people with enough context to decide, escalate, or automate while preserving accountability and auditability.",
-  },
-];
-
-const outcomes = [
-  {
-    number: "01",
-    label: "EFFICIENCY",
-    body: "Reduce manual work in repetitive internal processes and shorten the time from request to action.",
-  },
-  {
-    number: "02",
-    label: "SERVICE QUALITY",
-    body: "Improve response quality, consistency, and speed across customer-facing and internal support workflows.",
-  },
-  {
-    number: "03",
-    label: "DECISION SUPPORT",
-    body: "Give teams faster access to the right information so planning, review, and escalation decisions are made with better context.",
-  },
-  {
-    number: "04",
-    label: "COST CONTROL",
-    body: "Target automation where it lowers operating cost without adding brittle systems or unnecessary model spend.",
-  },
-];
-
-const processSteps = [
-  {
-    step: "01",
-    title: "Identify the business problem",
-    body: "We start with workflows, stakeholders, constraints, and available data rather than forcing a model-first solution.",
-  },
-  {
-    step: "02",
-    title: "Scope the engagement",
-    body: "Define the use case, expected value, implementation path, timeline, and commercial model before build work begins.",
-  },
-  {
-    step: "03",
-    title: "Design and build the solution",
-    body: "Develop the application, data flows, and evaluation framework needed to make the system useful in real operations.",
-  },
-  {
-    step: "04",
-    title: "Test with real users",
-    body: "Validate the system with live workflows, gather feedback, and tighten quality, safety, and usability before rollout.",
-  },
-  {
-    step: "05",
-    title: "Launch into production",
-    body: "Deploy the solution into live workflows, connect it to the required systems, and make sure it performs under real operating conditions.",
-  },
-  {
-    step: "06",
-    title: "Monitor and improve",
-    body: "Maintain observability, evaluate performance, and iterate based on real usage patterns and business outcomes.",
-  },
-];
+const ENTERPRISE_MODE_IDS = ["predictive", "conversational", "generative", "analytical"] as const;
+type EnterpriseModeId = (typeof ENTERPRISE_MODE_IDS)[number];
 
 export default function Home() {
+  const { dict, locale, setLocale } = useLocaleContext();
+  const enterpriseModes = ENTERPRISE_MODE_IDS.map((id) => ({
+    id,
+    ...dict.enterpriseModes[id],
+  }));
+  const axes = dict.enterpriseAxes;
+  const outcomes = dict.outcomes.items;
+  const processSteps = dict.process.steps;
+  const interfaceUserMessage = dict.hero.interfaceUser;
+  const interfaceAiMessage = dict.hero.interfaceAi;
   const heroVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const enterpriseModesSectionRef = useRef<HTMLDivElement | null>(null);
   const enterpriseStagePanelRef = useRef<HTMLElement | null>(null);
@@ -144,7 +70,7 @@ export default function Home() {
 
     return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
   });
-  const [activeEnterpriseMode, setActiveEnterpriseMode] = useState(enterpriseModes[0].id);
+  const [activeEnterpriseMode, setActiveEnterpriseMode] = useState<EnterpriseModeId>(ENTERPRISE_MODE_IDS[0]);
   const [navVisible, setNavVisible] = useState(true);
   const [typedUserMessage, setTypedUserMessage] = useState("");
   const [typedAiMessage, setTypedAiMessage] = useState("");
@@ -244,9 +170,9 @@ export default function Home() {
         }
 
         userIndex += 1;
-        setTypedUserMessage(INTERFACE_USER_MESSAGE.slice(0, userIndex));
+        setTypedUserMessage(interfaceUserMessage.slice(0, userIndex));
 
-        if (userIndex < INTERFACE_USER_MESSAGE.length) {
+        if (userIndex < interfaceUserMessage.length) {
           userTimeout = setTimeout(typeUser, 42);
           return;
         }
@@ -260,9 +186,9 @@ export default function Home() {
         }
 
         aiIndex += 1;
-        setTypedAiMessage(INTERFACE_AI_MESSAGE.slice(0, aiIndex));
+        setTypedAiMessage(interfaceAiMessage.slice(0, aiIndex));
 
-        if (aiIndex < INTERFACE_AI_MESSAGE.length) {
+        if (aiIndex < interfaceAiMessage.length) {
           aiTimeout = setTimeout(typeAi, 18);
           return;
         }
@@ -287,7 +213,7 @@ export default function Home() {
         clearTimeout(restartTimeout);
       }
     };
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, interfaceUserMessage, interfaceAiMessage]);
 
   useEffect(() => {
     const wrapper = enterpriseModesSectionRef.current;
@@ -446,9 +372,13 @@ export default function Home() {
 
   const closeNav = () => setNavOpen(false);
   const toggleTheme = () => setTheme((current) => (current === "dark" ? "light" : "dark"));
+  const toggleLocale = () => setLocale(locale === "en" ? "zh-HK" : "en");
   const selectedMode = enterpriseModes.find((mode) => mode.id === activeEnterpriseMode) ?? enterpriseModes[0];
-  const displayedUserMessage = prefersReducedMotion ? INTERFACE_USER_MESSAGE : typedUserMessage;
-  const displayedAiMessage = prefersReducedMotion ? INTERFACE_AI_MESSAGE : typedAiMessage;
+  const displayedUserMessage = prefersReducedMotion ? interfaceUserMessage : typedUserMessage;
+  const displayedAiMessage = prefersReducedMotion ? interfaceAiMessage : typedAiMessage;
+  const themeAria =
+    theme === "dark" ? dict.a11y.themeToLight : dict.a11y.themeToDark;
+  const langAria = locale === "en" ? dict.a11y.langToZh : dict.a11y.langToEn;
   const enterpriseMapScale = useTransform(enterpriseModesProgress, [0, 0.2, 0.55, 1], prefersReducedMotion ? [1, 1, 1, 1] : [0.9, 0.97, 1, 1]);
   const enterpriseMapRotateX = useTransform(enterpriseModesProgress, [0, 0.35], prefersReducedMotion ? [0, 0] : [12, 0]);
   const enterpriseMapY = useTransform(enterpriseModesProgress, [0, 0.25, 0.65, 1], prefersReducedMotion ? [0, 0, 0, 0] : [28, 8, 0, -4]);
@@ -474,7 +404,7 @@ export default function Home() {
         className="brand-mark fixed left-0 top-0 z-50 px-4 pt-[calc(env(safe-area-inset-top)+1.35rem)] text-xs tracking-[0.25em] text-[var(--white-80)] sm:px-6 sm:text-sm"
         onClick={closeNav}
       >
-        DEVIEW
+        {dict.whatMakesEnterprise.backBrand}
       </a>
 
       <header
@@ -489,47 +419,52 @@ export default function Home() {
             className="nav-toggle"
             aria-expanded={navOpen}
             aria-controls="mobile-site-nav"
-            aria-label={navOpen ? "Close menu" : "Open menu"}
+            aria-label={navOpen ? dict.a11y.closeMenu : dict.a11y.openMenu}
             onClick={() => setNavOpen((open) => !open)}
           >
             <span className="nav-toggle-bar" />
             <span className="nav-toggle-bar" />
             <span className="nav-toggle-bar" />
           </button>
-          <div className="hidden items-center gap-6 md:flex lg:gap-8">
+          <div className="hidden items-center gap-5 md:flex lg:gap-7">
             <a href="#hero" className="nav-item nav-item-active">
-              AI CONSULTING
+              {dict.nav.aiConsulting}
             </a>
             <a href="#enterprise-ai" className="nav-item">
-              ENTERPRISE AI
+              {dict.nav.enterpriseAi}
             </a>
             <a href="#services" className="nav-item">
-              SERVICES
+              {dict.nav.services}
             </a>
             <a href="#solutions" className="nav-item">
-              USE CASES
+              {dict.nav.useCases}
             </a>
             <a href="#outcomes" className="nav-item">
-              OUTCOMES
+              {dict.nav.outcomes}
             </a>
             <a href="#process" className="nav-item">
-              PROCESS
+              {dict.nav.process}
             </a>
             <a href="#contact" className="nav-item">
-              INQUIRE
+              {dict.nav.inquire}
             </a>
-            <button
-              type="button"
-              className="theme-toggle"
-              onClick={toggleTheme}
-              aria-label={theme === "dark" ? "Switch to bright mode" : "Switch to dark mode"}
-              title={theme === "dark" ? "Switch to bright mode" : "Switch to dark mode"}
-            >
-              <span className={`theme-icon theme-icon-sun ${theme === "light" ? "theme-icon-active" : ""}`} aria-hidden="true">
-                <span className="theme-icon-sun-core" />
-              </span>
-              <span className={`theme-icon theme-icon-moon ${theme === "dark" ? "theme-icon-active" : ""}`} aria-hidden="true" />
-            </button>
+            <div className="flex items-center gap-2 lg:gap-2.5">
+              <button
+                type="button"
+                className="lang-toggle"
+                onClick={toggleLocale}
+                aria-label={langAria}
+                title={langAria}
+              >
+                {locale === "en" ? dict.lang.shortZh : dict.lang.shortEn}
+              </button>
+              <button type="button" className="theme-toggle" onClick={toggleTheme} aria-label={themeAria} title={themeAria}>
+                <span className={`theme-icon theme-icon-sun ${theme === "light" ? "theme-icon-active" : ""}`} aria-hidden="true">
+                  <span className="theme-icon-sun-core" />
+                </span>
+                <span className={`theme-icon theme-icon-moon ${theme === "dark" ? "theme-icon-active" : ""}`} aria-hidden="true" />
+              </button>
+            </div>
           </div>
         </nav>
       </header>
@@ -540,46 +475,51 @@ export default function Home() {
           className="mobile-nav-overlay md:hidden"
           role="dialog"
           aria-modal="true"
-          aria-label="Site navigation"
+          aria-label={dict.a11y.siteNav}
         >
           <button type="button" className="mb-4 self-end text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]" onClick={closeNav}>
-            Close
+            {dict.mobileNav.close}
           </button>
           <a href="#hero" className="nav-item-active" onClick={closeNav}>
-            AI CONSULTING
+            {dict.nav.aiConsulting}
           </a>
           <a href="#enterprise-ai" onClick={closeNav}>
-            ENTERPRISE AI
+            {dict.nav.enterpriseAi}
           </a>
           <a href="#services" onClick={closeNav}>
-            SERVICES
+            {dict.nav.services}
           </a>
           <a href="#solutions" onClick={closeNav}>
-            USE CASES
+            {dict.nav.useCases}
           </a>
           <a href="#outcomes" onClick={closeNav}>
-            OUTCOMES
+            {dict.nav.outcomes}
           </a>
           <a href="#process" onClick={closeNav}>
-            PROCESS
+            {dict.nav.process}
           </a>
           <a href="#contact" onClick={closeNav}>
-            INQUIRE
+            {dict.nav.inquire}
           </a>
           <a href="/contact" onClick={closeNav}>
-            CONTACT FORM
+            {dict.mobileNav.contactForm}
           </a>
-          <button
-            type="button"
-            className="theme-toggle mt-4"
-            onClick={toggleTheme}
-            aria-label={theme === "dark" ? "Switch to bright mode" : "Switch to dark mode"}
-          >
-            <span className={`theme-icon theme-icon-sun ${theme === "light" ? "theme-icon-active" : ""}`} aria-hidden="true">
-              <span className="theme-icon-sun-core" />
-            </span>
-            <span className={`theme-icon theme-icon-moon ${theme === "dark" ? "theme-icon-active" : ""}`} aria-hidden="true" />
-          </button>
+          <div className="mt-4 flex items-center gap-3">
+            <button
+              type="button"
+              className="lang-toggle"
+              onClick={toggleLocale}
+              aria-label={langAria}
+            >
+              {locale === "en" ? dict.lang.shortZh : dict.lang.shortEn}
+            </button>
+            <button type="button" className="theme-toggle" onClick={toggleTheme} aria-label={themeAria}>
+              <span className={`theme-icon theme-icon-sun ${theme === "light" ? "theme-icon-active" : ""}`} aria-hidden="true">
+                <span className="theme-icon-sun-core" />
+              </span>
+              <span className={`theme-icon theme-icon-moon ${theme === "dark" ? "theme-icon-active" : ""}`} aria-hidden="true" />
+            </button>
+          </div>
         </div>
       ) : null}
 
@@ -633,18 +573,15 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="max-w-2xl"
           >
-            <p className="section-label mb-4">AI STRATEGY, IMPLEMENTATION, AND INTEGRATION</p>
+            <p className="section-label mb-4">{dict.hero.kicker}</p>
             <h1 className="hero-heading mb-6 text-[clamp(1.75rem,6.5vw,2.75rem)] text-[var(--white-100)] md:text-5xl lg:text-6xl">
-              CUSTOM AI
+              {dict.hero.titleL1}
               <br />
-              SOLUTIONS FOR
+              {dict.hero.titleL2}
               <br />
-              REAL OPERATIONS
+              {dict.hero.titleL3}
             </h1>
-            <p className="max-w-xl text-sm text-[var(--text-muted)] md:text-base">
-              DeView helps companies identify high-value AI opportunities, build custom solutions, and put the
-              right implementation foundations in place so those systems deliver measurable operational results.
-            </p>
+            <p className="max-w-xl text-sm text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
           </motion.div>
 
           <motion.div
@@ -654,39 +591,38 @@ export default function Home() {
             className="flex flex-col items-start justify-between gap-8 text-left md:items-end md:gap-10 md:text-right"
           >
             <div className="space-y-2 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)] sm:text-xs">
-              <div>STRATEGY</div>
-              <div>SOLUTION DELIVERY</div>
-              <div>AI IMPLEMENTATION</div>
-              <div>SYSTEM INTEGRATION</div>
+              {dict.hero.col1.map((line) => (
+                <div key={line}>{line}</div>
+              ))}
             </div>
             <div className="w-full space-y-3 text-sm md:w-auto">
               <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-end sm:gap-4">
                 <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
-                  CLIENTS
+                  {dict.hero.clients}
                 </span>
-                <span className="text-sm text-[var(--white-100)] sm:text-base">MID-MARKET TO ENTERPRISE</span>
+                <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.clientsValue}</span>
               </div>
               <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-end sm:gap-4">
                 <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
-                  FOCUS
+                  {dict.hero.focus}
                 </span>
-                <span className="text-sm text-[var(--white-100)] sm:text-base">USEFUL AI, NOT DEMO THEATER</span>
+                <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.focusValue}</span>
               </div>
               <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-end sm:gap-4">
                 <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
-                  ENGAGEMENTS
+                  {dict.hero.engagements}
                 </span>
-                <span className="text-sm text-[var(--white-100)] sm:text-base">DISCOVERY TO PRODUCTION</span>
+                <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.engagementsValue}</span>
               </div>
             </div>
             <div className="flex w-full flex-wrap items-center gap-6 md:w-auto md:justify-end md:gap-8">
               <a href="#contact" className="btn-outline">
-                INQUIRE
+                {dict.hero.inquire}
               </a>
               <div className="ml-auto flex flex-col items-end gap-3 md:ml-0">
                 <div className="scroll-cue" />
                 <span className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                  SCROLL
+                  {dict.hero.scroll}
                 </span>
               </div>
             </div>
@@ -704,23 +640,21 @@ export default function Home() {
           className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
         >
           <div className="section-shell">
-            <p className="section-label mb-3">ENTERPRISE AI</p>
+            <p className="section-label mb-3">{dict.enterpriseAi.label}</p>
             <div className="rule mb-6" />
             <div className="grid gap-6 lg:grid-cols-[1.15fr_auto] lg:items-stretch lg:gap-10">
               <div className="enterprise-opener">
                 <div className="enterprise-statement-stack">
                   <p className="enterprise-statement-line hero-heading text-[var(--white-80)]">
-                    ENTERPRISE AI IS NOT JUST A SMARTER INTERFACE.
+                    {dict.enterpriseAi.statement1}
                   </p>
                   <div className="rule enterprise-statement-rule" />
                   <p className="enterprise-statement-line hero-heading text-[var(--white-100)]">
-                    IT IS AI BUILT TO OPERATE INSIDE REAL COMPANIES.
+                    {dict.enterpriseAi.statement2}
                   </p>
                 </div>
                 <p className="enterprise-opener-body max-w-2xl text-[0.88rem] leading-relaxed text-[var(--text-muted)] md:text-[0.95rem]">
-                  DeView designs and implements enterprise AI systems that survive scale, compliance, integration
-                  complexity, and operational accountability — the real line between a demo and a production
-                  deployment.
+                  {dict.enterpriseAi.opener}
                 </p>
 
                 {/* Visual: interface-only vs operational AI */}
@@ -734,12 +668,16 @@ export default function Home() {
                 >
                   {/* Left panel: interface only */}
                   <div className="flex flex-col gap-5 bg-[var(--background)] p-5">
-                    <p className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-30)]">INTERFACE ONLY</p>
+                    <p className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-30)]">
+                      {dict.enterpriseAi.compare.interfaceOnly}
+                    </p>
 
                     <div className="space-y-2">
                       <div className="flex justify-end">
                         <div className="max-w-[82%] border border-[var(--white-10)] px-3 py-2">
-                          <p className="mb-1 text-[0.52rem] uppercase tracking-[0.14em] text-[var(--white-30)]">USER</p>
+                          <p className="mb-1 text-[0.52rem] uppercase tracking-[0.14em] text-[var(--white-30)]">
+                            {dict.hero.labels.user}
+                          </p>
                           <p className="type-line text-[0.7rem] leading-snug text-[var(--white-40)]">
                             {displayedUserMessage}
                             <span className="type-caret" aria-hidden="true" />
@@ -748,7 +686,9 @@ export default function Home() {
                       </div>
                       <div className="flex justify-start">
                         <div className="max-w-[82%] border border-[var(--white-10)] bg-[var(--surface)] px-3 py-2">
-                          <p className="mb-1 text-[0.52rem] uppercase tracking-[0.14em] text-[var(--white-30)]">AI</p>
+                          <p className="mb-1 text-[0.52rem] uppercase tracking-[0.14em] text-[var(--white-30)]">
+                            {dict.hero.labels.ai}
+                          </p>
                           <p className="type-line text-[0.7rem] leading-snug text-[var(--white-30)]">
                             {displayedAiMessage}
                             <span className="type-caret" aria-hidden="true" />
@@ -758,7 +698,7 @@ export default function Home() {
                     </div>
 
                     <div className="mt-auto border-t border-[var(--white-10)] pt-4 space-y-1.5">
-                      {["No access to your systems", "No action taken", "Not monitored or measured"].map((item) => (
+                      {dict.enterpriseAi.compare.interfaceBullets.map((item) => (
                         <div key={item} className="flex items-center gap-2">
                           <span className="shrink-0 text-[0.6rem] text-[var(--white-20)]">—</span>
                           <span className="text-[0.62rem] uppercase tracking-[0.1em] text-[var(--white-30)]">{item}</span>
@@ -769,12 +709,16 @@ export default function Home() {
 
                   {/* Right panel: operational AI */}
                   <div className="flex flex-col gap-5 bg-[var(--surface)] p-5">
-                    <p className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-80)]">OPERATIONAL AI</p>
+                    <p className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-80)]">
+                      {dict.enterpriseAi.compare.operational}
+                    </p>
 
                     <div className="grid min-w-0 grid-cols-[1fr_auto_1fr] items-start gap-1.5 sm:gap-2">
                       <div className="min-w-0 space-y-1.5">
-                        <p className="mb-2 text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-40)]">INPUTS</p>
-                        {["CRM", "ERP", "SLACK", "DOCS"].map((src) => (
+                        <p className="mb-2 text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-40)]">
+                          {dict.enterpriseAi.compare.inputs}
+                        </p>
+                        {dict.enterpriseAi.compare.sources.map((src) => (
                           <div key={src} className="border border-[var(--white-20)] px-2 py-1.5 text-center">
                             <span className="text-[0.6rem] uppercase tracking-[0.12em] text-[var(--white-60)]">{src}</span>
                           </div>
@@ -782,13 +726,17 @@ export default function Home() {
                       </div>
 
                       <div className="flex flex-col items-center justify-center gap-1.5 px-1 pt-7">
-                        <span className="text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-60)]">AI</span>
+                        <span className="text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-60)]">
+                          {dict.hero.labels.ai}
+                        </span>
                         <span className="text-[0.7rem] leading-none text-[var(--white-40)]">→</span>
                       </div>
 
                       <div className="min-w-0 space-y-1.5">
-                        <p className="mb-2 text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-40)]">ACTIONS</p>
-                        {["TICKET", "ALERT", "REPORT", "ESCALATION"].map((out) => (
+                        <p className="mb-2 text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-40)]">
+                          {dict.enterpriseAi.compare.actions}
+                        </p>
+                        {dict.enterpriseAi.compare.outputs.map((out) => (
                           <div key={out} className="border border-[var(--white-20)] px-2 py-1.5 text-center">
                             <span className="text-[0.6rem] uppercase tracking-[0.12em] text-[var(--white-60)]">{out}</span>
                           </div>
@@ -797,7 +745,7 @@ export default function Home() {
                     </div>
 
                     <div className="mt-auto border-t border-[var(--white-20)] pt-4 space-y-1.5">
-                      {["Reads from and writes to your systems", "Every action tracked and auditable", "Monitored and evaluated in production"].map((item) => (
+                      {dict.enterpriseAi.compare.opBullets.map((item) => (
                         <div key={item} className="flex items-center gap-2">
                           <span className="shrink-0 text-[0.6rem] text-[var(--white-60)]">+</span>
                           <span className="text-[0.62rem] uppercase tracking-[0.1em] text-[var(--white-80)]">{item}</span>
@@ -810,23 +758,29 @@ export default function Home() {
               <aside className="enterprise-opener-aside flex flex-col justify-end border-t border-[var(--white-20)] pt-8 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
                 <div className="space-y-4 text-[0.72rem] text-[var(--white-80)] sm:text-xs">
                   <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-6 lg:flex-col lg:gap-1">
-                    <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">WE DO</span>
+                    <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">
+                      {dict.enterpriseAi.aside.weDo}
+                    </span>
                     <span className="lg:text-[0.78rem] lg:leading-snug lg:text-[var(--white-80)]">
-                      Strategy, architecture, deployment, and integration
+                      {dict.enterpriseAi.aside.weDoBody}
                     </span>
                   </div>
                   <div className="rule opacity-60 lg:hidden" />
                   <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-6 lg:flex-col lg:gap-1">
-                    <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">FOCUS</span>
+                    <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">
+                      {dict.enterpriseAi.aside.focus}
+                    </span>
                     <span className="lg:text-[0.78rem] lg:leading-snug lg:text-[var(--white-80)]">
-                      Reliable AI for enterprise workflows, not generic tools
+                      {dict.enterpriseAi.aside.focusBody}
                     </span>
                   </div>
                   <div className="rule opacity-60 lg:hidden" />
                   <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-6 lg:flex-col lg:gap-1">
-                    <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">BOTTOM LINE</span>
+                    <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">
+                      {dict.enterpriseAi.aside.bottomLine}
+                    </span>
                     <span className="lg:text-[0.78rem] lg:leading-snug lg:text-[var(--white-80)]">
-                      This is why infrastructure matters
+                      {dict.enterpriseAi.aside.bottomLineBody}
                     </span>
                   </div>
                 </div>
@@ -851,14 +805,9 @@ export default function Home() {
               className="enterprise-mode-stage-copy"
               style={{ opacity: enterpriseStageIntroOpacity, y: enterpriseStageIntroY }}
             >
-              <p className="section-label mb-3">WHAT IS ENTERPRISE AI</p>
-              <h3 className="enterprise-mode-stage-title text-[var(--white-100)]">
-                Four operating modes across interaction, automation, strategic value, and insight.
-              </h3>
-              <p className="enterprise-mode-stage-body text-[var(--text-muted)]">
-                The useful implementations usually combine multiple modes. We scope the right mix based on the
-                workflow, the decision point, and the level of control required.
-              </p>
+              <p className="section-label mb-3">{dict.enterpriseModesIntro.label}</p>
+              <h3 className="enterprise-mode-stage-title text-[var(--white-100)]">{dict.enterpriseModesIntro.title}</h3>
+              <p className="enterprise-mode-stage-body text-[var(--text-muted)]">{dict.enterpriseModesIntro.body}</p>
             </motion.div>
             <motion.div
               style={{
@@ -875,16 +824,16 @@ export default function Home() {
               <div className={`enterprise-mode-text-stage enterprise-mode-text-stage-${selectedMode.id}`}>
                 <div className={`enterprise-mode-ambient enterprise-mode-ambient-${selectedMode.id}`} aria-hidden="true" />
                 <div className="enterprise-mode-text-axes enterprise-mode-text-axes-top" aria-hidden="true">
-                  <span>HIGH STRATEGIC VALUE</span>
+                  <span>{axes.top}</span>
                 </div>
                 <div className="enterprise-mode-text-axes enterprise-mode-text-axes-left" aria-hidden="true">
-                  <span>USER INTERACTION</span>
+                  <span>{axes.left}</span>
                 </div>
                 <div className="enterprise-mode-text-axes enterprise-mode-text-axes-right" aria-hidden="true">
-                  <span>HIGH AUTOMATION</span>
+                  <span>{axes.right}</span>
                 </div>
                 <div className="enterprise-mode-text-axes enterprise-mode-text-axes-bottom" aria-hidden="true">
-                  <span>OPERATIONAL INSIGHT</span>
+                  <span>{axes.bottom}</span>
                 </div>
                 <div className="enterprise-mode-text-main">
                   <motion.p
@@ -941,7 +890,9 @@ export default function Home() {
                     className="enterprise-mode-stage-detail enterprise-mode-stage-detail--in-card"
                   >
                     <div className="enterprise-mode-stage-detail-meta">
-                      <p className="mb-2 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">ACTIVE MODE</p>
+                      <p className="mb-2 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
+                        {dict.modeDetail.activeMode}
+                      </p>
                       <p className="text-base uppercase tracking-[0.16em] text-[var(--white-100)]">{selectedMode.label}</p>
                       <p className="mt-1 text-[0.6rem] uppercase tracking-[0.16em] text-[var(--white-40)]">
                         {selectedMode.axis}
@@ -957,6 +908,9 @@ export default function Home() {
 
       <RetroFeatureCards />
 
+      <HomeServicesSection variant="home" />
+      <HomeSolutionsSection variant="home" />
+
       <section
         id="outcomes"
         className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter"
@@ -967,20 +921,18 @@ export default function Home() {
           className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
         >
           <div className="section-shell">
-            <p className="section-label mb-3">OUTCOMES</p>
+            <p className="section-label mb-3">{dict.outcomes.label}</p>
             <div className="rule mb-6" />
             <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
               <div>
                 <h2 className="mb-4 text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
-                  Business value from
+                  {dict.outcomes.titleL1}
                   <br />
-                  implemented AI systems.
+                  {dict.outcomes.titleL2}
                 </h2>
               </div>
               <div>
-                <p className="max-w-md text-sm text-[var(--text-muted)]">
-                  Four categories of measurable improvement that we scope every engagement around.
-                </p>
+                <p className="max-w-md text-sm text-[var(--text-muted)]">{dict.outcomes.subtitle}</p>
               </div>
             </div>
           </div>
@@ -994,7 +946,7 @@ export default function Home() {
           >
             {outcomes.map((outcome) => (
               <motion.article
-                key={outcome.label}
+                key={outcome.number}
                 variants={cardMotion}
                 transition={{ duration: 0.45 }}
                 className="group border-b border-[var(--white-20)] transition-colors duration-200 hover:bg-[var(--surface)]"
@@ -1026,18 +978,15 @@ export default function Home() {
           className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
         >
           <div className="section-shell">
-            <p className="section-label mb-3">PROCESS</p>
+            <p className="section-label mb-3">{dict.process.label}</p>
             <div className="rule mb-6" />
             <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
               <h2 className="text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
-                A clear process for taking AI
+                {dict.process.titleL1}
                 <br />
-                from idea to live implementation.
+                {dict.process.titleL2}
               </h2>
-              <p className="max-w-md text-[0.8rem] text-[var(--text-muted)] md:text-sm">
-                We keep the engagement model simple: identify the right problem, scope the build, implement the
-                system, validate it in real workflows, then improve it in production.
-              </p>
+              <p className="max-w-md text-[0.8rem] text-[var(--text-muted)] md:text-sm">{dict.process.lead}</p>
             </div>
           </div>
 
@@ -1057,7 +1006,7 @@ export default function Home() {
                 className="panel panel-interactive process-card border border-[var(--white-20)] bg-[var(--surface-elevated)] px-5 py-6"
               >
                 <p className="process-step mb-3 text-[0.65rem] uppercase tracking-[0.24em] text-[var(--white-60)]">
-                  Step {item.step}
+                  {dict.process.stepPrefix} {item.step}
                 </p>
                 <h3 className="mb-3 text-sm text-[var(--white-100)]">{item.title}</h3>
                 <p className="text-[0.8rem] text-[var(--text-muted)]">{item.body}</p>
@@ -1069,43 +1018,43 @@ export default function Home() {
 
       <section
         id="contact"
-        className="scroll-margin-header relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter pb-[max(4rem,env(safe-area-inset-bottom))] pt-14 md:pb-[max(5.5rem,env(safe-area-inset-bottom))] md:pt-20"
+        className="contact-inquire-section scroll-margin-header relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter pb-[max(4rem,env(safe-area-inset-bottom))] pt-14 md:pb-[max(5.5rem,env(safe-area-inset-bottom))] md:pt-20"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-14 md:gap-[4.5rem]">
           <div className="max-w-md">
-            <p className="section-label mb-4">INQUIRE</p>
+            <p className="section-label mb-4">{dict.contact.label}</p>
             <div className="rule mb-8 max-w-[11rem]" />
             <h2 className="mb-6 text-sm leading-snug text-[var(--white-100)]">
-              Bring us the messy workflow, stubborn constraint,
+              {dict.contact.titleL1}
               <br />
-              or half-formed AI idea you want pressure-tested.
+              {dict.contact.titleL2}
             </h2>
             <p className="text-sm leading-snug text-[var(--text-muted)]">
-              Send the business function, current process,
+              {dict.contact.leadL1}
               <br />
-              available data, and the outcome you want to unlock.
+              {dict.contact.leadL2}
             </p>
           </div>
 
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-6">
-            {/*
-              Scroll wrapper: html/body use overflow-x:clip; large gradient text can extend past the flex line box.
-              Per-line background-clip keeps the @ glyph fully painted.
-            */}
-            <div className="contact-monument-scroll min-w-0 flex-1 overflow-x-auto overflow-y-visible overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] md:overflow-x-visible md:pb-0 [&::-webkit-scrollbar]:hidden">
+          {/*
+            Email is full-width above the CTA so it never shares a flex row with the button (that was shrinking
+            the slot and clipping glyphs under html/body overflow-x: clip). Outer strip scrolls horizontally if needed.
+          */}
+          <div className="flex flex-col gap-6 md:gap-8">
+            <div className="contact-monument-scrollstrip w-full overflow-x-auto overflow-y-visible overscroll-x-contain py-1 [scrollbar-width:thin]">
               <a
                 href="mailto:hello@deview.ai"
                 className="contact-monument-anchor"
                 onMouseMove={handleContactMouseMove}
                 onMouseLeave={handleContactMouseLeave}
               >
-                <span className="contact-monument-line">hello</span>
-                <span className="contact-monument-line">@deview.ai</span>
+                <span className="contact-monument-line">{dict.contact.monumentL1}</span>
+                <span className="contact-monument-line">{dict.contact.monumentL2}</span>
               </a>
             </div>
-            <div className="shrink-0 self-start md:self-end">
+            <div className="flex justify-start md:justify-end">
               <a href="/contact" className="btn-outline">
-                SEND INQUIRY →
+                {dict.contact.sendInquiry}
               </a>
             </div>
           </div>

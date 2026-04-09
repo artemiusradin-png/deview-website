@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useLocaleContext } from "@/lib/i18n/locale-context";
 
 /** Hash target for “back to home” from card detail pages (`/${this}#…`). */
 export const RETRO_FEATURE_CARDS_ID = "retro-feature-cards";
@@ -43,6 +46,9 @@ function RetroCard({
 }
 
 export function RetroFeatureCards() {
+  const { dict } = useLocaleContext();
+  const c = dict.cards;
+
   return (
     <section
       id={RETRO_FEATURE_CARDS_ID}
@@ -55,16 +61,16 @@ export function RetroFeatureCards() {
               href="/what-makes-it-enterprise"
               imageUrl="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80"
               imagePosition="center 42%"
-              eyebrow="WHAT MAKES IT ENTERPRISE"
-              title="Architecture across business systems, data foundation, infrastructure, and AI/ML operations."
+              eyebrow={c.whatMakesEyebrow}
+              title={c.whatMakesTitle}
               className="h-[240px]"
             />
             <RetroCard
               href="/architecture-reality-check"
               imageUrl="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80"
               imagePosition="center center"
-              eyebrow="ARCHITECTURE REALITY CHECK"
-              title="Infrastructure determines whether the system belongs in an enterprise at all."
+              eyebrow={c.archEyebrow}
+              title={c.archTitle}
               className="h-[240px]"
             />
           </div>
@@ -73,8 +79,8 @@ export function RetroFeatureCards() {
               href="/services"
               imageUrl="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80"
               imagePosition="center 38%"
-              eyebrow="SERVICES"
-              title={"End-to-end services for\nimplementing AI in business operations."}
+              eyebrow={c.servicesEyebrow}
+              title={c.servicesTitle}
               className="h-[240px] md:h-[510px] md:min-h-[510px]"
             />
           </div>
@@ -83,8 +89,8 @@ export function RetroFeatureCards() {
               href="/use-cases"
               imageUrl="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80"
               imagePosition="center 45%"
-              eyebrow="USE CASES"
-              title={"AI solutions built around\nconcrete operational problems."}
+              eyebrow={c.useCasesEyebrow}
+              title={c.useCasesTitle}
               className="h-[240px] md:h-[510px] md:min-h-[510px]"
             />
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { useLocaleContext } from "@/lib/i18n/locale-context";
 
 const FONT = "D-DIN, Arial, sans-serif";
 const BOX_RX = 2;
@@ -200,6 +201,8 @@ function MBox({
  * Enterprise AI architecture: business & application layers, data foundation, infrastructure, AI/ML core.
  */
 export function EnterpriseArchitectureDiagram({ className = "" }: { className?: string }) {
+  const { dict } = useLocaleContext();
+  const d = dict.diagram;
   const W = 920;
   const H = 400;
 
@@ -271,8 +274,7 @@ export function EnterpriseArchitectureDiagram({ className = "" }: { className?: 
   return (
     <figure className={`enterprise-arch-diagram ${className}`.trim()} aria-labelledby="arch-title">
       <figcaption id="arch-title" className="sr-only">
-        Enterprise AI Architecture: Business Layer and Application Layer feed data into a central Data Foundation
-        pipeline, which drives an AI/ML Core. Infrastructure spans and governs the AI layer.
+        {dict.whatMakesEnterprise.figcaption}
       </figcaption>
 
       <svg
@@ -310,33 +312,33 @@ export function EnterpriseArchitectureDiagram({ className = "" }: { className?: 
 
         <rect x="0" y="0" width={W} height={H} rx="6" fill="var(--enterprise-arch-bg)" />
 
-        <ArchZone x={pad} y={pad} w={c1w - pad} h={topH} label="BUSINESS LAYER" />
-        <ArchZone x={pad} y={midY} w={c1w - pad} h={midH} label="APPLICATION LAYER" />
-        <ArchZone x={c2x} y={pad} w={c2w} h={H - pad * 2} label="DATA FOUNDATION" />
-        <ArchZone x={c3x} y={pad} w={c3w} h={topH} label="INFRASTRUCTURE" />
-        <ArchZone x={c3x} y={midY} w={c3w} h={midH} label="AI / ML CORE" />
+        <ArchZone x={pad} y={pad} w={c1w - pad} h={topH} label={d.zoneBusiness} />
+        <ArchZone x={pad} y={midY} w={c1w - pad} h={midH} label={d.zoneApplication} />
+        <ArchZone x={c2x} y={pad} w={c2w} h={H - pad * 2} label={d.zoneData} />
+        <ArchZone x={c3x} y={pad} w={c3w} h={topH} label={d.zoneInfra} />
+        <ArchZone x={c3x} y={midY} w={c3w} h={midH} label={d.zoneAi} />
 
-        <ArchBox x={pad + 6} y={bizBoxY} w={126} h={bizBoxH} t1="BUSINESS" t2="PROCESSES" />
-        <ArchBox x={pad + 144} y={bizBoxY} w={126} h={bizBoxH} t1="STRATEGIC" t2="GOALS" />
+        <ArchBox x={pad + 6} y={bizBoxY} w={126} h={bizBoxH} t1={d.businessProcesses} t2={d.processes} />
+        <ArchBox x={pad + 144} y={bizBoxY} w={126} h={bizBoxH} t1={d.strategic} t2={d.goals} />
 
-        <ArchBox x={pad + 6} y={alBoxY} w={126} h={alBoxH} t1="USER" t2="INTERFACES" />
-        <ArchBox x={pad + 144} y={alBoxY} w={126} h={alBoxH} t1="ENTERPRISE" t2="APPS" sub="ERP · CRM · …" />
+        <ArchBox x={pad + 6} y={alBoxY} w={126} h={alBoxH} t1={d.user} t2={d.interfaces} />
+        <ArchBox x={pad + 144} y={alBoxY} w={126} h={alBoxH} t1={d.enterprise} t2={d.apps} sub={d.appsSub} />
 
-        <ArchBox x={dfBX} y={dfY1} w={dfBW} h={dfH1} t1="DATA SOURCES" sub="Internal &amp; external" />
+        <ArchBox x={dfBX} y={dfY1} w={dfBW} h={dfH1} t1={d.dataSources} sub={d.dataSourcesSub} />
         <ArchArrow x1={dfCx} y1={dfY1 + dfH1} x2={dfCx} y2={dfY2} />
-        <ArchBox x={dfBX} y={dfY2} w={dfBW} h={dfH2} t1="ETL / PIPELINES" />
+        <ArchBox x={dfBX} y={dfY2} w={dfBW} h={dfH2} t1={d.etl} />
         <ArchArrow x1={dfCx} y1={dfY2 + dfH2} x2={dfCx} y2={dfY3} />
-        <ArchBox x={dfBX} y={dfY3} w={dfBW} h={dfH3} t1="DATA LAKE /" t2="WAREHOUSE" />
+        <ArchBox x={dfBX} y={dfY3} w={dfBW} h={dfH3} t1={d.dataLake1} t2={d.dataLake2} />
 
-        <ArchBox x={inf1X} y={infY} w={infW} h={infH} t1="SECURITY" t2="&amp; GOVERNANCE" fontSize={7} />
-        <ArchBox x={inf2X} y={infY} w={infW} h={infH} t1="CLOUD /" t2="ON-PREM" fontSize={7} />
-        <ArchBox x={inf3X} y={infY} w={infW} h={infH} t1="MONITORING" t2="&amp; MLOPS" fontSize={7} />
+        <ArchBox x={inf1X} y={infY} w={infW} h={infH} t1={d.security1} t2={d.security2} fontSize={7} />
+        <ArchBox x={inf2X} y={infY} w={infW} h={infH} t1={d.cloud1} t2={d.cloud2} fontSize={7} />
+        <ArchBox x={inf3X} y={infY} w={infW} h={infH} t1={d.monitoring1} t2={d.monitoring2} fontSize={7} />
 
-        <ArchBox x={c3x + hPad} y={aiBoxY} w={aiBoxW} h={aiBoxH} t1="AI MODELS" bright />
+        <ArchBox x={c3x + hPad} y={aiBoxY} w={aiBoxW} h={aiBoxH} t1={d.aiModels} bright />
         <ArchArrow x1={c3x + hPad + aiBoxW / 2} y1={aiBoxY + aiBoxH} x2={c3x + hPad + aiBoxW / 2} y2={regY} />
-        <ArchBox x={c3x + hPad} y={regY} w={regW} h={aiBoxH} t1="MODEL" t2="REGISTRY" bright />
+        <ArchBox x={c3x + hPad} y={regY} w={regW} h={aiBoxH} t1={d.modelRegistry1} t2={d.modelRegistry2} bright />
         <ArchArrow x1={c3x + hPad + regW} y1={regY + aiBoxH / 2} x2={srvX} y2={regY + aiBoxH / 2} />
-        <ArchBox x={srvX} y={regY} w={srvW} h={aiBoxH} t1="MODEL SERVING" bright />
+        <ArchBox x={srvX} y={regY} w={srvW} h={aiBoxH} t1={d.modelServing} bright />
 
         <ArchPathArrow
           d={`M ${srvX + srvW} ${regY + aiBoxH / 2} H ${c3x + c3w - 6} V ${aiMidY} H ${aiBoxRight}`}
@@ -363,30 +365,30 @@ export function EnterpriseArchitectureDiagram({ className = "" }: { className?: 
       </svg>
 
       <div className="flex flex-col gap-2.5 md:hidden">
-        <MZone label="BUSINESS LAYER">
-          <MBox>Business processes</MBox>
-          <MBox>Strategic goals</MBox>
+        <MZone label={d.zoneBusiness}>
+          <MBox>{d.mobileBusinessProcesses}</MBox>
+          <MBox>{d.mobileStrategicGoals}</MBox>
         </MZone>
-        <MZone label="APPLICATION LAYER">
-          <MBox>User interfaces</MBox>
-          <MBox sub="ERP · CRM · …">Enterprise apps</MBox>
+        <MZone label={d.zoneApplication}>
+          <MBox>{d.mobileUserInterfaces}</MBox>
+          <MBox sub={d.appsSub}>{d.mobileEnterpriseApps}</MBox>
         </MZone>
-        <MZone label="DATA FOUNDATION">
-          <MBox full>Data sources</MBox>
-          <MBox full>ETL / pipelines</MBox>
-          <MBox full>Data lake / warehouse</MBox>
+        <MZone label={d.zoneData}>
+          <MBox full>{d.mobileDataSources}</MBox>
+          <MBox full>{d.mobileEtl}</MBox>
+          <MBox full>{d.mobileDataLake}</MBox>
         </MZone>
-        <MZone label="INFRASTRUCTURE">
-          <MBox>Security</MBox>
-          <MBox>Cloud / on-prem</MBox>
-          <MBox>MLOps</MBox>
+        <MZone label={d.zoneInfra}>
+          <MBox>{d.mobileSecurity}</MBox>
+          <MBox>{d.mobileCloud}</MBox>
+          <MBox>{d.mobileMlops}</MBox>
         </MZone>
-        <MZone label="AI / ML CORE">
+        <MZone label={d.zoneAi}>
           <MBox full bright>
-            AI models
+            {d.mobileAiModels}
           </MBox>
-          <MBox bright>Registry</MBox>
-          <MBox bright>Serving</MBox>
+          <MBox bright>{d.mobileRegistry}</MBox>
+          <MBox bright>{d.mobileServing}</MBox>
         </MZone>
       </div>
     </figure>

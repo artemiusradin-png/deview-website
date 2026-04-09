@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { architectureComparison } from "@/lib/architecture-comparison";
+import { useLocaleContext } from "@/lib/i18n/locale-context";
 
 const cardMotion = {
   initial: { opacity: 0, y: 24 },
@@ -12,6 +12,8 @@ const cardMotion = {
 const revealViewport = { once: true, amount: 0.2 } as const;
 
 export function ArchitectureRealityPanel() {
+  const { dict } = useLocaleContext();
+  const a = dict.architecture;
   const [architectureFocus, setArchitectureFocus] = useState<"public" | "enterprise">("enterprise");
 
   return (
@@ -25,14 +27,10 @@ export function ArchitectureRealityPanel() {
     >
       <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="section-label mb-2">ARCHITECTURE REALITY CHECK</p>
-          <h3 className="text-lg text-[var(--white-100)] md:text-2xl">
-            Infrastructure determines whether the system belongs in an enterprise at all.
-          </h3>
+          <p className="section-label mb-2">{a.sectionLabel}</p>
+          <h3 className="text-lg text-[var(--white-100)] md:text-2xl">{a.headline}</h3>
         </div>
-        <p className="max-w-sm text-[0.8rem] text-[var(--text-muted)]">
-          This is where DeView moves clients from public AI usage to enterprise-grade deployment.
-        </p>
+        <p className="max-w-sm text-[0.8rem] text-[var(--text-muted)]">{a.sub}</p>
       </div>
       <div className="mb-4 flex flex-wrap gap-3">
         <button
@@ -42,7 +40,7 @@ export function ArchitectureRealityPanel() {
           onFocus={() => setArchitectureFocus("public")}
           onClick={() => setArchitectureFocus("public")}
         >
-          PUBLIC AI SERVICE
+          {a.publicChip}
         </button>
         <button
           type="button"
@@ -51,7 +49,7 @@ export function ArchitectureRealityPanel() {
           onFocus={() => setArchitectureFocus("enterprise")}
           onClick={() => setArchitectureFocus("enterprise")}
         >
-          ENTERPRISE AI DEPLOYMENT
+          {a.enterpriseChip}
         </button>
       </div>
       <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr] md:items-stretch">
@@ -60,11 +58,9 @@ export function ArchitectureRealityPanel() {
             architectureFocus === "public" ? "enterprise-compare-active" : "enterprise-compare-dim"
           }`}
         >
-          <p className="mb-4 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">
-            {architectureComparison.public.label}
-          </p>
+          <p className="mb-4 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">{a.publicLabel}</p>
           <ul className="space-y-2 text-[0.82rem] text-[var(--text-muted)]">
-            {architectureComparison.public.points.map((point) => (
+            {a.publicPoints.map((point) => (
               <li key={point} className="enterprise-list-item">
                 {point}
               </li>
@@ -84,11 +80,9 @@ export function ArchitectureRealityPanel() {
             architectureFocus === "enterprise" ? "enterprise-compare-active" : "enterprise-compare-dim"
           }`}
         >
-          <p className="mb-4 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">
-            {architectureComparison.enterprise.label}
-          </p>
+          <p className="mb-4 text-[0.72rem] uppercase tracking-[0.2em] text-[var(--white-100)]">{a.enterpriseLabel}</p>
           <ul className="space-y-2 text-[0.82rem] text-[var(--text-muted)]">
-            {architectureComparison.enterprise.points.map((point) => (
+            {a.enterprisePoints.map((point) => (
               <li key={point} className="enterprise-list-item">
                 {point}
               </li>
@@ -97,11 +91,8 @@ export function ArchitectureRealityPanel() {
         </article>
       </div>
       <div className="mt-6 border-t border-[var(--white-20)] pt-5">
-        <p className="section-label mb-2 text-[0.65rem]">BOTTOM LINE</p>
-        <p className="max-w-2xl text-[0.88rem] leading-relaxed text-[var(--text-muted)] md:text-sm">
-          This is why infrastructure matters. Enterprise AI is not only about model quality — it is about data
-          control, uptime, compliance posture, system integration, and accountability in the workflow.
-        </p>
+        <p className="section-label mb-2 text-[0.65rem]">{a.bottomLabel}</p>
+        <p className="max-w-2xl text-[0.88rem] leading-relaxed text-[var(--text-muted)] md:text-sm">{a.closing}</p>
       </div>
     </motion.section>
   );

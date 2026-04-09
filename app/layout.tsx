@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { AppProviders } from "./providers";
 import { ThemeSync } from "./theme-sync";
 
 export const metadata: Metadata = {
@@ -25,8 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--text)]">
-        <ThemeSync />
-        {children}
+        <AppProviders>
+          <ThemeSync />
+          {children}
+        </AppProviders>
       </body>
     </html>
   );

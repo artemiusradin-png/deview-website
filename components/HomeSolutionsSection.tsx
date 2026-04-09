@@ -3,13 +3,21 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { homeSectionCardMotion, homeSectionReveal, homeSectionStagger } from "@/lib/home-section-motion";
-import { homeSolutionAreas } from "@/lib/solution-areas";
+import { solutionAreaAccents } from "@/lib/i18n/solution-area-accents";
+import { useLocaleContext } from "@/lib/i18n/locale-context";
 
 type HomeSolutionsSectionProps = {
   variant?: "home" | "standalone";
 };
 
 export function HomeSolutionsSection({ variant = "home" }: HomeSolutionsSectionProps) {
+  const { dict } = useLocaleContext();
+  const sol = dict.solutions;
+  const areas = sol.areas.map((area) => ({
+    ...area,
+    accent: solutionAreaAccents[area.id] ?? "rgba(148, 214, 255, 0.16)",
+  }));
+
   const solutionCarouselRef = useRef<HTMLDivElement | null>(null);
   const solutionCardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const solutionsSectionRef = useRef<HTMLElement | null>(null);
@@ -57,7 +65,7 @@ export function HomeSolutionsSection({ variant = "home" }: HomeSolutionsSectionP
       carousel.removeEventListener("scroll", updateActiveSolution);
       window.removeEventListener("resize", updateActiveSolution);
     };
-  }, []);
+  }, [areas.length]);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -117,7 +125,7 @@ export function HomeSolutionsSection({ variant = "home" }: HomeSolutionsSectionP
     });
   };
 
-  const activeSolution = homeSolutionAreas[activeSolutionIndex] ?? homeSolutionAreas[0];
+  const activeSolution = areas[activeSolutionIndex] ?? areas[0];
   const marqueeContent = `${activeSolution.title} • `.repeat(14);
 
   return (
@@ -148,36 +156,30 @@ export function HomeSolutionsSection({ variant = "home" }: HomeSolutionsSectionP
         className="solutions-content mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
       >
         <div className="section-shell">
-          <p className="section-label mb-3">USE CASES</p>
+          <p className="section-label mb-3">{sol.sectionLabel}</p>
           <div className="rule mb-6" />
           <div className="grid gap-6 md:grid-cols-[1.4fr_1fr]">
             <div>
               <h2 className="mb-4 text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
-                AI solutions built around
+                {sol.titleL1}
                 <br />
-                concrete operational problems.
+                {sol.titleL2}
               </h2>
-              <p className="mb-4 text-sm text-[var(--text-muted)]">
-                We focus on high-friction workflows where AI can reduce manual effort, improve response quality, and help
-                teams move faster with better information.
-              </p>
-              <p className="text-sm text-[var(--text-muted)]">
-                Each solution is designed to fit into existing systems and processes rather than living as an isolated demo
-                or experimental tool.
-              </p>
+              <p className="mb-4 text-sm text-[var(--text-muted)]">{sol.p1}</p>
+              <p className="text-sm text-[var(--text-muted)]">{sol.p2}</p>
             </div>
             <div className="space-y-4 text-[0.72rem] text-[var(--white-80)] sm:text-xs">
               <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
-                <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">FRAMING</span>
-                <span className="sm:text-right">Business workflows before model types</span>
+                <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">{sol.framing}</span>
+                <span className="sm:text-right">{sol.framingBody}</span>
               </div>
               <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
-                <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">POSITIONING</span>
-                <span className="sm:text-right">Custom systems integrated with real operations</span>
+                <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">{sol.positioning}</span>
+                <span className="sm:text-right">{sol.positioningBody}</span>
               </div>
               <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
-                <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">DELIVERY</span>
-                <span className="sm:text-right">Strategy, implementation, and rollout in one engagement</span>
+                <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">{sol.delivery}</span>
+                <span className="sm:text-right">{sol.deliveryBody}</span>
               </div>
             </div>
           </div>
@@ -192,7 +194,7 @@ export function HomeSolutionsSection({ variant = "home" }: HomeSolutionsSectionP
         >
           <button
             type="button"
-            aria-label="Scroll use cases left"
+            aria-label={sol.scrollLeft}
             className="carousel-arrow carousel-arrow-left hidden md:inline-flex"
             onClick={() => scrollSolutions("left")}
           >
@@ -200,7 +202,7 @@ export function HomeSolutionsSection({ variant = "home" }: HomeSolutionsSectionP
           </button>
           <button
             type="button"
-            aria-label="Scroll use cases right"
+            aria-label={sol.scrollRight}
             className="carousel-arrow carousel-arrow-right hidden md:inline-flex"
             onClick={() => scrollSolutions("right")}
           >
@@ -212,17 +214,17 @@ export function HomeSolutionsSection({ variant = "home" }: HomeSolutionsSectionP
             ref={solutionCarouselRef}
             className="hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-0 ps-1 pe-[max(1rem,env(safe-area-inset-right))] [-webkit-overflow-scrolling:touch] sm:gap-6 sm:px-6 sm:pe-4 md:px-8"
           >
-            {homeSolutionAreas.map((area) => (
+            {areas.map((area, areaIndex) => (
               <motion.div
-                key={area.title}
+                key={area.id}
                 ref={(node) => {
-                  solutionCardRefs.current[homeSolutionAreas.findIndex((item) => item.id === area.id)] = node;
+                  solutionCardRefs.current[areaIndex] = node;
                 }}
                 variants={homeSectionCardMotion}
                 transition={{ duration: 0.45 }}
                 whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
-                onMouseEnter={() => setActiveSolutionIndex(homeSolutionAreas.findIndex((item) => item.id === area.id))}
-                onFocusCapture={() => setActiveSolutionIndex(homeSolutionAreas.findIndex((item) => item.id === area.id))}
+                onMouseEnter={() => setActiveSolutionIndex(areaIndex)}
+                onFocusCapture={() => setActiveSolutionIndex(areaIndex)}
                 className={`solutions-card panel panel-interactive min-w-[min(85vw,calc(100vw-2.5rem))] max-w-[calc(100vw-2rem)] snap-start border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-5 sm:min-w-[360px] sm:max-w-none sm:px-5 sm:py-6 lg:min-w-[420px] ${
                   activeSolution.id === area.id ? "solutions-card-active" : "solutions-card-inactive"
                 }`}

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { homeSectionCardMotion, homeSectionReveal, homeSectionStagger } from "@/lib/home-section-motion";
-import { homeServices } from "@/lib/services";
+import { useLocaleContext } from "@/lib/i18n/locale-context";
 
 type HomeServicesSectionProps = {
   /** `home`: in-page `#services` anchor. `standalone`: dedicated route (no id). */
@@ -11,7 +11,10 @@ type HomeServicesSectionProps = {
 };
 
 export function HomeServicesSection({ variant = "home" }: HomeServicesSectionProps) {
-  const [activeServiceId, setActiveServiceId] = useState(homeServices[0].id);
+  const { dict } = useLocaleContext();
+  const s = dict.services;
+  const items = s.items;
+  const [activeServiceId, setActiveServiceId] = useState<string>(() => items[0].id);
 
   return (
     <section
@@ -24,18 +27,15 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
         className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
       >
         <div className="section-shell">
-          <p className="section-label mb-3">SERVICES</p>
+          <p className="section-label mb-3">{s.sectionLabel}</p>
           <div className="rule mb-6" />
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <h2 className="text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
-              End-to-end services for
+              {s.titleL1}
               <br />
-              implementing AI in business operations.
+              {s.titleL2}
             </h2>
-            <p className="max-w-md text-[0.8rem] text-[var(--text-muted)] md:text-sm">
-              We focus on simple, fast-to-ship AI services that solve real workflow problems without turning the first
-              engagement into a large transformation project.
-            </p>
+            <p className="max-w-md text-[0.8rem] text-[var(--text-muted)] md:text-sm">{s.intro}</p>
           </div>
         </div>
 
@@ -46,7 +46,7 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
           viewport={homeSectionStagger.viewport}
           className="grid gap-6 md:grid-cols-2 md:gap-10 xl:grid-cols-4"
         >
-          {homeServices.map((service) => (
+          {items.map((service) => (
             <motion.article
               key={service.id}
               variants={homeSectionCardMotion}
@@ -86,11 +86,11 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
                 <p className="mb-3 text-sm text-[var(--white-100)]">{service.title}</p>
                 <div className="mb-4 space-y-1 text-[0.7rem] text-[var(--white-80)]">
                   <div className="flex justify-between gap-2">
-                    <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">DURATION</span>
+                    <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">{s.duration}</span>
                     <span>{service.duration}</span>
                   </div>
                   <div className="flex justify-between gap-2">
-                    <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">SCOPE</span>
+                    <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">{s.scope}</span>
                     <span className="text-right">{service.scope}</span>
                   </div>
                 </div>
