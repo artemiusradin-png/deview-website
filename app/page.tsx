@@ -1087,16 +1087,22 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-4 overflow-visible md:flex-row md:items-end md:justify-between md:gap-6">
-            <a
-              href="mailto:hello@deview.ai"
-              className="contact-monument flex-1 overflow-visible break-words pl-[0.04em] pr-[0.08em] leading-normal md:pr-[0.12em]"
-              onMouseMove={handleContactMouseMove}
-              onMouseLeave={handleContactMouseLeave}
-            >
-              <span className="contact-monument-line block">hello</span>
-              <span className="contact-monument-line block">@deview.ai</span>
-            </a>
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-6">
+            {/*
+              Scroll wrapper: html/body use overflow-x:clip; large gradient text can extend past the flex line box.
+              Per-line background-clip keeps the @ glyph fully painted.
+            */}
+            <div className="contact-monument-scroll min-w-0 flex-1 overflow-x-auto overflow-y-visible overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] md:overflow-x-visible md:pb-0 [&::-webkit-scrollbar]:hidden">
+              <a
+                href="mailto:hello@deview.ai"
+                className="contact-monument-anchor"
+                onMouseMove={handleContactMouseMove}
+                onMouseLeave={handleContactMouseLeave}
+              >
+                <span className="contact-monument-line">hello</span>
+                <span className="contact-monument-line">@deview.ai</span>
+              </a>
+            </div>
             <div className="shrink-0 self-start md:self-end">
               <a href="/contact" className="btn-outline">
                 SEND INQUIRY →

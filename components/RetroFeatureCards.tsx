@@ -9,9 +9,17 @@ type RetroCardProps = {
   eyebrow: string;
   title: string;
   className?: string;
+  imagePosition?: string;
 };
 
-function RetroCard({ href, imageUrl, eyebrow, title, className = "" }: RetroCardProps) {
+function RetroCard({
+  href,
+  imageUrl,
+  eyebrow,
+  title,
+  className = "",
+  imagePosition = "center",
+}: RetroCardProps) {
   return (
     <Link
       href={href}
@@ -19,7 +27,7 @@ function RetroCard({ href, imageUrl, eyebrow, title, className = "" }: RetroCard
     >
       <div
         className="absolute inset-0 z-0 origin-center scale-105 bg-cover bg-center bg-no-repeat transition-transform duration-300 ease-in-out group-hover:scale-110"
-        style={{ backgroundImage: `url(${imageUrl})` }}
+        style={{ backgroundImage: `url(${imageUrl})`, backgroundPosition: imagePosition }}
         aria-hidden="true"
       />
       <div
@@ -45,14 +53,16 @@ export function RetroFeatureCards() {
           <div className="flex flex-1 flex-col gap-[30px] md:basis-1/3">
             <RetroCard
               href="/what-makes-it-enterprise"
-              imageUrl="https://untree.co/demos/blogy/images/img_2_horizontal.jpg"
+              imageUrl="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80"
+              imagePosition="center 42%"
               eyebrow="WHAT MAKES IT ENTERPRISE"
               title="Architecture across business systems, data foundation, infrastructure, and AI/ML operations."
               className="h-[240px]"
             />
             <RetroCard
               href="/architecture-reality-check"
-              imageUrl="https://untree.co/demos/blogy/images/img_5_horizontal.jpg"
+              imageUrl="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80"
+              imagePosition="center center"
               eyebrow="ARCHITECTURE REALITY CHECK"
               title="Infrastructure determines whether the system belongs in an enterprise at all."
               className="h-[240px]"
@@ -61,7 +71,8 @@ export function RetroFeatureCards() {
           <div className="md:basis-1/3">
             <RetroCard
               href="/services"
-              imageUrl="https://untree.co/demos/blogy/images/img_1_vertical.jpg"
+              imageUrl="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80"
+              imagePosition="center 38%"
               eyebrow="SERVICES"
               title={"End-to-end services for\nimplementing AI in business operations."}
               className="h-[240px] md:h-[510px] md:min-h-[510px]"
@@ -70,7 +81,8 @@ export function RetroFeatureCards() {
           <div className="md:basis-1/3">
             <RetroCard
               href="/use-cases"
-              imageUrl="https://untree.co/demos/blogy/images/img_3_horizontal.jpg"
+              imageUrl="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80"
+              imagePosition="center 45%"
               eyebrow="USE CASES"
               title={"AI solutions built around\nconcrete operational problems."}
               className="h-[240px] md:h-[510px] md:min-h-[510px]"
