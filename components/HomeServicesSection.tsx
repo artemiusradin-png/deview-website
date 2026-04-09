@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { homeSectionCardMotion, homeSectionReveal, homeSectionStagger } from "@/lib/home-section-motion";
 import { homeServices } from "@/lib/services";
@@ -10,6 +11,8 @@ type HomeServicesSectionProps = {
 };
 
 export function HomeServicesSection({ variant = "home" }: HomeServicesSectionProps) {
+  const [activeServiceId, setActiveServiceId] = useState(homeServices[0].id);
+
   return (
     <section
       id={variant === "home" ? "services" : undefined}
@@ -30,8 +33,8 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
               implementing AI in business operations.
             </h2>
             <p className="max-w-md text-[0.8rem] text-[var(--text-muted)] md:text-sm">
-              From selecting the right use case to building, integrating, and operating the final system, we work across
-              the full implementation lifecycle.
+              We focus on simple, fast-to-ship AI services that solve real workflow problems without turning the first
+              engagement into a large transformation project.
             </p>
           </div>
         </div>
@@ -48,23 +51,62 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
               key={service.id}
               variants={homeSectionCardMotion}
               transition={{ duration: 0.45 }}
-              whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
-              className="panel panel-interactive border border-[var(--white-20)] bg-[var(--surface)] px-4 py-5"
+              whileHover={{ y: -4 }}
+              onMouseEnter={() => setActiveServiceId(service.id)}
+              className={`group panel panel-interactive relative overflow-hidden border px-4 py-5 transition-all duration-200 ${
+                activeServiceId === service.id
+                  ? "border-[var(--white-40)] bg-[var(--surface-elevated)] shadow-[0_20px_45px_rgba(0,0,0,0.14)]"
+                  : "border-[var(--white-20)] bg-[var(--surface)]"
+              }`}
             >
-              <p className="section-label mb-3 text-[0.6rem]">{service.label}</p>
-              <p className="mb-3 text-sm text-[var(--white-100)]">{service.title}</p>
-              <div className="mb-4 space-y-1 text-[0.7rem] text-[var(--white-80)]">
-                <div className="flex justify-between gap-2">
-                  <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">DURATION</span>
-                  <span>{service.duration}</span>
+              <span
+                aria-hidden="true"
+                className={`absolute inset-y-0 left-0 w-[2px] transition-opacity duration-200 ${
+                  activeServiceId === service.id ? "bg-[var(--white-90)] opacity-100" : "bg-[var(--white-40)] opacity-0"
+                }`}
+              />
+              <button
+                type="button"
+                onClick={() => setActiveServiceId(service.id)}
+                className="flex w-full flex-col border-0 bg-transparent p-0 text-left text-inherit"
+                aria-pressed={activeServiceId === service.id}
+              >
+                <div className="mb-3 flex items-start justify-between gap-3">
+                  <p className="section-label text-[0.6rem]">{service.label}</p>
+                  <span
+                    className={`text-[0.9rem] transition-all duration-200 ${
+                      activeServiceId === service.id
+                        ? "translate-x-[2px] -translate-y-[2px] text-[var(--white-100)]"
+                        : "text-[var(--white-60)]"
+                    }`}
+                  >
+                    ↗
+                  </span>
                 </div>
-                <div className="flex justify-between gap-2">
-                  <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">SCOPE</span>
-                  <span className="text-right">{service.scope}</span>
+                <p className="mb-3 text-sm text-[var(--white-100)]">{service.title}</p>
+                <div className="mb-4 space-y-1 text-[0.7rem] text-[var(--white-80)]">
+                  <div className="flex justify-between gap-2">
+                    <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">DURATION</span>
+                    <span>{service.duration}</span>
+                  </div>
+                  <div className="flex justify-between gap-2">
+                    <span className="uppercase tracking-[0.16em] text-[var(--white-60)]">SCOPE</span>
+                    <span className="text-right">{service.scope}</span>
+                  </div>
                 </div>
-              </div>
-              <p className="mb-3 text-[0.75rem] leading-relaxed text-[var(--text-muted)]">{service.body}</p>
-              <p className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)]">{service.status}</p>
+                <p className="mb-4 text-[0.75rem] leading-relaxed text-[var(--text-muted)]">{service.body}</p>
+                <div className="mb-4 flex flex-wrap gap-2">
+                  {service.bullets.map((bullet) => (
+                    <span
+                      key={bullet}
+                      className="inline-flex min-h-[1.7rem] items-center whitespace-nowrap border border-[var(--white-20)] px-[0.55rem] py-[0.22rem] text-[0.58rem] leading-none tracking-[0.12em] text-[var(--white-80)] uppercase"
+                    >
+                      {bullet}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)]">{service.status}</p>
+              </button>
             </motion.article>
           ))}
         </motion.div>
