@@ -209,20 +209,12 @@ html[data-theme="light"] .bg-grid::before {
   filter: none;
 }
 
-.service-client__logo--raster {
-  filter: brightness(0) invert(1) drop-shadow(0 8px 20px rgba(0, 0, 0, 0.22));
-}
-
 .service-client__logo--evdev {
   color: var(--white-100);
 }
 
 html[data-theme="light"] .service-client__logo {
   filter: none;
-}
-
-html[data-theme="light"] .service-client__logo--raster {
-  filter: brightness(0) saturate(100%) drop-shadow(0 8px 18px rgba(19, 31, 47, 0.12));
 }
 
 html[data-theme="light"] .service-client__logo--evdev {
