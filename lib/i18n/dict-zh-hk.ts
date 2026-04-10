@@ -193,7 +193,7 @@ export const zhHK: Dictionary = {
     ],
   },
   services: {
-    clientsLabel: "合作客戶",
+    clientsLabel: "精選項目",
     clientsIntro: "以下為我們曾支援的部分公司，涵蓋產品、營運及數碼交付工作。",
     sectionLabel: "服務",
     titleL1: "端到端服務",

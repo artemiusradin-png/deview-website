@@ -191,7 +191,7 @@ export const en = {
     ],
   },
   services: {
-    clientsLabel: "SELECTED CLIENTS",
+    clientsLabel: "SELECTED PROJECTS",
     clientsIntro: "A few companies we have supported across product, operations, and digital delivery work.",
     sectionLabel: "SERVICES",
     titleL1: "End-to-end services for",
