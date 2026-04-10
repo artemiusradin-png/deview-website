@@ -1,5 +1,6 @@
 "use client";
 
+import { DeviewWordmarkLogo } from "@/components/DeviewWordmarkLogo";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 
 type SiteFooterProps = {
@@ -61,6 +62,9 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
 
         <div className="footer-structure-grid">
           <section className="footer-structure-block footer-structure-block--brand">
+            <div className="mb-3 text-[var(--text)]" aria-hidden="true">
+              <DeviewWordmarkLogo className="h-6 w-auto max-w-[min(100%,12rem)] sm:h-7" />
+            </div>
             <p className="footer-structure-copy footer-structure-copy--strong">{f.brandStrong}</p>
             <p className="footer-structure-copy">{f.loc}</p>
             <p className="footer-structure-copy">{f.stack}</p>
