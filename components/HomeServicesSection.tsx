@@ -97,14 +97,14 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
           <p className="section-label">{s.clientsLabel}</p>
 
           {/* Row 1: Novartis, EVDEV (PolyU prepends here when file is added) */}
-          <div className="flex flex-wrap items-center gap-8 lg:gap-12">
+          <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-12">
             {row1Clients.map((client, idx) => (
               <ClientLogo key={client.name} client={client} idx={idx} />
             ))}
           </div>
 
           {/* Row 2: remaining clients */}
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:gap-10">
+          <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-10">
             {row2Clients.map((client, idx) => (
               <ClientLogo key={client.name} client={client} idx={row1Clients.length + idx} />
             ))}
