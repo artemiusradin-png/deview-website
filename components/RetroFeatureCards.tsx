@@ -66,30 +66,28 @@ function RetroOutcomesCard({ className = "", rootPrefix = "" }: { className?: st
         className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/50 from-0% via-black/55 via-[25%] to-black/88 to-100%"
         aria-hidden="true"
       />
-      <div className="relative z-10 flex min-h-0 flex-1 flex-col justify-end p-4 sm:p-5 md:p-5">
-        <div className="flex min-h-0 w-full flex-1 flex-col gap-3">
-          <div className="shrink-0">
-            <span className="mb-1.5 block text-[13px] uppercase tracking-[0.12em] text-white/72">{o.label}</span>
-            <h2 className="mb-1.5 max-w-[20rem] whitespace-pre-line text-base font-medium leading-snug text-white sm:text-lg">
-              {o.titleL1}
-              {"\n"}
-              {o.titleL2}
-            </h2>
-            <p className="max-w-[22rem] text-[11px] leading-snug text-white/70 sm:text-xs">{o.subtitle}</p>
-          </div>
-          <ul className="m-0 flex min-h-0 flex-1 list-none flex-col gap-2.5 overflow-y-auto overscroll-contain p-0 [-webkit-overflow-scrolling:touch]">
-            {o.items.map((item) => (
-              <li key={item.number} className="border-l border-white/20 pl-2.5">
-                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0">
-                  <span className="text-[11px] tabular-nums text-white/45">{item.number}</span>
-                  <span className="text-[10px] uppercase tracking-[0.14em] text-white/90 sm:text-[11px]">
-                    {item.label}
-                  </span>
-                </div>
-                <p className="mt-0.5 text-[10px] leading-snug text-white/65 sm:text-[11px]">{item.body}</p>
-              </li>
-            ))}
-          </ul>
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col p-4 text-left sm:p-5 md:p-5">
+        <ul className="mb-3 flex min-h-0 flex-1 list-none flex-col gap-2.5 overflow-y-auto overscroll-contain p-0 [-webkit-overflow-scrolling:touch]">
+          {o.items.map((item) => (
+            <li key={item.number} className="border-l border-white/20 pl-2.5">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0">
+                <span className="text-[11px] tabular-nums text-white/45">{item.number}</span>
+                <span className="text-[10px] uppercase tracking-[0.14em] text-white/90 sm:text-[11px]">
+                  {item.label}
+                </span>
+              </div>
+              <p className="mt-0.5 text-[10px] leading-snug text-white/65 sm:text-[11px]">{item.body}</p>
+            </li>
+          ))}
+        </ul>
+        <div className="shrink-0 self-start">
+          <span className="mb-1.5 block text-[13px] uppercase tracking-[0.12em] text-white/72">{o.label}</span>
+          <h2 className="mb-1.5 max-w-[20rem] whitespace-pre-line text-base font-medium leading-snug text-white sm:text-lg">
+            {o.titleL1}
+            {"\n"}
+            {o.titleL2}
+          </h2>
+          <p className="max-w-[22rem] text-[11px] leading-snug text-white/70 sm:text-xs">{o.subtitle}</p>
         </div>
       </div>
     </Link>
