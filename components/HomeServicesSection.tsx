@@ -94,9 +94,8 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
                   alt={client.name}
                   width={client.width}
                   height={client.height}
-                  className={`h-10 w-auto max-w-full object-contain ${client.invert ? "brightness-0 invert" : ""} ${
-                    client.blend ? "mix-blend-screen opacity-90" : ""
-                  }`}
+                  className="h-10 w-auto max-w-full object-contain"
+                  style={{ filter: "brightness(0) sepia(1) saturate(0.45) brightness(1.9)" }}
                 />
                 <div className="overflow-hidden">
                   <motion.span
