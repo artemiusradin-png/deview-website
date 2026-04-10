@@ -199,8 +199,6 @@ export const en = {
     whatMakesTitle: "Architecture across business systems, data foundation, infrastructure, and AI/ML operations.",
     archEyebrow: "ARCHITECTURE REALITY CHECK",
     archTitle: "Infrastructure determines whether the system belongs in an enterprise at all.",
-    servicesEyebrow: "SERVICES",
-    servicesTitle: "End-to-end services for\nimplementing AI in business operations.",
     useCasesEyebrow: "USE CASES",
     useCasesTitle: "AI solutions built around\nconcrete operational problems.",
   },

@@ -6,6 +6,9 @@ import { useLocaleContext } from "@/lib/i18n/locale-context";
 /** Hash target for “back to home” from card detail pages (`/${this}#…`). */
 export const RETRO_FEATURE_CARDS_ID = "retro-feature-cards";
 
+const OUTCOMES_CARD_IMAGE =
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80";
+
 type RetroCardProps = {
   href: string;
   imageUrl: string;
@@ -45,7 +48,51 @@ function RetroCard({
   );
 }
 
-export function RetroFeatureCards() {
+function RetroOutcomesCard({ className = "", rootPrefix = "" }: { className?: string; rootPrefix?: string }) {
+  const { dict } = useLocaleContext();
+  const o = dict.outcomes;
+
+  return (
+    <Link
+      href={`${rootPrefix}/#outcomes`}
+      className={`group relative block overflow-hidden rounded-none ${className}`}
+    >
+      <div
+        className="absolute inset-0 z-0 origin-center scale-105 bg-cover bg-center bg-no-repeat transition-transform duration-300 ease-in-out group-hover:scale-110"
+        style={{ backgroundImage: `url(${OUTCOMES_CARD_IMAGE})`, backgroundPosition: "center 35%" }}
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/50 from-0% via-black/55 via-[25%] to-black/88 to-100%"
+        aria-hidden="true"
+      />
+      <div className="relative z-10 flex h-full max-h-full flex-col justify-end overflow-y-auto overscroll-contain p-4 sm:p-5 md:p-5">
+        <span className="mb-1.5 block text-[13px] uppercase tracking-[0.12em] text-white/72">{o.label}</span>
+        <h2 className="mb-1.5 max-w-[20rem] whitespace-pre-line text-base font-medium leading-snug text-white sm:text-lg">
+          {o.titleL1}
+          {"\n"}
+          {o.titleL2}
+        </h2>
+        <p className="mb-3 max-w-[22rem] text-[11px] leading-snug text-white/70 sm:text-xs">{o.subtitle}</p>
+        <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
+          {o.items.map((item) => (
+            <li key={item.number} className="border-l border-white/20 pl-2.5">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0">
+                <span className="text-[11px] tabular-nums text-white/45">{item.number}</span>
+                <span className="text-[10px] uppercase tracking-[0.14em] text-white/90 sm:text-[11px]">
+                  {item.label}
+                </span>
+              </div>
+              <p className="mt-0.5 text-[10px] leading-snug text-white/65 sm:text-[11px]">{item.body}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Link>
+  );
+}
+
+export function RetroFeatureCards({ rootPrefix = "" }: { rootPrefix?: string }) {
   const { dict } = useLocaleContext();
   const c = dict.cards;
 
@@ -75,13 +122,9 @@ export function RetroFeatureCards() {
             />
           </div>
           <div className="md:basis-1/3">
-            <RetroCard
-              href="/services"
-              imageUrl="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80"
-              imagePosition="center 38%"
-              eyebrow={c.servicesEyebrow}
-              title={c.servicesTitle}
-              className="h-[240px] md:h-[510px] md:min-h-[510px]"
+            <RetroOutcomesCard
+              rootPrefix={rootPrefix}
+              className="h-[320px] min-h-0 md:h-[510px] md:min-h-[510px]"
             />
           </div>
           <div className="md:basis-1/3">

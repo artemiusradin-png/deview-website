@@ -202,8 +202,6 @@ export const zhHK: Dictionary = {
     whatMakesTitle: "涵蓋業務系統、數據基礎、基礎設施與 AI／ML 營運的整體架構。",
     archEyebrow: "架構現實檢驗",
     archTitle: "基礎設施決定系統是否真正符合企業環境要求。",
-    servicesEyebrow: "服務",
-    servicesTitle: "端到端服務，\n將 AI 落實至真實業務營運。",
     useCasesEyebrow: "應用場景",
     useCasesTitle: "圍繞真實營運難題\n而設計的 AI 方案。",
   },
