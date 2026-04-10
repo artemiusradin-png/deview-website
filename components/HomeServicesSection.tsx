@@ -12,10 +12,10 @@ type HomeServicesSectionProps = {
 };
 
 const serviceClients = [
-  { name: "EVDEV",      src: "/client-logos/evdev.svg",      width: 96,  height: 19, invert: true },
-  { name: "Fizkultura", src: "/client-logos/fizkultura.png", width: 118, height: 79, invert: true },
-  { name: "Jetfans",    src: "/client-logos/jetfans.avif",   width: 160, height: 60, invert: false, blend: true },
-  { name: "Nextair",    src: "/client-logos/nextair.webp",   width: 80,  height: 80, invert: true },
+  { name: "EVDEV",      src: "/client-logos/evdev.svg",      width: 96,  height: 19, logoH: "h-8"  },
+  { name: "Fizkultura", src: "/client-logos/fizkultura.png", width: 118, height: 79, logoH: "h-16" },
+  { name: "Jetfans",    src: "/client-logos/jetfans.avif",   width: 160, height: 60, logoH: "h-14" },
+  { name: "Nextair",    src: "/client-logos/nextair.webp",   width: 80,  height: 80, logoH: "h-16" },
 ] as const;
 
 const serviceThemes = [
@@ -94,7 +94,7 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
                   alt={client.name}
                   width={client.width}
                   height={client.height}
-                  className="h-10 w-auto max-w-full object-contain"
+                  className={`${client.logoH} w-auto max-w-full object-contain`}
                   style={{ filter: "brightness(0) sepia(1) saturate(0.45) brightness(1.9)" }}
                 />
                 <div className="overflow-hidden">
