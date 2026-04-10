@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { DeviewWordmarkLogo } from "../components/DeviewWordmarkLogo";
 import { HomeServicesSection } from "../components/HomeServicesSection";
 import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
@@ -400,11 +399,10 @@ export default function Home() {
     <div className="min-h-screen bg-[var(--background)] bg-grid text-[var(--text)]">
       <a
         href="#"
-        className="brand-mark fixed left-0 top-0 z-50 flex items-end px-4 pt-[calc(env(safe-area-inset-top)+1.1rem)] text-[var(--white-80)] sm:px-6 sm:pt-[calc(env(safe-area-inset-top)+1.15rem)]"
+        className="brand-mark fixed left-0 top-0 z-50 px-4 pt-[calc(env(safe-area-inset-top)+1.35rem)] text-xs tracking-[0.25em] text-[var(--white-80)] sm:px-6 sm:text-sm"
         onClick={closeNav}
-        aria-label="DeView"
       >
-        <DeviewWordmarkLogo className="h-4 w-auto max-w-[min(42vw,9.5rem)] sm:h-[1.15rem]" />
+        {dict.whatMakesEnterprise.backBrand}
       </a>
 
       <header
@@ -413,13 +411,7 @@ export default function Home() {
         }`}
       >
         <nav className="section-gutter mx-auto flex h-16 max-w-6xl items-center justify-between">
-          <a
-            href="#hero"
-            className="nav-shell-brand flex min-w-0 shrink items-center text-[var(--white-90)] transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--white-40)]"
-            aria-label="DeView — top"
-          >
-            <DeviewWordmarkLogo className="h-[1.35rem] w-auto max-w-[min(46vw,10.5rem)] sm:h-[1.45rem]" />
-          </a>
+          <div className="nav-shell-spacer" aria-hidden="true" />
           <button
             type="button"
             className="nav-toggle"
