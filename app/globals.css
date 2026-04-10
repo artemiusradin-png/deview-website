@@ -222,6 +222,11 @@ html[data-theme="light"] .bg-grid::before {
   filter: brightness(0) invert(1);
 }
 
+/* FACT — white on dark, black on light */
+.service-client__logo--fact {
+  filter: brightness(0) invert(1);
+}
+
 /* PolyU — original on dark, black on light */
 /* filter: none already by default */
 
@@ -239,6 +244,10 @@ html[data-theme="light"] .service-client__logo--fizkultura {
 
 html[data-theme="light"] .service-client__logo--novartis {
   filter: none;
+}
+
+html[data-theme="light"] .service-client__logo--fact {
+  filter: brightness(0);
 }
 
 html[data-theme="light"] .service-client__logo--polyu {
@@ -2846,9 +2855,24 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
   max-height: min(52vh, 30rem);
   aspect-ratio: var(--sv-slide-aspect);
   pointer-events: none;
-  z-index: 100;
+  z-index: 60;
   container-type: size;
   overflow: hidden;
+}
+
+/* All .svoyage-slide-info panels share one grid cell; only the current one may show copy. */
+.svoyage-slide-info[data-current] {
+  z-index: 130;
+}
+
+.svoyage-slide-info:not([data-current]) .svoyage-slide-info__text-wrap {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.svoyage-slide-info[data-current] .svoyage-slide-info__text-wrap {
+  visibility: visible;
 }
 
 .svoyage-slide-info[data-current] .svoyage-slide-info__text span {
@@ -2877,11 +2901,17 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
   width: 100%;
   max-width: 100%;
   max-height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   padding: 1.05rem 1rem 1rem;
   transform: translateZ(40px);
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
   background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.08) 18%, rgba(0, 0, 0, 0.18) 100%);
+  scrollbar-width: thin;
 }
 
 .svoyage-slide-info__text {

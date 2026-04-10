@@ -11,11 +11,12 @@ type HomeServicesSectionProps = {
   variant?: "home" | "standalone";
 };
 
-// Row 1: PolyU (add file when available), Novartis, EVDEV
+// Row 1: PolyU (add file when available), Novartis, EVDEV, FACT
 const row1Clients = [
   // { name: "The Hong Kong Polytechnic University", src: "/client-logos/polyu.svg", width: 0, height: 0, logoH: "h-14", modifier: "polyu" },
   { name: "Novartis",   src: "/client-logos/novartis.svg",   width: 283, height: 42, logoH: "h-10", modifier: "novartis" },
   { name: "EVDEV",      src: "/client-logos/evdev.svg",      width: 96,  height: 19, logoH: "h-8",  modifier: "evdev"    },
+  { name: "FACT",       src: "/client-logos/fact.png",       width: 492, height: 96, logoH: "h-10", modifier: "fact"      },
 ] as const;
 
 // Row 2: the rest
@@ -23,7 +24,6 @@ const row2Clients = [
   { name: "Fizkultura", src: "/client-logos/fizkultura.png", width: 118, height: 79, logoH: "h-16", modifier: "fizkultura" },
   { name: "Jetfans",    src: "/client-logos/jetfans.avif",   width: 160, height: 60, logoH: "h-14", modifier: ""           },
   { name: "Nextair",    src: "/client-logos/nextair.webp",   width: 80,  height: 80, logoH: "h-16", modifier: ""           },
-  { name: "FACT",       src: "/client-logos/fact.png",       width: 492, height: 96, logoH: "h-10", modifier: ""           },
 ] as const;
 
 type ClientEntry = { name: string; src: string; width: number; height: number; logoH: string; modifier: string };
