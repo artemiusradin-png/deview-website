@@ -2749,7 +2749,7 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
 
 .svoyage-slider__stage {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   min-height: min(58vh, 34rem);
 }
 
@@ -2759,7 +2759,7 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
   grid-template: 1fr / 1fr;
   place-items: center;
   min-height: min(52vh, 30rem);
-  padding: 0.75rem 0;
+  padding: 2rem 0 0.75rem;
   isolation: isolate;
 }
 

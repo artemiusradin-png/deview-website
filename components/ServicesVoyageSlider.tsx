@@ -71,9 +71,6 @@ export function ServicesVoyageSlider({ services: s }: Props) {
                         </div>
                         {isCurrent && (
                           <div className="svoyage-slide__details">
-                            <div className="svoyage-slide__subtitle">
-                              {s.duration} · {service.duration}
-                            </div>
                             <div className="svoyage-slide__desc">{service.title}</div>
                             <div className="svoyage-slide__meta">
                               <span className="svoyage-slide__meta-k">{s.scope}</span>
