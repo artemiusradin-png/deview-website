@@ -209,12 +209,20 @@ html[data-theme="light"] .bg-grid::before {
   filter: none;
 }
 
+.service-client__logo--raster {
+  filter: brightness(0) invert(1) drop-shadow(0 8px 20px rgba(0, 0, 0, 0.22));
+}
+
 .service-client__logo--evdev {
   color: var(--white-100);
 }
 
 html[data-theme="light"] .service-client__logo {
   filter: none;
+}
+
+html[data-theme="light"] .service-client__logo--raster {
+  filter: brightness(0) saturate(100%) drop-shadow(0 8px 18px rgba(19, 31, 47, 0.12));
 }
 
 html[data-theme="light"] .service-client__logo--evdev {
@@ -2794,6 +2802,7 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
   pointer-events: none;
   z-index: 100;
   container-type: size;
+  overflow: hidden;
 }
 
 .svoyage-slide-info[data-current] .svoyage-slide-info__text span {
@@ -2813,18 +2822,20 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
+  padding: 0.95rem;
 }
 
 .svoyage-slide-info__text-wrap {
   position: absolute;
-  left: 0;
-  bottom: 12%;
-  width: min(130%, 22rem);
-  max-height: 88%;
-  overflow-y: auto;
+  inset: auto 0 0 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  padding: 1.05rem 1rem 1rem;
   transform: translateZ(40px);
   z-index: 2;
-  scrollbar-width: thin;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.08) 18%, rgba(0, 0, 0, 0.18) 100%);
 }
 
 .svoyage-slide-info__text {
@@ -2841,35 +2852,34 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
 
 .svoyage-slide-info__text--title span,
 .svoyage-slide-info__text--subtitle span {
-  font-size: min(3.5cqw, 1.35rem);
+  font-size: min(3cqw, 1.08rem);
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  line-height: 1.15;
+  line-height: 1.12;
 }
 
 .svoyage-slide-info__text--subtitle span {
-  margin-top: 0.2em;
-  margin-left: 0.12em;
-  font-size: min(2.8cqw, 1.05rem);
+  margin-top: 0.28rem;
+  font-size: min(2.1cqw, 0.8rem);
   font-weight: 600;
+  color: rgba(255, 255, 255, 0.76);
 }
 
 .svoyage-slide-info__text--desc span {
-  margin-top: 0.35em;
-  margin-left: 0.08em;
-  font-size: min(2.2cqw, 0.82rem);
+  margin-top: 0.6rem;
+  font-size: min(1.9cqw, 0.72rem);
   font-family: var(--sv-font-body);
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0.02em;
-  line-height: 1.35;
+  line-height: 1.4;
   white-space: normal;
 }
 
 .svoyage-slide-info__meta {
-  margin: 0.6em 0 0 0.1em;
-  font-size: min(2cqw, 0.72rem);
+  margin: 0.8rem 0 0;
+  font-size: min(1.7cqw, 0.66rem);
   font-family: var(--sv-font-body);
   color: rgba(255, 255, 255, 0.72);
   line-height: 1.35;
@@ -2885,11 +2895,11 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
 }
 
 .svoyage-slide-info__body {
-  margin: 0.75em 0 0 0.08em;
+  margin: 0.8rem 0 0;
   font-family: var(--sv-font-body);
-  font-size: min(2cqw, 0.78rem);
+  font-size: min(1.8cqw, 0.68rem);
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 1.42;
   color: rgba(255, 255, 255, 0.82);
 }
 
@@ -2897,24 +2907,24 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
-  margin: 0.65em 0 0 0.05em;
+  margin: 0.75rem 0 0;
 }
 
 .svoyage-slide-info__chip {
   display: inline-block;
-  padding: 0.2rem 0.45rem;
+  padding: 0.18rem 0.42rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
   font-family: var(--sv-font-body);
-  font-size: min(1.75cqw, 0.65rem);
+  font-size: min(1.5cqw, 0.58rem);
   color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0.04em;
 }
 
 .svoyage-slide-info__status {
-  margin: 0.65em 0 0 0.08em;
+  margin: 0.75rem 0 0;
   font-family: var(--sv-font-body);
-  font-size: min(1.8cqw, 0.68rem);
+  font-size: min(1.55cqw, 0.6rem);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
@@ -3011,6 +3021,10 @@ html[data-theme="light"] .svoyage-slide__panel {
     0 20px 48px rgba(19, 31, 47, 0.08);
 }
 
+html[data-theme="light"] .svoyage-slide-info__text-wrap {
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.14) 18%, rgba(255, 255, 255, 0.5) 100%);
+}
+
 html[data-theme="light"] .svoyage-slide-info__text {
   color: rgba(19, 31, 47, 0.92);
 }
@@ -3043,8 +3057,7 @@ html[data-theme="light"] .svoyage-slide-info__meta-k {
   }
 
   .svoyage-slide-info__text-wrap {
-    bottom: 8%;
-    width: min(100%, 20rem);
+    padding: 0.9rem 0.85rem 0.9rem;
   }
 }
 
