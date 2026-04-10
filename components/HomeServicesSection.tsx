@@ -11,10 +11,10 @@ type HomeServicesSectionProps = {
 };
 
 const serviceClients = [
-  { name: "EVDEV", href: "https://evdev.dev/", logo: "https://logo.clearbit.com/evdev.dev" },
-  { name: "Fizkultura", href: "https://fizkultura.com.ua/", logo: "https://logo.clearbit.com/fizkultura.com.ua" },
-  { name: "Jetfans", href: "https://www.jetfans.eu/", logo: "https://logo.clearbit.com/jetfans.eu" },
-  { name: "Nextair", href: "https://nextair.com.ua/", logo: "https://nextair.com.ua/img/FooterLogo.png" },
+  { name: "EVDEV", href: "https://evdev.dev/", mark: "EVDEV", accent: "software" },
+  { name: "Fizkultura", href: "https://fizkultura.com.ua/", mark: "Fizkultura", accent: "fitness" },
+  { name: "Jetfans", href: "https://www.jetfans.eu/", mark: "JETFANS", accent: "aviation" },
+  { name: "Nextair", href: "https://nextair.com.ua/", mark: "NEXTAIR", accent: "air" },
 ] as const;
 
 export function HomeServicesSection({ variant = "home" }: HomeServicesSectionProps) {
@@ -47,16 +47,25 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
                 href={client.href}
                 target="_blank"
                 rel="noreferrer"
-                className="flex min-h-[4.5rem] items-center justify-center border border-[var(--white-20)] bg-[var(--surface)] px-4 py-3 transition-colors duration-200 hover:border-[var(--white-40)]"
+                className="group relative flex min-h-[5.5rem] overflow-hidden border border-[var(--white-20)] bg-[linear-gradient(180deg,color-mix(in_srgb,var(--surface-elevated)_86%,transparent),color-mix(in_srgb,var(--surface)_94%,transparent))] px-4 py-3 transition-all duration-200 hover:border-[var(--white-40)] hover:bg-[var(--surface-elevated)]"
                 aria-label={client.name}
                 title={client.name}
               >
-                <img
-                  src={client.logo}
-                  alt={client.name}
-                  className="max-h-9 w-auto max-w-full object-contain"
-                  loading="lazy"
-                />
+                <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(240,240,250,0.34),transparent)] opacity-70" />
+                <span className="flex w-full flex-col justify-between">
+                  <span className="text-[0.55rem] uppercase tracking-[0.18em] text-[var(--white-40)]">
+                    {client.accent}
+                  </span>
+                  <span
+                    className={`text-[var(--white-100)] transition-transform duration-200 group-hover:translate-x-[2px] ${
+                      client.name === "Fizkultura"
+                        ? "text-[1.15rem] tracking-[0.01em]"
+                        : "text-[0.95rem] tracking-[0.22em]"
+                    }`}
+                  >
+                    {client.mark}
+                  </span>
+                </span>
               </a>
             ))}
           </div>
