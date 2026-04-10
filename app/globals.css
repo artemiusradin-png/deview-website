@@ -639,10 +639,6 @@ html[data-theme="light"] .hero-fallback {
     min-height: 0;
   }
 
-  .process-card {
-    min-height: 0;
-  }
-
   .enterprise-chip {
     min-height: 44px;
     align-items: center;
@@ -681,25 +677,6 @@ html[data-theme="light"] .hero-fallback {
     border-color 180ms ease,
     background-color 180ms ease,
     opacity 180ms ease;
-}
-
-.process-card {
-  min-height: 12rem;
-}
-
-.process-step {
-  position: relative;
-  padding-left: 1rem;
-}
-
-.process-step::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.1rem;
-  bottom: 0.1rem;
-  width: 1px;
-  background: linear-gradient(to bottom, var(--white-60), transparent);
 }
 
 /* Enterprise AI section — statement stack aligned with hero / outcomes rhythm */
@@ -943,8 +920,34 @@ html[data-theme="light"] .enterprise-mode::before {
   z-index: 6;
   max-width: 58rem;
   width: auto;
+  padding: 1.35rem 1.6rem 1.65rem;
   pointer-events: none;
   will-change: transform, opacity, filter;
+  border-radius: 1rem;
+  border: 1px solid var(--white-10);
+  background: color-mix(in srgb, var(--background) 64%, transparent);
+  backdrop-filter: blur(20px) saturate(1.12);
+  -webkit-backdrop-filter: blur(20px) saturate(1.12);
+  box-shadow:
+    0 12px 48px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+html[data-theme="light"] .enterprise-mode-stage-copy {
+  background: color-mix(in srgb, var(--background) 52%, transparent);
+  border-color: rgba(19, 31, 47, 0.1);
+  box-shadow:
+    0 12px 40px rgba(19, 31, 47, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.enterprise-mode-cards-motion {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  will-change: filter;
 }
 
 .enterprise-mode-stage-title {
@@ -1027,7 +1030,7 @@ html[data-theme="light"] .enterprise-mode-stage-copy .section-label {
   align-items: stretch;
   justify-content: flex-start;
   padding:
-    clamp(5.5rem, 11vh, 9rem)
+    clamp(7.25rem, 15vh, 12.5rem)
     clamp(2.25rem, 4vw, 4rem)
     clamp(1rem, 2vh, 1.5rem);
   background:
@@ -1426,6 +1429,10 @@ html[data-theme="light"] .enterprise-compare-enterprise {
     min-height: auto;
     height: auto;
     padding-left: 0;
+  }
+
+  .enterprise-mode-cards-motion {
+    width: 100%;
   }
 
   .enterprise-scroll-rail {

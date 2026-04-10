@@ -19,15 +19,6 @@ const reveal = {
   viewport: { once: true, amount: 0.2 },
 };
 
-const stagger = {
-  whileInView: {
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-  viewport: { once: true, amount: 0.15 },
-};
-
 const cardMotion = {
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
@@ -46,7 +37,6 @@ export default function Home() {
     ...dict.enterpriseModes[id],
   }));
   const axes = dict.enterpriseAxes;
-  const processSteps = dict.process.steps;
   const interfaceUserMessage = dict.hero.interfaceUser;
   const interfaceAiMessage = dict.hero.interfaceAi;
   const heroVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
@@ -387,10 +377,17 @@ export default function Home() {
   );
   const enterpriseStageIntroBlur = useTransform(
     enterpriseModesProgress,
-    prefersReducedMotion ? [0, 1] : [0, 0.028, 0.031, 0.036, 0.038],
-    prefersReducedMotion ? [0, 0] : [0, 0, 3, 7, 8],
+    prefersReducedMotion ? [0, 1] : [0, 0.024, 0.03, 0.036, 0.042],
+    prefersReducedMotion ? [0, 0] : [0, 0, 5, 14, 18],
   );
   const enterpriseStageIntroFilter = useTransform(enterpriseStageIntroBlur, (px) => `blur(${px}px)`);
+  /** While intro is prominent, soften mode labels beneath so lines don’t read as stacked */
+  const enterpriseCardsBlurPx = useTransform(
+    enterpriseModesProgress,
+    prefersReducedMotion ? [0, 1] : [0, 0.012, 0.028, 0.05],
+    prefersReducedMotion ? [0, 0] : [11, 8, 2, 0],
+  );
+  const enterpriseCardsFilter = useTransform(enterpriseCardsBlurPx, (px) => `blur(${px}px)`);
   const enterpriseStageIntroY = useTransform(
     enterpriseModesProgress,
     [0, 0.045],
@@ -439,9 +436,6 @@ export default function Home() {
             <a href="/outcomes" className="nav-item">
               {dict.nav.outcomes}
             </a>
-            <a href="#process" className="nav-item">
-              {dict.nav.process}
-            </a>
             <a href="#contact" className="nav-item">
               {dict.nav.inquire}
             </a>
@@ -488,9 +482,6 @@ export default function Home() {
           </a>
           <a href="/outcomes" onClick={closeNav}>
             {dict.nav.outcomes}
-          </a>
-          <a href="#process" onClick={closeNav}>
-            {dict.nav.process}
           </a>
           <a href="#contact" onClick={closeNav}>
             {dict.nav.inquire}
@@ -811,6 +802,10 @@ export default function Home() {
               <div className="enterprise-scroll-rail" aria-hidden="true">
                 <motion.div className="enterprise-scroll-rail-fill" style={{ height: enterpriseRailFill }} />
               </div>
+              <motion.div
+                className="enterprise-mode-cards-motion"
+                style={{ filter: enterpriseCardsFilter }}
+              >
               <div className={`enterprise-mode-text-stage enterprise-mode-text-stage-${selectedMode.id}`}>
                 <div className={`enterprise-mode-ambient enterprise-mode-ambient-${selectedMode.id}`} aria-hidden="true" />
                 <div className="enterprise-mode-text-axes enterprise-mode-text-axes-top" aria-hidden="true">
@@ -891,6 +886,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              </motion.div>
             </div>
           </section>
       </div>
@@ -898,54 +894,6 @@ export default function Home() {
       <RetroFeatureCards />
 
       <HomeServicesSection variant="home" />
-
-      <section
-        id="process"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter"
-      >
-        <motion.div
-          {...reveal}
-          transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
-        >
-          <div className="section-shell">
-            <p className="section-label mb-3">{dict.process.label}</p>
-            <div className="rule mb-6" />
-            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-              <h2 className="text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
-                {dict.process.titleL1}
-                <br />
-                {dict.process.titleL2}
-              </h2>
-              <p className="max-w-md text-[0.8rem] text-[var(--text-muted)] md:text-sm">{dict.process.lead}</p>
-            </div>
-          </div>
-
-          <motion.div
-            variants={stagger}
-            initial="initial"
-            whileInView="whileInView"
-            viewport={stagger.viewport}
-            className="grid gap-6 md:grid-cols-2 xl:grid-cols-3"
-          >
-            {processSteps.map((item) => (
-              <motion.article
-                key={item.step}
-                variants={cardMotion}
-                transition={{ duration: 0.45 }}
-                whileHover={{ y: -4, borderColor: "rgba(240, 240, 250, 0.32)" }}
-                className="panel panel-interactive process-card border border-[var(--white-20)] bg-[var(--surface-elevated)] px-5 py-6"
-              >
-                <p className="process-step mb-3 text-[0.65rem] uppercase tracking-[0.24em] text-[var(--white-60)]">
-                  {dict.process.stepPrefix} {item.step}
-                </p>
-                <h3 className="mb-3 text-sm text-[var(--white-100)]">{item.title}</h3>
-                <p className="text-[0.8rem] text-[var(--text-muted)]">{item.body}</p>
-              </motion.article>
-            ))}
-          </motion.div>
-        </motion.div>
-      </section>
 
       <section
         id="contact"
