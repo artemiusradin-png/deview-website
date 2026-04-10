@@ -377,13 +377,11 @@ export default function Home() {
   const themeAria =
     theme === "dark" ? dict.a11y.themeToLight : dict.a11y.themeToDark;
   const langAria = locale === "en" ? dict.a11y.langToZh : dict.a11y.langToEn;
-  const enterpriseMapScale = useTransform(enterpriseModesProgress, [0, 0.2, 0.55, 1], prefersReducedMotion ? [1, 1, 1, 1] : [0.9, 0.97, 1, 1]);
-  const enterpriseMapRotateX = useTransform(enterpriseModesProgress, [0, 0.35], prefersReducedMotion ? [0, 0] : [12, 0]);
-  const enterpriseMapY = useTransform(enterpriseModesProgress, [0, 0.25, 0.65, 1], prefersReducedMotion ? [0, 0, 0, 0] : [28, 8, 0, -4]);
-  const enterpriseMapBlur = useTransform(enterpriseModesProgress, [0, 0.2], prefersReducedMotion ? [0, 0] : [10, 0]);
-  const enterpriseDetailOpacity = useTransform(enterpriseModesProgress, [0.16, 0.42], prefersReducedMotion ? [1, 1] : [0.12, 1]);
+  const enterpriseMapScale = useTransform(enterpriseModesProgress, [0, 0.2, 0.55, 1], prefersReducedMotion ? [1, 1, 1, 1] : [0.92, 0.98, 1, 1]);
+  const enterpriseMapRotateX = useTransform(enterpriseModesProgress, [0, 0.35], prefersReducedMotion ? [0, 0] : [5, 0]);
+  const enterpriseMapY = useTransform(enterpriseModesProgress, [0, 0.25, 0.65, 1], prefersReducedMotion ? [0, 0, 0, 0] : [16, 6, 0, -2]);
+  const enterpriseDetailOpacity = useTransform(enterpriseModesProgress, [0.14, 0.32], prefersReducedMotion ? [1, 1] : [0.82, 1]);
   const enterpriseRailFill = useTransform(enterpriseModesProgress, [0, 1], ["0%", "100%"]);
-  const enterpriseMapFilter = useTransform(enterpriseMapBlur, (v) => `blur(${v}px)`);
   const enterpriseStageIntroOpacity = useTransform(
     enterpriseModesProgress,
     prefersReducedMotion ? [0, 0.035, 0.055] : [0, 0.055, 0.13],
@@ -806,7 +804,6 @@ export default function Home() {
                 scale: enterpriseMapScale,
                 rotateX: enterpriseMapRotateX,
                 y: enterpriseMapY,
-                filter: enterpriseMapFilter,
               }}
               className="enterprise-map-shell enterprise-mode-stage-shell"
             >
@@ -830,8 +827,8 @@ export default function Home() {
                 <div className="enterprise-mode-text-main">
                   <motion.p
                     key={selectedMode.id}
-                    initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
                     className="enterprise-mode-text-label"
                   >
