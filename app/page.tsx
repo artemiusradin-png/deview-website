@@ -377,20 +377,24 @@ export default function Home() {
   const themeAria =
     theme === "dark" ? dict.a11y.themeToLight : dict.a11y.themeToDark;
   const langAria = locale === "en" ? dict.a11y.langToZh : dict.a11y.langToEn;
-  const enterpriseMapScale = useTransform(enterpriseModesProgress, [0, 0.2, 0.55, 1], prefersReducedMotion ? [1, 1, 1, 1] : [0.92, 0.98, 1, 1]);
-  const enterpriseMapRotateX = useTransform(enterpriseModesProgress, [0, 0.35], prefersReducedMotion ? [0, 0] : [5, 0]);
-  const enterpriseMapY = useTransform(enterpriseModesProgress, [0, 0.25, 0.65, 1], prefersReducedMotion ? [0, 0, 0, 0] : [16, 6, 0, -2]);
-  const enterpriseDetailOpacity = useTransform(enterpriseModesProgress, [0.14, 0.32], prefersReducedMotion ? [1, 1] : [0.82, 1]);
+  /** Keep shell transform-free — scale/rotateX on an ancestor rasterizes type and looks blurry while scrolling. */
   const enterpriseRailFill = useTransform(enterpriseModesProgress, [0, 1], ["0%", "100%"]);
+  /** Intro copy: stay solid longer, then a tight scroll band with brief blur-out (readable, fast handoff to cards). */
   const enterpriseStageIntroOpacity = useTransform(
     enterpriseModesProgress,
-    prefersReducedMotion ? [0, 0.035, 0.055] : [0, 0.055, 0.13],
-    prefersReducedMotion ? [1, 1, 0] : [1, 0.92, 0],
+    prefersReducedMotion ? [0, 0.028, 0.032] : [0, 0.028, 0.038],
+    prefersReducedMotion ? [1, 1, 0] : [1, 1, 0],
   );
+  const enterpriseStageIntroBlur = useTransform(
+    enterpriseModesProgress,
+    prefersReducedMotion ? [0, 1] : [0, 0.028, 0.031, 0.036, 0.038],
+    prefersReducedMotion ? [0, 0] : [0, 0, 3, 7, 8],
+  );
+  const enterpriseStageIntroFilter = useTransform(enterpriseStageIntroBlur, (px) => `blur(${px}px)`);
   const enterpriseStageIntroY = useTransform(
     enterpriseModesProgress,
-    [0, 0.11],
-    prefersReducedMotion ? [0, 0] : [0, -28],
+    [0, 0.045],
+    prefersReducedMotion ? [0, 0] : [0, -22],
   );
 
   return (
@@ -793,20 +797,17 @@ export default function Home() {
         >
             <motion.div
               className="enterprise-mode-stage-copy"
-              style={{ opacity: enterpriseStageIntroOpacity, y: enterpriseStageIntroY }}
+              style={{
+                opacity: enterpriseStageIntroOpacity,
+                y: enterpriseStageIntroY,
+                filter: enterpriseStageIntroFilter,
+              }}
             >
               <p className="section-label mb-3">{dict.enterpriseModesIntro.label}</p>
               <h3 className="enterprise-mode-stage-title text-[var(--white-100)]">{dict.enterpriseModesIntro.title}</h3>
               <p className="enterprise-mode-stage-body text-[var(--text-muted)]">{dict.enterpriseModesIntro.body}</p>
             </motion.div>
-            <motion.div
-              style={{
-                scale: enterpriseMapScale,
-                rotateX: enterpriseMapRotateX,
-                y: enterpriseMapY,
-              }}
-              className="enterprise-map-shell enterprise-mode-stage-shell"
-            >
+            <div className="enterprise-map-shell enterprise-mode-stage-shell">
               <div className="enterprise-scroll-rail" aria-hidden="true">
                 <motion.div className="enterprise-scroll-rail-fill" style={{ height: enterpriseRailFill }} />
               </div>
@@ -873,9 +874,8 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
-                  <motion.div
+                  <div
                     key={selectedMode.id}
-                    style={{ opacity: enterpriseDetailOpacity }}
                     className="enterprise-mode-stage-detail enterprise-mode-stage-detail--in-card"
                   >
                     <div className="enterprise-mode-stage-detail-meta">
@@ -888,10 +888,10 @@ export default function Home() {
                       </p>
                     </div>
                     <p className="enterprise-mode-stage-detail-copy text-[var(--text-muted)]">{selectedMode.body}</p>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </section>
       </div>
 

@@ -919,7 +919,7 @@ html[data-theme="light"] .enterprise-mode::before {
   max-width: 58rem;
   width: auto;
   pointer-events: none;
-  will-change: transform, opacity;
+  will-change: transform, opacity, filter;
 }
 
 .enterprise-mode-stage-title {
@@ -928,6 +928,9 @@ html[data-theme="light"] .enterprise-mode::before {
   line-height: 0.92;
   letter-spacing: -0.04em;
   text-transform: uppercase;
+  text-shadow:
+    0 0.06em 0.35em rgba(0, 0, 0, 0.55),
+    0 0.02em 0.12em rgba(0, 0, 0, 0.45);
 }
 
 .enterprise-mode-stage-body {
@@ -935,6 +938,25 @@ html[data-theme="light"] .enterprise-mode::before {
   max-width: 52rem;
   font-size: clamp(1rem, 1.5vw, 1.22rem);
   line-height: 1.7;
+  text-shadow: 0 0.08em 0.28em rgba(0, 0, 0, 0.42);
+}
+
+.enterprise-mode-stage-copy .section-label {
+  text-shadow: 0 0.06em 0.2em rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="light"] .enterprise-mode-stage-title {
+  text-shadow:
+    0 0.06em 0.35em rgba(255, 255, 255, 0.75),
+    0 0.02em 0.08em rgba(255, 252, 246, 0.55);
+}
+
+html[data-theme="light"] .enterprise-mode-stage-body {
+  text-shadow: 0 0.08em 0.22em rgba(255, 255, 255, 0.55);
+}
+
+html[data-theme="light"] .enterprise-mode-stage-copy .section-label {
+  text-shadow: 0 0.06em 0.16em rgba(255, 255, 255, 0.45);
 }
 
 .enterprise-scroll-copy {
@@ -943,10 +965,6 @@ html[data-theme="light"] .enterprise-mode::before {
 }
 
 .enterprise-map-shell {
-  perspective: 1100px;
-  transform-style: preserve-3d;
-  transform-origin: center center;
-  will-change: transform;
   position: relative;
   height: 100%;
   max-height: 100%;
@@ -973,6 +991,7 @@ html[data-theme="light"] .enterprise-mode::before {
 
 .enterprise-mode-text-stage {
   position: relative;
+  z-index: 0;
   flex: 1 1 0;
   min-width: 0;
   width: 100%;
@@ -993,15 +1012,18 @@ html[data-theme="light"] .enterprise-mode::before {
   border: none;
   overflow: hidden;
   box-sizing: border-box;
+  isolation: isolate;
 }
 
 .enterprise-mode-ambient {
   position: absolute;
+  z-index: 0;
   inset: 12% 18%;
   border-radius: 999px;
   filter: blur(80px);
   opacity: 0.22;
   pointer-events: none;
+  transform: translateZ(0);
   transition:
     opacity 220ms ease,
     transform 220ms ease,
@@ -1081,8 +1103,6 @@ html[data-theme="light"] .enterprise-mode::before {
 .enterprise-mode-text-main {
   position: relative;
   z-index: 2;
-  transform: translateZ(0);
-  backface-visibility: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1234,12 +1254,12 @@ html[data-theme="light"] .enterprise-mode::before {
 }
 
 .enterprise-mode-stage-detail {
+  position: relative;
+  z-index: 2;
   display: grid;
   gap: 1.25rem 2rem;
   align-items: start;
   grid-template-columns: minmax(0, 20rem) 1fr;
-  transform: translateZ(0);
-  backface-visibility: hidden;
 }
 
 .enterprise-mode-stage-detail--in-card {
@@ -2862,7 +2882,7 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
 
 .svoyage-slide-info__text--title span,
 .svoyage-slide-info__text--subtitle span {
-  font-size: min(3cqw, 1.3rem);
+  font-size: min(4.2cqw, 1.58rem);
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -2871,28 +2891,28 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
 
 .svoyage-slide-info__text--subtitle span {
   margin-top: 0.28rem;
-  font-size: min(2.1cqw, 0.95rem);
+  font-size: min(3cqw, 1.12rem);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.76);
 }
 
 .svoyage-slide-info__text--desc span {
   margin-top: 0.6rem;
-  font-size: min(1.9cqw, 0.88rem);
+  font-size: min(2.65cqw, 1.05rem);
   font-family: var(--sv-font-body);
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0.02em;
-  line-height: 1.4;
+  line-height: 1.45;
   white-space: normal;
 }
 
 .svoyage-slide-info__meta {
   margin: 0.8rem 0 0;
-  font-size: min(1.7cqw, 0.8rem);
+  font-size: min(2.35cqw, 0.95rem);
   font-family: var(--sv-font-body);
   color: rgba(255, 255, 255, 0.72);
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
 .svoyage-slide-info__meta-k {
@@ -2907,9 +2927,9 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
 .svoyage-slide-info__body {
   margin: 0.8rem 0 0;
   font-family: var(--sv-font-body);
-  font-size: min(1.8cqw, 0.82rem);
+  font-size: min(2.45cqw, 1.02rem);
   font-weight: 400;
-  line-height: 1.42;
+  line-height: 1.5;
   color: rgba(255, 255, 255, 0.82);
 }
 
@@ -2922,11 +2942,11 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
 
 .svoyage-slide-info__chip {
   display: inline-block;
-  padding: 0.18rem 0.42rem;
+  padding: 0.22rem 0.5rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
   font-family: var(--sv-font-body);
-  font-size: min(1.5cqw, 0.72rem);
+  font-size: min(2cqw, 0.85rem);
   color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0.04em;
 }
@@ -2934,7 +2954,7 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
 .svoyage-slide-info__status {
   margin: 0.75rem 0 0;
   font-family: var(--sv-font-body);
-  font-size: min(1.55cqw, 0.72rem);
+  font-size: min(2.05cqw, 0.84rem);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
@@ -2986,10 +3006,10 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
   border: 1px solid var(--white-20);
   background: rgba(255, 255, 255, 0.03);
   color: var(--white-60);
-  font-size: 0.58rem;
+  font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 0.45rem 0.65rem;
+  padding: 0.5rem 0.72rem;
   cursor: pointer;
   transition:
     border-color 180ms ease,
