@@ -47,7 +47,6 @@ export default function Home() {
     ...dict.enterpriseModes[id],
   }));
   const axes = dict.enterpriseAxes;
-  const outcomes = dict.outcomes.items;
   const processSteps = dict.process.steps;
   const interfaceUserMessage = dict.hero.interfaceUser;
   const interfaceAiMessage = dict.hero.interfaceAi;
@@ -439,7 +438,7 @@ export default function Home() {
             <a href="#solutions" className="nav-item">
               {dict.nav.useCases}
             </a>
-            <a href="#outcomes" className="nav-item">
+            <a href="/outcomes" className="nav-item">
               {dict.nav.outcomes}
             </a>
             <a href="#process" className="nav-item">
@@ -492,7 +491,7 @@ export default function Home() {
           <a href="#solutions" onClick={closeNav}>
             {dict.nav.useCases}
           </a>
-          <a href="#outcomes" onClick={closeNav}>
+          <a href="/outcomes" onClick={closeNav}>
             {dict.nav.outcomes}
           </a>
           <a href="#process" onClick={closeNav}>
@@ -910,63 +909,6 @@ export default function Home() {
 
       <HomeServicesSection variant="home" />
       <HomeSolutionsSection variant="home" />
-
-      <section
-        id="outcomes"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter"
-      >
-        <motion.div
-          {...reveal}
-          transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
-        >
-          <div className="section-shell">
-            <p className="section-label mb-3">{dict.outcomes.label}</p>
-            <div className="rule mb-6" />
-            <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
-              <div>
-                <h2 className="mb-4 text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
-                  {dict.outcomes.titleL1}
-                  <br />
-                  {dict.outcomes.titleL2}
-                </h2>
-              </div>
-              <div>
-                <p className="max-w-md text-sm text-[var(--text-muted)]">{dict.outcomes.subtitle}</p>
-              </div>
-            </div>
-          </div>
-
-          <motion.div
-            variants={stagger}
-            initial="initial"
-            whileInView="whileInView"
-            viewport={stagger.viewport}
-            className="border-t border-[var(--white-20)]"
-          >
-            {outcomes.map((outcome) => (
-              <motion.article
-                key={outcome.number}
-                variants={cardMotion}
-                transition={{ duration: 0.45 }}
-                className="group border-b border-[var(--white-20)] transition-colors duration-200 hover:bg-[var(--surface)]"
-              >
-                <div className="grid gap-3 px-0 py-5 sm:gap-4 sm:py-6 md:grid-cols-[80px_220px_1fr] md:items-start md:gap-6 md:py-7">
-                  <div className="text-[2.75rem] leading-none tracking-[-0.04em] text-[var(--white-10)] sm:text-[3.5rem] md:text-[4rem]">
-                    {outcome.number}
-                  </div>
-                  <div className="pt-0 text-sm uppercase tracking-[0.2em] text-[var(--white-100)] sm:pt-1 sm:text-base md:text-lg">
-                    {outcome.label}
-                  </div>
-                  <div className="pt-0 text-[0.85rem] leading-relaxed text-[var(--text-muted)] sm:pt-1 sm:text-sm md:max-w-2xl">
-                    {outcome.body}
-                  </div>
-                </div>
-              </motion.article>
-            ))}
-          </motion.div>
-        </motion.div>
-      </section>
 
       <section
         id="process"

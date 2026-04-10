@@ -1,7 +1,15 @@
 import type { Metadata, Viewport } from "next";
+import { Red_Rose } from "next/font/google";
 import "./globals.css";
 import { AppProviders } from "./providers";
 import { ThemeSync } from "./theme-sync";
+
+const redRose = Red_Rose({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-red-rose",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "DeView | AI Consulting & Data Engineering",
@@ -24,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className={`h-full antialiased ${redRose.variable}`}>
       <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--text)]">
         <AppProviders>
           <ThemeSync />

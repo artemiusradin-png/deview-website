@@ -443,6 +443,9 @@ export const en = {
     useCasesTitle: "Use cases | DeView",
     useCasesDesc:
       "AI solutions built around concrete operational problems — customer operations, internal knowledge, operations, and data products.",
+    outcomesTitle: "Outcomes | DeView",
+    outcomesDesc:
+      "Business value from implemented AI systems — efficiency, service quality, decision support, and cost control.",
     whatMakesTitle: "What makes it enterprise | DeView",
     whatMakesDesc:
       "Enterprise AI architecture across business systems, data foundation, infrastructure, and AI/ML operations.",

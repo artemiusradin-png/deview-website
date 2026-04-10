@@ -19,7 +19,7 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
 
   const helpLinks = [
     { label: f.links.process, href: "#process" },
-    { label: f.links.outcomes, href: "#outcomes" },
+    { label: f.links.outcomes, href: "/outcomes" },
     { label: f.links.useCases, href: "#solutions" },
     { label: f.links.sendInquiry, href: "/contact" },
   ] as const;

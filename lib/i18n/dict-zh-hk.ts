@@ -444,6 +444,9 @@ export const zhHK: Dictionary = {
     useCasesTitle: "應用場景 | DeView",
     useCasesDesc:
       "圍繞真實營運難題而設計的 AI 方案，涵蓋客戶營運、內部知識、營運及數據產品。",
+    outcomesTitle: "成果 | DeView",
+    outcomesDesc:
+      "已落地 AI 系統帶來嘅商業價值——效率、服務質素、決策支援同成本掌控。",
     whatMakesTitle: "何謂企業級 | DeView",
     whatMakesDesc: "涵蓋業務系統、數據基礎、基礎設施與 AI／ML 營運的企業 AI 架構。",
     contactDocumentTitle: "開展項目 | DeView",

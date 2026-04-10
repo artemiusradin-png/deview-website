@@ -16,6 +16,8 @@ function metaForPath(pathname: string, d: Dictionary): { title: string; descript
       return { title: sp.servicesTitle, description: sp.servicesDesc };
     case "/use-cases":
       return { title: sp.useCasesTitle, description: sp.useCasesDesc };
+    case "/outcomes":
+      return { title: sp.outcomesTitle, description: sp.outcomesDesc };
     case "/what-makes-it-enterprise":
       return { title: sp.whatMakesTitle, description: sp.whatMakesDesc };
     case "/architecture-reality-check":
