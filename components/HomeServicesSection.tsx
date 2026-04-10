@@ -12,10 +12,12 @@ type HomeServicesSectionProps = {
 };
 
 const serviceClients = [
-  { name: "EVDEV", src: "/client-logos/evdev.svg", width: 96, height: 19, logoH: "h-8" },
+  { name: "EVDEV",      src: "/client-logos/evdev.svg",      width: 96,  height: 19, logoH: "h-8"  },
   { name: "Fizkultura", src: "/client-logos/fizkultura.png", width: 118, height: 79, logoH: "h-16" },
-  { name: "Jetfans", src: "/client-logos/jetfans.avif", width: 160, height: 60, logoH: "h-14" },
-  { name: "Nextair", src: "/client-logos/nextair.webp", width: 80, height: 80, logoH: "h-16" },
+  { name: "Jetfans",    src: "/client-logos/jetfans.avif",   width: 160, height: 60, logoH: "h-14" },
+  { name: "Nextair",    src: "/client-logos/nextair.webp",   width: 80,  height: 80, logoH: "h-16" },
+  { name: "FACT",       src: "/client-logos/fact.png",       width: 492, height: 96, logoH: "h-10" },
+  { name: "Novarise",   src: "/client-logos/novarise.svg",   width: 283, height: 42, logoH: "h-10" },
 ] as const;
 
 function EvdevLogo({ className = "" }: { className?: string }) {
@@ -58,7 +60,7 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
       >
         <div className="grid gap-4 border-b border-[var(--white-20)] pb-6 md:gap-5 md:pb-8">
           <p className="section-label">{s.clientsLabel}</p>
-          <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-10">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6 lg:gap-10">
             {serviceClients.map((client) => (
               <div key={client.name} className="service-client">
                 <motion.div
@@ -88,13 +90,13 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
         <div className="flex w-full flex-col justify-between gap-5 md:flex-row md:items-end md:gap-8">
           <div className="max-w-2xl">
             <p className="section-label mb-3">{s.sectionLabel}</p>
-            <h2 className="text-[clamp(1.6rem,4.5vw,2.5rem)] leading-snug text-[var(--white-100)]">
+            <h2 className="text-[clamp(1.85rem,5vw,2.85rem)] leading-snug text-[var(--white-100)]">
               {s.titleL1}
               <br />
               {s.titleL2}
             </h2>
           </div>
-          <p className="max-w-md text-[0.95rem] leading-relaxed text-[var(--text-muted)] md:text-base">
+          <p className="max-w-md text-[1.05rem] leading-relaxed text-[var(--text-muted)] md:text-[1.125rem]">
             {s.intro}
           </p>
         </div>
