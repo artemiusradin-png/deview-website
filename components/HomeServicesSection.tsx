@@ -36,24 +36,48 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
       >
         <div className="grid gap-4 border-b border-[var(--white-20)] pb-6 md:gap-5 md:pb-8">
           <p className="section-label">{s.clientsLabel}</p>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:gap-4">
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
             {serviceClients.map((client) => (
               <a
                 key={client.name}
                 href={client.href}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex min-h-[5.25rem] items-center justify-center border border-[var(--white-20)] bg-[var(--surface)] px-4 py-3 transition-all duration-200 hover:border-[var(--white-40)] hover:bg-[var(--surface-elevated)]"
+                className="group relative block h-[11.5rem] overflow-hidden border border-[var(--white-20)] bg-[var(--surface)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--white-40)] hover:bg-[var(--surface-elevated)]"
                 aria-label={client.name}
                 title={client.name}
               >
-                <Image
-                  src={client.src}
-                  alt={client.name}
-                  width={client.width}
-                  height={client.height}
-                  className="max-h-9 w-auto max-w-full object-contain transition-transform duration-200 group-hover:scale-[1.02]"
-                />
+                <div className="absolute inset-x-0 top-0 h-[78%] overflow-hidden border-b border-[var(--white-10)]">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(240,240,250,0.08),transparent_65%)] opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="relative flex h-full w-full items-center justify-center px-5 py-5">
+                    <Image
+                      src={client.src}
+                      alt={client.name}
+                      width={client.width}
+                      height={client.height}
+                      className="max-h-12 w-auto max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.04]"
+                    />
+                  </div>
+                </div>
+                <div className="absolute left-0 bottom-[16%] z-10 -translate-x-[14%] overflow-hidden pointer-events-none select-none">
+                  <span
+                    className={`block text-[var(--white-100)] transition-transform duration-300 group-hover:translate-x-[6px] ${
+                      client.name === "Fizkultura"
+                        ? "text-[1.55rem] tracking-[0.02em]"
+                        : "text-[1.3rem] tracking-[0.18em]"
+                    }`}
+                  >
+                    {client.name}
+                  </span>
+                </div>
+                <div className="absolute inset-x-0 bottom-0 flex h-[22%] items-end justify-between px-3 pb-2">
+                  <span className="text-[0.52rem] uppercase tracking-[0.22em] text-[var(--white-40)]">
+                    Client
+                  </span>
+                  <span className="text-[0.8rem] text-[var(--white-40)] transition-all duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px] group-hover:text-[var(--white-90)]">
+                    ↗
+                  </span>
+                </div>
               </a>
             ))}
           </div>
