@@ -1,7 +1,6 @@
 "use client";
 
-import { Fragment, useCallback, useState } from "react";
-import type { CSSProperties } from "react";
+import { useCallback, useState } from "react";
 import type { Dictionary } from "@/lib/i18n/dict-en";
 
 type ServicesBlock = Dictionary["services"];
@@ -9,28 +8,11 @@ type ServiceItem = ServicesBlock["items"][number];
 
 const wrapIndex = (index: number, length: number) => ((index % length) + length) % length;
 
-const SERVICE_IMAGES: Record<string, string> = {
-  "workflow-audit":
-    "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=80",
-  "knowledge-assistant":
-    "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1400&q=80",
-  "document-automation":
-    "https://images.unsplash.com/photo-1568667256549-094888797f96?auto=format&fit=crop&w=1400&q=80",
-  "support-assistant":
-    "https://images.unsplash.com/photo-1533759280709-50f15c913492?auto=format&fit=crop&w=1400&q=80",
-  "reporting-copilot":
-    "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1400&q=80",
-  "implementation-advisory":
-    "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1400&q=80",
-};
-
-function slideImage(service: ServiceItem) {
-  return SERVICE_IMAGES[service.id] ?? SERVICE_IMAGES["workflow-audit"];
-}
-
-function dataAttrForRole(role: "previous" | "current" | "next") {
+function dataAttrForRole(role: "previous-far" | "previous" | "current" | "next" | "next-far") {
   if (role === "current") return { "data-current": "" as const };
+  if (role === "next-far") return { "data-next-far": "" as const };
   if (role === "next") return { "data-next": "" as const };
+  if (role === "previous-far") return { "data-previous-far": "" as const };
   return { "data-previous": "" as const };
 }
 
@@ -50,13 +32,13 @@ export function ServicesVoyageSlider({ services: s }: Props) {
   );
 
   const cur = items[currentIndex];
-  const prev = items[wrapIndex(currentIndex - 1, items.length)];
-  const next = items[wrapIndex(currentIndex + 1, items.length)];
 
-  const slots: { service: ServiceItem; role: "previous" | "current" | "next" }[] = [
-    { service: prev, role: "previous" },
+  const slots: { service: ServiceItem; role: "previous-far" | "previous" | "current" | "next" | "next-far" }[] = [
+    { service: items[wrapIndex(currentIndex - 2, items.length)], role: "previous-far" },
+    { service: items[wrapIndex(currentIndex - 1, items.length)], role: "previous" },
     { service: cur, role: "current" },
-    { service: next, role: "next" },
+    { service: items[wrapIndex(currentIndex + 1, items.length)], role: "next" },
+    { service: items[wrapIndex(currentIndex + 2, items.length)], role: "next-far" },
   ];
 
   return (
@@ -77,23 +59,13 @@ export function ServicesVoyageSlider({ services: s }: Props) {
           <div className="svoyage-slider__slides-layer">
             <div className="svoyage-slides">
               {slots.map(({ service, role }) => {
-                const src = slideImage(service);
                 const d = dataAttrForRole(role);
                 return (
-                  <Fragment key={service.id}>
-                    <div className={`svoyage-slide svoyage-slide--${role}`} {...d}>
-                      <div className="svoyage-slide__inner">
-                        <div className="svoyage-slide__image-wrap">
-                          <img className="svoyage-slide__image" src={src} alt="" />
-                        </div>
-                      </div>
+                  <div key={service.id} className={`svoyage-slide svoyage-slide--${role}`} {...d}>
+                    <div className="svoyage-slide__inner">
+                      <div className="svoyage-slide__panel" />
                     </div>
-                    <div
-                      className={`svoyage-slide__bg svoyage-slide__bg--${role}`}
-                      style={{ "--sv-bg": `url(${src})` } as CSSProperties}
-                      {...d}
-                    />
-                  </Fragment>
+                  </div>
                 );
               })}
             </div>
