@@ -65,6 +65,12 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
 
   const previousIndex = wrapIndex(currentIndex - 1, items.length);
   const nextIndex = wrapIndex(currentIndex + 1, items.length);
+  const currentService = items[currentIndex];
+  const previousService = items[previousIndex];
+  const nextService = items[nextIndex];
+  const currentTheme = serviceThemes[currentIndex % serviceThemes.length];
+  const previousTheme = serviceThemes[previousIndex % serviceThemes.length];
+  const nextTheme = serviceThemes[nextIndex % serviceThemes.length];
 
   return (
     <section
@@ -82,65 +88,71 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
           <p className="section-label">{s.clientsLabel}</p>
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
             {serviceClients.map((client, idx) => (
-              <div key={client.name} className="flex flex-col gap-2">
-                {/* Name above the card */}
-                <div className="overflow-hidden">
+              <a
+                key={client.name}
+                href={client.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group relative block h-[18rem] overflow-hidden border border-[var(--white-20)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--white-40)]"
+                style={{ background: client.lightBg ? "#f5f5f5" : "var(--surface)" }}
+                aria-label={client.name}
+                title={client.name}
+              >
+                {/* Logo area */}
+                <div className="absolute inset-x-0 top-0 flex h-[78%] items-center justify-center border-b border-[var(--white-10)] px-6 py-5">
+                  {!client.lightBg && (
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(240,240,250,0.08),transparent_65%)] opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+                  )}
+                  <Image
+                    src={client.src}
+                    alt={client.name}
+                    width={client.width}
+                    height={client.height}
+                    className={`relative w-auto max-w-[75%] object-contain transition-transform duration-300 group-hover:scale-[1.04] ${
+                      client.lightBg
+                        ? "max-h-16"
+                        : "max-h-16 brightness-0 invert"
+                    }`}
+                  />
+                </div>
+
+                {/* Name — half-clipped off left edge, slides up on enter (reference style) */}
+                <div
+                  className="pointer-events-none absolute left-0 bottom-[25%] -translate-x-1/2 select-none overflow-hidden"
+                >
                   <motion.span
                     initial={{ translateY: "100%" }}
                     whileInView={{ translateY: "0%" }}
                     viewport={{ once: true }}
-                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 + idx * 0.08 }}
-                    className="block font-bold tracking-widest text-[var(--white-100)]"
+                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.4 + idx * 0.1 }}
+                    className="block font-bold"
                     style={{
-                      fontSize: client.name.length > 8 ? "1.55rem" : "2rem",
+                      fontSize: client.name.length > 8 ? "1.6rem" : "2.2rem",
+                      letterSpacing: "0.04em",
                       fontFamily: 'var(--font-red-rose, "Red Rose", serif)',
+                      color: client.lightBg ? "#111" : "var(--white-100)",
                     }}
                   >
                     {client.name}
                   </motion.span>
                 </div>
 
-                {/* Card */}
-                <a
-                  href={client.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group relative block h-[13rem] overflow-hidden border border-[var(--white-20)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--white-40)]"
-                  style={{ background: client.lightBg ? "#f5f5f5" : "var(--surface)" }}
-                  aria-label={client.name}
-                  title={client.name}
-                >
-                  {/* Logo */}
-                  <div className="absolute inset-x-0 top-0 flex h-[78%] items-center justify-center border-b border-[var(--white-10)] px-6 py-5">
-                    {!client.lightBg && (
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(240,240,250,0.08),transparent_65%)] opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
-                    )}
-                    <Image
-                      src={client.src}
-                      alt={client.name}
-                      width={client.width}
-                      height={client.height}
-                      className="relative max-h-12 w-auto max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.04]"
-                    />
-                  </div>
-
-                  {/* Footer */}
-                  <div className="absolute inset-x-0 bottom-0 flex h-[22%] items-end justify-between px-3 pb-2">
-                    <span
-                      className="text-[0.52rem] uppercase tracking-[0.22em]"
-                      style={{ color: client.lightBg ? "rgba(0,0,0,0.35)" : "var(--white-40)" }}
-                    >
-                      Client
-                    </span>
-                    <span
-                      className="text-[0.8rem] transition-all duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]"
-                      style={{ color: client.lightBg ? "rgba(0,0,0,0.35)" : "var(--white-40)" }}
-                    >
-                      ↗
-                    </span>
-                  </div>
-                </a>
-              </div>
+                {/* Footer */}
+                <div className="absolute inset-x-0 bottom-0 flex h-[22%] items-end justify-between px-3 pb-2">
+                  <span
+                    className="text-[0.52rem] uppercase tracking-[0.22em]"
+                    style={{ color: client.lightBg ? "rgba(0,0,0,0.35)" : "var(--white-40)" }}
+                  >
+                    Client
+                  </span>
+                  <span
+                    className="text-[0.8rem] transition-all duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]"
+                    style={{ color: client.lightBg ? "rgba(0,0,0,0.35)" : "var(--white-40)" }}
+                  >
+                    ↗
+                  </span>
+                </div>
+              </a>
             ))}
           </div>
         </div>
@@ -165,6 +177,7 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
               <span className="services-slider__count-divider" />
               <span>{String(items.length).padStart(2, "0")}</span>
             </div>
+            <p className="services-slider__kicker">{currentService.label}</p>
             <div className="services-slider__actions">
               <button
                 type="button"
@@ -190,102 +203,96 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
           </div>
 
           <div className="services-slider__stage">
-            <div className="services-slider__backgrounds" aria-hidden="true">
-              {items.map((service, index) => {
-                const theme = serviceThemes[index % serviceThemes.length];
-                const isActive = index === currentIndex;
-
-                return (
-                  <div
-                    key={`${service.id}-bg`}
-                    className={`services-slider__bg${isActive ? " is-active" : ""}`}
-                    style={{ backgroundImage: `${theme.glow}, ${theme.shell}` }}
-                  />
-                );
-              })}
-            </div>
+            <div
+              className="services-slider__bg is-active"
+              aria-hidden="true"
+              style={{ backgroundImage: `${currentTheme.glow}, ${currentTheme.shell}` }}
+            />
 
             <div className="services-slider__layout">
               <div className="services-slider__slides" aria-live="polite">
-                {items.map((service, index) => {
-                  const theme = serviceThemes[index % serviceThemes.length];
-                  let state = "is-hidden";
+                <button
+                  type="button"
+                  className="services-slide services-slide--preview services-slide--previous"
+                  onClick={() => goTo(currentIndex - 1)}
+                  aria-label={`Go to previous service: ${previousService.title}`}
+                >
+                  <div className="services-slide__inner">
+                    <div className="services-slide__visual" style={{ backgroundImage: previousTheme.shell }}>
+                      <span className="services-slide__mini-label">Previous</span>
+                      <p className="services-slide__mini-title">{previousService.label}</p>
+                      <div className="services-slide__visual-line" style={{ backgroundImage: previousTheme.line }} />
+                    </div>
+                  </div>
+                </button>
 
-                  if (index === currentIndex) {
-                    state = "is-current";
-                  } else if (index === previousIndex) {
-                    state = "is-previous";
-                  } else if (index === nextIndex) {
-                    state = "is-next";
-                  }
-
-                  return (
-                    <article
-                      key={service.id}
-                      className={`services-slide ${state}`}
-                      aria-hidden={index !== currentIndex}
-                    >
-                      <div className="services-slide__inner">
-                        <div className="services-slide__visual" style={{ backgroundImage: theme.shell }}>
-                          <span className="services-slide__eyebrow">{service.label}</span>
-                          <div className="services-slide__visual-grid">
-                            <span>{service.duration}</span>
-                            <span>{service.scope}</span>
-                          </div>
-                          <div className="services-slide__visual-core" style={{ backgroundImage: theme.glow }} />
-                          <div className="services-slide__visual-line" style={{ backgroundImage: theme.line }} />
-                          <div className="services-slide__pillars">
-                            {service.bullets.map((bullet) => (
-                              <span key={bullet}>{bullet}</span>
-                            ))}
-                          </div>
+                <article className="services-slide services-slide--current">
+                  <div className="services-slide__inner">
+                    <div className="services-slide__visual services-slide__visual--current" style={{ backgroundImage: currentTheme.shell }}>
+                      <span className="services-slide__eyebrow">{currentService.label}</span>
+                      <div className="services-slide__visual-core" style={{ backgroundImage: currentTheme.glow }} />
+                      <div className="services-slide__visual-grid">
+                        <div>
+                          <span className="services-slide__visual-meta-label">{s.duration}</span>
+                          <strong>{currentService.duration}</strong>
+                        </div>
+                        <div>
+                          <span className="services-slide__visual-meta-label">{s.scope}</span>
+                          <strong>{currentService.scope}</strong>
                         </div>
                       </div>
-                    </article>
-                  );
-                })}
+                      <div className="services-slide__visual-line" style={{ backgroundImage: currentTheme.line }} />
+                      <div className="services-slide__pillars">
+                        {currentService.bullets.map((bullet) => (
+                          <span key={bullet}>{bullet}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <button
+                  type="button"
+                  className="services-slide services-slide--preview services-slide--next"
+                  onClick={() => goTo(currentIndex + 1)}
+                  aria-label={`Go to next service: ${nextService.title}`}
+                >
+                  <div className="services-slide__inner">
+                    <div className="services-slide__visual" style={{ backgroundImage: nextTheme.shell }}>
+                      <span className="services-slide__mini-label">Next</span>
+                      <p className="services-slide__mini-title">{nextService.label}</p>
+                      <div className="services-slide__visual-line" style={{ backgroundImage: nextTheme.line }} />
+                    </div>
+                  </div>
+                </button>
               </div>
 
               <div className="services-slider__info-wrap">
-                {items.map((service, index) => {
-                  let state = "is-hidden";
-
-                  if (index === currentIndex) {
-                    state = "is-current";
-                  } else if (index === previousIndex) {
-                    state = "is-previous";
-                  } else if (index === nextIndex) {
-                    state = "is-next";
-                  }
-
-                  return (
-                    <article key={`${service.id}-info`} className={`services-slide-info ${state}`} aria-hidden={index !== currentIndex}>
-                      <div className="services-slide-info__inner">
-                        <div className="services-slide-info__text">
-                          <p className="services-slide-info__label">{service.label}</p>
-                          <h3 className="services-slide-info__title">{service.title}</h3>
-                          <p className="services-slide-info__body">{service.body}</p>
-                        </div>
-                        <div className="services-slide-info__meta">
-                          <div>
-                            <span className="services-slide-info__meta-label">{s.duration}</span>
-                            <span className="services-slide-info__meta-value">{service.duration}</span>
-                          </div>
-                          <div>
-                            <span className="services-slide-info__meta-label">{s.scope}</span>
-                            <span className="services-slide-info__meta-value">{service.scope}</span>
-                          </div>
-                        </div>
-                        <div className="services-slide-info__chips">
-                          {service.bullets.map((bullet) => (
-                            <span key={bullet}>{bullet}</span>
-                          ))}
-                        </div>
-                        <p className="services-slide-info__status">{service.status}</p>
+                <article key={`${currentService.id}-info`} className="services-slide-info is-current">
+                  <div className="services-slide-info__inner">
+                    <div className="services-slide-info__text">
+                      <p className="services-slide-info__label">{currentService.label}</p>
+                      <h3 className="services-slide-info__title">{currentService.title}</h3>
+                      <p className="services-slide-info__body">{currentService.body}</p>
+                    </div>
+                    <div className="services-slide-info__meta">
+                      <div>
+                        <span className="services-slide-info__meta-label">{s.duration}</span>
+                        <span className="services-slide-info__meta-value">{currentService.duration}</span>
                       </div>
-                    </article>
-                  );
-                })}
+                      <div>
+                        <span className="services-slide-info__meta-label">{s.scope}</span>
+                        <span className="services-slide-info__meta-value">{currentService.scope}</span>
+                      </div>
+                    </div>
+                    <div className="services-slide-info__chips">
+                      {currentService.bullets.map((bullet) => (
+                        <span key={bullet}>{bullet}</span>
+                      ))}
+                    </div>
+                    <p className="services-slide-info__status">{currentService.status}</p>
+                  </div>
+                </article>
               </div>
             </div>
           </div>
