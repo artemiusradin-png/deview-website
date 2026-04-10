@@ -1,6 +1,5 @@
 "use client";
 
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ServicesVoyageSlider } from "@/components/ServicesVoyageSlider";
@@ -13,10 +12,10 @@ type HomeServicesSectionProps = {
 };
 
 const serviceClients = [
-  { name: "EVDEV",      src: "/client-logos/evdev.svg",      width: 96,  height: 19, logoH: "h-8",  accent: "rgba(168, 214, 255, 0.2)" },
-  { name: "Fizkultura", src: "/client-logos/fizkultura.png", width: 118, height: 79, logoH: "h-16", accent: "rgba(255, 219, 169, 0.2)" },
-  { name: "Jetfans",    src: "/client-logos/jetfans.avif",   width: 160, height: 60, logoH: "h-14", accent: "rgba(197, 230, 255, 0.18)" },
-  { name: "Nextair",    src: "/client-logos/nextair.webp",   width: 80,  height: 80, logoH: "h-16", accent: "rgba(215, 255, 190, 0.18)" },
+  { name: "EVDEV", src: "/client-logos/evdev.svg", width: 96, height: 19, logoH: "h-8" },
+  { name: "Fizkultura", src: "/client-logos/fizkultura.png", width: 118, height: 79, logoH: "h-16" },
+  { name: "Jetfans", src: "/client-logos/jetfans.avif", width: 160, height: 60, logoH: "h-14" },
+  { name: "Nextair", src: "/client-logos/nextair.webp", width: 80, height: 80, logoH: "h-16" },
 ] as const;
 
 export function HomeServicesSection({ variant = "home" }: HomeServicesSectionProps) {
@@ -38,11 +37,14 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
         <div className="grid gap-4 border-b border-[var(--white-20)] pb-6 md:gap-5 md:pb-8">
           <p className="section-label">{s.clientsLabel}</p>
           <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-10">
-            {serviceClients.map((client, idx) => (
+            {serviceClients.map((client) => (
               <div key={client.name} className="service-client">
-                <div
-                  className="service-client__tile"
-                  style={{ "--service-client-accent": client.accent } as CSSProperties}
+                <motion.div
+                  initial={{ opacity: 0, translateY: 18 }}
+                  whileInView={{ opacity: 1, translateY: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="service-client__logo-wrap"
                 >
                   <Image
                     src={client.src}
@@ -51,37 +53,9 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
                     height={client.height}
                     className={`service-client__logo ${client.logoH} w-auto max-w-full object-contain`}
                   />
-                </div>
-                <div className="service-client__caption overflow-hidden">
-                  <motion.span
-                    initial={{ translateY: "100%" }}
-                    whileInView={{ translateY: "0%" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 + idx * 0.08 }}
-                    className="block"
-                    style={{
-                      fontSize: "0.72rem",
-                      letterSpacing: "0.18em",
-                    }}
-                  >
-                    {client.name}
-                  </motion.span>
-                </div>
+                </motion.div>
               </div>
             ))}
-          </div>
-        </div>
-
-        <div className="section-shell">
-          <p className="section-label mb-3">{s.sectionLabel}</p>
-          <div className="rule mb-6" />
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <h2 className="text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
-              {s.titleL1}
-              <br />
-              {s.titleL2}
-            </h2>
-            <p className="max-w-md text-[0.8rem] text-[var(--text-muted)] md:text-sm">{s.intro}</p>
           </div>
         </div>
 

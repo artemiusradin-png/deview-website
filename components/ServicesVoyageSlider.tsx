@@ -80,7 +80,7 @@ export function ServicesVoyageSlider({ services: s }: Props) {
                 const src = slideImage(service);
                 const d = dataAttrForRole(role);
                 return (
-                  <Fragment key={`${currentIndex}-${role}-${service.id}`}>
+                  <Fragment key={service.id}>
                     <div className={`svoyage-slide svoyage-slide--${role}`} {...d}>
                       <div className="svoyage-slide__inner">
                         <div className="svoyage-slide__image-wrap">
@@ -102,7 +102,7 @@ export function ServicesVoyageSlider({ services: s }: Props) {
               {slots.map(({ service, role }) => {
                 const d = dataAttrForRole(role);
                 return (
-                  <div key={`${currentIndex}-${role}-info-${service.id}`} className={`svoyage-slide-info svoyage-slide-info--${role}`} {...d}>
+                  <div key={`info-${service.id}`} className={`svoyage-slide-info svoyage-slide-info--${role}`} {...d}>
                     <div className="svoyage-slide-info__inner">
                       <div className="svoyage-slide-info__text-wrap">
                         <div className="svoyage-slide-info__text svoyage-slide-info__text--title">

@@ -191,60 +191,31 @@ html[data-theme="light"] .bg-grid::before {
 }
 
 .service-client {
-  display: grid;
-  gap: 0.9rem;
-}
-
-.service-client__tile {
-  --service-client-accent: rgba(255, 255, 255, 0.14);
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 8.5rem;
-  padding: 1.35rem 1rem;
-  border: 1px solid var(--white-20);
-  border-radius: 1.75rem;
-  background:
-    radial-gradient(circle at 18% 20%, color-mix(in srgb, var(--service-client-accent) 100%, transparent), transparent 38%),
-    radial-gradient(circle at 82% 78%, rgba(255, 255, 255, 0.08), transparent 34%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015));
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 24px 56px rgba(0, 0, 0, 0.16);
+}
+
+.service-client__logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5.5rem;
+  width: 100%;
 }
 
 .service-client__logo {
   opacity: 0.98;
-  filter: brightness(0) saturate(100%) invert(95%) sepia(16%) saturate(196%) hue-rotate(180deg) brightness(103%) contrast(94%) drop-shadow(0 10px 30px rgba(0, 0, 0, 0.22));
-}
-
-.service-client__caption {
-  text-align: center;
-  color: var(--white-60);
-  text-transform: uppercase;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-html[data-theme="light"] .service-client__tile {
-  background:
-    radial-gradient(circle at 18% 20%, color-mix(in srgb, var(--service-client-accent) 82%, white 18%), transparent 38%),
-    radial-gradient(circle at 82% 78%, rgba(255, 255, 255, 0.5), transparent 34%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 252, 246, 0.92));
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.65),
-    0 20px 48px rgba(19, 31, 47, 0.08);
+  filter: none;
 }
 
 html[data-theme="light"] .service-client__logo {
-  filter: brightness(0) saturate(100%) invert(11%) sepia(34%) saturate(604%) hue-rotate(174deg) brightness(94%) contrast(92%) drop-shadow(0 10px 24px rgba(19, 31, 47, 0.14));
+  filter: none;
 }
 
 @media (max-width: 961px) {
-  .service-client__tile {
-    min-height: 7.25rem;
-    padding: 1.1rem 0.8rem;
-    border-radius: 1.35rem;
+  .service-client__logo-wrap {
+    min-height: 4.75rem;
   }
 }
 

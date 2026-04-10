@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { HomeServicesSection } from "../components/HomeServicesSection";
-import { HomeSolutionsSection } from "../components/HomeSolutionsSection";
 import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
@@ -421,9 +420,6 @@ export default function Home() {
             <a href="#services" className="nav-item">
               {dict.nav.services}
             </a>
-            <a href="#solutions" className="nav-item">
-              {dict.nav.useCases}
-            </a>
             <a href="/outcomes" className="nav-item">
               {dict.nav.outcomes}
             </a>
@@ -473,9 +469,6 @@ export default function Home() {
           </a>
           <a href="#services" onClick={closeNav}>
             {dict.nav.services}
-          </a>
-          <a href="#solutions" onClick={closeNav}>
-            {dict.nav.useCases}
           </a>
           <a href="/outcomes" onClick={closeNav}>
             {dict.nav.outcomes}
@@ -894,7 +887,6 @@ export default function Home() {
       <RetroFeatureCards />
 
       <HomeServicesSection variant="home" />
-      <HomeSolutionsSection variant="home" />
 
       <section
         id="process"
