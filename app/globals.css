@@ -213,12 +213,20 @@ html[data-theme="light"] .bg-grid::before {
   color: var(--white-100);
 }
 
+.service-client__logo--fizkultura {
+  filter: brightness(0) invert(1);
+}
+
 html[data-theme="light"] .service-client__logo {
   filter: none;
 }
 
 html[data-theme="light"] .service-client__logo--evdev {
   color: #000;
+}
+
+html[data-theme="light"] .service-client__logo--fizkultura {
+  filter: none;
 }
 
 @media (max-width: 961px) {

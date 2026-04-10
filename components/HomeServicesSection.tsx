@@ -76,7 +76,7 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
                       alt={client.name}
                       width={client.width}
                       height={client.height}
-                      className={`service-client__logo ${client.logoH} w-auto max-w-full object-contain`}
+                      className={`service-client__logo ${client.name === "Fizkultura" ? "service-client__logo--fizkultura" : ""} ${client.logoH} w-auto max-w-full object-contain`}
                     />
                   )}
                 </motion.div>
