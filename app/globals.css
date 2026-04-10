@@ -285,6 +285,14 @@ html[data-theme="light"] .service-client__logo--polyu {
   }
 }
 
+/* Narrow phones: a bit more horizontal breathing room + notch overlap */
+@media (max-width: 639px) {
+  .section-gutter {
+    padding-left: max(1.125rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1.125rem, env(safe-area-inset-right, 0px));
+  }
+}
+
 /* Cinematic overlay utilities */
 .hero-overlay {
   background: radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.06), transparent 55%),
@@ -1515,9 +1523,14 @@ html[data-theme="light"] .enterprise-compare-enterprise {
   }
 
   .enterprise-mode-text-list-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 44px;
     font-size: 0.58rem;
     letter-spacing: 0.12em;
-    padding-top: 0.6rem;
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
     word-break: break-word;
   }
 
@@ -1601,88 +1614,87 @@ html[data-theme="light"] .btn-outline:hover {
   transform: translateY(-1px);
 }
 
+/* Language toggle — segmented pill */
 .lang-toggle {
-  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 0.2rem;
+  border: 1px solid var(--white-20);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.lang-toggle__opt {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 2.65rem;
-  padding: 0.38rem 0.55rem;
-  border: 1px solid var(--white-20);
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, var(--white-100) 9%, transparent) 0%,
-      color-mix(in srgb, var(--surface-elevated) 70%, transparent) 48%,
-      color-mix(in srgb, var(--black-50) 25%, transparent) 100%
-    );
-  box-shadow:
-    0 1px 0 color-mix(in srgb, var(--white-100) 8%, transparent),
-    inset 0 1px 0 color-mix(in srgb, var(--white-100) 12%, transparent);
+  padding: 0.26rem 0.58rem;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
   font-family: inherit;
   font-size: 0.58rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--white-85);
-  line-height: 1.15;
+  color: var(--white-40);
+  line-height: 1;
   cursor: pointer;
   transition:
     color 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
+    background 180ms ease;
 }
 
-.lang-toggle:hover {
-  border-color: color-mix(in srgb, var(--white-100) 42%, transparent);
+.lang-toggle__opt.is-active {
+  background: var(--white-20);
   color: var(--white-100);
-  box-shadow:
-    0 2px 10px color-mix(in srgb, var(--black-50) 45%, transparent),
-    0 1px 0 color-mix(in srgb, var(--white-100) 12%, transparent),
-    inset 0 1px 0 color-mix(in srgb, var(--white-100) 16%, transparent);
-  transform: translateY(-1px);
 }
 
-.lang-toggle:focus {
-  outline: none;
-}
-
-.lang-toggle:focus-visible {
-  border-color: var(--white-60);
-  color: var(--white-100);
-  box-shadow:
-    0 0 0 1px var(--white-40),
-    inset 0 1px 0 color-mix(in srgb, var(--white-100) 14%, transparent);
-}
-
-.lang-toggle:active {
-  transform: translateY(0);
-  box-shadow:
-    inset 0 2px 6px color-mix(in srgb, var(--black-50) 35%, transparent),
-    inset 0 1px 0 color-mix(in srgb, var(--white-100) 6%, transparent);
-}
-
-html[data-theme="light"] .lang-toggle {
-  background:
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, var(--white-100) 14%, var(--surface-elevated)) 0%,
-      var(--surface-elevated) 45%,
-      color-mix(in srgb, var(--white-60) 12%, var(--surface-elevated)) 100%
-    );
-  box-shadow:
-    0 1px 0 color-mix(in srgb, var(--white-100) 35%, transparent),
-    inset 0 1px 0 #fff;
+.lang-toggle__opt:hover:not(.is-active) {
   color: var(--white-70);
 }
 
-html[data-theme="light"] .lang-toggle:hover {
+.lang-toggle__opt:focus {
+  outline: none;
+}
+
+.lang-toggle__opt:focus-visible {
+  outline: 2px solid var(--white-40);
+  outline-offset: 1px;
+}
+
+html[data-theme="light"] .lang-toggle {
+  border-color: var(--white-20);
+  background: rgba(19, 31, 47, 0.04);
+}
+
+html[data-theme="light"] .lang-toggle__opt.is-active {
+  background: var(--white-20);
   color: var(--white-100);
-  box-shadow:
-    0 2px 12px color-mix(in srgb, var(--white-100) 12%, transparent),
-    0 1px 0 color-mix(in srgb, var(--white-100) 28%, transparent),
-    inset 0 1px 0 #fff;
+}
+
+html[data-theme="light"] .lang-toggle__opt:hover:not(.is-active) {
+  color: var(--white-80);
+}
+
+@media (max-width: 767px) {
+  .lang-toggle {
+    min-height: 44px;
+    padding: 0.2rem;
+  }
+
+  .lang-toggle__opt {
+    min-height: 36px;
+    padding: 0.3rem 0.7rem;
+  }
+
+  .theme-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+    padding-inline: 0.35rem;
+  }
 }
 
 .theme-icon {
@@ -1848,7 +1860,10 @@ html[data-theme="light"] .lang-toggle:hover {
   z-index: 45;
   display: flex;
   flex-direction: column;
-  padding: 5.25rem 1.25rem max(1.5rem, env(safe-area-inset-bottom, 0px));
+  padding-top: 5.25rem;
+  padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
+  padding-left: max(1.25rem, env(safe-area-inset-left, 0px));
   min-height: 100dvh;
   min-height: 100svh;
   background: rgba(0, 0, 0, 0.97);
@@ -1866,8 +1881,10 @@ html[data-theme="light"] .mobile-nav-overlay {
 }
 
 .mobile-nav-overlay a {
-  display: block;
-  padding: 0.85rem 0;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0.65rem 0;
   border-bottom: 1px solid var(--white-10);
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -2259,6 +2276,19 @@ html[data-theme="light"] .contact-monument-line {
     font-size: clamp(2.2rem, 9.2vw, 3.75rem);
     letter-spacing: 0;
     line-height: 1.08;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-monument-line {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.12;
+  }
+
+  .enterprise-statement-line {
+    overflow-wrap: anywhere;
   }
 }
 
@@ -3187,6 +3217,12 @@ html[data-theme="light"] .svoyage-slide__info {
     order: -1;
     width: 100%;
     max-width: 10rem;
+    min-height: 44px;
+  }
+
+  .svoyage-slider__dot {
+    min-height: 44px;
+    padding: 0.5rem 0.65rem;
   }
 
   .svoyage-slider__wrapper {

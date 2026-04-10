@@ -440,15 +440,24 @@ export default function Home() {
               {dict.nav.inquire}
             </a>
             <div className="flex items-center gap-2 lg:gap-2.5">
-              <button
-                type="button"
-                className="lang-toggle"
-                onClick={toggleLocale}
-                aria-label={langAria}
-                title={langAria}
-              >
-                {locale === "en" ? dict.lang.shortZh : dict.lang.shortEn}
-              </button>
+              <div className="lang-toggle" role="group" aria-label={langAria}>
+                <button
+                  type="button"
+                  className={`lang-toggle__opt${locale === "en" ? " is-active" : ""}`}
+                  onClick={() => setLocale("en")}
+                  aria-pressed={locale === "en"}
+                >
+                  {dict.lang.shortEn}
+                </button>
+                <button
+                  type="button"
+                  className={`lang-toggle__opt${locale === "zh-HK" ? " is-active" : ""}`}
+                  onClick={() => setLocale("zh-HK")}
+                  aria-pressed={locale === "zh-HK"}
+                >
+                  {dict.lang.shortZh}
+                </button>
+              </div>
               <button type="button" className="theme-toggle" onClick={toggleTheme} aria-label={themeAria} title={themeAria}>
                 <span className={`theme-icon theme-icon-sun ${theme === "light" ? "theme-icon-active" : ""}`} aria-hidden="true">
                   <span className="theme-icon-sun-core" />
@@ -566,7 +575,7 @@ export default function Home() {
               <br />
               {dict.hero.titleL3}
             </h1>
-            <p className="max-w-xl text-sm text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
+            <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
           </motion.div>
 
           <motion.div
@@ -600,11 +609,11 @@ export default function Home() {
                 <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.engagementsValue}</span>
               </div>
             </div>
-            <div className="flex w-full flex-wrap items-center gap-6 md:w-auto md:justify-end md:gap-8">
-              <a href="#contact" className="btn-outline">
+            <div className="flex w-full flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6 md:w-auto md:justify-end md:gap-8">
+              <a href="#contact" className="btn-outline w-full text-center sm:w-auto">
                 {dict.hero.inquire}
               </a>
-              <div className="ml-auto flex flex-col items-end gap-3 md:ml-0">
+              <div className="flex flex-col items-center gap-3 sm:ml-auto sm:items-end md:ml-0">
                 <div className="scroll-cue" />
                 <span className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
                   {dict.hero.scroll}
