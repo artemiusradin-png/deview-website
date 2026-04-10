@@ -33,6 +33,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`h-full antialiased ${redRose.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=archivo@300,400,500&f[]=clash-display@600,700&display=swap"
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--text)]">
         <AppProviders>
           <ThemeSync />
