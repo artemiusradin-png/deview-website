@@ -2725,11 +2725,11 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
 /* -------------------------------------------------------------------------- */
 
 .svoyage-slider {
-  --sv-slide-width: min(24vw, 280px);
+  --sv-slide-width: min(25vw, 295px);
   --sv-slide-aspect: 2 / 3;
   --sv-duration: 780ms;
   --sv-ease: cubic-bezier(0.215, 0.61, 0.355, 1);
-  --sv-font-display: "Clash Display", system-ui, sans-serif;
+  --sv-font-display: var(--font-red-rose), "Clash Display", system-ui, sans-serif;
   --sv-font-body: "Archivo", system-ui, sans-serif;
 
   position: relative;
@@ -2763,8 +2763,7 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
   isolation: isolate;
 }
 
-.svoyage-slides,
-.svoyage-slides-infos {
+.svoyage-slides {
   grid-column: 1;
   grid-row: 1;
   width: 100%;
@@ -2772,15 +2771,11 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
   display: grid;
   place-items: center;
   pointer-events: none;
-}
-
-.svoyage-slides {
   position: relative;
   z-index: 1;
 }
 
-.svoyage-slides > *,
-.svoyage-slides-infos > * {
+.svoyage-slides > * {
   grid-area: 1 / -1;
 }
 
@@ -2846,177 +2841,158 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border-radius: 0.45rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 34%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015));
+    radial-gradient(ellipse at 28% 18%, rgba(255, 255, 255, 0.11), transparent 55%),
+    linear-gradient(155deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    0 24px 54px rgba(0, 0, 0, 0.16);
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 32px 64px rgba(0, 0, 0, 0.22);
 }
 
-.svoyage-slide-info {
-  width: var(--sv-slide-width);
-  height: 100%;
-  max-height: min(52vh, 30rem);
-  aspect-ratio: var(--sv-slide-aspect);
-  pointer-events: none;
-  z-index: 60;
-  container-type: size;
-  overflow: hidden;
-}
-
-/* All .svoyage-slide-info panels share one grid cell; only the current one may show copy. */
-.svoyage-slide-info[data-current] {
-  z-index: 130;
-}
-
-.svoyage-slide-info:not([data-current]) .svoyage-slide-info__text-wrap {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.svoyage-slide-info[data-current] .svoyage-slide-info__text-wrap {
-  visibility: visible;
-}
-
-.svoyage-slide-info[data-current] .svoyage-slide-info__text span {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-  transition-delay: 220ms;
-}
-
-.svoyage-slide-info:not([data-current]) .svoyage-slide-info__text span {
-  opacity: 0;
-  transform: translate3d(0, 100%, 0);
-  transition-delay: 0ms;
-}
-
-.svoyage-slide-info__inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  padding: 0.95rem;
-}
-
-.svoyage-slide-info__text-wrap {
+/* Content overlay — lives inside .svoyage-slide__inner (position: relative) */
+.svoyage-slide__info {
   position: absolute;
-  inset: auto 0 0 0;
-  width: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding: 1.05rem 1rem 1rem;
-  transform: translateZ(40px);
+  inset: 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  gap: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.08) 18%, rgba(0, 0, 0, 0.18) 100%);
+  justify-content: flex-end;
+  padding: 1.15rem 1.1rem 1.1rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.58) 38%,
+    rgba(0, 0, 0, 0.12) 68%,
+    transparent 100%
+  );
+  container-type: size;
+  pointer-events: none;
   scrollbar-width: thin;
+  overflow-y: auto;
 }
 
-.svoyage-slide-info__text {
-  font-family: var(--sv-font-display);
-  color: #fff;
+/* Far cards: hide info */
+.svoyage-slide[data-previous-far] .svoyage-slide__info,
+.svoyage-slide[data-next-far] .svoyage-slide__info {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Label row — shown on current + adjacent cards */
+.svoyage-slide__label-line {
   overflow: hidden;
 }
 
-.svoyage-slide-info__text span {
+.svoyage-slide__label-line span {
   display: block;
-  transition: var(--sv-duration) var(--sv-ease);
-  transition-property: opacity, transform;
-}
-
-/* On-slide “hero” copy (scrollable cards): large & readable */
-.svoyage-slide-info__text--title span {
-  font-size: min(6cqw, 2.2rem);
+  font-family: var(--sv-font-display);
+  font-size: 9cqw;
   font-weight: 700;
-  letter-spacing: 0.045em;
-  text-transform: uppercase;
-  line-height: 1.08;
-}
-
-.svoyage-slide-info__text--subtitle span {
-  margin-top: 0.35rem;
-  font-size: min(4.6cqw, 1.48rem);
-  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  line-height: 1.15;
-  color: rgba(255, 255, 255, 0.78);
+  color: #fff;
+  line-height: 1.1;
+  transition: opacity var(--sv-duration) var(--sv-ease), transform var(--sv-duration) var(--sv-ease);
 }
 
-.svoyage-slide-info__text--desc span {
-  margin-top: 0.65rem;
-  font-size: min(4.1cqw, 1.38rem);
+/* Side cards: animate label in slightly */
+.svoyage-slide[data-previous] .svoyage-slide__label-line span,
+.svoyage-slide[data-next] .svoyage-slide__label-line span {
+  opacity: 0.88;
+  font-size: 8.5cqw;
+}
+
+/* Details block — current card only */
+.svoyage-slide__details {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.3rem;
+  animation: sv-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 200ms;
+}
+
+@keyframes sv-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+.svoyage-slide__subtitle {
+  margin-top: 0.3rem;
+  font-family: var(--sv-font-display);
+  font-size: 5.5cqw;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.2;
+}
+
+.svoyage-slide__desc {
+  margin-top: 0.6rem;
   font-family: var(--sv-font-body);
+  font-size: 5cqw;
   font-weight: 500;
-  text-transform: none;
-  letter-spacing: 0.015em;
-  line-height: 1.4;
-  white-space: normal;
+  color: rgba(255, 255, 255, 0.96);
+  line-height: 1.42;
 }
 
-.svoyage-slide-info__meta {
-  margin: 0.85rem 0 0;
-  font-size: min(3.5cqw, 1.22rem);
+.svoyage-slide__meta {
+  margin-top: 0.75rem;
   font-family: var(--sv-font-body);
-  color: rgba(255, 255, 255, 0.74);
-  line-height: 1.38;
+  font-size: 4.4cqw;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.4;
 }
 
-.svoyage-slide-info__meta-k {
+.svoyage-slide__meta-k {
   display: block;
   font-size: 0.78em;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.48);
+  color: rgba(255, 255, 255, 0.42);
   margin-bottom: 0.12em;
 }
 
-/* Expanded detail under scope (current slide only): smaller, secondary */
-.svoyage-slide-info__body {
-  margin: 0.65rem 0 0;
+.svoyage-slide__body {
+  margin-top: 0.65rem;
   padding-top: 0.55rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
   font-family: var(--sv-font-body);
-  font-size: min(1.95cqw, 0.76rem);
+  font-size: 3.5cqw;
   font-weight: 400;
-  line-height: 1.45;
-  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.svoyage-slide-info__chips {
+.svoyage-slide__chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.28rem;
-  margin: 0.55rem 0 0;
+  gap: 0.3rem;
+  margin-top: 0.55rem;
 }
 
-.svoyage-slide-info__chip {
+.svoyage-slide__chip {
   display: inline-block;
-  padding: 0.14rem 0.4rem;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 0.18rem 0.48rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 999px;
   font-family: var(--sv-font-body);
-  font-size: min(1.55cqw, 0.62rem);
-  color: rgba(255, 255, 255, 0.78);
-  letter-spacing: 0.035em;
+  font-size: 2.9cqw;
+  color: rgba(255, 255, 255, 0.82);
+  letter-spacing: 0.04em;
 }
 
-.svoyage-slide-info__status {
-  margin: 0.5rem 0 0;
+.svoyage-slide__status {
+  margin-top: 0.5rem;
   font-family: var(--sv-font-body);
-  font-size: min(1.65cqw, 0.64rem);
-  letter-spacing: 0.11em;
+  font-size: 2.8cqw;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.48);
+  color: rgba(255, 255, 255, 0.44);
 }
 
 .svoyage-slider__btn {
@@ -3103,43 +3079,27 @@ html[data-theme="light"] .svoyage-slider__dot {
 html[data-theme="light"] .svoyage-slide__panel {
   border-color: rgba(19, 31, 47, 0.14);
   background:
-    radial-gradient(circle at top left, rgba(19, 31, 47, 0.06), transparent 34%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 252, 246, 0.92));
+    radial-gradient(ellipse at 28% 18%, rgba(19, 31, 47, 0.05), transparent 55%),
+    linear-gradient(155deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 252, 246, 0.85) 100%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.58),
-    0 20px 48px rgba(19, 31, 47, 0.08);
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 24px 52px rgba(19, 31, 47, 0.09);
 }
 
-html[data-theme="light"] .svoyage-slide-info__text-wrap {
-  background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.14) 18%, rgba(255, 255, 255, 0.5) 100%);
-}
-
-html[data-theme="light"] .svoyage-slide-info__text {
-  color: rgba(19, 31, 47, 0.92);
-}
-
-html[data-theme="light"] .svoyage-slide-info__body,
-html[data-theme="light"] .svoyage-slide-info__chip,
-html[data-theme="light"] .svoyage-slide-info__status {
-  color: rgba(19, 31, 47, 0.88);
-  border-color: rgba(19, 31, 47, 0.14);
-}
-
-html[data-theme="light"] .svoyage-slide-info__meta {
-  color: rgba(19, 31, 47, 0.65);
-}
-
-html[data-theme="light"] .svoyage-slide-info__meta-k {
-  color: rgba(19, 31, 47, 0.45);
-}
-
-html[data-theme="light"] .svoyage-slide-info__body {
-  border-top-color: rgba(19, 31, 47, 0.12);
+/* Keep text white on the dark gradient overlay regardless of theme */
+html[data-theme="light"] .svoyage-slide__info {
+  background: linear-gradient(
+    to top,
+    rgba(19, 31, 47, 0.88) 0%,
+    rgba(19, 31, 47, 0.52) 38%,
+    rgba(19, 31, 47, 0.08) 68%,
+    transparent 100%
+  );
 }
 
 @media (max-width: 900px) {
   .svoyage-slider {
-    --sv-slide-width: min(72vw, 260px);
+    --sv-slide-width: min(70vw, 270px);
   }
 
   .svoyage-slide[data-next],
@@ -3149,7 +3109,7 @@ html[data-theme="light"] .svoyage-slide-info__body {
     opacity: 0.4;
   }
 
-  .svoyage-slide-info__text-wrap {
+  .svoyage-slide__info {
     padding: 0.9rem 0.85rem 0.9rem;
   }
 }
@@ -3182,7 +3142,7 @@ html[data-theme="light"] .svoyage-slide-info__body {
     --sv-rotY: 0deg;
   }
 
-  .svoyage-slides-infos .svoyage-slide-info:not([data-current]) {
-    display: none;
+  .svoyage-slide:not([data-current]) .svoyage-slide__info {
+    opacity: 0;
   }
 }

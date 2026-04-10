@@ -60,49 +60,35 @@ export function ServicesVoyageSlider({ services: s }: Props) {
             <div className="svoyage-slides">
               {slots.map(({ service, role }) => {
                 const d = dataAttrForRole(role);
+                const isCurrent = role === "current";
                 return (
                   <div key={service.id} className={`svoyage-slide svoyage-slide--${role}`} {...d}>
                     <div className="svoyage-slide__inner">
                       <div className="svoyage-slide__panel" />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="svoyage-slides-infos">
-              {slots.map(({ service, role }) => {
-                const d = dataAttrForRole(role);
-                return (
-                  <div key={`info-${service.id}`} className={`svoyage-slide-info svoyage-slide-info--${role}`} {...d}>
-                    <div className="svoyage-slide-info__inner">
-                      <div className="svoyage-slide-info__text-wrap">
-                        <div className="svoyage-slide-info__text svoyage-slide-info__text--title">
+                      <div className="svoyage-slide__info">
+                        <div className="svoyage-slide__label-line">
                           <span>{service.label}</span>
                         </div>
-                        <div className="svoyage-slide-info__text svoyage-slide-info__text--subtitle">
-                          <span>
-                            {s.duration} · {service.duration}
-                          </span>
-                        </div>
-                        <div className="svoyage-slide-info__text svoyage-slide-info__text--desc">
-                          <span>{service.title}</span>
-                        </div>
-                        <p className="svoyage-slide-info__meta">
-                          <span className="svoyage-slide-info__meta-k">{s.scope}</span> {service.scope}
-                        </p>
-                        {role === "current" && (
-                          <>
-                            <p className="svoyage-slide-info__body">{service.body}</p>
-                            <div className="svoyage-slide-info__chips" aria-label={s.sectionLabel}>
+                        {isCurrent && (
+                          <div className="svoyage-slide__details">
+                            <div className="svoyage-slide__subtitle">
+                              {s.duration} · {service.duration}
+                            </div>
+                            <div className="svoyage-slide__desc">{service.title}</div>
+                            <div className="svoyage-slide__meta">
+                              <span className="svoyage-slide__meta-k">{s.scope}</span>
+                              {service.scope}
+                            </div>
+                            <p className="svoyage-slide__body">{service.body}</p>
+                            <div className="svoyage-slide__chips" aria-label={s.sectionLabel}>
                               {service.bullets.map((bullet) => (
-                                <span key={bullet} className="svoyage-slide-info__chip">
+                                <span key={bullet} className="svoyage-slide__chip">
                                   {bullet}
                                 </span>
                               ))}
                             </div>
-                            <p className="svoyage-slide-info__status">{service.status}</p>
-                          </>
+                            <p className="svoyage-slide__status">{service.status}</p>
+                          </div>
                         )}
                       </div>
                     </div>
