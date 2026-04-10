@@ -68,7 +68,7 @@ export function HomeSolutionsSection({ variant = "home" }: HomeSolutionsSectionP
   }, [areas.length]);
 
   useEffect(() => {
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || variant === "standalone") {
       return;
     }
 
@@ -107,7 +107,7 @@ export function HomeSolutionsSection({ variant = "home" }: HomeSolutionsSectionP
       window.removeEventListener("resize", updateMarqueeOffset);
       wideMq.removeEventListener("change", updateMarqueeOffset);
     };
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, variant]);
 
   const scrollSolutions = (direction: "left" | "right") => {
     const carousel = solutionCarouselRef.current;
@@ -126,7 +126,6 @@ export function HomeSolutionsSection({ variant = "home" }: HomeSolutionsSectionP
   };
 
   const activeSolution = areas[activeSolutionIndex] ?? areas[0];
-  const marqueeContent = `${activeSolution.title} • `.repeat(14);
 
   return (
     <section
@@ -136,20 +135,24 @@ export function HomeSolutionsSection({ variant = "home" }: HomeSolutionsSectionP
       style={
         {
           "--solutions-accent": activeSolution.accent,
-          "--solutions-marquee-offset": `${solutionsMarqueeOffset}%`,
+          ...(variant === "standalone"
+            ? {}
+            : { "--solutions-marquee-offset": `${solutionsMarqueeOffset}%` }),
         } as CSSProperties
       }
     >
-      <div
-        className={`solutions-marquee-container ${isSolutionsInView ? "solutions-marquee-container-visible" : ""}`}
-        aria-hidden="true"
-      >
-        {["top", "bottom"].map((position) => (
-          <div key={`${position}-${activeSolution.id}`} className={`solutions-marquee solutions-marquee-${position}`}>
-            <div className="solutions-marquee-track">{marqueeContent}</div>
-          </div>
-        ))}
-      </div>
+      {variant === "standalone" ? null : (
+        <div
+          className={`solutions-marquee-container ${isSolutionsInView ? "solutions-marquee-container-visible" : ""}`}
+          aria-hidden="true"
+        >
+          {["top", "bottom"].map((position) => (
+            <div key={`${position}-${activeSolution.id}`} className={`solutions-marquee solutions-marquee-${position}`}>
+              <div className="solutions-marquee-track">{`${activeSolution.title} • `.repeat(14)}</div>
+            </div>
+          ))}
+        </div>
+      )}
       <motion.div
         {...homeSectionReveal}
         transition={{ duration: 0.5 }}

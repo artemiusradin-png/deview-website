@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { HomeServicesSection } from "../components/HomeServicesSection";
+import { LangSwitch } from "../components/LangSwitch";
 import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
@@ -31,7 +32,7 @@ const ENTERPRISE_MODE_IDS = ["predictive", "conversational", "generative", "anal
 type EnterpriseModeId = (typeof ENTERPRISE_MODE_IDS)[number];
 
 export default function Home() {
-  const { dict, locale, setLocale } = useLocaleContext();
+  const { dict } = useLocaleContext();
   const enterpriseModes = ENTERPRISE_MODE_IDS.map((id) => ({
     id,
     ...dict.enterpriseModes[id],
@@ -360,13 +361,11 @@ export default function Home() {
 
   const closeNav = () => setNavOpen(false);
   const toggleTheme = () => setTheme((current) => (current === "dark" ? "light" : "dark"));
-  const toggleLocale = () => setLocale(locale === "en" ? "zh-HK" : "en");
   const selectedMode = enterpriseModes.find((mode) => mode.id === activeEnterpriseMode) ?? enterpriseModes[0];
   const displayedUserMessage = prefersReducedMotion ? interfaceUserMessage : typedUserMessage;
   const displayedAiMessage = prefersReducedMotion ? interfaceAiMessage : typedAiMessage;
   const themeAria =
     theme === "dark" ? dict.a11y.themeToLight : dict.a11y.themeToDark;
-  const langAria = locale === "en" ? dict.a11y.langToZh : dict.a11y.langToEn;
   /** Keep shell transform-free — scale/rotateX on an ancestor rasterizes type and looks blurry while scrolling. */
   const enterpriseRailFill = useTransform(enterpriseModesProgress, [0, 1], ["0%", "100%"]);
   /** Intro copy: stay solid longer, then a tight scroll band with brief blur-out (readable, fast handoff to cards). */
@@ -440,15 +439,7 @@ export default function Home() {
               {dict.nav.inquire}
             </a>
             <div className="flex items-center gap-2 lg:gap-2.5">
-              <button
-                type="button"
-                className="lang-toggle"
-                onClick={toggleLocale}
-                aria-label={langAria}
-                title={langAria}
-              >
-                {locale === "en" ? dict.lang.shortZh : dict.lang.shortEn}
-              </button>
+              <LangSwitch />
               <button type="button" className="theme-toggle" onClick={toggleTheme} aria-label={themeAria} title={themeAria}>
                 <span className={`theme-icon theme-icon-sun ${theme === "light" ? "theme-icon-active" : ""}`} aria-hidden="true">
                   <span className="theme-icon-sun-core" />
@@ -490,14 +481,7 @@ export default function Home() {
             {dict.mobileNav.contactForm}
           </a>
           <div className="mt-4 flex items-center gap-3">
-            <button
-              type="button"
-              className="lang-toggle"
-              onClick={toggleLocale}
-              aria-label={langAria}
-            >
-              {locale === "en" ? dict.lang.shortZh : dict.lang.shortEn}
-            </button>
+            <LangSwitch />
             <button type="button" className="theme-toggle" onClick={toggleTheme} aria-label={themeAria}>
               <span className={`theme-icon theme-icon-sun ${theme === "light" ? "theme-icon-active" : ""}`} aria-hidden="true">
                 <span className="theme-icon-sun-core" />

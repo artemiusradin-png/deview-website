@@ -16,6 +16,7 @@ export const zhHK: Dictionary = {
     inquire: "聯絡",
   },
   a11y: {
+    langGroup: "語言",
     openMenu: "開啟選單",
     closeMenu: "關閉選單",
     siteNav: "網站導覽",

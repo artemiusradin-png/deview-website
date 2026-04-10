@@ -14,6 +14,7 @@ export const en = {
     inquire: "INQUIRE",
   },
   a11y: {
+    langGroup: "Language",
     openMenu: "Open menu",
     closeMenu: "Close menu",
     siteNav: "Site navigation",
