@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { homeSectionCardMotion, homeSectionReveal, homeSectionStagger } from "@/lib/home-section-motion";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
@@ -11,10 +12,10 @@ type HomeServicesSectionProps = {
 };
 
 const serviceClients = [
-  { name: "EVDEV", href: "https://evdev.dev/", mark: "EVDEV", accent: "software" },
-  { name: "Fizkultura", href: "https://fizkultura.com.ua/", mark: "Fizkultura", accent: "fitness" },
-  { name: "Jetfans", href: "https://www.jetfans.eu/", mark: "JETFANS", accent: "aviation" },
-  { name: "Nextair", href: "https://nextair.com.ua/", mark: "NEXTAIR", accent: "air" },
+  { name: "EVDEV", href: "https://evdev.dev/", src: "/client-logos/evdev.svg", width: 96, height: 19 },
+  { name: "Fizkultura", href: "https://fizkultura.com.ua/", src: "/client-logos/fizkultura.png", width: 118, height: 79 },
+  { name: "Jetfans", href: "https://www.jetfans.eu/", src: "/client-logos/jetfans.avif", width: 160, height: 60 },
+  { name: "Nextair", href: "https://nextair.com.ua/", src: "/client-logos/nextair.webp", width: 80, height: 80 },
 ] as const;
 
 export function HomeServicesSection({ variant = "home" }: HomeServicesSectionProps) {
@@ -34,12 +35,7 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
         className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
       >
         <div className="grid gap-4 border-b border-[var(--white-20)] pb-6 md:gap-5 md:pb-8">
-          <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="section-label mb-2">{s.clientsLabel}</p>
-              <p className="max-w-xl text-[0.8rem] text-[var(--text-muted)] md:text-sm">{s.clientsIntro}</p>
-            </div>
-          </div>
+          <p className="section-label">{s.clientsLabel}</p>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:gap-4">
             {serviceClients.map((client) => (
               <a
@@ -47,25 +43,17 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
                 href={client.href}
                 target="_blank"
                 rel="noreferrer"
-                className="group relative flex min-h-[5.5rem] overflow-hidden border border-[var(--white-20)] bg-[linear-gradient(180deg,color-mix(in_srgb,var(--surface-elevated)_86%,transparent),color-mix(in_srgb,var(--surface)_94%,transparent))] px-4 py-3 transition-all duration-200 hover:border-[var(--white-40)] hover:bg-[var(--surface-elevated)]"
+                className="group flex min-h-[5.25rem] items-center justify-center border border-[var(--white-20)] bg-[var(--surface)] px-4 py-3 transition-all duration-200 hover:border-[var(--white-40)] hover:bg-[var(--surface-elevated)]"
                 aria-label={client.name}
                 title={client.name}
               >
-                <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(240,240,250,0.34),transparent)] opacity-70" />
-                <span className="flex w-full flex-col justify-between">
-                  <span className="text-[0.55rem] uppercase tracking-[0.18em] text-[var(--white-40)]">
-                    {client.accent}
-                  </span>
-                  <span
-                    className={`text-[var(--white-100)] transition-transform duration-200 group-hover:translate-x-[2px] ${
-                      client.name === "Fizkultura"
-                        ? "text-[1.15rem] tracking-[0.01em]"
-                        : "text-[0.95rem] tracking-[0.22em]"
-                    }`}
-                  >
-                    {client.mark}
-                  </span>
-                </span>
+                <Image
+                  src={client.src}
+                  alt={client.name}
+                  width={client.width}
+                  height={client.height}
+                  className="max-h-9 w-auto max-w-full object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+                />
               </a>
             ))}
           </div>
