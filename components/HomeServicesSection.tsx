@@ -90,13 +90,13 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
         <div className="flex w-full flex-col justify-between gap-5 md:flex-row md:items-end md:gap-8">
           <div className="max-w-2xl">
             <p className="section-label mb-3">{s.sectionLabel}</p>
-            <h2 className="text-[clamp(1.85rem,5vw,2.85rem)] leading-snug text-[var(--white-100)]">
+            <h2 className="text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
               {s.titleL1}
               <br />
               {s.titleL2}
             </h2>
           </div>
-          <p className="max-w-md text-[1.05rem] leading-relaxed text-[var(--text-muted)] md:text-[1.125rem]">
+          <p className="max-w-md text-[0.8rem] leading-relaxed text-[var(--text-muted)] md:text-sm">
             {s.intro}
           </p>
         </div>

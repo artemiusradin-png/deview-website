@@ -2880,8 +2880,8 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
   transition-property: opacity, transform;
 }
 
-.svoyage-slide-info__text--title span,
-.svoyage-slide-info__text--subtitle span {
+/* Service name only — keep smaller than body stack per design */
+.svoyage-slide-info__text--title span {
   font-size: min(4.2cqw, 1.58rem);
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -2891,28 +2891,31 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
 
 .svoyage-slide-info__text--subtitle span {
   margin-top: 0.28rem;
-  font-size: min(3cqw, 1.12rem);
+  font-size: min(3.65cqw, 1.26rem);
   font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.15;
   color: rgba(255, 255, 255, 0.76);
 }
 
 .svoyage-slide-info__text--desc span {
   margin-top: 0.6rem;
-  font-size: min(2.65cqw, 1.05rem);
+  font-size: min(3.35cqw, 1.2rem);
   font-family: var(--sv-font-body);
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0.02em;
-  line-height: 1.45;
+  line-height: 1.48;
   white-space: normal;
 }
 
 .svoyage-slide-info__meta {
   margin: 0.8rem 0 0;
-  font-size: min(2.35cqw, 0.95rem);
+  font-size: min(3cqw, 1.1rem);
   font-family: var(--sv-font-body);
   color: rgba(255, 255, 255, 0.72);
-  line-height: 1.4;
+  line-height: 1.42;
 }
 
 .svoyage-slide-info__meta-k {
@@ -2927,9 +2930,9 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
 .svoyage-slide-info__body {
   margin: 0.8rem 0 0;
   font-family: var(--sv-font-body);
-  font-size: min(2.45cqw, 1.02rem);
+  font-size: min(3.05cqw, 1.14rem);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.52;
   color: rgba(255, 255, 255, 0.82);
 }
 
@@ -2942,11 +2945,11 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
 
 .svoyage-slide-info__chip {
   display: inline-block;
-  padding: 0.22rem 0.5rem;
+  padding: 0.26rem 0.55rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
   font-family: var(--sv-font-body);
-  font-size: min(2cqw, 0.85rem);
+  font-size: min(2.5cqw, 0.95rem);
   color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0.04em;
 }
@@ -2954,7 +2957,7 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
 .svoyage-slide-info__status {
   margin: 0.75rem 0 0;
   font-family: var(--sv-font-body);
-  font-size: min(2.05cqw, 0.84rem);
+  font-size: min(2.4cqw, 0.9rem);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
