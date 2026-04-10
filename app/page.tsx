@@ -359,14 +359,13 @@ export default function Home() {
   }, [navOpen]);
 
   const closeNav = () => setNavOpen(false);
-  const toggleLocale = () => setLocale(locale === "en" ? "zh-HK" : "en");
   const toggleTheme = () => setTheme((current) => (current === "dark" ? "light" : "dark"));
   const selectedMode = enterpriseModes.find((mode) => mode.id === activeEnterpriseMode) ?? enterpriseModes[0];
   const displayedUserMessage = prefersReducedMotion ? interfaceUserMessage : typedUserMessage;
   const displayedAiMessage = prefersReducedMotion ? interfaceAiMessage : typedAiMessage;
   const themeAria =
     theme === "dark" ? dict.a11y.themeToLight : dict.a11y.themeToDark;
-  const langAria = locale === "en" ? dict.a11y.langToZh : dict.a11y.langToEn;
+  const langSwitchLabel = locale === "en" ? "Language" : "語言";
   /** Keep shell transform-free — scale/rotateX on an ancestor rasterizes type and looks blurry while scrolling. */
   const enterpriseRailFill = useTransform(enterpriseModesProgress, [0, 1], ["0%", "100%"]);
   /** Intro copy: stay solid longer, then a tight scroll band with brief blur-out (readable, fast handoff to cards). */
@@ -440,7 +439,7 @@ export default function Home() {
               {dict.nav.inquire}
             </a>
             <div className="flex items-center gap-2 lg:gap-2.5">
-              <div className="lang-toggle" role="group" aria-label={langAria}>
+              <div className="lang-toggle" role="group" aria-label={langSwitchLabel}>
                 <button
                   type="button"
                   className={`lang-toggle__opt${locale === "en" ? " is-active" : ""}`}
@@ -499,14 +498,24 @@ export default function Home() {
             {dict.mobileNav.contactForm}
           </a>
           <div className="mt-4 flex items-center gap-3">
-            <button
-              type="button"
-              className="lang-toggle"
-              onClick={toggleLocale}
-              aria-label={langAria}
-            >
-              {locale === "en" ? dict.lang.shortZh : dict.lang.shortEn}
-            </button>
+            <div className="lang-toggle" role="group" aria-label={langSwitchLabel}>
+              <button
+                type="button"
+                className={`lang-toggle__opt${locale === "en" ? " is-active" : ""}`}
+                onClick={() => setLocale("en")}
+                aria-pressed={locale === "en"}
+              >
+                {dict.lang.shortEn}
+              </button>
+              <button
+                type="button"
+                className={`lang-toggle__opt${locale === "zh-HK" ? " is-active" : ""}`}
+                onClick={() => setLocale("zh-HK")}
+                aria-pressed={locale === "zh-HK"}
+              >
+                {dict.lang.shortZh}
+              </button>
+            </div>
             <button type="button" className="theme-toggle" onClick={toggleTheme} aria-label={themeAria}>
               <span className={`theme-icon theme-icon-sun ${theme === "light" ? "theme-icon-active" : ""}`} aria-hidden="true">
                 <span className="theme-icon-sun-core" />

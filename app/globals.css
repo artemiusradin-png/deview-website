@@ -96,7 +96,7 @@ a {
 button,
 input[type="submit"],
 .nav-toggle,
-.lang-toggle,
+.lang-toggle__opt,
 .carousel-arrow,
 .enterprise-chip {
   -webkit-tap-highlight-color: transparent;
@@ -1622,7 +1622,7 @@ html[data-theme="light"] .btn-outline:hover {
   padding: 0.2rem;
   border: 1px solid var(--white-20);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
+  background: transparent;
 }
 
 .lang-toggle__opt {
@@ -1666,7 +1666,7 @@ html[data-theme="light"] .btn-outline:hover {
 
 html[data-theme="light"] .lang-toggle {
   border-color: var(--white-20);
-  background: rgba(19, 31, 47, 0.04);
+  background: transparent;
 }
 
 html[data-theme="light"] .lang-toggle__opt.is-active {
@@ -1680,13 +1680,13 @@ html[data-theme="light"] .lang-toggle__opt:hover:not(.is-active) {
 
 @media (max-width: 767px) {
   .lang-toggle {
-    min-height: 44px;
-    padding: 0.2rem;
+    padding: 0.15rem;
   }
 
   .lang-toggle__opt {
-    min-height: 36px;
-    padding: 0.3rem 0.7rem;
+    min-height: 44px;
+    min-width: 2.75rem;
+    padding: 0.35rem 0.75rem;
   }
 
   .theme-toggle {
