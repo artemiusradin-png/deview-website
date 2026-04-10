@@ -10,6 +10,13 @@ type HomeServicesSectionProps = {
   variant?: "home" | "standalone";
 };
 
+const serviceClients = [
+  { name: "EVDEV", href: "https://evdev.dev/", logo: "https://logo.clearbit.com/evdev.dev" },
+  { name: "Fizkultura", href: "https://fizkultura.com.ua/", logo: "https://logo.clearbit.com/fizkultura.com.ua" },
+  { name: "Jetfans", href: "https://www.jetfans.eu/", logo: "https://logo.clearbit.com/jetfans.eu" },
+  { name: "Nextair", href: "https://nextair.com.ua/", logo: "https://nextair.com.ua/img/FooterLogo.png" },
+] as const;
+
 export function HomeServicesSection({ variant = "home" }: HomeServicesSectionProps) {
   const { dict } = useLocaleContext();
   const s = dict.services;
@@ -26,6 +33,35 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
         transition={{ duration: 0.5 }}
         className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
       >
+        <div className="grid gap-4 border-b border-[var(--white-20)] pb-6 md:gap-5 md:pb-8">
+          <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="section-label mb-2">{s.clientsLabel}</p>
+              <p className="max-w-xl text-[0.8rem] text-[var(--text-muted)] md:text-sm">{s.clientsIntro}</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:gap-4">
+            {serviceClients.map((client) => (
+              <a
+                key={client.name}
+                href={client.href}
+                target="_blank"
+                rel="noreferrer"
+                className="flex min-h-[4.5rem] items-center justify-center border border-[var(--white-20)] bg-[var(--surface)] px-4 py-3 transition-colors duration-200 hover:border-[var(--white-40)]"
+                aria-label={client.name}
+                title={client.name}
+              >
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="max-h-9 w-auto max-w-full object-contain"
+                  loading="lazy"
+                />
+              </a>
+            ))}
+          </div>
+        </div>
+
         <div className="section-shell">
           <p className="section-label mb-3">{s.sectionLabel}</p>
           <div className="rule mb-6" />
