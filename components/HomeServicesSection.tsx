@@ -11,14 +11,49 @@ type HomeServicesSectionProps = {
   variant?: "home" | "standalone";
 };
 
-const serviceClients = [
-  { name: "EVDEV",      src: "/client-logos/evdev.svg",      width: 96,  height: 19, logoH: "h-8"  },
-  { name: "Fizkultura", src: "/client-logos/fizkultura.png", width: 118, height: 79, logoH: "h-16" },
-  { name: "Jetfans",    src: "/client-logos/jetfans.avif",   width: 160, height: 60, logoH: "h-14" },
-  { name: "Nextair",    src: "/client-logos/nextair.webp",   width: 80,  height: 80, logoH: "h-16" },
-  { name: "FACT",       src: "/client-logos/fact.png",       width: 492, height: 96, logoH: "h-10" },
-  { name: "Novarise",   src: "/client-logos/novarise.svg",   width: 283, height: 42, logoH: "h-10" },
+// Row 1: PolyU (add file when available), Novartis, EVDEV
+const row1Clients = [
+  // { name: "The Hong Kong Polytechnic University", src: "/client-logos/polyu.svg", width: 0, height: 0, logoH: "h-14", modifier: "polyu" },
+  { name: "Novartis",   src: "/client-logos/novartis.svg",   width: 283, height: 42, logoH: "h-10", modifier: "novartis" },
+  { name: "EVDEV",      src: "/client-logos/evdev.svg",      width: 96,  height: 19, logoH: "h-8",  modifier: "evdev"    },
 ] as const;
+
+// Row 2: the rest
+const row2Clients = [
+  { name: "Fizkultura", src: "/client-logos/fizkultura.png", width: 118, height: 79, logoH: "h-16", modifier: "fizkultura" },
+  { name: "Jetfans",    src: "/client-logos/jetfans.avif",   width: 160, height: 60, logoH: "h-14", modifier: ""           },
+  { name: "Nextair",    src: "/client-logos/nextair.webp",   width: 80,  height: 80, logoH: "h-16", modifier: ""           },
+  { name: "FACT",       src: "/client-logos/fact.png",       width: 492, height: 96, logoH: "h-10", modifier: ""           },
+] as const;
+
+type ClientEntry = { name: string; src: string; width: number; height: number; logoH: string; modifier: string };
+
+function ClientLogo({ client, idx }: { client: ClientEntry; idx: number }) {
+  const modClass = client.modifier ? `service-client__logo--${client.modifier}` : "";
+  return (
+    <div className="service-client">
+      <motion.div
+        initial={{ opacity: 0, translateY: 18 }}
+        whileInView={{ opacity: 1, translateY: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: idx * 0.07 }}
+        className="service-client__logo-wrap"
+      >
+        {client.modifier === "evdev" ? (
+          <EvdevLogo className={`service-client__logo ${modClass} ${client.logoH} w-auto max-w-full`} />
+        ) : (
+          <Image
+            src={client.src}
+            alt={client.name}
+            width={client.width}
+            height={client.height}
+            className={`service-client__logo ${modClass} ${client.logoH} w-auto max-w-full object-contain`}
+          />
+        )}
+      </motion.div>
+    </div>
+  );
+}
 
 function EvdevLogo({ className = "" }: { className?: string }) {
   return (
@@ -58,31 +93,20 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
         transition={{ duration: 0.5 }}
         className="relative mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 py-8 md:gap-10 md:py-10"
       >
-        <div className="grid gap-4 border-b border-[var(--white-20)] pb-6 md:gap-5 md:pb-8">
+        <div className="flex flex-col gap-6 border-b border-[var(--white-20)] pb-6 md:gap-8 md:pb-8">
           <p className="section-label">{s.clientsLabel}</p>
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6 lg:gap-10">
-            {serviceClients.map((client) => (
-              <div key={client.name} className="service-client">
-                <motion.div
-                  initial={{ opacity: 0, translateY: 18 }}
-                  whileInView={{ opacity: 1, translateY: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="service-client__logo-wrap"
-                >
-                  {client.name === "EVDEV" ? (
-                    <EvdevLogo className={`service-client__logo service-client__logo--evdev ${client.logoH} w-auto max-w-full`} />
-                  ) : (
-                    <Image
-                      src={client.src}
-                      alt={client.name}
-                      width={client.width}
-                      height={client.height}
-                      className={`service-client__logo ${client.name === "Fizkultura" ? "service-client__logo--fizkultura" : ""} ${client.logoH} w-auto max-w-full object-contain`}
-                    />
-                  )}
-                </motion.div>
-              </div>
+
+          {/* Row 1: Novartis, EVDEV (PolyU prepends here when file is added) */}
+          <div className="flex flex-wrap items-center gap-8 lg:gap-12">
+            {row1Clients.map((client, idx) => (
+              <ClientLogo key={client.name} client={client} idx={idx} />
+            ))}
+          </div>
+
+          {/* Row 2: remaining clients */}
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:gap-10">
+            {row2Clients.map((client, idx) => (
+              <ClientLogo key={client.name} client={client} idx={row1Clients.length + idx} />
             ))}
           </div>
         </div>
