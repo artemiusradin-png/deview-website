@@ -51,7 +51,7 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
                     alt={client.name}
                     width={client.width}
                     height={client.height}
-                    className={`service-client__logo ${client.logoH} w-auto max-w-full object-contain`}
+                    className={`service-client__logo ${client.name === "EVDEV" ? "service-client__logo--evdev" : ""} ${client.logoH} w-auto max-w-full object-contain`}
                   />
                 </motion.div>
               </div>

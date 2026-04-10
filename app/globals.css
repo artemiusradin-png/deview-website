@@ -209,8 +209,16 @@ html[data-theme="light"] .bg-grid::before {
   filter: none;
 }
 
+.service-client__logo--evdev {
+  color: var(--white-100);
+}
+
 html[data-theme="light"] .service-client__logo {
   filter: none;
+}
+
+html[data-theme="light"] .service-client__logo--evdev {
+  color: #000;
 }
 
 @media (max-width: 961px) {
@@ -2054,6 +2062,8 @@ html[data-theme="light"] .carousel-fade-right {
 }
 
 .contact-monument-anchor {
+  --contact-x: 50%;
+  --contact-y: 50%;
   display: inline-block;
   width: 100%;
   max-width: 100%;
@@ -2081,7 +2091,7 @@ html[data-theme="light"] .carousel-fade-right {
   color: transparent;
   background-image:
     radial-gradient(
-      circle at 50% 50%,
+      circle at var(--contact-x) var(--contact-y),
       rgba(255, 255, 255, 1) 0%,
       rgba(255, 255, 255, 0.98) 8%,
       rgba(240, 240, 250, 0.96) 16%,
@@ -2100,7 +2110,7 @@ html[data-theme="light"] .carousel-fade-right {
 html[data-theme="light"] .contact-monument-line {
   background-image:
     radial-gradient(
-      circle at 50% 50%,
+      circle at var(--contact-x) var(--contact-y),
       rgba(19, 31, 47, 1) 0%,
       rgba(19, 31, 47, 0.96) 14%,
       rgba(133, 88, 31, 0.92) 26%,
