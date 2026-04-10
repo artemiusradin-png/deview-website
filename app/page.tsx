@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { HomeServicesSection } from "../components/HomeServicesSection";
@@ -320,20 +320,6 @@ export default function Home() {
     if (remaining <= HERO_VIDEO_CROSSFADE_SECONDS) {
       void startStandbyLayer(layerIndex);
     }
-  };
-
-  const handleContactMouseMove = (event: MouseEvent<HTMLAnchorElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width) * 100;
-    const y = ((event.clientY - rect.top) / rect.height) * 100;
-
-    event.currentTarget.style.setProperty("--contact-x", `${x}%`);
-    event.currentTarget.style.setProperty("--contact-y", `${y}%`);
-  };
-
-  const handleContactMouseLeave = (event: MouseEvent<HTMLAnchorElement>) => {
-    event.currentTarget.style.setProperty("--contact-x", "50%");
-    event.currentTarget.style.setProperty("--contact-y", "50%");
   };
 
   const [navOpen, setNavOpen] = useState(false);
@@ -978,17 +964,11 @@ export default function Home() {
             </p>
           </div>
 
-          {/*
-            Email is full-width above the CTA so it never shares a flex row with the button (that was shrinking
-            the slot and clipping glyphs under html/body overflow-x: clip). Outer strip scrolls horizontally if needed.
-          */}
           <div className="flex flex-col gap-6 md:gap-8">
-            <div className="contact-monument-scrollstrip w-full overflow-x-auto overflow-y-visible overscroll-x-contain py-1 [scrollbar-width:thin]">
+            <div className="w-full py-1">
               <a
                 href="mailto:hello@deview.ai"
                 className="contact-monument-anchor"
-                onMouseMove={handleContactMouseMove}
-                onMouseLeave={handleContactMouseLeave}
               >
                 <span className="contact-monument-line">{dict.contact.monumentL1}</span>
                 <span className="contact-monument-line">{dict.contact.monumentL2}</span>

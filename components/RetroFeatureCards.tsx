@@ -55,7 +55,7 @@ function RetroOutcomesCard({ className = "", rootPrefix = "" }: { className?: st
   return (
     <Link
       href={`${rootPrefix}/outcomes`}
-      className={`group relative flex min-h-0 flex-col overflow-hidden rounded-none ${className}`}
+      className={`group relative block overflow-hidden rounded-none ${className}`}
     >
       <div
         className="absolute inset-0 z-0 origin-center scale-105 bg-cover bg-center bg-no-repeat transition-transform duration-300 ease-in-out group-hover:scale-110"
@@ -66,28 +66,28 @@ function RetroOutcomesCard({ className = "", rootPrefix = "" }: { className?: st
         className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/50 from-0% via-black/55 via-[25%] to-black/88 to-100%"
         aria-hidden="true"
       />
-      <div className="relative z-10 flex min-h-0 flex-1 flex-col p-4 text-left sm:p-5 md:p-5">
-        <ul className="mb-3 flex min-h-0 flex-1 list-none flex-col gap-2.5 overflow-y-auto overscroll-contain p-0 [-webkit-overflow-scrolling:touch]">
+      <div className="relative z-10 flex h-full flex-col justify-end overflow-hidden p-4 text-left sm:p-5 md:p-5">
+        <ul className="mb-2.5 flex list-none flex-col gap-1.5 overflow-hidden p-0 md:gap-2">
           {o.items.map((item) => (
-            <li key={item.number} className="border-l border-white/20 pl-2.5">
-              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0">
-                <span className="text-[11px] tabular-nums text-white/45">{item.number}</span>
-                <span className="text-[10px] uppercase tracking-[0.14em] text-white/90 sm:text-[11px]">
+            <li key={item.number} className="border-l border-white/20 pl-2">
+              <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0">
+                <span className="text-[10px] tabular-nums text-white/45 sm:text-[11px]">{item.number}</span>
+                <span className="text-[9px] uppercase tracking-[0.12em] text-white/90 sm:text-[10px]">
                   {item.label}
                 </span>
               </div>
-              <p className="mt-0.5 text-[10px] leading-snug text-white/65 sm:text-[11px]">{item.body}</p>
+              <p className="mt-0.5 text-[9px] leading-[1.35] text-white/65 sm:text-[10px]">{item.body}</p>
             </li>
           ))}
         </ul>
-        <div className="shrink-0 self-start">
-          <span className="mb-1.5 block text-[13px] uppercase tracking-[0.12em] text-white/72">{o.label}</span>
-          <h2 className="mb-1.5 max-w-[20rem] whitespace-pre-line text-base font-medium leading-snug text-white sm:text-lg">
+        <div className="self-start overflow-hidden">
+          <span className="mb-1 block text-[12px] uppercase tracking-[0.12em] text-white/72 sm:text-[13px]">{o.label}</span>
+          <h2 className="mb-1 max-w-[20rem] whitespace-pre-line text-sm font-medium leading-snug text-white sm:mb-1.5 sm:text-base md:text-lg">
             {o.titleL1}
             {"\n"}
             {o.titleL2}
           </h2>
-          <p className="max-w-[22rem] text-[11px] leading-snug text-white/70 sm:text-xs">{o.subtitle}</p>
+          <p className="max-w-[22rem] text-[10px] leading-snug text-white/70 sm:text-[11px] md:text-xs">{o.subtitle}</p>
         </div>
       </div>
     </Link>
@@ -126,7 +126,7 @@ export function RetroFeatureCards({ rootPrefix = "" }: { rootPrefix?: string }) 
           <div className="md:basis-1/3">
             <RetroOutcomesCard
               rootPrefix={rootPrefix}
-              className="h-[320px] min-h-0 md:h-[510px] md:min-h-[510px]"
+              className="h-[320px] md:h-[510px]"
             />
           </div>
           <div className="md:basis-1/3">

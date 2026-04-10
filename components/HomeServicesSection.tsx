@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { ServicesVoyageSlider } from "@/components/ServicesVoyageSlider";
 import { homeSectionReveal } from "@/lib/home-section-motion";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 
@@ -12,65 +13,15 @@ type HomeServicesSectionProps = {
 };
 
 const serviceClients = [
-  { name: "EVDEV",      src: "/client-logos/evdev.svg",      width: 96,  height: 19, logoH: "h-8"  },
-  { name: "Fizkultura", src: "/client-logos/fizkultura.png", width: 118, height: 79, logoH: "h-16" },
-  { name: "Jetfans",    src: "/client-logos/jetfans.avif",   width: 160, height: 60, logoH: "h-14" },
-  { name: "Nextair",    src: "/client-logos/nextair.webp",   width: 80,  height: 80, logoH: "h-16" },
+  { name: "EVDEV",      src: "/client-logos/evdev.svg",      width: 96,  height: 19, logoH: "h-8",  accent: "rgba(168, 214, 255, 0.2)" },
+  { name: "Fizkultura", src: "/client-logos/fizkultura.png", width: 118, height: 79, logoH: "h-16", accent: "rgba(255, 219, 169, 0.2)" },
+  { name: "Jetfans",    src: "/client-logos/jetfans.avif",   width: 160, height: 60, logoH: "h-14", accent: "rgba(197, 230, 255, 0.18)" },
+  { name: "Nextair",    src: "/client-logos/nextair.webp",   width: 80,  height: 80, logoH: "h-16", accent: "rgba(215, 255, 190, 0.18)" },
 ] as const;
-
-const serviceThemes = [
-  {
-    shell: "linear-gradient(160deg, rgba(255,255,255,0.14), rgba(255,255,255,0.02) 48%, rgba(0,0,0,0.12)), radial-gradient(circle at 18% 18%, rgba(255,255,255,0.24), transparent 30%), linear-gradient(135deg, #202734, #050608 72%)",
-    glow: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.28), transparent 62%)",
-    line: "linear-gradient(90deg, rgba(255,255,255,0.16), rgba(255,255,255,0.72), rgba(255,255,255,0.08))",
-  },
-  {
-    shell: "linear-gradient(160deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02) 44%, rgba(0,0,0,0.14)), radial-gradient(circle at 78% 18%, rgba(255,210,156,0.26), transparent 28%), linear-gradient(135deg, #2d2019, #070505 74%)",
-    glow: "radial-gradient(circle at 58% 38%, rgba(255,210,156,0.28), transparent 58%)",
-    line: "linear-gradient(90deg, rgba(255,224,188,0.12), rgba(255,214,160,0.75), rgba(255,224,188,0.08))",
-  },
-  {
-    shell: "linear-gradient(160deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02) 48%, rgba(0,0,0,0.12)), radial-gradient(circle at 22% 74%, rgba(162,205,255,0.22), transparent 32%), linear-gradient(135deg, #142536, #060708 72%)",
-    glow: "radial-gradient(circle at 42% 54%, rgba(162,205,255,0.26), transparent 62%)",
-    line: "linear-gradient(90deg, rgba(180,217,255,0.1), rgba(180,217,255,0.72), rgba(180,217,255,0.06))",
-  },
-  {
-    shell: "linear-gradient(160deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02) 44%, rgba(0,0,0,0.14)), radial-gradient(circle at 76% 74%, rgba(212,255,184,0.18), transparent 28%), linear-gradient(135deg, #162319, #060706 72%)",
-    glow: "radial-gradient(circle at 60% 62%, rgba(212,255,184,0.22), transparent 58%)",
-    line: "linear-gradient(90deg, rgba(215,255,190,0.08), rgba(215,255,190,0.66), rgba(215,255,190,0.06))",
-  },
-  {
-    shell: "linear-gradient(160deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02) 44%, rgba(0,0,0,0.14)), radial-gradient(circle at 28% 24%, rgba(224,184,255,0.22), transparent 30%), linear-gradient(135deg, #261533, #050507 76%)",
-    glow: "radial-gradient(circle at 44% 34%, rgba(224,184,255,0.24), transparent 60%)",
-    line: "linear-gradient(90deg, rgba(226,198,255,0.08), rgba(226,198,255,0.74), rgba(226,198,255,0.06))",
-  },
-  {
-    shell: "linear-gradient(160deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02) 44%, rgba(0,0,0,0.14)), radial-gradient(circle at 80% 18%, rgba(255,244,163,0.22), transparent 28%), linear-gradient(135deg, #2f2812, #080705 72%)",
-    glow: "radial-gradient(circle at 58% 40%, rgba(255,244,163,0.26), transparent 58%)",
-    line: "linear-gradient(90deg, rgba(255,244,163,0.08), rgba(255,244,163,0.7), rgba(255,244,163,0.05))",
-  },
-] as const;
-
-const wrapIndex = (index: number, length: number) => (index + length) % length;
 
 export function HomeServicesSection({ variant = "home" }: HomeServicesSectionProps) {
   const { dict } = useLocaleContext();
   const s = dict.services;
-  const items = s.items;
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const goTo = (index: number) => {
-    setCurrentIndex(wrapIndex(index, items.length));
-  };
-
-  const previousIndex = wrapIndex(currentIndex - 1, items.length);
-  const nextIndex = wrapIndex(currentIndex + 1, items.length);
-  const currentService = items[currentIndex];
-  const previousService = items[previousIndex];
-  const nextService = items[nextIndex];
-  const currentTheme = serviceThemes[currentIndex % serviceThemes.length];
-  const previousTheme = serviceThemes[previousIndex % serviceThemes.length];
-  const nextTheme = serviceThemes[nextIndex % serviceThemes.length];
 
   return (
     <section
@@ -88,26 +39,29 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
           <p className="section-label">{s.clientsLabel}</p>
           <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-10">
             {serviceClients.map((client, idx) => (
-              <div key={client.name} className="flex flex-col items-center gap-4">
-                <Image
-                  src={client.src}
-                  alt={client.name}
-                  width={client.width}
-                  height={client.height}
-                  className={`${client.logoH} w-auto max-w-full object-contain`}
-                  style={{ filter: "brightness(0) sepia(1) saturate(0.45) brightness(1.9)" }}
-                />
-                <div className="overflow-hidden">
+              <div key={client.name} className="service-client">
+                <div
+                  className="service-client__tile"
+                  style={{ "--service-client-accent": client.accent } as CSSProperties}
+                >
+                  <Image
+                    src={client.src}
+                    alt={client.name}
+                    width={client.width}
+                    height={client.height}
+                    className={`service-client__logo ${client.logoH} w-auto max-w-full object-contain`}
+                  />
+                </div>
+                <div className="service-client__caption overflow-hidden">
                   <motion.span
                     initial={{ translateY: "100%" }}
                     whileInView={{ translateY: "0%" }}
                     viewport={{ once: true }}
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 + idx * 0.08 }}
-                    className="block font-bold text-[var(--white-100)]"
+                    className="block"
                     style={{
-                      fontSize: client.name.length > 8 ? "1.4rem" : "1.8rem",
-                      letterSpacing: "0.06em",
-                      fontFamily: 'var(--font-red-rose, "Red Rose", serif)',
+                      fontSize: "0.72rem",
+                      letterSpacing: "0.18em",
                     }}
                   >
                     {client.name}
@@ -131,147 +85,8 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
           </div>
         </div>
 
-        <div className="services-slider">
-          <div className="services-slider__chrome">
-            <div className="services-slider__count">
-              <span>{String(currentIndex + 1).padStart(2, "0")}</span>
-              <span className="services-slider__count-divider" />
-              <span>{String(items.length).padStart(2, "0")}</span>
-            </div>
-            <p className="services-slider__kicker">{currentService.label}</p>
-            <div className="services-slider__actions">
-              <button
-                type="button"
-                onClick={() => goTo(currentIndex - 1)}
-                className="services-slider__btn"
-                aria-label="Previous service"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m15 18-6-6 6-6" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={() => goTo(currentIndex + 1)}
-                className="services-slider__btn"
-                aria-label="Next service"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div className="services-slider__stage">
-            <div
-              className="services-slider__bg is-active"
-              aria-hidden="true"
-              style={{ backgroundImage: `${currentTheme.glow}, ${currentTheme.shell}` }}
-            />
-
-            <div className="services-slider__layout">
-              <div className="services-slider__slides" aria-live="polite">
-                <button
-                  type="button"
-                  className="services-slide services-slide--preview services-slide--previous"
-                  onClick={() => goTo(currentIndex - 1)}
-                  aria-label={`Go to previous service: ${previousService.title}`}
-                >
-                  <div className="services-slide__inner">
-                    <div className="services-slide__visual" style={{ backgroundImage: previousTheme.shell }}>
-                      <span className="services-slide__mini-label">Previous</span>
-                      <p className="services-slide__mini-title">{previousService.label}</p>
-                      <div className="services-slide__visual-line" style={{ backgroundImage: previousTheme.line }} />
-                    </div>
-                  </div>
-                </button>
-
-                <article className="services-slide services-slide--current">
-                  <div className="services-slide__inner">
-                    <div className="services-slide__visual services-slide__visual--current" style={{ backgroundImage: currentTheme.shell }}>
-                      <span className="services-slide__eyebrow">{currentService.label}</span>
-                      <div className="services-slide__visual-core" style={{ backgroundImage: currentTheme.glow }} />
-                      <div className="services-slide__visual-grid">
-                        <div>
-                          <span className="services-slide__visual-meta-label">{s.duration}</span>
-                          <strong>{currentService.duration}</strong>
-                        </div>
-                        <div>
-                          <span className="services-slide__visual-meta-label">{s.scope}</span>
-                          <strong>{currentService.scope}</strong>
-                        </div>
-                      </div>
-                      <div className="services-slide__visual-line" style={{ backgroundImage: currentTheme.line }} />
-                      <div className="services-slide__pillars">
-                        {currentService.bullets.map((bullet) => (
-                          <span key={bullet}>{bullet}</span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </article>
-
-                <button
-                  type="button"
-                  className="services-slide services-slide--preview services-slide--next"
-                  onClick={() => goTo(currentIndex + 1)}
-                  aria-label={`Go to next service: ${nextService.title}`}
-                >
-                  <div className="services-slide__inner">
-                    <div className="services-slide__visual" style={{ backgroundImage: nextTheme.shell }}>
-                      <span className="services-slide__mini-label">Next</span>
-                      <p className="services-slide__mini-title">{nextService.label}</p>
-                      <div className="services-slide__visual-line" style={{ backgroundImage: nextTheme.line }} />
-                    </div>
-                  </div>
-                </button>
-              </div>
-
-              <div className="services-slider__info-wrap">
-                <article key={`${currentService.id}-info`} className="services-slide-info is-current">
-                  <div className="services-slide-info__inner">
-                    <div className="services-slide-info__text">
-                      <p className="services-slide-info__label">{currentService.label}</p>
-                      <h3 className="services-slide-info__title">{currentService.title}</h3>
-                      <p className="services-slide-info__body">{currentService.body}</p>
-                    </div>
-                    <div className="services-slide-info__meta">
-                      <div>
-                        <span className="services-slide-info__meta-label">{s.duration}</span>
-                        <span className="services-slide-info__meta-value">{currentService.duration}</span>
-                      </div>
-                      <div>
-                        <span className="services-slide-info__meta-label">{s.scope}</span>
-                        <span className="services-slide-info__meta-value">{currentService.scope}</span>
-                      </div>
-                    </div>
-                    <div className="services-slide-info__chips">
-                      {currentService.bullets.map((bullet) => (
-                        <span key={bullet}>{bullet}</span>
-                      ))}
-                    </div>
-                    <p className="services-slide-info__status">{currentService.status}</p>
-                  </div>
-                </article>
-              </div>
-            </div>
-          </div>
-
-          <div className="services-slider__rail" aria-label="Service slides">
-            {items.map((service, index) => (
-              <button
-                key={`${service.id}-dot`}
-                type="button"
-                onClick={() => goTo(index)}
-                className={`services-slider__dot${index === currentIndex ? " is-active" : ""}`}
-                aria-label={`${service.title} ${index === currentIndex ? "(current)" : ""}`.trim()}
-                aria-pressed={index === currentIndex}
-              >
-                <span>{service.label}</span>
-              </button>
-            ))}
-          </div>
+        <div className="w-full" aria-live="polite">
+          <ServicesVoyageSlider services={s} />
         </div>
       </motion.div>
     </section>
