@@ -12,10 +12,10 @@ type HomeServicesSectionProps = {
 };
 
 const serviceClients = [
-  { name: "EVDEV",     href: "https://evdev.dev/",            src: "/client-logos/evdev.svg",     width: 96,  height: 19, lightBg: true  },
-  { name: "Fizkultura",href: "https://fizkultura.com.ua/",    src: "/client-logos/fizkultura.png", width: 118, height: 79, lightBg: false },
-  { name: "Jetfans",   href: "https://www.jetfans.eu/",       src: "/client-logos/jetfans.avif",  width: 160, height: 60, lightBg: false },
-  { name: "Nextair",   href: "https://nextair.com.ua/",       src: "/client-logos/nextair.webp",  width: 80,  height: 80, lightBg: false },
+  { name: "EVDEV",      src: "/client-logos/evdev.svg",      width: 96,  height: 19 },
+  { name: "Fizkultura", src: "/client-logos/fizkultura.png", width: 118, height: 79 },
+  { name: "Jetfans",    src: "/client-logos/jetfans.avif",   width: 160, height: 60 },
+  { name: "Nextair",    src: "/client-logos/nextair.webp",   width: 80,  height: 80 },
 ] as const;
 
 const serviceThemes = [
@@ -86,73 +86,33 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
       >
         <div className="grid gap-4 border-b border-[var(--white-20)] pb-6 md:gap-5 md:pb-8">
           <p className="section-label">{s.clientsLabel}</p>
-          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
+          <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-10">
             {serviceClients.map((client, idx) => (
-              <a
-                key={client.name}
-                href={client.href}
-                target="_blank"
-                rel="noreferrer"
-                className="group relative block h-[18rem] overflow-hidden border border-[var(--white-20)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--white-40)]"
-                style={{ background: client.lightBg ? "#f5f5f5" : "var(--surface)" }}
-                aria-label={client.name}
-                title={client.name}
-              >
-                {/* Logo area */}
-                <div className="absolute inset-x-0 top-0 flex h-[78%] items-center justify-center border-b border-[var(--white-10)] px-6 py-5">
-                  {!client.lightBg && (
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(240,240,250,0.08),transparent_65%)] opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
-                  )}
-                  <Image
-                    src={client.src}
-                    alt={client.name}
-                    width={client.width}
-                    height={client.height}
-                    className={`relative w-auto max-w-[75%] object-contain transition-transform duration-300 group-hover:scale-[1.04] ${
-                      client.lightBg
-                        ? "max-h-16"
-                        : "max-h-16 brightness-0 invert"
-                    }`}
-                  />
-                </div>
-
-                {/* Name — half-clipped off left edge, slides up on enter (reference style) */}
-                <div
-                  className="pointer-events-none absolute left-0 bottom-[25%] -translate-x-1/2 select-none overflow-hidden"
-                >
+              <div key={client.name} className="flex flex-col items-center gap-4">
+                <Image
+                  src={client.src}
+                  alt={client.name}
+                  width={client.width}
+                  height={client.height}
+                  className="h-10 w-auto max-w-full object-contain brightness-0 invert"
+                />
+                <div className="overflow-hidden">
                   <motion.span
                     initial={{ translateY: "100%" }}
                     whileInView={{ translateY: "0%" }}
                     viewport={{ once: true }}
-                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.4 + idx * 0.1 }}
-                    className="block font-bold"
+                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 + idx * 0.08 }}
+                    className="block font-bold text-[var(--white-100)]"
                     style={{
-                      fontSize: client.name.length > 8 ? "1.6rem" : "2.2rem",
-                      letterSpacing: "0.04em",
+                      fontSize: client.name.length > 8 ? "1.4rem" : "1.8rem",
+                      letterSpacing: "0.06em",
                       fontFamily: 'var(--font-red-rose, "Red Rose", serif)',
-                      color: client.lightBg ? "#111" : "var(--white-100)",
                     }}
                   >
                     {client.name}
                   </motion.span>
                 </div>
-
-                {/* Footer */}
-                <div className="absolute inset-x-0 bottom-0 flex h-[22%] items-end justify-between px-3 pb-2">
-                  <span
-                    className="text-[0.52rem] uppercase tracking-[0.22em]"
-                    style={{ color: client.lightBg ? "rgba(0,0,0,0.35)" : "var(--white-40)" }}
-                  >
-                    Client
-                  </span>
-                  <span
-                    className="text-[0.8rem] transition-all duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]"
-                    style={{ color: client.lightBg ? "rgba(0,0,0,0.35)" : "var(--white-40)" }}
-                  >
-                    ↗
-                  </span>
-                </div>
-              </a>
+              </div>
             ))}
           </div>
         </div>
