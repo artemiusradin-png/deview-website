@@ -59,27 +59,6 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
         <div className="rule footer-rule" aria-hidden="true" />
 
         <div className="footer-structure-grid">
-          <section className="footer-structure-block footer-structure-block--brand footer-structure-block--contact">
-            <h4 className="footer-structure-title">{f.connect}</h4>
-            <div className="footer-connect-actions">
-              <a href="mailto:deview.info@gmail.com" className="footer-text-link">
-                deview.info@gmail.com
-              </a>
-              <a href={resolveHref("/contact")} className="footer-text-link">
-                {f.inquiryForm}
-              </a>
-            </div>
-            <div className="footer-button-row">
-              <a href={resolveHref("/contact")} className="footer-chip">
-                {f.contactUs}
-              </a>
-              <a href="mailto:deview.info@gmail.com" className="footer-chip">
-                {f.emailDirect}
-              </a>
-            </div>
-            <p className="footer-structure-copy footer-structure-copy--compact">{f.compact}</p>
-          </section>
-
           <section className="footer-structure-block footer-structure-block--brand">
             <p className="footer-structure-copy footer-structure-copy--strong">{f.brandStrong}</p>
             <p className="footer-structure-copy">{f.loc}</p>
@@ -120,8 +99,15 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
           </section>
 
           <section className="footer-structure-block">
-            <h4 className="footer-structure-title">{f.ctaLabel}</h4>
-            <p className="footer-structure-copy">{f.ctaCopy}</p>
+            <h4 className="footer-structure-title">{f.connect}</h4>
+            <div className="footer-connect-actions">
+              <a href="mailto:deview.info@gmail.com" className="footer-text-link">
+                deview.info@gmail.com
+              </a>
+              <a href={resolveHref("/contact")} className="footer-text-link">
+                {f.inquiryForm}
+              </a>
+            </div>
             <form className="footer-form" onSubmit={(event) => event.preventDefault()}>
               <input
                 type="email"
@@ -132,6 +118,7 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
               />
               <button type="submit">{f.subscribe}</button>
             </form>
+            <p className="footer-structure-copy footer-structure-copy--compact">{f.compact}</p>
           </section>
         </div>
 
