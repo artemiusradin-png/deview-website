@@ -71,12 +71,12 @@ function RetroOutcomesCard({ className = "", rootPrefix = "" }: { className?: st
           {o.items.map((item) => (
             <li key={item.number} className="border-l border-white/20 pl-2">
               <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0">
-                <span className="text-[10px] tabular-nums text-white/45 sm:text-[11px]">{item.number}</span>
-                <span className="text-[9px] uppercase tracking-[0.12em] text-white/90 sm:text-[10px]">
+                <span className="text-[11px] tabular-nums text-white/45 sm:text-[11px]">{item.number}</span>
+                <span className="text-[10px] uppercase tracking-[0.12em] text-white/90 sm:text-[10px]">
                   {item.label}
                 </span>
               </div>
-              <p className="mt-0.5 text-[9px] leading-[1.35] text-white/65 sm:text-[10px]">{item.body}</p>
+              <p className="mt-0.5 text-[11px] leading-[1.4] text-white/65 sm:text-[10px]">{item.body}</p>
             </li>
           ))}
         </ul>
@@ -87,7 +87,7 @@ function RetroOutcomesCard({ className = "", rootPrefix = "" }: { className?: st
             {"\n"}
             {o.titleL2}
           </h2>
-          <p className="max-w-[22rem] text-[10px] leading-snug text-white/70 sm:text-[11px] md:text-xs">{o.subtitle}</p>
+          <p className="max-w-[22rem] text-xs leading-snug text-white/70 sm:text-[11px] md:text-xs">{o.subtitle}</p>
         </div>
       </div>
     </Link>
@@ -103,7 +103,7 @@ export function RetroFeatureCards({ rootPrefix = "" }: { rootPrefix?: string }) 
       id={RETRO_FEATURE_CARDS_ID}
       className="scroll-margin-header relative w-full border-t border-[var(--white-20)] bg-[var(--surface)] py-10 md:py-14"
     >
-      <div className="w-full pl-[max(0px,env(safe-area-inset-left))] pr-[max(0px,env(safe-area-inset-right))]">
+      <div className="section-gutter w-full">
         <div className="flex w-full flex-col gap-[30px] md:flex-row md:items-stretch">
           <div className="flex flex-1 flex-col gap-[30px] md:basis-1/3">
             <RetroCard

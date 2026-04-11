@@ -143,7 +143,6 @@ export default function Home() {
     let mounted = true;
     let userTimeout: ReturnType<typeof setTimeout> | null = null;
     let aiTimeout: ReturnType<typeof setTimeout> | null = null;
-    let restartTimeout: ReturnType<typeof setTimeout> | null = null;
 
     const runTypingLoop = () => {
       let userIndex = 0;
@@ -180,8 +179,6 @@ export default function Home() {
           aiTimeout = setTimeout(typeAi, 18);
           return;
         }
-
-        restartTimeout = setTimeout(runTypingLoop, 2600);
       };
 
       userTimeout = setTimeout(typeUser, 500);
@@ -196,9 +193,6 @@ export default function Home() {
       }
       if (aiTimeout) {
         clearTimeout(aiTimeout);
-      }
-      if (restartTimeout) {
-        clearTimeout(restartTimeout);
       }
     };
   }, [prefersReducedMotion, interfaceUserMessage, interfaceAiMessage]);
@@ -581,8 +575,12 @@ export default function Home() {
               {dict.hero.titleL1}
               <br />
               {dict.hero.titleL2}
-              <br />
-              {dict.hero.titleL3}
+              {dict.hero.titleL3 ? (
+                <>
+                  <br />
+                  {dict.hero.titleL3}
+                </>
+              ) : null}
             </h1>
             <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
           </motion.div>
@@ -599,19 +597,19 @@ export default function Home() {
               ))}
             </div>
             <div className="w-full space-y-3 text-sm md:w-auto">
-              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-end sm:gap-4">
+              <div className="flex flex-col gap-1 sm:items-end">
                 <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
                   {dict.hero.clients}
                 </span>
                 <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.clientsValue}</span>
               </div>
-              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-end sm:gap-4">
+              <div className="flex flex-col gap-1 sm:items-end">
                 <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
                   {dict.hero.focus}
                 </span>
                 <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.focusValue}</span>
               </div>
-              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-end sm:gap-4">
+              <div className="flex flex-col gap-1 sm:items-end">
                 <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
                   {dict.hero.engagements}
                 </span>
@@ -648,13 +646,21 @@ export default function Home() {
             <div className="grid gap-6 lg:grid-cols-[1.15fr_auto] lg:items-stretch lg:gap-10">
               <div className="enterprise-opener">
                 <div className="enterprise-statement-stack">
-                  <p className="enterprise-statement-line hero-heading text-[var(--white-80)]">
+                  <p
+                    className={`enterprise-statement-line hero-heading ${
+                      dict.enterpriseAi.statement2 ? "text-[var(--white-80)]" : "text-[var(--white-100)]"
+                    }`}
+                  >
                     {dict.enterpriseAi.statement1}
                   </p>
-                  <div className="rule enterprise-statement-rule" />
-                  <p className="enterprise-statement-line hero-heading text-[var(--white-100)]">
-                    {dict.enterpriseAi.statement2}
-                  </p>
+                  {dict.enterpriseAi.statement2 ? (
+                    <>
+                      <div className="rule enterprise-statement-rule" />
+                      <p className="enterprise-statement-line hero-heading text-[var(--white-100)]">
+                        {dict.enterpriseAi.statement2}
+                      </p>
+                    </>
+                  ) : null}
                 </div>
                 <p className="enterprise-opener-body max-w-2xl text-[0.88rem] leading-relaxed text-[var(--text-muted)] md:text-[0.95rem]">
                   {dict.enterpriseAi.opener}
@@ -775,15 +781,6 @@ export default function Home() {
                     </span>
                     <span className="lg:text-[0.78rem] lg:leading-snug lg:text-[var(--white-80)]">
                       {dict.enterpriseAi.aside.focusBody}
-                    </span>
-                  </div>
-                  <div className="rule opacity-60 lg:hidden" />
-                  <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-6 lg:flex-col lg:gap-1">
-                    <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">
-                      {dict.enterpriseAi.aside.bottomLine}
-                    </span>
-                    <span className="lg:text-[0.78rem] lg:leading-snug lg:text-[var(--white-80)]">
-                      {dict.enterpriseAi.aside.bottomLineBody}
                     </span>
                   </div>
                 </div>

@@ -165,7 +165,7 @@ function MZone({ label, children }: { label: string; children: ReactNode }) {
       <p className="mb-2 text-center text-[0.52rem] uppercase tracking-[0.14em] text-[var(--enterprise-arch-zone-label)]">
         {label}
       </p>
-      <div className="flex flex-wrap gap-1.5">{children}</div>
+      <div className="flex flex-wrap gap-2">{children}</div>
     </div>
   );
 }
@@ -183,16 +183,20 @@ function MBox({
 }) {
   return (
     <div
-      className={`rounded-sm border px-2.5 py-2 ${full ? "w-full" : "min-w-[118px] flex-1"} ${
+      className={`rounded-sm border px-2.5 py-2.5 ${full ? "w-full" : "min-w-[118px] flex-1"} ${
         bright
           ? "border-[var(--enterprise-arch-box-stroke)] bg-[var(--enterprise-arch-box-fill-strong)]"
           : "border-[var(--enterprise-arch-box-stroke)] bg-[var(--enterprise-arch-box-fill)]"
       }`}
     >
-      <span className="block text-[0.6rem] uppercase tracking-[0.08em] text-[var(--enterprise-arch-text)]">
+      <span className="block text-[0.6rem] uppercase leading-snug tracking-[0.08em] text-[var(--enterprise-arch-text)]">
         {children}
       </span>
-      {sub && <span className="mt-0.5 block text-[0.5rem] tracking-wide text-[var(--enterprise-arch-subtext)]">{sub}</span>}
+      {sub ? (
+        <span className="mt-1 block text-[0.5rem] leading-snug tracking-wide text-[var(--enterprise-arch-subtext)]">
+          {sub}
+        </span>
+      ) : null}
     </div>
   );
 }
@@ -328,7 +332,7 @@ export function EnterpriseArchitectureDiagram({ className = "" }: { className?: 
         <ArchArrow x1={dfCx} y1={dfY1 + dfH1} x2={dfCx} y2={dfY2} />
         <ArchBox x={dfBX} y={dfY2} w={dfBW} h={dfH2} t1={d.etl} />
         <ArchArrow x1={dfCx} y1={dfY2 + dfH2} x2={dfCx} y2={dfY3} />
-        <ArchBox x={dfBX} y={dfY3} w={dfBW} h={dfH3} t1={d.dataLake1} t2={d.dataLake2} />
+        <ArchBox x={dfBX} y={dfY3} w={dfBW} h={dfH3} t1={d.dataLake1} t2={d.dataLake2 || undefined} />
 
         <ArchBox x={inf1X} y={infY} w={infW} h={infH} t1={d.security1} t2={d.security2} fontSize={7} />
         <ArchBox x={inf2X} y={infY} w={infW} h={infH} t1={d.cloud1} t2={d.cloud2} fontSize={7} />

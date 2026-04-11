@@ -9,7 +9,7 @@ const homeWithRetroCards = `/#${RETRO_FEATURE_CARDS_ID}`;
 export const metadata: Metadata = {
   title: "Use cases | DeView",
   description:
-    "AI solutions built around concrete operational problems — customer operations, internal knowledge, operations, and data products.",
+    "AI solutions built around concrete operational problems — customer operations, internal knowledge, and operations.",
 };
 
 export default function UseCasesPage() {

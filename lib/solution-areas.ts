@@ -20,11 +20,4 @@ export const homeSolutionAreas = [
     body: "Automate repetitive review, classification, routing, and escalation tasks while keeping humans in the loop for judgment-heavy cases.",
     accent: "rgba(157, 247, 198, 0.14)",
   },
-  {
-    id: "data-products",
-    sector: "DATA PRODUCTS",
-    title: "Analytics and intelligence layers",
-    body: "Build data-backed AI interfaces that surface business signals, summarize trends, and assist teams with better day-to-day decisions.",
-    accent: "rgba(205, 177, 255, 0.16)",
-  },
 ] as const;

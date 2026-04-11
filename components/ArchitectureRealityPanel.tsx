@@ -91,7 +91,6 @@ export function ArchitectureRealityPanel() {
         </article>
       </div>
       <div className="mt-6 border-t border-[var(--white-20)] pt-5">
-        <p className="section-label mb-2 text-[0.65rem]">{a.bottomLabel}</p>
         <p className="max-w-2xl text-[0.88rem] leading-relaxed text-[var(--text-muted)] md:text-sm">{a.closing}</p>
       </div>
     </motion.section>

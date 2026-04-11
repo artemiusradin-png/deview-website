@@ -161,30 +161,14 @@ export function HomeSolutionsSection({ variant = "home" }: HomeSolutionsSectionP
         <div className="section-shell">
           <p className="section-label mb-3">{sol.sectionLabel}</p>
           <div className="rule mb-6" />
-          <div className="grid gap-6 md:grid-cols-[1.4fr_1fr]">
-            <div>
-              <h2 className="mb-4 text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
-                {sol.titleL1}
-                <br />
-                {sol.titleL2}
-              </h2>
-              <p className="mb-4 text-sm text-[var(--text-muted)]">{sol.p1}</p>
-              <p className="text-sm text-[var(--text-muted)]">{sol.p2}</p>
-            </div>
-            <div className="space-y-4 text-[0.72rem] text-[var(--white-80)] sm:text-xs">
-              <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
-                <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">{sol.framing}</span>
-                <span className="sm:text-right">{sol.framingBody}</span>
-              </div>
-              <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
-                <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">{sol.positioning}</span>
-                <span className="sm:text-right">{sol.positioningBody}</span>
-              </div>
-              <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
-                <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">{sol.delivery}</span>
-                <span className="sm:text-right">{sol.deliveryBody}</span>
-              </div>
-            </div>
+          <div>
+            <h2 className="mb-4 text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
+              {sol.titleL1}
+              <br />
+              {sol.titleL2}
+            </h2>
+            <p className="mb-4 text-sm text-[var(--text-muted)]">{sol.p1}</p>
+            <p className="text-sm text-[var(--text-muted)]">{sol.p2}</p>
           </div>
         </div>
 

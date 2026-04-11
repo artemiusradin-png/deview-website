@@ -22,6 +22,7 @@
 
 # misc
 .DS_Store
+scripts/__pycache__/
 *.pem
 
 # debug
