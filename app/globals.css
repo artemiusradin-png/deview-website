@@ -640,14 +640,17 @@ html[data-theme="light"] .hero-fallback {
 @media (max-width: 961px) {
   .section-fullscreen {
     min-height: auto;
-    padding-top: 4.5rem;
-    padding-bottom: 1.25rem;
+    padding-top: 4rem;
+    padding-bottom: 1.5rem;
     scroll-margin-top: var(--header-stack-height);
   }
 
   .section-fullscreen--hero {
     min-height: 100dvh;
     min-height: 100svh;
+    padding-top: calc(var(--header-stack-height) + 1.35rem);
+    padding-bottom: max(1.75rem, env(safe-area-inset-bottom, 0px));
+    align-items: flex-end;
   }
 
   .enterprise-detail {
@@ -1401,7 +1404,7 @@ html[data-theme="light"] .enterprise-compare-enterprise {
 @media (max-width: 1100px) {
   .enterprise-stage-scroll-wrapper {
     height: auto;
-    min-height: 260vh;
+    min-height: 0;
   }
 
   .enterprise-mode-stage {
@@ -1410,7 +1413,7 @@ html[data-theme="light"] .enterprise-compare-enterprise {
     height: auto;
     min-height: auto;
     align-items: start;
-    gap: 2rem;
+    gap: 1.35rem;
     width: 100%;
     margin-left: 0;
     margin-right: 0;
@@ -1420,13 +1423,12 @@ html[data-theme="light"] .enterprise-compare-enterprise {
   }
 
   .enterprise-mode-stage-copy {
-    position: absolute;
-    top: max(1.25rem, env(safe-area-inset-top, 0px));
-    left: max(1.25rem, env(safe-area-inset-left, 0px));
-    right: max(1.25rem, env(safe-area-inset-right, 0px));
+    position: static;
     max-width: none;
-    width: auto;
-    z-index: 6;
+    width: 100%;
+    margin-bottom: 0;
+    padding: 1rem 1rem 1.15rem;
+    z-index: 1;
   }
 
   .enterprise-mode-stage-title {
@@ -1440,10 +1442,12 @@ html[data-theme="light"] .enterprise-compare-enterprise {
   }
 
   .enterprise-mode-stage-shell {
-    display: block;
+    display: flex;
+    flex-direction: column;
     min-height: auto;
     height: auto;
     padding-left: 0;
+    gap: 0.9rem;
   }
 
   .enterprise-mode-cards-motion {
@@ -1461,8 +1465,8 @@ html[data-theme="light"] .enterprise-compare-enterprise {
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-    gap: 1.5rem;
-    padding: 1.75rem 1rem 1.5rem;
+    gap: 1.1rem;
+    padding: 1.4rem 1rem 1.15rem;
   }
 
   .enterprise-mode-ambient {
@@ -1487,7 +1491,7 @@ html[data-theme="light"] .enterprise-compare-enterprise {
   }
 
   .enterprise-mode-card-footer {
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
     padding-top: 0;
     gap: 0.85rem;
   }
@@ -1551,6 +1555,39 @@ html[data-theme="light"] .enterprise-compare-enterprise {
 @media (max-width: 540px) {
   .enterprise-mode-text-list {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .enterprise-mode-stage {
+    padding-top: max(1rem, env(safe-area-inset-top, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+  }
+
+  .enterprise-mode-stage-copy {
+    padding: 0.95rem 0.9rem 1rem;
+  }
+
+  .enterprise-mode-stage-title {
+    font-size: clamp(1.35rem, 8vw, 2rem);
+    line-height: 1.02;
+  }
+
+  .enterprise-mode-stage-body {
+    margin-top: 0.8rem;
+    font-size: 0.88rem;
+    line-height: 1.58;
+  }
+
+  .enterprise-mode-text-stage {
+    padding: 1.15rem 0.9rem 1rem;
+  }
+
+  .enterprise-mode-stage-detail-copy {
+    font-size: 0.92rem;
+    line-height: 1.58;
   }
 }
 
@@ -1800,6 +1837,15 @@ html[data-theme="light"] .lang-toggle__opt:hover:not(.is-active) {
   text-decoration: none;
 }
 
+@media (max-width: 767px) {
+  .brand-mark {
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-top: calc(env(safe-area-inset-top) + 1rem);
+    font-size: 0.64rem;
+    letter-spacing: 0.2em;
+  }
+}
+
 .nav-shell {
   transition:
     transform 220ms ease,
@@ -1860,12 +1906,14 @@ html[data-theme="light"] .lang-toggle__opt:hover:not(.is-active) {
   z-index: 45;
   display: flex;
   flex-direction: column;
+  gap: 0.2rem;
   padding-top: 5.25rem;
   padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
   padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
   padding-left: max(1.25rem, env(safe-area-inset-left, 0px));
   min-height: 100dvh;
   min-height: 100svh;
+  overflow-y: auto;
   background: rgba(0, 0, 0, 0.97);
   border: 0;
 }
@@ -2188,15 +2236,7 @@ html[data-theme="light"] .carousel-fade-right {
 @media (max-width: 767px) {
   .carousel-fade-left,
   .carousel-fade-right {
-    width: 48px;
-  }
-
-  .carousel-fade-left {
-    left: -8px;
-  }
-
-  .carousel-fade-right {
-    right: -8px;
+    display: none;
   }
 
   .solutions-marquee-top,
@@ -2204,6 +2244,20 @@ html[data-theme="light"] .carousel-fade-right {
     padding: 0.75rem 0;
     font-size: 0.56rem;
     letter-spacing: 0.18em;
+  }
+
+  .solutions-content {
+    gap: 1.25rem;
+  }
+
+  .solutions-card {
+    min-width: min(89vw, 22rem);
+    max-width: min(89vw, 22rem);
+    padding: 1.1rem 1rem;
+  }
+
+  .solutions-card-inactive {
+    opacity: 0.84;
   }
 }
 
@@ -3210,14 +3264,18 @@ html[data-theme="light"] .svoyage-slide__info {
 
 @media (max-width: 640px) {
   .svoyage-slider {
-    flex-direction: column;
+    --sv-slide-width: min(100%, 22rem);
+    gap: 0.9rem 0.75rem;
+    display: grid;
+    grid-template-columns: minmax(2.9rem, 3.25rem) minmax(0, 1fr) minmax(2.9rem, 3.25rem);
+    align-items: center;
   }
 
   .svoyage-slider__btn {
-    order: -1;
     width: 100%;
-    max-width: 10rem;
+    max-width: none;
     min-height: 44px;
+    min-width: 44px;
   }
 
   .svoyage-slider__dot {
@@ -3230,6 +3288,15 @@ html[data-theme="light"] .svoyage-slide__info {
     order: 0;
   }
 
+  .svoyage-slider__stage {
+    min-height: auto;
+  }
+
+  .svoyage-slider__slides-layer {
+    min-height: auto;
+    padding: 0;
+  }
+
   .svoyage-slide[data-next],
   .svoyage-slide[data-previous],
   .svoyage-slide[data-next-far],
@@ -3238,11 +3305,38 @@ html[data-theme="light"] .svoyage-slide__info {
   }
 
   .svoyage-slide[data-current] {
+    width: min(100%, 22rem);
+    justify-self: center;
+    --sv-scale: 1;
     --sv-tx: 0;
     --sv-rotY: 0deg;
   }
 
+  .svoyage-slide__info {
+    padding: 1rem 0.95rem 0.95rem;
+  }
+
+  .svoyage-slider__rail {
+    grid-column: 1 / -1;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    margin-top: 0;
+    padding-bottom: 0.15rem;
+    scrollbar-width: none;
+  }
+
+  .svoyage-slider__rail::-webkit-scrollbar {
+    display: none;
+  }
+
   .svoyage-slide:not([data-current]) .svoyage-slide__info {
     opacity: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .service-client__logo-wrap {
+    min-height: 3.9rem;
   }
 }
