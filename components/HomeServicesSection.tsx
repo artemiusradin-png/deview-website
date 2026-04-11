@@ -91,9 +91,9 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
       <motion.div
         {...homeSectionReveal}
         transition={{ duration: 0.5 }}
-        className="relative mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 py-8 md:gap-10 md:py-10"
+        className="relative mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 py-4 md:gap-10 md:py-10"
       >
-        <div className="flex flex-col gap-6 border-b border-[var(--white-20)] pb-6 md:gap-8 md:pb-8">
+        <div className="flex flex-col gap-5 border-b border-[var(--white-20)] pb-5 md:gap-8 md:pb-8">
           <p className="section-label">{s.clientsLabel}</p>
 
           {/* Row 1: Novartis, EVDEV (PolyU prepends here when file is added) */}

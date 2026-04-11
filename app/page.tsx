@@ -63,6 +63,7 @@ export default function Home() {
   const [typedUserMessage, setTypedUserMessage] = useState("");
   const [typedAiMessage, setTypedAiMessage] = useState("");
   const [heroVideoPreload, setHeroVideoPreload] = useState<"auto" | "metadata">("metadata");
+  const [isCompactEnterpriseLayout, setIsCompactEnterpriseLayout] = useState(false);
   const standbyStartedRef = useRef(false);
   const crossfadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -98,6 +99,14 @@ export default function Home() {
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
     const apply = () => setHeroVideoPreload(mq.matches ? "auto" : "metadata");
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1100px)");
+    const apply = () => setIsCompactEnterpriseLayout(mq.matches);
     apply();
     mq.addEventListener("change", apply);
     return () => mq.removeEventListener("change", apply);
@@ -198,6 +207,10 @@ export default function Home() {
   }, [prefersReducedMotion, interfaceUserMessage, interfaceAiMessage]);
 
   useEffect(() => {
+    if (isCompactEnterpriseLayout) {
+      return;
+    }
+
     const wrapper = enterpriseModesSectionRef.current;
 
     if (!wrapper) {
@@ -233,10 +246,10 @@ export default function Home() {
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
-  }, []);
+  }, [isCompactEnterpriseLayout]);
 
   useMotionValueEvent(enterpriseModesProgress, "change", (latest) => {
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || isCompactEnterpriseLayout) {
       return;
     }
 
@@ -563,12 +576,12 @@ export default function Home() {
         <div
           className={`absolute inset-0 ${heroVideoState === "fallback" ? "hero-overlay" : "hero-overlay hero-overlay-video"}`}
         />
-        <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col justify-between gap-10 md:flex-row md:gap-12">
+        <div className="hero-shell relative z-20 mx-auto flex w-full max-w-6xl flex-col gap-8 md:grid md:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.8fr)] md:items-end md:gap-10">
           <motion.div
             initial={fade.initial}
             animate={fade.animate}
             transition={{ duration: 0.6 }}
-            className="max-w-2xl"
+            className="hero-copy max-w-3xl"
           >
             <p className="section-label mb-4">{dict.hero.kicker}</p>
             <h1 className="hero-heading mb-6 text-[clamp(1.75rem,6.5vw,2.75rem)] text-[var(--white-100)] md:text-5xl lg:text-6xl">
@@ -583,49 +596,57 @@ export default function Home() {
               ) : null}
             </h1>
             <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
+            <div className="hero-actions mt-7 flex w-full flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
+              <a href="#contact" className="btn-outline w-full text-center sm:w-auto">
+                {dict.hero.inquire}
+              </a>
+              <div className="hero-scroll-prompt flex items-center gap-3">
+                <div className="scroll-cue" />
+                <span className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                  {dict.hero.scroll}
+                </span>
+              </div>
+            </div>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="flex flex-col items-start justify-between gap-8 text-left md:items-end md:gap-10 md:text-right"
+            className="hero-aside flex flex-col gap-4 text-left"
           >
-            <div className="space-y-2 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)] sm:text-xs">
-              {dict.hero.col1.map((line) => (
-                <div key={line}>{line}</div>
-              ))}
+            <div className="hero-meta-panel">
+              <div className="hero-meta-lines space-y-2 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)] sm:text-xs">
+                {dict.hero.col1.map((line) => (
+                  <div key={line}>{line}</div>
+                ))}
+              </div>
+              <div className="hero-stats-grid w-full text-sm">
+                <div className="hero-stat-card">
+                  <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
+                    {dict.hero.clients}
+                  </span>
+                  <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.clientsValue}</span>
+                </div>
+                <div className="hero-stat-card">
+                  <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
+                    {dict.hero.focus}
+                  </span>
+                  <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.focusValue}</span>
+                </div>
+                <div className="hero-stat-card">
+                  <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
+                    {dict.hero.engagements}
+                  </span>
+                  <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.engagementsValue}</span>
+                </div>
+              </div>
             </div>
-            <div className="w-full space-y-3 text-sm md:w-auto">
-              <div className="flex flex-col gap-1 sm:items-end">
-                <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
-                  {dict.hero.clients}
-                </span>
-                <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.clientsValue}</span>
-              </div>
-              <div className="flex flex-col gap-1 sm:items-end">
-                <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
-                  {dict.hero.focus}
-                </span>
-                <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.focusValue}</span>
-              </div>
-              <div className="flex flex-col gap-1 sm:items-end">
-                <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
-                  {dict.hero.engagements}
-                </span>
-                <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.engagementsValue}</span>
-              </div>
-            </div>
-            <div className="flex w-full flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6 md:w-auto md:justify-end md:gap-8">
-              <a href="#contact" className="btn-outline w-full text-center sm:w-auto">
-                {dict.hero.inquire}
-              </a>
-              <div className="flex flex-col items-center gap-3 sm:ml-auto sm:items-end md:ml-0">
-                <div className="scroll-cue" />
-                <span className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                  {dict.hero.scroll}
-                </span>
-              </div>
+            <div className="hero-aside-note">
+              <span className="hero-aside-note__label">OPERATING MODEL</span>
+              <p className="hero-aside-note__body">
+                Enterprise AI strategy, delivery architecture, and production implementation aligned in one engagement.
+              </p>
             </div>
           </motion.div>
         </div>
@@ -799,14 +820,16 @@ export default function Home() {
       >
         <section
           ref={enterpriseStagePanelRef}
-          className={`enterprise-mode-stage enterprise-mode-stage--frameless bg-[var(--background)] enterprise-mode-stage--${enterprisePinState}`}
+          className={`enterprise-mode-stage enterprise-mode-stage--frameless bg-[var(--background)]${
+            isCompactEnterpriseLayout ? "" : ` enterprise-mode-stage--${enterprisePinState}`
+          }`}
         >
             <motion.div
               className="enterprise-mode-stage-copy"
               style={{
-                opacity: enterpriseStageIntroOpacity,
-                y: enterpriseStageIntroY,
-                filter: enterpriseStageIntroFilter,
+                opacity: isCompactEnterpriseLayout ? 1 : enterpriseStageIntroOpacity,
+                y: isCompactEnterpriseLayout ? 0 : enterpriseStageIntroY,
+                filter: isCompactEnterpriseLayout ? "none" : enterpriseStageIntroFilter,
               }}
             >
               <p className="section-label mb-3">{dict.enterpriseModesIntro.label}</p>
@@ -819,7 +842,7 @@ export default function Home() {
               </div>
               <motion.div
                 className="enterprise-mode-cards-motion"
-                style={{ filter: enterpriseCardsFilter }}
+                style={{ filter: isCompactEnterpriseLayout ? "none" : enterpriseCardsFilter }}
               >
               <div className={`enterprise-mode-text-stage enterprise-mode-text-stage-${selectedMode.id}`}>
                 <div className={`enterprise-mode-ambient enterprise-mode-ambient-${selectedMode.id}`} aria-hidden="true" />
