@@ -689,7 +689,7 @@ html[data-theme="light"] .hero-fallback {
   }
 
   .section-fullscreen--hero {
-    padding-top: calc(var(--header-stack-height) + 1rem);
+    padding-top: calc(var(--header-stack-height) + 2rem);
     padding-bottom: max(1.1rem, env(safe-area-inset-bottom, 0px));
   }
 
