@@ -148,8 +148,8 @@ export const en = {
     titleL2: "or half-formed AI idea you want pressure-tested.",
     leadL1: "Send the business context, current process,",
     leadL2: "available data, and the outcome you want to unlock.",
-    monumentL1: "hello",
-    monumentL2: "@deview.ai",
+    monumentL1: "deview.info",
+    monumentL2: "@gmail.com",
     sendInquiry: "SEND INQUIRY →",
   },
   cards: {
@@ -419,6 +419,11 @@ export const en = {
     initialOutput: "INITIAL OUTPUT",
     initialOutputValue: "Fit assessment + scoped engagement options",
     directEmail: "DIRECT EMAIL",
+    submitSending: "SENDING…",
+    submitSuccess: "Thank you — we received your inquiry and will reply within 1–2 business days.",
+    submitSuccessMailto:
+      "Your email app should open with a draft addressed to us. Send the message to complete your inquiry.",
+    submitError: "We could not send that just now. Please try again or use the email address on the right.",
   },
 };
 

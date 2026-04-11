@@ -150,8 +150,8 @@ export const zhHK: Dictionary = {
     titleL2: "或尚未成形的 AI 構想，交由我們一同梳理與驗證。",
     leadL1: "請說明業務背景、現有流程、",
     leadL2: "可用數據與期望達成的成果，我們會回覆具體的下一步建議。",
-    monumentL1: "hello",
-    monumentL2: "@deview.ai",
+    monumentL1: "deview.info",
+    monumentL2: "@gmail.com",
     sendInquiry: "發送查詢 →",
   },
   cards: {
@@ -418,5 +418,9 @@ export const zhHK: Dictionary = {
     initialOutput: "初步內容",
     initialOutputValue: "適配評估及具明確範圍的合作選項",
     directEmail: "直接電郵",
+    submitSending: "傳送中…",
+    submitSuccess: "已收到你的查詢，我們會在一至兩個工作天內回覆。",
+    submitSuccessMailto: "應該已開啟你的電郵程式並填好草稿，請發送郵件以完成查詢。",
+    submitError: "暫時無法傳送，請稍後再試，或使用右側電郵地址直接聯絡我們。",
   },
 };

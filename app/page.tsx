@@ -7,6 +7,7 @@ import { HomeServicesSection } from "../components/HomeServicesSection";
 import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
+import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 
 const fade = {
   initial: { opacity: 0, y: 18 },
@@ -948,7 +949,7 @@ export default function Home() {
           <div className="flex flex-col gap-6 md:gap-8">
             <div className="w-full py-1">
               <a
-                href="mailto:deview.info@gmail.com"
+                href={`mailto:${SITE_INQUIRY_EMAIL}`}
                 className="contact-monument-anchor"
                 onMouseMove={handleContactMouseMove}
                 onMouseLeave={handleContactMouseLeave}

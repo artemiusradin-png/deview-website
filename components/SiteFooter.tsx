@@ -1,6 +1,7 @@
 "use client";
 
 import { useLocaleContext } from "@/lib/i18n/locale-context";
+import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 
 type SiteFooterProps = {
   rootPrefix?: string;
@@ -49,7 +50,7 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
               <a href={resolveHref("/contact")} className="btn-outline footer-cta-primary">
                 {f.contactUs}
               </a>
-              <a href="mailto:deview.info@gmail.com" className="btn-outline footer-cta-secondary">
+              <a href={`mailto:${SITE_INQUIRY_EMAIL}`} className="btn-outline footer-cta-secondary">
                 {f.emailDirect}
               </a>
             </div>
@@ -72,7 +73,7 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
               <a href={resolveHref("/contact")} className="footer-chip">
                 {f.moreInfo}
               </a>
-              <a href="mailto:deview.info@gmail.com" className="footer-chip">
+              <a href={`mailto:${SITE_INQUIRY_EMAIL}`} className="footer-chip">
                 {f.emailUs}
               </a>
             </div>
@@ -101,8 +102,8 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
           <section className="footer-structure-block">
             <h4 className="footer-structure-title">{f.connect}</h4>
             <div className="footer-connect-actions">
-              <a href="mailto:deview.info@gmail.com" className="footer-text-link">
-                deview.info@gmail.com
+              <a href={`mailto:${SITE_INQUIRY_EMAIL}`} className="footer-text-link">
+                {SITE_INQUIRY_EMAIL}
               </a>
               <a href={resolveHref("/contact")} className="footer-text-link">
                 {f.inquiryForm}
