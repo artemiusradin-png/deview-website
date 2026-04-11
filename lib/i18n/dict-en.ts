@@ -42,7 +42,7 @@ export const en = {
     scroll: "SCROLL",
     interfaceUser: "What are our Q4 exposure risks?",
     interfaceAi:
-      "From your October run-rate: FX on the Asia import leg and two suppliers still on allocation through mid-November are the main drag. Inbound spend is concentrated—if the week-46 receipt plan slips, margin needs a fresh pass with finance before you reforecast.",
+      "From your October $12.4M run-rate: Asia import FX is ~2.8% over plan, and two suppliers on allocation through Nov 14 still gate ~68% of inbound—that's the drag. If week-46 slips past the Nov 10 receipt window, model ~50 bps to margin; get finance to sign off before you reforecast.",
     labels: { user: "USER", ai: "AI" },
   },
   enterpriseAi: {
