@@ -42,7 +42,7 @@ export const en = {
     scroll: "SCROLL",
     interfaceUser: "What are our Q4 exposure risks?",
     interfaceAi:
-      "Based on general patterns, Q4 risks typically include supply chain pressure and budget cycles...",
+      "From your October run-rate: FX on the Asia import leg and two suppliers still on allocation through mid-November are the main drag. Inbound spend is concentrated—if the week-46 receipt plan slips, margin needs a fresh pass with finance before you reforecast.",
     labels: { user: "USER", ai: "AI" },
   },
   enterpriseAi: {
