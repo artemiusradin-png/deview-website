@@ -128,10 +128,10 @@ export default function ContactPage() {
                     {f.directEmail}
                   </p>
                   <a
-                    href="mailto:hello@deview.ai"
+                    href="mailto:deview.info@gmail.com"
                     className="text-[var(--white-100)] underline underline-offset-4"
                   >
-                    hello@deview.ai
+                    deview.info@gmail.com
                   </a>
                 </div>
               </div>

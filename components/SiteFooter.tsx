@@ -49,7 +49,7 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
               <a href={resolveHref("/contact")} className="btn-outline footer-cta-primary">
                 {f.contactUs}
               </a>
-              <a href="mailto:hello@deview.ai" className="btn-outline footer-cta-secondary">
+              <a href="mailto:deview.info@gmail.com" className="btn-outline footer-cta-secondary">
                 {f.emailDirect}
               </a>
             </div>
@@ -62,8 +62,8 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
           <section className="footer-structure-block footer-structure-block--brand footer-structure-block--contact">
             <h4 className="footer-structure-title">{f.connect}</h4>
             <div className="footer-connect-actions">
-              <a href="mailto:hello@deview.ai" className="footer-text-link">
-                hello@deview.ai
+              <a href="mailto:deview.info@gmail.com" className="footer-text-link">
+                deview.info@gmail.com
               </a>
               <a href={resolveHref("/contact")} className="footer-text-link">
                 {f.inquiryForm}
@@ -73,7 +73,7 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
               <a href={resolveHref("/contact")} className="footer-chip">
                 {f.contactUs}
               </a>
-              <a href="mailto:hello@deview.ai" className="footer-chip">
+              <a href="mailto:deview.info@gmail.com" className="footer-chip">
                 {f.emailDirect}
               </a>
             </div>
@@ -93,7 +93,7 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
               <a href={resolveHref("/contact")} className="footer-chip">
                 {f.moreInfo}
               </a>
-              <a href="mailto:hello@deview.ai" className="footer-chip">
+              <a href="mailto:deview.info@gmail.com" className="footer-chip">
                 {f.emailUs}
               </a>
             </div>

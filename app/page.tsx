@@ -654,7 +654,7 @@ export default function Home() {
 
       <section
         id="enterprise-ai"
-        className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter"
+        className="enterprise-ai-section section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter"
       >
         <motion.div
           {...reveal}
@@ -956,7 +956,7 @@ export default function Home() {
           <div className="flex flex-col gap-6 md:gap-8">
             <div className="w-full py-1">
               <a
-                href="mailto:hello@deview.ai"
+                href="mailto:deview.info@gmail.com"
                 className="contact-monument-anchor"
                 onMouseMove={handleContactMouseMove}
                 onMouseLeave={handleContactMouseLeave}
