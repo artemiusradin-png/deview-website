@@ -597,6 +597,19 @@ export default function Home() {
               ) : null}
             </h1>
             <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
+            <motion.a
+              href="/resources/ai-guide-lending"
+              className="hero-resource-button mt-7"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.18, duration: 0.45 }}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.99 }}
+            >
+              <span className="hero-resource-button__tag">FREE AI GUIDE</span>
+              <span className="hero-resource-button__copy">Download: 10 lender use cases</span>
+              <span className="hero-resource-button__arrow">→</span>
+            </motion.a>
           </motion.div>
 
           <motion.div
@@ -926,35 +939,51 @@ export default function Home() {
 
       <HomeServicesSection variant="home" />
 
-      <section className="relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter py-14 md:py-20">
+      <section className="resource-spotlight relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter py-14 md:py-20">
         <motion.div
           {...reveal}
           transition={{ duration: 0.5 }}
-          className="mx-auto max-w-6xl"
+          className="resource-spotlight__inner mx-auto max-w-6xl"
         >
-          <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end md:gap-12">
+          <div className="resource-spotlight__grid grid gap-8 md:grid-cols-[1fr_auto] md:items-center md:gap-12">
             <div>
-              <p className="section-label mb-4">FREE RESOURCE — LENDING &amp; FINANCIAL SERVICES</p>
-              <div className="rule mb-6 max-w-[8rem]" />
+              <p className="resource-kicker mb-5">
+                <span>FREE RESOURCE</span>
+                <span>LENDING &amp; FINANCIAL SERVICES</span>
+              </p>
               <h2 className="hero-heading mb-4 text-[clamp(1.3rem,4vw,2rem)] leading-[1.2] text-[var(--white-100)]">
-                10 PRACTICAL AI USE CASES
+                <span className="resource-title-accent resource-title-accent--blue">10 PRACTICAL</span> AI USE CASES
                 <br />
-                FOR LENDING COMPANIES
+                FOR <span className="resource-title-accent resource-title-accent--green">LENDING COMPANIES</span>
               </h2>
               <p className="max-w-xl text-sm leading-relaxed text-[var(--text-muted)]">
                 A practical guide for small and mid-sized lending firms — where to reduce manual work,
                 which workflows are safe to automate, and how to start without putting confidential
                 data at risk.
               </p>
+              <div className="resource-chip-row resource-chip-row--animated mt-6">
+                <span>Workflow automation</span>
+                <span>Data risk controls</span>
+                <span>Fast first projects</span>
+              </div>
             </div>
-            <div className="flex shrink-0 flex-col gap-3 md:items-end">
-              <a href="/resources/ai-guide-lending" className="btn-outline whitespace-nowrap">
+            <motion.div
+              className="resource-guide-card shrink-0"
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 260, damping: 22 }}
+            >
+              <div className="resource-guide-card__cover">
+                <span className="resource-guide-card__eyebrow">AI GUIDE</span>
+                <span className="resource-guide-card__number">10</span>
+                <span className="resource-guide-card__line">Use cases for lenders</span>
+              </div>
+              <a href="/resources/ai-guide-lending" className="btn-outline btn-resource whitespace-nowrap">
                 GET THE FREE GUIDE
               </a>
-              <span className="text-[0.6rem] uppercase tracking-[0.16em] text-[var(--white-40)] md:text-right">
+              <span className="resource-note">
                 No obligation — instant access
               </span>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </section>

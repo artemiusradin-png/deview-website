@@ -35,10 +35,36 @@ const WHAT_YOU_GET = [
   "A framework for evaluating any AI use case in 3 questions",
 ];
 
+const PERSONAL_EMAIL_DOMAINS = new Set([
+  "gmail.com",
+  "googlemail.com",
+  "icloud.com",
+  "me.com",
+  "mac.com",
+  "outlook.com",
+  "hotmail.com",
+  "live.com",
+  "msn.com",
+  "yahoo.com",
+  "aol.com",
+  "proton.me",
+  "protonmail.com",
+  "pm.me",
+  "mail.com",
+  "gmx.com",
+  "zoho.com",
+  "yandex.com",
+]);
+
 const rise = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
 };
+
+function isLikelyWorkEmail(email: string) {
+  const domain = email.split("@")[1]?.toLowerCase();
+  return Boolean(domain && domain.includes(".") && !PERSONAL_EMAIL_DOMAINS.has(domain));
+}
 
 export default function LeadMagnetPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -60,6 +86,12 @@ export default function LeadMagnetPage() {
     const industry = String(fd.get("industry") ?? "").trim();
     const challenge = String(fd.get("challenge") ?? "").trim();
 
+    if (!isLikelyWorkEmail(email)) {
+      setStatus("error");
+      setFeedback("Please use a work email address so we can send the lending guide to the right business contact.");
+      return;
+    }
+
     setStatus("sending");
     setFeedback(null);
 
@@ -69,10 +101,13 @@ export default function LeadMagnetPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, company, industry, challenge }),
       });
-      const data = (await res.json().catch(() => ({}))) as { ok?: boolean };
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
       if (data.ok || res.ok) {
         sessionStorage.setItem("deview-guide-lending", "1");
         setStatus("success");
+      } else if (data.error === "work_email_required") {
+        setStatus("error");
+        setFeedback("Please use a work email address so we can send the guide to the right business contact.");
       } else {
         setStatus("error");
         setFeedback("Something went wrong — please try again.");
@@ -113,33 +148,41 @@ export default function LeadMagnetPage() {
               transition={{ duration: 0.55 }}
               className="flex flex-col gap-8"
             >
-              <div>
-                <p className="section-label mb-4">FREE GUIDE — LENDING &amp; FINANCIAL SERVICES</p>
-                <div className="rule mb-6 max-w-[8rem]" />
+              <div className="resource-landing-hero">
+                <p className="resource-kicker mb-5">
+                  <span>FREE GUIDE</span>
+                  <span>LENDING &amp; FINANCIAL SERVICES</span>
+                </p>
                 <h1 className="hero-heading mb-5 text-[clamp(1.5rem,5vw,2.2rem)] leading-[1.15] text-[var(--white-100)]">
-                  10 PRACTICAL AI USE CASES FOR LENDING COMPANIES
+                  <span className="resource-title-accent resource-title-accent--blue">10 PRACTICAL</span> AI USE CASES FOR{" "}
+                  <span className="resource-title-accent resource-title-accent--green">LENDING COMPANIES</span>
                 </h1>
                 <p className="mb-6 max-w-xl text-sm leading-relaxed text-[var(--text-muted)]">
                   A practical guide for small and mid-sized lending firms that want to reduce manual work,
                   speed up document processing, and improve operations — without putting confidential client
                   data at risk.
                 </p>
+                <div className="resource-chip-row">
+                  <span>Document review</span>
+                  <span>Client follow-up</span>
+                  <span>Compliance support</span>
+                </div>
               </div>
 
-              <div className="panel border border-[var(--white-20)] bg-[var(--surface)] p-5 md:p-6">
-                <p className="mb-4 text-[0.6rem] uppercase tracking-[0.22em] text-[var(--white-60)]">WHAT'S INSIDE</p>
+              <div className="resource-info-panel resource-info-panel--cyan panel border border-[var(--white-20)] bg-[var(--surface)] p-5 md:p-6">
+                <p className="resource-panel-label mb-4">WHAT&apos;S INSIDE</p>
                 <div className="space-y-3">
                   {WHAT_YOU_GET.map((item) => (
                     <div key={item} className="flex items-start gap-3">
-                      <span className="mt-[0.15rem] shrink-0 text-[0.6rem] text-[var(--white-40)]">+</span>
+                      <span className="resource-list-marker mt-[0.15rem] shrink-0 text-[0.6rem]">+</span>
                       <span className="text-sm leading-snug text-[var(--white-90)]">{item}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="panel border border-[var(--white-20)] bg-[var(--surface-elevated)] p-5 md:p-6">
-                <p className="mb-3 text-[0.6rem] uppercase tracking-[0.22em] text-[var(--white-60)]">WHO THIS IS FOR</p>
+              <div className="resource-info-panel resource-info-panel--amber panel border border-[var(--white-20)] bg-[var(--surface-elevated)] p-5 md:p-6">
+                <p className="resource-panel-label mb-3">WHO THIS IS FOR</p>
                 <div className="space-y-2">
                   {[
                     "Owners of small and mid-sized lending companies",
@@ -148,7 +191,7 @@ export default function LeadMagnetPage() {
                     "Companies where employees are already using ChatGPT without clear rules",
                   ].map((item) => (
                     <div key={item} className="flex items-start gap-3">
-                      <span className="mt-[0.15rem] shrink-0 text-[0.6rem] text-[var(--white-30)]">—</span>
+                      <span className="resource-list-marker mt-[0.15rem] shrink-0 text-[0.6rem]">—</span>
                       <span className="text-sm leading-snug text-[var(--white-80)]">{item}</span>
                     </div>
                   ))}
@@ -181,11 +224,14 @@ export default function LeadMagnetPage() {
                   </Link>
                 </div>
               ) : (
-                <div className="panel border border-[var(--white-20)] bg-[var(--surface)] p-5 md:p-8">
-                  <p className="section-label mb-3">GET THE FREE GUIDE</p>
-                  <div className="rule mb-6" />
+                <div className="resource-form-panel panel border border-[var(--white-20)] bg-[var(--surface)] p-5 md:p-8">
+                  <p className="resource-kicker mb-5">
+                    <span>GET THE FREE GUIDE</span>
+                    <span>INSTANT ACCESS</span>
+                  </p>
                   <p className="mb-6 text-sm leading-relaxed text-[var(--text-muted)]">
-                    Free. No obligation. Read it at your own pace.
+                    Enter your work email to unlock the guide. We use it to keep access tied to
+                    a business contact, not a personal inbox.
                   </p>
 
                   <form className="space-y-4" onSubmit={handleSubmit}>
@@ -199,6 +245,25 @@ export default function LeadMagnetPage() {
                       className="pointer-events-none absolute left-[-10000px] h-0 w-0 opacity-0"
                     />
 
+                    <div className="resource-email-callout">
+                      <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                        <span>Work Email <span className="text-red-500">*</span></span>
+                        <input
+                          type="email"
+                          name="email"
+                          required
+                          inputMode="email"
+                          autoComplete="email"
+                          placeholder="jane@yourcompany.com"
+                          className="min-h-12 w-full border border-[rgba(141,231,189,0.48)] bg-[rgba(141,231,189,0.08)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[#8de7bd] sm:text-sm"
+                        />
+                      </label>
+                      <p className="resource-field-note">
+                        Use a company domain. Personal email providers such as Gmail, Outlook, Yahoo,
+                        and iCloud are not accepted for this resource.
+                      </p>
+                    </div>
+
                     <div className="grid gap-4 sm:grid-cols-2">
                       <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
                         <span>Full Name <span className="text-red-500">*</span></span>
@@ -206,31 +271,22 @@ export default function LeadMagnetPage() {
                           type="text"
                           name="name"
                           required
+                          autoComplete="name"
                           placeholder="Jane Smith"
                           className="min-h-11 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
                         />
                       </label>
                       <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                        <span>Work Email <span className="text-red-500">*</span></span>
+                        Company
                         <input
-                          type="email"
-                          name="email"
-                          required
-                          placeholder="jane@company.com"
+                          type="text"
+                          name="company"
+                          autoComplete="organization"
+                          placeholder="Acme Lending Co."
                           className="min-h-11 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
                         />
                       </label>
                     </div>
-
-                    <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                      Company
-                      <input
-                        type="text"
-                        name="company"
-                        placeholder="Acme Lending Co."
-                        className="min-h-11 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
-                      />
-                    </label>
 
                     <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
                       Industry

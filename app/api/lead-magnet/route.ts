@@ -4,6 +4,31 @@ import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
 const MAX = { name: 200, email: 320, company: 200, industry: 100, challenge: 200 } as const;
 const LEAD_SOURCE = "ai-guide-lending" as const;
+const PERSONAL_EMAIL_DOMAINS = new Set([
+  "gmail.com",
+  "googlemail.com",
+  "icloud.com",
+  "me.com",
+  "mac.com",
+  "outlook.com",
+  "hotmail.com",
+  "live.com",
+  "msn.com",
+  "yahoo.com",
+  "aol.com",
+  "proton.me",
+  "protonmail.com",
+  "pm.me",
+  "mail.com",
+  "gmx.com",
+  "zoho.com",
+  "yandex.com",
+]);
+
+function isLikelyWorkEmail(email: string) {
+  const domain = email.split("@")[1]?.toLowerCase();
+  return Boolean(domain && domain.includes(".") && !PERSONAL_EMAIL_DOMAINS.has(domain));
+}
 
 export async function POST(req: Request) {
   let body: unknown;
@@ -30,6 +55,10 @@ export async function POST(req: Request) {
 
   if (!name || !email) {
     return NextResponse.json({ ok: false, error: "missing_fields" }, { status: 400 });
+  }
+
+  if (!isLikelyWorkEmail(email)) {
+    return NextResponse.json({ ok: false, error: "work_email_required" }, { status: 400 });
   }
 
   const supabase = getSupabaseAdmin();
