@@ -926,6 +926,39 @@ export default function Home() {
 
       <HomeServicesSection variant="home" />
 
+      <section className="relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter py-14 md:py-20">
+        <motion.div
+          {...reveal}
+          transition={{ duration: 0.5 }}
+          className="mx-auto max-w-6xl"
+        >
+          <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end md:gap-12">
+            <div>
+              <p className="section-label mb-4">FREE RESOURCE — LENDING &amp; FINANCIAL SERVICES</p>
+              <div className="rule mb-6 max-w-[8rem]" />
+              <h2 className="hero-heading mb-4 text-[clamp(1.3rem,4vw,2rem)] leading-[1.2] text-[var(--white-100)]">
+                10 PRACTICAL AI USE CASES
+                <br />
+                FOR LENDING COMPANIES
+              </h2>
+              <p className="max-w-xl text-sm leading-relaxed text-[var(--text-muted)]">
+                A practical guide for small and mid-sized lending firms — where to reduce manual work,
+                which workflows are safe to automate, and how to start without putting confidential
+                data at risk.
+              </p>
+            </div>
+            <div className="flex shrink-0 flex-col gap-3 md:items-end">
+              <a href="/resources/ai-guide-lending" className="btn-outline whitespace-nowrap">
+                GET THE FREE GUIDE
+              </a>
+              <span className="text-[0.6rem] uppercase tracking-[0.16em] text-[var(--white-40)] md:text-right">
+                No obligation — instant access
+              </span>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
       <section
         id="contact"
         className="contact-inquire-section scroll-margin-header relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter pb-[max(4rem,env(safe-area-inset-bottom))] pt-14 md:pb-[max(5.5rem,env(safe-area-inset-bottom))] md:pt-20"
