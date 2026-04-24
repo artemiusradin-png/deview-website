@@ -379,6 +379,7 @@ export const zhHK: Dictionary = {
       outcomes: "成果",
       useCases: "應用",
       sendInquiry: "發送查詢",
+      clientPortal: "客戶專區",
     },
   },
   subpages: {

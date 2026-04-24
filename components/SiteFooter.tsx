@@ -22,6 +22,7 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
     { label: f.links.outcomes, href: "/outcomes" },
     { label: f.links.useCases, href: "#solutions" },
     { label: f.links.sendInquiry, href: "/contact" },
+    { label: f.links.clientPortal, href: "/client-portal" },
   ] as const;
 
   const resolveHref = (href: string) => {

@@ -378,6 +378,7 @@ export const en = {
       outcomes: "Outcomes",
       useCases: "Use cases",
       sendInquiry: "Send inquiry",
+      clientPortal: "Client Portal",
     },
   },
   subpages: {
