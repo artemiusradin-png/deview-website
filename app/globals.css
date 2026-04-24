@@ -456,14 +456,18 @@ html[data-theme="light"] .bg-grid::before {
 }
 
 .hero-resource-button {
-  position: relative;
+  position: absolute;
   isolation: isolate;
   overflow: hidden;
   display: inline-grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 0.7rem;
-  max-width: min(100%, 31rem);
+  left: max(1.125rem, env(safe-area-inset-left, 0px));
+  bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+  z-index: 30;
+  width: calc(100% - 2.25rem);
+  max-width: 31rem;
   border: 2px solid rgba(255, 204, 102, 0.78);
   background:
     linear-gradient(135deg, rgba(92, 170, 255, 0.28), transparent 42%),
@@ -688,17 +692,15 @@ html[data-theme="light"] .hero-resource-button__arrow {
   }
 
   .hero-resource-button {
-    width: 100%;
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px));
   }
 }
 
 @media (min-width: 768px) {
   .hero-resource-button {
-    position: absolute;
     left: max(1.5rem, calc((100vw - 72rem) / 2 + 1.5rem));
     bottom: max(2rem, env(safe-area-inset-bottom, 0px));
-    z-index: 30;
-    margin-top: 0 !important;
+    width: auto;
   }
 }
 

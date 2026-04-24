@@ -597,19 +597,6 @@ export default function Home() {
               ) : null}
             </h1>
             <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
-            <motion.a
-              href="/resources/ai-guide-lending"
-              className="hero-resource-button mt-7"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.18, duration: 0.45 }}
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.99 }}
-            >
-              <span className="hero-resource-button__tag">FREE AI GUIDE</span>
-              <span className="hero-resource-button__copy">Download: 10 lender use cases</span>
-              <span className="hero-resource-button__arrow">→</span>
-            </motion.a>
           </motion.div>
 
           <motion.div
@@ -656,6 +643,19 @@ export default function Home() {
             </div>
           </motion.div>
         </div>
+        <motion.a
+          href="/resources/ai-guide-lending"
+          className="hero-resource-button"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.18, duration: 0.45 }}
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.99 }}
+        >
+          <span className="hero-resource-button__tag">FREE AI GUIDE</span>
+          <span className="hero-resource-button__copy">Download: 10 lender use cases</span>
+          <span className="hero-resource-button__arrow">→</span>
+        </motion.a>
       </section>
 
       <section
