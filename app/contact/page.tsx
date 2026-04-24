@@ -5,12 +5,24 @@ import { FormEvent, useState } from "react";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SubpageNav } from "../../components/SubpageNav";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
-import { SITE_INQUIRY_EMAIL, buildInquiryMailto } from "@/lib/site-contact";
+import { SITE_INQUIRY_EMAIL, buildInquiryMailto, buildInquiryText } from "@/lib/site-contact";
 
 const rise = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
 };
+
+function web3FormsMessage(data: unknown): string | null {
+  if (!data || typeof data !== "object") return null;
+  const o = data as Record<string, unknown>;
+  if (typeof o.message === "string") return o.message;
+  const body = o.body;
+  if (body && typeof body === "object") {
+    const m = (body as Record<string, unknown>).message;
+    if (typeof m === "string") return m;
+  }
+  return null;
+}
 
 export default function ContactPage() {
   const { dict } = useLocaleContext();
@@ -38,13 +50,59 @@ export default function ContactPage() {
     setStatus("sending");
     setFeedback(null);
 
+    const web3Key = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
+    const subject = `[DeView inquiry] ${name}`;
+    const message = buildInquiryText({ email, company, details });
+    let web3LastError: string | null = null;
+
     try {
+      if (web3Key) {
+        const w3res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            access_key: web3Key,
+            subject,
+            name,
+            email,
+            replyto: email,
+            message,
+            company: company || undefined,
+          }),
+        });
+        let w3data: unknown;
+        try {
+          w3data = await w3res.json();
+        } catch {
+          w3data = null;
+        }
+        const w3Success =
+          w3res.ok &&
+          typeof w3data === "object" &&
+          w3data !== null &&
+          (w3data as { success?: boolean }).success === true;
+        if (w3Success) {
+          setStatus("success");
+          setFeedback(f.submitSuccess);
+          form.reset();
+          return;
+        }
+        web3LastError = web3FormsMessage(w3data) ?? (w3res.ok ? null : `HTTP ${w3res.status}`);
+      }
+
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({ name, email, company, details, honeypot }),
       });
-      const data = (await res.json()) as { ok?: boolean; mailto?: boolean; error?: string };
+      let data: { ok?: boolean; mailto?: boolean; error?: string } = {};
+      try {
+        data = (await res.json()) as { ok?: boolean; mailto?: boolean; error?: string };
+      } catch {
+        setStatus("error");
+        setFeedback(web3LastError ? `${f.submitError} — ${web3LastError}` : f.submitError);
+        return;
+      }
 
       if (data.ok) {
         setStatus("success");
@@ -61,10 +119,10 @@ export default function ContactPage() {
       }
 
       setStatus("error");
-      setFeedback(f.submitError);
+      setFeedback(web3LastError ? `${f.submitError} — ${web3LastError}` : f.submitError);
     } catch {
       setStatus("error");
-      setFeedback(f.submitError);
+      setFeedback(web3LastError ? `${f.submitError} — ${web3LastError}` : f.submitError);
     }
   }
 

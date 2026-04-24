@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { SITE_INQUIRY_EMAIL, buildInquiryText } from "@/lib/site-contact";
 
 const MAX = { name: 200, email: 320, company: 200, details: 12_000 } as const;
 
@@ -28,39 +29,35 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "missing_fields" }, { status: 400 });
   }
 
-  const accessKey = process.env.WEB3FORMS_ACCESS_KEY?.trim();
-  if (!accessKey) {
-    return NextResponse.json({ ok: false, mailto: true });
+  const subject = `[DeView inquiry] ${name}`;
+  const message = buildInquiryText({ email, company, details });
+  const resendApiKey = process.env.RESEND_API_KEY?.trim();
+  const emailFrom = process.env.EMAIL_FROM?.trim();
+
+  if (resendApiKey && emailFrom) {
+    try {
+      const upstream = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${resendApiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: emailFrom,
+          to: [SITE_INQUIRY_EMAIL],
+          subject,
+          text: `Name: ${name}\n${message}`,
+          reply_to: email,
+        }),
+      });
+
+      if (upstream.ok) {
+        return NextResponse.json({ ok: true });
+      }
+    } catch {
+      /* fall through to mailto */
+    }
   }
 
-  const params = new URLSearchParams();
-  params.set("access_key", accessKey);
-  params.set("subject", `[DeView inquiry] ${name}`);
-  params.set("from_name", name);
-  params.set("name", name);
-  params.set("email", email);
-  params.set("replyto", email);
-  params.set("message", `Work email: ${email}\nCompany: ${company || "—"}\n\n${details}`);
-
-  const upstream = await fetch("https://api.web3forms.com/submit", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "application/json" },
-    body: params.toString(),
-  });
-
-  let result: { success?: boolean; message?: string } = {};
-  try {
-    result = (await upstream.json()) as { success?: boolean; message?: string };
-  } catch {
-    return NextResponse.json({ ok: false, error: "send_failed" }, { status: 502 });
-  }
-
-  if (!upstream.ok || !result.success) {
-    return NextResponse.json(
-      { ok: false, error: "send_failed", detail: result.message },
-      { status: 502 },
-    );
-  }
-
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: false, mailto: true });
 }
