@@ -3907,3 +3907,43 @@ html[data-theme="light"] .svoyage-slide__info {
     min-height: 3.9rem;
   }
 }
+
+.btn-primary {
+  border-radius: 0;
+  border: 1px solid var(--white-100);
+  padding: 0.9rem 1.8rem;
+  background: var(--white-100);
+  color: var(--background);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  display: inline-block;
+  cursor: pointer;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 4px 12px rgba(0, 0, 0, 0.2);
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.btn-primary:hover {
+  border-color: var(--white-80);
+  background: var(--white-80);
+  transform: translateY(-1px);
+}
+
+html[data-theme="light"] .btn-primary {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--background);
+}
+
+html[data-theme="light"] .btn-primary:hover {
+  background: var(--text-muted);
+  border-color: var(--text-muted);
+}

@@ -631,6 +631,9 @@ export default function Home() {
               </div>
             </div>
             <div className="flex w-full flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6 md:w-auto md:justify-end md:gap-8">
+              <a href="/resources/ai-guide-lending" className="btn-primary w-full text-center sm:w-auto">
+                FREE AI GUIDE: 10 lender use cases
+              </a>
               <a href="#contact" className="btn-outline w-full text-center sm:w-auto">
                 {dict.hero.inquire}
               </a>
@@ -643,19 +646,6 @@ export default function Home() {
             </div>
           </motion.div>
         </div>
-        <motion.a
-          href="/resources/ai-guide-lending"
-          className="hero-resource-button"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.18, duration: 0.45 }}
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.99 }}
-        >
-          <span className="hero-resource-button__tag">FREE AI GUIDE</span>
-          <span className="hero-resource-button__copy">Download: 10 lender use cases</span>
-          <span className="hero-resource-button__arrow">→</span>
-        </motion.a>
       </section>
 
       <section
