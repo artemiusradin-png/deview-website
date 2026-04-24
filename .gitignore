@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Separate repos (have their own .git)
 Task Manager - App/
+
+# Local Netlify folder
+.netlify
