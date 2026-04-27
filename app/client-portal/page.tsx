@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
-// useRef kept for login input focus
 import { motion, AnimatePresence } from "framer-motion";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SubpageNav } from "../../components/SubpageNav";
@@ -15,6 +14,14 @@ type Milestone = {
   position: number;
 };
 
+type Document = {
+  id: string;
+  name: string;
+  url: string;
+  fileType: "pdf" | "docx" | "image" | "other";
+  uploadedAt: string;
+};
+
 type Portal = {
   reference: string;
   clientName: string;
@@ -23,12 +30,20 @@ type Portal = {
   createdAt: string;
   updatedAt: string;
   milestones: Milestone[];
+  documents: Document[];
 };
 
 function milestoneStatus(index: number, currentStage: number) {
   if (index < currentStage) return "done";
   if (index === currentStage) return "active";
   return "upcoming";
+}
+
+function fileTypeIcon(fileType: Document["fileType"]) {
+  if (fileType === "pdf") return "PDF";
+  if (fileType === "docx") return "DOC";
+  if (fileType === "image") return "IMG";
+  return "FILE";
 }
 
 function formatDate(iso: string) {
@@ -159,6 +174,39 @@ function PortalView({ portal, onLogout }: { portal: Portal; onLogout: () => void
           })}
         </div>
       </section>
+
+      {/* Documents */}
+      {portal.documents.length > 0 && (
+        <section className="mb-10">
+          <p className="section-label mb-4">PROJECT DOCUMENTS</p>
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {portal.documents.map((doc) => (
+              <a
+                key={doc.id}
+                href={doc.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 border border-[var(--white-10)] bg-[var(--surface)] p-4 transition-colors hover:border-[var(--white-30)] hover:bg-[var(--surface-elevated)]"
+              >
+                <span className="flex-shrink-0 text-[0.55rem] font-bold uppercase tracking-wider text-[var(--white-40)] group-hover:text-[var(--white-60)]">
+                  {fileTypeIcon(doc.fileType)}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-xs text-[var(--white-80)] group-hover:text-[var(--white-100)]">
+                    {doc.name}
+                  </p>
+                  <p className="text-[0.6rem] text-[var(--white-30)]">
+                    {formatDate(doc.uploadedAt)}
+                  </p>
+                </div>
+                <span className="flex-shrink-0 text-[var(--white-30)] group-hover:text-[var(--white-60)]">
+                  ↗
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       <p className="text-[0.6rem] uppercase tracking-[0.12em] text-[var(--white-20)]">
         Last updated {formatDate(portal.updatedAt)}
