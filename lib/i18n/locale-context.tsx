@@ -17,14 +17,18 @@ type LocaleContextValue = {
 const LocaleContext = createContext<LocaleContextValue | null>(null);
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en");
+  const [locale, setLocaleState] = useState<Locale>(() => {
+    if (typeof window === "undefined") {
+      return "en";
+    }
 
-  useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored === "zh-HK" || stored === "en") {
-      setLocaleState(stored);
+      return stored;
     }
-  }, []);
+
+    return "en";
+  });
 
   const setLocale = useCallback((next: Locale) => {
     setLocaleState(next);

@@ -1,0 +1,25 @@
+<svg width="960" height="720" viewBox="0 0 960 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="720" rx="0" fill="#03070D"/>
+  <rect x="104" y="84" width="752" height="552" fill="#050A12" stroke="rgba(240,240,250,0.22)" stroke-width="2"/>
+  <rect x="144" y="126" width="282" height="86" fill="#0B1320" stroke="rgba(92,170,255,0.45)" stroke-width="2"/>
+  <rect x="144" y="236" width="282" height="86" fill="#0B1320" stroke="rgba(141,231,189,0.42)" stroke-width="2"/>
+  <rect x="144" y="346" width="282" height="86" fill="#0B1320" stroke="rgba(255,204,102,0.42)" stroke-width="2"/>
+  <rect x="144" y="456" width="282" height="86" fill="#0B1320" stroke="rgba(240,240,250,0.22)" stroke-width="2"/>
+  <rect x="498" y="126" width="318" height="416" fill="#070F1B" stroke="rgba(240,240,250,0.18)" stroke-width="2"/>
+  <path d="M536 472C578 392 611 318 646 242C662 306 699 366 778 422" stroke="#5CAAFF" stroke-width="8" stroke-linecap="square"/>
+  <path d="M536 492H780" stroke="rgba(240,240,250,0.28)" stroke-width="2"/>
+  <path d="M536 422H780" stroke="rgba(240,240,250,0.12)" stroke-width="2"/>
+  <path d="M536 352H780" stroke="rgba(240,240,250,0.12)" stroke-width="2"/>
+  <path d="M536 282H780" stroke="rgba(240,240,250,0.12)" stroke-width="2"/>
+  <circle cx="646" cy="242" r="13" fill="#FFCC66"/>
+  <circle cx="778" cy="422" r="13" fill="#8DE7BD"/>
+  <circle cx="536" cy="472" r="13" fill="#5CAAFF"/>
+  <text x="174" y="164" fill="rgba(240,240,250,0.52)" font-family="Arial, sans-serif" font-size="18" letter-spacing="4">01 DOCUMENT INTAKE</text>
+  <text x="174" y="274" fill="rgba(240,240,250,0.52)" font-family="Arial, sans-serif" font-size="18" letter-spacing="4">02 FOLLOW-UP</text>
+  <text x="174" y="384" fill="rgba(240,240,250,0.52)" font-family="Arial, sans-serif" font-size="18" letter-spacing="4">03 RISK CONTROLS</text>
+  <text x="174" y="494" fill="rgba(240,240,250,0.52)" font-family="Arial, sans-serif" font-size="18" letter-spacing="4">04 KNOWLEDGE BASE</text>
+  <text x="530" y="178" fill="#F0F0FA" font-family="Arial, sans-serif" font-size="56" font-weight="700">10</text>
+  <text x="618" y="178" fill="rgba(240,240,250,0.72)" font-family="Arial, sans-serif" font-size="18" letter-spacing="5">AI USE CASES</text>
+  <rect x="536" y="562" width="244" height="28" fill="rgba(255,204,102,0.18)" stroke="rgba(255,204,102,0.55)"/>
+  <text x="556" y="582" fill="#FFE09A" font-family="Arial, sans-serif" font-size="14" letter-spacing="3">START WITH LOW RISK</text>
+</svg>

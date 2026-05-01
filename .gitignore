@@ -46,3 +46,11 @@ Task Manager - App/
 
 # Local Netlify folder
 .netlify
+
+# Dev tool artifacts
+.claude/
+.agents/
+.codex/
+plugins/
+LOGOS/
+COPY_REWRITE_PLAN.md

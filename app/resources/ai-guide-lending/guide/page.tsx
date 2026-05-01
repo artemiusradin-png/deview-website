@@ -1,17 +1,32 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { SiteFooter } from "../../../../components/SiteFooter";
+import { SubpageNav } from "../../../../components/SubpageNav";
+import { FeatureSpotlight } from "@/components/ui/feature-spotlight";
+
+const USE_CASE_IMAGES = [
+  "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1553484771-371a605b060b?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&w=800&q=80",
+];
 
 const USE_CASES = [
   {
     number: "01",
     title: "AI Document Intake and Classification",
     problem:
-      "Lending companies receive a constant stream of documents — IDs, bank statements, contracts, applications, invoices, proof of income, and company registrations. Staff spend significant time manually sorting these into the right folders or workflows.",
+      "Your team manually opens, reads, and sorts every incoming application, contract, and form. For a team processing 50+ documents a day, this is 2–4 staff hours of work that produces no decisions — only sorted piles.",
     useCase:
       "AI can automatically classify incoming documents by type and route them to the correct folder or workflow stage.",
     example: [
@@ -23,21 +38,22 @@ const USE_CASES = [
       "Flag: incorrect or unreadable document",
     ],
     value: [
-      "Less manual sorting time",
-      "Faster application processing",
+      "Reduces document intake from hours to minutes",
+      "Frees staff to handle exceptions and borrower communication",
+      "Scales without additional headcount as volume grows",
       "Fewer misfiled or lost documents",
-      "Cleaner internal workflow",
     ],
     note: "AI handles sorting only — it does not make lending decisions.",
     impact: "High",
     complexity: "Medium",
     risk: "Low",
+    recommended: true,
   },
   {
     number: "02",
     title: "Missing Document Detection",
     problem:
-      "Employees manually cross-check each application to verify all required documents are present. This creates bottlenecks and delays, especially under volume.",
+      "Incomplete applications create delays, back-and-forth communication, and delayed closings. Every day an application sits waiting for a missing document is a day of pipeline revenue at risk.",
     useCase:
       "AI compares a submitted document set against a configurable checklist and immediately flags what is missing, so staff can send a targeted follow-up.",
     example: [
@@ -48,21 +64,22 @@ const USE_CASES = [
       "Signed consent form — ✗ missing",
     ],
     value: [
-      "Instant identification of gaps",
-      "Fewer delays in the approval pipeline",
-      "Better customer experience (specific requests)",
-      "Reduced back-and-forth communication",
+      "Automatically flags missing items before the file reaches underwriting",
+      "Reduces application-to-complete cycle time",
+      "Eliminates the manual checklist review before each handoff",
+      "Better borrower experience — specific requests, not generic follow-ups",
     ],
     note: null,
     impact: "High",
     complexity: "Low",
     risk: "Low",
+    recommended: true,
   },
   {
     number: "03",
     title: "AI-Assisted Customer Email Replies",
     problem:
-      "Customer-facing teams answer the same questions repeatedly: required documents, application status, approval timelines, payment change requests. This consumes hours of staff time weekly.",
+      "Customer emails asking about application status, document requirements, and loan terms arrive constantly. Writing individual responses takes time — and inconsistent answers create compliance risk.",
     useCase:
       "AI drafts replies based on approved response templates and the customer's file status. Staff review and send with one click.",
     example: [
@@ -70,21 +87,22 @@ const USE_CASES = [
       "AI draft: \"Thank you for your application. Your file is currently missing [bank statements — last 3 months] and [signed consent form]. You can submit these via [portal link] or email them directly to [address]...\"",
     ],
     value: [
-      "Faster first response time",
-      "More consistent communication across the team",
-      "Reduced staff pressure during high-volume periods",
-      "Better client experience",
+      "Consistent, accurate replies drafted in seconds",
+      "Agents review and send — not write from scratch",
+      "Reduces per-email handling time by 60–80%",
+      "Better client experience during high-volume periods",
     ],
     note: "Always human-reviewed before sending — especially for financial or legal content.",
     impact: "High",
     complexity: "Low",
     risk: "Medium",
+    recommended: true,
   },
   {
     number: "04",
     title: "Internal Knowledge Assistant for Employees",
     problem:
-      "Employees waste time searching through policy PDFs, procedure manuals, old email threads, and shared drives. New hires take weeks to become self-sufficient. Institutional knowledge lives in the heads of a few experienced people.",
+      "When a loan officer needs to check a policy, they either search a shared drive for 10 minutes, send a Slack message, or ask their manager. Each interruption costs 15+ minutes of productive time on both sides.",
     useCase:
       "A private internal AI assistant that answers questions based exclusively on company-approved documents — no external knowledge, no hallucination risk from general AI.",
     example: [
@@ -94,21 +112,22 @@ const USE_CASES = [
       "\"What are the compliance steps before sending a file to legal review?\"",
     ],
     value: [
-      "Faster onboarding for new employees",
-      "Fewer internal questions to senior staff",
-      "Consistent application of company processes",
+      "Instant answers from your actual policy and procedure documents",
+      "New staff productive in days instead of weeks",
+      "Managers stop being interrupted by questions documents already answer",
       "Institutional knowledge stays in the business, not just in people",
     ],
     note: "This is one of the highest-ROI first AI projects for most lending operations.",
     impact: "High",
     complexity: "Medium",
     risk: "Low",
+    recommended: true,
   },
   {
     number: "05",
     title: "Call and Meeting Summaries",
     problem:
-      "Sales and customer service teams gather important information on calls, but follow-up notes are either not taken, typed manually hours later, or inconsistent between team members. CRM data stays incomplete.",
+      "Every borrower call and team meeting produces notes that someone has to write up, file, and act on. If this gets skipped, context is lost. If it doesn't, it's 20–30 minutes of work per call.",
     useCase:
       "AI transcribes and summarizes calls or meetings into structured notes, automatically extracting the fields that matter.",
     example: [
@@ -120,10 +139,10 @@ const USE_CASES = [
       "Next action + responsible employee + deadline",
     ],
     value: [
-      "Better follow-up and accountability",
-      "Less time spent on manual note-taking",
-      "Cleaner, more complete CRM data",
-      "Fewer missed commitments",
+      "Automatic summary and action items after every call",
+      "Notes filed to CRM without manual entry",
+      "Compliance documentation produced automatically",
+      "Fewer missed commitments and cleaner CRM data",
     ],
     note: "Must comply with privacy regulations and call recording consent requirements in your jurisdiction.",
     impact: "High",
@@ -134,7 +153,7 @@ const USE_CASES = [
     number: "06",
     title: "CRM Data Cleanup and Enrichment",
     problem:
-      "Most lending CRMs accumulate messy, incomplete, or inconsistent data over time — duplicate contacts, free-text notes, missing status fields, and unclear pipeline stages.",
+      "Stale, duplicate, and incomplete CRM records make pipeline management unreliable. Sales and operations teams make decisions based on data they can't fully trust.",
     useCase:
       "AI processes unstructured CRM notes and converts them into structured, consistent fields. It can also flag duplicates and normalize contact records.",
     example: [
@@ -142,9 +161,9 @@ const USE_CASES = [
       "After: Status: Documents incomplete | Missing item: Bank statements | Priority: Medium | Next action: Send reminder | Follow-up date: [date]",
     ],
     value: [
-      "Cleaner sales pipeline and reporting",
-      "Better visibility into deal stages",
-      "More effective follow-up by the entire team",
+      "Identifies duplicates, blanks, and inconsistencies automatically",
+      "Improves reliability of pipeline reporting and forecasting",
+      "Better visibility into deal stages across the team",
       "Less confusion when clients transfer between employees",
     ],
     note: null,
@@ -156,7 +175,7 @@ const USE_CASES = [
     number: "07",
     title: "AI-Powered Lead Qualification",
     problem:
-      "Not every inbound inquiry is equally worth pursuing. Sales teams spend time on low-quality leads, incomplete inquiries, or clients who do not fit basic criteria — time that could go to high-priority opportunities.",
+      "Your team spends significant time on leads that will never convert — incomplete profiles, out-of-scope loan sizes, or applicants who don't meet basic criteria. That time costs money.",
     useCase:
       "AI analyzes inbound inquiries and categorizes them by urgency, fit, loan type, and completeness of information provided.",
     example: [
@@ -167,10 +186,10 @@ const USE_CASES = [
       "Compliance-sensitive — flag for senior review",
     ],
     value: [
-      "Sales team focuses on the strongest leads first",
-      "Faster initial response to urgent inquiries",
-      "Higher conversion rate from the same volume of leads",
-      "Less time lost on unqualified inquiries",
+      "Score and rank inbound leads before human review",
+      "Surface the highest-probability opportunities first",
+      "Reduce time wasted on leads that fail basic qualification criteria",
+      "Higher conversion rate from the same volume of inbound inquiries",
     ],
     note: "AI supports prioritization only — it does not make eligibility decisions.",
     impact: "High",
@@ -181,7 +200,7 @@ const USE_CASES = [
     number: "08",
     title: "Contract and Agreement Summarization",
     problem:
-      "Reviewing long contracts, loan agreements, or policy documents takes significant time and is prone to missing important clauses.",
+      "Reviewing contracts line by line — loan agreements, vendor contracts, referral agreements — takes hours per document. The risk of missing a clause is real, especially under time pressure.",
     useCase:
       "AI reads and summarizes key terms from contracts, highlighting the sections most relevant to the review.",
     example: [
@@ -193,10 +212,10 @@ const USE_CASES = [
       "Sections flagged for legal review",
     ],
     value: [
-      "Faster document review before meetings or approval steps",
-      "Easier understanding for non-legal staff",
+      "Key terms, obligations, and risk flags extracted in minutes",
+      "Reduces review time by 60–80% per document",
+      "Flags clauses that deviate from standard templates for human attention",
       "Better preparation before legal or compliance review",
-      "Less time spent re-reading the same documents",
     ],
     note: "AI summaries assist understanding — they do not replace qualified legal review.",
     impact: "Medium",
@@ -207,7 +226,7 @@ const USE_CASES = [
     number: "09",
     title: "Compliance Checklist Support",
     problem:
-      "Compliance tasks involve repetitive checking, documentation, and evidence collection. Missing one item before a file is submitted can cause significant delays or penalties.",
+      "Compliance checklists are completed manually, often under time pressure, and errors create audit exposure. When a regulator asks, the documentation needs to be complete and accurate.",
     useCase:
       "AI pre-screens files against configurable compliance checklists and flags incomplete items before they reach the review stage.",
     example: [
@@ -218,10 +237,10 @@ const USE_CASES = [
       "Approval chain documented — ✗ incomplete",
     ],
     value: [
+      "Automatically checks the file against the required checklist items",
+      "Flags gaps before submission — not after",
+      "Creates a timestamped audit trail for every compliance check",
       "Fewer incomplete files reaching the compliance team",
-      "More consistent process across all employees",
-      "Easier audit trails",
-      "Less manual checklist work for compliance staff",
     ],
     note: "AI supports preparation — final compliance approval remains with a qualified person.",
     impact: "High",
@@ -232,7 +251,7 @@ const USE_CASES = [
     number: "10",
     title: "Management Reporting and Insights",
     problem:
-      "Managers often lack real-time visibility into operational bottlenecks. Reports are manually compiled, arrive late, and do not reflect what is actually slowing the team down.",
+      "Weekly and monthly management reports are assembled manually from multiple systems. Someone spends half a day pulling data, formatting it, and writing the summary — every single week.",
     useCase:
       "AI summarizes operational data into structured weekly management insights — surfacing bottlenecks, volume trends, and team workload without manual compilation.",
     example: [
@@ -243,10 +262,10 @@ const USE_CASES = [
       "Top repeated customer question: payment date changes",
     ],
     value: [
-      "Faster identification of operational bottlenecks",
-      "More informed decisions without manual report compilation",
+      "Reports generated automatically from connected data sources",
+      "Variance and anomalies highlighted without manual analysis",
+      "Management briefing ready in minutes instead of half a day",
       "Clearer view of team capacity and workload distribution",
-      "More professional reporting for stakeholders",
     ],
     note: null,
     impact: "High",
@@ -269,25 +288,28 @@ const SCORING = [
 ];
 
 const AUDIT_ITEMS = [
-  "Which of your workflows are losing the most time right now",
-  "Which AI use cases are the right first projects for your specific operation",
-  "Where confidential data risks are and how to avoid them",
-  "What your first AI implementation could look like in practice",
-  "A realistic timeline and what it would cost to get started",
+  "Which specific workflows are costing the most time and money in your operation",
+  "Which of the 10 use cases applies to your situation — and which order to tackle them",
+  "Where borrower data risk sits and what to keep away from AI",
+  "What a first implementation looks like in practice for a team your size",
+  "A realistic timeline and cost range for your first project",
 ];
 
 export default function AiGuideLendingPage() {
   const router = useRouter();
-  const [ready, setReady] = useState(false);
+  const [ready] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    return sessionStorage.getItem("deview-guide-lending") === "1";
+  });
 
   useEffect(() => {
-    const unlocked = sessionStorage.getItem("deview-guide-lending");
-    if (!unlocked) {
+    if (!ready) {
       router.replace("/resources/ai-guide-lending");
-    } else {
-      setReady(true);
     }
-  }, [router]);
+  }, [ready, router]);
 
   if (!ready) {
     return (
@@ -302,15 +324,7 @@ export default function AiGuideLendingPage() {
       <main className="section-gutter min-h-screen overflow-x-clip bg-[var(--background)] bg-grid pb-[max(2rem,env(safe-area-inset-bottom))] pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:pb-10 sm:pt-24">
         <div className="mx-auto max-w-4xl">
 
-          {/* Back nav */}
-          <div className="mb-8 flex items-center justify-between border-b border-[var(--white-20)] pb-5 sm:mb-10">
-            <Link href="/" className="inline-flex min-h-11 items-center text-xs uppercase tracking-[0.24em] text-[var(--white-80)] sm:min-h-0">
-              DEVIEW
-            </Link>
-            <Link href="/resources/ai-guide-lending" className="inline-flex min-h-11 items-center text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:min-h-0">
-              ← Back
-            </Link>
-          </div>
+          <SubpageNav backHref="/resources/ai-guide-lending" />
 
           {/* Cover */}
           <motion.div
@@ -320,153 +334,112 @@ export default function AiGuideLendingPage() {
             className="mb-16 border border-[var(--white-20)] bg-[var(--surface)] p-6 md:p-10"
           >
             <p className="mb-4 text-[0.6rem] uppercase tracking-[0.24em] text-[var(--white-60)]">
-              PREPARED BY DEVIEW CONSULTING — AI AUTOMATION &amp; WORKFLOW CONSULTING
+              PREPARED BY DEVIEW — AI AUTOMATION FOR LENDING &amp; FINANCIAL OPERATIONS
             </p>
             <div className="rule mb-6 max-w-[6rem]" />
             <h1 className="hero-heading mb-4 text-[clamp(1.5rem,5vw,2.4rem)] leading-[1.15] text-[var(--white-100)]">
-              10 PRACTICAL AI USE CASES FOR LENDING COMPANIES
+              10 AI USE CASES FOR LENDING COMPANIES: WHERE TO START, WHAT TO AUTOMATE, AND HOW TO DO IT SAFELY
             </h1>
             <p className="mb-6 max-w-2xl text-base leading-relaxed text-[var(--text-muted)]">
-              How AI can help your team save time, reduce repetitive manual work, and operate more efficiently —
-              while keeping sensitive customer and financial data protected.
+              A practical guide to reducing manual processing costs in your lending operation — with a scoring table
+              that tells you which use cases are worth piloting first.
             </p>
             <div className="flex flex-wrap gap-4 text-[0.6rem] uppercase tracking-[0.18em] text-[var(--white-40)]">
-              <span>For: Small &amp; Mid-Sized Lending Firms</span>
+              <span>For: Lending &amp; financial services operations teams</span>
               <span>·</span>
-              <span>10–100 Employees</span>
+              <span>Practical first projects</span>
               <span>·</span>
-              <span>Focus: Safe, Practical First AI Projects</span>
+              <span>Data-safe implementation</span>
             </div>
           </motion.div>
 
           {/* Introduction */}
           <section className="mb-16">
-            <p className="section-label mb-4">INTRODUCTION</p>
+            <p className="section-label mb-4">WHY MOST LENDING TEAMS START AI WRONG</p>
             <div className="rule mb-6 max-w-[5rem]" />
             <div className="space-y-4 text-sm leading-relaxed text-[var(--text-muted)]">
               <p>
-                Many lending companies are interested in AI, but they are not sure where to start.
-                The most common mistake is starting with tools instead of business processes.
+                Most lending teams start with a tool — a chatbot, an AI writing assistant, a general-purpose platform —
+                before identifying the specific workflow they need to fix. That&apos;s why most AI pilots in lending fail
+                to show ROI. The tool is real; the problem it solves is vague.
               </p>
               <p>
-                AI should not be introduced just because it is popular. It should be used where it
-                clearly saves time, improves accuracy, or reduces repetitive manual work — without
-                creating new risks around data privacy or compliance.
+                The lending workflows worth automating are specific and measurable: document intake that takes three
+                staff-hours a day, missing-item follow-up that delays closings, internal policy questions that interrupt
+                your senior staff, compliance checklists that are manually completed every time. AI solves these.
+                Quantify the cost first, automate second.
               </p>
               <p>
-                This guide maps 10 practical areas where lending companies can apply AI in day-to-day
-                operations: from document intake and missing-item detection to customer communication
-                and internal knowledge management.
+                This guide maps 10 specific lending workflows where AI delivers measurable time and cost savings.
+                Each use case includes the business problem, what the AI does, and what changes after deployment.
+                The final section includes a scored priority table so you can identify your best first project.
               </p>
             </div>
           </section>
 
           {/* Framework */}
           <section className="mb-16">
-            <p className="section-label mb-4">HOW TO EVALUATE AN AI USE CASE</p>
+            <p className="section-label mb-4">THREE QUESTIONS BEFORE YOU AUTOMATE ANYTHING</p>
             <div className="rule mb-6 max-w-[5rem]" />
             <p className="mb-6 text-sm leading-relaxed text-[var(--text-muted)]">
-              Before introducing AI to any workflow, ask three questions:
+              Before spending on any AI tool or build, run every candidate workflow through these three tests:
             </p>
             <div className="grid gap-px border border-[var(--white-20)] bg-[var(--white-20)] sm:grid-cols-3">
               {[
-                { q: "Is the task repetitive?", body: "The same steps, the same inputs, the same outputs — every time." },
-                { q: "Does it use text or documents?", body: "Emails, applications, contracts, forms, notes, PDFs." },
-                { q: "Does it require high-level judgment?", body: "If yes, AI supports — it does not decide." },
+                {
+                  q: "Is the task repetitive and high-volume?",
+                  body: "The same steps, the same inputs, the same outputs — dozens or hundreds of times per week. If yes, every hour spent on it is a cost AI can eliminate.",
+                },
+                {
+                  q: "Does it involve text, documents, or emails?",
+                  body: "Applications, contracts, emails, forms, PDFs, notes. If the input is text, AI can read, classify, extract, and route it.",
+                },
+                {
+                  q: "Does the outcome carry legal or compliance weight?",
+                  body: "If a decision affects a borrower's application, a regulatory filing, or a credit outcome — AI assists and flags; a human decides and signs off.",
+                },
               ].map((item) => (
                 <div key={item.q} className="flex flex-col gap-3 bg-[var(--surface)] p-5">
-                  <p className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">SIGNAL</p>
+                  <p className="label-xs text-[var(--white-40)]">SIGNAL</p>
                   <p className="text-sm font-medium text-[var(--white-90)]">{item.q}</p>
                   <p className="text-xs leading-relaxed text-[var(--text-muted)]">{item.body}</p>
                 </div>
               ))}
             </div>
             <p className="mt-5 text-[0.72rem] leading-relaxed text-[var(--white-40)]">
-              Good AI use cases satisfy the first two conditions. For the third — where decisions carry legal,
-              financial, or compliance weight — AI should always support human judgment, never replace it.
+              The best first AI projects score high on conditions one and two, and low on condition three. That&apos;s
+              where you get fast ROI with minimal compliance risk. The 10 use cases in this guide are ranked on
+              exactly this basis.
             </p>
           </section>
 
           {/* Use cases */}
           <section className="mb-16">
-            <p className="section-label mb-4">THE 10 USE CASES</p>
-            <div className="rule mb-10 max-w-[5rem]" />
-            <div className="space-y-8">
-              {USE_CASES.map((uc) => (
-                <div
+            <p className="section-label mb-4">THE 10 USE CASES — RANKED BY ROI AND RISK</p>
+            <div className="rule mb-6 max-w-[5rem]" />
+            <div>
+              {USE_CASES.map((uc, i) => (
+                <FeatureSpotlight
                   key={uc.number}
-                  className="border border-[var(--white-20)] bg-[var(--surface)] p-5 md:p-6"
-                >
-                  <div className="mb-4 flex items-start justify-between gap-4">
-                    <div className="flex items-start gap-4">
-                      <span className="shrink-0 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-30)] sm:text-xs">
-                        {uc.number}
-                      </span>
-                      <h2 className="text-sm font-medium uppercase tracking-[0.12em] text-[var(--white-100)] sm:text-base">
-                        {uc.title}
-                      </h2>
-                    </div>
-                    <span className={`shrink-0 px-2 py-0.5 text-[0.55rem] uppercase tracking-[0.14em] ${
-                      uc.impact === "High"
-                        ? "bg-[var(--white-10)] text-[var(--white-80)]"
-                        : "border border-[var(--white-20)] text-[var(--white-40)]"
-                    }`}>
-                      {uc.impact} impact
-                    </span>
-                  </div>
-
-                  <div className="rule mb-4 opacity-40" />
-
-                  <div className="grid gap-5 md:grid-cols-2">
-                    <div>
-                      <p className="mb-2 text-[0.58rem] uppercase tracking-[0.2em] text-[var(--white-40)]">PROBLEM</p>
-                      <p className="text-[0.8rem] leading-relaxed text-[var(--text-muted)]">{uc.problem}</p>
-                    </div>
-                    <div>
-                      <p className="mb-2 text-[0.58rem] uppercase tracking-[0.2em] text-[var(--white-40)]">AI USE CASE</p>
-                      <p className="text-[0.8rem] leading-relaxed text-[var(--text-muted)]">{uc.useCase}</p>
-                    </div>
-                  </div>
-
-                  <div className="mt-5 grid gap-5 md:grid-cols-2">
-                    <div>
-                      <p className="mb-2 text-[0.58rem] uppercase tracking-[0.2em] text-[var(--white-40)]">EXAMPLE OUTPUT</p>
-                      <div className="space-y-1 border border-[var(--white-10)] bg-[var(--surface-elevated)] p-3">
-                        {uc.example.map((line) => (
-                          <p key={line} className="text-[0.72rem] leading-snug text-[var(--white-60)]">
-                            {line}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <p className="mb-2 text-[0.58rem] uppercase tracking-[0.2em] text-[var(--white-40)]">BUSINESS VALUE</p>
-                      <div className="space-y-1.5">
-                        {uc.value.map((v) => (
-                          <div key={v} className="flex items-start gap-2">
-                            <span className="mt-[0.15rem] shrink-0 text-[0.6rem] text-[var(--white-30)]">+</span>
-                            <span className="text-[0.72rem] leading-snug text-[var(--white-70)]">{v}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {uc.note ? (
-                    <div className="mt-4 border-t border-[var(--white-10)] pt-3">
-                      <p className="text-[0.65rem] leading-snug text-[var(--white-30)]">
-                        <span className="uppercase tracking-[0.14em]">Note: </span>{uc.note}
-                      </p>
-                    </div>
-                  ) : null}
-                </div>
+                  number={uc.number}
+                  impact={uc.impact}
+                  title={uc.title}
+                  description={`${uc.problem} ${uc.useCase}`}
+                  bullets={uc.value}
+                  note={uc.note}
+                  imageUrl={USE_CASE_IMAGES[i]}
+                  imageAlt={uc.title}
+                  reverse={i % 2 !== 0}
+                  recommended={uc.recommended}
+                  className={i === USE_CASES.length - 1 ? "border-b-0" : ""}
+                />
               ))}
             </div>
           </section>
 
           {/* Scoring matrix */}
           <section className="mb-16">
-            <p className="section-label mb-4">WHERE TO START</p>
+            <p className="section-label mb-4">WHICH USE CASE TO PILOT FIRST</p>
             <div className="rule mb-6 max-w-[5rem]" />
             <p className="mb-6 text-sm leading-relaxed text-[var(--text-muted)]">
               For most small and mid-sized lending companies, the safest first AI projects combine high impact
@@ -507,13 +480,13 @@ export default function AiGuideLendingPage() {
               </table>
             </div>
             <div className="mt-6 border border-[var(--white-20)] bg-[var(--surface)] p-5">
-              <p className="mb-3 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-60)]">RECOMMENDED FIRST PROJECTS</p>
+              <p className="mb-3 label-xs text-[var(--white-60)]">RECOMMENDED FIRST PROJECTS</p>
               <div className="space-y-2">
                 {[
-                  "Document classification — safe, visible, immediate ROI",
-                  "Missing document detection — directly reduces application delays",
-                  "Internal knowledge assistant — high value, no sensitive decisions",
-                  "AI-assisted email drafts with human approval — fast wins without automation risk",
+                  "Document intake and classification — highest volume, clearest ROI, lowest compliance risk",
+                  "Missing document detection — directly shortens your application-to-close cycle",
+                  "Internal knowledge assistant — immediate productivity gain with no borrower data involved",
+                  "AI-assisted email drafts with human approval — fast to implement, measurable response-time improvement",
                 ].map((item, i) => (
                   <div key={item} className="flex items-start gap-3">
                     <span className="mt-[0.15rem] shrink-0 text-[0.6rem] text-[var(--white-40)]">{String(i + 1).padStart(2, "0")}</span>
@@ -533,17 +506,18 @@ export default function AiGuideLendingPage() {
               transition={{ duration: 0.5 }}
               className="border border-[var(--white-20)] bg-[var(--surface)] p-6 md:p-10"
             >
-              <p className="section-label mb-4">FREE OFFER — LIMITED SPOTS</p>
+              <p className="section-label mb-4">FREE 30-MINUTE AI AUDIT FOR YOUR LENDING OPERATION</p>
               <div className="rule mb-6 max-w-[5rem]" />
 
               <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:gap-10">
                 <div>
                   <h2 className="hero-heading mb-4 text-[clamp(1.2rem,4vw,1.8rem)] leading-[1.2] text-[var(--white-100)]">
-                    FREE AI OPERATIONS AUDIT FOR YOUR LENDING BUSINESS
+                    FIND OUT EXACTLY WHERE AI WILL REDUCE YOUR COSTS
                   </h2>
                   <p className="mb-5 text-sm leading-relaxed text-[var(--text-muted)]">
-                    In a focused 30-minute session, we review your current workflows and tell you
-                    exactly where AI can reduce manual work — with no obligation to proceed.
+                    In 30 minutes, we review your current workflows and tell you: which of the 10 use cases fits
+                    your operation, what the time savings would realistically be, and what a first project would cost.
+                    No pitch, no obligation.
                   </p>
                   <div className="space-y-2">
                     {AUDIT_ITEMS.map((item) => (
@@ -567,7 +541,7 @@ export default function AiGuideLendingPage() {
                     </div>
                     <div className="border border-[var(--white-20)] bg-[var(--surface-elevated)] p-4">
                       <p className="mb-1 text-[0.58rem] uppercase tracking-[0.2em] text-[var(--white-40)]">OUTPUT</p>
-                      <p className="text-sm text-[var(--white-90)]">Specific use case recommendations for your operation</p>
+                      <p className="text-sm text-[var(--white-90)]">Written use case recommendations with ROI estimate for your top priority</p>
                     </div>
                   </div>
 
@@ -576,20 +550,20 @@ export default function AiGuideLendingPage() {
                       href="/contact"
                       className="btn-outline w-full text-center"
                     >
-                      BOOK YOUR FREE AUDIT
+                      BOOK YOUR FREE AUDIT →
                     </Link>
                     <p className="text-center text-[0.6rem] uppercase tracking-[0.14em] text-[var(--white-40)]">
-                      Response within 24 hours
+                      We respond within 24 hours to confirm a time.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 border-t border-[var(--white-10)] pt-5">
+              <div className="mt-8 pt-5">
                 <p className="text-[0.6rem] leading-relaxed text-[var(--white-30)]">
-                  Prepared by Deview Consulting — AI automation and workflow consulting for growing businesses.
-                  This guide is for informational purposes. AI recommendations should be validated against your
-                  specific compliance and data requirements before implementation.
+                  Prepared by DeView — AI automation and workflow consulting for lending and financial services operations.
+                  Recommendations in this guide are for planning purposes. All AI implementations should be validated
+                  against your specific compliance, data, and regulatory requirements before deployment.
                 </p>
               </div>
             </motion.div>

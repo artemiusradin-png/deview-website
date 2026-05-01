@@ -12,7 +12,7 @@ type SubpageNavProps = {
 export function SubpageNav({ backHref = `/#${RETRO_FEATURE_CARDS_ID}` }: SubpageNavProps) {
   const { dict } = useLocaleContext();
   return (
-    <div className="mb-8 flex flex-col gap-4 border-b border-[var(--white-20)] pb-5 sm:mb-10 sm:flex-row sm:items-center sm:justify-between">
+    <div className="mb-8 flex flex-col gap-4 pb-5 sm:mb-10 sm:flex-row sm:items-center sm:justify-between">
       <Link
         href="/"
         className="inline-flex min-h-11 items-center text-xs uppercase tracking-[0.24em] text-[var(--white-80)] sm:min-h-0"

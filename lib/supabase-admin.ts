@@ -16,8 +16,13 @@ export function getSupabaseAdmin(): SupabaseClient | null {
     return null;
   }
 
-  cached = createClient(url, serviceRoleKey, {
-    auth: { persistSession: false, autoRefreshToken: false },
-  });
+  try {
+    cached = createClient(url, serviceRoleKey, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+  } catch (e) {
+    console.error("[supabase-admin] createClient failed:", (e as Error).message);
+    cached = null;
+  }
   return cached;
 }

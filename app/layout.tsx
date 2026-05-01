@@ -1,15 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Red_Rose } from "next/font/google";
 import "./globals.css";
 import { AppProviders } from "./providers";
 import { ThemeSync } from "./theme-sync";
-
-const redRose = Red_Rose({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-red-rose",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "DeView | AI Consulting & Data Engineering",
@@ -32,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`h-full antialiased ${redRose.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className="h-full antialiased">
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
         <link

@@ -380,6 +380,7 @@ export const zhHK: Dictionary = {
       useCases: "應用",
       sendInquiry: "發送查詢",
       clientPortal: "客戶專區",
+      aiGuide: "AI 指南 — 貸款",
     },
   },
   subpages: {

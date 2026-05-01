@@ -101,7 +101,7 @@ export function RetroFeatureCards({ rootPrefix = "" }: { rootPrefix?: string }) 
   return (
     <section
       id={RETRO_FEATURE_CARDS_ID}
-      className="scroll-margin-header relative w-full border-t border-[var(--white-20)] bg-[var(--surface)] py-10 md:py-14"
+      className="scroll-margin-header relative w-full bg-[var(--surface)] py-10 md:py-14"
     >
       <div className="section-gutter w-full">
         <div className="flex w-full flex-col gap-[30px] md:flex-row md:items-stretch">

@@ -2,10 +2,15 @@
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
+import { ArrowRightIcon, Rocket, X } from "lucide-react";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { AnimatedFeatureSpotlightDemo } from "../components/AnimatedFeatureSpotlightDemo";
 import { HomeServicesSection } from "../components/HomeServicesSection";
 import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
+import { SelectedProjectsLogoMarquee } from "../components/SelectedProjectsLogoMarquee";
+import { Banner } from "@/components/ui/banner";
+import { Globe } from "@/components/ui/globe";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 
@@ -31,6 +36,7 @@ const HERO_VIDEO_CROSSFADE_SECONDS = 0.9;
 const ENTERPRISE_MODE_IDS = ["predictive", "conversational", "generative", "analytical"] as const;
 type EnterpriseModeId = (typeof ENTERPRISE_MODE_IDS)[number];
 
+
 export default function Home() {
   const { dict, locale, setLocale } = useLocaleContext();
   const enterpriseModes = ENTERPRISE_MODE_IDS.map((id) => ({
@@ -42,29 +48,17 @@ export default function Home() {
   const interfaceAiMessage = dict.hero.interfaceAi;
   const heroVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const enterpriseModesSectionRef = useRef<HTMLDivElement | null>(null);
-  const enterpriseStagePanelRef = useRef<HTMLElement | null>(null);
-  const [enterprisePinState, setEnterprisePinState] = useState<"before" | "pinned" | "past">("before");
   const [heroVideoState, setHeroVideoState] = useState<"loading" | "playing" | "fallback">("loading");
   const [activeHeroLayer, setActiveHeroLayer] = useState(0);
   const [fadingHeroLayer, setFadingHeroLayer] = useState<number | null>(null);
-  const [theme, setTheme] = useState<"dark" | "light">(() => {
-    if (typeof window === "undefined") {
-      return "dark";
-    }
-
-    const storedTheme = window.localStorage.getItem("deview-theme");
-    if (storedTheme === "light" || storedTheme === "dark") {
-      return storedTheme;
-    }
-
-    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-  });
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [activeEnterpriseMode, setActiveEnterpriseMode] = useState<EnterpriseModeId>(ENTERPRISE_MODE_IDS[0]);
   const [navVisible, setNavVisible] = useState(true);
   const [typedUserMessage, setTypedUserMessage] = useState("");
   const [typedAiMessage, setTypedAiMessage] = useState("");
   const [heroVideoPreload, setHeroVideoPreload] = useState<"auto" | "metadata">("metadata");
   const [isCompactEnterpriseLayout, setIsCompactEnterpriseLayout] = useState(false);
+  const [guideCtaVisible, setGuideCtaVisible] = useState(true);
   const standbyStartedRef = useRef(false);
   const crossfadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -207,48 +201,6 @@ export default function Home() {
     };
   }, [prefersReducedMotion, interfaceUserMessage, interfaceAiMessage]);
 
-  useEffect(() => {
-    if (isCompactEnterpriseLayout) {
-      return;
-    }
-
-    const wrapper = enterpriseModesSectionRef.current;
-
-    if (!wrapper) {
-      return;
-    }
-
-    const getNavHeight = () => {
-      const header = document.querySelector("header.nav-shell");
-      return header ? Math.round(header.getBoundingClientRect().height) : 64;
-    };
-
-    const update = () => {
-      const navHeight = getNavHeight();
-      const wrapperTop = wrapper.getBoundingClientRect().top + window.scrollY;
-      const wrapperHeight = wrapper.offsetHeight;
-      const panelHeight = window.innerHeight - navHeight;
-      const scrollY = window.scrollY;
-
-      if (scrollY < wrapperTop) {
-        setEnterprisePinState("before");
-      } else if (scrollY >= wrapperTop + wrapperHeight - panelHeight) {
-        setEnterprisePinState("past");
-      } else {
-        setEnterprisePinState("pinned");
-      }
-    };
-
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-
-    return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, [isCompactEnterpriseLayout]);
-
   useMotionValueEvent(enterpriseModesProgress, "change", (latest) => {
     if (prefersReducedMotion || isCompactEnterpriseLayout) {
       return;
@@ -379,25 +331,25 @@ export default function Home() {
   /** Intro copy: stay solid longer, then a tight scroll band with brief blur-out (readable, fast handoff to cards). */
   const enterpriseStageIntroOpacity = useTransform(
     enterpriseModesProgress,
-    prefersReducedMotion ? [0, 0.028, 0.032] : [0, 0.028, 0.038],
+    prefersReducedMotion ? [0, 0.12, 0.16] : [0, 0.12, 0.16],
     prefersReducedMotion ? [1, 1, 0] : [1, 1, 0],
   );
   const enterpriseStageIntroBlur = useTransform(
     enterpriseModesProgress,
-    prefersReducedMotion ? [0, 1] : [0, 0.024, 0.03, 0.036, 0.042],
-    prefersReducedMotion ? [0, 0] : [0, 0, 5, 14, 18],
+    prefersReducedMotion ? [0, 1] : [0, 0.11, 0.135, 0.16, 0.18],
+    prefersReducedMotion ? [0, 0] : [0, 0, 4, 12, 18],
   );
   const enterpriseStageIntroFilter = useTransform(enterpriseStageIntroBlur, (px) => `blur(${px}px)`);
   /** While intro is prominent, soften mode labels beneath so lines don’t read as stacked */
   const enterpriseCardsBlurPx = useTransform(
     enterpriseModesProgress,
-    prefersReducedMotion ? [0, 1] : [0, 0.012, 0.028, 0.05],
+    prefersReducedMotion ? [0, 1] : [0, 0.08, 0.14, 0.2],
     prefersReducedMotion ? [0, 0] : [11, 8, 2, 0],
   );
   const enterpriseCardsFilter = useTransform(enterpriseCardsBlurPx, (px) => `blur(${px}px)`);
   const enterpriseStageIntroY = useTransform(
     enterpriseModesProgress,
-    [0, 0.045],
+    [0, 0.18],
     prefersReducedMotion ? [0, 0] : [0, -22],
   );
 
@@ -412,7 +364,7 @@ export default function Home() {
       </a>
 
       <header
-        className={`nav-shell fixed inset-x-0 top-0 z-40 border-b border-[var(--white-20)] bg-gradient-to-b from-[var(--black-80)] to-transparent pt-[env(safe-area-inset-top)] ${
+        className={`nav-shell fixed inset-x-0 top-0 z-40 bg-gradient-to-b from-[var(--black-80)] to-transparent pt-[env(safe-area-inset-top)] ${
           navVisible ? "nav-shell-visible" : "nav-shell-hidden"
         }`}
       >
@@ -534,6 +486,40 @@ export default function Home() {
         </div>
       ) : null}
 
+      {guideCtaVisible ? (
+        <div className="group fixed bottom-5 right-4 z-50 w-[calc(100vw-2rem)] max-w-[23rem] sm:bottom-6 sm:right-6 sm:w-auto">
+          <a
+            href="/resources/ai-guide-lending"
+            className="block text-left no-underline"
+            aria-label="Open free AI guide with 10 lender use cases"
+          >
+            <Banner
+              show
+              variant="gradient"
+              title="Free AI guide"
+              description="10 lender use cases"
+              showShade
+              icon={<Rocket className="h-5 w-5" />}
+              className="w-full cursor-pointer border-[var(--white-20)] bg-[var(--white-10)] pr-9 text-[var(--text)] shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition-colors hover:bg-[var(--white-20)] sm:min-w-[21rem] sm:max-w-[23rem]"
+              action={
+                <span className="inline-flex h-9 items-center gap-1 rounded-md border border-[var(--white-20)] bg-[var(--white-10)] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text)]">
+                  Open
+                  <ArrowRightIcon className="h-3 w-3" />
+                </span>
+              }
+            />
+          </a>
+          <button
+            type="button"
+            className="absolute right-1.5 top-1.5 flex size-6 items-center justify-center rounded-md border border-[var(--white-20)] bg-[var(--black-80)] text-[var(--text)] opacity-0 shadow-sm transition-opacity hover:bg-[var(--white-20)] focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--white-40)] group-hover:opacity-100"
+            aria-label="Close free AI guide button"
+            onClick={() => setGuideCtaVisible(false)}
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      ) : null}
+
       <section
         id="hero"
         className="section-fullscreen section-fullscreen--hero relative flex items-center justify-center section-gutter py-12 md:py-0"
@@ -631,9 +617,6 @@ export default function Home() {
               </div>
             </div>
             <div className="flex w-full flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6 md:w-auto md:justify-end md:gap-8">
-              <a href="/resources/ai-guide-lending" className="btn-primary w-full text-center sm:w-auto">
-                FREE AI GUIDE: 10 lender use cases
-              </a>
               <a href="#contact" className="btn-outline w-full text-center sm:w-auto">
                 {dict.hero.inquire}
               </a>
@@ -650,17 +633,17 @@ export default function Home() {
 
       <section
         id="enterprise-ai"
-        className="enterprise-ai-section section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter"
+        className="enterprise-ai-section section-fullscreen relative bg-[var(--surface)] section-gutter"
       >
         <motion.div
           {...reveal}
           transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
+          className="mx-auto flex h-full min-h-0 max-w-6xl flex-col justify-between gap-6 overflow-hidden md:gap-10"
         >
-          <div className="section-shell">
+          <div className="section-shell flex min-h-0 flex-1 flex-col">
             <p className="section-label mb-3">{dict.enterpriseAi.label}</p>
             <div className="rule mb-6" />
-            <div className="grid gap-6 lg:grid-cols-[1.15fr_auto] lg:items-stretch lg:gap-10">
+            <div className="enterprise-difference-grid grid min-h-0 flex-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(12rem,16rem)] lg:items-stretch lg:gap-8">
               <div className="enterprise-opener">
                 <div className="enterprise-statement-stack">
                   <p
@@ -679,7 +662,7 @@ export default function Home() {
                     </>
                   ) : null}
                 </div>
-                <p className="enterprise-opener-body max-w-2xl text-[0.88rem] leading-relaxed text-[var(--text-muted)] md:text-[0.95rem]">
+                <p className="enterprise-opener-body max-w-3xl text-[0.84rem] leading-relaxed text-[var(--text-muted)] md:text-[0.9rem]">
                   {dict.enterpriseAi.opener}
                 </p>
 
@@ -690,32 +673,32 @@ export default function Home() {
                   whileInView="whileInView"
                   viewport={reveal.viewport}
                   transition={{ duration: 0.45, delay: 0.1 }}
-                  className="enterprise-system-compare mt-8 grid gap-px border border-[var(--white-20)] bg-[var(--white-20)] sm:grid-cols-2"
+                  className="enterprise-system-compare mt-6 grid gap-px border border-[var(--white-20)] bg-[var(--white-20)] md:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]"
                 >
                   {/* Left panel: interface only */}
-                  <div className="flex flex-col gap-5 bg-[var(--background)] p-5">
-                    <p className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-30)]">
+                  <div className="enterprise-compare-panel enterprise-compare-panel--chat flex flex-col bg-[var(--background)]">
+                    <p className="enterprise-compare-heading text-[var(--white-30)]">
                       {dict.enterpriseAi.compare.interfaceOnly}
                     </p>
 
-                    <div className="space-y-2">
+                    <div className="enterprise-chat-stack">
                       <div className="flex justify-end">
-                        <div className="max-w-[82%] border border-[var(--white-10)] px-3 py-2">
-                          <p className="mb-1 text-[0.52rem] uppercase tracking-[0.14em] text-[var(--white-30)]">
+                        <div className="enterprise-chat-bubble enterprise-chat-bubble--user">
+                          <p className="enterprise-chat-label text-[var(--white-30)]">
                             {dict.hero.labels.user}
                           </p>
-                          <p className="type-line text-[0.7rem] leading-snug text-[var(--white-40)]">
+                          <p className="enterprise-chat-copy text-[var(--white-40)]">
                             {displayedUserMessage}
                             <span className="type-caret" aria-hidden="true" />
                           </p>
                         </div>
                       </div>
                       <div className="flex justify-start">
-                        <div className="max-w-[82%] border border-[var(--white-10)] bg-[var(--surface)] px-3 py-2">
-                          <p className="mb-1 text-[0.52rem] uppercase tracking-[0.14em] text-[var(--white-30)]">
+                        <div className="enterprise-chat-bubble enterprise-chat-bubble--ai">
+                          <p className="enterprise-chat-label text-[var(--white-30)]">
                             {dict.hero.labels.ai}
                           </p>
-                          <p className="type-line text-[0.7rem] leading-snug text-[var(--white-30)]">
+                          <p className="enterprise-chat-copy enterprise-chat-copy--ai text-[var(--white-30)]">
                             {displayedAiMessage}
                             <span className="type-caret" aria-hidden="true" />
                           </p>
@@ -723,65 +706,65 @@ export default function Home() {
                       </div>
                     </div>
 
-                    <div className="mt-auto border-t border-[var(--white-10)] pt-4 space-y-1.5">
+                    <div className="enterprise-compare-bullets enterprise-compare-bullets--muted mt-auto">
                       {dict.enterpriseAi.compare.interfaceBullets.map((item) => (
-                        <div key={item} className="flex items-center gap-2">
+                        <div key={item} className="enterprise-compare-bullet">
                           <span className="shrink-0 text-[0.6rem] text-[var(--white-20)]">—</span>
-                          <span className="text-[0.62rem] uppercase tracking-[0.1em] text-[var(--white-30)]">{item}</span>
+                          <span>{item}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
                   {/* Right panel: operational AI */}
-                  <div className="flex flex-col gap-5 bg-[var(--surface)] p-5">
-                    <p className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-80)]">
+                  <div className="enterprise-compare-panel enterprise-compare-panel--system flex flex-col bg-[var(--surface)]">
+                    <p className="enterprise-compare-heading text-[var(--white-80)]">
                       {dict.enterpriseAi.compare.operational}
                     </p>
 
-                    <div className="grid min-w-0 grid-cols-[1fr_auto_1fr] items-start gap-1.5 sm:gap-2">
-                      <div className="min-w-0 space-y-1.5">
-                        <p className="mb-2 text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-40)]">
+                    <div className="enterprise-operational-flow">
+                      <div className="min-w-0">
+                        <p className="enterprise-flow-label text-[var(--white-40)]">
                           {dict.enterpriseAi.compare.inputs}
                         </p>
                         {dict.enterpriseAi.compare.sources.map((src) => (
-                          <div key={src} className="border border-[var(--white-20)] px-2 py-1.5 text-center">
-                            <span className="text-[0.6rem] uppercase tracking-[0.12em] text-[var(--white-60)]">{src}</span>
+                          <div key={src} className="enterprise-flow-tile">
+                            <span>{src}</span>
                           </div>
                         ))}
                       </div>
 
-                      <div className="flex flex-col items-center justify-center gap-1.5 px-1 pt-7">
-                        <span className="text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-60)]">
+                      <div className="enterprise-flow-ai">
+                        <span>
                           {dict.hero.labels.ai}
                         </span>
-                        <span className="text-[0.7rem] leading-none text-[var(--white-40)]">→</span>
+                        <span aria-hidden="true">→</span>
                       </div>
 
-                      <div className="min-w-0 space-y-1.5">
-                        <p className="mb-2 text-[0.5rem] uppercase tracking-[0.14em] text-[var(--white-40)]">
+                      <div className="min-w-0">
+                        <p className="enterprise-flow-label text-[var(--white-40)]">
                           {dict.enterpriseAi.compare.actions}
                         </p>
                         {dict.enterpriseAi.compare.outputs.map((out) => (
-                          <div key={out} className="border border-[var(--white-20)] px-2 py-1.5 text-center">
-                            <span className="text-[0.6rem] uppercase tracking-[0.12em] text-[var(--white-60)]">{out}</span>
+                          <div key={out} className="enterprise-flow-tile enterprise-flow-tile--active">
+                            <span>{out}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    <div className="mt-auto border-t border-[var(--white-20)] pt-4 space-y-1.5">
+                    <div className="enterprise-compare-bullets mt-auto">
                       {dict.enterpriseAi.compare.opBullets.map((item) => (
-                        <div key={item} className="flex items-center gap-2">
+                        <div key={item} className="enterprise-compare-bullet enterprise-compare-bullet--active">
                           <span className="shrink-0 text-[0.6rem] text-[var(--white-60)]">+</span>
-                          <span className="text-[0.62rem] uppercase tracking-[0.1em] text-[var(--white-80)]">{item}</span>
+                          <span>{item}</span>
                         </div>
                       ))}
                     </div>
                   </div>
                 </motion.div>
               </div>
-              <aside className="enterprise-opener-aside flex flex-col justify-end border-t border-[var(--white-20)] pt-8 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
+              <aside className="enterprise-opener-aside flex flex-col justify-end pt-8 lg:border-l lg:pt-0 lg:pl-10">
                 <div className="space-y-4 text-[0.72rem] text-[var(--white-80)] sm:text-xs">
                   <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-6 lg:flex-col lg:gap-1">
                     <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">
@@ -815,11 +798,16 @@ export default function Home() {
         className="enterprise-stage-scroll-wrapper"
       >
         <section
-          ref={enterpriseStagePanelRef}
-          className={`enterprise-mode-stage enterprise-mode-stage--frameless bg-[var(--background)]${
-            isCompactEnterpriseLayout ? "" : ` enterprise-mode-stage--${enterprisePinState}`
-          }`}
+          className="enterprise-mode-stage enterprise-mode-stage--frameless bg-[var(--background)]"
         >
+            {/* Globe — stays fixed with the pinned panel; text changes on scroll */}
+            <div
+              className="pointer-events-none absolute inset-y-0 right-0 z-[40] hidden w-[44%] overflow-visible md:block"
+              aria-hidden="true"
+            >
+              <Globe className="absolute left-[-8%] top-1/2 z-[40] w-[108%] max-w-none -translate-y-[48%]" />
+            </div>
+
             <motion.div
               className="enterprise-mode-stage-copy"
               style={{
@@ -927,60 +915,15 @@ export default function Home() {
 
       <RetroFeatureCards />
 
+      <SelectedProjectsLogoMarquee />
+
       <HomeServicesSection variant="home" />
 
-      <section className="resource-spotlight relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter py-14 md:py-20">
-        <motion.div
-          {...reveal}
-          transition={{ duration: 0.5 }}
-          className="resource-spotlight__inner mx-auto max-w-6xl"
-        >
-          <div className="resource-spotlight__grid grid gap-8 md:grid-cols-[1fr_auto] md:items-center md:gap-12">
-            <div>
-              <p className="resource-kicker mb-5">
-                <span>FREE RESOURCE</span>
-                <span>LENDING &amp; FINANCIAL SERVICES</span>
-              </p>
-              <h2 className="hero-heading mb-4 text-[clamp(1.3rem,4vw,2rem)] leading-[1.2] text-[var(--white-100)]">
-                <span className="resource-title-accent resource-title-accent--blue">10 PRACTICAL</span> AI USE CASES
-                <br />
-                FOR <span className="resource-title-accent resource-title-accent--green">LENDING COMPANIES</span>
-              </h2>
-              <p className="max-w-xl text-sm leading-relaxed text-[var(--text-muted)]">
-                A practical guide for small and mid-sized lending firms — where to reduce manual work,
-                which workflows are safe to automate, and how to start without putting confidential
-                data at risk.
-              </p>
-              <div className="resource-chip-row resource-chip-row--animated mt-6">
-                <span>Workflow automation</span>
-                <span>Data risk controls</span>
-                <span>Fast first projects</span>
-              </div>
-            </div>
-            <motion.div
-              className="resource-guide-card shrink-0"
-              whileHover={{ y: -4 }}
-              transition={{ type: "spring", stiffness: 260, damping: 22 }}
-            >
-              <div className="resource-guide-card__cover">
-                <span className="resource-guide-card__eyebrow">AI GUIDE</span>
-                <span className="resource-guide-card__number">10</span>
-                <span className="resource-guide-card__line">Use cases for lenders</span>
-              </div>
-              <a href="/resources/ai-guide-lending" className="btn-outline btn-resource whitespace-nowrap">
-                GET THE FREE GUIDE
-              </a>
-              <span className="resource-note">
-                No obligation — instant access
-              </span>
-            </motion.div>
-          </div>
-        </motion.div>
-      </section>
+      <AnimatedFeatureSpotlightDemo />
 
       <section
         id="contact"
-        className="contact-inquire-section scroll-margin-header relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter pb-[max(4rem,env(safe-area-inset-bottom))] pt-14 md:pb-[max(5.5rem,env(safe-area-inset-bottom))] md:pt-20"
+        className="contact-inquire-section scroll-margin-header relative bg-[var(--background)] section-gutter pb-[max(4rem,env(safe-area-inset-bottom))] pt-14 md:pb-[max(5.5rem,env(safe-area-inset-bottom))] md:pt-20"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-14 md:gap-[4.5rem]">
           <div className="max-w-md">

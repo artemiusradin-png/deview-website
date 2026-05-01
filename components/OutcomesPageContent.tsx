@@ -28,7 +28,7 @@ export function OutcomesPageContent() {
   const o = dict.outcomes;
 
   return (
-    <section className="section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--background)] section-gutter">
+    <section className="section-fullscreen relative bg-[var(--background)] section-gutter">
       <motion.div
         {...reveal}
         transition={{ duration: 0.5 }}
@@ -56,14 +56,14 @@ export function OutcomesPageContent() {
           initial="initial"
           whileInView="whileInView"
           viewport={stagger.viewport}
-          className="border-t border-[var(--white-20)]"
+          className=""
         >
           {o.items.map((outcome) => (
             <motion.article
               key={outcome.number}
               variants={cardMotion}
               transition={{ duration: 0.45 }}
-              className="group border-b border-[var(--white-20)] transition-colors duration-200 hover:bg-[var(--surface)]"
+              className="group transition-colors duration-200 hover:bg-[var(--surface)]"
             >
               <div className="grid gap-3 px-0 py-5 sm:gap-4 sm:py-6 md:grid-cols-[80px_220px_1fr] md:items-start md:gap-6 md:py-7">
                 <div className="text-[2.75rem] leading-none tracking-[-0.04em] text-[var(--white-10)] sm:text-[3.5rem] md:text-[4rem]">

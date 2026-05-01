@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { homeSectionCardMotion, homeSectionReveal, homeSectionStagger } from "@/lib/home-section-motion";
 import { solutionAreaAccents } from "@/lib/i18n/solution-area-accents";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
+import { NewsletterDialog } from "@/components/ui/newsletter-dialog";
 
 type HomeSolutionsSectionProps = {
   variant?: "home" | "standalone";
@@ -131,7 +132,7 @@ export function HomeSolutionsSection({ variant = "home" }: HomeSolutionsSectionP
     <section
       id={variant === "home" ? "solutions" : undefined}
       ref={solutionsSectionRef}
-      className="solutions-section section-fullscreen relative border-t border-[var(--white-20)] bg-[var(--surface)] section-gutter"
+      className="solutions-section section-fullscreen relative bg-[var(--surface)] section-gutter"
       style={
         {
           "--solutions-accent": activeSolution.accent,
@@ -225,6 +226,22 @@ export function HomeSolutionsSection({ variant = "home" }: HomeSolutionsSectionP
                   {area.title}
                 </p>
                 <p className="text-[0.8rem] text-[var(--text-muted)]">{area.body}</p>
+                <div className="mt-4 pt-4">
+                  <NewsletterDialog
+                    trigger={
+                      <button
+                        type="button"
+                        className="text-[0.7rem] uppercase tracking-[0.1em] text-[var(--text-muted)] transition-colors hover:text-[var(--white-100)]"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Get insights →
+                      </button>
+                    }
+                    title={area.title}
+                    description={`Subscribe to receive insights and examples for ${area.sector.toLowerCase()}.`}
+                    source={`use-case-${area.id}`}
+                  />
+                </div>
               </motion.div>
             ))}
           </div>

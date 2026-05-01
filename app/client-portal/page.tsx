@@ -4,6 +4,7 @@ import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SubpageNav } from "../../components/SubpageNav";
+import { Particles } from "@/components/ui/particles";
 
 const STORAGE_KEY = "deview-portal-ref";
 
@@ -64,7 +65,7 @@ function PortalView({ portal, onLogout }: { portal: Portal; onLogout: () => void
       transition={{ duration: 0.5 }}
     >
       {/* Header */}
-      <div className="mb-8 flex flex-col gap-2 border-b border-[var(--white-10)] pb-8 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mb-8 flex flex-col gap-2 pb-8 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="section-label mb-1">PROJECT PORTAL</p>
           <h1 className="hero-heading text-[clamp(1.4rem,4vw,2rem)]">{portal.projectTitle}</h1>
@@ -254,69 +255,99 @@ function LoginView({ onSuccess }: { onSuccess: (portal: Portal, reference: strin
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.55 }}
-      className="mx-auto max-w-md"
-    >
-      <p className="section-label mb-3">CLIENT PORTAL</p>
-      <div className="rule mb-6" />
-      <h1 className="hero-heading mb-2 text-[clamp(1.5rem,5vw,2rem)]">
-        Access your project portal
-      </h1>
-      <p className="mb-8 text-sm leading-relaxed text-[var(--text-muted)]">
-        Enter the Agreement Reference provided in your engagement documents to view your project
-        timeline and files.
-      </p>
+    <div className="relative h-screen w-full overflow-hidden bg-[var(--background)]">
+      {/* Particle field — needs a concrete pixel height, so parent is h-screen */}
+      <Particles
+        color="#888888"
+        quantity={120}
+        ease={20}
+        className="pointer-events-none absolute inset-0 z-0"
+      />
 
-      <form onSubmit={handleSubmit} className="space-y-5">
-        <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-          Agreement Reference
-          <input
-            ref={inputRef}
-            type="text"
-            value={reference}
-            onChange={(e) => setReference(e.target.value.toUpperCase())}
-            required
-            autoComplete="off"
-            spellCheck={false}
-            placeholder="e.g. CLIENT-ACME-2024"
-            className="min-h-14 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-5 py-4 font-mono text-base uppercase tracking-[0.2em] text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:normal-case placeholder:tracking-normal placeholder:text-[var(--white-30)] focus:border-[var(--white-80)]"
-          />
-        </label>
+      {/* Ambient blobs */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+        <div className="absolute left-0 top-0 h-[80vh] w-[35vw] -translate-y-1/2 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,rgba(255,255,255,0.05)_0,rgba(140,140,140,0.015)_50%,rgba(255,255,255,0.008)_80%)]" />
+        <div className="absolute left-0 top-0 h-[80vh] w-[15vw] -translate-y-1/2 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,0.03)_0,rgba(255,255,255,0.008)_80%,transparent_100%)] [translate:5%_-50%]" />
+        <div className="absolute left-0 top-0 h-[80vh] w-[15vw] -translate-y-1/2 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,0.03)_0,rgba(255,255,255,0.008)_80%,transparent_100%)]" />
+      </div>
 
-        <AnimatePresence>
-          {status === "error" && (
-            <motion.p
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="text-sm text-red-400"
-            >
-              {errorMsg}
-            </motion.p>
-          )}
-        </AnimatePresence>
+      {/* Back nav */}
+      <div className="absolute left-0 right-0 top-0 z-10 section-gutter">
+        <div className="mx-auto max-w-6xl pt-5">
+          <SubpageNav backHref="/" />
+        </div>
+      </div>
 
-        <button
-          type="submit"
-          disabled={status === "loading"}
-          className="w-full border border-[var(--white-40)] bg-transparent px-8 py-4 text-[0.7rem] uppercase tracking-[0.2em] text-[var(--white-90)] transition-colors hover:border-[var(--white-90)] hover:text-[var(--white-100)] disabled:cursor-not-allowed disabled:opacity-50"
+      {/* Centred card */}
+      <div className="relative z-10 flex h-full items-center justify-center overflow-y-auto px-4 py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55 }}
+          className="w-full max-w-sm space-y-6"
         >
-          {status === "loading" ? "Verifying…" : "Open Portal →"}
-        </button>
-      </form>
+          {/* Branding */}
+          <div className="space-y-1">
+            <p className="section-label">CLIENT PORTAL</p>
+            <h1 className="hero-heading text-[clamp(1.5rem,5vw,2rem)]">
+              Access your project portal
+            </h1>
+            <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+              Enter the Agreement Reference from your engagement documents to view your project
+              timeline and files.
+            </p>
+          </div>
 
-      <p className="mt-8 text-[0.65rem] leading-relaxed text-[var(--white-30)]">
-        Your reference is included in your signed engagement agreement from DeView. If you need
-        help, contact us at{" "}
-        <a href="mailto:hello@deview.ai" className="text-[var(--white-50)] hover:text-[var(--white-80)]">
-          hello@deview.ai
-        </a>
-        .
-      </p>
-    </motion.div>
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+              Agreement Reference
+              <input
+                ref={inputRef}
+                type="text"
+                value={reference}
+                onChange={(e) => setReference(e.target.value.toUpperCase())}
+                required
+                autoComplete="off"
+                spellCheck={false}
+                placeholder="e.g. CLIENT-ACME-2024"
+                className="min-h-14 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-5 py-4 font-mono text-base uppercase tracking-[0.2em] text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:normal-case placeholder:tracking-normal placeholder:text-[var(--white-30)] focus:border-[var(--white-80)]"
+              />
+            </label>
+
+            <AnimatePresence>
+              {status === "error" && (
+                <motion.p
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="text-sm text-red-400"
+                >
+                  {errorMsg}
+                </motion.p>
+              )}
+            </AnimatePresence>
+
+            <button
+              type="submit"
+              disabled={status === "loading"}
+              className="w-full border border-[var(--white-40)] bg-transparent px-8 py-4 text-[0.7rem] uppercase tracking-[0.2em] text-[var(--white-90)] transition-colors hover:border-[var(--white-90)] hover:text-[var(--white-100)] disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {status === "loading" ? "Verifying…" : "Open Portal →"}
+            </button>
+          </form>
+
+          {/* Footer note */}
+          <p className="text-[0.65rem] leading-relaxed text-[var(--white-30)]">
+            Your reference is included in your signed engagement agreement from DeView. Need
+            help?{" "}
+            <a href="mailto:hello@deview.ai" className="text-[var(--white-50)] hover:text-[var(--white-80)]">
+              hello@deview.ai
+            </a>
+          </p>
+        </motion.div>
+      </div>
+    </div>
   );
 }
 
@@ -344,7 +375,7 @@ export default function ClientPortalPage() {
   }, []);
 
   useEffect(() => {
-    tryAutoLoad();
+    void Promise.resolve().then(tryAutoLoad);
   }, [tryAutoLoad]);
 
   function handleSuccess(p: Portal, reference: string) {
@@ -358,13 +389,12 @@ export default function ClientPortalPage() {
   }
 
   if (!hydrated) {
-    return (
-      <div className="section-gutter min-h-screen bg-[var(--background)] pt-[calc(5.5rem+env(safe-area-inset-top))]">
-        <div className="mx-auto max-w-6xl">
-          <SubpageNav backHref="/" />
-        </div>
-      </div>
-    );
+    return <div className="min-h-screen bg-[var(--background)]" />;
+  }
+
+  // Login view is full-screen with its own layout
+  if (!portal) {
+    return <LoginView onSuccess={handleSuccess} />;
   }
 
   return (
@@ -375,11 +405,7 @@ export default function ClientPortalPage() {
 
           <div className="panel border border-[var(--white-20)] bg-[var(--surface)] p-5 md:p-10">
             <AnimatePresence mode="wait">
-              {portal ? (
-                <PortalView key="portal" portal={portal} onLogout={handleLogout} />
-              ) : (
-                <LoginView key="login" onSuccess={handleSuccess} />
-              )}
+              <PortalView key="portal" portal={portal} onLogout={handleLogout} />
             </AnimatePresence>
           </div>
         </div>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DEVIEW — Animated Logo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, sans-serif;
+      gap: 80px;
+      padding: 60px 40px;
+    }
+
+    h2 {
+      color: #555;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* ─── LOGO WRAPPER ─────────────────────────────── */
+    .logo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    /* ─── VARIANT CARD ─────────────────────────────── */
+    .variant {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* ══════════════════════════════════════════════════
+       LOGO 1 — Dark background (primary)
+    ══════════════════════════════════════════════════ */
+    .logo-dark {
+      background: #0a0a0f;
+      padding: 48px 64px;
+      border: 1px solid #1a1a2e;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* ══════════════════════════════════════════════════
+       LOGO 2 — Light background
+    ══════════════════════════════════════════════════ */
+    .logo-light {
+      background: #f8f8fa;
+      padding: 48px 64px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* ══════════════════════════════════════════════════
+       LOGO 3 — Gradient card
+    ══════════════════════════════════════════════════ */
+    .logo-gradient {
+      background: linear-gradient(135deg, #0f0f23 0%, #1a0a2e 50%, #0a1a2e 100%);
+      padding: 48px 64px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .logo-gradient::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(99,102,241,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* ─── WORDMARK ─────────────────────────────────── */
+    .wordmark {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .wordmark-name {
+      font-size: 28px;
+      font-weight: 200;
+      letter-spacing: 0.25em;
+      line-height: 1;
+    }
+    .wordmark-sub {
+      font-size: 8.5px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      opacity: 0.45;
+    }
+    .wordmark--dark .wordmark-name  { color: #e8e8f0; }
+    .wordmark--dark .wordmark-sub   { color: #e8e8f0; }
+    .wordmark--light .wordmark-name { color: #1a1a2e; }
+    .wordmark--light .wordmark-sub  { color: #1a1a2e; }
+
+    /* ─── MARK SVG ANIMATIONS ──────────────────────── */
+
+    /* --- draw-on for the lens paths --- */
+    @keyframes draw {
+      from { stroke-dashoffset: var(--len, 300); }
+      to   { stroke-dashoffset: 0; }
+    }
+
+    /* --- fade in fill after draw --- */
+    @keyframes fill-in {
+      0%, 60% { opacity: 0; }
+      100%    { opacity: 1; }
+    }
+
+    /* --- node pulse --- */
+    @keyframes node-pulse {
+      0%, 100% { r: 2.5px; opacity: 0.9; }
+      50%      { r: 4px;   opacity: 0.5; }
+    }
+
+    /* --- orbit ring --- */
+    @keyframes orbit {
+      from { stroke-dashoffset: 0; }
+      to   { stroke-dashoffset: -220; }
+    }
+
+    /* --- wordmark reveal --- */
+    @keyframes wordmark-in {
+      from { opacity: 0; transform: translateX(-8px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes sub-in {
+      from { opacity: 0; }
+      to   { opacity: 0.45; }
+    }
+
+    /* --- glow pulse on mark --- */
+    @keyframes glow-pulse {
+      0%, 100% { filter: drop-shadow(0 0 6px rgba(99,102,241,0.35)); }
+      50%      { filter: drop-shadow(0 0 14px rgba(99,102,241,0.7)); }
+    }
+
+    /* animated mark wrapper */
+    .mark-svg {
+      flex-shrink: 0;
+      animation: glow-pulse 3.5s ease-in-out infinite;
+      animation-delay: 1.8s;
+    }
+
+    /* lens outer ring — draw-on */
+    .lens-outer {
+      stroke-dasharray: 220;
+      stroke-dashoffset: 220;
+      animation: draw 1s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+
+    /* lens inner ellipse — draw-on with delay */
+    .lens-inner {
+      stroke-dasharray: 110;
+      stroke-dashoffset: 110;
+      animation: draw 0.8s cubic-bezier(0.4,0,0.2,1) 0.5s forwards;
+    }
+
+    /* pupil dot — fade in */
+    .lens-pupil {
+      opacity: 0;
+      animation: fill-in 0.5s ease 1.1s forwards;
+    }
+
+    /* orbit ring — continuous rotate after draw */
+    .orbit-ring {
+      stroke-dasharray: 8 4;
+      stroke-dashoffset: 0;
+      animation: orbit 8s linear 1.5s infinite;
+      opacity: 0;
+      animation-fill-mode: both;
+    }
+    @keyframes orbit-appear {
+      from { opacity: 0; }
+      to   { opacity: 0.35; }
+    }
+    .orbit-ring { animation: orbit-appear 0.4s ease 1.4s forwards, orbit 8s linear 1.8s infinite; }
+
+    /* neural nodes */
+    .n1 { animation: node-pulse 2.8s ease-in-out 1.6s infinite; }
+    .n2 { animation: node-pulse 2.8s ease-in-out 2.0s infinite; }
+    .n3 { animation: node-pulse 2.8s ease-in-out 2.3s infinite; }
+    .n4 { animation: node-pulse 2.8s ease-in-out 1.9s infinite; }
+
+    /* connecting lines — draw on */
+    .conn {
+      stroke-dasharray: 30;
+      stroke-dashoffset: 30;
+    }
+    .conn-1 { animation: draw 0.4s ease 1.65s forwards; }
+    .conn-2 { animation: draw 0.4s ease 1.75s forwards; }
+    .conn-3 { animation: draw 0.4s ease 1.85s forwards; }
+    .conn-4 { animation: draw 0.4s ease 1.95s forwards; }
+
+    /* wordmark */
+    .wm-name {
+      animation: wordmark-in 0.7s cubic-bezier(0.4,0,0.2,1) 0.8s both;
+    }
+    .wm-sub {
+      animation: sub-in 0.6s ease 1.3s both;
+    }
+
+    /* ── ICON-ONLY version ─── */
+    .logo-icon-only {
+      background: #0a0a0f;
+      padding: 40px;
+      border: 1px solid #1a1a2e;
+      border-radius: 2px;
+    }
+    .mark-lg {
+      animation: glow-pulse 3.5s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+
+    /* ── STACKED version ─── */
+    .logo-stacked {
+      background: #0a0a0f;
+      padding: 40px 60px;
+      border: 1px solid #1a1a2e;
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .wordmark-stacked {
+      text-align: center;
+    }
+    .wordmark-stacked .wordmark-name {
+      color: #e8e8f0;
+      font-size: 22px;
+      letter-spacing: 0.4em;
+    }
+    .wordmark-stacked .wordmark-sub {
+      color: #e8e8f0;
+    }
+
+    /* ── Grid layout ── */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      width: 100%;
+      max-width: 900px;
+    }
+    .grid .variant { gap: 12px; }
+
+    .row {
+      display: flex;
+      flex-direction: row;
+      gap: 2px;
+      width: 100%;
+      max-width: 900px;
+    }
+    .row .variant { flex: 1; }
+  </style>
+</head>
+<body>
+
+  <h2>DEVIEW — Logo System</h2>
+
+  <!-- ══ ROW 1: Horizontal logo variants ══ -->
+  <div class="row">
+
+    <!-- Dark primary -->
+    <div class="variant">
+      <h2>Primary · Dark</h2>
+      <div class="logo-dark">
+        <!-- MARK -->
+        <svg class="mark-svg" width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#6366F1"/>
+              <stop offset="100%" stop-color="#06B6D4"/>
+            </linearGradient>
+            <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8B5CF6"/>
+              <stop offset="100%" stop-color="#6366F1"/>
+            </linearGradient>
+          </defs>
+          <!-- Orbit ring -->
+          <ellipse class="orbit-ring" cx="26" cy="26" rx="23" ry="23" stroke="url(#g1)" stroke-width="0.75"/>
+          <!-- Outer lens -->
+          <ellipse class="lens-outer" cx="26" cy="26" rx="18" ry="18" stroke="url(#g1)" stroke-width="1.5" fill="none"/>
+          <!-- Inner ellipse -->
+          <ellipse class="lens-inner" cx="26" cy="26" rx="9" ry="9" stroke="url(#g2)" stroke-width="1.25" fill="none"/>
+          <!-- Pupil -->
+          <circle class="lens-pupil" cx="26" cy="26" r="3" fill="url(#g1)"/>
+          <!-- Neural nodes -->
+          <circle class="n1" cx="8"  cy="14" r="2.5" fill="#6366F1"/>
+          <circle class="n2" cx="44" cy="14" r="2.5" fill="#06B6D4"/>
+          <circle class="n3" cx="8"  cy="38" r="2.5" fill="#06B6D4"/>
+          <circle class="n4" cx="44" cy="38" r="2.5" fill="#6366F1"/>
+          <!-- Connecting lines -->
+          <line class="conn conn-1" x1="8"  y1="14" x2="12" y2="20" stroke="#6366F1" stroke-width="0.75" opacity="0.6"/>
+          <line class="conn conn-2" x1="44" y1="14" x2="40" y2="20" stroke="#06B6D4" stroke-width="0.75" opacity="0.6"/>
+          <line class="conn conn-3" x1="8"  y1="38" x2="12" y2="32" stroke="#06B6D4" stroke-width="0.75" opacity="0.6"/>
+          <line class="conn conn-4" x1="44" y1="38" x2="40" y2="32" stroke="#6366F1" stroke-width="0.75" opacity="0.6"/>
+        </svg>
+        <!-- WORDMARK -->
+        <div class="wordmark wordmark--dark">
+          <div class="wordmark-name wm-name">DEVIEW</div>
+          <div class="wordmark-sub wm-sub">AI Implementation</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gradient dark -->
+    <div class="variant">
+      <h2>Gradient · Dark</h2>
+      <div class="logo-gradient">
+        <svg class="mark-svg" width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#6366F1"/>
+              <stop offset="100%" stop-color="#06B6D4"/>
+            </linearGradient>
+            <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8B5CF6"/>
+              <stop offset="100%" stop-color="#6366F1"/>
+            </linearGradient>
+          </defs>
+          <ellipse class="orbit-ring" cx="26" cy="26" rx="23" ry="23" stroke="url(#g3)" stroke-width="0.75"/>
+          <ellipse class="lens-outer" cx="26" cy="26" rx="18" ry="18" stroke="url(#g3)" stroke-width="1.5" fill="none"/>
+          <ellipse class="lens-inner" cx="26" cy="26" rx="9" ry="9" stroke="url(#g4)" stroke-width="1.25" fill="none"/>
+          <circle class="lens-pupil" cx="26" cy="26" r="3" fill="url(#g3)"/>
+          <circle class="n1" cx="8"  cy="14" r="2.5" fill="#6366F1"/>
+          <circle class="n2" cx="44" cy="14" r="2.5" fill="#06B6D4"/>
+          <circle class="n3" cx="8"  cy="38" r="2.5" fill="#06B6D4"/>
+          <circle class="n4" cx="44" cy="38" r="2.5" fill="#6366F1"/>
+          <line class="conn conn-1" x1="8"  y1="14" x2="12" y2="20" stroke="#6366F1" stroke-width="0.75" opacity="0.6"/>
+          <line class="conn conn-2" x1="44" y1="14" x2="40" y2="20" stroke="#06B6D4" stroke-width="0.75" opacity="0.6"/>
+          <line class="conn conn-3" x1="8"  y1="38" x2="12" y2="32" stroke="#06B6D4" stroke-width="0.75" opacity="0.6"/>
+          <line class="conn conn-4" x1="44" y1="38" x2="40" y2="32" stroke="#6366F1" stroke-width="0.75" opacity="0.6"/>
+        </svg>
+        <div class="wordmark wordmark--dark">
+          <div class="wordmark-name wm-name">DEVIEW</div>
+          <div class="wordmark-sub wm-sub">AI Implementation</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ ROW 2: Light + Stacked ══ -->
+  <div class="row">
+
+    <!-- Light -->
+    <div class="variant">
+      <h2>Light Background</h2>
+      <div class="logo-light">
+        <svg class="mark-svg" width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g5" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#6366F1"/>
+              <stop offset="100%" stop-color="#06B6D4"/>
+            </linearGradient>
+            <linearGradient id="g6" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8B5CF6"/>
+              <stop offset="100%" stop-color="#6366F1"/>
+            </linearGradient>
+          </defs>
+          <ellipse class="orbit-ring" cx="26" cy="26" rx="23" ry="23" stroke="url(#g5)" stroke-width="0.75"/>
+          <ellipse class="lens-outer" cx="26" cy="26" rx="18" ry="18" stroke="url(#g5)" stroke-width="1.5" fill="none"/>
+          <ellipse class="lens-inner" cx="26" cy="26" rx="9" ry="9" stroke="url(#g6)" stroke-width="1.25" fill="none"/>
+          <circle class="lens-pupil" cx="26" cy="26" r="3" fill="url(#g5)"/>
+          <circle class="n1" cx="8"  cy="14" r="2.5" fill="#6366F1"/>
+          <circle class="n2" cx="44" cy="14" r="2.5" fill="#06B6D4"/>
+          <circle class="n3" cx="8"  cy="38" r="2.5" fill="#06B6D4"/>
+          <circle class="n4" cx="44" cy="38" r="2.5" fill="#6366F1"/>
+          <line class="conn conn-1" x1="8"  y1="14" x2="12" y2="20" stroke="#6366F1" stroke-width="0.75" opacity="0.5"/>
+          <line class="conn conn-2" x1="44" y1="14" x2="40" y2="20" stroke="#06B6D4" stroke-width="0.75" opacity="0.5"/>
+          <line class="conn conn-3" x1="8"  y1="38" x2="12" y2="32" stroke="#06B6D4" stroke-width="0.75" opacity="0.5"/>
+          <line class="conn conn-4" x1="44" y1="38" x2="40" y2="32" stroke="#6366F1" stroke-width="0.75" opacity="0.5"/>
+        </svg>
+        <div class="wordmark wordmark--light">
+          <div class="wordmark-name wm-name">DEVIEW</div>
+          <div class="wordmark-sub wm-sub">AI Implementation</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stacked -->
+    <div class="variant">
+      <h2>Stacked · Dark</h2>
+      <div class="logo-stacked">
+        <svg class="mark-lg" width="64" height="64" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g7" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#6366F1"/>
+              <stop offset="100%" stop-color="#06B6D4"/>
+            </linearGradient>
+            <linearGradient id="g8" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8B5CF6"/>
+              <stop offset="100%" stop-color="#6366F1"/>
+            </linearGradient>
+          </defs>
+          <ellipse class="orbit-ring" cx="26" cy="26" rx="23" ry="23" stroke="url(#g7)" stroke-width="0.75"/>
+          <ellipse class="lens-outer" cx="26" cy="26" rx="18" ry="18" stroke="url(#g7)" stroke-width="1.5" fill="none"/>
+          <ellipse class="lens-inner" cx="26" cy="26" rx="9" ry="9" stroke="url(#g8)" stroke-width="1.25" fill="none"/>
+          <circle class="lens-pupil" cx="26" cy="26" r="3" fill="url(#g7)"/>
+          <circle class="n1" cx="8"  cy="14" r="2.5" fill="#6366F1"/>
+          <circle class="n2" cx="44" cy="14" r="2.5" fill="#06B6D4"/>
+          <circle class="n3" cx="8"  cy="38" r="2.5" fill="#06B6D4"/>
+          <circle class="n4" cx="44" cy="38" r="2.5" fill="#6366F1"/>
+          <line class="conn conn-1" x1="8"  y1="14" x2="12" y2="20" stroke="#6366F1" stroke-width="0.75" opacity="0.6"/>
+          <line class="conn conn-2" x1="44" y1="14" x2="40" y2="20" stroke="#06B6D4" stroke-width="0.75" opacity="0.6"/>
+          <line class="conn conn-3" x1="8"  y1="38" x2="12" y2="32" stroke="#06B6D4" stroke-width="0.75" opacity="0.6"/>
+          <line class="conn conn-4" x1="44" y1="38" x2="40" y2="32" stroke="#6366F1" stroke-width="0.75" opacity="0.6"/>
+        </svg>
+        <div class="wordmark-stacked">
+          <div class="wordmark-name wm-name">DEVIEW</div>
+          <div class="wordmark-sub wm-sub">AI Implementation</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ ROW 3: Icon only ══ -->
+  <div class="row" style="justify-content:center;">
+    <div class="variant" style="align-items:center;">
+      <h2>Mark / Icon Only</h2>
+      <div class="logo-icon-only">
+        <svg class="mark-lg" width="80" height="80" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g9" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#6366F1"/>
+              <stop offset="100%" stop-color="#06B6D4"/>
+            </linearGradient>
+            <linearGradient id="g10" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8B5CF6"/>
+              <stop offset="100%" stop-color="#6366F1"/>
+            </linearGradient>
+          </defs>
+          <ellipse class="orbit-ring" cx="26" cy="26" rx="23" ry="23" stroke="url(#g9)" stroke-width="0.75"/>
+          <ellipse class="lens-outer" cx="26" cy="26" rx="18" ry="18" stroke="url(#g9)" stroke-width="1.5" fill="none"/>
+          <ellipse class="lens-inner" cx="26" cy="26" rx="9" ry="9" stroke="url(#g10)" stroke-width="1.25" fill="none"/>
+          <circle class="lens-pupil" cx="26" cy="26" r="3" fill="url(#g9)"/>
+          <circle class="n1" cx="8"  cy="14" r="2.5" fill="#6366F1"/>
+          <circle class="n2" cx="44" cy="14" r="2.5" fill="#06B6D4"/>
+          <circle class="n3" cx="8"  cy="38" r="2.5" fill="#06B6D4"/>
+          <circle class="n4" cx="44" cy="38" r="2.5" fill="#6366F1"/>
+          <line class="conn conn-1" x1="8"  y1="14" x2="12" y2="20" stroke="#6366F1" stroke-width="0.75" opacity="0.6"/>
+          <line class="conn conn-2" x1="44" y1="14" x2="40" y2="20" stroke="#06B6D4" stroke-width="0.75" opacity="0.6"/>
+          <line class="conn conn-3" x1="8"  y1="38" x2="12" y2="32" stroke="#06B6D4" stroke-width="0.75" opacity="0.6"/>
+          <line class="conn conn-4" x1="44" y1="38" x2="40" y2="32" stroke="#6366F1" stroke-width="0.75" opacity="0.6"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
