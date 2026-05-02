@@ -86,21 +86,21 @@ export function AnimatedFeatureSpotlightDemo() {
   }
 
   return (
-    <section className="w-full bg-[var(--background)] px-4 py-10 md:px-8 md:py-14">
-      <div className="relative mx-auto grid max-w-[78rem] overflow-hidden border border-[var(--white-20)] bg-[linear-gradient(135deg,rgba(141,231,189,0.12),rgba(255,255,255,0.035)_34%,rgba(255,255,255,0.02))] lg:grid-cols-[1.15fr_0.72fr]">
+    <section className="w-full bg-[var(--background)] px-3 py-10 md:px-6 md:py-14 xl:px-8">
+      <div className="relative mx-auto grid w-full max-w-[94rem] overflow-hidden border border-[var(--white-20)] bg-[linear-gradient(135deg,rgba(141,231,189,0.12),rgba(255,255,255,0.035)_34%,rgba(255,255,255,0.02))] lg:grid-cols-[1.45fr_0.72fr]">
         <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(141,231,189,0.75),transparent)]" />
 
-        <div className="relative flex flex-col justify-center p-6 md:p-8 lg:p-10">
+        <div className="relative flex flex-col justify-center p-6 md:p-8 lg:p-12 xl:p-14">
           <div className="mb-5 inline-flex w-fit items-center gap-2 border border-[#8de7bd]/40 bg-[#8de7bd]/10 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[#8de7bd]">
             <FileText className="h-3.5 w-3.5" />
             <span>Free AI automation guide for lenders</span>
           </div>
 
-          <h2 className="mb-4 max-w-3xl text-[clamp(1.75rem,4vw,3.4rem)] font-semibold leading-[0.98] tracking-tight text-foreground">
+          <h2 className="mb-4 max-w-5xl text-[clamp(1.75rem,4vw,3.65rem)] font-semibold leading-[0.98] tracking-tight text-foreground">
             Prioritize the <span className="text-primary">10 lending workflows</span> AI can automate safely
           </h2>
 
-          <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
+          <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground md:text-base">
             A practical field guide for small and mid-sized lending teams. Use it to identify manual-work bottlenecks,
             choose lower-risk pilots, and set borrower-data controls before automation reaches production.
           </p>

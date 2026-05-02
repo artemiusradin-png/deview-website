@@ -235,7 +235,7 @@ export default function Footer4Col({
             <p className="text-[0.65rem] text-[var(--white-30)]">
               {legal.copyright}
             </p>
-            <p className="mt-3 text-[0.65rem] text-[var(--white-25)] sm:mt-0">
+            <p className="mt-3 text-[0.65rem] text-[var(--white-30)] sm:mt-0">
               {legal.tagline}
             </p>
           </div>

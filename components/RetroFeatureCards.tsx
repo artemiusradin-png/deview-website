@@ -67,27 +67,25 @@ function RetroOutcomesCard({ className = "", rootPrefix = "" }: { className?: st
         aria-hidden="true"
       />
       <div className="relative z-10 flex h-full flex-col justify-end overflow-hidden p-4 text-left sm:p-5 md:p-5">
-        <ul className="mb-2.5 flex list-none flex-col gap-1.5 overflow-hidden p-0 md:gap-2">
+        {/* 2×2 metric grid — stat is the dominant element */}
+        <div className="mb-3 grid grid-cols-2 gap-1.5">
           {o.items.map((item) => (
-            <li key={item.number} className="border-l border-white/20 pl-2">
-              <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0">
-                <span className="text-[11px] tabular-nums text-white/45 sm:text-[11px]">{item.number}</span>
-                <span className="text-[10px] uppercase tracking-[0.12em] text-white/90 sm:text-[10px]">
-                  {item.label}
-                </span>
-              </div>
-              <p className="mt-0.5 text-[11px] leading-[1.4] text-white/65 sm:text-[10px]">{item.body}</p>
-            </li>
+            <div key={item.number} className="border border-white/12 bg-black/50 p-2.5 backdrop-blur-[2px]">
+              <p className="mb-1 text-[0.5rem] uppercase tracking-[0.18em] text-white/40">{item.label}</p>
+              <p className="font-mono text-[1.1rem] font-semibold leading-none tracking-[-0.02em] text-white/90 sm:text-[1.25rem]">
+                {(item as { stat?: string }).stat ?? item.number}
+              </p>
+            </div>
           ))}
-        </ul>
-        <div className="self-start overflow-hidden">
-          <span className="mb-1 block text-[12px] uppercase tracking-[0.12em] text-white/72 sm:text-[13px]">{o.label}</span>
-          <h2 className="mb-1 max-w-[20rem] whitespace-pre-line text-sm font-medium leading-snug text-white sm:mb-1.5 sm:text-base md:text-lg">
+        </div>
+        {/* Card title */}
+        <div className="self-start">
+          <span className="mb-1 block text-[10px] uppercase tracking-[0.16em] text-white/50">{o.label}</span>
+          <h2 className="max-w-[20rem] whitespace-pre-line text-sm font-medium leading-snug text-white sm:text-base md:text-lg">
             {o.titleL1}
             {"\n"}
             {o.titleL2}
           </h2>
-          <p className="max-w-[22rem] text-xs leading-snug text-white/70 sm:text-[11px] md:text-xs">{o.subtitle}</p>
         </div>
       </div>
     </Link>

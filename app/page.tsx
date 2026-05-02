@@ -13,6 +13,7 @@ import { Banner } from "@/components/ui/banner";
 import { Globe } from "@/components/ui/globe";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
+import { CtaCard } from "@/components/ui/call-to-action-cta";
 
 const fade = {
   initial: { opacity: 0, y: 18 },
@@ -923,42 +924,20 @@ export default function Home() {
 
       <section
         id="contact"
-        className="contact-inquire-section scroll-margin-header relative bg-[var(--background)] section-gutter pb-[max(4rem,env(safe-area-inset-bottom))] pt-14 md:pb-[max(5.5rem,env(safe-area-inset-bottom))] md:pt-20"
+        className="scroll-margin-header section-gutter pb-[max(4rem,env(safe-area-inset-bottom))] pt-14 md:pb-[max(5.5rem,env(safe-area-inset-bottom))] md:pt-20"
       >
-        <div className="mx-auto flex max-w-6xl flex-col gap-14 md:gap-[4.5rem]">
-          <div className="max-w-md">
-            <p className="section-label mb-4">{dict.contact.label}</p>
-            <div className="rule mb-8 max-w-[11rem]" />
-            <h2 className="mb-6 text-sm leading-snug text-[var(--white-100)]">
-              {dict.contact.titleL1}
-              <br />
-              {dict.contact.titleL2}
-            </h2>
-            <p className="text-sm leading-snug text-[var(--text-muted)]">
-              {dict.contact.leadL1}
-              <br />
-              {dict.contact.leadL2}
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-6 md:gap-8">
-            <div className="w-full py-1">
-              <a
-                href={`mailto:${SITE_INQUIRY_EMAIL}`}
-                className="contact-monument-anchor"
-                onMouseMove={handleContactMouseMove}
-                onMouseLeave={handleContactMouseLeave}
-              >
-                <span className="contact-monument-line">{dict.contact.monumentL1}</span>
-                <span className="contact-monument-line">{dict.contact.monumentL2}</span>
-              </a>
-            </div>
-            <div className="flex justify-start md:justify-end">
-              <a href="/contact" className="btn-outline">
-                {dict.contact.sendInquiry}
-              </a>
-            </div>
-          </div>
+        <div className="mx-auto max-w-6xl">
+          <CtaCard
+            title={`${dict.contact.titleL1} ${dict.contact.titleL2}`}
+            description={`${dict.contact.leadL1} ${dict.contact.leadL2}`}
+            buttonText={dict.contact.sendInquiry}
+            inputPlaceholder="Your email address"
+            imageSrc="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&auto=format&fit=crop&q=80"
+            onButtonClick={(email) => {
+              window.location.href = `/contact?email=${encodeURIComponent(email)}`;
+            }}
+            className="min-h-[320px]"
+          />
         </div>
       </section>
 
