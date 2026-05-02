@@ -155,13 +155,6 @@ export const en = {
     monumentL1: "deview.info",
     monumentL2: "@gmail.com",
     sendInquiry: "SEND INQUIRY →",
-    directEmail: "DIRECT EMAIL",
-    replyGuarantee: "Reply within 1–2 business days",
-    process: [
-      { step: "01", label: "DESCRIBE THE WORKFLOW" },
-      { step: "02", label: "WE SCOPE IT" },
-      { step: "03", label: "YOU GET A PLAN" },
-    ],
   },
   cards: {
     whatMakesEyebrow: "WHY ARCHITECTURE MATTERS",
