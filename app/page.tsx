@@ -924,9 +924,8 @@ export default function Home() {
 
       <section
         id="contact"
-        className="scroll-margin-header section-gutter pb-[max(4rem,env(safe-area-inset-bottom))] pt-14 md:pb-[max(5.5rem,env(safe-area-inset-bottom))] md:pt-20"
+        className="scroll-margin-header pb-[max(4rem,env(safe-area-inset-bottom))] pt-6 md:pb-[max(5.5rem,env(safe-area-inset-bottom))] md:pt-8"
       >
-        <div className="mx-auto max-w-6xl">
           <CtaCard
             title={`${dict.contact.titleL1} ${dict.contact.titleL2}`}
             description={`${dict.contact.leadL1} ${dict.contact.leadL2}`}
@@ -936,9 +935,8 @@ export default function Home() {
             onButtonClick={(email) => {
               window.location.href = `/contact?email=${encodeURIComponent(email)}`;
             }}
-            className="min-h-[320px]"
+            className="min-h-[320px] rounded-none border-0"
           />
-        </div>
       </section>
 
       <SiteFooter />
