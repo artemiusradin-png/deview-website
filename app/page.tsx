@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
-import { ArrowRightIcon, Rocket, X } from "lucide-react";
+import { Rocket, X } from "lucide-react";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { AnimatedFeatureSpotlightDemo } from "../components/AnimatedFeatureSpotlightDemo";
 import { HomeServicesSection } from "../components/HomeServicesSection";
@@ -501,22 +501,16 @@ export default function Home() {
               description="10 lender use cases"
               showShade
               icon={<Rocket className="h-5 w-5" />}
-              className="w-full cursor-pointer border-[var(--white-20)] bg-[var(--white-10)] pr-9 text-[var(--text)] shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition-colors hover:bg-[var(--white-20)] sm:min-w-[21rem] sm:max-w-[23rem]"
-              action={
-                <span className="inline-flex h-9 items-center gap-1 rounded-md border border-[var(--white-20)] bg-[var(--white-10)] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text)]">
-                  Open
-                  <ArrowRightIcon className="h-3 w-3" />
-                </span>
-              }
+              className="w-full cursor-pointer border-[var(--white-20)] bg-[var(--white-10)] pr-8 text-[var(--text)] shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition-colors hover:bg-[var(--white-20)] sm:min-w-[21rem] sm:max-w-[23rem]"
             />
           </a>
           <button
             type="button"
-            className="absolute right-1.5 top-1.5 flex size-6 items-center justify-center rounded-md border border-[var(--white-20)] bg-[var(--black-80)] text-[var(--text)] opacity-0 shadow-sm transition-opacity hover:bg-[var(--white-20)] focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--white-40)] group-hover:opacity-100"
-            aria-label="Close free AI guide button"
+            className="absolute right-2 top-1/2 -translate-y-1/2 flex size-6 items-center justify-center rounded-full text-[var(--white-40)] transition-colors hover:text-[var(--white-90)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--white-40)]"
+            aria-label="Dismiss free AI guide"
             onClick={() => setGuideCtaVisible(false)}
           >
-            <X className="h-3.5 w-3.5" />
+            <X className="h-4 w-4" />
           </button>
         </div>
       ) : null}
