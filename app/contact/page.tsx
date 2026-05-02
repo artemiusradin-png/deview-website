@@ -5,6 +5,7 @@ import { FormEvent, useState } from "react";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SubpageNav } from "../../components/SubpageNav";
 import RotatingEarth from "@/components/ui/wireframe-dotted-globe";
+import { InquiryCalendar } from "@/components/ui/inquiry-calendar";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL, buildInquiryMailto } from "@/lib/site-contact";
 
@@ -229,6 +230,7 @@ export default function ContactPage() {
                   </a>
                 </div>
               </div>
+              <InquiryCalendar />
             </motion.aside>
           </div>
         </div>

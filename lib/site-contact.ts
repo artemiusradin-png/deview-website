@@ -1,6 +1,9 @@
 /** Primary inbox for inquiries (mailto links + form delivery). */
 export const SITE_INQUIRY_EMAIL = "deview.info@gmail.com";
 
+/** Booking page URL (e.g. cal.com/deview). Set to empty string to hide the calendar CTA. */
+export const SITE_BOOKING_URL = "";
+
 /** Plain-text body for Resend / Web3Forms (excludes name; name is a separate field). */
 export function buildInquiryText(input: {
   email: string;
