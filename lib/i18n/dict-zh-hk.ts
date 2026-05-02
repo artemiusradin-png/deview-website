@@ -157,6 +157,13 @@ export const zhHK: Dictionary = {
     monumentL1: "deview.info",
     monumentL2: "@gmail.com",
     sendInquiry: "發送查詢 →",
+    directEmail: "直接電郵",
+    replyGuarantee: "1–2 個工作天內回覆",
+    process: [
+      { step: "01", label: "描述工作流程" },
+      { step: "02", label: "我們評估範圍" },
+      { step: "03", label: "您獲得方案" },
+    ],
   },
   cards: {
     whatMakesEyebrow: "何謂企業級",

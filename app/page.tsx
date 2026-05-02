@@ -925,39 +925,57 @@ export default function Home() {
         id="contact"
         className="contact-inquire-section scroll-margin-header relative bg-[var(--background)] section-gutter pb-[max(4rem,env(safe-area-inset-bottom))] pt-14 md:pb-[max(5.5rem,env(safe-area-inset-bottom))] md:pt-20"
       >
-        <div className="mx-auto flex max-w-6xl flex-col gap-14 md:gap-[4.5rem]">
-          <div className="max-w-md">
-            <p className="section-label mb-4">{dict.contact.label}</p>
-            <div className="rule mb-8 max-w-[11rem]" />
-            <h2 className="mb-6 text-sm leading-snug text-[var(--white-100)]">
-              {dict.contact.titleL1}
-              <br />
-              {dict.contact.titleL2}
-            </h2>
-            <p className="text-sm leading-snug text-[var(--text-muted)]">
-              {dict.contact.leadL1}
-              <br />
-              {dict.contact.leadL2}
-            </p>
-          </div>
+        <div className="mx-auto max-w-6xl">
+          <div className="contact-inquire-grid">
 
-          <div className="flex flex-col gap-6 md:gap-8">
-            <div className="w-full py-1">
-              <a
-                href={`mailto:${SITE_INQUIRY_EMAIL}`}
-                className="contact-monument-anchor"
-                onMouseMove={handleContactMouseMove}
-                onMouseLeave={handleContactMouseLeave}
-              >
-                <span className="contact-monument-line">{dict.contact.monumentL1}</span>
-                <span className="contact-monument-line">{dict.contact.monumentL2}</span>
-              </a>
+            {/* Left column — copy */}
+            <div className="contact-inquire-copy">
+              <p className="section-label mb-4">{dict.contact.label}</p>
+              <div className="rule mb-8 max-w-[11rem]" />
+              <h2 className="contact-inquire-heading mb-5">
+                {dict.contact.titleL1}
+                {" "}
+                {dict.contact.titleL2}
+              </h2>
+              <p className="mb-8 text-[0.88rem] leading-relaxed text-[var(--text-muted)]">
+                {dict.contact.leadL1}
+                {" "}
+                {dict.contact.leadL2}
+              </p>
+              <div className="contact-process-strip">
+                {dict.contact.process.map((item, i) => (
+                  <div key={item.step} className="contact-process-step">
+                    {i > 0 && <span className="contact-process-sep" aria-hidden="true">—</span>}
+                    <span className="contact-process-num">{item.step}</span>
+                    <span className="contact-process-label">{item.label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="flex justify-start md:justify-end">
-              <a href="/contact" className="btn-outline">
+
+            {/* Right column — action */}
+            <div className="contact-inquire-action border border-[var(--white-20)] p-6 md:p-8">
+              <p className="section-label mb-5 text-[var(--white-40)]">{dict.contact.directEmail}</p>
+              <div className="mb-6">
+                <a
+                  href={`mailto:${SITE_INQUIRY_EMAIL}`}
+                  className="contact-monument-anchor"
+                  onMouseMove={handleContactMouseMove}
+                  onMouseLeave={handleContactMouseLeave}
+                >
+                  <span className="contact-monument-line">{dict.contact.monumentL1}</span>
+                  <span className="contact-monument-line">{dict.contact.monumentL2}</span>
+                </a>
+              </div>
+              <div className="rule mb-6 opacity-40" />
+              <a href="/contact" className="contact-inquire-cta">
                 {dict.contact.sendInquiry}
               </a>
+              <p className="mt-3 text-[0.62rem] uppercase tracking-[0.14em] text-[var(--white-30)]">
+                {dict.contact.replyGuarantee}
+              </p>
             </div>
+
           </div>
         </div>
       </section>

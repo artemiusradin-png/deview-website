@@ -18,6 +18,7 @@
   --white-60: rgba(240, 240, 250, 0.6);
   --white-50: rgba(240, 240, 250, 0.5);
   --white-40: rgba(240, 240, 250, 0.4);
+  --white-30: rgba(240, 240, 250, 0.3);
   --white-20: rgba(240, 240, 250, 0.2);
   --white-10: rgba(240, 240, 250, 0.1);
 
@@ -70,6 +71,7 @@ html[data-theme="light"] {
   --white-60: rgba(19, 31, 47, 0.6);
   --white-50: rgba(19, 31, 47, 0.45);
   --white-40: rgba(19, 31, 47, 0.38);
+  --white-30: rgba(19, 31, 47, 0.26);
   --white-20: rgba(19, 31, 47, 0.18);
   --white-10: rgba(19, 31, 47, 0.08);
   --black-80: rgba(243, 238, 226, 0.92);
@@ -2814,6 +2816,95 @@ html[data-theme="light"] .carousel-fade-right {
   overflow-y: visible;
 }
 
+.contact-inquire-grid {
+  display: grid;
+  gap: 3rem;
+}
+
+@media (min-width: 900px) {
+  .contact-inquire-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+.contact-inquire-copy {
+  border-left: 2px solid var(--white-20);
+  padding-left: 1.5rem;
+}
+
+.contact-inquire-heading {
+  font-size: clamp(1.05rem, 2.6vw, 1.55rem);
+  line-height: 1.28;
+  color: var(--white-100);
+  margin: 0;
+}
+
+.contact-process-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  border-top: 1px solid var(--white-10);
+  padding-top: 1.25rem;
+}
+
+.contact-process-step {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.contact-process-sep {
+  color: var(--white-20);
+  font-size: 0.6rem;
+  margin-right: 0.3rem;
+}
+
+.contact-process-num {
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white-30);
+}
+
+.contact-process-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--white-50);
+}
+
+.contact-inquire-action {
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+}
+
+.contact-inquire-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  width: 100%;
+  padding: 0 1.5rem;
+  background: var(--white-90);
+  color: var(--background);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--white-90);
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.contact-inquire-cta:hover {
+  background: var(--white-100);
+  border-color: var(--white-100);
+}
+
 .contact-monument-anchor {
   --contact-x: 50%;
   --contact-y: 50%;
@@ -2831,11 +2922,11 @@ html[data-theme="light"] .carousel-fade-right {
 
 .contact-monument-line {
   display: block;
-  font-size: clamp(3.5rem, 8.5vw, 8rem);
+  font-size: clamp(2.2rem, 4.5vw, 4.2rem);
   letter-spacing: -0.02em;
-  line-height: 1.02;
-  word-break: normal;
-  white-space: nowrap;
+  line-height: 1.06;
+  word-break: break-all;
+  white-space: normal;
   overflow: visible;
   padding-inline: 0.06em;
   margin-inline: -0.06em;
@@ -2872,9 +2963,9 @@ html[data-theme="light"] .contact-monument-line {
     );
 }
 
-@media (max-width: 767px) {
+@media (max-width: 899px) {
   .contact-monument-line {
-    font-size: clamp(2.2rem, 9.2vw, 3.75rem);
+    font-size: clamp(2rem, 8vw, 3.5rem);
     letter-spacing: 0;
     line-height: 1.08;
   }
@@ -2882,7 +2973,6 @@ html[data-theme="light"] .contact-monument-line {
 
 @media (max-width: 480px) {
   .contact-monument-line {
-    white-space: normal;
     overflow-wrap: anywhere;
     word-break: break-word;
     line-height: 1.12;
