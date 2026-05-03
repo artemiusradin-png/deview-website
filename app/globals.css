@@ -455,7 +455,7 @@ html[data-theme="light"] .selected-project-logos__image {
 }
 
 html[data-theme="light"] .selected-project-logos__image--grandfg {
-  filter: none;
+  filter: invert(1);
 }
 
 .selected-project-logos__wordmark {
@@ -470,7 +470,7 @@ html[data-theme="light"] .selected-project-logos__image--grandfg {
 }
 
 html[data-theme="light"] .selected-project-logos__wordmark {
-  color: var(--background);
+  color: var(--white-100);
 }
 
 @keyframes selected-project-logo-marquee {
