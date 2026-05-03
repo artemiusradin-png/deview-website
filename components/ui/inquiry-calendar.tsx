@@ -56,21 +56,28 @@ export function InquiryCalendar() {
     setSubmitting(true);
     setError(null);
 
-    const res = await fetch("/api/cal/book", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: name.trim(),
-        email: email.trim(),
-        start: selectedSlot,
-        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      }),
-    });
+    let data: { uid?: string; start?: string; meetingUrl?: string; error?: string } = {};
+    try {
+      const res = await fetch("/api/cal/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          start: selectedSlot,
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        }),
+      });
+      data = await res.json();
+    } catch {
+      setSubmitting(false);
+      setError("Something went wrong. Please try again.");
+      return;
+    }
 
-    const data = await res.json() as { uid?: string; start?: string; meetingUrl?: string; error?: string };
     setSubmitting(false);
 
-    if (!res.ok || data.error) {
+    if (data.error) {
       setError(data.error ?? "Something went wrong. Please try again.");
       return;
     }
