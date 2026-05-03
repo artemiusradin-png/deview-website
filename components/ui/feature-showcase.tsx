@@ -65,18 +65,18 @@ export function FeatureShowcase({
 
   return (
     <section className={cn("w-full bg-background text-foreground", className)}>
-      <div className="container mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 py-16 md:grid-cols-12 md:py-20 lg:gap-14">
+      <div className="container mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-20 md:grid-cols-12 md:py-32 lg:gap-20">
         <div className="md:col-span-6">
-          <Badge variant="outline" className="mb-6">
+          <Badge variant="outline" className="mb-8">
             {eyebrow}
           </Badge>
 
-          <h2 className="text-balance text-4xl font-bold leading-[0.95] sm:text-5xl md:text-6xl">{title}</h2>
+          <h2 className="text-balance text-5xl font-bold leading-[0.95] sm:text-6xl md:text-7xl">{title}</h2>
 
-          {description ? <p className="mt-6 max-w-xl text-muted-foreground">{description}</p> : null}
+          {description ? <p className="mt-8 max-w-xl text-base text-muted-foreground md:text-lg">{description}</p> : null}
 
           {stats.length > 0 && (
-            <div className="mt-6 flex flex-wrap gap-2">
+            <div className="mt-8 flex flex-wrap gap-2">
               {stats.map((s, i) => (
                 <Badge key={i} variant="secondary" className="bg-muted text-foreground">
                   {s}
@@ -85,12 +85,12 @@ export function FeatureShowcase({
             </div>
           )}
 
-          <div className="mt-10 max-w-xl">
+          <div className="mt-12 max-w-xl">
             <Accordion type="single" collapsible className="w-full">
               {steps.map((step) => (
                 <AccordionItem key={step.id} value={step.id}>
-                  <AccordionTrigger className="text-left text-base font-medium">{step.title}</AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground">{step.text}</AccordionContent>
+                  <AccordionTrigger className="text-left text-base font-medium md:text-lg">{step.title}</AccordionTrigger>
+                  <AccordionContent className="text-sm text-muted-foreground md:text-base">{step.text}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>

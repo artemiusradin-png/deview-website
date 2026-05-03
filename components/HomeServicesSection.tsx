@@ -89,7 +89,7 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
         steps={projectSteps}
         tabs={selectedProjectTabs}
         defaultTab="grand-finance"
-        panelMinHeight={560}
+        panelMinHeight={720}
       />
     </section>
     </>
