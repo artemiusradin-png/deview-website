@@ -11,69 +11,38 @@ type HomeServicesSectionProps = {
   variant?: "home" | "standalone";
 };
 
-const projectHighlights = [
+const selectedProjectTabs: TabMedia[] = [
   {
-    id: "novartis",
-    title: "AI-Assisted Medical Information Workflows",
-    description:
-      "Deployed a retrieval-augmented system to surface compliant responses to medical queries — reducing manual triage time while maintaining audit trails required in regulated markets.",
-    href: "/contact",
-    image:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1080&q=80",
+    value: "grand-finance",
+    label: "Borrower Portal",
+    src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85",
+    alt: "Unified borrower data portal — Grand Finance Group",
   },
   {
-    id: "evdev",
-    title: "Internal Knowledge Base Copilot",
-    description:
-      "Built a semantic search layer over fragmented engineering documentation, letting development teams get precise answers from thousands of internal specs and changelogs.",
-    href: "/contact",
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1080&q=80",
-  },
-  {
-    id: "fact",
-    title: "Operational Reporting Automation",
-    description:
-      "Replaced manual data pulls and Excel assembly with an AI pipeline that generates weekly performance summaries, flags anomalies, and routes exceptions to the right teams.",
-    href: "/contact",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1080&q=80",
-  },
-  {
-    id: "fizkultura",
-    title: "Member Engagement and Support Automation",
-    description:
-      "Implemented an AI assistant that handles class scheduling queries, membership FAQs, and cancellation flows — freeing staff to focus on in-person coaching.",
-    href: "/contact",
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1080&q=80",
-  },
-  {
-    id: "jetfans",
-    title: "Fan Experience Personalisation Layer",
-    description:
-      "Designed a recommendation engine that surfaces relevant content, merchandise, and event offers to fans based on engagement signals — driving repeat visits and conversions.",
-    href: "/contact",
-    image:
-      "https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=1080&q=80",
-  },
-  {
-    id: "nextair",
-    title: "Ground Operations Decision Support",
-    description:
-      "Integrated AI-assisted triage into ground operations workflows, helping teams prioritise exceptions, log handoff notes faster, and reduce dwell time per aircraft turn.",
-    href: "/contact",
-    image:
-      "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1080&q=80",
+    value: "wilson-cpa",
+    label: "CPA Workspace",
+    src: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=85",
+    alt: "Compliance intelligence workspace — LKKS CPA Limited",
   },
 ];
 
-const selectedProjectTabs: TabMedia[] = projectHighlights.slice(0, 3).map((project) => ({
-  value: project.id,
-  label: project.id === "novartis" ? "Healthcare" : project.id === "evdev" ? "Knowledge" : "Reporting",
-  src: project.image,
-  alt: project.title,
-}));
+const projectSteps = [
+  {
+    id: "grand-finance",
+    title: "Unified Borrower Intelligence Portal — Grand Finance Group",
+    text: "Grand Finance operated across five disconnected loan management systems with no shared search layer. Loan officers spent 10–15 minutes per case manually opening each system to piece together a borrower's repayment history, application status, related-party exposure, and CRM notes.\n\nWe built a unified, search-first portal that consolidates all source databases into a single interface. A global search (by HKID, phone, name, or loan number) returns a complete 360° borrower profile across 13 structured modules: application metadata, partakers and related entities, credit reference data, uploaded documents, mortgage collateral, income/DSR calculations, full loan history, approval records, repayment timeline, collection conditions, CRM interaction log, and OCA/write-off records.\n\nTechnically: Next.js frontend over a Supabase PostgreSQL database with JSONB module columns for schema flexibility. An ETL layer pulls from legacy SQL databases, APIs, Excel exports, and web interfaces on a configurable schedule, with identity resolution to match records across systems. Role-based access control restricts sensitive modules (approval details, write-off data) to authorised roles. All lookups, profile views, and sensitive data access are logged for compliance. An embedded DeepSeek-powered assistant generates on-demand case summaries grounded on the open borrower record.",
+  },
+  {
+    id: "wilson-cpa",
+    title: "Compliance Intelligence Workspace — LKKS CPA Limited",
+    text: "LKKS CPA Limited needed to accelerate client onboarding and engagement review without reducing the rigour required in a regulated assurance practice. Reviews were slow because client risk, document completeness, and compliance flags lived across separate files with no unified view.\n\nWe built a purpose-designed internal workspace with HKID-based client search and a deterministic risk-scoring engine across 10 weighted factors: missing KYC documents (8 pts each), internal compliance flags (7 pts each), overseas exposure (9 pts), ownership structure complexity (Simple / Layered / Complex), sanctions screening status, PEP classification, dormant-but-active patterns, incomplete audit trail, late tax status, and escalated audit status. Clients scoring 60+ are classified Elevated Risk and surfaced immediately in the leadership dashboard.\n\nFor each client the system surfaces key strengths, specific concerns, structured compliance observations, and recommended next actions — all generated by a compliance-aware AI assistant that cites source records and enforces human review at every decision gate. The system deliberately avoids autonomous decisioning: every recommendation is framed as input for a professional reviewer, not a replacement for one.\n\nTechnically: Next.js 15 / React 19 / TypeScript on Vercel. The risk engine is deterministic and auditable — no black-box scoring. The AI assistant returns structured responses (heading, recommendation, confidence range, bullet analysis, mandatory review note) designed to fit inside an existing engagement workflow.",
+  },
+  {
+    id: "methodology",
+    title: "How both systems were delivered",
+    text: "Both engagements followed the same delivery structure. We started with an operational audit: mapping every data source, handoff point, compliance boundary, and permission boundary before writing a line of code. The AI layer was designed around those constraints, not around what the model could theoretically do.\n\nIntegration was built on top of the client's existing systems rather than alongside them — no separate demo environment, no parallel data entry. Each system shipped with documented data flows, role permission matrices, audit log schemas, and a handoff package the client team could run without us.\n\nBoth systems are live and in daily operational use.",
+  },
+];
 
 export function HomeServicesSection({ variant = "home" }: HomeServicesSectionProps) {
   const { dict } = useLocaleContext();
@@ -114,28 +83,12 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
       <FeatureShowcase
         className="bg-[var(--background)]"
         eyebrow="SELECTED PROJECTS"
-        title="Systems shaped around real operational constraints"
-        description="A closer look at the projects behind the logos: compliant medical information workflows, internal knowledge retrieval, and operational reporting automation."
-        stats={["Healthcare", "Internal knowledge", "Reporting automation"]}
-        steps={[
-          {
-            id: "step-1",
-            title: "Start with the workflow",
-            text: "Each engagement begins with the operating process, handoffs, data sources, and compliance boundaries that define what the AI system is allowed to do.",
-          },
-          {
-            id: "step-2",
-            title: "Build the AI layer around existing systems",
-            text: "We integrate retrieval, automation, and reporting with the tools already used by the team instead of forcing a separate demo environment.",
-          },
-          {
-            id: "step-3",
-            title: "Ship with measurement and handoff",
-            text: "Every delivery includes the operational checks, documentation, and adoption path needed for teams to run the system after launch.",
-          },
-        ]}
+        title="Two systems built around real operational constraints"
+        description="A borrower intelligence portal consolidating five loan management databases for a Hong Kong lending firm, and a risk-scored compliance workspace for a CPA and assurance practice. Both are in daily production use."
+        stats={["Hong Kong Financial Services", "CPA & Assurance", "AI-augmented"]}
+        steps={projectSteps}
         tabs={selectedProjectTabs}
-        defaultTab="evdev"
+        defaultTab="grand-finance"
         panelMinHeight={560}
       />
     </section>
