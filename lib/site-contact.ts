@@ -2,7 +2,7 @@
 export const SITE_INQUIRY_EMAIL = "deview.info@gmail.com";
 
 /** Booking page URL (e.g. cal.com/deview). Set to empty string to hide the calendar CTA. */
-export const SITE_BOOKING_URL = "";
+export const SITE_BOOKING_URL = "https://calendly.com/artemius-radin/new-meeting";
 
 /** Plain-text body for Resend / Web3Forms (excludes name; name is a separate field). */
 export function buildInquiryText(input: {
