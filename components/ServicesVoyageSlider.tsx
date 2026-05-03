@@ -76,7 +76,6 @@ export function ServicesVoyageSlider({ services: s }: Props) {
                               <span className="svoyage-slide__meta-k">{s.scope}</span>
                               {service.scope}
                             </div>
-                            <p className="svoyage-slide__body">{service.body}</p>
                             <div className="svoyage-slide__chips" aria-label={s.sectionLabel}>
                               {service.bullets.map((bullet) => (
                                 <span key={bullet} className="svoyage-slide__chip">
@@ -115,11 +114,10 @@ export function ServicesVoyageSlider({ services: s }: Props) {
             type="button"
             role="tab"
             aria-selected={index === currentIndex}
+            aria-label={service.label}
             className={`svoyage-slider__dot${index === currentIndex ? " is-active" : ""}`}
             onClick={() => setCurrentIndex(index)}
-          >
-            <span>{service.label}</span>
-          </button>
+          />
         ))}
       </div>
     </div>
