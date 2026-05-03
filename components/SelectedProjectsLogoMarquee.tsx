@@ -36,7 +36,7 @@ export function SelectedProjectsLogoMarquee() {
     >
       <div className="section-gutter mx-auto w-full max-w-6xl">
         <p id="selected-project-logos-title" className="section-label">
-          SELECTED PROJECTS
+          TRUSTED PARTNERS
         </p>
       </div>
 
