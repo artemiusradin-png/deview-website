@@ -14,13 +14,14 @@ export function InquiryCalendar() {
       <div className="overflow-hidden rounded-2xl border border-[var(--white-20)]">
         <InlineWidget
           url={SITE_BOOKING_URL}
-          styles={{ height: "660px", minWidth: "100%" }}
+          styles={{ height: "700px", minWidth: "100%", overflow: "hidden" }}
           pageSettings={{
             backgroundColor: "0a0a0a",
             hideEventTypeDetails: false,
-            hideLandingPageDetails: false,
+            hideLandingPageDetails: true,
             primaryColor: "6366f1",
             textColor: "ffffff",
+            hideGdprBanner: true,
           }}
         />
       </div>
