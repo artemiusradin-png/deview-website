@@ -190,12 +190,22 @@ export function Globe({
       const currentPhi = phi.current + pointerRotation.current;
       const size = width.current;
 
-      const themeOverrides = themeRef.current === "light" ? GLOBE_LIGHT_OVERRIDES : {};
+      const themeColors = themeRef.current === "light"
+        ? GLOBE_LIGHT_OVERRIDES
+        : {
+            dark: config.dark ?? 1,
+            diffuse: config.diffuse ?? 0.45,
+            mapBrightness: config.mapBrightness ?? 5.5,
+            mapBaseBrightness: config.mapBaseBrightness ?? 0.08,
+            baseColor: config.baseColor,
+            markerColor: config.markerColor,
+            glowColor: config.glowColor,
+          };
       globe.update({
         phi: currentPhi,
         width: size * 2,
         height: size * 2,
-        ...themeOverrides,
+        ...themeColors,
       });
 
       frame = requestAnimationFrame(animate);
