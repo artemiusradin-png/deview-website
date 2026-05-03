@@ -32,25 +32,25 @@ export function PerspectiveMarquee({
 }: PerspectiveMarqueeProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const rendered = [...logos, ...logos, ...logos];
+  const rendered = [...logos, ...logos, ...logos, ...logos, ...logos];
 
   useEffect(() => {
-    let frame = 0;
+    let offset = 0;
     let raf: number;
     const totalWidth = logos.length * itemWidth;
 
     const animate = () => {
-      frame += 1;
-      const offset = -((frame * pixelsPerFrame) % totalWidth);
+      offset += pixelsPerFrame;
+      if (offset >= totalWidth) offset -= totalWidth;
 
       if (trackRef.current) {
-        trackRef.current.style.transform = `translateX(${offset}px)`;
+        trackRef.current.style.transform = `translateX(${-offset}px)`;
       }
 
       itemRefs.current.forEach((el, i) => {
         if (!el) return;
         const center = trackRef.current?.parentElement?.offsetWidth ?? 1280;
-        const itemCenter = i * itemWidth + itemWidth / 2 + offset;
+        const itemCenter = i * itemWidth + itemWidth / 2 - offset;
         const norm = (itemCenter - center / 2) / (center / 2);
         const dist = Math.min(1, Math.abs(norm));
         el.style.filter = `blur(${dist * 5}px)`;
