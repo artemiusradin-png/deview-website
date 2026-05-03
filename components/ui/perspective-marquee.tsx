@@ -79,6 +79,7 @@ export function PerspectiveMarquee({
         <div
           style={{
             display: "flex",
+            flexWrap: "nowrap",
             alignItems: "center",
             transform: `translateX(${offset}px)`,
           }}

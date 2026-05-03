@@ -41,8 +41,8 @@ function MarqueeScene({ logos, isDark }: SceneProps) {
       rotateY={-28}
       rotateX={8}
       perspective={1200}
-      itemWidth={320}
-      logoHeight={90}
+      itemWidth={500}
+      logoHeight={100}
     />
   );
 }
@@ -74,6 +74,7 @@ export function SelectedProjectsLogoMarquee() {
           autoPlay
           loop
           clickToPlay={false}
+          acknowledgeRemotionLicense
         />
       </div>
 
