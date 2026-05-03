@@ -63,7 +63,8 @@ export function SelectedProjectsLogoMarquee() {
                   ]
                     .filter(Boolean)
                     .join(" ")}
-                  sizes="(max-width: 768px) 140px, 220px"
+                  style={{ width: "auto", height: "auto" }}
+                  sizes="(max-width: 768px) 200px, 320px"
                 />
                 {logo.name === "Nextair" ? (
                   <span className="selected-project-logos__wordmark">NEXTAIR</span>
