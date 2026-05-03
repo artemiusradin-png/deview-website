@@ -424,8 +424,8 @@ html[data-theme="light"] .service-client__logo--polyu {
 
 .selected-project-logos__item {
   display: flex;
-  width: clamp(8.5rem, 16vw, 16rem);
-  height: 6rem;
+  width: clamp(10rem, 18vw, 20rem);
+  height: 7.5rem;
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
@@ -436,14 +436,14 @@ html[data-theme="light"] .service-client__logo--polyu {
   display: block;
   width: auto;
   max-width: 100%;
-  max-height: 4.25rem;
+  max-height: 5.75rem;
   object-fit: contain;
   opacity: 0.94;
   filter: grayscale(1) brightness(0) invert(1);
 }
 
 .selected-project-logos__image--nextair {
-  max-height: 6.25rem;
+  max-height: 8rem;
 }
 
 .selected-project-logos__image--grandfg {
@@ -496,16 +496,16 @@ html[data-theme="light"] .selected-project-logos__wordmark {
   }
 
   .selected-project-logos__item {
-    width: 8.75rem;
-    height: 4.75rem;
+    width: 10rem;
+    height: 6rem;
   }
 
   .selected-project-logos__image {
-    max-height: 3.25rem;
+    max-height: 4.5rem;
   }
 
   .selected-project-logos__image--nextair {
-    max-height: 4.85rem;
+    max-height: 6rem;
   }
 }
 
