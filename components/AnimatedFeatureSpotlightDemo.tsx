@@ -87,11 +87,11 @@ export function AnimatedFeatureSpotlightDemo() {
 
   return (
     <section className="w-full bg-[var(--background)] px-3 py-10 md:px-6 md:py-14 xl:px-8">
-      <div className="relative mx-auto grid w-full max-w-[94rem] overflow-hidden border border-[var(--white-20)] bg-[linear-gradient(135deg,rgba(141,231,189,0.12),rgba(255,255,255,0.035)_34%,rgba(255,255,255,0.02))] lg:grid-cols-[1.45fr_0.72fr]">
-        <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(141,231,189,0.75),transparent)]" />
+      <div className="relative mx-auto grid w-full max-w-[94rem] overflow-hidden border border-[var(--white-20)] bg-[linear-gradient(135deg,rgba(26,51,128,0.18),rgba(128,184,255,0.04)_34%,rgba(255,255,255,0.01))] lg:grid-cols-[1.45fr_0.72fr]">
+        <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(128,184,255,0.65),transparent)]" />
 
         <div className="relative flex flex-col justify-center p-6 md:p-8 lg:p-12 xl:p-14">
-          <div className="mb-5 inline-flex w-fit items-center gap-2 border border-[#8de7bd]/40 bg-[#8de7bd]/10 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[#8de7bd]">
+          <div className="mb-5 inline-flex w-fit items-center gap-2 border border-[#80b8ff]/40 bg-[#80b8ff]/10 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[#80b8ff]">
             <FileText className="h-3.5 w-3.5" />
             <span>Free AI automation guide for lenders</span>
           </div>
@@ -108,7 +108,7 @@ export function AnimatedFeatureSpotlightDemo() {
           <div className="mt-6 grid gap-3">
             {INSIGHTS.map((item, index) => (
               <div key={item} className="grid grid-cols-[2rem_1fr] items-start gap-3">
-                <span className="flex h-8 w-8 items-center justify-center border border-[#8de7bd]/35 bg-[#8de7bd]/10 text-[0.65rem] font-semibold text-[#8de7bd]">
+                <span className="flex h-8 w-8 items-center justify-center border border-[#80b8ff]/35 bg-[#80b8ff]/10 text-[0.65rem] font-semibold text-[#80b8ff]">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <span className="text-xs leading-relaxed text-[var(--white-80)]">{item}</span>
@@ -144,7 +144,7 @@ export function AnimatedFeatureSpotlightDemo() {
           <div className="p-5">
             {status === "sent" ? (
               <div className="flex min-h-[12rem] flex-col justify-center">
-                <CheckCircle2 className="mb-3 h-8 w-8 text-[#8de7bd]" />
+                <CheckCircle2 className="mb-3 h-8 w-8 text-[#80b8ff]" />
                 <p className="mb-2 text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
                   Information sent
                 </p>
@@ -158,10 +158,10 @@ export function AnimatedFeatureSpotlightDemo() {
               <>
                 <div className="mb-4 flex items-center justify-between gap-4">
                   <div className="flex items-center gap-2">
-                    <Mail className="h-4 w-4 text-[#8de7bd]" />
+                    <Mail className="h-4 w-4 text-[#80b8ff]" />
                     <p className="text-sm font-medium text-foreground">Get the guide by email</p>
                   </div>
-                  <ShieldCheck className="h-5 w-5 text-[#8de7bd]" />
+                  <ShieldCheck className="h-5 w-5 text-[#80b8ff]" />
                 </div>
 
                 <form className="space-y-3" onSubmit={handleSubmit}>
@@ -181,7 +181,7 @@ export function AnimatedFeatureSpotlightDemo() {
                       />
                       <button
                         type="submit"
-                        className="absolute inset-y-1 end-1 flex h-10 w-10 items-center justify-center bg-[#8de7bd] text-black outline-offset-2 transition-colors hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+                        className="absolute inset-y-1 end-1 flex h-10 w-10 items-center justify-center bg-[#80b8ff] text-black outline-offset-2 transition-colors hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
                         aria-label={status === "sending" ? "Sending guide" : "Send guide"}
                         disabled={status === "sending"}
                       >
@@ -194,7 +194,7 @@ export function AnimatedFeatureSpotlightDemo() {
 
                   <button
                     type="submit"
-                    className="inline-flex min-h-11 w-full items-center justify-center bg-[#8de7bd] px-4 text-[0.72rem] font-semibold uppercase tracking-[0.15em] text-black transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
+                    className="inline-flex min-h-11 w-full items-center justify-center bg-[#80b8ff] px-4 text-[0.72rem] font-semibold uppercase tracking-[0.15em] text-black transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
                     disabled={status === "sending"}
                   >
                     {status === "sending" ? "Sending..." : "Send me the guide"}
