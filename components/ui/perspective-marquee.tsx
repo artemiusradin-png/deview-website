@@ -1,6 +1,6 @@
 "use client";
 
-import { useCurrentFrame } from "remotion";
+import { useEffect, useRef } from "react";
 
 export interface LogoItem {
   name: string;
@@ -16,9 +16,6 @@ export interface PerspectiveMarqueeProps {
   rotateY?: number;
   rotateX?: number;
   perspective?: number;
-  background?: string;
-  fadeColor?: string;
-  speed?: number;
   itemWidth?: number;
   logoHeight?: number;
 }
@@ -30,21 +27,45 @@ export function PerspectiveMarquee({
   rotateY = -28,
   rotateX = 8,
   perspective = 1200,
-  background = "#050505",
-  fadeColor = "#050505",
-  speed = 1,
-  itemWidth = 320,
-  logoHeight = 90,
+  itemWidth = 500,
+  logoHeight = 100,
 }: PerspectiveMarqueeProps) {
-  const frame = useCurrentFrame() * speed;
-  const totalWidth = logos.length * itemWidth;
-  const offset = -((frame * pixelsPerFrame) % totalWidth);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const rendered = [...logos, ...logos, ...logos];
 
-  const getFilter = (name: string) => {
-    if (name === "Grand Finance Group") {
-      return isDark ? "none" : "invert(1)";
-    }
+  useEffect(() => {
+    let frame = 0;
+    let raf: number;
+    const totalWidth = logos.length * itemWidth;
+
+    const animate = () => {
+      frame += 1;
+      const offset = -((frame * pixelsPerFrame) % totalWidth);
+
+      if (trackRef.current) {
+        trackRef.current.style.transform = `translateX(${offset}px)`;
+      }
+
+      itemRefs.current.forEach((el, i) => {
+        if (!el) return;
+        const center = trackRef.current?.parentElement?.offsetWidth ?? 1280;
+        const itemCenter = i * itemWidth + itemWidth / 2 + offset;
+        const norm = (itemCenter - center / 2) / (center / 2);
+        const dist = Math.min(1, Math.abs(norm));
+        el.style.filter = `blur(${dist * 5}px)`;
+        el.style.opacity = String(1 - dist * 0.4);
+      });
+
+      raf = requestAnimationFrame(animate);
+    };
+
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [logos, itemWidth, pixelsPerFrame]);
+
+  const imgFilter = (name: string) => {
+    if (name === "Grand Finance Group") return isDark ? "none" : "invert(1)";
     return isDark
       ? "grayscale(1) brightness(0) invert(1)"
       : "grayscale(1) brightness(0)";
@@ -57,12 +78,10 @@ export function PerspectiveMarquee({
   return (
     <div
       style={{
-        position: "absolute",
-        inset: 0,
-        background,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        position: "relative",
+        width: "100%",
+        height: "100%",
+        background: "var(--background)",
         overflow: "hidden",
         perspective: `${perspective}px`,
       }}
@@ -70,6 +89,7 @@ export function PerspectiveMarquee({
       <div
         style={{
           width: "100%",
+          height: "100%",
           display: "flex",
           alignItems: "center",
           transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
@@ -77,97 +97,85 @@ export function PerspectiveMarquee({
         }}
       >
         <div
-          style={{
-            display: "flex",
-            flexWrap: "nowrap",
-            alignItems: "center",
-            transform: `translateX(${offset}px)`,
-          }}
+          ref={trackRef}
+          style={{ display: "flex", flexWrap: "nowrap", alignItems: "center" }}
         >
-          {rendered.map((logo, i) => {
-            const itemCenter = i * itemWidth + itemWidth / 2 + offset;
-            const norm = (itemCenter - 640) / 640;
-            const distance = Math.min(1, Math.abs(norm));
-            const blurPx = distance * 4;
-            const opacity = 1 - distance * 0.35;
-
-            return (
-              <div
-                key={`${logo.name}-${i}`}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: itemWidth,
-                  height: logoHeight + 48,
-                  filter: `blur(${blurPx}px)`,
-                  opacity,
-                  flexShrink: 0,
-                }}
-              >
-                {logo.name === "Nextair" ? (
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={logo.src}
-                      alt=""
-                      style={{
-                        height: logoHeight * 1.25,
-                        width: "auto",
-                        filter: getFilter(logo.name),
-                        objectFit: "contain",
-                      }}
-                    />
-                    <span
-                      style={{
-                        color: wordmarkColor,
-                        fontSize: logoHeight * 0.6,
-                        fontStyle: "italic",
-                        fontWeight: 700,
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        lineHeight: 1,
-                      }}
-                    >
-                      NEXTAIR
-                    </span>
-                  </div>
-                ) : (
-                  // eslint-disable-next-line @next/next/no-img-element
+          {rendered.map((logo, i) => (
+            <div
+              key={`${logo.name}-${i}`}
+              ref={(el) => { itemRefs.current[i] = el; }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: itemWidth,
+                height: logoHeight + 48,
+                flexShrink: 0,
+              }}
+            >
+              {logo.name === "Nextair" ? (
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={logo.src}
                     alt=""
                     style={{
-                      height: logoHeight,
-                      maxWidth: itemWidth - 40,
+                      height: logoHeight * 1.25,
                       width: "auto",
-                      filter: getFilter(logo.name),
+                      filter: imgFilter(logo.name),
                       objectFit: "contain",
                     }}
                   />
-                )}
-              </div>
-            );
-          })}
+                  <span
+                    style={{
+                      color: wordmarkColor,
+                      fontSize: logoHeight * 0.6,
+                      fontStyle: "italic",
+                      fontWeight: 700,
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      lineHeight: 1,
+                    }}
+                  >
+                    NEXTAIR
+                  </span>
+                </div>
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={logo.src}
+                  alt=""
+                  style={{
+                    height: logoHeight,
+                    maxWidth: itemWidth - 40,
+                    width: "auto",
+                    filter: imgFilter(logo.name),
+                    objectFit: "contain",
+                  }}
+                />
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Left/right fade */}
+      {/* Edge fades */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           pointerEvents: "none",
-          background: `linear-gradient(90deg, ${fadeColor} 0%, transparent 15%, transparent 85%, ${fadeColor} 100%)`,
+          background:
+            "linear-gradient(90deg, var(--background) 0%, transparent 15%, transparent 85%, var(--background) 100%)",
         }}
       />
-      {/* Top/bottom fade */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           pointerEvents: "none",
-          background: `linear-gradient(180deg, ${fadeColor} 0%, transparent 22%, transparent 78%, ${fadeColor} 100%)`,
+          background:
+            "linear-gradient(180deg, var(--background) 0%, transparent 25%, transparent 75%, var(--background) 100%)",
         }}
       />
     </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { Player } from "@remotion/player";
 import { PerspectiveMarquee, type LogoItem } from "@/components/ui/perspective-marquee";
 
 const CLIENT_LOGOS: LogoItem[] = [
@@ -27,26 +26,6 @@ function useIsDark() {
   return isDark;
 }
 
-type SceneProps = { logos: LogoItem[]; isDark: boolean };
-
-function MarqueeScene({ logos, isDark }: SceneProps) {
-  const bg = isDark ? "#050505" : "#fbf7ee";
-  return (
-    <PerspectiveMarquee
-      logos={logos}
-      isDark={isDark}
-      background={bg}
-      fadeColor={bg}
-      pixelsPerFrame={1.8}
-      rotateY={-28}
-      rotateX={8}
-      perspective={1200}
-      itemWidth={500}
-      logoHeight={100}
-    />
-  );
-}
-
 export function SelectedProjectsLogoMarquee() {
   const isDark = useIsDark();
 
@@ -62,19 +41,15 @@ export function SelectedProjectsLogoMarquee() {
       </div>
 
       <div className="mt-8" style={{ height: "280px" }}>
-        <Player
-          component={MarqueeScene}
-          inputProps={{ logos: CLIENT_LOGOS, isDark }}
-          durationInFrames={9999}
-          fps={30}
-          compositionWidth={1280}
-          compositionHeight={280}
-          style={{ width: "100%", height: "100%" }}
-          controls={false}
-          autoPlay
-          loop
-          clickToPlay={false}
-          acknowledgeRemotionLicense
+        <PerspectiveMarquee
+          logos={CLIENT_LOGOS}
+          isDark={isDark}
+          pixelsPerFrame={1.8}
+          rotateY={-28}
+          rotateX={8}
+          perspective={1200}
+          itemWidth={500}
+          logoHeight={100}
         />
       </div>
 
