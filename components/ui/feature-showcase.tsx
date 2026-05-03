@@ -65,13 +65,13 @@ export function FeatureShowcase({
 
   return (
     <section className={cn("w-full bg-background text-foreground", className)}>
-      <div className="container mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-20 md:grid-cols-12 md:py-32 lg:gap-20">
+      <div className="section-gutter grid w-full grid-cols-1 gap-12 py-20 md:grid-cols-12 md:py-32 lg:gap-20">
         <div className="md:col-span-6">
           <Badge variant="outline" className="mb-8">
             {eyebrow}
           </Badge>
 
-          <h2 className="text-balance text-5xl font-bold leading-[0.95] sm:text-6xl md:text-7xl">{title}</h2>
+          <h2 className="text-balance font-semibold leading-[0.98] tracking-tight text-[clamp(2rem,5vw,4rem)]">{title}</h2>
 
           {description ? <p className="mt-8 max-w-xl text-base text-muted-foreground md:text-lg">{description}</p> : null}
 
