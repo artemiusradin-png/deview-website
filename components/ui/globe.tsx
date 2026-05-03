@@ -78,6 +78,17 @@ const GLOBE_CONFIG: COBEOptions = {
   })),
 };
 
+// Overrides applied in light theme — greyscale planet
+const GLOBE_LIGHT_OVERRIDES: Partial<COBEOptions> = {
+  dark: 0,
+  diffuse: 1.6,
+  mapBrightness: 3.8,
+  mapBaseBrightness: 0.22,
+  baseColor: [0.54, 0.55, 0.57],
+  markerColor: [0.1, 0.1, 0.12],
+  glowColor: [0.72, 0.72, 0.74],
+};
+
 const ROTATION_SPEED = 0.006;               // radians per frame (~2× faster)
 
 type AnchorLabelStyle = CSSProperties & {
@@ -133,6 +144,7 @@ export function Globe({
   const pointerInteracting = useRef<number | null>(null);
   const pointerInteractionMovement = useRef(0);
   const pointerRotation = useRef(0);
+  const themeRef = useRef<"dark" | "light">("dark");
 
   const updatePointerInteraction = (value: number | null) => {
     pointerInteracting.current = value;
@@ -154,6 +166,15 @@ export function Globe({
   }, []);
 
   useEffect(() => {
+    themeRef.current = (document.documentElement.dataset.theme as "dark" | "light") || "dark";
+    const obs = new MutationObserver(() => {
+      themeRef.current = (document.documentElement.dataset.theme as "dark" | "light") || "dark";
+    });
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
     window.addEventListener("resize", onResize);
     onResize();
 
@@ -169,10 +190,12 @@ export function Globe({
       const currentPhi = phi.current + pointerRotation.current;
       const size = width.current;
 
+      const themeOverrides = themeRef.current === "light" ? GLOBE_LIGHT_OVERRIDES : {};
       globe.update({
         phi: currentPhi,
         width: size * 2,
         height: size * 2,
+        ...themeOverrides,
       });
 
       frame = requestAnimationFrame(animate);

@@ -916,20 +916,17 @@ export default function Home() {
 
       <AnimatedFeatureSpotlightDemo />
 
-      <section
-        id="contact"
-        className="scroll-margin-header pb-[max(4rem,env(safe-area-inset-bottom))] pt-6 md:pb-[max(5.5rem,env(safe-area-inset-bottom))] md:pt-8"
-      >
-          <CtaCard
-            title={`${dict.contact.titleL1} ${dict.contact.titleL2}`}
-            description={`${dict.contact.leadL1} ${dict.contact.leadL2}`}
-            buttonText={dict.contact.sendInquiry}
-            inputPlaceholder="Your email address"
-            onButtonClick={(email) => {
-              window.location.href = `/contact?email=${encodeURIComponent(email)}`;
-            }}
-            className="min-h-[320px]"
-          />
+      <section id="contact" className="scroll-margin-header pt-6 md:pt-8">
+        <CtaCard
+          title={`${dict.contact.titleL1} ${dict.contact.titleL2}`}
+          description={`${dict.contact.leadL1} ${dict.contact.leadL2}`}
+          buttonText={dict.contact.sendInquiry}
+          inputPlaceholder="Your email address"
+          onButtonClick={(email) => {
+            window.location.href = `/contact?email=${encodeURIComponent(email)}`;
+          }}
+          className="min-h-[320px]"
+        />
       </section>
 
       <SiteFooter />
