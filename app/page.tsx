@@ -925,11 +925,10 @@ export default function Home() {
             description={`${dict.contact.leadL1} ${dict.contact.leadL2}`}
             buttonText={dict.contact.sendInquiry}
             inputPlaceholder="Your email address"
-            imageSrc="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&auto=format&fit=crop&q=80"
             onButtonClick={(email) => {
               window.location.href = `/contact?email=${encodeURIComponent(email)}`;
             }}
-            className="min-h-[320px] rounded-none border-0"
+            className="min-h-[320px]"
           />
       </section>
 
