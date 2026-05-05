@@ -385,7 +385,7 @@ export const en = {
     contactUs: "Contact us",
     emailDirect: "Email direct",
     brandStrong: "DeView AI consulting",
-    loc: "Hong Kong · remote for North America and Europe.",
+    loc: "Asia-Pacific, Europe, Americas",
     stack: "AI connected to your CRM, ERP, documents, and workflows — not alongside them.",
     about: "About",
     aboutCopy: "We build AI systems that do the work, not just answer questions — connected to your real data, with a full audit trail.",

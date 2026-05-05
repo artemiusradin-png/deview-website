@@ -96,9 +96,6 @@ export function FeatureShowcase({
             </Accordion>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg">
-                <Link href="/contact">Get started</Link>
-              </Button>
               <Button asChild size="lg" variant="secondary" className="border border-border bg-transparent">
                 <Link href="/contact">Discuss a project</Link>
               </Button>
