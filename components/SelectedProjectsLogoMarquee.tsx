@@ -7,7 +7,7 @@ const CLIENT_LOGOS: LogoItem[] = [
   { name: "EVDEV",               src: "/client-logos/evdev.svg",         width: 96,  height: 19  },
   { name: "Fizkultura",          src: "/client-logos/fizkultura.png",    width: 118, height: 79  },
   { name: "Nextair",             src: "/client-logos/nextair.png",       width: 104, height: 100 },
-  { name: "Grand Finance Group", src: "/client-logos/grandfg-white.png", width: 266, height: 62  },
+  { name: "Lending Platform",    src: "/client-logos/grandfg-white.png", width: 266, height: 62  },
 ];
 
 function useIsDark() {
@@ -28,6 +28,15 @@ function useIsDark() {
 
 export function SelectedProjectsLogoMarquee() {
   const isDark = useIsDark();
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const apply = () => setIsMobile(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
 
   return (
     <section
@@ -44,12 +53,12 @@ export function SelectedProjectsLogoMarquee() {
         <PerspectiveMarquee
           logos={CLIENT_LOGOS}
           isDark={isDark}
-          pixelsPerFrame={1.8}
+          pixelsPerFrame={isMobile ? 2.8 : 1.8}
           rotateY={-28}
           rotateX={8}
           perspective={1200}
-          itemWidth={500}
-          logoHeight={100}
+          itemWidth={isMobile ? 360 : 500}
+          logoHeight={isMobile ? 70 : 100}
         />
       </div>
 
