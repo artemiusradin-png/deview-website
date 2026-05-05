@@ -91,81 +91,31 @@ const GLOBE_LIGHT_OVERRIDES: Partial<COBEOptions> = {
 
 const ROTATION_SPEED = 0.006;               // radians per frame (~2× faster)
 
-type MarkerLabelStyle = CSSProperties & {
-  "--marker-x": string;
-  "--marker-y": string;
-  "--marker-visible": number;
+type AnchorLabelStyle = CSSProperties & {
+  positionAnchor: string;
 };
 
-const LABEL_OFFSETS: Record<string, string> = {
-  "hong-kong": "translate(var(--globe-label-offset, 4rem), -50%)",
-  stuttgart: "translate(var(--globe-label-offset, 4rem), -50%)",
-  vancouver: "translate(var(--globe-label-offset, 4rem), -50%)",
-  edinburgh: "translate(var(--globe-label-offset, 4rem), -50%)",
+const CITY_LABEL_TRANSFORMS: Record<string, string> = {
+  "hong-kong": "translate(-50%, -0.65rem)",
+  stuttgart: "translate(-118%, -0.2rem)",
+  vancouver: "translate(-50%, -0.65rem)",
+  edinburgh: "translate(16%, -1.65rem)",
 };
 
-function projectOfficeMarker(
-  [lat, lng]: [number, number],
-  phi: number,
-  theta: number,
-  size: number,
-  config: COBEOptions,
-) {
-  const latRad = (lat * Math.PI) / 180;
-  const lngRad = (lng * Math.PI) / 180 - Math.PI;
-  const cosLat = Math.cos(latRad);
-  const point: [number, number, number] = [
-    -cosLat * Math.cos(lngRad),
-    Math.sin(latRad),
-    cosLat * Math.sin(lngRad),
-  ];
-  const markerRadius = 0.8 + (config.markerElevation ?? GLOBE_CONFIG.markerElevation ?? 0);
-  const scaledPoint: [number, number, number] = [
-    point[0] * markerRadius,
-    point[1] * markerRadius,
-    point[2] * markerRadius,
-  ];
-  const cosTheta = Math.cos(theta);
-  const sinTheta = Math.sin(theta);
-  const cosPhi = Math.cos(phi);
-  const sinPhi = Math.sin(phi);
-  const rotatedX = cosPhi * scaledPoint[0] + sinPhi * scaledPoint[2];
-  const rotatedY = sinPhi * sinTheta * scaledPoint[0]
-    + cosTheta * scaledPoint[1]
-    - cosPhi * sinTheta * scaledPoint[2];
-  const depth = -sinPhi * cosTheta * scaledPoint[0]
-    + sinTheta * scaledPoint[1]
-    + cosPhi * cosTheta * scaledPoint[2];
-  const scale = config.scale ?? GLOBE_CONFIG.scale ?? 1;
-  const offset = config.offset ?? GLOBE_CONFIG.offset ?? [0, 0];
-  const x = ((rotatedX * scale + offset[0] * scale + 1) / 2) * size;
-  const y = ((-rotatedY * scale + offset[1] * scale + 1) / 2) * size;
-  const onFront = depth >= 0 || rotatedX * rotatedX + rotatedY * rotatedY >= 0.64;
+function CityInfoBox({ office }: { office: OfficeMarker }) {
+  const visibleVar = `--cobe-visible-${office.id}`;
 
-  return {
-    x,
-    y,
-    visible: onFront ? 1 : 0,
-  };
-}
-
-function CityInfoBox({
-  office,
-  labelRef,
-}: {
-  office: OfficeMarker;
-  labelRef: (node: HTMLDivElement | null) => void;
-}) {
   return (
     <div
-      ref={labelRef}
-      className="globe-city-box pointer-events-none absolute z-[80] w-36 border border-[var(--white-20)] bg-[color-mix(in_srgb,var(--background)_86%,transparent)] px-2.5 py-2 text-left shadow-xl backdrop-blur-md transition-[opacity,filter,transform] duration-150"
+      className="globe-city-box pointer-events-none absolute z-[80] w-36 border border-[var(--white-20)] bg-[color-mix(in_srgb,var(--background)_86%,transparent)] px-2.5 py-2 text-left shadow-xl backdrop-blur-md transition-[opacity,filter,transform] duration-300"
       style={{
-        "--marker-x": "0px",
-        "--marker-y": "0px",
-        "--marker-visible": 0,
-        transform: LABEL_OFFSETS[office.id],
-      } as MarkerLabelStyle}
+        positionAnchor: `--cobe-${office.id}`,
+        bottom: "anchor(top)",
+        left: "anchor(center)",
+        opacity: `var(${visibleVar}, 0)`,
+        filter: `blur(calc((1 - var(${visibleVar}, 0)) * 6px))`,
+        transform: CITY_LABEL_TRANSFORMS[office.id],
+      } as AnchorLabelStyle}
     >
       <p className="mb-1 text-[0.52rem] uppercase tracking-[0.14em] text-[var(--text-muted)]">
         {office.region}
@@ -195,7 +145,6 @@ export function Globe({
   const pointerInteractionMovement = useRef(0);
   const pointerRotation = useRef(0);
   const themeRef = useRef<"dark" | "light">("dark");
-  const labelRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const updatePointerInteraction = (value: number | null) => {
     pointerInteracting.current = value;
@@ -259,24 +208,6 @@ export function Globe({
         ...themeColors,
       });
 
-      if (size > 0) {
-        for (const office of OFFICES) {
-          const label = labelRefs.current[office.id];
-          if (!label) continue;
-
-          const projected = projectOfficeMarker(
-            office.location,
-            currentPhi,
-            config.theta ?? GLOBE_CONFIG.theta ?? 0,
-            size,
-            config,
-          );
-          label.style.setProperty("--marker-x", `${projected.x}px`);
-          label.style.setProperty("--marker-y", `${projected.y}px`);
-          label.style.setProperty("--marker-visible", String(projected.visible));
-        }
-      }
-
       frame = requestAnimationFrame(animate);
     };
     frame = requestAnimationFrame(animate);
@@ -306,13 +237,23 @@ export function Globe({
         onTouchMove={(e) => e.touches[0] && updateMovement(e.touches[0].clientX)}
       />
       {OFFICES.map((office) => (
-        <CityInfoBox
+        <CityInfoBox key={office.id} office={office} />
+      ))}
+    </div>
+  );
+}
+
+export function GlobeMobileOffices() {
+  return (
+    <div className="globe-mobile-offices pointer-events-none absolute inset-x-0 bottom-3 z-[80] hidden justify-center gap-1.5 px-3 flex-wrap">
+      {OFFICES.map((office) => (
+        <div
           key={office.id}
-          office={office}
-          labelRef={(node) => {
-            labelRefs.current[office.id] = node;
-          }}
-        />
+          className="flex flex-col rounded-sm border border-[var(--white-20)] bg-[color-mix(in_srgb,var(--background)_86%,transparent)] px-2 py-1.5 shadow-lg backdrop-blur-md"
+        >
+          <span className="text-[0.48rem] uppercase tracking-[0.14em] text-[var(--text-muted)]">{office.region}</span>
+          <span className="text-[0.62rem] font-semibold leading-tight text-[var(--white-100)]">{office.city}</span>
+        </div>
       ))}
     </div>
   );
