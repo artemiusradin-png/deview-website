@@ -16,7 +16,7 @@ interface OfficeMarker {
   email: string;
 }
 
-const OFFICES: OfficeMarker[] = [
+export const OFFICES: OfficeMarker[] = [
   {
     id: "hong-kong",
     location: [22.3193, 114.1694],
@@ -107,7 +107,7 @@ function CityInfoBox({ office }: { office: OfficeMarker }) {
 
   return (
     <div
-      className="pointer-events-none absolute z-[80] w-36 border border-[var(--white-20)] bg-[color-mix(in_srgb,var(--background)_86%,transparent)] px-2.5 py-2 text-left shadow-xl backdrop-blur-md transition-[opacity,filter,transform] duration-300"
+      className="globe-city-box pointer-events-none absolute z-[80] w-36 border border-[var(--white-20)] bg-[color-mix(in_srgb,var(--background)_86%,transparent)] px-2.5 py-2 text-left shadow-xl backdrop-blur-md transition-[opacity,filter,transform] duration-300"
       style={{
         positionAnchor: `--cobe-${office.id}`,
         bottom: "anchor(top)",
@@ -238,6 +238,22 @@ export function Globe({
       />
       {OFFICES.map((office) => (
         <CityInfoBox key={office.id} office={office} />
+      ))}
+    </div>
+  );
+}
+
+export function GlobeMobileOffices() {
+  return (
+    <div className="globe-mobile-offices pointer-events-none absolute inset-x-0 bottom-3 z-[80] hidden justify-center gap-1.5 px-3 flex-wrap">
+      {OFFICES.map((office) => (
+        <div
+          key={office.id}
+          className="flex flex-col rounded-sm border border-[var(--white-20)] bg-[color-mix(in_srgb,var(--background)_86%,transparent)] px-2 py-1.5 shadow-lg backdrop-blur-md"
+        >
+          <span className="text-[0.48rem] uppercase tracking-[0.14em] text-[var(--text-muted)]">{office.region}</span>
+          <span className="text-[0.62rem] font-semibold leading-tight text-[var(--white-100)]">{office.city}</span>
+        </div>
       ))}
     </div>
   );

@@ -3871,6 +3871,7 @@ html[data-theme="light"] .svoyage-slide__info {
   }
 
   .svoyage-slide[data-current] {
+    --sv-slide-aspect: 3 / 2;
     width: min(100%, 22rem);
     justify-self: center;
     --sv-scale: 1;
@@ -3879,7 +3880,7 @@ html[data-theme="light"] .svoyage-slide__info {
   }
 
   .svoyage-slide__info {
-    padding: 1rem 0.95rem 0.95rem;
+    padding: 1rem 0.95rem 1rem;
   }
 
   .svoyage-slider__rail {
@@ -3889,6 +3890,29 @@ html[data-theme="light"] .svoyage-slide__info {
 
   .svoyage-slide:not([data-current]) .svoyage-slide__info {
     opacity: 0;
+  }
+
+  /* Reduce label font size so long names don't wrap to 3+ lines */
+  .svoyage-slide__label-line span {
+    font-size: 6.5cqw;
+    line-height: 1.15;
+  }
+
+  /* On mobile: show only label + description — hide scope/chips/status */
+  .svoyage-slide__meta,
+  .svoyage-slide__chips,
+  .svoyage-slide__status {
+    display: none;
+  }
+
+  /* Tighten description spacing */
+  .svoyage-slide__desc {
+    margin-top: 0.5rem;
+    font-size: 4.5cqw;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 
@@ -5400,6 +5424,70 @@ html[data-theme="light"] .btn-primary:hover {
   .landing-depth-card,
   .landing-orbit-node {
     transform: none !important;
+  }
+}
+
+/* ── Mobile performance & sizing fixes ────────────────────────────────────── */
+
+/* Stop the bg-grid drift on mobile — saves a composited layer running every frame */
+@media (max-width: 767px) {
+  .bg-grid::before {
+    animation: none;
+  }
+}
+
+/* Scroll cue is a space-wasting desktop affordance — hide on phones */
+@media (max-width: 639px) {
+  .scroll-cue,
+  .scroll-cue + span {
+    display: none;
+  }
+}
+
+/* Hero aside stat group — reduce gap on narrow phones */
+@media (max-width: 639px) {
+  .hero-aside .space-y-3 {
+    gap: 0.85rem;
+  }
+}
+
+/* RetroFeatureCards — shrink fixed card heights on phones */
+@media (max-width: 639px) {
+  #retro-feature-cards .h-\[240px\] {
+    height: 190px;
+  }
+
+  #retro-feature-cards .h-\[320px\] {
+    height: 240px;
+  }
+}
+
+/* Suppress scale hover effect on touch devices (no real hover) */
+@media (hover: none) {
+  #retro-feature-cards [class*="group-hover:scale"] {
+    transform: scale(1.05) !important;
+  }
+}
+
+/* Enterprise: disable costly will-change when section is non-sticky */
+@media (max-width: 1100px) {
+  .enterprise-mode-cards-motion {
+    will-change: auto;
+  }
+
+  .enterprise-mode-stage-copy {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* Globe city info boxes use CSS Anchor Positioning — clip & position issues on mobile */
+  .globe-city-box {
+    display: none;
+  }
+
+  /* Show the static mobile badge strip instead */
+  .globe-mobile-offices {
+    display: flex;
   }
 }
 

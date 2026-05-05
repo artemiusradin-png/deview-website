@@ -10,7 +10,7 @@ import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
 import { SelectedProjectsLogoMarquee } from "../components/SelectedProjectsLogoMarquee";
 import { Banner } from "@/components/ui/banner";
-import { Globe } from "@/components/ui/globe";
+import { Globe, GlobeMobileOffices } from "@/components/ui/globe";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
@@ -566,7 +566,7 @@ export default function Home() {
             className="max-w-2xl"
           >
             <p className="section-label mb-4">{dict.hero.kicker}</p>
-            <h1 className="hero-heading mb-6 text-[clamp(1.75rem,6.5vw,2.75rem)] text-[var(--white-100)] md:text-5xl lg:text-6xl">
+            <h1 className="hero-heading mb-6 text-[clamp(1.65rem,8vw,2.75rem)] text-[var(--white-100)] md:text-5xl lg:text-6xl">
               {dict.hero.titleL1}
               <br />
               {dict.hero.titleL2}
@@ -801,6 +801,7 @@ export default function Home() {
               aria-hidden="true"
             >
               <Globe className="absolute left-[-8%] top-1/2 z-[40] w-[108%] max-w-none -translate-y-[48%]" />
+              <GlobeMobileOffices />
             </div>
 
             <motion.div

@@ -90,7 +90,11 @@ export function FeatureShowcase({
               {steps.map((step) => (
                 <AccordionItem key={step.id} value={step.id}>
                   <AccordionTrigger className="text-left text-base font-medium md:text-lg">{step.title}</AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground md:text-base">{step.text}</AccordionContent>
+                  <AccordionContent className="text-sm text-muted-foreground md:text-base">
+                  <span className="block [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4] overflow-hidden sm:overflow-visible sm:[display:block] sm:[-webkit-line-clamp:unset]">
+                    {step.text.split("\n\n")[0]}
+                  </span>
+                </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
@@ -106,10 +110,9 @@ export function FeatureShowcase({
           </div>
         </div>
 
-        <div className="md:col-span-6">
+        <div className="hidden md:block md:col-span-6">
           <Card
-            className="relative overflow-hidden rounded-2xl border border-border bg-card/40 p-0 shadow-sm"
-            style={{ height: panelMinHeight, minHeight: panelMinHeight }}
+            className="relative h-[260px] overflow-hidden rounded-2xl border border-border bg-card/40 p-0 shadow-sm sm:h-[360px] md:h-[560px] lg:h-[720px]"
           >
             <Tabs defaultValue={initial} className="relative h-full w-full">
               <div className="relative h-full w-full">
