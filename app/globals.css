@@ -1457,6 +1457,7 @@ html[data-theme="light"] .enterprise-mode::before {
   height: calc(100vh - var(--header-stack-height));
   height: calc(100dvh - var(--header-stack-height));
   border-top: none;
+  isolation: isolate;
 }
 
 .enterprise-mode-stage--before,
@@ -1551,6 +1552,7 @@ html[data-theme="light"] .enterprise-mode-stage-copy .section-label {
 
 .enterprise-map-shell {
   position: relative;
+  z-index: 4;
   height: 100%;
   max-height: 100%;
   width: 56%;
@@ -1558,6 +1560,30 @@ html[data-theme="light"] .enterprise-mode-stage-copy .section-label {
   padding-left: 0;
   overflow: hidden;
   box-sizing: border-box;
+}
+
+.enterprise-globe-wrapper {
+  --globe-label-offset: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.enterprise-globe {
+  opacity: 0.74;
+}
+
+.enterprise-globe canvas {
+  position: relative;
+  z-index: 0;
+}
+
+.globe-city-box {
+  left: var(--marker-x);
+  top: var(--marker-y);
+  opacity: var(--marker-visible);
+  filter: blur(calc((1 - var(--marker-visible)) * 5px));
+  z-index: 2;
 }
 
 .enterprise-mode-stage-shell {
@@ -2103,23 +2129,23 @@ html[data-theme="light"] .enterprise-compare-enterprise {
 
   /* Globe — reflow from absolute right-panel to full-width decorative band */
   .enterprise-globe-wrapper {
+    --globe-label-offset: 0.65rem;
     position: relative;
     inset: auto;
     width: 100%;
-    height: 260px;
-    overflow: hidden;
+    height: 320px;
+    overflow: visible;
     order: -1;
-    opacity: 0.7;
     margin-bottom: 0.5rem;
   }
 
-  .enterprise-globe-wrapper canvas {
+  .enterprise-globe {
     position: absolute;
     left: 50%;
     top: 50%;
+    width: min(112vw, 24rem) !important;
+    opacity: 0.78;
     transform: translate(-50%, -50%);
-    width: 100% !important;
-    height: auto !important;
   }
 }
 
@@ -5480,14 +5506,21 @@ html[data-theme="light"] .btn-primary:hover {
     -webkit-backdrop-filter: none;
   }
 
-  /* Globe city info boxes use CSS Anchor Positioning — clip & position issues on mobile */
   .globe-city-box {
-    display: none;
+    width: 7.4rem;
+    padding: 0.45rem 0.55rem;
   }
 
-  /* Show the static mobile badge strip instead */
-  .globe-mobile-offices {
-    display: flex;
+  .globe-city-box p:first-child {
+    font-size: 0.43rem;
+  }
+
+  .globe-city-box p:nth-child(2) {
+    font-size: 0.58rem;
+  }
+
+  .globe-city-box p:last-child {
+    display: none;
   }
 }
 

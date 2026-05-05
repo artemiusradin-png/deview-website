@@ -10,7 +10,7 @@ import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
 import { SelectedProjectsLogoMarquee } from "../components/SelectedProjectsLogoMarquee";
 import { Banner } from "@/components/ui/banner";
-import { Globe, GlobeMobileOffices } from "@/components/ui/globe";
+import { Globe } from "@/components/ui/globe";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
@@ -797,11 +797,10 @@ export default function Home() {
         >
             {/* Globe — stays fixed with the pinned panel; text changes on scroll */}
             <div
-              className="enterprise-globe-wrapper pointer-events-none absolute inset-y-0 right-0 z-[40] w-[44%] overflow-visible"
+              className="enterprise-globe-wrapper pointer-events-none absolute inset-0 z-[2] overflow-visible"
               aria-hidden="true"
             >
-              <Globe className="absolute left-[-8%] top-1/2 z-[40] w-[108%] max-w-none -translate-y-[48%]" />
-              <GlobeMobileOffices />
+              <Globe className="enterprise-globe absolute left-1/2 top-1/2 z-[40] w-[min(62vh,48vw,40rem)] max-w-none -translate-x-1/2 -translate-y-1/2" />
             </div>
 
             <motion.div
