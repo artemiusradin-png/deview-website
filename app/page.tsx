@@ -538,7 +538,7 @@ export default function Home() {
             initial={fade.initial}
             animate={fade.animate}
             transition={{ duration: 0.6 }}
-            className="max-w-2xl md:pt-2"
+            className="flex min-h-[58svh] max-w-2xl flex-col md:min-h-0 md:pt-2"
           >
             <p className="section-label mb-4">{dict.hero.kicker}</p>
             <h1 className="hero-heading mb-6 text-[clamp(1.65rem,8vw,2.75rem)] leading-[1.06] text-[var(--white-100)] md:text-5xl md:leading-[1.02] lg:text-6xl">
@@ -552,11 +552,13 @@ export default function Home() {
                 </>
               ) : null}
             </h1>
-            <p className="mt-8 max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:mt-12 md:text-base">{dict.hero.lead}</p>
-            <div className="mt-6 md:mt-7">
-              <a href="#contact" className="btn-outline inline-block w-full text-center sm:w-auto">
-                {dict.hero.inquire}
-              </a>
+            <div className="mt-auto pt-8 md:mt-0 md:pt-12">
+              <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
+              <div className="mt-6 md:mt-7">
+                <a href="#contact" className="btn-outline inline-block w-full text-center sm:w-auto">
+                  {dict.hero.inquire}
+                </a>
+              </div>
             </div>
           </motion.div>
 
