@@ -1040,6 +1040,7 @@ html[data-theme="light"] .hero-fallback {
 
 @media (max-width: 961px) {
   .section-fullscreen {
+    height: auto;
     min-height: auto;
     max-height: none;
     overflow: visible;
@@ -3841,7 +3842,7 @@ html[data-theme="light"] .svoyage-slide__info {
 
 @media (max-width: 640px) {
   .svoyage-slider {
-    --sv-slide-width: min(100%, 22.5rem);
+    --sv-slide-width: min(100%, 24.25rem);
     gap: 0.9rem 0.75rem;
     display: grid;
     grid-template-columns: minmax(2.9rem, 3.25rem) minmax(0, 1fr) minmax(2.9rem, 3.25rem);
@@ -3878,7 +3879,7 @@ html[data-theme="light"] .svoyage-slide__info {
 
   .svoyage-slide[data-current] {
     --sv-slide-aspect: 2 / 3;
-    width: min(100%, 22.5rem);
+    width: min(100%, 24.25rem);
     justify-self: center;
     --sv-scale: 1;
     --sv-tx: 0;
@@ -3886,7 +3887,7 @@ html[data-theme="light"] .svoyage-slide__info {
   }
 
   .svoyage-slide__info {
-    padding: 1.15rem 1rem 1.1rem;
+    padding: 1.25rem 1.08rem 1.2rem;
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -3902,11 +3903,13 @@ html[data-theme="light"] .svoyage-slide__info {
 
   /* Keep full desktop information on mobile while remaining readable */
   .svoyage-slide__label-line span {
-    font-size: clamp(1.1rem, 7.6vw, 1.5rem);
-    line-height: 1.12;
+    font-size: clamp(0.98rem, 6.9vw, 1.28rem);
+    line-height: 1.18;
+    letter-spacing: 0.035em;
+    text-wrap: balance;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
     overflow: hidden;
   }
 
@@ -5570,26 +5573,53 @@ html[data-theme="light"] .btn-primary:hover {
 }
 
 @media (max-width: 767px) {
+  .section-fullscreen,
+  .section-fullscreen--hero {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+  }
+
+  .section-fullscreen--hero {
+    align-items: flex-start;
+  }
+
   html {
     scroll-behavior: auto;
+    overflow-anchor: none;
   }
 
   body {
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+
+  .nav-shell {
+    transition: none !important;
+  }
+
+  .brand-mark {
+    position: absolute;
   }
 
   .hero-video,
   .hero-video-visible,
   .hero-video-fading,
   .hero-video-hidden {
-    transition: opacity 420ms ease, transform 520ms ease;
-    transform: scale(1.02);
+    transition: none !important;
+    transform: none !important;
   }
 
   .hero-media,
   .hero-overlay,
   .hero-overlay-video {
     background-attachment: scroll;
+  }
+
+  .hero-overlay-video {
+    background:
+      linear-gradient(to right, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.08) 48%, rgba(0, 0, 0, 0.16) 100%),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
   }
 
   .section-fullscreen,

@@ -96,10 +96,10 @@ type AnchorLabelStyle = CSSProperties & {
 };
 
 const CITY_LABEL_TRANSFORMS: Record<string, string> = {
-  "hong-kong": "translate(-50%, -0.2rem)",
-  stuttgart: "translate(-105%, -0.05rem)",
-  vancouver: "translate(-50%, -0.2rem)",
-  edinburgh: "translate(10%, -0.95rem)",
+  "hong-kong": "translate(-50%, -0.02rem)",
+  stuttgart: "translate(-96%, -0.02rem)",
+  vancouver: "translate(-50%, -0.02rem)",
+  edinburgh: "translate(4%, -0.35rem)",
 };
 
 function CityInfoBox({ office }: { office: OfficeMarker }) {
@@ -110,7 +110,7 @@ function CityInfoBox({ office }: { office: OfficeMarker }) {
       className="globe-city-box pointer-events-none absolute z-[80] w-36 text-left transition-[opacity,filter,transform] duration-300"
       style={{
         positionAnchor: `--cobe-${office.id}`,
-        bottom: "anchor(top)",
+        bottom: "anchor(center)",
         left: "anchor(center)",
         opacity: `var(${visibleVar}, 0)`,
         filter: `blur(calc((1 - var(${visibleVar}, 0)) * 6px))`,
