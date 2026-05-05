@@ -495,12 +495,65 @@ html[data-theme="light"] .selected-project-logos__wordmark {
 
 @media (max-width: 640px) {
   .selected-project-logos {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 2.75rem;
+    padding-bottom: 2.75rem;
   }
 
   .selected-project-logos__marquee {
     height: 8.75rem;
+  }
+
+  .selected-project-logos__mobile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .selected-project-logos__mobile-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 5.25rem;
+    border: 1px solid var(--white-10);
+    background: color-mix(in srgb, var(--surface) 72%, transparent);
+    overflow: hidden;
+  }
+
+  .selected-project-logos__mobile-image {
+    display: block;
+    width: auto;
+    max-width: 78%;
+    max-height: 3.15rem;
+    object-fit: contain;
+    opacity: 0.92;
+  }
+
+  .selected-project-logos__mobile-nextair {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-width: 0;
+    color: var(--white-100);
+  }
+
+  .selected-project-logos__mobile-image--nextair {
+    max-width: 2.2rem;
+    max-height: 2.2rem;
+  }
+
+  .selected-project-logos__mobile-nextair span {
+    min-width: 0;
+    max-width: 5.75rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.82rem;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--white-90);
   }
 
   .selected-project-logos__track {
@@ -1105,8 +1158,10 @@ html[data-theme="light"] .hero-fallback {
   }
 
   .section-fullscreen--hero {
-    padding-top: calc(var(--header-stack-height) + 2rem);
-    padding-bottom: max(1.1rem, env(safe-area-inset-bottom, 0px));
+    min-height: auto;
+    padding-top: calc(var(--header-stack-height) + 3.25rem);
+    padding-bottom: max(2.25rem, calc(env(safe-area-inset-bottom, 0px) + 1rem));
+    align-items: center;
   }
 
   .hero-aside {
@@ -2438,9 +2493,19 @@ html[data-theme="light"] .lang-toggle__opt:hover:not(.is-active) {
 @media (max-width: 767px) {
   .brand-mark {
     padding-left: max(1rem, env(safe-area-inset-left, 0px));
-    padding-top: calc(env(safe-area-inset-top) + 1rem);
+    padding-top: calc(env(safe-area-inset-top, 0px) + 1.75rem);
     font-size: 0.64rem;
     letter-spacing: 0.2em;
+  }
+
+  .nav-shell {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .nav-shell nav {
+    height: 5.75rem;
+    align-items: flex-start;
+    padding-top: 1.45rem;
   }
 }
 
