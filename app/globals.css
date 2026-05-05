@@ -2454,8 +2454,8 @@ html[data-theme="light"] .lang-toggle__opt:hover:not(.is-active) {
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 1px solid var(--white-40);
-  background: transparent;
+  border: 0;
+  background: none;
   color: var(--white-90);
   cursor: pointer;
   touch-action: manipulation;
