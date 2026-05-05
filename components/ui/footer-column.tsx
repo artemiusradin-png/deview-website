@@ -21,6 +21,26 @@ function GithubIcon({ className }: { className?: string }) {
     </svg>
   );
 }
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37a4 4 0 1 1-2.9-2.9 4 4 0 0 1 2.9 2.9z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+}
 import Link from "next/link";
 
 type FooterLink = {
@@ -59,7 +79,8 @@ type FooterColumnProps = {
 };
 
 const socialLinks = [
-  { icon: LinkedinIcon, label: "LinkedIn", href: "https://www.linkedin.com/company/deview-ai" },
+  { icon: LinkedinIcon, label: "LinkedIn", href: "https://www.linkedin.com/company/115044062" },
+  { icon: InstagramIcon, label: "Instagram", href: "https://www.instagram.com/deview.ai?igsh=dnBhbnk1eTIzcjF4" },
   { icon: GithubIcon, label: "GitHub", href: "https://github.com/deview-ai" },
   { icon: Mail, label: "Email", href: `mailto:${SITE_INQUIRY_EMAIL}` },
 ];
