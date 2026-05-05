@@ -382,6 +382,10 @@ html[data-theme="light"] .service-client__logo--polyu {
   perspective: 1200px;
 }
 
+.selected-project-logos__marquee {
+  height: 280px;
+}
+
 .selected-project-logos__stage::before,
 .selected-project-logos__stage::after {
   content: "";
@@ -490,6 +494,15 @@ html[data-theme="light"] .selected-project-logos__wordmark {
 }
 
 @media (max-width: 640px) {
+  .selected-project-logos {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .selected-project-logos__marquee {
+    height: 8.75rem;
+  }
+
   .selected-project-logos__track {
     gap: 2.25rem;
     animation-duration: 22s;
@@ -2287,6 +2300,14 @@ html[data-theme="light"] .lang-toggle__opt:hover:not(.is-active) {
 }
 
 @media (max-width: 767px) {
+  html {
+    scroll-padding-bottom: 5rem;
+  }
+
+  body {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
   .lang-toggle {
     padding: 0.15rem;
   }
@@ -2303,6 +2324,7 @@ html[data-theme="light"] .lang-toggle__opt:hover:not(.is-active) {
     justify-content: center;
     padding-inline: 0.35rem;
   }
+
 }
 
 .theme-icon {
@@ -3434,6 +3456,23 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-process-label {
 
 html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
   stroke: rgba(19, 31, 47, 0.45);
+}
+
+.feature-showcase__media {
+  height: min(var(--feature-showcase-panel-height), 72vh);
+  min-height: min(var(--feature-showcase-panel-height), 72vh);
+}
+
+@media (max-width: 767px) {
+  .feature-showcase__media {
+    height: clamp(20rem, 78vw, 28rem);
+    min-height: clamp(20rem, 78vw, 28rem);
+  }
+
+  .feature-showcase__media [role="tablist"] {
+    max-width: calc(100vw - 3rem);
+    overflow-x: auto;
+  }
 }
 
 /* -------------------------------------------------------------------------- */

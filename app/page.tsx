@@ -488,7 +488,7 @@ export default function Home() {
       ) : null}
 
       {guideCtaVisible ? (
-        <div className="group fixed bottom-5 right-4 z-50 w-[calc(100vw-2rem)] max-w-[23rem] sm:bottom-6 sm:right-6 sm:w-auto">
+        <div className="group fixed bottom-5 right-4 z-50 hidden w-[calc(100vw-2rem)] max-w-[23rem] sm:bottom-6 sm:right-6 sm:w-auto md:block">
           <a
             href="/resources/ai-guide-lending"
             className="block text-left no-underline"

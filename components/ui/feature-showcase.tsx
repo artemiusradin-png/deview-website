@@ -108,8 +108,8 @@ export function FeatureShowcase({
 
         <div className="md:col-span-6">
           <Card
-            className="relative overflow-hidden rounded-2xl border border-border bg-card/40 p-0 shadow-sm"
-            style={{ height: panelMinHeight, minHeight: panelMinHeight }}
+            className="feature-showcase__media relative overflow-hidden rounded-lg border border-border bg-card/40 p-0 shadow-sm"
+            style={{ "--feature-showcase-panel-height": `${panelMinHeight}px` } as React.CSSProperties}
           >
             <Tabs defaultValue={initial} className="relative h-full w-full">
               <div className="relative h-full w-full">

@@ -26,8 +26,23 @@ function useIsDark() {
   return isDark;
 }
 
+function useIsMobileMarquee() {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const mq = window.matchMedia("(max-width: 640px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  return isMobile;
+}
+
 export function SelectedProjectsLogoMarquee() {
   const isDark = useIsDark();
+  const isMobile = useIsMobileMarquee();
 
   return (
     <section
@@ -40,16 +55,17 @@ export function SelectedProjectsLogoMarquee() {
         </p>
       </div>
 
-      <div className="mt-8" style={{ height: "280px" }}>
+      <div className="selected-project-logos__marquee mt-6 md:mt-8">
         <PerspectiveMarquee
           logos={CLIENT_LOGOS}
           isDark={isDark}
-          pixelsPerFrame={1.8}
-          rotateY={-28}
-          rotateX={8}
-          perspective={1200}
-          itemWidth={500}
-          logoHeight={100}
+          pixelsPerFrame={isMobile ? 0.7 : 1.8}
+          rotateY={isMobile ? 0 : -28}
+          rotateX={isMobile ? 0 : 8}
+          perspective={isMobile ? 800 : 1200}
+          itemWidth={isMobile ? 240 : 500}
+          logoHeight={isMobile ? 52 : 100}
+          blurMultiplier={isMobile ? 1.6 : 5}
         />
       </div>
 
