@@ -56,6 +56,7 @@ export default function Home() {
   const [typedAiMessage, setTypedAiMessage] = useState("");
   const [heroVideoPreload, setHeroVideoPreload] = useState<"auto" | "metadata">("metadata");
   const [isCompactEnterpriseLayout, setIsCompactEnterpriseLayout] = useState(false);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
   const standbyStartedRef = useRef(false);
   const crossfadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -105,6 +106,19 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const apply = () => setIsMobileViewport(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+
+  useEffect(() => {
+    if (isMobileViewport) {
+      setHeroVideoState("fallback");
+      return;
+    }
+
     const primaryVideo = heroVideoRefs.current[0];
 
     if (!primaryVideo) {
@@ -134,7 +148,7 @@ export default function Home() {
         clearTimeout(crossfadeTimeoutRef.current);
       }
     };
-  }, []);
+  }, [isMobileViewport]);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -538,7 +552,7 @@ export default function Home() {
             initial={fade.initial}
             animate={fade.animate}
             transition={{ duration: 0.6 }}
-            className="flex min-h-[58svh] max-w-2xl flex-col md:min-h-0 md:pt-2"
+            className="flex min-h-[calc(100svh-var(--header-stack-height)-2.25rem)] max-w-2xl flex-col md:min-h-0 md:pt-2"
           >
             <p className="section-label mb-4">{dict.hero.kicker}</p>
             <h1 className="hero-heading mb-6 text-[clamp(1.65rem,8vw,2.75rem)] leading-[1.06] text-[var(--white-100)] md:text-5xl md:leading-[1.02] lg:text-6xl">
