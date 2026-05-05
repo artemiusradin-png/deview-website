@@ -81,7 +81,7 @@ export default function LeadMagnetPage() {
 
           <SubpageNav />
 
-          <div className="grid gap-16 md:grid-cols-[1fr_380px] md:gap-20 lg:grid-cols-[1fr_420px]">
+          <div className="grid gap-10 md:grid-cols-[1fr_380px] md:gap-20 lg:grid-cols-[1fr_420px]">
 
             {/* Left: offer */}
             <motion.div
