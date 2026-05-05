@@ -130,6 +130,25 @@ function CityInfoBox({ office }: { office: OfficeMarker }) {
   );
 }
 
+function MobileFixedCityLabels() {
+  return (
+    <div className="pointer-events-none absolute inset-0 z-[85] md:hidden">
+      <span className="absolute left-[56%] top-[46%] -translate-x-1/2 text-[0.54rem] font-semibold uppercase tracking-[0.04em] text-[var(--white-90)]">
+        Hong Kong
+      </span>
+      <span className="absolute left-[40%] top-[37%] -translate-x-1/2 text-[0.54rem] font-semibold uppercase tracking-[0.04em] text-[var(--white-90)]">
+        Stuttgart
+      </span>
+      <span className="absolute left-[22%] top-[44%] -translate-x-1/2 text-[0.54rem] font-semibold uppercase tracking-[0.04em] text-[var(--white-90)]">
+        Vancouver
+      </span>
+      <span className="absolute left-[36%] top-[33%] -translate-x-1/2 text-[0.54rem] font-semibold uppercase tracking-[0.04em] text-[var(--white-90)]">
+        Edinburgh
+      </span>
+    </div>
+  );
+}
+
 // ── Main Globe component ─────────────────────────────────────────────────────
 export function Globe({
   className,
@@ -243,6 +262,7 @@ export function Globe({
       {OFFICES.map((office) => (
         <CityInfoBox key={office.id} office={office} />
       ))}
+      <MobileFixedCityLabels />
     </div>
   );
 }
