@@ -797,7 +797,7 @@ export default function Home() {
         >
             {/* Globe — stays fixed with the pinned panel; text changes on scroll */}
             <div
-              className="pointer-events-none absolute inset-y-0 right-0 z-[40] hidden w-[44%] overflow-visible md:block"
+              className="enterprise-globe-wrapper pointer-events-none absolute inset-y-0 right-0 z-[40] w-[44%] overflow-visible"
               aria-hidden="true"
             >
               <Globe className="absolute left-[-8%] top-1/2 z-[40] w-[108%] max-w-none -translate-y-[48%]" />
