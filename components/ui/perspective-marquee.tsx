@@ -65,7 +65,7 @@ export function PerspectiveMarquee({
   }, [logos, itemWidth, pixelsPerFrame]);
 
   const imgFilter = (name: string) => {
-    if (name === "Grand Finance Group") return isDark ? "none" : "invert(1)";
+    if (name === "Lending Platform") return isDark ? "none" : "invert(1)";
     return isDark
       ? "grayscale(1) brightness(0) invert(1)"
       : "grayscale(1) brightness(0)";
