@@ -10,7 +10,7 @@ import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
 import { SelectedProjectsLogoMarquee } from "../components/SelectedProjectsLogoMarquee";
 import { Banner } from "@/components/ui/banner";
-import { Globe, GlobeMobileOffices } from "@/components/ui/globe";
+import { Globe } from "@/components/ui/globe";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
@@ -586,12 +586,12 @@ export default function Home() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="hero-aside flex flex-col items-start justify-between gap-8 text-left md:items-end md:gap-10 md:text-right"
           >
-            <div className="space-y-2 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)] sm:text-xs">
+            <div className="hidden space-y-2 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)] sm:text-xs md:block">
               {dict.hero.col1.map((line) => (
                 <div key={line}>{line}</div>
               ))}
             </div>
-            <div className="w-full space-y-3 text-sm md:w-auto">
+            <div className="hidden w-full space-y-3 text-sm md:block md:w-auto">
               <div className="flex flex-col gap-1 sm:items-end">
                 <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
                   {dict.hero.clients}
@@ -611,6 +611,7 @@ export default function Home() {
                 <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.engagementsValue}</span>
               </div>
             </div>
+            <div className="h-16 w-full md:hidden" aria-hidden="true" />
             <div className="flex w-full flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6 md:w-auto md:justify-end md:gap-8">
               <a href="#contact" className="btn-outline w-full text-center sm:w-auto">
                 {dict.hero.inquire}
@@ -801,7 +802,6 @@ export default function Home() {
               aria-hidden="true"
             >
               <Globe className="absolute left-[-8%] top-1/2 z-[40] w-[108%] max-w-none -translate-y-[48%]" />
-              <GlobeMobileOffices />
             </div>
 
             <motion.div

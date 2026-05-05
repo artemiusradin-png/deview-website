@@ -3629,6 +3629,8 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
   display: flex;
   flex-direction: column;
   margin-top: 0.3rem;
+  min-height: 0;
+  overflow: hidden;
   animation: sv-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: 200ms;
 }
@@ -3885,6 +3887,7 @@ html[data-theme="light"] .svoyage-slide__info {
 
   .svoyage-slide__info {
     padding: 1.15rem 1rem 1.1rem;
+    overflow: hidden;
   }
 
   .svoyage-slider__rail {
@@ -3900,12 +3903,20 @@ html[data-theme="light"] .svoyage-slide__info {
   .svoyage-slide__label-line span {
     font-size: clamp(1.25rem, 8.8vw, 1.9rem);
     line-height: 1.12;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
   }
 
   .svoyage-slide__desc {
     margin-top: 0.55rem;
     font-size: clamp(0.94rem, 3.9vw, 1.02rem);
     line-height: 1.5;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
   }
 
   .svoyage-slide__meta,
@@ -3924,6 +3935,8 @@ html[data-theme="light"] .svoyage-slide__info {
   .svoyage-slide__chips {
     gap: 0.4rem;
     margin-top: 0.7rem;
+    max-height: 4rem;
+    overflow: hidden;
   }
 
   .svoyage-slide__chip {
@@ -5523,14 +5536,52 @@ html[data-theme="light"] .btn-primary:hover {
     -webkit-backdrop-filter: none;
   }
 
-  /* Globe city info boxes use CSS Anchor Positioning — clip & position issues on mobile */
+  /* Show labels fixed to markers on globe, without boxes */
   .globe-city-box {
+    display: block;
+    width: auto;
+    max-width: 10rem;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+  }
+
+  .globe-city-box p {
+    margin: 0;
+  }
+
+  .globe-city-box p:first-child,
+  .globe-city-box p:last-child {
     display: none;
   }
 
-  /* Show the static mobile badge strip instead */
-  .globe-mobile-offices {
-    display: flex;
+  .globe-city-box p:nth-child(2) {
+    font-size: 0.62rem;
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white-90);
+  }
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .hero-video,
+  .hero-video-visible,
+  .hero-video-fading,
+  .hero-video-hidden {
+    transition: opacity 700ms ease, transform 900ms ease;
   }
 }
 
