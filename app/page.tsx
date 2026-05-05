@@ -566,7 +566,7 @@ export default function Home() {
             className="max-w-2xl"
           >
             <p className="section-label mb-4">{dict.hero.kicker}</p>
-            <h1 className="hero-heading mb-6 text-[clamp(1.65rem,8vw,2.75rem)] text-[var(--white-100)] md:text-5xl lg:text-6xl">
+            <h1 className="hero-heading mb-6 text-[clamp(1.65rem,8vw,2.75rem)] leading-[1.06] text-[var(--white-100)] md:text-5xl md:leading-[1.02] lg:text-6xl">
               {dict.hero.titleL1}
               <br />
               {dict.hero.titleL2}

@@ -177,9 +177,13 @@ export function Globe({
   useEffect(() => {
     window.addEventListener("resize", onResize);
     onResize();
+    const isMobileViewport = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
+    const effectiveDevicePixelRatio = isMobileViewport ? Math.min(window.devicePixelRatio || 1, 1.5) : (config.devicePixelRatio ?? 2);
 
     const globe = createGlobe(canvasRef.current!, {
       ...config,
+      devicePixelRatio: effectiveDevicePixelRatio,
+      mapSamples: isMobileViewport ? 12000 : (config.mapSamples ?? 20000),
       width: width.current * 2,
       height: width.current * 2,
     });

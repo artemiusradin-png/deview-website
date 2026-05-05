@@ -1,6 +1,7 @@
 "use client";
 
 import { Mail, MapPin, MessageSquare, Send } from "lucide-react";
+import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 
 function LinkedinIcon({ className }: { className?: string }) {
   return (
@@ -60,7 +61,7 @@ type FooterColumnProps = {
 const socialLinks = [
   { icon: LinkedinIcon, label: "LinkedIn", href: "https://www.linkedin.com/company/deview-ai" },
   { icon: GithubIcon, label: "GitHub", href: "https://github.com/deview-ai" },
-  { icon: Mail, label: "Email", href: "mailto:deview.info@gmail.com" },
+  { icon: Mail, label: "Email", href: `mailto:${SITE_INQUIRY_EMAIL}` },
 ];
 
 function resolveHref(href: string, rootPrefix: string) {
