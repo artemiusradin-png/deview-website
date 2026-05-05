@@ -86,28 +86,28 @@ export function AnimatedFeatureSpotlightDemo() {
   }
 
   return (
-    <section className="w-full bg-[var(--background)] px-3 py-8 md:px-6 md:py-14 xl:px-8">
+    <section className="w-full bg-[var(--background)] px-3 py-5 md:px-6 md:py-9 xl:px-8">
       <div className="relative mx-auto grid w-full max-w-[94rem] overflow-hidden border border-[var(--white-20)] bg-[linear-gradient(135deg,rgba(26,51,128,0.18),rgba(128,184,255,0.04)_34%,rgba(255,255,255,0.01))] lg:grid-cols-[1.45fr_0.72fr]">
         <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(128,184,255,0.65),transparent)]" />
 
-        <div className="relative flex flex-col justify-center p-5 md:p-8 lg:p-12 xl:p-14">
-          <div className="mb-4 inline-flex w-fit items-center gap-2 border border-[#80b8ff]/40 bg-[#80b8ff]/10 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[#80b8ff]">
+        <div className="relative flex flex-col justify-center p-4 md:p-6 lg:p-8 xl:p-10">
+          <div className="mb-3 inline-flex w-fit items-center gap-2 border border-[#80b8ff]/40 bg-[#80b8ff]/10 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-[#80b8ff]">
             <FileText className="h-3.5 w-3.5" />
             <span>Free AI automation guide for lenders</span>
           </div>
 
-          <h2 className="mb-3 max-w-5xl text-[clamp(1.4rem,5vw,3.65rem)] font-semibold leading-[1.0] tracking-tight text-foreground md:mb-4 md:leading-[0.98]">
+          <h2 className="mb-2 max-w-5xl text-[clamp(1.25rem,4.2vw,2.6rem)] font-semibold leading-[1.02] tracking-tight text-foreground md:mb-3 md:leading-[1]">
             Prioritize the <span className="text-primary">10 lending workflows</span> AI can automate safely
           </h2>
 
-          <p className="line-clamp-2 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:line-clamp-none md:text-base">
+          <p className="line-clamp-2 max-w-3xl text-[0.84rem] leading-relaxed text-muted-foreground sm:line-clamp-none md:text-sm">
             A practical field guide for small and mid-sized lending teams. Use it to identify manual-work bottlenecks,
             choose lower-risk pilots, and set borrower-data controls before automation reaches production.
           </p>
 
-          <div className="mt-4 grid gap-2.5 md:mt-6 md:gap-3">
+          <div className="mt-3 grid gap-2 md:mt-4 md:gap-2.5">
             {INSIGHTS.map((item, index) => (
-              <div key={item} className={`grid grid-cols-[2rem_1fr] items-start gap-3${index === 2 ? " hidden sm:grid" : ""}`}>
+              <div key={item} className={`grid grid-cols-[2rem_1fr] items-start gap-3${index >= 1 ? " hidden sm:grid" : ""}`}>
                 <span className="flex h-8 w-8 items-center justify-center border border-[#80b8ff]/35 bg-[#80b8ff]/10 text-[0.65rem] font-semibold text-[#80b8ff]">
                   {String(index + 1).padStart(2, "0")}
                 </span>
@@ -116,7 +116,7 @@ export function AnimatedFeatureSpotlightDemo() {
             ))}
           </div>
 
-          <div className="mt-5 hidden flex-wrap gap-2 text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-[var(--white-80)] sm:flex md:mt-7">
+          <div className="mt-4 hidden flex-wrap gap-2 text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-[var(--white-80)] sm:flex md:mt-5">
             <span className="border border-[var(--white-20)] bg-[var(--white-10)] px-2.5 py-1">Risk-scored</span>
             <span className="border border-[var(--white-20)] bg-[var(--white-10)] px-2.5 py-1">Pilot-ready</span>
             <span className="border border-[var(--white-20)] bg-[var(--white-10)] px-2.5 py-1">Borrower-data aware</span>
@@ -124,24 +124,6 @@ export function AnimatedFeatureSpotlightDemo() {
         </div>
 
         <div className="relative grid gap-0 border-t border-[var(--white-20)] bg-[var(--surface)] lg:border-l lg:border-t-0">
-          {/* Photo only on lg+ — saves ~200px on mobile */}
-          <div
-            className="hidden min-h-[15rem] bg-cover bg-center lg:block"
-            style={{
-              backgroundImage:
-                "linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.72)), url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=900&q=85')",
-            }}
-            aria-label="Financial documents and lending workflow preview"
-            role="img"
-          >
-            <div className="flex h-full min-h-[15rem] items-end p-5">
-              <div className="border border-white/20 bg-black/45 px-3 py-2 backdrop-blur-sm">
-                <p className="text-[0.58rem] uppercase tracking-[0.18em] text-white/55">Inside the guide</p>
-                <p className="mt-1 text-2xl font-semibold text-white">10 use cases</p>
-              </div>
-            </div>
-          </div>
-
           <div className="p-4 md:p-5">
             {status === "sent" ? (
               <div className="flex flex-col justify-center py-4">

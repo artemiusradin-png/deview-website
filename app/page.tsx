@@ -7,7 +7,6 @@ import { AnimatedFeatureSpotlightDemo } from "../components/AnimatedFeatureSpotl
 import { HomeServicesSection } from "../components/HomeServicesSection";
 import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
-import { SelectedProjectsLogoMarquee } from "../components/SelectedProjectsLogoMarquee";
 import { Globe } from "@/components/ui/globe";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
@@ -888,8 +887,6 @@ export default function Home() {
       </div>
 
       <RetroFeatureCards />
-
-      <SelectedProjectsLogoMarquee />
 
       <HomeServicesSection variant="home" />
 
