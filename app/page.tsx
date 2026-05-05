@@ -2,14 +2,12 @@
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
-import { Rocket, X } from "lucide-react";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { AnimatedFeatureSpotlightDemo } from "../components/AnimatedFeatureSpotlightDemo";
 import { HomeServicesSection } from "../components/HomeServicesSection";
 import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
 import { SelectedProjectsLogoMarquee } from "../components/SelectedProjectsLogoMarquee";
-import { Banner } from "@/components/ui/banner";
 import { Globe } from "@/components/ui/globe";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
@@ -59,7 +57,6 @@ export default function Home() {
   const [typedAiMessage, setTypedAiMessage] = useState("");
   const [heroVideoPreload, setHeroVideoPreload] = useState<"auto" | "metadata">("metadata");
   const [isCompactEnterpriseLayout, setIsCompactEnterpriseLayout] = useState(false);
-  const [guideCtaVisible, setGuideCtaVisible] = useState(true);
   const standbyStartedRef = useRef(false);
   const crossfadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -300,6 +297,13 @@ export default function Home() {
   }, [navOpen]);
 
   useEffect(() => {
+    const isMobileViewport = window.matchMedia("(max-width: 767px)").matches;
+    if (isMobileViewport) {
+      // Avoid per-scroll React state churn on iOS, which can cause visible jumpiness.
+      setNavVisible(true);
+      return;
+    }
+
     let lastScrollY = window.scrollY;
 
     const updateNavVisibility = () => {
@@ -487,34 +491,6 @@ export default function Home() {
         </div>
       ) : null}
 
-      {guideCtaVisible ? (
-        <div className="group fixed bottom-5 right-4 z-50 w-[calc(100vw-2rem)] max-w-[23rem] sm:bottom-6 sm:right-6 sm:w-auto">
-          <a
-            href="/resources/ai-guide-lending"
-            className="block text-left no-underline"
-            aria-label="Open free AI guide with 10 lender use cases"
-          >
-            <Banner
-              show
-              variant="gradient"
-              title="Free AI guide"
-              description="10 lender use cases"
-              showShade
-              icon={<Rocket className="h-5 w-5" />}
-              className="w-full cursor-pointer border-[var(--white-20)] bg-[var(--white-10)] pr-8 text-[var(--text)] shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition-colors hover:bg-[var(--white-20)] sm:min-w-[21rem] sm:max-w-[23rem]"
-            />
-          </a>
-          <button
-            type="button"
-            className="absolute right-2 top-1/2 -translate-y-1/2 flex size-6 items-center justify-center rounded-full text-[var(--white-40)] transition-colors hover:text-[var(--white-90)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--white-40)]"
-            aria-label="Dismiss free AI guide"
-            onClick={() => setGuideCtaVisible(false)}
-          >
-            <X className="h-4 w-4" />
-          </button>
-        </div>
-      ) : null}
-
       <section
         id="hero"
         className="section-fullscreen section-fullscreen--hero relative flex items-center justify-center section-gutter py-12 md:py-0"
@@ -558,12 +534,12 @@ export default function Home() {
         <div
           className={`absolute inset-0 ${heroVideoState === "fallback" ? "hero-overlay" : "hero-overlay hero-overlay-video"}`}
         />
-        <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col justify-between gap-10 md:flex-row md:gap-12">
+        <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col justify-start gap-6 md:flex-row md:items-start md:gap-12">
           <motion.div
             initial={fade.initial}
             animate={fade.animate}
             transition={{ duration: 0.6 }}
-            className="max-w-2xl"
+            className="max-w-2xl md:pt-2"
           >
             <p className="section-label mb-4">{dict.hero.kicker}</p>
             <h1 className="hero-heading mb-6 text-[clamp(1.65rem,8vw,2.75rem)] leading-[1.06] text-[var(--white-100)] md:text-5xl md:leading-[1.02] lg:text-6xl">
@@ -577,7 +553,12 @@ export default function Home() {
                 </>
               ) : null}
             </h1>
-            <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
+            <p className="mt-8 max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:mt-12 md:text-base">{dict.hero.lead}</p>
+            <div className="mt-6 md:mt-7">
+              <a href="#contact" className="btn-outline inline-block w-full text-center sm:w-auto">
+                {dict.hero.inquire}
+              </a>
+            </div>
           </motion.div>
 
           <motion.div
@@ -613,9 +594,6 @@ export default function Home() {
             </div>
             <div className="h-16 w-full md:hidden" aria-hidden="true" />
             <div className="flex w-full flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6 md:w-auto md:justify-end md:gap-8">
-              <a href="#contact" className="btn-outline w-full text-center sm:w-auto">
-                {dict.hero.inquire}
-              </a>
               <div className="flex flex-col items-center gap-3 sm:ml-auto sm:items-end md:ml-0">
                 <div className="scroll-cue" />
                 <span className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
