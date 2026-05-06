@@ -9,6 +9,7 @@ import { HomeServicesSection } from "../components/HomeServicesSection";
 import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
 import { SelectedProjectsLogoMarquee } from "../components/SelectedProjectsLogoMarquee";
+import { SelectedProjectsShowcase } from "../components/SelectedProjectsShowcase";
 import { Banner } from "@/components/ui/banner";
 import { Globe } from "@/components/ui/globe";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
@@ -383,18 +384,21 @@ export default function Home() {
             <span className="nav-toggle-bar" />
             <span className="nav-toggle-bar" />
           </button>
-          <div className="hidden items-center gap-5 md:flex lg:gap-7">
+          <div className="hidden items-center gap-4 md:flex lg:gap-6">
             <a href="#hero" className="nav-item nav-item-active">
               {dict.nav.aiConsulting}
-            </a>
-            <a href="#enterprise-ai" className="nav-item">
-              {dict.nav.enterpriseAi}
             </a>
             <a href="#services" className="nav-item">
               {dict.nav.services}
             </a>
-            <a href="/outcomes" className="nav-item">
-              {dict.nav.outcomes}
+            <a href="/case-studies" className="nav-item">
+              CASE STUDIES
+            </a>
+            <a href="/insights" className="nav-item">
+              INSIGHTS
+            </a>
+            <a href="/about" className="nav-item">
+              ABOUT
             </a>
             <a href="#contact" className="nav-item">
               {dict.nav.inquire}
@@ -443,14 +447,23 @@ export default function Home() {
           <a href="#hero" className="nav-item-active" onClick={closeNav}>
             {dict.nav.aiConsulting}
           </a>
-          <a href="#enterprise-ai" onClick={closeNav}>
-            {dict.nav.enterpriseAi}
-          </a>
           <a href="#services" onClick={closeNav}>
             {dict.nav.services}
           </a>
-          <a href="/outcomes" onClick={closeNav}>
-            {dict.nav.outcomes}
+          <a href="/case-studies" onClick={closeNav}>
+            CASE STUDIES
+          </a>
+          <a href="/insights" onClick={closeNav}>
+            INSIGHTS
+          </a>
+          <a href="/about" onClick={closeNav}>
+            ABOUT
+          </a>
+          <a href="/how-we-work" onClick={closeNav}>
+            HOW WE WORK
+          </a>
+          <a href="/faq" onClick={closeNav}>
+            FAQ
           </a>
           <a href="#contact" onClick={closeNav}>
             {dict.nav.inquire}
@@ -566,7 +579,7 @@ export default function Home() {
             className="max-w-2xl"
           >
             <p className="section-label mb-4">{dict.hero.kicker}</p>
-            <h1 className="hero-heading mb-6 text-[clamp(1.75rem,6.5vw,2.75rem)] text-[var(--white-100)] md:text-5xl lg:text-6xl">
+            <h1 className="hero-heading mb-6 text-[clamp(1.75rem,6.5vw,2.75rem)] leading-[1.06] text-[var(--white-100)] md:text-5xl md:leading-[1.02] lg:text-6xl">
               {dict.hero.titleL1}
               <br />
               {dict.hero.titleL2}
@@ -911,6 +924,8 @@ export default function Home() {
       <RetroFeatureCards />
 
       <SelectedProjectsLogoMarquee />
+
+      <SelectedProjectsShowcase />
 
       <HomeServicesSection variant="home" />
 
