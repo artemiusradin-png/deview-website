@@ -7,6 +7,9 @@ import { AnimatedFeatureSpotlightDemo } from "../components/AnimatedFeatureSpotl
 import { HomeServicesSection } from "../components/HomeServicesSection";
 import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
+import { SelectedProjectsLogoMarquee } from "../components/SelectedProjectsLogoMarquee";
+import { SelectedProjectsShowcase } from "../components/SelectedProjectsShowcase";
+import { Banner } from "@/components/ui/banner";
 import { Globe } from "@/components/ui/globe";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
@@ -400,18 +403,21 @@ export default function Home() {
             <span className="nav-toggle-bar" />
             <span className="nav-toggle-bar" />
           </button>
-          <div className="hidden items-center gap-5 md:flex lg:gap-7">
+          <div className="hidden items-center gap-4 md:flex lg:gap-6">
             <a href="#hero" className="nav-item nav-item-active">
               {dict.nav.aiConsulting}
-            </a>
-            <a href="#enterprise-ai" className="nav-item">
-              {dict.nav.enterpriseAi}
             </a>
             <a href="#services" className="nav-item">
               {dict.nav.services}
             </a>
-            <a href="/outcomes" className="nav-item">
-              {dict.nav.outcomes}
+            <a href="/case-studies" className="nav-item">
+              CASE STUDIES
+            </a>
+            <a href="/insights" className="nav-item">
+              INSIGHTS
+            </a>
+            <a href="/about" className="nav-item">
+              ABOUT
             </a>
             <a href="#contact" className="nav-item">
               {dict.nav.inquire}
@@ -460,14 +466,23 @@ export default function Home() {
           <a href="#hero" className="nav-item-active" onClick={closeNav}>
             {dict.nav.aiConsulting}
           </a>
-          <a href="#enterprise-ai" onClick={closeNav}>
-            {dict.nav.enterpriseAi}
-          </a>
           <a href="#services" onClick={closeNav}>
             {dict.nav.services}
           </a>
-          <a href="/outcomes" onClick={closeNav}>
-            {dict.nav.outcomes}
+          <a href="/case-studies" onClick={closeNav}>
+            CASE STUDIES
+          </a>
+          <a href="/insights" onClick={closeNav}>
+            INSIGHTS
+          </a>
+          <a href="/about" onClick={closeNav}>
+            ABOUT
+          </a>
+          <a href="/how-we-work" onClick={closeNav}>
+            HOW WE WORK
+          </a>
+          <a href="/faq" onClick={closeNav}>
+            FAQ
           </a>
           <a href="#contact" onClick={closeNav}>
             {dict.nav.inquire}
@@ -504,6 +519,33 @@ export default function Home() {
         </div>
       ) : null}
 
+      {guideCtaVisible ? (
+        <div className="group fixed bottom-5 right-4 z-50 hidden w-[calc(100vw-2rem)] max-w-[23rem] sm:bottom-6 sm:right-6 sm:w-auto md:block">
+          <a
+            href="/resources/ai-guide-lending"
+            className="block text-left no-underline"
+            aria-label="Open free AI guide with 10 lender use cases"
+          >
+            <Banner
+              show
+              variant="gradient"
+              title="Free AI guide"
+              description="10 lender use cases"
+              showShade
+              icon={<Rocket className="h-5 w-5" />}
+              className="w-full cursor-pointer border-[var(--white-20)] bg-[var(--white-10)] pr-8 text-[var(--text)] shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition-colors hover:bg-[var(--white-20)] sm:min-w-[21rem] sm:max-w-[23rem]"
+            />
+          </a>
+          <button
+            type="button"
+            className="absolute right-2 top-1/2 -translate-y-1/2 flex size-6 items-center justify-center rounded-full text-[var(--white-40)] transition-colors hover:text-[var(--white-90)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--white-40)]"
+            aria-label="Dismiss free AI guide"
+            onClick={() => setGuideCtaVisible(false)}
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      ) : null}
       <section
         id="hero"
         className="section-fullscreen section-fullscreen--hero relative flex items-center justify-center section-gutter py-12 md:py-0"
@@ -555,7 +597,7 @@ export default function Home() {
             className="flex min-h-[calc(100svh-var(--header-stack-height)-2.25rem)] max-w-2xl flex-col md:min-h-0 md:pt-2"
           >
             <p className="section-label mb-4">{dict.hero.kicker}</p>
-            <h1 className="hero-heading mb-6 text-[clamp(1.65rem,8vw,2.75rem)] leading-[1.06] text-[var(--white-100)] md:text-5xl md:leading-[1.02] lg:text-6xl">
+            <h1 className="hero-heading mb-6 text-[clamp(1.75rem,6.5vw,2.75rem)] leading-[1.06] text-[var(--white-100)] md:text-5xl md:leading-[1.02] lg:text-6xl">
               {dict.hero.titleL1}
               <br />
               {dict.hero.titleL2}
@@ -904,6 +946,9 @@ export default function Home() {
 
       <RetroFeatureCards />
 
+      <SelectedProjectsLogoMarquee />
+
+      <SelectedProjectsShowcase />
       <HomeServicesSection variant="home" />
 
       <AnimatedFeatureSpotlightDemo />

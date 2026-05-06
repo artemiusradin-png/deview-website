@@ -26,17 +26,29 @@ function useIsDark() {
   return isDark;
 }
 
-export function SelectedProjectsLogoMarquee() {
-  const isDark = useIsDark();
+function useIsMobileMarquee() {
   const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    const apply = () => setIsMobile(mq.matches);
-    apply();
-    mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
+    const mq = window.matchMedia("(max-width: 640px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
   }, []);
+
+  return isMobile;
+}
+
+export function SelectedProjectsLogoMarquee() {
+  const isDark = useIsDark();
+  const isMobile = useIsMobileMarquee();
+  const logoFilter = (name: string) => {
+    if (name === "Grand Finance Group") return isDark ? "none" : "invert(1)";
+    return isDark
+      ? "grayscale(1) brightness(0) invert(1)"
+      : "grayscale(1) brightness(0)";
+  };
 
   return (
     <section
@@ -49,18 +61,48 @@ export function SelectedProjectsLogoMarquee() {
         </p>
       </div>
 
-      <div className="mt-8" style={{ height: "280px" }}>
-        <PerspectiveMarquee
-          logos={CLIENT_LOGOS}
-          isDark={isDark}
-          pixelsPerFrame={isMobile ? 2.8 : 1.8}
-          rotateY={-28}
-          rotateX={8}
-          perspective={1200}
-          itemWidth={isMobile ? 360 : 500}
-          logoHeight={isMobile ? 70 : 100}
-        />
-      </div>
+      {isMobile ? (
+        <div className="selected-project-logos__mobile-grid section-gutter mx-auto mt-6 w-full max-w-6xl">
+          {CLIENT_LOGOS.map((logo) => (
+            <div key={logo.name} className="selected-project-logos__mobile-item">
+              {logo.name === "Nextair" ? (
+                <div className="selected-project-logos__mobile-nextair">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={logo.src}
+                    alt=""
+                    className="selected-project-logos__mobile-image selected-project-logos__mobile-image--nextair"
+                    style={{ filter: logoFilter(logo.name) }}
+                  />
+                  <span>NEXTAIR</span>
+                </div>
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={logo.src}
+                  alt={logo.name}
+                  className="selected-project-logos__mobile-image"
+                  style={{ filter: logoFilter(logo.name) }}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="selected-project-logos__marquee mt-8">
+          <PerspectiveMarquee
+            logos={CLIENT_LOGOS}
+            isDark={isDark}
+            pixelsPerFrame={1.8}
+            rotateY={-28}
+            rotateX={8}
+            perspective={1200}
+            itemWidth={500}
+            logoHeight={100}
+            blurMultiplier={5}
+          />
+        </div>
+      )}
 
       <p className="sr-only">
         Selected projects: {CLIENT_LOGOS.map((l) => l.name).join(", ")}.

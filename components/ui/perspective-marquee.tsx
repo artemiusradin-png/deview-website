@@ -18,6 +18,7 @@ export interface PerspectiveMarqueeProps {
   perspective?: number;
   itemWidth?: number;
   logoHeight?: number;
+  blurMultiplier?: number;
 }
 
 export function PerspectiveMarquee({
@@ -29,6 +30,7 @@ export function PerspectiveMarquee({
   perspective = 1200,
   itemWidth = 500,
   logoHeight = 100,
+  blurMultiplier = 5,
 }: PerspectiveMarqueeProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -53,7 +55,7 @@ export function PerspectiveMarquee({
         const itemCenter = i * itemWidth + itemWidth / 2 - offset;
         const norm = (itemCenter - center / 2) / (center / 2);
         const dist = Math.min(1, Math.abs(norm));
-        el.style.filter = `blur(${dist * 5}px)`;
+        el.style.filter = `blur(${dist * blurMultiplier}px)`;
         el.style.opacity = String(1 - dist * 0.4);
       });
 
@@ -62,7 +64,7 @@ export function PerspectiveMarquee({
 
     raf = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(raf);
-  }, [logos, itemWidth, pixelsPerFrame]);
+  }, [blurMultiplier, logos, itemWidth, pixelsPerFrame]);
 
   const imgFilter = (name: string) => {
     if (name === "Lending Platform") return isDark ? "none" : "invert(1)";

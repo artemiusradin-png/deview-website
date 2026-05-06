@@ -382,6 +382,10 @@ html[data-theme="light"] .service-client__logo--polyu {
   perspective: 1200px;
 }
 
+.selected-project-logos__marquee {
+  height: 280px;
+}
+
 .selected-project-logos__stage::before,
 .selected-project-logos__stage::after {
   content: "";
@@ -490,6 +494,68 @@ html[data-theme="light"] .selected-project-logos__wordmark {
 }
 
 @media (max-width: 640px) {
+  .selected-project-logos {
+    padding-top: 2.75rem;
+    padding-bottom: 2.75rem;
+  }
+
+  .selected-project-logos__marquee {
+    height: 8.75rem;
+  }
+
+  .selected-project-logos__mobile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .selected-project-logos__mobile-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 5.25rem;
+    border: 1px solid var(--white-10);
+    background: color-mix(in srgb, var(--surface) 72%, transparent);
+    overflow: hidden;
+  }
+
+  .selected-project-logos__mobile-image {
+    display: block;
+    width: auto;
+    max-width: 78%;
+    max-height: 3.15rem;
+    object-fit: contain;
+    opacity: 0.92;
+  }
+
+  .selected-project-logos__mobile-nextair {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-width: 0;
+    color: var(--white-100);
+  }
+
+  .selected-project-logos__mobile-image--nextair {
+    max-width: 2.2rem;
+    max-height: 2.2rem;
+  }
+
+  .selected-project-logos__mobile-nextair span {
+    min-width: 0;
+    max-width: 5.75rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.82rem;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--white-90);
+  }
+
   .selected-project-logos__track {
     gap: 2.25rem;
     animation-duration: 22s;
@@ -1097,8 +1163,10 @@ html[data-theme="light"] .hero-fallback {
   }
 
   .section-fullscreen--hero {
-    padding-top: calc(var(--header-stack-height) + 2rem);
-    padding-bottom: max(1.1rem, env(safe-area-inset-bottom, 0px));
+    min-height: auto;
+    padding-top: calc(var(--header-stack-height) + 3.25rem);
+    padding-bottom: max(2.25rem, calc(env(safe-area-inset-bottom, 0px) + 1rem));
+    align-items: center;
   }
 
   .hero-aside {
@@ -2111,20 +2179,25 @@ html[data-theme="light"] .enterprise-compare-enterprise {
     position: relative;
     inset: auto;
     width: 100%;
-    height: 260px;
+    height: 300px;
     overflow: hidden;
     order: -1;
-    opacity: 0.7;
+    opacity: 0.75;
     margin-bottom: 0.5rem;
   }
 
-  .enterprise-globe-wrapper canvas {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 100% !important;
-    height: auto !important;
+  /* Override the desktop className props baked into the Globe component */
+  .enterprise-globe-wrapper > div {
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -40%) !important;
+    width: 92% !important;
+    max-width: 420px !important;
+  }
+
+  /* City label boxes use CSS anchor() which breaks when globe is repositioned */
+  .enterprise-globe-wrapper > div > div {
+    display: none !important;
   }
 }
 
@@ -2292,6 +2365,14 @@ html[data-theme="light"] .lang-toggle__opt:hover:not(.is-active) {
 }
 
 @media (max-width: 767px) {
+  html {
+    scroll-padding-bottom: 5rem;
+  }
+
+  body {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
   .lang-toggle {
     padding: 0.15rem;
   }
@@ -2308,6 +2389,7 @@ html[data-theme="light"] .lang-toggle__opt:hover:not(.is-active) {
     justify-content: center;
     padding-inline: 0.35rem;
   }
+
 }
 
 .theme-icon {
@@ -2416,9 +2498,19 @@ html[data-theme="light"] .lang-toggle__opt:hover:not(.is-active) {
 @media (max-width: 767px) {
   .brand-mark {
     padding-left: max(1rem, env(safe-area-inset-left, 0px));
-    padding-top: calc(env(safe-area-inset-top) + 1rem);
+    padding-top: calc(env(safe-area-inset-top, 0px) + 1.75rem);
     font-size: 0.64rem;
     letter-spacing: 0.2em;
+  }
+
+  .nav-shell {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .nav-shell nav {
+    height: 5.75rem;
+    align-items: flex-start;
+    padding-top: 1.45rem;
   }
 }
 
@@ -3439,6 +3531,23 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-process-label {
 
 html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
   stroke: rgba(19, 31, 47, 0.45);
+}
+
+.feature-showcase__media {
+  height: min(var(--feature-showcase-panel-height), 72vh);
+  min-height: min(var(--feature-showcase-panel-height), 72vh);
+}
+
+@media (max-width: 767px) {
+  .feature-showcase__media {
+    height: clamp(20rem, 78vw, 28rem);
+    min-height: clamp(20rem, 78vw, 28rem);
+  }
+
+  .feature-showcase__media [role="tablist"] {
+    max-width: calc(100vw - 3rem);
+    overflow-x: auto;
+  }
 }
 
 /* -------------------------------------------------------------------------- */
