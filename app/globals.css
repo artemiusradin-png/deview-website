@@ -237,6 +237,189 @@ html[data-theme="light"] .bg-grid::before {
   letter-spacing: 0.12em;
 }
 
+/* Hero — editorial / “make it work” impact */
+.hero-kicker-shell {
+  position: relative;
+  z-index: 20;
+  margin-top: 0.5rem;
+}
+
+.hero-kicker-marquee {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
+  border-top: 1px solid var(--white-10);
+  border-bottom: 1px solid var(--white-10);
+  background: color-mix(in srgb, var(--background) 55%, transparent);
+  backdrop-filter: blur(8px);
+  padding: 0.5rem 0;
+}
+
+.hero-kicker-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: hero-kicker-scroll 32s linear infinite;
+}
+
+.hero-kicker-marquee-segment {
+  flex: 0 0 auto;
+  padding: 0 2.5rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--white-70);
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .hero-kicker-marquee-segment {
+    font-size: 0.68rem;
+    padding: 0 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-kicker-marquee-track {
+    animation: none;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 0.35rem;
+    column-gap: 0;
+    padding: 0 1rem;
+  }
+
+  .hero-kicker-marquee-segment {
+    white-space: normal;
+    text-align: center;
+    padding: 0 0.75rem;
+  }
+
+  .hero-kicker-marquee-segment[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+@keyframes hero-kicker-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-25%, 0, 0);
+  }
+}
+
+.hero-kicker-static {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border-top: 1px solid var(--white-10);
+  border-bottom: 1px solid var(--white-10);
+  background: color-mix(in srgb, var(--background) 55%, transparent);
+  padding: 0.55rem 1rem;
+  text-align: center;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white-70);
+}
+
+@media (min-width: 768px) {
+  .hero-kicker-static {
+    font-size: 0.68rem;
+  }
+}
+
+.hero-value-hook {
+  max-width: 36rem;
+  font-family: "Archivo", "D-DIN", system-ui, sans-serif;
+  font-size: clamp(0.95rem, 2.4vw, 1.125rem);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  color: var(--white-90);
+  text-transform: none;
+}
+
+.hero-title-stack {
+  font-family: "Clash Display", "D-DIN", system-ui, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 0.98;
+}
+
+.hero-title-line--accent {
+  background: linear-gradient(102deg, rgb(141 231 189), rgb(130 200 255));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+html[data-theme="light"] .hero-title-line--accent {
+  background: linear-gradient(102deg, #087a55, #1c65b7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-outcome-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.5rem;
+}
+
+.hero-outcome-pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--white-20);
+  padding: 0.35rem 0.65rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white-85);
+  background: color-mix(in srgb, var(--background) 40%, transparent);
+}
+
+@media (min-width: 640px) {
+  .hero-outcome-pill {
+    font-size: 0.6rem;
+    padding: 0.4rem 0.75rem;
+  }
+}
+
+.btn-hero-primary {
+  display: inline-block;
+  border-radius: 0;
+  border: 1px solid transparent;
+  padding: 1rem 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: var(--white-100);
+  color: var(--background);
+  text-decoration: none;
+  text-align: center;
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease,
+    box-shadow 180ms ease;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.btn-hero-primary:hover {
+  transform: translateY(-2px);
+  opacity: 0.94;
+}
+
+html[data-theme="light"] .btn-hero-primary {
+  background: rgba(19, 31, 47, 0.96);
+  color: #fbf7ee;
+  box-shadow: 0 12px 36px rgba(19, 31, 47, 0.18);
+}
+
 
 .animate-float {
   animation: feature-spotlight-float 6s ease-in-out infinite;
@@ -1156,6 +1339,10 @@ html[data-theme="light"] .hero-fallback {
 @media (max-width: 767px) {
   .hero-heading {
     letter-spacing: 0.08em;
+  }
+
+  .hero-title-stack {
+    letter-spacing: 0.05em;
   }
 
   .enterprise-ai-section {

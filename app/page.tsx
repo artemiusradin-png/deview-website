@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { Rocket, X } from "lucide-react";
 import { AnimatedFeatureSpotlightDemo } from "../components/AnimatedFeatureSpotlightDemo";
 import { HomeServicesSection } from "../components/HomeServicesSection";
 import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
 import { SelectedProjectsLogoMarquee } from "../components/SelectedProjectsLogoMarquee";
-import { SelectedProjectsShowcase } from "../components/SelectedProjectsShowcase";
 import { Banner } from "@/components/ui/banner";
 import { Globe } from "@/components/ui/globe";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
@@ -60,6 +60,7 @@ export default function Home() {
   const [heroVideoPreload, setHeroVideoPreload] = useState<"auto" | "metadata">("metadata");
   const [isCompactEnterpriseLayout, setIsCompactEnterpriseLayout] = useState(false);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
+  const [guideCtaVisible, setGuideCtaVisible] = useState(true);
   const standbyStartedRef = useRef(false);
   const crossfadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -589,29 +590,50 @@ export default function Home() {
         <div
           className={`absolute inset-0 ${heroVideoState === "fallback" ? "hero-overlay" : "hero-overlay hero-overlay-video"}`}
         />
-        <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col justify-start gap-6 md:flex-row md:items-start md:gap-12">
+        <div className="hero-kicker-shell">
+          {prefersReducedMotion ? (
+            <p className="hero-kicker-static">{dict.hero.kicker}</p>
+          ) : (
+            <>
+              <p className="sr-only">{dict.hero.kicker}</p>
+              <div className="hero-kicker-marquee" aria-hidden="true">
+              <div className="hero-kicker-marquee-track">
+                {[0, 1, 2, 3].map((i) => (
+                  <span key={i} className="hero-kicker-marquee-segment" aria-hidden={i !== 0}>
+                    {dict.hero.kicker}
+                  </span>
+                ))}
+              </div>
+            </div>
+            </>
+          )}
+        </div>
+        <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col justify-start gap-8 md:flex-row md:items-start md:gap-14">
           <motion.div
             initial={fade.initial}
             animate={fade.animate}
             transition={{ duration: 0.6 }}
-            className="flex min-h-[calc(100svh-var(--header-stack-height)-2.25rem)] max-w-2xl flex-col md:min-h-0 md:pt-2"
+            className="flex min-h-[calc(100svh-var(--header-stack-height)-2.25rem)] max-w-3xl flex-col md:min-h-0 md:pt-2"
           >
-            <p className="section-label mb-4">{dict.hero.kicker}</p>
-            <h1 className="hero-heading mb-6 text-[clamp(1.75rem,6.5vw,2.75rem)] leading-[1.06] text-[var(--white-100)] md:text-5xl md:leading-[1.02] lg:text-6xl">
-              {dict.hero.titleL1}
-              <br />
-              {dict.hero.titleL2}
-              {dict.hero.titleL3 ? (
-                <>
-                  <br />
-                  {dict.hero.titleL3}
-                </>
-              ) : null}
+            <p className="hero-value-hook mb-5">{dict.hero.valueHook}</p>
+            <h1 className="hero-title-stack mb-5 text-[clamp(2rem,7.5vw,3.35rem)] text-[var(--white-100)] md:mb-6 md:text-[clamp(2.35rem,5.2vw,4.25rem)] lg:text-[clamp(2.6rem,4.8vw,4.75rem)]">
+              <span className="block">{dict.hero.titleL1}</span>
+              <span className="block">{dict.hero.titleL2}</span>
+              {dict.hero.titleL3 ? <span className="hero-title-line--accent block">{dict.hero.titleL3}</span> : null}
             </h1>
-            <div className="mt-auto pt-8 md:mt-0 md:pt-12">
-              <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
-              <div className="mt-6 md:mt-7">
-                <a href="#contact" className="btn-outline inline-block w-full text-center sm:w-auto">
+            <ul className="hero-outcome-pills mb-6 md:mb-7">
+              {dict.hero.col1.map((line) => (
+                <li key={line} className="hero-outcome-pill">
+                  {line}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-auto pt-2 md:mt-0 md:pt-0">
+              <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-[1.02rem] md:leading-relaxed">
+                {dict.hero.lead}
+              </p>
+              <div className="mt-6 md:mt-8">
+                <a href="#contact" className="btn-hero-primary inline-block w-full sm:w-auto">
                   {dict.hero.inquire}
                 </a>
               </div>
@@ -624,11 +646,6 @@ export default function Home() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="hero-aside flex flex-col items-start justify-between gap-8 text-left md:items-end md:gap-10 md:text-right"
           >
-            <div className="hidden space-y-2 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)] sm:text-xs md:block">
-              {dict.hero.col1.map((line) => (
-                <div key={line}>{line}</div>
-              ))}
-            </div>
             <div className="hidden w-full space-y-3 text-sm md:block md:w-auto">
               <div className="flex flex-col gap-1 sm:items-end">
                 <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
@@ -947,8 +964,6 @@ export default function Home() {
       <RetroFeatureCards />
 
       <SelectedProjectsLogoMarquee />
-
-      <SelectedProjectsShowcase />
       <HomeServicesSection variant="home" />
 
       <AnimatedFeatureSpotlightDemo />

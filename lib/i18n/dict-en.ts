@@ -26,6 +26,8 @@ export const en = {
   mobileNav: { close: "Close", contactForm: "CONTACT FORM" },
   hero: {
     kicker: "REDUCE COSTS · AUTOMATE WORKFLOWS · MOVE FASTER",
+    /** One line: what we do + outcome for the buyer */
+    valueHook: "We embed production AI in your stack — you cut cost, automate toil, and ship in weeks.",
     titleL1: "AI THAT WORKS",
     titleL2: "INSIDE YOUR",
     titleL3: "OPERATIONS",
