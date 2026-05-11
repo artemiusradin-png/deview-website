@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { Rocket, X } from "lucide-react";
 import { AnimatedFeatureSpotlightDemo } from "../components/AnimatedFeatureSpotlightDemo";
 import { HomeServicesSection } from "../components/HomeServicesSection";
 import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
 import { SelectedProjectsLogoMarquee } from "../components/SelectedProjectsLogoMarquee";
-import { SelectedProjectsShowcase } from "../components/SelectedProjectsShowcase";
 import { Banner } from "@/components/ui/banner";
 import { Globe } from "@/components/ui/globe";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
@@ -60,6 +60,7 @@ export default function Home() {
   const [heroVideoPreload, setHeroVideoPreload] = useState<"auto" | "metadata">("metadata");
   const [isCompactEnterpriseLayout, setIsCompactEnterpriseLayout] = useState(false);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
+  const [guideCtaVisible, setGuideCtaVisible] = useState(true);
   const standbyStartedRef = useRef(false);
   const crossfadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -948,7 +949,6 @@ export default function Home() {
 
       <SelectedProjectsLogoMarquee />
 
-      <SelectedProjectsShowcase />
       <HomeServicesSection variant="home" />
 
       <AnimatedFeatureSpotlightDemo />
