@@ -54,3 +54,6 @@ Task Manager - App/
 plugins/
 LOGOS/
 COPY_REWRITE_PLAN.md
+
+# Prototype folder — screen recordings are large binaries
+New-Landing-Page/*.mov

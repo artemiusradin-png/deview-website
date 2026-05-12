@@ -31,6 +31,10 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://api.fontshare.com/v2/css?f[]=archivo@300,400,500&f[]=clash-display@600,700&display=swap"
         />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        />
       </head>
       <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--text)]">
         <AppProviders>
