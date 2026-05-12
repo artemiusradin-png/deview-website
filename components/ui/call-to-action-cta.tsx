@@ -68,7 +68,7 @@ const CtaCard = React.forwardRef<HTMLDivElement, CtaCardProps>(
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[var(--white-20)]" />
 
         <motion.div
-          className="relative z-10 mx-auto grid max-w-[90rem] grid-cols-1 items-center gap-8 px-6 py-12 md:grid-cols-2 md:px-12 md:py-16 lg:px-20 lg:py-20"
+          className="relative z-10 mx-auto grid max-w-[90rem] grid-cols-1 items-center gap-6 px-6 py-8 md:grid-cols-2 md:px-10 md:py-10 lg:px-16 lg:py-12"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -76,13 +76,13 @@ const CtaCard = React.forwardRef<HTMLDivElement, CtaCardProps>(
         >
           <div className="flex flex-col items-start text-left">
             <motion.h2
-              className="text-3xl font-extrabold tracking-tight text-[var(--white-100)] md:text-4xl lg:text-5xl"
+              className="text-xl font-extrabold tracking-tight text-[var(--white-100)] md:text-2xl lg:text-3xl"
               variants={itemVariants}
             >
               {title}
             </motion.h2>
             <motion.p
-              className="mt-4 max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-lg"
+              className="mt-3 max-w-xl text-sm leading-relaxed text-[var(--text-muted)]"
               variants={itemVariants}
             >
               {description}

@@ -838,14 +838,6 @@ export default function Home() {
         <section
           className="enterprise-mode-stage enterprise-mode-stage--frameless bg-[var(--background)]"
         >
-            {/* Globe — stays fixed with the pinned panel; text changes on scroll */}
-            <div
-              className="enterprise-globe-wrapper pointer-events-none absolute inset-y-0 right-0 z-[40] w-[44%] overflow-visible"
-              aria-hidden="true"
-            >
-              <Globe className="absolute left-[-8%] top-1/2 z-[40] w-[108%] max-w-none -translate-y-[48%]" />
-            </div>
-
             <motion.div
               className="enterprise-mode-stage-copy"
               style={{
@@ -858,6 +850,15 @@ export default function Home() {
               <h3 className="enterprise-mode-stage-title text-[var(--white-100)]">{dict.enterpriseModesIntro.title}</h3>
               <p className="enterprise-mode-stage-body text-[var(--text-muted)]">{dict.enterpriseModesIntro.body}</p>
             </motion.div>
+
+            {/* Globe — stays fixed with the pinned panel on desktop; flows below intro copy on mobile */}
+            <div
+              className="enterprise-globe-wrapper pointer-events-none absolute inset-y-0 right-0 z-[40] w-[44%] overflow-visible"
+              aria-hidden="true"
+            >
+              <Globe className="absolute left-[-8%] top-1/2 z-[40] w-[108%] max-w-none -translate-y-[48%]" />
+            </div>
+
             <div className="enterprise-map-shell enterprise-mode-stage-shell">
               <div className="enterprise-scroll-rail" aria-hidden="true">
                 <motion.div className="enterprise-scroll-rail-fill" style={{ height: enterpriseRailFill }} />
@@ -970,7 +971,7 @@ export default function Home() {
           onButtonClick={(email) => {
             window.location.href = `/contact?email=${encodeURIComponent(email)}`;
           }}
-          className="min-h-[320px]"
+          className="min-h-[180px]"
         />
       </section>
 

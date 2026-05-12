@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>We — Sales Technical Guide</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #09090b;
+      --bg-card: #111114;
+      --bg-card-hover: #18181c;
+      --border: #222228;
+      --border-light: #2a2a32;
+      --text: #e4e4e7;
+      --text-muted: #71717a;
+      --text-dim: #3f3f46;
+      --accent: #6366f1;
+      --accent-light: #818cf8;
+      --accent-glow: rgba(99,102,241,0.12);
+      --green: #22c55e;
+      --green-dim: rgba(34,197,94,0.1);
+      --amber: #f59e0b;
+      --amber-dim: rgba(245,158,11,0.1);
+      --red: #ef4444;
+      --cyan: #06b6d4;
+      --purple: #a855f7;
+      --sidebar-width: 256px;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout ── */
+    .layout { display: flex; min-height: 100vh; }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: #0c0c0f;
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0; left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 0 0 32px;
+      z-index: 100;
+    }
+
+    .sidebar-brand {
+      padding: 22px 20px 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .sidebar-brand .wordmark {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      color: var(--text);
+    }
+
+    .sidebar-brand .tagline {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-top: 3px;
+    }
+
+    .nav-group { padding: 0 10px; margin-bottom: 4px; }
+
+    .nav-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-dim);
+      padding: 10px 10px 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: background 0.12s, color 0.12s;
+      margin-bottom: 1px;
+    }
+
+    .nav-item:hover { background: var(--bg-card); color: var(--text); }
+
+    .nav-item.active {
+      background: var(--accent-glow);
+      color: var(--accent-light);
+    }
+
+    .nav-num {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-dim);
+      min-width: 16px;
+      font-family: var(--mono);
+    }
+
+    .nav-item.active .nav-num { color: var(--accent); }
+
+    /* ── Main content ── */
+    .content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: 0 52px 100px;
+      max-width: calc(100% - var(--sidebar-width));
+    }
+
+    /* ── Module sections ── */
+    .module { padding-top: 72px; max-width: 880px; }
+
+    .module-header {
+      margin-bottom: 40px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .module-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 10px;
+      font-family: var(--mono);
+    }
+
+    .module-title {
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -1.2px;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .module-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 620px;
+      line-height: 1.75;
+    }
+
+    /* ── Section headings ── */
+    h2.sh {
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: -0.4px;
+      color: var(--text);
+      margin: 44px 0 16px;
+    }
+
+    h3.ssh {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 20px 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px;
+      margin-bottom: 14px;
+      transition: border-color 0.15s;
+    }
+
+    .card:hover { border-color: var(--border-light); }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── Badges ── */
+    .badge {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      border: 1px solid;
+    }
+
+    .b-blue  { color: var(--accent-light); border-color: var(--accent); background: var(--accent-glow); }
+    .b-green { color: var(--green); border-color: var(--green); background: var(--green-dim); }
+    .b-amber { color: var(--amber); border-color: var(--amber); background: var(--amber-dim); }
+    .b-purple{ color: var(--purple); border-color: var(--purple); background: rgba(168,85,247,.1); }
+    .b-cyan  { color: var(--cyan); border-color: var(--cyan); background: rgba(6,182,212,.1); }
+
+    /* ── Grids ── */
+    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+
+    /* ── Tags ── */
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 9px;
+      border-radius: 20px;
+      background: var(--border);
+      color: var(--text-muted);
+      margin: 2px;
+      font-family: var(--mono);
+    }
+
+    /* ── Flow diagrams ── */
+    .flow {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 14px 0;
+    }
+
+    .fs {
+      background: var(--bg);
+      border: 1px solid var(--border-light);
+      border-radius: 7px;
+      padding: 9px 14px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .fa { color: var(--text-dim); font-size: 16px; padding: 0 7px; flex-shrink: 0; }
+
+    /* ── Tables ── */
+    .dt {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      margin: 14px 0;
+    }
+
+    .dt th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+
+    .dt td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    .dt tr:last-child td { border-bottom: none; }
+    .dt tr:hover td { background: var(--bg-card); }
+    .dt td:first-child { color: var(--text-muted); font-size: 13px; }
+
+    /* ── Check lists ── */
+    .cl { list-style: none; margin: 10px 0; }
+
+    .cl li {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      padding: 4px 0 4px 22px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .cl li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+    .cl li strong { color: var(--text); }
+
+    /* ── Callouts ── */
+    .co {
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      border-left: 3px solid;
+      font-size: 13.5px;
+      line-height: 1.7;
+    }
+
+    .co-info   { background: var(--accent-glow); border-color: var(--accent); color: var(--text-muted); }
+    .co-info strong { color: var(--accent-light); }
+    .co-warn   { background: var(--amber-dim); border-color: var(--amber); color: var(--text-muted); }
+    .co-warn strong { color: var(--amber); }
+    .co-ok     { background: var(--green-dim); border-color: var(--green); color: var(--text-muted); }
+    .co-ok strong { color: var(--green); }
+
+    /* ── Diagram containers ── */
+    .diag {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      margin: 16px 0;
+      overflow-x: auto;
+    }
+
+    .diag svg { display: block; margin: 0 auto; width: 100%; height: auto; }
+
+    .diag-cap {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    /* ── Stat cards ── */
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 18px 14px;
+      text-align: center;
+    }
+
+    .stat-val { font-size: 26px; font-weight: 700; color: var(--text); letter-spacing: -1px; }
+    .stat-lbl { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 3px; }
+
+    /* ── FAQ ── */
+    .faq {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      padding: 15px 18px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--bg-card);
+      user-select: none;
+      gap: 12px;
+    }
+
+    .faq-q:hover { background: var(--bg-card-hover); }
+
+    .faq-ch { font-size: 11px; color: var(--text-muted); transition: transform 0.2s; flex-shrink: 0; }
+    .faq.open .faq-ch { transform: rotate(180deg); }
+
+    .faq-a {
+      display: none;
+      padding: 14px 18px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      border-top: 1px solid var(--border);
+    }
+
+    .faq.open .faq-a { display: block; }
+
+    /* ── Dividers ── */
+    .divider { height: 1px; background: var(--border); margin: 52px 0; }
+
+    /* ── Comparison table ── */
+    .comp-good { color: var(--green); font-size: 13px; }
+    .comp-bad  { color: var(--text-muted); font-size: 13px; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
+
+    /* ── Print ── */
+    @media print {
+      @page { size: A4 portrait; margin: 12mm 14mm; }
+
+      html { zoom: 0.72; }
+
+      .sidebar { display: none; }
+
+      .layout { display: block; }
+
+      .content {
+        margin-left: 0;
+        max-width: 100%;
+        padding: 0 8px;
+      }
+
+      .module { padding-top: 28px; max-width: 100%; }
+
+      .module-title { font-size: 24px; }
+
+      .diag {
+        padding: 12px;
+        overflow: hidden;
+        page-break-inside: avoid;
+      }
+
+      .diag svg { width: 100% !important; height: auto !important; }
+
+      .dt { font-size: 11px; }
+      .dt th, .dt td { padding: 7px 10px; }
+
+      .card { padding: 14px; page-break-inside: avoid; }
+
+      .flow { flex-wrap: wrap; gap: 4px; padding: 12px 14px; page-break-inside: avoid; }
+      .fs { font-size: 11px; padding: 6px 10px; }
+
+      .g2, .g3, .g4 { gap: 10px; }
+
+      .faq { page-break-inside: avoid; }
+      .faq-a { display: block; }
+
+      .divider { margin: 24px 0; }
+
+      h2.sh { margin: 24px 0 10px; font-size: 15px; }
+      .module-desc { font-size: 13px; }
+      p { font-size: 13px; }
+      .cl li { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- ════════════════════════════════════════
+       SIDEBAR
+  ════════════════════════════════════════ -->
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <div class="wordmark">We</div>
+      <div class="tagline">Sales Technical Guide</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Modules</div>
+      <a class="nav-item" href="#m1"><span class="nav-num">01</span> The Big Picture</a>
+      <a class="nav-item" href="#m2"><span class="nav-num">02</span> Services Deep Dive</a>
+      <a class="nav-item" href="#m3"><span class="nav-num">03</span> Data Infrastructure</a>
+      <a class="nav-item" href="#m4"><span class="nav-num">04</span> Security &amp; Compliance</a>
+      <a class="nav-item" href="#m5"><span class="nav-num">05</span> MLOps &amp; Monitoring</a>
+      <a class="nav-item" href="#m6"><span class="nav-num">06</span> Our Own Stack</a>
+      <a class="nav-item" href="#m7"><span class="nav-num">07</span> Sales FAQ</a>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════
+       CONTENT
+  ════════════════════════════════════════ -->
+  <main class="content">
+
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━
+         MODULE 1 — BIG PICTURE
+    ━━━━━━━━━━━━━━━━━━━━━━ -->
+    <section class="module" id="m1">
+      <div class="module-header">
+        <div class="module-tag">Module 01</div>
+        <h1 class="module-title">The Big Picture</h1>
+        <p class="module-desc">What we build, how our architecture is structured, and why production-grade AI is different from a demo. Use this module to frame any technical conversation with a prospect.</p>
+      </div>
+
+      <!-- 5-Layer Architecture -->
+      <h2 class="sh">Our Enterprise AI Architecture</h2>
+      <p style="font-size:13.5px;color:var(--text-muted);margin-bottom:16px;line-height:1.7">Every engagement operates within a five-layer model. Understanding these layers lets you explain exactly where our work sits inside a client's existing technology estate — and why every layer matters.</p>
+
+      <div class="diag">
+        <svg width="820" height="390" viewBox="0 0 820 390" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+          <defs>
+            <marker id="a1" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L6,3 z" fill="#3f3f46"/>
+            </marker>
+          </defs>
+
+          <!-- L5: Business -->
+          <rect x="20" y="10" width="780" height="60" rx="8" fill="#16162a" stroke="#6366f1" stroke-width="1.5"/>
+          <text x="42" y="34" fill="#818cf8" font-size="10" font-weight="700" letter-spacing="1.8" text-transform="uppercase">LAYER 5 — BUSINESS</text>
+          <text x="42" y="55" fill="#a1a1aa" font-size="13">Business Processes · Strategic Goals · KPI Dashboards · Executive Reporting · ROI Tracking</text>
+
+          <line x1="410" y1="70" x2="410" y2="86" stroke="#3f3f46" stroke-width="2" marker-end="url(#a1)"/>
+
+          <!-- L4: Application -->
+          <rect x="20" y="86" width="780" height="60" rx="8" fill="#111118" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="42" y="110" fill="#60a5fa" font-size="10" font-weight="700" letter-spacing="1.8">LAYER 4 — APPLICATION</text>
+          <text x="42" y="131" fill="#a1a1aa" font-size="13">User Interfaces · ERP (SAP / Oracle) · CRM (Salesforce / HubSpot) · Slack · Document Platforms</text>
+
+          <line x1="410" y1="146" x2="410" y2="162" stroke="#3f3f46" stroke-width="2" marker-end="url(#a1)"/>
+
+          <!-- L3: Data Foundation -->
+          <rect x="20" y="162" width="780" height="60" rx="8" fill="#111118" stroke="#06b6d4" stroke-width="1.5"/>
+          <text x="42" y="186" fill="#22d3ee" font-size="10" font-weight="700" letter-spacing="1.8">LAYER 3 — DATA FOUNDATION</text>
+          <text x="42" y="207" fill="#a1a1aa" font-size="13">Data Sources · ETL Pipelines · Data Integration · Vector Stores · Feature Engineering · Data Quality</text>
+
+          <line x1="410" y1="222" x2="410" y2="238" stroke="#3f3f46" stroke-width="2" marker-end="url(#a1)"/>
+
+          <!-- L2: Infrastructure -->
+          <rect x="20" y="238" width="780" height="60" rx="8" fill="#111118" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="42" y="262" fill="#4ade80" font-size="10" font-weight="700" letter-spacing="1.8">LAYER 2 — INFRASTRUCTURE</text>
+          <text x="42" y="283" fill="#a1a1aa" font-size="13">Security &amp; Access Control · Cloud / On-Premises · MLOps · Audit Logging · Monitoring &amp; Alerting</text>
+
+          <line x1="410" y1="298" x2="410" y2="314" stroke="#3f3f46" stroke-width="2" marker-end="url(#a1)"/>
+
+          <!-- L1: AI/ML Core -->
+          <rect x="20" y="314" width="780" height="60" rx="8" fill="#1a1428" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="42" y="338" fill="#c084fc" font-size="10" font-weight="700" letter-spacing="1.8">LAYER 1 — AI / ML CORE</text>
+          <text x="42" y="359" fill="#a1a1aa" font-size="13">LLMs · ML Classifiers · Model Registry · Serving Infrastructure · Evaluation Framework · Embeddings</text>
+        </svg>
+        <p class="diag-cap">Fig 1.1 — our five-layer enterprise AI architecture. Every engagement touches all five layers.</p>
+      </div>
+
+      <!-- 4 AI Modes -->
+      <h2 class="sh">The Four AI Operating Modes</h2>
+      <div class="g2">
+        <div class="card">
+          <div class="card-title">📈 Predictive <span class="badge b-blue">Data-driven</span></div>
+          <p>Uses historical and real-time data to forecast outcomes before they happen. Client examples include inventory demand forecasting, fraud detection scoring, credit risk assessment, and workforce capacity planning.</p>
+          <div style="margin-top:12px;"><span class="tag">ML models</span><span class="tag">time-series</span><span class="tag">scoring APIs</span></div>
+        </div>
+        <div class="card">
+          <div class="card-title">💬 Conversational <span class="badge b-green">User-facing</span></div>
+          <p>AI-powered interfaces that respond to natural language. Examples: internal knowledge assistants, customer support bots, HR policy Q&amp;A, and procurement request handling embedded in Slack or a web portal.</p>
+          <div style="margin-top:12px;"><span class="tag">LLMs</span><span class="tag">RAG</span><span class="tag">chat APIs</span></div>
+        </div>
+        <div class="card">
+          <div class="card-title">✍️ Generative <span class="badge b-purple">Content</span></div>
+          <p>AI that creates new documents or structured content at scale. Examples: automated report generation, loan application summaries, contract drafting, compliance document review, and email response drafting.</p>
+          <div style="margin-top:12px;"><span class="tag">LLMs</span><span class="tag">templates</span><span class="tag">structured output</span></div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔬 Analytical <span class="badge b-cyan">Insight</span></div>
+          <p>AI that surfaces hidden patterns in operational data. Examples: customer churn signals, pipeline health scoring, document classification, and sentiment analysis on support tickets to route them faster.</p>
+          <div style="margin-top:12px;"><span class="tag">NLP</span><span class="tag">classification</span><span class="tag">embeddings</span></div>
+        </div>
+      </div>
+
+      <!-- PoC vs Production -->
+      <h2 class="sh">Production-Grade vs. Proof-of-Concept</h2>
+      <div class="co co-info">
+        <strong>Sales tip:</strong> Most prospects have already seen an AI demo. The real question they're asking is: "Can this actually work inside our environment, with our data, under our security policies?" This table is your answer.
+      </div>
+      <table class="dt">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Proof-of-Concept (what they've likely seen)</th>
+            <th>we Production-Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Data</td>
+            <td class="comp-bad">Sample CSV or synthetic data</td>
+            <td class="comp-good">✓ Live integrations with real CRM / ERP</td>
+          </tr>
+          <tr>
+            <td>Security</td>
+            <td class="comp-bad">No auth, shared API keys</td>
+            <td class="comp-good">✓ Role-based access, audit logs, isolated tenants</td>
+          </tr>
+          <tr>
+            <td>Reliability</td>
+            <td class="comp-bad">Demo environment only, no SLA</td>
+            <td class="comp-good">✓ Uptime monitoring, error handling, fallback logic</td>
+          </tr>
+          <tr>
+            <td>Monitoring</td>
+            <td class="comp-bad">None</td>
+            <td class="comp-good">✓ Drift detection, evaluation pipelines, alerting</td>
+          </tr>
+          <tr>
+            <td>Integration</td>
+            <td class="comp-bad">Standalone app, copy-paste workflow</td>
+            <td class="comp-good">✓ Embedded in existing tools and workflows</td>
+          </tr>
+          <tr>
+            <td>Compliance</td>
+            <td class="comp-bad">Not considered in the PoC</td>
+            <td class="comp-good">✓ Designed for regulated industries from day one</td>
+          </tr>
+          <tr>
+            <td>Ownership</td>
+            <td class="comp-bad">Vendor lock-in, hosted platform</td>
+            <td class="comp-good">✓ Deployed in your environment — you own the system</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━
+         MODULE 2 — SERVICES
+    ━━━━━━━━━━━━━━━━━━━━━━ -->
+    <section class="module" id="m2">
+      <div class="module-header">
+        <div class="module-tag">Module 02</div>
+        <h1 class="module-title">Services Deep Dive</h1>
+        <p class="module-desc">A technical breakdown of each of our services — how it works under the hood, what systems it connects to, and what the client receives.</p>
+      </div>
+
+      <!-- Service 1: AI Workflow Audit -->
+      <h2 class="sh">① AI Workflow Audit</h2>
+      <div class="g2">
+        <div class="card">
+          <div class="card-title">What it is</div>
+          <p>A structured analysis of one specific business process to identify the highest-value AI automation entry point. Delivered as a scoped report with a concrete, costed implementation pathway.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">What the client receives</div>
+          <ul class="cl">
+            <li><strong>Process map</strong> annotated with bottleneck markers</li>
+            <li><strong>Automation score</strong> per process step (effort vs. impact)</li>
+            <li><strong>Top use case</strong> with rough ROI estimate</li>
+            <li><strong>Implementation roadmap</strong> phased into 3 stages</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flow">
+        <div class="fs">📋 Process intake interview</div>
+        <div class="fa">→</div>
+        <div class="fs">🔍 Bottleneck mapping</div>
+        <div class="fa">→</div>
+        <div class="fs">📊 Automation scoring</div>
+        <div class="fa">→</div>
+        <div class="fs">🎯 Use case prioritization</div>
+        <div class="fa">→</div>
+        <div class="fs">📄 Roadmap delivery</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Service 2: Internal Knowledge Assistant -->
+      <h2 class="sh">② Internal Knowledge Assistant</h2>
+      <div class="co co-info">
+        <strong>Key technical concept — RAG:</strong> This service uses Retrieval-Augmented Generation. Instead of the AI "guessing" answers from its training data, it first searches the client's actual documents, retrieves the most relevant sections, then generates an answer grounded only in those specific documents — with citations.
+      </div>
+      <div class="g2">
+        <div class="card">
+          <div class="card-title">How RAG works (for the sales conversation)</div>
+          <p>Think of it like giving the AI a private search engine over your company's documents. When someone asks a question, the AI searches first, finds the right policy or procedure, then answers — quoting the source. It never makes up an answer that isn't in your documents.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">What gets connected</div>
+          <ul class="cl">
+            <li><strong>Confluence / Notion</strong> — internal wikis and runbooks</li>
+            <li><strong>SharePoint / Google Drive</strong> — file storage and policies</li>
+            <li><strong>PDF / Word documents</strong> — procedures and compliance docs</li>
+            <li><strong>Slack history</strong> — surfacing institutional knowledge</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flow">
+        <div class="fs">📁 Company documents ingested</div>
+        <div class="fa">→</div>
+        <div class="fs">✂️ Chunked &amp; vectorized</div>
+        <div class="fa">→</div>
+        <div class="fs">🗄️ Stored in vector DB</div>
+        <div class="fa">→</div>
+        <div class="fs">❓ User asks question</div>
+        <div class="fa">→</div>
+        <div class="fs">🔍 Relevant chunks retrieved</div>
+        <div class="fa">→</div>
+        <div class="fs">💬 LLM answers with citations</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Service 3: Document Automation -->
+      <h2 class="sh">③ Document Automation</h2>
+      <div class="g2">
+        <div class="card">
+          <div class="card-title">What it automates</div>
+          <p>Repetitive document processing: extracting structured data from forms, classifying incoming document types, generating outputs from unstructured text, and routing documents to the correct downstream workflow — without manual handling.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Human-in-the-loop (a feature, not a limitation)</div>
+          <p>When the AI's confidence score falls below the configured threshold, the document is flagged for human review rather than processed automatically. This means the system never silently makes a high-stakes mistake.</p>
+        </div>
+      </div>
+      <div class="flow">
+        <div class="fs">📄 Document received</div>
+        <div class="fa">→</div>
+        <div class="fs">🔤 OCR / text extraction</div>
+        <div class="fa">→</div>
+        <div class="fs">🤖 LLM parsing &amp; classification</div>
+        <div class="fa">→</div>
+        <div class="fs">✅ Confidence check</div>
+        <div class="fa">→</div>
+        <div class="fs">🔀 Auto-process or human review</div>
+        <div class="fa">→</div>
+        <div class="fs">⚙️ Downstream system updated</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Service 4: Customer Support Assistant -->
+      <h2 class="sh">④ Customer Support Assistant</h2>
+      <div class="g2">
+        <div class="card">
+          <div class="card-title">How intelligent routing works</div>
+          <p>The AI classifies each incoming message by intent (billing query, technical issue, complaint, general inquiry) and assigns a confidence score. High-confidence intents are handled automatically; ambiguous ones escalate to a human agent — with full conversation context pre-populated.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">CRM integration behavior</div>
+          <ul class="cl">
+            <li><strong>Reads</strong> full customer history before composing a reply</li>
+            <li><strong>Logs</strong> every AI interaction to the CRM record</li>
+            <li><strong>Creates</strong> tickets or updates case records automatically</li>
+            <li><strong>Escalates</strong> with conversation context pre-loaded for the agent</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flow">
+        <div class="fs">📨 Customer message arrives</div>
+        <div class="fa">→</div>
+        <div class="fs">🎯 Intent classification</div>
+        <div class="fa">→</div>
+        <div class="fs">📚 KB + CRM lookup</div>
+        <div class="fa">→</div>
+        <div class="fs">💬 AI response generated</div>
+        <div class="fa">→</div>
+        <div class="fs">📝 CRM record updated</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Service 5: Reporting Copilot -->
+      <h2 class="sh">⑤ Reporting &amp; Research Copilot</h2>
+      <div class="g2">
+        <div class="card">
+          <div class="card-title">What it replaces</div>
+          <p>Hours of manual data gathering, spreadsheet consolidation, and report drafting. The AI connects directly to data sources, queries them on schedule, summarizes findings in your preferred format, and delivers the report via email or Slack — without human intervention.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Data connectors supported</div>
+          <ul class="cl">
+            <li><strong>SQL databases</strong> — direct query access via read-only credentials</li>
+            <li><strong>BI tools</strong> — Tableau, Power BI, Looker data exports</li>
+            <li><strong>APIs</strong> — internal and third-party data feeds</li>
+            <li><strong>Spreadsheets</strong> — Google Sheets, Excel via scheduled sync</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flow">
+        <div class="fs">🔗 Data source connected</div>
+        <div class="fa">→</div>
+        <div class="fs">⏰ Scheduled data pull</div>
+        <div class="fa">→</div>
+        <div class="fs">🤖 LLM summarizes &amp; formats</div>
+        <div class="fa">→</div>
+        <div class="fs">📊 Report structured</div>
+        <div class="fa">→</div>
+        <div class="fs">📧 Delivered to stakeholders</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Service 6: Advisory -->
+      <h2 class="sh">⑥ AI Implementation Advisory</h2>
+      <div class="g2">
+        <div class="card">
+          <div class="card-title">What makes this different from generic strategy advice</div>
+          <p>Recommendations are scoped to the client's actual tech stack, team capabilities, and data readiness. The output is a prioritized roadmap with effort/impact scoring — not a slide deck full of buzzwords. Every recommendation is tied to a specific, implementable next action.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Assessment dimensions</div>
+          <ul class="cl">
+            <li><strong>Data readiness</strong> — quality, availability, and governance status</li>
+            <li><strong>Integration feasibility</strong> — existing systems and API availability</li>
+            <li><strong>Team capability</strong> — skill gaps and training requirements</li>
+            <li><strong>ROI modeling</strong> — time and cost savings estimated per use case</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━
+         MODULE 3 — DATA INFRA
+    ━━━━━━━━━━━━━━━━━━━━━━ -->
+    <section class="module" id="m3">
+      <div class="module-header">
+        <div class="module-tag">Module 03</div>
+        <h1 class="module-title">Data Infrastructure</h1>
+        <p class="module-desc">How client data flows from existing source systems through our AI pipelines — and back into the business. Use this to answer "where does our data go?"</p>
+      </div>
+
+      <h2 class="sh">Data Integration Map</h2>
+
+      <div class="diag">
+        <svg width="840" height="310" viewBox="0 0 840 310" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+          <defs>
+            <marker id="b1" markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#3f3f46"/></marker>
+            <marker id="b2" markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#3b82f6"/></marker>
+            <marker id="b3" markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#a855f7"/></marker>
+            <marker id="b4" markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#22c55e"/></marker>
+          </defs>
+
+          <!-- Column labels -->
+          <text x="95" y="20" fill="#52525b" font-size="10" font-weight="700" letter-spacing="1.2" text-anchor="middle">CLIENT SYSTEMS</text>
+          <text x="320" y="20" fill="#52525b" font-size="10" font-weight="700" letter-spacing="1.2" text-anchor="middle">ETL PIPELINE</text>
+          <text x="560" y="20" fill="#52525b" font-size="10" font-weight="700" letter-spacing="1.2" text-anchor="middle">AI LAYER</text>
+          <text x="750" y="20" fill="#52525b" font-size="10" font-weight="700" letter-spacing="1.2" text-anchor="middle">OUTPUTS</text>
+
+          <!-- Client system boxes -->
+          <rect x="20" y="32" width="150" height="34" rx="6" fill="#111118" stroke="#3f3f46" stroke-width="1"/>
+          <text x="95" y="54" fill="#e4e4e7" font-size="12" text-anchor="middle">CRM (Salesforce)</text>
+
+          <rect x="20" y="76" width="150" height="34" rx="6" fill="#111118" stroke="#3f3f46" stroke-width="1"/>
+          <text x="95" y="98" fill="#e4e4e7" font-size="12" text-anchor="middle">ERP (SAP / Oracle)</text>
+
+          <rect x="20" y="120" width="150" height="34" rx="6" fill="#111118" stroke="#3f3f46" stroke-width="1"/>
+          <text x="95" y="142" fill="#e4e4e7" font-size="12" text-anchor="middle">Document Storage</text>
+
+          <rect x="20" y="164" width="150" height="34" rx="6" fill="#111118" stroke="#3f3f46" stroke-width="1"/>
+          <text x="95" y="186" fill="#e4e4e7" font-size="12" text-anchor="middle">SQL Databases</text>
+
+          <rect x="20" y="208" width="150" height="34" rx="6" fill="#111118" stroke="#3f3f46" stroke-width="1"/>
+          <text x="95" y="230" fill="#e4e4e7" font-size="12" text-anchor="middle">Slack / Email</text>
+
+          <rect x="20" y="252" width="150" height="34" rx="6" fill="#111118" stroke="#3f3f46" stroke-width="1"/>
+          <text x="95" y="274" fill="#e4e4e7" font-size="12" text-anchor="middle">BI Tools</text>
+
+          <!-- Arrows → ETL -->
+          <line x1="170" y1="49" x2="238" y2="122" stroke="#3f3f46" stroke-width="1.5" marker-end="url(#b1)"/>
+          <line x1="170" y1="93" x2="238" y2="135" stroke="#3f3f46" stroke-width="1.5" marker-end="url(#b1)"/>
+          <line x1="170" y1="137" x2="238" y2="148" stroke="#3f3f46" stroke-width="1.5" marker-end="url(#b1)"/>
+          <line x1="170" y1="181" x2="238" y2="162" stroke="#3f3f46" stroke-width="1.5" marker-end="url(#b1)"/>
+          <line x1="170" y1="225" x2="238" y2="175" stroke="#3f3f46" stroke-width="1.5" marker-end="url(#b1)"/>
+          <line x1="170" y1="269" x2="238" y2="185" stroke="#3f3f46" stroke-width="1.5" marker-end="url(#b1)"/>
+
+          <!-- ETL box -->
+          <rect x="238" y="100" width="164" height="110" rx="8" fill="#0f1729" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="320" y="126" fill="#60a5fa" font-size="13" text-anchor="middle" font-weight="600">Extract</text>
+          <text x="320" y="148" fill="#71717a" font-size="12" text-anchor="middle">↓ Transform</text>
+          <text x="320" y="168" fill="#71717a" font-size="12" text-anchor="middle">↓ Validate</text>
+          <text x="320" y="188" fill="#71717a" font-size="12" text-anchor="middle">↓ Load</text>
+
+          <!-- Arrow ETL → AI -->
+          <line x1="402" y1="155" x2="460" y2="155" stroke="#3b82f6" stroke-width="2" marker-end="url(#b2)"/>
+
+          <!-- AI Layer boxes -->
+          <rect x="460" y="75" width="190" height="60" rx="8" fill="#1a1428" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="555" y="101" fill="#c084fc" font-size="13" text-anchor="middle" font-weight="600">LLM / ML Models</text>
+          <text x="555" y="120" fill="#71717a" font-size="11" text-anchor="middle">Vector DB · Model Serving</text>
+
+          <rect x="460" y="155" width="190" height="60" rx="8" fill="#1a1428" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="555" y="181" fill="#c084fc" font-size="13" text-anchor="middle" font-weight="600">Evaluation Layer</text>
+          <text x="555" y="200" fill="#71717a" font-size="11" text-anchor="middle">Scoring · Drift Detection</text>
+
+          <rect x="460" y="235" width="190" height="60" rx="8" fill="#1a1428" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="555" y="261" fill="#c084fc" font-size="13" text-anchor="middle" font-weight="600">Audit Logger</text>
+          <text x="555" y="280" fill="#71717a" font-size="11" text-anchor="middle">Every action recorded</text>
+
+          <!-- Arrows AI → Output -->
+          <line x1="650" y1="105" x2="695" y2="105" stroke="#a855f7" stroke-width="1.5" marker-end="url(#b3)"/>
+          <line x1="650" y1="185" x2="695" y2="175" stroke="#a855f7" stroke-width="1.5" marker-end="url(#b3)"/>
+          <line x1="650" y1="265" x2="695" y2="255" stroke="#a855f7" stroke-width="1.5" marker-end="url(#b3)"/>
+
+          <!-- Output boxes -->
+          <rect x="695" y="80" width="130" height="38" rx="6" fill="#111118" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="760" y="104" fill="#4ade80" font-size="12" text-anchor="middle">Insights &amp; Reports</text>
+
+          <rect x="695" y="156" width="130" height="38" rx="6" fill="#111118" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="760" y="175" fill="#4ade80" font-size="12" text-anchor="middle">Automated Actions</text>
+          <text x="760" y="190" fill="#52525b" font-size="10" text-anchor="middle">CRM updates, tickets</text>
+
+          <rect x="695" y="232" width="130" height="38" rx="6" fill="#111118" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="760" y="256" fill="#4ade80" font-size="12" text-anchor="middle">Compliance Logs</text>
+          <text x="760" y="271" fill="#52525b" font-size="10" text-anchor="middle">Exportable audit trail</text>
+        </svg>
+        <p class="diag-cap">Fig 3.1 — Data flow from client source systems through the ETL pipeline into the AI layer and back to business outputs.</p>
+      </div>
+
+      <!-- Deployment Models -->
+      <h2 class="sh">Deployment Models</h2>
+      <div class="g3">
+        <div class="card">
+          <div class="card-title"><span class="badge b-blue">Cloud-hosted</span></div>
+          <p style="margin-top:10px;">Deployed within the client's own AWS, GCP, or Azure account. Data never leaves their cloud environment. We manage the deployment — not the data. Most common for mid-market clients.</p>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="badge b-green">On-premises</span></div>
+          <p style="margin-top:10px;">Fully air-gapped within the client's physical or virtual infrastructure. Uses open-source models (Llama 3, Mistral) running locally. Required for highly regulated environments.</p>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="badge b-amber">Hybrid</span></div>
+          <p style="margin-top:10px;">Sensitive regulated data stays on-premises; non-sensitive processing uses cloud inference. Common in lending — some datasets are regulated, others aren't.</p>
+        </div>
+      </div>
+
+      <h2 class="sh">Data Isolation &amp; Ownership</h2>
+      <div class="co co-ok">
+        <strong>Key assurance for enterprise procurement:</strong> Each client deployment is fully isolated. No shared model learns from one client's data and applies it to another. Your data is never used to train general-purpose models.
+      </div>
+      <ul class="cl">
+        <li>Separate database schema or dedicated instance per client</li>
+        <li>API keys and credentials scoped exclusively to each deployment</li>
+        <li>Audit logs are client-specific and fully exportable on request</li>
+        <li>Data retention policies configurable per engagement agreement</li>
+        <li>Client retains full ownership — system lives in their environment</li>
+      </ul>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━
+         MODULE 4 — SECURITY
+    ━━━━━━━━━━━━━━━━━━━━━━ -->
+    <section class="module" id="m4">
+      <div class="module-header">
+        <div class="module-tag">Module 04</div>
+        <h1 class="module-title">Security &amp; Compliance</h1>
+        <p class="module-desc">How we handle data security, access control, audit trails, and regulated industry requirements. Use this for enterprise procurement and legal review conversations.</p>
+      </div>
+
+      <h2 class="sh">Security Boundary Map</h2>
+
+      <div class="diag">
+        <svg width="820" height="290" viewBox="0 0 820 290" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+          <defs>
+            <marker id="c1" markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#f59e0b"/></marker>
+            <marker id="c2" markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#a855f7"/></marker>
+          </defs>
+
+          <!-- Zone 1: Client Browser -->
+          <rect x="10" y="10" width="225" height="268" rx="8" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="6,4"/>
+          <text x="122" y="32" fill="#60a5fa" font-size="10" font-weight="700" letter-spacing="1.2" text-anchor="middle">CLIENT BROWSER</text>
+
+          <rect x="28" y="42" width="189" height="38" rx="6" fill="#0f1729" stroke="#3b82f6" stroke-width="1"/>
+          <text x="122" y="66" fill="#93c5fd" font-size="12" text-anchor="middle">React UI (Next.js)</text>
+
+          <rect x="28" y="92" width="189" height="38" rx="6" fill="#0f1729" stroke="#3b82f6" stroke-width="1"/>
+          <text x="122" y="116" fill="#93c5fd" font-size="12" text-anchor="middle">Public keys only (safe)</text>
+
+          <rect x="28" y="142" width="189" height="38" rx="6" fill="#0f1729" stroke="#3b82f6" stroke-width="1"/>
+          <text x="122" y="166" fill="#93c5fd" font-size="12" text-anchor="middle">localStorage (UI state)</text>
+
+          <text x="122" y="258" fill="#3f3f46" font-size="11" text-anchor="middle">No sensitive keys exposed</text>
+
+          <!-- Lock + HTTPS label -->
+          <text x="272" y="148" fill="#f59e0b" font-size="22" text-anchor="middle">🔒</text>
+          <text x="272" y="168" fill="#71717a" font-size="10" text-anchor="middle">HTTPS only</text>
+
+          <line x1="235" y1="140" x2="300" y2="140" stroke="#f59e0b" stroke-width="2" marker-end="url(#c1)"/>
+
+          <!-- Zone 2: Server -->
+          <rect x="300" y="10" width="245" height="268" rx="8" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="6,4"/>
+          <text x="422" y="32" fill="#4ade80" font-size="10" font-weight="700" letter-spacing="1.2" text-anchor="middle">SERVER (Node.js API)</text>
+
+          <rect x="318" y="42" width="209" height="38" rx="6" fill="#0a1a0a" stroke="#22c55e" stroke-width="1"/>
+          <text x="422" y="66" fill="#86efac" font-size="12" text-anchor="middle">Input validation + sanitize</text>
+
+          <rect x="318" y="92" width="209" height="38" rx="6" fill="#0a1a0a" stroke="#22c55e" stroke-width="1"/>
+          <text x="422" y="116" fill="#86efac" font-size="12" text-anchor="middle">Honeypot spam detection</text>
+
+          <rect x="318" y="142" width="209" height="38" rx="6" fill="#0a1a0a" stroke="#22c55e" stroke-width="1"/>
+          <text x="422" y="158" fill="#86efac" font-size="12" text-anchor="middle">Secret env vars only</text>
+          <text x="422" y="173" fill="#52525b" font-size="10" text-anchor="middle">Never exposed to browser</text>
+
+          <rect x="318" y="196" width="209" height="38" rx="6" fill="#0a1a0a" stroke="#22c55e" stroke-width="1"/>
+          <text x="422" y="220" fill="#86efac" font-size="12" text-anchor="middle">API route auth guards</text>
+
+          <text x="422" y="258" fill="#3f3f46" font-size="11" text-anchor="middle">Zero trust between zones</text>
+
+          <!-- Arrows → Third-party -->
+          <line x1="545" y1="95" x2="598" y2="95" stroke="#a855f7" stroke-width="1.5" marker-end="url(#c2)"/>
+          <line x1="545" y1="155" x2="598" y2="155" stroke="#a855f7" stroke-width="1.5" marker-end="url(#c2)"/>
+          <line x1="545" y1="215" x2="598" y2="215" stroke="#a855f7" stroke-width="1.5" marker-end="url(#c2)"/>
+
+          <!-- Zone 3: Third-party -->
+          <rect x="598" y="10" width="212" height="268" rx="8" fill="none" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="6,4"/>
+          <text x="704" y="32" fill="#c084fc" font-size="10" font-weight="700" letter-spacing="1.2" text-anchor="middle">THIRD-PARTY SERVICES</text>
+
+          <rect x="616" y="68" width="176" height="38" rx="6" fill="#1a0a2a" stroke="#a855f7" stroke-width="1"/>
+          <text x="704" y="92" fill="#d8b4fe" font-size="12" text-anchor="middle">Supabase (PostgreSQL)</text>
+
+          <rect x="616" y="128" width="176" height="38" rx="6" fill="#1a0a2a" stroke="#a855f7" stroke-width="1"/>
+          <text x="704" y="152" fill="#d8b4fe" font-size="12" text-anchor="middle">LLM / AI APIs</text>
+
+          <rect x="616" y="188" width="176" height="38" rx="6" fill="#1a0a2a" stroke="#a855f7" stroke-width="1"/>
+          <text x="704" y="212" fill="#d8b4fe" font-size="12" text-anchor="middle">Email / Notifications</text>
+
+          <text x="704" y="258" fill="#3f3f46" font-size="11" text-anchor="middle">Server-proxied — never direct</text>
+        </svg>
+        <p class="diag-cap">Fig 4.1 — Security boundaries. Sensitive credentials exist only server-side. Client never touches secrets directly.</p>
+      </div>
+
+      <!-- Security measures grid -->
+      <h2 class="sh">Security Measures in Plain English</h2>
+      <div class="g2">
+        <div class="card">
+          <div class="card-title">🔑 Access Control</div>
+          <ul class="cl">
+            <li><strong>Role-based permissions</strong> — users see only what they need</li>
+            <li><strong>Service accounts</strong> — systems talk with scoped keys only</li>
+            <li><strong>Row-level security</strong> enforced at database layer (RLS)</li>
+            <li><strong>Admin access</strong> server-side only, never client-side</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">📋 Audit &amp; Traceability</div>
+          <ul class="cl">
+            <li><strong>Every AI action logged</strong> — who, when, what input, what output</li>
+            <li><strong>Immutable records</strong> — logs cannot be retroactively altered</li>
+            <li><strong>Export available</strong> — full audit trail exportable for compliance review</li>
+            <li><strong>Timestamps</strong> — created_at / updated_at on all records</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">🛡️ Input Security</div>
+          <ul class="cl">
+            <li><strong>Server-side validation</strong> — all input sanitized before processing</li>
+            <li><strong>Length limits</strong> — prevent injection and overflow attempts</li>
+            <li><strong>Honeypot fields</strong> — bot and spam detection on all endpoints</li>
+            <li><strong>Domain validation</strong> — rejects personal emails for B2B flows</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">🤖 AI-Specific Security</div>
+          <ul class="cl">
+            <li><strong>Prompt injection mitigation</strong> — user input sanitized before LLM</li>
+            <li><strong>Output filtering</strong> — AI responses screened before delivery</li>
+            <li><strong>Domain guardrails</strong> — model constrained to defined scope</li>
+            <li><strong>Confidence thresholds</strong> — low-confidence outputs escalate to humans</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Compliance table -->
+      <h2 class="sh">Regulatory Compliance Context</h2>
+      <div class="co co-warn">
+        <strong>Sales guidance:</strong> We do not currently hold SOC 2 or ISO 27001 certifications. When a prospect asks, be honest and pivot to architecture: "We're designed with these frameworks in mind and can provide full documentation for your security review team."
+      </div>
+      <table class="dt">
+        <thead>
+          <tr><th>Regulation</th><th>Who it applies to</th><th>How we address it</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GDPR</td>
+            <td>EU-based clients or clients handling EU personal data</td>
+            <td>Data stays in client-controlled cloud; data processing agreements available on request</td>
+          </tr>
+          <tr>
+            <td>PDPO</td>
+            <td>Hong Kong personal data processing</td>
+            <td>Primary jurisdiction for we; data residency options built into HK deployments</td>
+          </tr>
+          <tr>
+            <td>MAS TRM</td>
+            <td>Singapore financial institutions</td>
+            <td>Audit trail requirements met; model risk documentation available</td>
+          </tr>
+          <tr>
+            <td>HKMA</td>
+            <td>HK banks and licensed lenders</td>
+            <td>On-premises deployment available for regulated data; full audit exports</td>
+          </tr>
+          <tr>
+            <td>SOC 2</td>
+            <td>US enterprise and SaaS buyers</td>
+            <td>Architecture follows SOC 2 principles; formal certification on roadmap; security questionnaire available</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━
+         MODULE 5 — MLOPS
+    ━━━━━━━━━━━━━━━━━━━━━━ -->
+    <section class="module" id="m5">
+      <div class="module-header">
+        <div class="module-tag">Module 05</div>
+        <h1 class="module-title">MLOps &amp; Monitoring</h1>
+        <p class="module-desc">How we ensure AI systems keep working correctly after they go live. Use this to answer "what happens after deployment?" — the question every technical buyer asks eventually.</p>
+      </div>
+
+      <h2 class="sh">The MLOps Lifecycle</h2>
+
+      <div class="diag">
+        <svg width="720" height="280" viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+          <defs>
+            <marker id="d1" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#3f3f46"/></marker>
+          </defs>
+
+          <!-- Deploy (top center) -->
+          <rect x="270" y="18" width="180" height="56" rx="8" fill="#0f1729" stroke="#3b82f6" stroke-width="2"/>
+          <text x="360" y="44" fill="#60a5fa" font-size="14" text-anchor="middle" font-weight="700">🚀 Deploy</text>
+          <text x="360" y="63" fill="#71717a" font-size="11" text-anchor="middle">Model goes to production</text>
+
+          <!-- Arrow: Deploy → Monitor -->
+          <path d="M450 46 Q570 46 570 118" fill="none" stroke="#3f3f46" stroke-width="1.5" marker-end="url(#d1)"/>
+
+          <!-- Monitor (right) -->
+          <rect x="560" y="118" width="150" height="56" rx="8" fill="#111118" stroke="#06b6d4" stroke-width="2"/>
+          <text x="635" y="144" fill="#22d3ee" font-size="14" text-anchor="middle" font-weight="700">👁 Monitor</text>
+          <text x="635" y="163" fill="#71717a" font-size="11" text-anchor="middle">Performance tracked</text>
+
+          <!-- Arrow: Monitor → Evaluate -->
+          <path d="M635 174 Q635 230 570 242" fill="none" stroke="#3f3f46" stroke-width="1.5" marker-end="url(#d1)"/>
+
+          <!-- Evaluate (bottom center) -->
+          <rect x="395" y="224" width="180" height="56" rx="8" fill="#111118" stroke="#f59e0b" stroke-width="2"/>
+          <text x="485" y="250" fill="#fbbf24" font-size="14" text-anchor="middle" font-weight="700">📊 Evaluate</text>
+          <text x="485" y="269" fill="#71717a" font-size="11" text-anchor="middle">Accuracy &amp; drift scored</text>
+
+          <!-- Arrow: Evaluate → Retrain -->
+          <path d="M395 252 Q270 252 210 205" fill="none" stroke="#3f3f46" stroke-width="1.5" marker-end="url(#d1)"/>
+
+          <!-- Retrain (left) -->
+          <rect x="68" y="150" width="150" height="56" rx="8" fill="#111118" stroke="#a855f7" stroke-width="2"/>
+          <text x="143" y="176" fill="#c084fc" font-size="14" text-anchor="middle" font-weight="700">🔄 Retrain</text>
+          <text x="143" y="195" fill="#71717a" font-size="11" text-anchor="middle">Model improved</text>
+
+          <!-- Arrow: Retrain → Deploy -->
+          <path d="M143 150 Q143 46 270 46" fill="none" stroke="#3f3f46" stroke-width="1.5" marker-end="url(#d1)"/>
+
+          <!-- Center label -->
+          <text x="360" y="168" fill="#27272a" font-size="14" text-anchor="middle" font-weight="600">Continuous</text>
+          <text x="360" y="190" fill="#27272a" font-size="14" text-anchor="middle" font-weight="600">improvement</text>
+          <text x="360" y="212" fill="#27272a" font-size="12" text-anchor="middle">loop</text>
+        </svg>
+        <p class="diag-cap">Fig 5.1 — MLOps lifecycle: Deploy → Monitor → Evaluate → Retrain → back to Deploy.</p>
+      </div>
+
+      <h2 class="sh">What Each Stage Means for the Client</h2>
+      <div class="g2">
+        <div class="card">
+          <div class="card-title" style="color:var(--cyan);">👁 Monitor — What is tracked</div>
+          <ul class="cl">
+            <li><strong>Response latency</strong> — is the AI responding within SLA?</li>
+            <li><strong>Error rates</strong> — are requests failing or timing out?</li>
+            <li><strong>Input distribution</strong> — are query types shifting?</li>
+            <li><strong>Output consistency</strong> — are answers staying on-topic?</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color:var(--amber);">📊 Evaluate — What is scored</div>
+          <ul class="cl">
+            <li><strong>Accuracy</strong> — are answers factually correct?</li>
+            <li><strong>Relevance</strong> — are answers appropriate for each query?</li>
+            <li><strong>Drift score</strong> — how far has performance shifted from baseline?</li>
+            <li><strong>Human feedback</strong> — thumbs up/down signals from end users</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="sh">Model Drift — Explained for Clients</h2>
+      <div class="co co-warn">
+        <strong>What is drift?</strong> An AI model trained on last year's data may become less accurate as the world changes. A lending risk model trained before an interest rate hike may score applications differently than intended after the hike. Drift monitoring catches this before it causes problems.
+      </div>
+      <div class="g2">
+        <div class="card">
+          <div class="card-title">Data drift</div>
+          <p>Incoming data starts looking different from the training data. Example: new product categories appear in queries that the model wasn't trained on. Detected by comparing statistical distributions of inputs over time.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Concept drift</div>
+          <p>The relationship between input and correct output changes. Example: customer sentiment language evolves and the model no longer interprets it correctly. Detected by declining accuracy scores on sampled outputs.</p>
+        </div>
+      </div>
+
+      <h2 class="sh">Human-in-the-Loop Escalation</h2>
+      <div class="flow">
+        <div class="fs">AI generates output</div>
+        <div class="fa">→</div>
+        <div class="fs">Confidence scored</div>
+        <div class="fa">→</div>
+        <div class="fs">High confidence → auto-deliver</div>
+        <div class="fa">→</div>
+        <div class="fs">Low confidence → human review queue</div>
+        <div class="fa">→</div>
+        <div class="fs">Human approves / corrects</div>
+        <div class="fa">→</div>
+        <div class="fs">Correction logged for retraining</div>
+      </div>
+      <div class="co co-ok">
+        <strong>Why this matters in sales:</strong> Human-in-the-loop is a professional risk management feature. It means the AI never silently delivers a wrong answer on a high-stakes decision. Frame it as governance, not a limitation.
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━
+         MODULE 6 — DEVIEW STACK
+    ━━━━━━━━━━━━━━━━━━━━━━ -->
+    <section class="module" id="m6">
+      <div class="module-header">
+        <div class="module-tag">Module 06</div>
+        <h1 class="module-title">our Own Technical Stack</h1>
+        <p class="module-desc">The infrastructure we run on — demonstrating that we operate with the same engineering standards we build for clients. Use this to establish technical credibility.</p>
+      </div>
+
+      <h2 class="sh">Technology Stack</h2>
+      <table class="dt">
+        <thead>
+          <tr><th>Layer</th><th>Technology</th><th>Version</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Frontend Framework</td>
+            <td><strong>Next.js + React</strong></td>
+            <td>16.2 / 19.2</td>
+            <td>Server-side rendering, App Router, API routes — modern web architecture</td>
+          </tr>
+          <tr>
+            <td>Language</td>
+            <td><strong>TypeScript</strong></td>
+            <td>5.x strict</td>
+            <td>Type-safe development — catches errors at compile time, not runtime</td>
+          </tr>
+          <tr>
+            <td>Styling</td>
+            <td><strong>Tailwind CSS</strong></td>
+            <td>4.x</td>
+            <td>Utility-first design system — consistent, responsive, maintainable UI</td>
+          </tr>
+          <tr>
+            <td>Animation</td>
+            <td><strong>Framer Motion</strong></td>
+            <td>11.x</td>
+            <td>Scroll-triggered reveals, timeline animations, reduced-motion support</td>
+          </tr>
+          <tr>
+            <td>Database</td>
+            <td><strong>Supabase (PostgreSQL)</strong></td>
+            <td>Latest</td>
+            <td>Client portal data, lead capture, project milestones — with row-level security</td>
+          </tr>
+          <tr>
+            <td>Email delivery</td>
+            <td><strong>Resend + Web3Forms</strong></td>
+            <td>—</td>
+            <td>Multi-tier fallback: Resend (primary) → Web3Forms (browser fallback) → mailto</td>
+          </tr>
+          <tr>
+            <td>Hosting</td>
+            <td><strong>Netlify</strong></td>
+            <td>—</td>
+            <td>Serverless deployment with Next.js plugin — global CDN, automatic deploys</td>
+          </tr>
+          <tr>
+            <td>Runtime</td>
+            <td><strong>Node.js</strong></td>
+            <td>20 LTS</td>
+            <td>Server-side API route execution — current long-term support version</td>
+          </tr>
+          <tr>
+            <td>Internationalisation</td>
+            <td><strong>Custom i18n context</strong></td>
+            <td>—</td>
+            <td>English + Traditional Chinese (zh-HK) — purpose-built for HK &amp; international clients</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="sh">Client Portal Architecture</h2>
+      <p style="font-size:13.5px;color:var(--text-muted);line-height:1.7;margin-bottom:16px;">Each client receives a unique reference code that unlocks their project portal — showing current stage, milestones, and progress in real time, backed by Supabase with a Task Manager fallback for resilience.</p>
+
+      <div class="flow">
+        <div class="fs">Client receives reference code</div>
+        <div class="fa">→</div>
+        <div class="fs">Enters code on portal page</div>
+        <div class="fa">→</div>
+        <div class="fs">API call to /api/client-portal</div>
+        <div class="fa">→</div>
+        <div class="fs">Server queries Supabase (RLS bypassed server-side only)</div>
+        <div class="fa">→</div>
+        <div class="fs">Portal + milestones returned</div>
+        <div class="fa">→</div>
+        <div class="fs">Timeline rendered with Framer Motion</div>
+      </div>
+
+      <div class="g2">
+        <div class="card">
+          <div class="card-title">What clients see in their portal</div>
+          <ul class="cl">
+            <li><strong>Project title</strong> and client name from Supabase</li>
+            <li><strong>Current stage indicator</strong> — which phase the engagement is in</li>
+            <li><strong>Milestone timeline</strong> — done / active / upcoming with animations</li>
+            <li><strong>Progress bar</strong> — currentStage ÷ total milestones</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Security design of the portal</div>
+          <ul class="cl">
+            <li><strong>Reference code</strong> acts as access token — no password required</li>
+            <li><strong>Server-side queries only</strong> — Supabase service key never in browser</li>
+            <li><strong>is_active flag</strong> — any portal can be disabled instantly</li>
+            <li><strong>Fallback resilience</strong> — Task Manager API if Supabase unavailable</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="sh">Why This Matters in Sales</h2>
+      <div class="co co-info">
+        <strong>Credibility point:</strong> When a prospect asks "have you built production systems like this before?" — walk them through our own infrastructure. We don't just consult on production AI systems; we run one ourselves. A bilingual (English / Traditional Chinese) client portal, backed by a production PostgreSQL database with proper access controls and service redundancy, is a working demonstration of our engineering standards.
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━
+         MODULE 7 — FAQ
+    ━━━━━━━━━━━━━━━━━━━━━━ -->
+    <section class="module" id="m7">
+      <div class="module-header">
+        <div class="module-tag">Module 07</div>
+        <h1 class="module-title">Sales FAQ</h1>
+        <p class="module-desc">The 15 most common technical questions from enterprise prospects — with answers your sales team can use immediately. Click any question to expand.</p>
+      </div>
+
+      <div class="faq" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Where is our data stored? <span class="faq-ch">▼</span></div>
+        <div class="faq-a">Your data stays in your own environment. For cloud deployments, we deploy into your existing AWS, GCP, or Azure account — we never have persistent access to your data. For on-premises deployments, nothing leaves your physical network. We do not store client data in our own infrastructure.</div>
+      </div>
+
+      <div class="faq" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Can this connect to our existing CRM or ERP? <span class="faq-ch">▼</span></div>
+        <div class="faq-a">Yes. We build native integrations with Salesforce, HubSpot, SAP, Oracle, and most SQL databases via standard APIs and connectors. Integration scope is agreed upfront during the AI Implementation Advisory phase so there are no surprises mid-project. We use read-only access initially and expand only as needed for each use case.</div>
+      </div>
+
+      <div class="faq" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What LLM do you use — is it OpenAI / ChatGPT? <span class="faq-ch">▼</span></div>
+        <div class="faq-a">We are model-agnostic and select the best option for your use case and compliance requirements. Options include OpenAI GPT-4o, Anthropic Claude, Google Gemini, or open-source models like Llama 3 and Mistral for fully on-premises deployments. For regulated clients, we default to open-source models that run entirely within your environment — zero data leaves your network.</div>
+      </div>
+
+      <div class="faq" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Who has access to our data? <span class="faq-ch">▼</span></div>
+        <div class="faq-a">Access is scoped by role and enforced at both application and database level. Only the service accounts required for each specific integration have access. No engineers on our team hold standing access to production client data — any deployment access is time-limited and logged in full. Audit logs are available for your security team to review at any time.</div>
+      </div>
+
+      <div class="faq" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What happens if the AI gives a wrong answer? <span class="faq-ch">▼</span></div>
+        <div class="faq-a">Every deployment includes a human-in-the-loop escalation path. When the AI's confidence score falls below the threshold agreed for your use case, it flags the item for human review rather than delivering a low-confidence answer automatically. All AI outputs are also logged, so any errors can be traced, corrected, and used to improve the model through the retraining cycle.</div>
+      </div>
+
+      <div class="faq" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Is this GDPR / PDPO compliant? <span class="faq-ch">▼</span></div>
+        <div class="faq-a">Our architecture is designed to support compliance with GDPR and Hong Kong's PDPO. Data stays in client-controlled environments, data processing agreements are available on request, data retention is configurable per agreement, and audit trails are fully exportable. We recommend your Data Protection Officer review our architecture documentation as part of procurement — we can provide this on request.</div>
+      </div>
+
+      <div class="faq" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Can we run this on-premises? <span class="faq-ch">▼</span></div>
+        <div class="faq-a">Yes. For clients in regulated industries (banking, insurance, healthcare) or with strict data residency requirements, we deploy fully air-gapped solutions using open-source models such as Llama 3 or Mistral. The AI never calls an external API — all inference runs locally on your infrastructure. This requires appropriate hardware but eliminates any external data exposure entirely.</div>
+      </div>
+
+      <div class="faq" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What is the typical integration timeline? <span class="faq-ch">▼</span></div>
+        <div class="faq-a">Timelines depend on the service and data source complexity. An AI Workflow Audit delivers in 1–2 weeks. A fully deployed Internal Knowledge Assistant typically takes 4–8 weeks end-to-end, including data source access approvals. The AI Implementation Advisory phase (2 weeks) runs first and produces a detailed timeline specific to your stack, constraints, and access approval process.</div>
+      </div>
+
+      <div class="faq" onclick="this.classList.toggle('open')">
+        <div class="faq-q">How do we know it's working correctly after go-live? <span class="faq-ch">▼</span></div>
+        <div class="faq-a">Every production deployment includes monitoring dashboards showing AI performance metrics, accuracy scores, and drift indicators in real time. You'll have visibility into error rates, response latency, and model confidence distributions. We also configure evaluation pipelines that run on a schedule and alert your team if performance degrades below agreed thresholds.</div>
+      </div>
+
+      <div class="faq" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What's the difference between this and us just using ChatGPT ourselves? <span class="faq-ch">▼</span></div>
+        <div class="faq-a">ChatGPT is a general-purpose tool with no access to your internal data, no integration with your systems, no audit trail, and no reliability guarantees. Our deployment is purpose-built: it knows your company's specific data, integrates with your CRM, ERP, and documents, enforces your access controls, logs every interaction for compliance, and includes monitoring so performance issues are caught before they impact operations. The gap is between a consumer tool and an enterprise system.</div>
+      </div>
+
+      <div class="faq" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Does your AI learn from our data and share it with other clients? <span class="faq-ch">▼</span></div>
+        <div class="faq-a">No. Each client deployment is fully isolated. Your data is never used to train shared models, and outputs from your deployment never influence another client's system. This is an architectural guarantee — there is no shared model layer across client deployments. The isolation is enforced by construction, not just by policy.</div>
+      </div>
+
+      <div class="faq" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Do you have SOC 2 or ISO 27001 certification? <span class="faq-ch">▼</span></div>
+        <div class="faq-a">We do not currently hold these certifications, though our architecture is built with their requirements in mind. For enterprise procurement, we can provide a detailed security architecture document, data flow diagrams, and completed security questionnaire responses for your security team. Formal certification is on our roadmap — if this is a hard procurement requirement, discuss timing with your account contact so we can explore whether an architecture review satisfies your team in the interim.</div>
+      </div>
+
+      <div class="faq" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What happens to our AI system if we stop working with us? <span class="faq-ch">▼</span></div>
+        <div class="faq-a">Because deployments live in your own cloud account or on-premises infrastructure, you retain full ownership of the system. The code, models, configuration, and data are all yours. We provide complete handover documentation and a transition process. You are not locked into our platform — we build systems you own, not subscriptions you rent.</div>
+      </div>
+
+      <div class="faq" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Can the AI handle our industry-specific terminology? <span class="faq-ch">▼</span></div>
+        <div class="faq-a">Yes. During implementation we configure prompts and retrieval systems using the client's own internal documents, policy glossaries, and operational procedures. For lending clients, for example, the assistant understands LTV, DSR, HIBOR, and facility terms because it's trained on your materials — not generic internet text. Domain specificity is a core part of every implementation, not an add-on.</div>
+      </div>
+
+      <div class="faq" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What level of support do we get after launch? <span class="faq-ch">▼</span></div>
+        <div class="faq-a">Post-launch support includes monitoring setup, a defined escalation path for performance issues, and scheduled review cycles to assess drift and retraining needs. Ongoing support scope depends on the engagement agreement — We offer both a managed service model (we monitor and maintain the system) and a handover model (client team owns operations with us on retainer for major model updates and retraining cycles).</div>
+      </div>
+
+    </section>
+
+    <div style="height:100px;"></div>
+  </main>
+</div>
+
+<script>
+  // Sidebar active state on scroll
+  const modules  = document.querySelectorAll('.module');
+  const navLinks = document.querySelectorAll('.nav-item');
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.nav-item[href="#${entry.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+
+  modules.forEach(m => io.observe(m));
+</script>
+</body>
+</html>
