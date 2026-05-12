@@ -588,6 +588,11 @@ export default function Home() {
             </div>
           ) : null}
         </div>
+        {/* Globe — mobile hero decoration (video disabled on mobile) */}
+        <div className="pointer-events-none absolute inset-0 z-[6] overflow-hidden md:hidden" aria-hidden="true">
+          <Globe className="absolute left-1/2 top-1/2 w-[160%] max-w-none -translate-x-1/2 -translate-y-[55%] opacity-50" />
+        </div>
+
         <div
           className={`absolute inset-0 ${heroVideoState === "fallback" ? "hero-overlay" : "hero-overlay hero-overlay-video"}`}
         />
