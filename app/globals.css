@@ -2025,11 +2025,11 @@ html[data-theme="light"] .enterprise-compare-enterprise {
     height: auto;
     min-height: auto;
     align-items: start;
-    gap: 1.35rem;
+    gap: 0.65rem;
     width: 100%;
     margin-left: 0;
     margin-right: 0;
-    padding: 0.5rem 1.25rem 1.25rem;
+    padding: 0.25rem 1.25rem 0.75rem;
     padding-left: max(1.25rem, env(safe-area-inset-left, 0px));
     padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
   }
@@ -2039,7 +2039,7 @@ html[data-theme="light"] .enterprise-compare-enterprise {
     max-width: none;
     width: 100%;
     margin-bottom: 0;
-    padding: 1rem 1rem 1.15rem;
+    padding: 0.65rem 0.85rem 0.75rem;
     z-index: 1;
   }
 
@@ -2181,9 +2181,9 @@ html[data-theme="light"] .enterprise-compare-enterprise {
     width: 100%;
     height: 300px;
     overflow: hidden;
-    order: -1;
+    order: 0;
     opacity: 0.75;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   /* Override the desktop className props baked into the Globe component */
@@ -3952,17 +3952,23 @@ html[data-theme="light"] .svoyage-slide__info {
 @media (max-width: 640px) {
   .svoyage-slider {
     --sv-slide-width: min(100%, 25.5rem);
-    gap: 0.9rem 0.75rem;
+    gap: 0.9rem 0.5rem;
     display: grid;
-    grid-template-columns: minmax(2.9rem, 3.25rem) minmax(0, 1fr) minmax(2.9rem, 3.25rem);
+    grid-template-columns: minmax(1.75rem, 2rem) minmax(0, 1fr) minmax(1.75rem, 2rem);
     align-items: center;
   }
 
   .svoyage-slider__btn {
     width: 100%;
     max-width: none;
-    min-height: 44px;
-    min-width: 44px;
+    min-height: 2rem;
+    min-width: 1.75rem;
+    height: 2rem;
+  }
+
+  .svoyage-slider__btn svg {
+    width: 0.85rem;
+    height: 0.85rem;
   }
 
   .svoyage-slider__wrapper {
