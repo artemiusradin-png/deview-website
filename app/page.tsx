@@ -672,7 +672,7 @@ export default function Home() {
         <motion.div
           {...reveal}
           transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full min-h-0 max-w-6xl flex-col justify-between gap-6 overflow-hidden md:gap-10"
+          className="mx-auto flex h-full min-h-0 max-w-6xl flex-col justify-between gap-6 overflow-visible md:overflow-hidden md:gap-10"
         >
           <div className="section-shell flex min-h-0 flex-1 flex-col">
             <p className="section-label mb-3">{dict.enterpriseAi.label}</p>
