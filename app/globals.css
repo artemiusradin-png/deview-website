@@ -2056,6 +2056,9 @@ html[data-theme="light"] .enterprise-compare-enterprise {
   .enterprise-map-shell {
     width: 100%;
     max-width: 100%;
+    height: auto;
+    max-height: none;
+    overflow: visible;
   }
 
   .enterprise-mode-stage-shell {
@@ -2063,6 +2066,8 @@ html[data-theme="light"] .enterprise-compare-enterprise {
     flex-direction: column;
     min-height: auto;
     height: auto;
+    max-height: none;
+    overflow: visible;
     width: 100%;
     max-width: 100%;
     padding-left: 0;
@@ -2080,6 +2085,8 @@ html[data-theme="light"] .enterprise-compare-enterprise {
   .enterprise-mode-text-stage {
     min-height: auto;
     height: auto;
+    max-height: none;
+    overflow: visible;
     display: flex;
     flex-direction: column;
     align-items: stretch;
