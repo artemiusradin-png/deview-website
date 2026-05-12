@@ -588,10 +588,6 @@ export default function Home() {
             </div>
           ) : null}
         </div>
-        {/* Globe — mobile hero decoration (video disabled on mobile) */}
-        <div className="pointer-events-none absolute inset-0 z-[6] overflow-hidden md:hidden" aria-hidden="true">
-          <Globe className="absolute left-1/2 top-1/2 w-[160%] max-w-none -translate-x-1/2 -translate-y-[55%] opacity-50" />
-        </div>
 
         <div
           className={`absolute inset-0 ${heroVideoState === "fallback" ? "hero-overlay" : "hero-overlay hero-overlay-video"}`}
@@ -656,7 +652,7 @@ export default function Home() {
                 <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.engagementsValue}</span>
               </div>
             </div>
-            <div className="h-16 w-full md:hidden" aria-hidden="true" />
+            <div className="h-10 w-full md:hidden" aria-hidden="true" />
             <div className="flex w-full flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6 md:w-auto md:justify-end md:gap-8">
               <div className="flex flex-col items-center gap-3 sm:ml-auto sm:items-end md:ml-0">
                 <div className="scroll-cue" />
