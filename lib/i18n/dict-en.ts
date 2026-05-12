@@ -430,6 +430,36 @@ export const en = {
     contactLead:
       "Describe the process that is costing the most time or money. We review it and reply with a specific recommendation — what AI can do, how long it takes, and what it costs. No commitment required.",
   },
+  security: {
+    sectionLabel: "SECURITY & COMPLIANCE",
+    headline: "Built on certified infrastructure",
+    lead: "Every system we deploy runs on enterprise-grade, certified platforms. Your data stays in boundaries you control — with encryption in transit and at rest, full audit logging, and architecture designed for regulated industries.",
+    pillars: [
+      {
+        label: "DATA ISOLATION & ENCRYPTION",
+        body: "Client data never mingles across tenants. All data is encrypted in transit (TLS 1.2+) and at rest. Secrets are managed server-side and never exposed to the browser or logs.",
+      },
+      {
+        label: "FULL AUDIT TRAIL",
+        body: "Every AI action, every user, every timestamp — recorded and exportable. Designed to satisfy regulatory review requests from day one, without retrofitting.",
+      },
+      {
+        label: "COMPLIANCE-READY ARCHITECTURE",
+        body: "Systems are structured to meet GDPR, PDPO, MAS TRM, and HKMA requirements. We advise on data residency, access controls, and redaction workflows before the first line of code is written.",
+      },
+    ],
+    toolsLabel: "CERTIFIED TOOLS WE BUILD WITH",
+    tools: [
+      { name: "Microsoft Azure", cert: "ISO 27001 · SOC 2 Type II" },
+      { name: "AWS", cert: "ISO 27001 · SOC 2 · GDPR" },
+      { name: "OpenAI Enterprise", cert: "SOC 2 Type II" },
+      { name: "Supabase", cert: "SOC 2 Type II" },
+      { name: "Vercel", cert: "SOC 2 Type II" },
+    ],
+    frameworksLabel: "FRAMEWORKS SUPPORTED",
+    frameworks: ["GDPR", "PDPO", "MAS TRM", "HKMA"],
+    architectureLink: "View our security architecture",
+  },
   contactForm: {
     label: "CONTACT FORM",
     fullName: "Full Name",

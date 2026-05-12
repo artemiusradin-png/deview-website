@@ -6,6 +6,7 @@ import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform 
 import { Rocket, X } from "lucide-react";
 import { AnimatedFeatureSpotlightDemo } from "../components/AnimatedFeatureSpotlightDemo";
 import { HomeServicesSection } from "../components/HomeServicesSection";
+import { SecurityTrustSection } from "../components/SecurityTrustSection";
 import { SiteFooter } from "../components/SiteFooter";
 import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
 import { SelectedProjectsLogoMarquee } from "../components/SelectedProjectsLogoMarquee";
@@ -590,7 +591,7 @@ export default function Home() {
         <div
           className={`absolute inset-0 ${heroVideoState === "fallback" ? "hero-overlay" : "hero-overlay hero-overlay-video"}`}
         />
-        <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col justify-start gap-6 md:flex-row md:items-start md:gap-12">
+        <div className="relative z-20 mx-auto flex w-full max-w-7xl flex-col justify-start gap-6 md:flex-row md:items-start md:gap-12">
           <motion.div
             initial={fade.initial}
             animate={fade.animate}
@@ -950,6 +951,8 @@ export default function Home() {
       <SelectedProjectsLogoMarquee />
 
       <HomeServicesSection variant="home" />
+
+      <SecurityTrustSection />
 
       <AnimatedFeatureSpotlightDemo />
 

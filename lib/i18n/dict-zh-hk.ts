@@ -405,6 +405,36 @@ export const zhHK: Dictionary = {
     contactLead:
       "分享目前的工作流程、營運限制與預期成果，我們會回覆具明確範圍的建議與下一步。",
   },
+  security: {
+    sectionLabel: "安全與合規",
+    headline: "建基於認證基礎設施",
+    lead: "我們部署的每個系統均採用企業級認證平台。你的數據在你掌控的邊界內運行——傳輸及靜態加密、完整審計日誌，以及專為受監管行業設計的架構。",
+    pillars: [
+      {
+        label: "數據隔離與加密",
+        body: "客戶數據在租戶之間完全隔離。所有數據在傳輸（TLS 1.2+）及靜態時均已加密。機密資訊由伺服器端管理，絕不暴露於瀏覽器或日誌。",
+      },
+      {
+        label: "完整審計追蹤",
+        body: "每一個 AI 操作、每一位用戶、每一個時間戳——均有記錄並可匯出。從第一天起即符合監管審查要求，無需事後補救。",
+      },
+      {
+        label: "合規就緒架構",
+        body: "系統架構符合 GDPR、PDPO、MAS TRM 及 HKMA 要求。我們在撰寫第一行代碼前，已就數據駐留、存取控制及編輯工作流提供建議。",
+      },
+    ],
+    toolsLabel: "我們採用的認證工具",
+    tools: [
+      { name: "Microsoft Azure", cert: "ISO 27001 · SOC 2 Type II" },
+      { name: "AWS", cert: "ISO 27001 · SOC 2 · GDPR" },
+      { name: "OpenAI Enterprise", cert: "SOC 2 Type II" },
+      { name: "Supabase", cert: "SOC 2 Type II" },
+      { name: "Vercel", cert: "SOC 2 Type II" },
+    ],
+    frameworksLabel: "支援框架",
+    frameworks: ["GDPR", "PDPO", "MAS TRM", "HKMA"],
+    architectureLink: "查看我們的安全架構",
+  },
   contactForm: {
     label: "聯絡表格",
     fullName: "全名",
