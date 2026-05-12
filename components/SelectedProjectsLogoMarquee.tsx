@@ -61,48 +61,19 @@ export function SelectedProjectsLogoMarquee() {
         </p>
       </div>
 
-      {isMobile ? (
-        <div className="selected-project-logos__mobile-grid section-gutter mx-auto mt-6 w-full max-w-6xl">
-          {CLIENT_LOGOS.map((logo) => (
-            <div key={logo.name} className="selected-project-logos__mobile-item">
-              {logo.name === "Nextair" ? (
-                <div className="selected-project-logos__mobile-nextair">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={logo.src}
-                    alt=""
-                    className="selected-project-logos__mobile-image selected-project-logos__mobile-image--nextair"
-                    style={{ filter: logoFilter(logo.name) }}
-                  />
-                  <span>NEXTAIR</span>
-                </div>
-              ) : (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={logo.src}
-                  alt={logo.name}
-                  className="selected-project-logos__mobile-image"
-                  style={{ filter: logoFilter(logo.name) }}
-                />
-              )}
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="selected-project-logos__marquee mt-8">
-          <PerspectiveMarquee
-            logos={CLIENT_LOGOS}
-            isDark={isDark}
-            pixelsPerFrame={1.8}
-            rotateY={-28}
-            rotateX={8}
-            perspective={1200}
-            itemWidth={500}
-            logoHeight={100}
-            blurMultiplier={5}
-          />
-        </div>
-      )}
+      <div className="selected-project-logos__marquee mt-8">
+        <PerspectiveMarquee
+          logos={CLIENT_LOGOS}
+          isDark={isDark}
+          pixelsPerFrame={isMobile ? 1.2 : 1.8}
+          rotateY={isMobile ? 0 : -28}
+          rotateX={isMobile ? 0 : 8}
+          perspective={1200}
+          itemWidth={isMobile ? 280 : 500}
+          logoHeight={isMobile ? 64 : 100}
+          blurMultiplier={isMobile ? 0 : 5}
+        />
+      </div>
 
       <p className="sr-only">
         Selected projects: {CLIENT_LOGOS.map((l) => l.name).join(", ")}.
