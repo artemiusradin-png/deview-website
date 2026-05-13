@@ -598,12 +598,12 @@ export default function Home() {
         <div
           className={`absolute inset-0 ${heroVideoState === "fallback" ? "hero-overlay" : "hero-overlay hero-overlay-video"}`}
         />
-        <div className="relative z-20 mx-auto flex w-full max-w-7xl flex-col justify-start gap-6 md:-mt-16 md:flex-row md:items-start md:gap-12">
+        <div className="relative z-20 mx-auto flex w-full max-w-screen-2xl flex-col justify-start gap-6 md:-mt-16 md:flex-row md:items-start md:gap-12">
           <motion.div
             initial={fade.initial}
             animate={fade.animate}
             transition={{ duration: 0.6 }}
-            className="flex min-h-[calc(100svh-var(--header-stack-height)-2.25rem)] max-w-2xl flex-col md:min-h-0 md:pt-2"
+            className="flex min-h-[calc(100svh-var(--header-stack-height)-2.25rem)] max-w-4xl flex-col md:min-h-0 md:pt-2"
           >
             <p className="section-label mb-4">{dict.hero.kicker}</p>
             <h1 className="hero-heading mb-6 text-[clamp(1.75rem,6.5vw,2.75rem)] leading-[1.06] text-[var(--white-100)] md:text-5xl md:leading-[1.02] lg:text-6xl">
@@ -618,7 +618,7 @@ export default function Home() {
               ) : null}
             </h1>
             <div className="mt-auto pt-8 md:mt-0 md:pt-12">
-              <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
+              <p className="max-w-3xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
               <div className="mt-6 md:mt-7">
                 <a href="#contact" className="btn-outline inline-block w-full text-center sm:w-auto">
                   {dict.hero.inquire}
