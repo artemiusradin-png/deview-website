@@ -97,7 +97,7 @@ type AnchorLabelStyle = CSSProperties & {
 
 const CITY_LABEL_TRANSFORMS: Record<string, string> = {
   "hong-kong": "translate(-50%, -0.02rem)",
-  stuttgart: "translate(-96%, -0.02rem)",
+  stuttgart: "translate(8%, 1.2rem)",
   vancouver: "translate(-50%, -0.02rem)",
   edinburgh: "translate(4%, -0.35rem)",
 };
@@ -122,9 +122,6 @@ function CityInfoBox({ office }: { office: OfficeMarker }) {
       </p>
       <p className="text-[0.72rem] font-semibold leading-tight text-[var(--white-100)]">
         {office.city}
-      </p>
-      <p className="mt-1 text-[0.58rem] uppercase tracking-[0.1em] text-[var(--white-60)]">
-        {office.role}
       </p>
     </div>
   );

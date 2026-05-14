@@ -12,7 +12,7 @@ export function HomeTestimonials() {
   const item = s.items[active];
 
   return (
-    <section className="relative overflow-hidden bg-[var(--background)] section-gutter py-20 md:py-28">
+    <section className="relative overflow-hidden bg-[var(--background)] section-gutter py-10 md:py-14">
       <motion.div {...homeSectionReveal} transition={{ duration: 0.5 }} className="mx-auto max-w-6xl">
         <p className="section-label mb-3">{s.sectionLabel}</p>
         <div className="rule mb-10" />

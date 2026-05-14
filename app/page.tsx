@@ -18,7 +18,6 @@ import { CtaCard } from "@/components/ui/call-to-action-cta";
 import { HomeProcessTimeline } from "../components/HomeProcessTimeline";
 import { HomeInsightsPreview } from "../components/HomeInsightsPreview";
 import { HomeTestimonials } from "../components/HomeTestimonials";
-import { HomeStats } from "../components/HomeStats";
 import { HomeIndustries } from "../components/HomeIndustries";
 
 const fade = {
@@ -37,7 +36,7 @@ const cardMotion = {
   whileInView: { opacity: 1, y: 0 },
 };
 
-const HERO_VIDEO_SRC = "/Abstract_Architectural_AI_Background_Video.mp4";
+const HERO_VIDEO_SRC = "/deview-hero-animation.mp4";
 const HERO_VIDEO_CROSSFADE_SECONDS = 0.9;
 
 const ENTERPRISE_MODE_IDS = ["predictive", "conversational", "generative", "analytical"] as const;
@@ -108,7 +107,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1100px)");
+    const mq = window.matchMedia("(max-width: 767px)");
     const apply = () => setIsCompactEnterpriseLayout(mq.matches);
     apply();
     mq.addEventListener("change", apply);
@@ -385,7 +384,7 @@ export default function Home() {
     <div className="min-h-screen bg-[var(--background)] bg-grid text-[var(--text)]">
       <a
         href="#"
-        className="brand-mark fixed left-0 top-0 z-50 px-4 pt-[calc(env(safe-area-inset-top)+1.35rem)] text-xs tracking-[0.25em] text-[var(--white-80)] sm:px-6 sm:text-sm"
+        className="brand-mark fixed left-0 top-0 z-50 px-4 pt-[calc(env(safe-area-inset-top)+4rem)] text-[9px] tracking-[0.25em] text-[var(--white-80)] sm:px-6 sm:text-[10px]"
         onClick={closeNav}
       >
         {dict.whatMakesEnterprise.backBrand}
@@ -526,33 +525,7 @@ export default function Home() {
         </div>
       ) : null}
 
-      {guideCtaVisible ? (
-        <div className="group fixed bottom-5 right-4 z-50 hidden w-[calc(100vw-2rem)] max-w-[23rem] sm:bottom-6 sm:right-6 sm:w-auto md:block">
-          <a
-            href="/resources/ai-guide-lending"
-            className="block text-left no-underline"
-            aria-label="Open free AI guide with 10 lender use cases"
-          >
-            <Banner
-              show
-              variant="gradient"
-              title="Free AI guide"
-              description="10 lender use cases"
-              showShade
-              icon={<Rocket className="h-5 w-5" />}
-              className="w-full cursor-pointer border-[var(--white-20)] bg-[var(--white-10)] pr-8 text-[var(--text)] shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition-colors hover:bg-[var(--white-20)] sm:min-w-[21rem] sm:max-w-[23rem]"
-            />
-          </a>
-          <button
-            type="button"
-            className="absolute right-2 top-1/2 -translate-y-1/2 flex size-6 items-center justify-center rounded-full text-[var(--white-40)] transition-colors hover:text-[var(--white-90)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--white-40)]"
-            aria-label="Dismiss free AI guide"
-            onClick={() => setGuideCtaVisible(false)}
-          >
-            <X className="h-4 w-4" />
-          </button>
-        </div>
-      ) : null}
+      {/* Free AI guide CTA removed */}
       <section
         id="hero"
         className="section-fullscreen section-fullscreen--hero relative flex items-center justify-center section-gutter py-12 md:py-0"
@@ -634,7 +607,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="hero-aside flex flex-col items-start justify-between gap-8 text-left md:items-end md:gap-10 md:text-right"
+            className="hero-aside flex flex-col items-start justify-between gap-8 text-left md:ml-auto md:items-end md:gap-10 md:text-right"
           >
             <div className="hidden space-y-2 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)] sm:text-xs md:block">
               {dict.hero.col1.map((line) => (
@@ -961,11 +934,9 @@ export default function Home() {
 
       <SelectedProjectsLogoMarquee />
 
-      <HomeServicesSection variant="home" />
-
-      <HomeStats />
-
       <HomeIndustries />
+
+      <HomeServicesSection variant="home" />
 
       <HomeProcessTimeline />
 
@@ -973,7 +944,7 @@ export default function Home() {
 
       <AnimatedFeatureSpotlightDemo />
 
-      <HomeTestimonials />
+      {/* <HomeTestimonials /> */}
 
       <HomeInsightsPreview />
 

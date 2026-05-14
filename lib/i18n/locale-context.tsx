@@ -6,6 +6,15 @@ import { getStringAtPath } from "./translate";
 import type { Locale } from "./types";
 
 const STORAGE_KEY = "deview-locale";
+const GEO_LOCALE_COOKIE = "deview-geo-locale";
+
+function readGeoLocaleCookie(): Locale | null {
+  if (typeof document === "undefined") return null;
+  const match = document.cookie.match(new RegExp(`(^|;\\s*)${GEO_LOCALE_COOKIE}=([^;]+)`));
+  if (!match) return null;
+  const v = decodeURIComponent(match[2]);
+  return v === "zh-HK" || v === "en" ? v : null;
+}
 
 type LocaleContextValue = {
   locale: Locale;
@@ -16,15 +25,24 @@ type LocaleContextValue = {
 
 const LocaleContext = createContext<LocaleContextValue | null>(null);
 
-export function LocaleProvider({ children }: { children: ReactNode }) {
+export function LocaleProvider({ children, initialLocale }: { children: ReactNode; initialLocale?: Locale }) {
   const [locale, setLocaleState] = useState<Locale>(() => {
     if (typeof window === "undefined") {
-      return "en";
+      return initialLocale ?? "en";
     }
 
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored === "zh-HK" || stored === "en") {
       return stored;
+    }
+
+    if (initialLocale) {
+      return initialLocale;
+    }
+
+    const geoLocale = readGeoLocaleCookie();
+    if (geoLocale) {
+      return geoLocale;
     }
 
     return "en";
