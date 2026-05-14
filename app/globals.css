@@ -5693,8 +5693,8 @@ html[data-theme="light"] .btn-primary:hover {
     margin: 0;
   }
 
-  .globe-city-box p:first-child,
-  .globe-city-box p:last-child {
+  /* Hide the region label on mobile; keep the city name visible */
+  .globe-city-box p:first-child {
     display: none;
   }
 
