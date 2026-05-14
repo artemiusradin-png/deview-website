@@ -2076,6 +2076,12 @@ html[data-theme="light"] .enterprise-compare-enterprise {
 
   .enterprise-mode-cards-motion {
     width: 100%;
+    /* Desktop uses flex:1 1 0 to fill a 100dvh-pinned parent. On mobile the
+       parent is height:auto, so flex-basis:0 collapses the cards to 0px and
+       hides the four mode scrollers. Size to content instead. */
+    flex: 0 0 auto;
+    min-height: 0;
+    height: auto;
   }
 
   .enterprise-scroll-rail {
