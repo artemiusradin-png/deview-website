@@ -5718,10 +5718,12 @@ html[data-theme="light"] .btn-primary:hover {
     position: absolute;
   }
 
-  .hero-video,
-  .hero-video-visible,
-  .hero-video-fading,
-  .hero-video-hidden {
+  /* Hero only: hide heavy background clips on small viewports (Globe + CSS fallback).
+     Do NOT use bare .hero-video here — that also matched the first-visit intro overlay. */
+  #hero .hero-video,
+  #hero .hero-video-visible,
+  #hero .hero-video-fading,
+  #hero .hero-video-hidden {
     transition: none !important;
     transform: none !important;
     display: none !important;

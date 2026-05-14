@@ -329,6 +329,10 @@ export type StageProps = {
   persistPlayhead?: boolean;
   /** When false, hides the editor playback bar (marketing intro ). */
   showPlaybackBar?: boolean;
+  /** Fired once when `loop` is false and the playhead reaches the end. */
+  onEnded?: () => void;
+  /** Suppress Space / arrows / seek shortcuts (fullscreen “video” intro). */
+  disableKeyboardShortcuts?: boolean;
   children?: ReactNode;
 };
 
@@ -342,6 +346,8 @@ function Stage({
   persistKey = "animstage",
   persistPlayhead = false,
   showPlaybackBar = false,
+  onEnded,
+  disableKeyboardShortcuts = false,
   children,
 }: StageProps) {
   const [time, setTime] = useState(() => {
@@ -356,6 +362,7 @@ function Stage({
   const [playing, setPlaying] = useState(autoplay);
   const [hoverTime, setHoverTime] = useState<number | null>(null);
   const [scale, setScale] = useState(1);
+  const onEndedFiredRef = useRef(false);
 
   const stageRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLDivElement | null>(null);
@@ -420,6 +427,9 @@ function Stage({
   }, [playing, duration, loop]);
 
   useEffect(() => {
+    if (disableKeyboardShortcuts) {
+      return;
+    }
     const onKey = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
       if (e.code === "Space") {
@@ -435,7 +445,20 @@ function Stage({
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [duration]);
+  }, [duration, disableKeyboardShortcuts]);
+
+  useEffect(() => {
+    onEndedFiredRef.current = false;
+  }, [loop, onEnded, duration]);
+
+  useEffect(() => {
+    if (loop || !onEnded || duration <= 0) return;
+    if (onEndedFiredRef.current) return;
+    if (!playing && time >= duration - 0.08) {
+      onEndedFiredRef.current = true;
+      onEnded();
+    }
+  }, [loop, onEnded, playing, time, duration]);
 
   const displayTime = hoverTime != null ? hoverTime : time;
 

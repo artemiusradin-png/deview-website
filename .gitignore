@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# Generated PRD (npm run generate:prd)
+/output/
+
 # production
 /build
 

@@ -3,6 +3,14 @@
 
 import { useMemo, type ReactNode } from "react";
 import { Easing, clamp, useTime } from "./intro-animation-stage";
+import { INTRO_MASTER_TIMELINE, INTRO_WALL_DURATION } from "./intro-scene-timing";
+
+/** Maps wall-clock playhead (0…wall duration) to the scene’s 0…8s logical timeline. */
+function useSceneTime() {
+  const wallTime = useTime();
+  const scale = INTRO_MASTER_TIMELINE / INTRO_WALL_DURATION;
+  return Math.min(wallTime * scale, INTRO_MASTER_TIMELINE);
+}
 
 // Dark violet-blue palette (replaces the original warm gold treatment)
 const COLORS = {
@@ -84,7 +92,7 @@ function Stars() {
       speed: 0.8 + rng() * 1.6,
     }));
   }, []);
-  const time = useTime();
+  const time = useSceneTime();
   return (
     <div style={{position:'absolute', inset:0, pointerEvents:'none'}}>
       {stars.map((s,i) => {
@@ -129,7 +137,7 @@ function AtmosphericHaze() {
 // ── Building (single silhouette with lit windows) ─────────────────────────
 
 function Building({ x, y, width, height, depth, seed, spire }) {
-  const time = useTime();
+  const time = useSceneTime();
   const data = useMemo(() => {
     const rng = mulberry32(seed);
     const cols = Math.max(3, Math.round(width / 11));
@@ -328,7 +336,7 @@ function MidSkyline() {
 // ── Harbour (water + reflections + boat lights) ───────────────────────────
 
 function Harbour() {
-  const time = useTime();
+  const time = useSceneTime();
   const globalFade = getGlobalFade(time);
   // Sample some buildings to create vertical light reflections in water.
   // Each reflection has a revealTime tied to its x-position so it lights up
@@ -449,9 +457,9 @@ function Harbour() {
 
 // ── Camera dolly (sinusoidal so it loops at t=duration) ──────────────────
 
-function CameraDolly({ duration, children }) {
-  const time = useTime();
-  const phase = (time / duration) * Math.PI * 2;
+function CameraDolly({ duration: _duration, children }) {
+  const time = useSceneTime();
+  const phase = (time / INTRO_MASTER_TIMELINE) * Math.PI * 2;
   // very subtle continuous drift
   const tx = Math.sin(phase) * 14;
   const ty = Math.sin(phase + 1.2) * 6;
@@ -479,7 +487,7 @@ function HoloPanel({ x, y, width, height, children, enter, exit }: {
   enter: number;
   exit: number;
 }) {
-  const time = useTime();
+  const time = useSceneTime();
   let opacity = 0;
   let translate = 0;
   if (time < enter) {
@@ -622,7 +630,7 @@ function Bars({ width, height, seed = 9, time, enter }) {
 }
 
 function HoloOverlays() {
-  const time = useTime();
+  const time = useSceneTime();
   return (
     <>
       {/* Top-right small metric */}
@@ -748,7 +756,7 @@ const NETWORK_TOPS = [
 ];
 
 function ConnectionGraph() {
-  const time = useTime();
+  const time = useSceneTime();
   // Reveals 4.2 → 6.4
   const reveal = clamp((time - 4.2) / 1.4, 0, 1);
   const fadeOut = clamp((time - 6.6)/0.6, 0, 1);
@@ -820,13 +828,14 @@ function ConnectionGraph() {
 // ── Brand reveal — DEVIEW ────────────────────────────────────────────────
 
 function BrandReveal() {
-  const time = useTime();
+  const time = useSceneTime();
   // appear 5.4, hold to 7.6, gentle fade at end for loop seam
-  const enter = clamp((time - 5.4)/0.9, 0, 1);
-  const exit = clamp((time - 7.5)/0.5, 0, 1);
-  const op = Easing.easeOutCubic(enter) * (1 - Easing.easeInCubic(exit));
-  const slide = (1 - Easing.easeOutCubic(enter)) * 14;
-  const lineGrow = Easing.easeOutCubic(enter);
+  const enterLinear = clamp((time - 5.4) / 0.72, 0, 1);
+  const exit = clamp((time - 7.5) / 0.48, 0, 1);
+  const enterMotion = Easing.easeInOutCubic(enterLinear);
+  const op = enterMotion * (1 - Easing.easeInCubic(exit));
+  const slide = (1 - enterMotion) * 11;
+  const lineGrow = Easing.easeInOutSine(enterLinear);
 
   if (op <= 0.001) return null;
 
@@ -871,7 +880,7 @@ function Vignette() {
 }
 
 function FilmGrain() {
-  const time = useTime();
+  const time = useSceneTime();
   // shift the noise texture each frame for a 'film grain' feel
   const tx = Math.floor(Math.sin(time*40)*30);
   const ty = Math.floor(Math.cos(time*37)*30);
@@ -890,7 +899,7 @@ function FilmGrain() {
 // ── Light leaks / lens glints (gentle warm highlights) ───────────────────
 
 function LensGlints() {
-  const time = useTime();
+  const time = useSceneTime();
   const globalFade = getGlobalFade(time);
   // Glints fade in around the time the city is mostly lit, fade out with the city
   const ramp = clamp((time - 2.0) / 1.6, 0, 1) * globalFade;

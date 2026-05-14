@@ -16,6 +16,7 @@ import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
 import { FirstVisitIntroGate } from "@/components/first-visit-intro/first-visit-intro-gate";
+import { HERO_BACKGROUND_VIDEO_SOURCES } from "@/lib/hero-background-video";
 
 const fade = {
   initial: { opacity: 0, y: 18 },
@@ -33,7 +34,6 @@ const cardMotion = {
   whileInView: { opacity: 1, y: 0 },
 };
 
-const HERO_VIDEO_SRC = "/Abstract_Architectural_AI_Background_Video.mp4";
 const HERO_VIDEO_CROSSFADE_SECONDS = 0.9;
 
 const ENTERPRISE_MODE_IDS = ["predictive", "conversational", "generative", "analytical"] as const;
@@ -562,11 +562,13 @@ export default function Home() {
                 heroVideoRefs.current[layerIndex] = node;
               }}
               className={`hero-video pointer-events-none absolute inset-0 h-full w-full object-cover ${
-                heroVideoState === "playing" && activeHeroLayer === layerIndex
-                  ? "hero-video-visible"
+                heroVideoState === "fallback"
+                  ? "hero-video-hidden"
                   : fadingHeroLayer === layerIndex
                     ? "hero-video-fading"
-                    : "hero-video-hidden"
+                    : activeHeroLayer === layerIndex
+                      ? "hero-video-visible"
+                      : "hero-video-hidden"
               }`}
               autoPlay={layerIndex === 0}
               muted
@@ -578,7 +580,9 @@ export default function Home() {
               onEnded={() => void startStandbyLayer(layerIndex)}
               onError={() => setHeroVideoState("fallback")}
             >
-              <source src={HERO_VIDEO_SRC} type="video/mp4" />
+              {HERO_BACKGROUND_VIDEO_SOURCES.map(({ src, type }) => (
+                <source key={src} src={src} type={type} />
+              ))}
             </video>
           ))}
           {heroVideoState === "fallback" ? (

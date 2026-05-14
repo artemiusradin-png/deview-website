@@ -14,25 +14,33 @@ import {
   Stars,
   Vignette,
 } from "./hk-hero-scene";
+import { INTRO_WALL_DURATION } from "./intro-scene-timing";
 
-const HERO_DURATION = 8;
+const HERO_DURATION = INTRO_WALL_DURATION;
+
+type Props = {
+  /** Called once when the non-looping timeline reaches the end (like a video ending). */
+  onEnded?: () => void;
+};
 
 /**
- * Full-viewport looping Hong Kong harbour hero from `New-Landing-Page`
- * (no editor playback bar; playhead not persisted).
+ * Full-viewport Hong Kong harbour scene (HTML canvas timeline + JSON-driven sprites).
+ * Used for the first-visit intro: plays once, no playback chrome.
  */
-export function DeviewFirstVisitHero() {
+export function DeviewFirstVisitHero({ onEnded }: Props) {
   return (
     <Stage
       width={1920}
       height={1080}
       duration={HERO_DURATION}
       background="#06050a"
-      loop
+      loop={false}
       autoplay
       persistKey="deview-first-visit-hero"
       persistPlayhead={false}
       showPlaybackBar={false}
+      onEnded={onEnded}
+      disableKeyboardShortcuts
     >
       <Sky />
       <Stars />
