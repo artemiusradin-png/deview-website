@@ -460,6 +460,65 @@ export const en = {
     frameworks: ["GDPR", "PDPO", "MAS TRM", "HKMA"],
     architectureLink: "View our security architecture",
   },
+  process: {
+    sectionLabel: "HOW WE WORK",
+    titleL1: "From first conversation",
+    titleL2: "to live system in weeks.",
+    steps: [
+      { number: "01", label: "SCOPE", title: "Define the problem", body: "We map the workflow that's costing you the most and size the opportunity." },
+      { number: "02", label: "DESIGN", title: "Architecture & plan", body: "Solution architecture, data flow, timeline, and a fixed-price scope — before any build starts." },
+      { number: "03", label: "BUILD", title: "Develop & integrate", body: "We build the system, connect it to your tools, and test it with your real data." },
+      { number: "04", label: "DEPLOY", title: "Go live & monitor", body: "Deployed into your stack with monitoring, alerts, and audit logging from day one." },
+      { number: "05", label: "SUPPORT", title: "Iterate & improve", body: "Post-launch support, drift monitoring, and continuous improvement as your needs change." },
+    ],
+    cta: "See our full process →",
+  },
+  insights: {
+    sectionLabel: "INSIGHTS",
+    titleL1: "Practical AI guidance —",
+    titleL2: "no hype, no vendor pitches.",
+    viewAll: "View all insights →",
+  },
+  testimonials: {
+    sectionLabel: "WHAT CLIENTS SAY",
+    items: [
+      {
+        quote: "We went from a backlog by 10am every day to same-day processing. The team now spends time on exceptions and client relationships — not reading PDFs.",
+        name: "Head of Operations",
+        company: "Mid-sized HK lender",
+      },
+      {
+        quote: "The AI does the retrieval and drafting. My team does the judgment calls. That's exactly how it should work.",
+        name: "Customer Service Manager",
+        company: "APAC insurance firm",
+      },
+      {
+        quote: "We didn't realise how much senior time was going to questions that were already answered somewhere.",
+        name: "Managing Director",
+        company: "Singapore professional services firm",
+      },
+    ],
+  },
+  stats: {
+    sectionLabel: "BY THE NUMBERS",
+    items: [
+      { value: "40–70%", label: "Efficiency gains across deployments" },
+      { value: "1–8 wks", label: "From scoping to live system" },
+      { value: "4", label: "Global offices across 3 continents" },
+      { value: "94%", label: "Best-case processing time reduction" },
+    ],
+  },
+  industries: {
+    sectionLabel: "INDUSTRIES WE SERVE",
+    titleL1: "Deep expertise where",
+    titleL2: "AI delivers the most value.",
+    tiles: [
+      { id: "lending", label: "LENDING & FINANCE", href: "/case-studies" },
+      { id: "insurance", label: "INSURANCE", href: "/industries/insurance" },
+      { id: "legal", label: "LEGAL SERVICES", href: "/industries/legal" },
+      { id: "professional", label: "PROFESSIONAL SERVICES", href: "/case-studies" },
+    ],
+  },
   contactForm: {
     label: "CONTACT FORM",
     fullName: "Full Name",

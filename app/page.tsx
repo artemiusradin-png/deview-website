@@ -15,6 +15,11 @@ import { Globe } from "@/components/ui/globe";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
+import { HomeProcessTimeline } from "../components/HomeProcessTimeline";
+import { HomeInsightsPreview } from "../components/HomeInsightsPreview";
+import { HomeTestimonials } from "../components/HomeTestimonials";
+import { HomeStats } from "../components/HomeStats";
+import { HomeIndustries } from "../components/HomeIndustries";
 
 const fade = {
   initial: { opacity: 0, y: 18 },
@@ -958,9 +963,19 @@ export default function Home() {
 
       <HomeServicesSection variant="home" />
 
+      <HomeStats />
+
+      <HomeIndustries />
+
+      <HomeProcessTimeline />
+
       <SecurityTrustSection />
 
       <AnimatedFeatureSpotlightDemo />
+
+      <HomeTestimonials />
+
+      <HomeInsightsPreview />
 
       <section id="contact" className="scroll-margin-header pt-6 md:pt-8">
         <CtaCard

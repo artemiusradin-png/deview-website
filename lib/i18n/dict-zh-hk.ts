@@ -435,6 +435,65 @@ export const zhHK: Dictionary = {
     frameworks: ["GDPR", "PDPO", "MAS TRM", "HKMA"],
     architectureLink: "查看我們的安全架構",
   },
+  process: {
+    sectionLabel: "合作流程",
+    titleL1: "由初次對話",
+    titleL2: "到系統上線，只需數週。",
+    steps: [
+      { number: "01", label: "範圍", title: "釐清問題", body: "我哋會分析最花你成本嘅工作流程，評估自動化機會。" },
+      { number: "02", label: "設計", title: "架構及規劃", body: "方案架構、數據流程、時間線同固定報價——喺動工之前全部傾好。" },
+      { number: "03", label: "開發", title: "建構及整合", body: "我哋建構系統、連接你嘅工具，並用你嘅真實數據做測試。" },
+      { number: "04", label: "部署", title: "上線及監控", body: "部署到你嘅技術架構，第一日起就有監控、告警同審計記錄。" },
+      { number: "05", label: "支援", title: "迭代及改進", body: "上線後持續支援、漂移監控，隨住你嘅需求變化不斷改進。" },
+    ],
+    cta: "查看完整流程 →",
+  },
+  insights: {
+    sectionLabel: "深度洞察",
+    titleL1: "實用 AI 指引——",
+    titleL2: "無誇大、無推銷。",
+    viewAll: "查看所有文章 →",
+  },
+  testimonials: {
+    sectionLabel: "客戶評價",
+    items: [
+      {
+        quote: "以前每日十點前已經積壓，而家做到即日處理。團隊終於可以專注喺例外情況同客戶關係——唔使再睇 PDF。",
+        name: "營運主管",
+        company: "香港中型貸款機構",
+      },
+      {
+        quote: "AI 負責資料檢索同草擬回覆，我哋團隊負責判斷。呢個先係正確嘅分工。",
+        name: "客戶服務經理",
+        company: "亞太區保險公司",
+      },
+      {
+        quote: "我哋之前唔知原來咁多高級員工嘅時間都花喺答已經有答案嘅問題度。",
+        name: "董事總經理",
+        company: "新加坡專業服務公司",
+      },
+    ],
+  },
+  stats: {
+    sectionLabel: "數據概覽",
+    items: [
+      { value: "40–70%", label: "部署後效率提升" },
+      { value: "1–8 週", label: "由評估到系統上線" },
+      { value: "4", label: "全球辦公室覆蓋三大洲" },
+      { value: "94%", label: "最佳案例處理時間縮減" },
+    ],
+  },
+  industries: {
+    sectionLabel: "服務行業",
+    titleL1: "喺 AI 最具價值嘅",
+    titleL2: "行業深耕細作。",
+    tiles: [
+      { id: "lending", label: "貸款及金融", href: "/case-studies" },
+      { id: "insurance", label: "保險", href: "/industries/insurance" },
+      { id: "legal", label: "法律服務", href: "/industries/legal" },
+      { id: "professional", label: "專業服務", href: "/case-studies" },
+    ],
+  },
   contactForm: {
     label: "聯絡表格",
     fullName: "全名",
