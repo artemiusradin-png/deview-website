@@ -63,7 +63,7 @@ function AccordionPanel({ label, href, imageUrl, isActive, onActivate }: Accordi
       />
 
       <span
-        className={`absolute whitespace-nowrap text-[0.7rem] font-medium uppercase tracking-[0.18em] text-[var(--white-90)] transition-all duration-300 ease-in-out ${
+        className={`absolute whitespace-nowrap text-[0.7rem] font-medium uppercase tracking-[0.18em] text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.55)] transition-all duration-300 ease-in-out ${
           isActive
             ? "bottom-5 left-1/2 -translate-x-1/2 rotate-0"
             : "bottom-16 left-1/2 -translate-x-1/2 rotate-90"
