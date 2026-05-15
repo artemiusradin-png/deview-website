@@ -1,15 +1,15 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { CheckCircle2, FileText, Mail, Send, ShieldCheck } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { CheckCircle2, FileText } from "lucide-react";
 
 const INSIGHTS = [
   "The four safest AI pilots to run before connecting anything to core loan systems",
   "Where document review, borrower follow-up, and CRM handoffs usually waste the most hours",
   "A practical testing path for borrower data, approvals, permissions, and auditability",
 ];
+
+const CHIPS = ["Risk-scored", "Pilot-ready", "Borrower-data aware"];
 
 const PERSONAL_EMAIL_DOMAINS = new Set([
   "gmail.com",
@@ -37,10 +37,50 @@ function isLikelyWorkEmail(email: string) {
   return Boolean(domain && domain.includes(".") && !PERSONAL_EMAIL_DOMAINS.has(domain));
 }
 
+/** Email input with a mouse-tracking radial highlight on its top/bottom edges. */
+function GlowInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
+  const [mx, setMx] = useState(0);
+  const [hovering, setHovering] = useState(false);
+
+  return (
+    <div className="relative w-full">
+      <input
+        {...props}
+        className="peer relative z-10 h-12 w-full rounded-md border border-[rgba(128,184,255,0.2)] bg-[rgb(13,15,28)] px-4 text-base text-[var(--white-90)] outline-none transition-colors duration-200 placeholder:text-[var(--white-30)] focus:border-[rgba(128,184,255,0.55)] sm:text-sm"
+        onMouseMove={(e) => {
+          const r = e.currentTarget.getBoundingClientRect();
+          setMx(e.clientX - r.left);
+        }}
+        onMouseEnter={() => setHovering(true)}
+        onMouseLeave={() => setHovering(false)}
+      />
+      {hovering && (
+        <>
+          <div
+            className="pointer-events-none absolute inset-x-0 top-0 z-20 h-[2px] overflow-hidden rounded-t-md"
+            style={{
+              background: `radial-gradient(32px circle at ${mx}px 0px, #80b8ff 0%, transparent 70%)`,
+            }}
+          />
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-[2px] overflow-hidden rounded-b-md"
+            style={{
+              background: `radial-gradient(32px circle at ${mx}px 2px, #80b8ff 0%, transparent 70%)`,
+            }}
+          />
+        </>
+      )}
+    </div>
+  );
+}
+
 export function AnimatedFeatureSpotlightDemo() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [feedback, setFeedback] = useState<string | null>(null);
+
+  const [glow, setGlow] = useState({ x: 0, y: 0 });
+  const [glowOn, setGlowOn] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -87,109 +127,159 @@ export function AnimatedFeatureSpotlightDemo() {
 
   return (
     <section className="w-full bg-[var(--background)] px-3 py-5 md:px-6 md:py-9 xl:px-8">
-      <div className="relative mx-auto grid w-full max-w-[94rem] overflow-hidden border border-[var(--white-20)] bg-[linear-gradient(135deg,rgba(26,51,128,0.18),rgba(128,184,255,0.04)_34%,rgba(255,255,255,0.01))] lg:grid-cols-[1.45fr_0.72fr]">
-        <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(128,184,255,0.65),transparent)]" />
+      <div
+        className="relative mx-auto grid w-full max-w-[94rem] overflow-hidden rounded-lg border border-[rgba(128,184,255,0.16)] lg:grid-cols-[1.4fr_0.85fr]"
+        style={{
+          background:
+            "radial-gradient(ellipse at 22% 8%, rgba(128,184,255,0.1), transparent 55%), radial-gradient(ellipse at 85% 92%, rgba(26,51,128,0.34), transparent 52%), linear-gradient(160deg, rgba(26,51,128,0.18) 0%, rgba(13,15,28,0) 60%), rgb(13, 15, 28)",
+        }}
+      >
+        <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(128,184,255,0.4),transparent)]" />
 
-        <div className="relative flex flex-col justify-center p-4 md:p-6 lg:p-8 xl:p-10">
-          <div className="mb-3 inline-flex w-fit items-center gap-2 border border-[#80b8ff]/40 bg-[#80b8ff]/10 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-[#80b8ff]">
-            <FileText className="h-3.5 w-3.5" />
-            <span>Free AI automation guide for lenders</span>
-          </div>
+        {/* Left: content + form, with mouse-follow glow */}
+        <div
+          className="relative overflow-hidden p-5 md:p-8 lg:p-10"
+          onMouseMove={(e) => {
+            const r = e.currentTarget.getBoundingClientRect();
+            setGlow({ x: e.clientX - r.left, y: e.clientY - r.top });
+          }}
+          onMouseEnter={() => setGlowOn(true)}
+          onMouseLeave={() => setGlowOn(false)}
+        >
+          <div
+            className={`pointer-events-none absolute h-[480px] w-[480px] rounded-full bg-[radial-gradient(circle,rgba(128,184,255,0.18),rgba(26,51,128,0.1)_45%,transparent_65%)] blur-3xl transition-opacity duration-300 ${
+              glowOn ? "opacity-100" : "opacity-0"
+            }`}
+            style={{
+              transform: `translate(${glow.x - 250}px, ${glow.y - 250}px)`,
+              transition: "transform 0.1s ease-out, opacity 0.3s ease",
+            }}
+          />
 
-          <h2 className="mb-2 max-w-5xl text-[clamp(1.25rem,4.2vw,2.6rem)] font-semibold leading-[1.02] tracking-tight text-foreground md:mb-3 md:leading-[1]">
-            Prioritize the <span className="text-primary">10 lending workflows</span> AI can automate safely
-          </h2>
-
-          <p className="line-clamp-2 max-w-3xl text-[0.84rem] leading-relaxed text-muted-foreground sm:line-clamp-none md:text-sm">
-            A practical field guide for small and mid-sized lending teams. Use it to identify manual-work bottlenecks,
-            choose lower-risk pilots, and set borrower-data controls before automation reaches production.
-          </p>
-
-          <div className="mt-3 grid gap-2 md:mt-4 md:gap-2.5">
-            {INSIGHTS.map((item, index) => (
-              <div key={item} className={`grid grid-cols-[2rem_1fr] items-start gap-3${index >= 1 ? " hidden sm:grid" : ""}`}>
-                <span className="flex h-8 w-8 items-center justify-center border border-[#80b8ff]/35 bg-[#80b8ff]/10 text-[0.65rem] font-semibold text-[#80b8ff]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="text-xs leading-relaxed text-[var(--white-80)]">{item}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-4 hidden flex-wrap gap-2 text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-[var(--white-80)] sm:flex md:mt-5">
-            <span className="border border-[var(--white-20)] bg-[var(--white-10)] px-2.5 py-1">Risk-scored</span>
-            <span className="border border-[var(--white-20)] bg-[var(--white-10)] px-2.5 py-1">Pilot-ready</span>
-            <span className="border border-[var(--white-20)] bg-[var(--white-10)] px-2.5 py-1">Borrower-data aware</span>
-          </div>
-        </div>
-
-        <div className="relative grid gap-0 border-t border-[var(--white-20)] bg-[var(--surface)] lg:border-l lg:border-t-0">
-          <div className="p-4 md:p-5">
+          <div className="relative z-10">
             {status === "sent" ? (
-              <div className="flex min-h-[12rem] flex-col justify-center">
-                <CheckCircle2 className="mb-3 h-8 w-8 text-[#80b8ff]" />
-                <p className="mb-2 text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+              <div className="flex min-h-[16rem] flex-col justify-center">
+                <CheckCircle2 className="mb-3 h-8 w-8 text-[var(--white-70)]" />
+                <p className="mb-2 text-xs font-medium uppercase tracking-[0.16em] text-[var(--text-muted)]">
                   Information sent
                 </p>
-                <h3 className="mb-3 text-xl font-semibold text-foreground">Check your email.</h3>
-                <p className="text-xs leading-relaxed text-muted-foreground">
-                  We sent the AI use-case guide to {email}. The DeView team may follow up with a short note
-                  if your company looks like a fit for an AI workflow audit.
+                <h3 className="mb-3 text-2xl font-semibold text-[var(--white-100)]">Check your email.</h3>
+                <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
+                  We sent the AI use-case guide to {email}. The DeView team may follow up with a short
+                  note if your company looks like a fit for an AI workflow audit.
                 </p>
               </div>
             ) : (
               <>
-                <div className="mb-4 flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-2">
-                    <Mail className="h-4 w-4 text-[#80b8ff]" />
-                    <p className="text-sm font-medium text-foreground">Get the guide by email</p>
-                  </div>
-                  <ShieldCheck className="h-5 w-5 text-[#80b8ff]" />
+                <div
+                  className="mb-3 inline-flex w-fit items-center gap-2 rounded-md border border-[rgba(128,184,255,0.22)] px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-[#9fc4ff]"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse at 70% 130%, rgba(26,51,128,0.4), transparent 62%), rgb(13, 15, 28)",
+                  }}
+                >
+                  <FileText className="h-3.5 w-3.5" />
+                  <span>Free AI automation guide for lenders</span>
                 </div>
 
-                <form className="space-y-3" onSubmit={handleSubmit}>
-                  <div className="space-y-2">
-                    <Label htmlFor="lead-magnet-email" className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                      Work email
-                    </Label>
-                    <div className="relative">
-                      <Input
-                        id="lead-magnet-email"
-                        className="h-12 border-[var(--white-20)] bg-[var(--background)] pe-12"
-                        placeholder="name@company.com"
-                        type="email"
-                        required
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                      />
-                      <button
-                        type="submit"
-                        className="absolute inset-y-1 end-1 flex h-10 w-10 items-center justify-center bg-[#80b8ff] text-black outline-offset-2 transition-colors hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
-                        aria-label={status === "sending" ? "Sending guide" : "Send guide"}
-                        disabled={status === "sending"}
-                      >
-                        <Send size={16} strokeWidth={2} aria-hidden="true" />
-                      </button>
-                    </div>
-                  </div>
+                <h2 className="mb-3 max-w-2xl text-[clamp(1.25rem,4.2vw,2.4rem)] font-semibold leading-[1.05] tracking-tight text-[var(--white-100)]">
+                  Prioritize the{" "}
+                  <span className="text-[#9fc4ff] underline decoration-[rgba(128,184,255,0.4)] decoration-1 underline-offset-4">
+                    10 lending workflows
+                  </span>{" "}
+                  AI can automate safely
+                </h2>
 
-                  {feedback ? <p className="text-xs leading-relaxed text-red-400">{feedback}</p> : null}
+                <p className="max-w-xl text-[0.84rem] leading-relaxed text-[var(--text-muted)] md:text-sm">
+                  A practical field guide for small and mid-sized lending teams. Use it to identify
+                  manual-work bottlenecks, choose lower-risk pilots, and set borrower-data controls
+                  before automation reaches production.
+                </p>
+
+                <div className="mt-4 grid gap-2.5">
+                  {INSIGHTS.map((item, i) => (
+                    <div key={item} className="grid grid-cols-[2rem_1fr] items-start gap-3">
+                      <span
+                        className="flex h-8 w-8 items-center justify-center rounded-md border border-[rgba(128,184,255,0.22)] text-[0.65rem] font-semibold text-[#9fc4ff]"
+                        style={{
+                          background:
+                            "radial-gradient(ellipse at 60% 130%, rgba(26,51,128,0.45), transparent 65%), rgb(13, 15, 28)",
+                        }}
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="text-xs leading-relaxed text-[var(--white-80)]">{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-5 flex flex-wrap gap-2 text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-[var(--white-80)]">
+                  {CHIPS.map((c) => (
+                    <span
+                      key={c}
+                      className="rounded-md border border-[rgba(128,184,255,0.2)] px-2.5 py-1 text-[#bcd4f5]"
+                      style={{
+                        background:
+                          "radial-gradient(ellipse at 75% 130%, rgba(26,51,128,0.38), transparent 62%), rgb(13, 15, 28)",
+                      }}
+                    >
+                      {c}
+                    </span>
+                  ))}
+                </div>
+
+                <form className="mt-7 max-w-md space-y-3" onSubmit={handleSubmit}>
+                  <p className="text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">Work email</p>
+                  <GlowInput
+                    type="email"
+                    required
+                    placeholder="name@company.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+
+                  {feedback ? (
+                    <p className="text-xs leading-relaxed text-red-400">{feedback}</p>
+                  ) : null}
 
                   <button
                     type="submit"
-                    className="inline-flex min-h-11 w-full items-center justify-center bg-[#80b8ff] px-4 text-[0.72rem] font-semibold uppercase tracking-[0.15em] text-black transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
                     disabled={status === "sending"}
+                    className="group/button relative inline-flex w-full items-center justify-center overflow-hidden rounded-md border border-[rgba(128,184,255,0.3)] px-4 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.15em] text-[#cfe0ff] shadow-lg shadow-[rgba(26,51,128,0.35)] transition-all duration-300 ease-in-out hover:border-[rgba(128,184,255,0.55)] hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse at 50% 130%, rgba(26,51,128,0.55), transparent 60%), rgb(13, 15, 28)",
+                    }}
                   >
-                    {status === "sending" ? "Sending..." : "Send me the guide"}
+                    <span className="relative z-10">
+                      {status === "sending" ? "Sending..." : "Send me the guide"}
+                    </span>
+                    <span className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-13deg)_translateX(-100%)] group-hover/button:duration-1000 group-hover/button:[transform:skew(-13deg)_translateX(100%)]">
+                      <span className="relative h-full w-12 bg-[rgba(128,184,255,0.22)]" />
+                    </span>
                   </button>
 
-                  <p className="text-xs leading-relaxed text-muted-foreground">
-                    No newsletter signup. We send the guide and, only if useful, one practical next-step option for your lending workflow.
+                  <p className="text-xs leading-relaxed text-[var(--text-muted)]">
+                    No newsletter signup. We send the guide and, only if useful, one practical
+                    next-step option for your lending workflow.
                   </p>
                 </form>
               </>
             )}
           </div>
+        </div>
+
+        {/* Right: image */}
+        <div className="relative hidden overflow-hidden border-l border-[rgba(128,184,255,0.16)] lg:block">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop"
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(110deg,rgb(13,15,28),transparent_58%)]" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-[rgba(13,15,28,0.55)] via-[rgba(26,51,128,0.28)] to-[rgba(128,184,255,0.14)]" />
         </div>
       </div>
     </section>

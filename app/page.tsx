@@ -19,6 +19,7 @@ import { HomeProcessTimeline } from "../components/HomeProcessTimeline";
 import { HomeInsightsPreview } from "../components/HomeInsightsPreview";
 import { HomeTestimonials } from "../components/HomeTestimonials";
 import { HomeIndustries } from "../components/HomeIndustries";
+import TeamMemberCard from "../components/ui/team-member-card";
 
 const fade = {
   initial: { opacity: 0, y: 18 },
@@ -355,30 +356,6 @@ export default function Home() {
   const langSwitchLabel = locale === "en" ? "Language" : "語言";
   /** Keep shell transform-free — scale/rotateX on an ancestor rasterizes type and looks blurry while scrolling. */
   const enterpriseRailFill = useTransform(enterpriseModesProgress, [0, 1], ["0%", "100%"]);
-  /** Intro copy: stay solid longer, then a tight scroll band with brief blur-out (readable, fast handoff to cards). */
-  const enterpriseStageIntroOpacity = useTransform(
-    enterpriseModesProgress,
-    prefersReducedMotion ? [0, 0.12, 0.16] : [0, 0.12, 0.16],
-    prefersReducedMotion ? [1, 1, 0] : [1, 1, 0],
-  );
-  const enterpriseStageIntroBlur = useTransform(
-    enterpriseModesProgress,
-    prefersReducedMotion ? [0, 1] : [0, 0.11, 0.135, 0.16, 0.18],
-    prefersReducedMotion ? [0, 0] : [0, 0, 4, 12, 18],
-  );
-  const enterpriseStageIntroFilter = useTransform(enterpriseStageIntroBlur, (px) => `blur(${px}px)`);
-  /** While intro is prominent, soften mode labels beneath so lines don’t read as stacked */
-  const enterpriseCardsBlurPx = useTransform(
-    enterpriseModesProgress,
-    prefersReducedMotion ? [0, 1] : [0, 0.08, 0.14, 0.2],
-    prefersReducedMotion ? [0, 0] : [11, 8, 2, 0],
-  );
-  const enterpriseCardsFilter = useTransform(enterpriseCardsBlurPx, (px) => `blur(${px}px)`);
-  const enterpriseStageIntroY = useTransform(
-    enterpriseModesProgress,
-    [0, 0.18],
-    prefersReducedMotion ? [0, 0] : [0, -22],
-  );
 
   return (
     <div className="min-h-screen bg-[var(--background)] bg-grid text-[var(--text)]">
@@ -816,19 +793,6 @@ export default function Home() {
         <section
           className="enterprise-mode-stage enterprise-mode-stage--frameless bg-[var(--background)]"
         >
-            <motion.div
-              className="enterprise-mode-stage-copy"
-              style={{
-                opacity: isCompactEnterpriseLayout ? 1 : enterpriseStageIntroOpacity,
-                y: isCompactEnterpriseLayout ? 0 : enterpriseStageIntroY,
-                filter: isCompactEnterpriseLayout ? "none" : enterpriseStageIntroFilter,
-              }}
-            >
-              <p className="section-label mb-3">{dict.enterpriseModesIntro.label}</p>
-              <h3 className="enterprise-mode-stage-title text-[var(--white-100)]">{dict.enterpriseModesIntro.title}</h3>
-              <p className="enterprise-mode-stage-body text-[var(--text-muted)]">{dict.enterpriseModesIntro.body}</p>
-            </motion.div>
-
             {/* Globe — stays fixed with the pinned panel on desktop; flows below intro copy on mobile */}
             <div
               className="enterprise-globe-wrapper pointer-events-none absolute inset-y-0 right-0 z-[40] w-[44%] overflow-visible"
@@ -843,7 +807,7 @@ export default function Home() {
               </div>
               <motion.div
                 className="enterprise-mode-cards-motion"
-                style={{ filter: isCompactEnterpriseLayout ? "none" : enterpriseCardsFilter }}
+                style={{ filter: "none" }}
               >
               <div className={`enterprise-mode-text-stage enterprise-mode-text-stage-${selectedMode.id}`}>
                 <div className={`enterprise-mode-ambient enterprise-mode-ambient-${selectedMode.id}`} aria-hidden="true" />
@@ -947,6 +911,22 @@ export default function Home() {
       {/* <HomeTestimonials /> */}
 
       <HomeInsightsPreview />
+
+      <section className="relative overflow-hidden bg-[var(--background)] section-gutter py-10 md:py-14">
+        <div className="mx-auto max-w-6xl">
+          <p className="section-label mb-3">LEADERSHIP</p>
+          <div className="rule mb-2" />
+          <TeamMemberCard
+            position="left"
+            jobPosition="Managing Director"
+            firstName="Artemis"
+            lastName="Radin"
+            imageUrl="/team/artemis-radin.jpg"
+            href="/contact"
+            description="Artemis leads DeView's engagements end to end — from scoping the workflows that cost clients the most to shipping the AI systems that fix them. He works directly with operations and finance leaders across the firm's offices, holding every build to one standard: measurable outcomes in weeks, not roadmaps in quarters."
+          />
+        </div>
+      </section>
 
       <section id="contact" className="scroll-margin-header pt-6 md:pt-8">
         <CtaCard

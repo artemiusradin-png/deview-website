@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SubpageNav } from "../../components/SubpageNav";
+import TeamMemberCard from "../../components/ui/team-member-card";
 
 export const metadata: Metadata = {
   title: "About | DeView",
@@ -111,6 +112,23 @@ export default async function AboutPage() {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Leadership */}
+          <div className="mb-16">
+            <p className="mb-3 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
+              Leadership
+            </p>
+            <div className="rule mb-8" />
+            <TeamMemberCard
+              position="left"
+              jobPosition="Managing Director"
+              firstName="Artemis"
+              lastName="Radin"
+              imageUrl="/team/artemis-radin.jpg"
+              href="/contact"
+              description="Artemis leads DeView's engagements end to end — from scoping the workflows that cost clients the most to shipping the AI systems that fix them. He works directly with operations and finance leaders across the firm's offices, holding every build to one standard: measurable outcomes in weeks, not roadmaps in quarters."
+            />
           </div>
 
           {/* Expertise */}
