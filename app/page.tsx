@@ -15,7 +15,6 @@ import { Globe } from "@/components/ui/globe";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
-import { IndustriesAccordion } from "@/components/ui/interactive-image-accordion";
 
 const fade = {
   initial: { opacity: 0, y: 18 },
@@ -381,7 +380,7 @@ export default function Home() {
     <div className="min-h-screen bg-[var(--background)] bg-grid text-[var(--text)]">
       <a
         href="#"
-        className="brand-mark fixed right-0 top-0 z-50 px-4 pt-[calc(env(safe-area-inset-top)+1.35rem)] text-xs tracking-[0.25em] text-[var(--white-80)] sm:px-6 sm:text-sm"
+        className="brand-mark fixed left-0 top-0 z-50 px-4 pt-[calc(env(safe-area-inset-top)+1.35rem)] text-xs tracking-[0.25em] text-[var(--white-80)] sm:px-6 sm:text-sm"
         onClick={closeNav}
       >
         {dict.whatMakesEnterprise.backBrand}
@@ -393,6 +392,7 @@ export default function Home() {
         }`}
       >
         <nav className="section-gutter mx-auto flex h-16 max-w-6xl items-center justify-between">
+          <div className="nav-shell-spacer" aria-hidden="true" />
           <button
             type="button"
             className="nav-toggle"
@@ -451,7 +451,6 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div className="nav-shell-spacer" aria-hidden="true" />
         </nav>
       </header>
 
@@ -960,8 +959,6 @@ export default function Home() {
       <HomeServicesSection variant="home" />
 
       <SecurityTrustSection />
-
-      <IndustriesAccordion />
 
       <AnimatedFeatureSpotlightDemo />
 
