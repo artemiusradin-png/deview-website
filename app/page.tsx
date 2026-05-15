@@ -384,7 +384,7 @@ export default function Home() {
     <div className="min-h-screen bg-[var(--background)] bg-grid text-[var(--text)]">
       <a
         href="#"
-        className="brand-mark fixed left-0 top-0 z-50 flex h-16 items-center px-4 pt-[env(safe-area-inset-top)] text-[9px] tracking-[0.25em] text-[var(--white-80)] sm:px-6 sm:text-[10px]"
+        className="brand-mark fixed left-0 top-0 z-50 flex h-16 items-center px-4 pt-[env(safe-area-inset-top)] text-[12px] tracking-[0.25em] text-[var(--white-80)] sm:px-6 sm:text-[13px]"
         onClick={closeNav}
       >
         {dict.whatMakesEnterprise.backBrand}
