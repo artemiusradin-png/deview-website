@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import "./globals.css";
 import { AppProviders } from "./providers";
 import { ThemeSync } from "./theme-sync";
+import { PixelField } from "@/components/PixelField";
 import type { Locale } from "@/lib/i18n/types";
 
 export const metadata: Metadata = {
@@ -44,6 +45,7 @@ export default async function RootLayout({
         <AppProviders initialLocale={initialLocale}>
           <ThemeSync />
           {children}
+          <PixelField />
         </AppProviders>
       </body>
     </html>
