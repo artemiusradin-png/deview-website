@@ -1,5 +1,5 @@
 /** Primary inbox for inquiries (mailto links + form delivery). */
-export const SITE_INQUIRY_EMAIL = "hello@deview.ai";
+export const SITE_INQUIRY_EMAIL = "info@deviewai.com";
 
 /** Booking page URL (e.g. cal.com/deview). Set to empty string to hide the calendar CTA. */
 export const SITE_BOOKING_URL = "https://calendly.com/artemius-radin/new-meeting";

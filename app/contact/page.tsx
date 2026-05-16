@@ -40,40 +40,51 @@ export default function ContactPage() {
     setStatus("sending");
     setFeedback(null);
 
+    // Persist the inquiry to the database (server route). Web3Forms blocks
+    // server-side email on the free plan, so email delivery is done
+    // client-side below; this call is best-effort for the DB record.
+    void fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ name, email, company, details, honeypot }),
+    }).catch(() => {});
+
+    const web3Key = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    const message = `Work email: ${email}\nCompany: ${company || "—"}\n\n${details}`;
+
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ name, email, company, details, honeypot }),
-      });
-      let data: { ok?: boolean; mailto?: boolean; error?: string } = {};
-      try {
-        data = (await res.json()) as { ok?: boolean; mailto?: boolean; error?: string };
-      } catch {
-        setStatus("error");
-        setFeedback(f.submitError);
-        return;
+      if (web3Key) {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            access_key: web3Key,
+            subject: `[DeView inquiry] ${name}`,
+            from_name: name,
+            name,
+            email,
+            replyto: email,
+            company: company || "—",
+            message,
+          }),
+        });
+        const data = (await res.json().catch(() => null)) as { success?: boolean } | null;
+        if (res.ok && data?.success) {
+          setStatus("success");
+          setFeedback(f.submitSuccess);
+          form.reset();
+          return;
+        }
       }
 
-      if (data.ok) {
-        setStatus("success");
-        setFeedback(f.submitSuccess);
-        form.reset();
-        return;
-      }
-
-      if (data.mailto) {
-        window.location.href = buildInquiryMailto({ name, email, company, details });
-        setStatus("success");
-        setFeedback(f.submitSuccessMailto);
-        return;
-      }
-
-      setStatus("error");
-      setFeedback(f.submitError);
+      // Last-resort fallback: open the visitor's mail client.
+      window.location.href = buildInquiryMailto({ name, email, company, details });
+      setStatus("success");
+      setFeedback(f.submitSuccessMailto);
     } catch {
-      setStatus("error");
-      setFeedback(f.submitError);
+      window.location.href = buildInquiryMailto({ name, email, company, details });
+      setStatus("success");
+      setFeedback(f.submitSuccessMailto);
     }
   }
 

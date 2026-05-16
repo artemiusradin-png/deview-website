@@ -24,7 +24,7 @@ const OFFICES: OfficeMarker[] = [
     region: "Asia-Pacific",
     role: "Headquarters",
     representative: "DeView Core Team",
-    email: "hello@deview.ai",
+    email: "info@deviewai.com",
   },
   {
     id: "stuttgart",

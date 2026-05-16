@@ -402,7 +402,7 @@ export default function Home() {
             <a href="/about" className="nav-item">
               ABOUT
             </a>
-            <a href="#contact" className="nav-item">
+            <a href="/contact" className="nav-item">
               {dict.nav.inquire}
             </a>
             <div className="flex items-center gap-2 lg:gap-2.5">
@@ -467,7 +467,7 @@ export default function Home() {
           <a href="/faq" onClick={closeNav}>
             FAQ
           </a>
-          <a href="#contact" onClick={closeNav}>
+          <a href="/contact" onClick={closeNav}>
             {dict.nav.inquire}
           </a>
           <a href="/contact" onClick={closeNav}>
@@ -573,7 +573,7 @@ export default function Home() {
             <div className="mt-auto pt-8 md:mt-0 md:pt-12">
               <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
               <div className="mt-6 md:mt-7">
-                <a href="#contact" className="btn-outline inline-block w-full text-center sm:w-auto">
+                <a href="/contact" className="btn-outline inline-block w-full text-center sm:w-auto">
                   {dict.hero.inquire}
                 </a>
               </div>
@@ -910,8 +910,6 @@ export default function Home() {
 
       {/* <HomeTestimonials /> */}
 
-      <HomeInsightsPreview />
-
       <section className="relative overflow-hidden bg-[var(--background)] section-gutter py-10 md:py-14">
         <div className="mx-auto max-w-6xl">
           <p className="section-label mb-3">LEADERSHIP</p>
@@ -927,6 +925,8 @@ export default function Home() {
           />
         </div>
       </section>
+
+      <HomeInsightsPreview />
 
       <section id="contact" className="scroll-margin-header pt-6 md:pt-8">
         <CtaCard
