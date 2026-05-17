@@ -33,8 +33,9 @@ const PERSONAL_EMAIL_DOMAINS = new Set([
 ]);
 
 function isLikelyWorkEmail(email: string) {
+  // Accept any well-formed email (personal providers allowed).
   const domain = email.split("@")[1]?.toLowerCase();
-  return Boolean(domain && domain.includes(".") && !PERSONAL_EMAIL_DOMAINS.has(domain));
+  return Boolean(domain && domain.includes("."));
 }
 
 /** Email input with a mouse-tracking radial highlight on its top/bottom edges. */
@@ -87,42 +88,55 @@ export function AnimatedFeatureSpotlightDemo() {
 
     if (!isLikelyWorkEmail(email)) {
       setStatus("error");
-      setFeedback("Please use a work email so we can send the lending guide to the right business contact.");
+      setFeedback("Please enter a valid email address.");
       return;
     }
 
     setStatus("sending");
     setFeedback(null);
 
-    try {
-      const response = await fetch("/api/lead-magnet", {
+    const GUIDE_URL = "/resources/ai-guide-lending/guide";
+
+    // Record the lead (Supabase via server route — best-effort).
+    void fetch("/api/lead-magnet", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: "Website visitor",
+        email,
+        company: "",
+        industry: "Lending / Financial Services",
+        challenge: "Homepage lead magnet — 10 AI lending use cases guide",
+      }),
+    }).catch(() => {});
+
+    // Notify the team with the captured email (Web3Forms client-side —
+    // the server-side path is blocked on the free plan).
+    const web3Key = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    if (web3Key) {
+      void fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
+          access_key: web3Key,
+          subject: "[DeView] Lending guide requested",
+          from_name: "DeView website",
           name: "Website visitor",
           email,
-          company: "",
-          industry: "Lending / Financial Services",
-          challenge: "Homepage lead magnet",
+          replyto: email,
+          message: `Lending guide (10 AI use cases) requested by: ${email}`,
         }),
-      });
-      const data = (await response.json().catch(() => ({}))) as { ok?: boolean; error?: string };
-
-      if (response.ok || data.ok) {
-        setStatus("sent");
-        return;
-      }
-
-      setStatus("error");
-      setFeedback(
-        data.error === "work_email_required"
-          ? "Please use a work email so we can send the lending guide to the right business contact."
-          : "Something went wrong. Please try again.",
-      );
-    } catch {
-      setStatus("error");
-      setFeedback("Something went wrong. Please try again.");
+      }).catch(() => {});
     }
+
+    // Deliver the document: unlock the gated guide and open it.
+    try {
+      sessionStorage.setItem("deview-guide-lending", "1");
+    } catch {
+      /* ignore */
+    }
+    setStatus("sent");
+    window.location.href = GUIDE_URL;
   }
 
   return (
