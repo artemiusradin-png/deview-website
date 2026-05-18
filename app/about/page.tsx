@@ -114,7 +114,7 @@ export default async function AboutPage() {
             </div>
           </div>
 
-          {/* Leadership */}
+          {/* Leadership section hidden for now
           <div className="mb-16">
             <p className="mb-3 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
               Leadership
@@ -130,6 +130,7 @@ export default async function AboutPage() {
               description="Artemis leads DeView's engagements end to end — from scoping the workflows that cost clients the most to shipping the AI systems that fix them. He works directly with operations and finance leaders across the firm's offices, holding every build to one standard: measurable outcomes in weeks, not roadmaps in quarters."
             />
           </div>
+          */}
 
           {/* Expertise */}
           <div className="mb-16">

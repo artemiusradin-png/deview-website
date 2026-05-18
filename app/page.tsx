@@ -910,6 +910,7 @@ export default function Home() {
 
       {/* <HomeTestimonials /> */}
 
+      {/* Leadership section hidden for now
       <section className="relative overflow-hidden bg-[var(--background)] section-gutter py-10 md:py-14">
         <div className="mx-auto max-w-6xl">
           <p className="section-label mb-3">LEADERSHIP</p>
@@ -925,6 +926,7 @@ export default function Home() {
           />
         </div>
       </section>
+      */}
 
       <HomeInsightsPreview />
 
