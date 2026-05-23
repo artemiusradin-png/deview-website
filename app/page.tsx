@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { Rocket, X } from "lucide-react";
+import { Rocket, X, ScanEye, Layers, FileText, BarChart3 } from "lucide-react";
 import { AnimatedFeatureSpotlightDemo } from "../components/AnimatedFeatureSpotlightDemo";
 import { HomeServicesSection } from "../components/HomeServicesSection";
 import { SecurityTrustSection } from "../components/SecurityTrustSection";
@@ -12,9 +12,12 @@ import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFe
 import { SelectedProjectsLogoMarquee } from "../components/SelectedProjectsLogoMarquee";
 import { Banner } from "@/components/ui/banner";
 import { Globe } from "@/components/ui/globe";
+import TimeLine_01 from "@/components/ui/release-time-line";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
+import { FirstVisitIntroGate } from "@/components/first-visit-intro/first-visit-intro-gate";
+import { HERO_BACKGROUND_VIDEO_SOURCES } from "@/lib/hero-background-video";
 
 const fade = {
   initial: { opacity: 0, y: 18 },
@@ -32,7 +35,6 @@ const cardMotion = {
   whileInView: { opacity: 1, y: 0 },
 };
 
-const HERO_VIDEO_SRC = "/Abstract_Architectural_AI_Background_Video.mp4";
 const HERO_VIDEO_CROSSFADE_SECONDS = 0.9;
 
 const ENTERPRISE_MODE_IDS = ["predictive", "conversational", "generative", "analytical"] as const;
@@ -377,6 +379,7 @@ export default function Home() {
   );
 
   return (
+    <FirstVisitIntroGate>
     <div className="min-h-screen bg-[var(--background)] bg-grid text-[var(--text)]">
       <a
         href="#"
@@ -560,11 +563,13 @@ export default function Home() {
                 heroVideoRefs.current[layerIndex] = node;
               }}
               className={`hero-video pointer-events-none absolute inset-0 h-full w-full object-cover ${
-                heroVideoState === "playing" && activeHeroLayer === layerIndex
-                  ? "hero-video-visible"
+                heroVideoState === "fallback"
+                  ? "hero-video-hidden"
                   : fadingHeroLayer === layerIndex
                     ? "hero-video-fading"
-                    : "hero-video-hidden"
+                    : activeHeroLayer === layerIndex
+                      ? "hero-video-visible"
+                      : "hero-video-hidden"
               }`}
               autoPlay={layerIndex === 0}
               muted
@@ -576,7 +581,9 @@ export default function Home() {
               onEnded={() => void startStandbyLayer(layerIndex)}
               onError={() => setHeroVideoState("fallback")}
             >
-              <source src={HERO_VIDEO_SRC} type="video/mp4" />
+              {HERO_BACKGROUND_VIDEO_SOURCES.map(({ src, type }) => (
+                <source key={src} src={src} type={type} />
+              ))}
             </video>
           ))}
           {heroVideoState === "fallback" ? (
@@ -596,12 +603,12 @@ export default function Home() {
         <div
           className={`absolute inset-0 ${heroVideoState === "fallback" ? "hero-overlay" : "hero-overlay hero-overlay-video"}`}
         />
-        <div className="relative z-20 mx-auto flex w-full max-w-7xl flex-col justify-start gap-6 md:-mt-16 md:flex-row md:items-start md:gap-12">
+        <div className="relative z-20 mx-auto flex w-full max-w-screen-2xl flex-col justify-start gap-6 md:-mt-16 md:flex-row md:items-start md:gap-12">
           <motion.div
             initial={fade.initial}
             animate={fade.animate}
             transition={{ duration: 0.6 }}
-            className="flex min-h-[calc(100svh-var(--header-stack-height)-2.25rem)] max-w-2xl flex-col md:min-h-0 md:pt-2"
+            className="flex min-h-[calc(100svh-var(--header-stack-height)-2.25rem)] max-w-4xl flex-col md:min-h-0 md:pt-2"
           >
             <p className="section-label mb-4">{dict.hero.kicker}</p>
             <h1 className="hero-heading mb-6 text-[clamp(1.75rem,6.5vw,2.75rem)] leading-[1.06] text-[var(--white-100)] md:text-5xl md:leading-[1.02] lg:text-6xl">
@@ -616,7 +623,7 @@ export default function Home() {
               ) : null}
             </h1>
             <div className="mt-auto pt-8 md:mt-0 md:pt-12">
-              <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
+              <p className="max-w-3xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
               <div className="mt-6 md:mt-7">
                 <a href="#contact" className="btn-outline inline-block w-full text-center sm:w-auto">
                   {dict.hero.inquire}
@@ -952,6 +959,108 @@ export default function Home() {
           </section>
       </div>
 
+      {/* Featured deployment — AgroPlatforma */}
+      <section
+        id="featured-deployment"
+        className="scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] pt-20 sm:pt-28"
+      >
+        <div className="section-gutter mx-auto max-w-6xl">
+          <p className="section-label mb-3">FEATURED DEPLOYMENT · AGRICULTURE · UKRAINE</p>
+          <div className="rule mb-6" />
+          <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
+            <h2 className="text-[clamp(1.5rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
+              Inside the AgroPlatforma build — AI field diagnostics for a Ukrainian agricultural network.
+            </h2>
+            <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
+              A three-agent system on Claude (via Vertex AI), Salesforce and Flutter — cutting the field-to-quote workflow from ~40 minutes to under 30 seconds.
+            </p>
+          </div>
+
+          <div className="mt-10 overflow-hidden border border-[var(--white-20)] bg-black">
+            <video
+              className="block h-auto w-full"
+              controls
+              preload="metadata"
+              playsInline
+              muted
+            >
+              <source src="/deview-agroplatforma-demo.mp4" type="video/mp4" />
+              Your browser does not support embedded video.
+            </video>
+          </div>
+        </div>
+
+        <TimeLine_01
+          title="Phased build, in order."
+          description="The Ukrainian field-to-quote workflow was rebuilt as three AI agents on a shared backend. Below is the order we shipped — each block extends the same data flywheel without rewriting what's underneath."
+          entries={[
+            {
+              icon: Layers,
+              title: "Shared backend foundation",
+              subtitle: "Phase 0 · Infrastructure",
+              description:
+                "Set up the audit-first backbone every agent runs on top of, so each block could ship independently without reinventing auth, storage, or the data layer.",
+              items: [
+                "FastAPI on Python 3.12 with async tool-use orchestration",
+                "PostgreSQL 17 + pgvector (HNSW indexing, <20ms vector search)",
+                "GCP Cloud Run, Cloud SQL, Cloud Storage with 24-hour TTL photo buckets",
+                "Firebase Auth + JWT middleware; append-only event log shared across agents",
+                "EXIF/GPS scrubbing enforced in CI before any image touches the model",
+              ],
+              button: {
+                url: "https://artemiusradin-png.github.io/Project-2-demo/Agro%20Agent%20-%20Technical%20Architecture%20(Light).html",
+                text: "View the architecture",
+              },
+            },
+            {
+              icon: ScanEye,
+              title: "Block A — Agro-Vision Expert (v1)",
+              subtitle: "Phase 1 · Diagnosis & recommendation",
+              description:
+                "Field consultants photograph the affected crop in-field. Claude (multimodal, via Vertex AI) returns a diagnosis and ranked SKU recommendations from the live 20,000-product catalogue.",
+              items: [
+                "Multimodal Claude on Vertex AI — single call covers diagnosis + recommendation",
+                "RAG over the live SKU catalogue: only real, in-stock products can be suggested",
+                "Confidence threshold at 70% — low-confidence cases drop into chatbot guidance",
+                "Regulatory SQL filters strip anything not approved for Ukraine",
+                "Blind agronomist panel ≥85% accuracy gate before production",
+              ],
+            },
+            {
+              icon: FileText,
+              title: "Block B — Smart Operator & Sales",
+              subtitle: "Phase 2 · Salesforce-native quote drafts",
+              description:
+                "The diagnosis converts into a draft quotation written directly into Salesforce, layering alternatives, cross-sell and substitution rules — pending consultant sign-off before it reaches the grower.",
+              items: [
+                "~30% new code on top of the Block A foundation",
+                "Real-time Salesforce inventory check before any line item is proposed",
+                "Deterministic SQL for prices and margins — never generated by the LLM",
+                "Human-in-the-loop approval gate on every quote",
+                "Three scoped service accounts (read catalogue, read inventory, write quote)",
+              ],
+            },
+            {
+              icon: BarChart3,
+              title: "Block D — Vendor Analytics",
+              subtitle: "Phase 2 · Data flywheel for vendors",
+              description:
+                "Aggregates anonymised diagnostic and transaction data into vendor-facing dashboards with regional and product breakdowns. Read-only, row-level secured, fully auditable.",
+              items: [
+                "~20% new code — shares the same event log as Expert and Operator",
+                "Row-level security on every analytics query",
+                "Regional + product breakdowns built off the deterministic SQL layer",
+                "Closes the loop: field diagnostics → sales → vendor intelligence",
+              ],
+              button: {
+                url: "/case-studies",
+                text: "Read the full case study",
+              },
+            },
+          ]}
+        />
+      </section>
+
       <RetroFeatureCards />
 
       <SelectedProjectsLogoMarquee />
@@ -977,5 +1086,6 @@ export default function Home() {
 
       <SiteFooter />
     </div>
+    </FirstVisitIntroGate>
   );
 }

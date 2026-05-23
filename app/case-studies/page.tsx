@@ -8,9 +8,74 @@ export const metadata: Metadata = {
     "How DeView has helped operations and finance teams cut manual work, automate workflows, and reduce costs — with measurable outcomes.",
 };
 
-const cases = [
+type CaseAgent = {
+  block: string;
+  title: string;
+  body: string;
+};
+
+type CaseStudy = {
+  number: string;
+  sector: string;
+  service: string;
+  videoSrc?: string;
+  headline: string;
+  challenge: string;
+  solution: string;
+  agents?: CaseAgent[];
+  outcomes: { metric: string; label: string }[];
+  techStack?: string[];
+  quote?: string;
+  quoteRole?: string;
+};
+
+const cases: CaseStudy[] = [
   {
     number: "01",
+    sector: "AGRICULTURE · UKRAINE",
+    service: "AI Field Diagnostics & Sales Automation",
+    videoSrc: "/deview-agroplatforma-demo.mp4",
+    headline:
+      "Field-to-quote workflow cut from ~40 minutes to under 30 seconds with AI-assisted crop diagnostics.",
+    challenge:
+      "AgroPlatforma is a Ukrainian agricultural distributor and advisory network whose field consultants diagnose crop problems and prepare quotes for growers across the country. Each case took roughly 40 minutes — opening photos on a laptop, matching symptoms against agronomic references, picking the right SKU from a 20,000-product catalogue, checking stock and regulatory status, then drafting the quotation back in Salesforce. Slow turnarounds meant consultants spent more time on paperwork than in the field, and decisions arrived after the optimal treatment window had closed.",
+    solution:
+      "DeView built a three-agent AI system on top of AgroPlatforma's existing Salesforce and Flutter stack. A consultant photographs the affected crop in-field; Claude (multimodal, via Vertex AI) returns a diagnosis with ranked product recommendations sourced through RAG over the live SKU catalogue, then drafts the corresponding Salesforce quotation with alternatives and cross-sell. A nine-layer safety architecture — confidence thresholding, regulatory SQL filters, real-time inventory validation, deterministic metric queries, append-only audit logging, and consultant approval gates — keeps the human in control of every recommendation that reaches a grower.",
+    agents: [
+      {
+        block: "A",
+        title: "Agro-Vision Expert",
+        body: "Photo → diagnosis → ranked SKU recommendations from a 20,000-product catalogue via pgvector RAG. Low-confidence cases drop into chatbot guidance instead of recommending a product.",
+      },
+      {
+        block: "B",
+        title: "Smart Operator & Sales",
+        body: "Converts the diagnosis into a draft quotation directly inside Salesforce, layering in product alternatives, cross-sell, margin and substitution rules — pending consultant sign-off.",
+      },
+      {
+        block: "D",
+        title: "Vendor Analytics",
+        body: "Aggregates anonymised diagnostic and transaction data into vendor-facing dashboards with regional and product breakdowns. Read-only, row-level secured.",
+      },
+    ],
+    outcomes: [
+      { metric: "< 30 sec", label: "field-to-quote latency (was ~40 min)" },
+      { metric: "20K SKUs", label: "ranked through RAG over the live catalogue" },
+      { metric: "≥ 85%", label: "blind-panel accuracy gate before production" },
+      { metric: "9 layers", label: "of safety controls preventing hallucination" },
+    ],
+    techStack: [
+      "Claude on Vertex AI (multimodal)",
+      "FastAPI · Python 3.12",
+      "PostgreSQL 17 + pgvector",
+      "Flutter (iOS / Android / web)",
+      "Salesforce",
+      "GCP Cloud Run · Cloud SQL · Cloud Storage",
+      "Firebase Auth",
+    ],
+  },
+  {
+    number: "02",
     sector: "LENDING · HONG KONG",
     service: "Document Automation",
     headline: "Document processing time cut from 4 hours to 11 minutes per file",
@@ -29,7 +94,7 @@ const cases = [
     quoteRole: "Head of Operations, mid-sized HK lender",
   },
   {
-    number: "02",
+    number: "03",
     sector: "INSURANCE · ASIA-PACIFIC",
     service: "Customer Support Assistant",
     headline: "Average handle time reduced by 44% across 600+ daily support interactions",
@@ -48,7 +113,7 @@ const cases = [
     quoteRole: "Customer Service Manager, APAC insurance firm",
   },
   {
-    number: "03",
+    number: "04",
     sector: "PROFESSIONAL SERVICES · SINGAPORE",
     service: "Internal Knowledge Assistant",
     headline: "New consultant onboarding time cut from 3 weeks to 4 days",
@@ -67,7 +132,7 @@ const cases = [
     quoteRole: "Managing Director, Singapore professional services firm",
   },
   {
-    number: "04",
+    number: "05",
     sector: "FINANCIAL SERVICES · HONG KONG",
     service: "Reporting & Research Copilot",
     headline: "Weekly management pack reduced from 9 hours to 35 minutes of staff time",
@@ -103,7 +168,7 @@ export default function CaseStudiesPage() {
                 Measurable outcomes from live deployments.
               </h1>
               <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
-                Four engagements across lending, insurance, professional services, and financial operations. All outcomes are real — clients are anonymised by request.
+                Five engagements across agriculture, lending, insurance, professional services, and financial operations. All outcomes are real — clients are anonymised by request, except where named.
               </p>
             </div>
           </div>
@@ -130,6 +195,22 @@ export default function CaseStudiesPage() {
                   </div>
                 </div>
 
+                {/* Video (optional) */}
+                {c.videoSrc ? (
+                  <div className="mb-10 overflow-hidden border border-[var(--white-20)] bg-black">
+                    <video
+                      className="block h-auto w-full"
+                      controls
+                      preload="metadata"
+                      playsInline
+                      muted
+                    >
+                      <source src={c.videoSrc} type="video/mp4" />
+                      Your browser does not support embedded video.
+                    </video>
+                  </div>
+                ) : null}
+
                 {/* Headline */}
                 <h2 className="mb-8 text-[clamp(1.1rem,3.5vw,1.5rem)] leading-snug text-[var(--white-100)] md:max-w-3xl">
                   {c.headline}
@@ -151,6 +232,30 @@ export default function CaseStudiesPage() {
                   </div>
                 </div>
 
+                {/* Agents (optional) */}
+                {c.agents ? (
+                  <div className="mb-10">
+                    <p className="mb-4 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
+                      Three AI Agents on a Shared Backend
+                    </p>
+                    <div className="grid gap-px border border-[var(--white-20)] bg-[var(--white-20)] md:grid-cols-3">
+                      {c.agents.map((a) => (
+                        <div key={a.block} className="flex flex-col gap-3 bg-[var(--background)] p-5 sm:p-6">
+                          <div className="flex items-baseline gap-3">
+                            <span className="text-[1.5rem] leading-none tracking-[-0.04em] text-[var(--white-20)]">
+                              {a.block}
+                            </span>
+                            <span className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-80)]">
+                              {a.title}
+                            </span>
+                          </div>
+                          <p className="text-[0.8rem] leading-relaxed text-[var(--text-muted)]">{a.body}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+
                 {/* Metrics */}
                 <div className="mb-10 grid grid-cols-2 gap-px border border-[var(--white-20)] bg-[var(--white-20)] sm:grid-cols-4">
                   {c.outcomes.map((o) => (
@@ -163,15 +268,38 @@ export default function CaseStudiesPage() {
                   ))}
                 </div>
 
-                {/* Quote */}
-                <blockquote className="border-l-2 border-[var(--white-20)] pl-5">
-                  <p className="mb-2 text-sm italic leading-relaxed text-[var(--white-80)]">
-                    &ldquo;{c.quote}&rdquo;
-                  </p>
-                  <cite className="text-[0.6rem] not-italic uppercase tracking-[0.2em] text-[var(--white-40)]">
-                    {c.quoteRole}
-                  </cite>
-                </blockquote>
+                {/* Tech stack (optional) */}
+                {c.techStack ? (
+                  <div className="mb-10">
+                    <p className="mb-3 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
+                      Stack
+                    </p>
+                    <ul className="flex flex-wrap gap-2">
+                      {c.techStack.map((t) => (
+                        <li
+                          key={t}
+                          className="border border-[var(--white-20)] px-3 py-1.5 text-[0.7rem] uppercase tracking-[0.12em] text-[var(--white-80)]"
+                        >
+                          {t}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+
+                {/* Quote (optional) */}
+                {c.quote ? (
+                  <blockquote className="border-l-2 border-[var(--white-20)] pl-5">
+                    <p className="mb-2 text-sm italic leading-relaxed text-[var(--white-80)]">
+                      &ldquo;{c.quote}&rdquo;
+                    </p>
+                    {c.quoteRole ? (
+                      <cite className="text-[0.6rem] not-italic uppercase tracking-[0.2em] text-[var(--white-40)]">
+                        {c.quoteRole}
+                      </cite>
+                    ) : null}
+                  </blockquote>
+                ) : null}
               </article>
             ))}
           </div>
