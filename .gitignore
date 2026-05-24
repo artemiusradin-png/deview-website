@@ -17,9 +17,6 @@
 /.next/
 /out/
 
-# Generated PRD (npm run generate:prd)
-/output/
-
 # production
 /build
 
@@ -57,6 +54,3 @@ Task Manager - App/
 plugins/
 LOGOS/
 COPY_REWRITE_PLAN.md
-
-# Prototype folder — screen recordings are large binaries
-New-Landing-Page/*.mov

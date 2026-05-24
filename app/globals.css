@@ -18,7 +18,6 @@
   --white-60: rgba(240, 240, 250, 0.6);
   --white-50: rgba(240, 240, 250, 0.5);
   --white-40: rgba(240, 240, 250, 0.4);
-  --white-30: rgba(240, 240, 250, 0.32);
   --white-20: rgba(240, 240, 250, 0.2);
   --white-10: rgba(240, 240, 250, 0.1);
 
@@ -71,7 +70,6 @@ html[data-theme="light"] {
   --white-60: rgba(19, 31, 47, 0.6);
   --white-50: rgba(19, 31, 47, 0.45);
   --white-40: rgba(19, 31, 47, 0.38);
-  --white-30: rgba(19, 31, 47, 0.32);
   --white-20: rgba(19, 31, 47, 0.18);
   --white-10: rgba(19, 31, 47, 0.08);
   --black-80: rgba(243, 238, 226, 0.92);
@@ -5720,12 +5718,10 @@ html[data-theme="light"] .btn-primary:hover {
     position: absolute;
   }
 
-  /* Hero only: hide heavy background clips on small viewports (Globe + CSS fallback).
-     Do NOT use bare .hero-video here — that also matched the first-visit intro overlay. */
-  #hero .hero-video,
-  #hero .hero-video-visible,
-  #hero .hero-video-fading,
-  #hero .hero-video-hidden {
+  .hero-video,
+  .hero-video-visible,
+  .hero-video-fading,
+  .hero-video-hidden {
     transition: none !important;
     transform: none !important;
     display: none !important;

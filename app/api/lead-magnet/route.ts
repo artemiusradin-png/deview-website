@@ -47,22 +47,19 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   }
 
+  const name = String(data.name ?? "").trim().slice(0, MAX.name);
   const email = String(data.email ?? "").trim().slice(0, MAX.email);
-  const rawName = String(data.name ?? "").trim().slice(0, MAX.name);
   const company = String(data.company ?? "").trim().slice(0, MAX.company);
   const industry = String(data.industry ?? "").trim().slice(0, MAX.industry);
   const challenge = String(data.challenge ?? "").trim().slice(0, MAX.challenge);
 
-  if (!email) {
+  if (!name || !email) {
     return NextResponse.json({ ok: false, error: "missing_fields" }, { status: 400 });
   }
 
   if (!isLikelyWorkEmail(email)) {
     return NextResponse.json({ ok: false, error: "work_email_required" }, { status: 400 });
   }
-
-  const emailLocalPart = email.split("@")[0] ?? "";
-  const name = rawName || emailLocalPart || "Anonymous lead";
 
   const supabase = getSupabaseAdmin();
   if (supabase) {
@@ -82,8 +79,8 @@ export async function POST(req: Request) {
 
   const subject = `[DeView Lead] ${name} — AI Guide for Lending`;
   const message = [
+    `Name: ${name}`,
     `Email: ${email}`,
-    rawName ? `Name: ${rawName}` : `Name: — (not provided)`,
     `Company: ${company || "—"}`,
     `Industry: ${industry || "—"}`,
     `Main challenge: ${challenge || "—"}`,
@@ -116,9 +113,7 @@ export async function POST(req: Request) {
     }
   }
 
-  const web3Key =
-    process.env.WEB3FORMS_ACCESS_KEY?.trim() ??
-    process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
+  const web3Key = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
   if (web3Key) {
     try {
       const res = await fetch("https://api.web3forms.com/submit", {

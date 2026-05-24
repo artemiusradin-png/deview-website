@@ -71,44 +71,39 @@ export function SecurityTrustSection() {
         </div>
 
         {/* Certified tools + framework badges */}
-        <div className="flex flex-col gap-3 border-t border-[var(--white-20)] pt-4 md:gap-8 md:pt-8 lg:flex-row lg:items-start lg:gap-16">
-          {/* Tools — mobile: dense inline rows; md+: cards */}
-          <div className="flex min-w-0 flex-col gap-1 md:gap-4">
-            <p className="text-[0.5rem] uppercase leading-tight tracking-[0.14em] text-[var(--white-40)] md:text-[0.6rem] md:tracking-[0.22em]">
+        <div className="flex flex-col gap-8 border-t border-[var(--white-20)] pt-8 lg:flex-row lg:items-start lg:gap-16">
+          {/* Tools */}
+          <div className="flex flex-col gap-4">
+            <p className="text-[0.6rem] uppercase tracking-[0.22em] text-[var(--white-40)]">
               {s.toolsLabel}
             </p>
-            <div className="flex flex-col md:flex-row md:flex-wrap md:gap-3">
-              {s.tools.map((tool, i) => (
+            <div className="flex flex-wrap gap-3">
+              {s.tools.map((tool) => (
                 <div
                   key={tool.name}
-                  className={
-                    "min-w-0 border-[var(--white-20)] max-md:border-b max-md:py-1 max-md:last:border-b-0 md:flex md:flex-col md:gap-1 md:border md:bg-[var(--background)] md:px-4 md:py-3 " +
-                    (i === 0 ? "max-md:pt-0" : "")
-                  }
+                  className="flex flex-col gap-1 border border-[var(--white-20)] bg-[var(--background)] px-4 py-3"
                 >
-                  <p className="max-md:leading-[1.25] md:contents">
-                    <span className="text-[0.54rem] uppercase leading-none tracking-[0.06em] text-[var(--white-80)] md:block md:text-[0.72rem] md:leading-snug md:tracking-[0.14em]">
-                      {tool.name}
-                    </span>
-                    <span className="text-[0.48rem] leading-[1.25] tracking-[0.04em] text-[var(--white-40)] max-md:before:mr-0.5 max-md:before:inline max-md:before:text-[var(--white-50)] max-md:before:content-['·'] md:mt-0 md:block md:text-[0.6rem] md:tracking-[0.08em] md:before:hidden">
-                      {tool.cert}
-                    </span>
-                  </p>
+                  <span className="text-[0.72rem] uppercase tracking-[0.14em] text-[var(--white-80)]">
+                    {tool.name}
+                  </span>
+                  <span className="text-[0.6rem] tracking-[0.08em] text-[var(--white-40)]">
+                    {tool.cert}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Frameworks */}
-          <div className="flex flex-col gap-1 md:gap-4">
-            <p className="text-[0.5rem] uppercase leading-tight tracking-[0.14em] text-[var(--white-40)] md:text-[0.6rem] md:tracking-[0.22em]">
+          <div className="flex flex-col gap-4">
+            <p className="text-[0.6rem] uppercase tracking-[0.22em] text-[var(--white-40)]">
               {s.frameworksLabel}
             </p>
-            <div className="flex flex-wrap gap-1 md:gap-2">
+            <div className="flex flex-wrap gap-2">
               {s.frameworks.map((fw) => (
                 <span
                   key={fw}
-                  className="border border-[var(--white-30)] bg-[var(--white-10)] px-1.5 py-0.5 text-[0.52rem] uppercase tracking-[0.1em] text-[var(--white-70)] md:px-3 md:py-2 md:text-[0.65rem] md:tracking-[0.18em]"
+                  className="border border-[var(--white-30)] bg-[var(--white-10)] px-3 py-2 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-70)]"
                 >
                   {fw}
                 </span>
