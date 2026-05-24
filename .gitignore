@@ -54,3 +54,15 @@ Task Manager - App/
 plugins/
 LOGOS/
 COPY_REWRITE_PLAN.md
+
+# BMAD framework (per-machine install; do not commit)
+_bmad/
+_bmad-output/
+
+# Local working files (drafts, screen recordings, output dumps)
+New-Landing-Page/
+output/
+*.JPEG
+*.jpeg
+*.mov
+*.MOV

@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { Rocket, X } from "lucide-react";
+import { Rocket, X, Layers, ScanEye, FileText, BarChart3 } from "lucide-react";
+import TimeLine_01 from "@/components/ui/release-time-line";
 import { AnimatedFeatureSpotlightDemo } from "../components/AnimatedFeatureSpotlightDemo";
 import { HomeServicesSection } from "../components/HomeServicesSection";
 import { SecurityTrustSection } from "../components/SecurityTrustSection";
@@ -622,6 +623,108 @@ export default function Home() {
             </div>
           </motion.div>
         </div>
+      </section>
+
+      {/* Featured deployment — AgroPlatforma (right after main landing) */}
+      <section
+        id="featured-deployment"
+        className="scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] pt-20 sm:pt-28"
+      >
+        <div className="section-gutter mx-auto max-w-6xl">
+          <p className="section-label mb-3">FEATURED DEPLOYMENT · AGRICULTURE · UKRAINE</p>
+          <div className="rule mb-6" />
+          <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
+            <h2 className="text-[clamp(1.5rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
+              Inside the AgroPlatforma build — AI field diagnostics for a Ukrainian agricultural network.
+            </h2>
+            <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
+              A three-agent system on Claude (via Vertex AI), Salesforce and Flutter — cutting the field-to-quote workflow from ~40 minutes to under 30 seconds.
+            </p>
+          </div>
+
+          <div className="mt-10 overflow-hidden border border-[var(--white-20)] bg-black">
+            <video
+              className="block h-auto w-full"
+              controls
+              preload="metadata"
+              playsInline
+              muted
+            >
+              <source src="/deview-agroplatforma-demo.mp4" type="video/mp4" />
+              Your browser does not support embedded video.
+            </video>
+          </div>
+        </div>
+
+        <TimeLine_01
+          title="Phased build, in order."
+          description="The Ukrainian field-to-quote workflow was rebuilt as three AI agents on a shared backend. Below is the order we shipped — each block extends the same data flywheel without rewriting what's underneath."
+          entries={[
+            {
+              icon: Layers,
+              title: "Shared backend foundation",
+              subtitle: "Phase 0 · Infrastructure",
+              description:
+                "Set up the audit-first backbone every agent runs on top of, so each block could ship independently without reinventing auth, storage, or the data layer.",
+              items: [
+                "FastAPI on Python 3.12 with async tool-use orchestration",
+                "PostgreSQL 17 + pgvector (HNSW indexing, <20ms vector search)",
+                "GCP Cloud Run, Cloud SQL, Cloud Storage with 24-hour TTL photo buckets",
+                "Firebase Auth + JWT middleware; append-only event log shared across agents",
+                "EXIF/GPS scrubbing enforced in CI before any image touches the model",
+              ],
+              button: {
+                url: "https://artemiusradin-png.github.io/Project-2-demo/Agro%20Agent%20-%20Technical%20Architecture%20(Light).html",
+                text: "View the architecture",
+              },
+            },
+            {
+              icon: ScanEye,
+              title: "Block A — Agro-Vision Expert (v1)",
+              subtitle: "Phase 1 · Diagnosis & recommendation",
+              description:
+                "Field consultants photograph the affected crop in-field. Claude (multimodal, via Vertex AI) returns a diagnosis and ranked SKU recommendations from the live 20,000-product catalogue.",
+              items: [
+                "Multimodal Claude on Vertex AI — single call covers diagnosis + recommendation",
+                "RAG over the live SKU catalogue: only real, in-stock products can be suggested",
+                "Confidence threshold at 70% — low-confidence cases drop into chatbot guidance",
+                "Regulatory SQL filters strip anything not approved for Ukraine",
+                "Blind agronomist panel ≥85% accuracy gate before production",
+              ],
+            },
+            {
+              icon: FileText,
+              title: "Block B — Smart Operator & Sales",
+              subtitle: "Phase 2 · Salesforce-native quote drafts",
+              description:
+                "The diagnosis converts into a draft quotation written directly into Salesforce, layering alternatives, cross-sell and substitution rules — pending consultant sign-off before it reaches the grower.",
+              items: [
+                "~30% new code on top of the Block A foundation",
+                "Real-time Salesforce inventory check before any line item is proposed",
+                "Deterministic SQL for prices and margins — never generated by the LLM",
+                "Human-in-the-loop approval gate on every quote",
+                "Three scoped service accounts (read catalogue, read inventory, write quote)",
+              ],
+            },
+            {
+              icon: BarChart3,
+              title: "Block D — Vendor Analytics",
+              subtitle: "Phase 2 · Data flywheel for vendors",
+              description:
+                "Aggregates anonymised diagnostic and transaction data into vendor-facing dashboards with regional and product breakdowns. Read-only, row-level secured, fully auditable.",
+              items: [
+                "~20% new code — shares the same event log as Expert and Operator",
+                "Row-level security on every analytics query",
+                "Regional + product breakdowns built off the deterministic SQL layer",
+                "Closes the loop: field diagnostics → sales → vendor intelligence",
+              ],
+              button: {
+                url: "/case-studies",
+                text: "Read the full case study",
+              },
+            },
+          ]}
+        />
       </section>
 
       <section
