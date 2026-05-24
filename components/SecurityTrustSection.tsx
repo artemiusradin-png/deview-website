@@ -103,7 +103,11 @@ export function SecurityTrustSection() {
               {s.frameworks.map((fw) => (
                 <span
                   key={fw}
-                  className="border border-[var(--white-30)] bg-[var(--white-10)] px-3 py-2 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-70)]"
+                  className="rounded-md border border-[rgba(128,184,255,0.16)] px-3 py-2 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-80)]"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse at 75% 130%, rgba(26,51,128,0.4), transparent 62%), radial-gradient(ellipse at 20% 0%, rgba(128,184,255,0.08), transparent 60%), rgb(13, 15, 28)",
+                  }}
                 >
                   {fw}
                 </span>

@@ -341,8 +341,8 @@ function LoginView({ onSuccess }: { onSuccess: (portal: Portal, reference: strin
           <p className="text-[0.65rem] leading-relaxed text-[var(--white-30)]">
             Your reference is included in your signed engagement agreement from DeView. Need
             help?{" "}
-            <a href="mailto:hello@deview.ai" className="text-[var(--white-50)] hover:text-[var(--white-80)]">
-              hello@deview.ai
+            <a href="mailto:info@deviewai.com" className="text-[var(--white-50)] hover:text-[var(--white-80)]">
+              info@deviewai.com
             </a>
           </p>
         </motion.div>

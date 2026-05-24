@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SubpageNav } from "../../components/SubpageNav";
+import TeamMemberCard from "../../components/ui/team-member-card";
 
 export const metadata: Metadata = {
   title: "About | DeView",
   description:
-    "DeView is an AI consulting and engineering firm based in Hong Kong, building AI systems that reduce manual work and automate workflows for operations and finance teams.",
+    "DeView is an AI consulting and engineering firm with teams in Hong Kong, Vancouver, Edinburgh, and Stuttgart — building AI systems that reduce manual work and automate workflows for operations and finance teams.",
 };
 
 const values = [
@@ -38,7 +40,10 @@ const expertise = [
   { area: "Deployment", detail: "Cloud (AWS, GCP, Azure), on-premises, hybrid for regulated environments" },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const cookieStore = await cookies();
+  const isHongKong = cookieStore.get("deview-country")?.value === "HK";
+
   return (
     <>
       <main className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid pb-[max(2rem,env(safe-area-inset-bottom))] pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:pb-16 sm:pt-24">
@@ -55,7 +60,9 @@ export default function AboutPage() {
               </h1>
               <div className="space-y-4 text-sm leading-relaxed text-[var(--text-muted)]">
                 <p>
-                  DeView is an AI consulting and engineering firm based in Hong Kong. We work with operations and finance teams at mid-market and enterprise companies to build AI systems that reduce manual work, cut operating costs, and automate repetitive workflows.
+                  {isHongKong
+                    ? "DeView is an AI consulting and engineering firm headquartered in Hong Kong, with sales offices in Vancouver, Edinburgh, and Stuttgart. We work with operations and finance teams at mid-market and enterprise companies to build AI systems that reduce manual work, cut operating costs, and automate repetitive workflows."
+                    : "DeView is an AI consulting and engineering firm with teams in Hong Kong, Vancouver, Edinburgh, and Stuttgart. We work with operations and finance teams at mid-market and enterprise companies to build AI systems that reduce manual work, cut operating costs, and automate repetitive workflows."}
                 </p>
                 <p>
                   We focus on practical outcomes: specific processes that are currently costing time or money, automated and connected to the systems already in use. Not demos. Not roadmaps. Working systems, deployed in weeks.
@@ -107,6 +114,24 @@ export default function AboutPage() {
             </div>
           </div>
 
+          {/* Leadership section hidden for now
+          <div className="mb-16">
+            <p className="mb-3 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
+              Leadership
+            </p>
+            <div className="rule mb-8" />
+            <TeamMemberCard
+              position="left"
+              jobPosition="Managing Director"
+              firstName="Artemis"
+              lastName="Radin"
+              imageUrl="/team/artemis-radin.jpg"
+              href="/contact"
+              description="Artemis leads DeView's engagements end to end — from scoping the workflows that cost clients the most to shipping the AI systems that fix them. He works directly with operations and finance leaders across the firm's offices, holding every build to one standard: measurable outcomes in weeks, not roadmaps in quarters."
+            />
+          </div>
+          */}
+
           {/* Expertise */}
           <div className="mb-16">
             <p className="mb-3 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
@@ -127,11 +152,15 @@ export default function AboutPage() {
           <div className="mb-16 grid gap-8 md:grid-cols-3">
             <div>
               <p className="mb-2 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
-                Based in
+                {isHongKong ? "Headquarters" : "Based in"}
               </p>
-              <p className="text-sm text-[var(--white-80)]">Hong Kong</p>
+              <p className="text-sm text-[var(--white-80)]">
+                {isHongKong ? "Hong Kong" : "Hong Kong · Vancouver · Edinburgh · Stuttgart"}
+              </p>
               <p className="text-[0.75rem] text-[var(--text-muted)]">
-                Available remotely for North America and Europe
+                {isHongKong
+                  ? "Sales offices: Vancouver · Edinburgh · Stuttgart"
+                  : "Serving clients across Asia-Pacific, North America, and Europe"}
               </p>
             </div>
             <div>

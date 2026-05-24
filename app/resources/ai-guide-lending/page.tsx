@@ -22,8 +22,9 @@ const PERSONAL_EMAIL_DOMAINS = new Set([
 ]);
 
 function isLikelyWorkEmail(email: string) {
+  // Accept any well-formed email (personal providers allowed).
   const domain = email.split("@")[1]?.toLowerCase();
-  return Boolean(domain && domain.includes(".") && !PERSONAL_EMAIL_DOMAINS.has(domain));
+  return Boolean(domain && domain.includes("."));
 }
 
 export default function LeadMagnetPage() {
@@ -44,7 +45,7 @@ export default function LeadMagnetPage() {
 
     if (!isLikelyWorkEmail(email)) {
       setStatus("error");
-      setFeedback("Please use a work email address — personal providers like Gmail or Outlook aren't accepted.");
+      setFeedback("Please enter a valid email address.");
       return;
     }
 
@@ -61,9 +62,9 @@ export default function LeadMagnetPage() {
       if (data.ok || res.ok) {
         sessionStorage.setItem("deview-guide-lending", "1");
         setStatus("success");
-      } else if (data.error === "work_email_required") {
+      } else if (data.error === "invalid_email") {
         setStatus("error");
-        setFeedback("Please use a work email address — personal providers like Gmail or Outlook aren't accepted.");
+        setFeedback("Please enter a valid email address.");
       } else {
         setStatus("error");
         setFeedback("Something went wrong — please try again.");

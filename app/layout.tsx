@@ -1,7 +1,10 @@
 import type { Metadata, Viewport } from "next";
+import { cookies } from "next/headers";
 import "./globals.css";
 import { AppProviders } from "./providers";
 import { ThemeSync } from "./theme-sync";
+import { PixelField } from "@/components/PixelField";
+import type { Locale } from "@/lib/i18n/types";
 
 export const metadata: Metadata = {
   title: "DeView | AI Consulting & Data Engineering",
@@ -18,13 +21,19 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const geoLocaleCookie = cookieStore.get("deview-geo-locale")?.value;
+  const initialLocale: Locale =
+    geoLocaleCookie === "zh-HK" || geoLocaleCookie === "en" ? geoLocaleCookie : "en";
+  const htmlLang = initialLocale === "zh-HK" ? "zh-Hant-HK" : "en";
+
   return (
-    <html lang="en" data-scroll-behavior="smooth" className="h-full antialiased">
+    <html lang={htmlLang} data-scroll-behavior="smooth" className="h-full antialiased">
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
         <link
@@ -33,9 +42,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--text)]">
-        <AppProviders>
+        <AppProviders initialLocale={initialLocale}>
           <ThemeSync />
           {children}
+          <PixelField />
         </AppProviders>
       </body>
     </html>

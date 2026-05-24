@@ -26,8 +26,9 @@ const PERSONAL_EMAIL_DOMAINS = new Set([
 ]);
 
 function isLikelyWorkEmail(email: string) {
+  // Accept any well-formed email (personal providers allowed).
   const domain = email.split("@")[1]?.toLowerCase();
-  return Boolean(domain && domain.includes(".") && !PERSONAL_EMAIL_DOMAINS.has(domain));
+  return Boolean(domain && domain.includes("."));
 }
 
 export async function POST(req: Request) {
@@ -58,7 +59,7 @@ export async function POST(req: Request) {
   }
 
   if (!isLikelyWorkEmail(email)) {
-    return NextResponse.json({ ok: false, error: "work_email_required" }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "invalid_email" }, { status: 400 });
   }
 
   const supabase = getSupabaseAdmin();

@@ -191,6 +191,23 @@ html[data-theme="light"] .bg-grid::before {
   opacity: 0.65;
 }
 
+/* Site-wide scroll-reactive pixel field — refined texture over all content */
+.pixel-field {
+  mix-blend-mode: soft-light;
+  opacity: 0.9;
+}
+
+html[data-theme="light"] .pixel-field {
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel-field {
+    opacity: 0.55;
+  }
+}
+
 @keyframes grid-drift {
   0% {
     transform: translate3d(0, 0, 0);
@@ -656,7 +673,8 @@ html[data-theme="light"] .hero-media {
 }
 
 .hero-video {
-  filter: grayscale(100%) saturate(0%) brightness(1.02) contrast(1.04);
+  /* Dark mode: purple-blue tinted skyline */
+  filter: grayscale(100%) sepia(80%) hue-rotate(205deg) saturate(260%) brightness(0.92) contrast(1.08);
   object-position: 44% 14%;
   transform: scale(1.14);
   transform-origin: center top;
@@ -666,7 +684,8 @@ html[data-theme="light"] .hero-media {
 }
 
 html[data-theme="light"] .hero-video {
-  filter: sepia(16%) saturate(88%) brightness(1.12) contrast(0.96);
+  /* Bright mode: neutral grey skyline */
+  filter: invert(1) grayscale(100%) brightness(1.06) contrast(0.92);
 }
 
 .hero-video-visible {
@@ -976,6 +995,26 @@ html[data-theme="light"] .hero-fallback {
     linear-gradient(to bottom, rgba(255, 252, 244, 0.88), rgba(239, 232, 215, 0.98));
 }
 
+html[data-theme="light"] .hero-fallback-grid {
+  background-image:
+    linear-gradient(rgba(19, 31, 47, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 31, 47, 0.12) 1px, transparent 1px);
+  opacity: 1;
+}
+
+html[data-theme="light"] .hero-fallback-rings {
+  border-color: rgba(19, 31, 47, 0.38);
+  box-shadow:
+    0 0 0 48px rgba(19, 31, 47, 0.14),
+    0 0 0 112px rgba(19, 31, 47, 0.07);
+  opacity: 0.85;
+}
+
+html[data-theme="light"] .hero-fallback-beam {
+  background: linear-gradient(to bottom, transparent, rgba(19, 31, 47, 0.32), transparent);
+  opacity: 0.7;
+}
+
 .hero-fallback-visible {
   animation: hero-fallback-fade 1s ease forwards;
 }
@@ -1154,6 +1193,13 @@ html[data-theme="light"] .hero-fallback {
 }
 
 @media (max-width: 767px) {
+  /* No hero animation on mobile — keep the section static */
+  .hero-video,
+  .hero-fallback,
+  .hero-media {
+    display: none !important;
+  }
+
   .hero-heading {
     letter-spacing: 0.08em;
   }
@@ -1836,7 +1882,7 @@ html[data-theme="light"] .enterprise-mode-stage-copy .section-label {
   gap: 0.75rem 1rem;
 }
 
-@media (min-width: 1101px) and (max-width: 1320px) {
+@media (min-width: 768px) and (max-width: 1320px) {
   .enterprise-mode-text-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1917,7 +1963,13 @@ html[data-theme="light"] .enterprise-mode-stage-copy .section-label {
   display: grid;
   gap: 1.25rem 2rem;
   align-items: start;
-  grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1200px) {
+  .enterprise-mode-stage-detail {
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+  }
 }
 
 .enterprise-mode-stage-detail--in-card {
@@ -2013,7 +2065,7 @@ html[data-theme="light"] .enterprise-compare-enterprise {
   transform: translateY(-1px);
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 767px) {
   .enterprise-stage-scroll-wrapper {
     height: auto;
     min-height: 0;
@@ -2076,6 +2128,12 @@ html[data-theme="light"] .enterprise-compare-enterprise {
 
   .enterprise-mode-cards-motion {
     width: 100%;
+    /* Desktop uses flex:1 1 0 to fill a 100dvh-pinned parent. On mobile the
+       parent is height:auto, so flex-basis:0 collapses the cards to 0px and
+       hides the four mode scrollers. Size to content instead. */
+    flex: 0 0 auto;
+    min-height: 0;
+    height: auto;
   }
 
   .enterprise-scroll-rail {
@@ -2181,30 +2239,9 @@ html[data-theme="light"] .enterprise-compare-enterprise {
     padding-top: 0.35rem;
   }
 
-  /* Globe — reflow from absolute right-panel to full-width decorative band */
+  /* Globe — hidden on mobile (canvas doesn't render here; the band is just dead space) */
   .enterprise-globe-wrapper {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    height: 300px;
-    overflow: hidden;
-    order: 0;
-    opacity: 0.75;
-    margin-bottom: 0;
-  }
-
-  /* Override the desktop className props baked into the Globe component */
-  .enterprise-globe-wrapper > div {
-    left: 50% !important;
-    top: 50% !important;
-    transform: translate(-50%, -40%) !important;
-    width: 92% !important;
-    max-width: 420px !important;
-  }
-
-  /* City label boxes use CSS anchor() which breaks when globe is repositioned */
-  .enterprise-globe-wrapper > div > div {
-    display: none !important;
+    display: none;
   }
 }
 
@@ -3682,15 +3719,17 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
   height: 100%;
   overflow: hidden;
   border-radius: 0.5rem;
-  border: 1px solid rgba(99, 102, 241, 0.18);
+  border: 1px solid rgba(128, 184, 255, 0.14);
+  /* Matches the globe: dark-navy planet surface + deep-blue atmospheric glow */
   background:
-    radial-gradient(ellipse at 30% 15%, rgba(99, 102, 241, 0.12), transparent 52%),
-    radial-gradient(ellipse at 80% 85%, rgba(99, 102, 241, 0.06), transparent 45%),
-    linear-gradient(150deg, rgba(99, 102, 241, 0.06) 0%, rgba(15, 15, 25, 0.0) 100%);
+    radial-gradient(ellipse at 28% 12%, rgba(128, 184, 255, 0.1), transparent 55%),
+    radial-gradient(ellipse at 82% 88%, rgba(26, 51, 128, 0.32), transparent 50%),
+    linear-gradient(160deg, rgba(26, 51, 128, 0.18) 0%, rgba(13, 15, 28, 0) 60%),
+    rgb(13, 15, 28);
   box-shadow:
-    inset 0 1px 0 rgba(99, 102, 241, 0.12),
-    0 32px 64px rgba(0, 0, 0, 0.32),
-    0 0 0 0.5px rgba(99, 102, 241, 0.06);
+    inset 0 1px 0 rgba(128, 184, 255, 0.1),
+    0 32px 64px rgba(0, 0, 0, 0.36),
+    0 0 0 0.5px rgba(128, 184, 255, 0.06);
 }
 
 /* Content overlay — lives inside .svoyage-slide__inner (position: relative) */
@@ -3919,13 +3958,13 @@ html[data-theme="light"] .svoyage-slider__dot.is-active {
 }
 
 html[data-theme="light"] .svoyage-slide__panel {
-  border-color: rgba(99, 102, 241, 0.22);
+  border-color: rgba(19, 31, 47, 0.18);
   background:
-    radial-gradient(ellipse at 30% 15%, rgba(99, 102, 241, 0.14), transparent 52%),
-    radial-gradient(ellipse at 80% 85%, rgba(99, 102, 241, 0.08), transparent 45%),
-    linear-gradient(150deg, rgba(238, 238, 255, 0.9) 0%, rgba(220, 220, 245, 0.95) 100%);
+    radial-gradient(ellipse at 30% 15%, rgba(19, 31, 47, 0.08), transparent 52%),
+    radial-gradient(ellipse at 80% 85%, rgba(19, 31, 47, 0.04), transparent 45%),
+    linear-gradient(150deg, rgba(232, 232, 232, 0.95) 0%, rgba(214, 216, 220, 0.95) 100%);
   box-shadow:
-    inset 0 1px 0 rgba(99, 102, 241, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
     0 24px 52px rgba(0, 0, 0, 0.1);
 }
 
@@ -4073,7 +4112,7 @@ html[data-theme="light"] .svoyage-slide__info {
   }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 767px) {
   .enterprise-globe-wrapper {
     height: clamp(210px, 52vw, 300px);
     opacity: 0.68;
@@ -5646,7 +5685,7 @@ html[data-theme="light"] .btn-primary:hover {
 }
 
 /* Enterprise: disable costly will-change when section is non-sticky */
-@media (max-width: 1100px) {
+@media (max-width: 767px) {
   .enterprise-mode-cards-motion {
     will-change: auto;
   }
@@ -5674,8 +5713,8 @@ html[data-theme="light"] .btn-primary:hover {
     margin: 0;
   }
 
-  .globe-city-box p:first-child,
-  .globe-city-box p:last-child {
+  /* Hide the region label on mobile; keep the city name visible */
+  .globe-city-box p:first-child {
     display: none;
   }
 
