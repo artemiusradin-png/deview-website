@@ -193,10 +193,10 @@ export default function TimeLine_01({
 
                 <article
                   className={
-                    "flex flex-col rounded-2xl border p-3 transition-all duration-300 " +
+                    "flex flex-col rounded-2xl border p-3 transition-all duration-300 bg-[var(--surface)] " +
                     (isActive
-                      ? "border-gray-50 dark:border-gray-800 bg-gray-50 dark:bg-black shadow-lg"
-                      : "border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-black")
+                      ? "border-[var(--white-20)] shadow-lg"
+                      : "border-[var(--white-10)]")
                   }
                 >
                   {entry.image && (
@@ -242,7 +242,7 @@ export default function TimeLine_01({
                       <div className="overflow-hidden">
                         <div className="space-y-4 pt-2">
                           {entry.items && entry.items.length > 0 && (
-                            <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-black p-4">
+                            <div className="rounded-lg border border-[var(--white-10)] bg-[var(--background)] p-4">
                               <ul className="space-y-2">
                                 {entry.items.map((item, itemIndex) => (
                                   <li
