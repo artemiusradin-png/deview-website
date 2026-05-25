@@ -663,206 +663,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured deployment — AgroPlatforma (right after main landing) */}
-      <section
-        id="featured-deployment"
-        className="scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] pt-12 sm:pt-20 md:pt-28 pb-16 md:pb-28"
-      >
-        <div className="section-gutter mx-auto max-w-[96rem]">
-          <p className="section-label mb-3">FEATURED DEPLOYMENT · AGRICULTURE · UKRAINE</p>
-          <div className="rule mb-6" />
-          <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
-            <h2 className="text-[clamp(1.5rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
-              Inside the AgroPlatforma build — AI field diagnostics for a Ukrainian agricultural network.
-            </h2>
-            <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
-              A three-agent system on Claude (via Vertex AI), Salesforce and Flutter — cutting the field-to-quote workflow from ~40 minutes to under 30 seconds.
-            </p>
-          </div>
-
-          {/* Two-column: phased build on the left, video on the right (sticky on desktop) */}
-          <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)] md:gap-12 md:items-start">
-            {/* LEFT — phased build narrative */}
-            <div className="order-2 md:order-1">
-              <h3 className="mb-4 text-2xl font-medium tracking-tight text-[var(--white-100)] md:text-3xl">
-                Phased build, in order.
-              </h3>
-              <p className="mb-10 max-w-prose text-sm leading-relaxed text-[var(--text-muted)] md:text-base">
-                The Ukrainian field-to-quote workflow was rebuilt as three AI agents on a shared backend. Below is the order we shipped — each block extends the same data flywheel without rewriting what&apos;s underneath.
-              </p>
-
-              <ol className="space-y-8">
-                {[
-                  {
-                    icon: Layers,
-                    title: "Shared backend foundation",
-                    subtitle: "Phase 0 · Infrastructure",
-                    description:
-                      "Set up the audit-first backbone every agent runs on top of, so each block could ship independently without reinventing auth, storage, or the data layer.",
-                  },
-                  {
-                    icon: ScanEye,
-                    title: "Block A — Agro-Vision Expert (v1)",
-                    subtitle: "Phase 1 · Diagnosis & recommendation",
-                    description:
-                      "Field consultants photograph the affected crop in-field. Claude (multimodal, via Vertex AI) returns a diagnosis and ranked SKU recommendations from the live 20,000-product catalogue.",
-                  },
-                  {
-                    icon: FileText,
-                    title: "Block B — Smart Operator & Sales",
-                    subtitle: "Phase 2 · Salesforce-native quote drafts",
-                    description:
-                      "The diagnosis converts into a draft quotation written directly into Salesforce, layering alternatives, cross-sell and substitution rules — pending consultant sign-off before it reaches the grower.",
-                  },
-                  {
-                    icon: BarChart3,
-                    title: "Block D — Vendor Analytics",
-                    subtitle: "Phase 2 · Data flywheel for vendors",
-                    description:
-                      "Aggregates anonymised diagnostic and transaction data into vendor-facing dashboards with regional and product breakdowns. Read-only, row-level secured, fully auditable.",
-                    items: [
-                      "~20% new code — shares the same event log as Expert and Operator",
-                      "Row-level security on every analytics query",
-                      "Regional + product breakdowns built off the deterministic SQL layer",
-                      "Closes the loop: field diagnostics → sales → vendor intelligence",
-                    ],
-                  },
-                ].map((phase, idx) => (
-                  <li key={phase.title} className="relative">
-                    <div className="flex items-start gap-3">
-                      <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded border border-[var(--white-20)] bg-[var(--surface)] text-[var(--white-100)]" aria-hidden="true">
-                        <phase.icon className="h-4 w-4" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                          {phase.subtitle}
-                        </div>
-                        <h4 className="mt-1 text-base font-medium leading-snug text-[var(--white-100)] md:text-lg">
-                          {phase.title}
-                        </h4>
-                        <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
-                          {phase.description}
-                        </p>
-                        {phase.items ? (
-                          <ul className="mt-4 space-y-2">
-                            {phase.items.map((item) => (
-                              <li key={item} className="flex items-start gap-2 text-sm leading-relaxed text-[var(--text-muted)]">
-                                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--white-40)]" aria-hidden="true" />
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : null}
-                      </div>
-                    </div>
-                    {idx < 3 ? (
-                      <div className="ml-4 mt-6 h-px w-[calc(100%-1rem)] bg-[var(--white-10)]" aria-hidden="true" />
-                    ) : null}
-                  </li>
-                ))}
-              </ol>
-
-              <a
-                href="/case-studies"
-                className="mt-10 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-sm uppercase tracking-[0.18em] text-[var(--white-80)] transition-colors hover:text-[var(--white-100)]"
-              >
-                Read the full case study
-                <span aria-hidden="true">→</span>
-              </a>
-            </div>
-
-            {/* RIGHT — video (sticky on desktop) */}
-            <div className="order-1 md:order-2 md:sticky md:top-24 md:self-start">
-              <div className="overflow-hidden border border-[var(--white-20)] bg-black">
-                <video
-                  ref={agroVideoRef}
-                  className="block h-auto w-full"
-                  controls
-                  preload="metadata"
-                  playsInline
-                  muted
-                  loop
-                  poster="/deview-agroplatforma-poster.svg"
-                >
-                  <source src="/deview-agroplatforma-demo.mp4" type="video/mp4" />
-                  Your browser does not support embedded video.
-                </video>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {false && <TimeLine_01
-          title="Phased build, in order."
-          description="The Ukrainian field-to-quote workflow was rebuilt as three AI agents on a shared backend. Below is the order we shipped — each block extends the same data flywheel without rewriting what's underneath."
-          entries={[
-            {
-              icon: Layers,
-              title: "Shared backend foundation",
-              subtitle: "Phase 0 · Infrastructure",
-              description:
-                "Set up the audit-first backbone every agent runs on top of, so each block could ship independently without reinventing auth, storage, or the data layer.",
-              items: [
-                "FastAPI on Python 3.12 with async tool-use orchestration",
-                "PostgreSQL 17 + pgvector (HNSW indexing, <20ms vector search)",
-                "GCP Cloud Run, Cloud SQL, Cloud Storage with 24-hour TTL photo buckets",
-                "Firebase Auth + JWT middleware; append-only event log shared across agents",
-                "EXIF/GPS scrubbing enforced in CI before any image touches the model",
-              ],
-              button: {
-                url: "https://artemiusradin-png.github.io/Project-2-demo/Agro%20Agent%20-%20Technical%20Architecture%20(Light).html",
-                text: "View the architecture",
-              },
-            },
-            {
-              icon: ScanEye,
-              title: "Block A — Agro-Vision Expert (v1)",
-              subtitle: "Phase 1 · Diagnosis & recommendation",
-              description:
-                "Field consultants photograph the affected crop in-field. Claude (multimodal, via Vertex AI) returns a diagnosis and ranked SKU recommendations from the live 20,000-product catalogue.",
-              items: [
-                "Multimodal Claude on Vertex AI — single call covers diagnosis + recommendation",
-                "RAG over the live SKU catalogue: only real, in-stock products can be suggested",
-                "Confidence threshold at 70% — low-confidence cases drop into chatbot guidance",
-                "Regulatory SQL filters strip anything not approved for Ukraine",
-                "Blind agronomist panel ≥85% accuracy gate before production",
-              ],
-            },
-            {
-              icon: FileText,
-              title: "Block B — Smart Operator & Sales",
-              subtitle: "Phase 2 · Salesforce-native quote drafts",
-              description:
-                "The diagnosis converts into a draft quotation written directly into Salesforce, layering alternatives, cross-sell and substitution rules — pending consultant sign-off before it reaches the grower.",
-              items: [
-                "~30% new code on top of the Block A foundation",
-                "Real-time Salesforce inventory check before any line item is proposed",
-                "Deterministic SQL for prices and margins — never generated by the LLM",
-                "Human-in-the-loop approval gate on every quote",
-                "Three scoped service accounts (read catalogue, read inventory, write quote)",
-              ],
-            },
-            {
-              icon: BarChart3,
-              title: "Block D — Vendor Analytics",
-              subtitle: "Phase 2 · Data flywheel for vendors",
-              description:
-                "Aggregates anonymised diagnostic and transaction data into vendor-facing dashboards with regional and product breakdowns. Read-only, row-level secured, fully auditable.",
-              items: [
-                "~20% new code — shares the same event log as Expert and Operator",
-                "Row-level security on every analytics query",
-                "Regional + product breakdowns built off the deterministic SQL layer",
-                "Closes the loop: field diagnostics → sales → vendor intelligence",
-              ],
-              button: {
-                url: "/case-studies",
-                text: "Read the full case study",
-              },
-            },
-          ]}
-        />}
-      </section>
-
       {false && <section
         id="enterprise-ai"
         className="enterprise-ai-section section-fullscreen relative bg-[var(--surface)] section-gutter"
@@ -1140,6 +940,136 @@ export default function Home() {
       <HomeIndustries />
 
       <HomeServicesSection variant="home" />
+
+      {/* Featured deployment — AgroPlatforma (after WHAT WE BUILD services) */}
+      <section
+        id="featured-deployment"
+        className="scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] pt-12 sm:pt-20 md:pt-28 pb-16 md:pb-28"
+      >
+        <div className="section-gutter mx-auto max-w-[96rem]">
+          <p className="section-label mb-3">FEATURED DEPLOYMENT · AGRICULTURE · UKRAINE</p>
+          <div className="rule mb-6" />
+          <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
+            <h2 className="text-[clamp(1.5rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
+              Inside the AgroPlatforma build — AI field diagnostics for a Ukrainian agricultural network.
+            </h2>
+            <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
+              A three-agent system on Claude (via Vertex AI), Salesforce and Flutter — cutting the field-to-quote workflow from ~40 minutes to under 30 seconds.
+            </p>
+          </div>
+
+          {/* Two-column: phased build on the left, video on the right (sticky on desktop) */}
+          <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)] md:gap-12 md:items-start">
+            {/* LEFT — phased build narrative */}
+            <div className="order-2 md:order-1">
+              <h3 className="mb-4 text-2xl font-medium tracking-tight text-[var(--white-100)] md:text-3xl">
+                Phased build, in order.
+              </h3>
+              <p className="mb-10 max-w-prose text-sm leading-relaxed text-[var(--text-muted)] md:text-base">
+                The Ukrainian field-to-quote workflow was rebuilt as three AI agents on a shared backend. Below is the order we shipped — each block extends the same data flywheel without rewriting what&apos;s underneath.
+              </p>
+
+              <ol className="space-y-8">
+                {[
+                  {
+                    icon: Layers,
+                    title: "Shared backend foundation",
+                    subtitle: "Phase 0 · Infrastructure",
+                    description:
+                      "Set up the audit-first backbone every agent runs on top of, so each block could ship independently without reinventing auth, storage, or the data layer.",
+                  },
+                  {
+                    icon: ScanEye,
+                    title: "Block A — Agro-Vision Expert (v1)",
+                    subtitle: "Phase 1 · Diagnosis & recommendation",
+                    description:
+                      "Field consultants photograph the affected crop in-field. Claude (multimodal, via Vertex AI) returns a diagnosis and ranked SKU recommendations from the live 20,000-product catalogue.",
+                  },
+                  {
+                    icon: FileText,
+                    title: "Block B — Smart Operator & Sales",
+                    subtitle: "Phase 2 · Salesforce-native quote drafts",
+                    description:
+                      "The diagnosis converts into a draft quotation written directly into Salesforce, layering alternatives, cross-sell and substitution rules — pending consultant sign-off before it reaches the grower.",
+                  },
+                  {
+                    icon: BarChart3,
+                    title: "Block D — Vendor Analytics",
+                    subtitle: "Phase 2 · Data flywheel for vendors",
+                    description:
+                      "Aggregates anonymised diagnostic and transaction data into vendor-facing dashboards with regional and product breakdowns. Read-only, row-level secured, fully auditable.",
+                    items: [
+                      "~20% new code — shares the same event log as Expert and Operator",
+                      "Row-level security on every analytics query",
+                      "Regional + product breakdowns built off the deterministic SQL layer",
+                      "Closes the loop: field diagnostics → sales → vendor intelligence",
+                    ],
+                  },
+                ].map((phase, idx) => (
+                  <li key={phase.title} className="relative">
+                    <div className="flex items-start gap-3">
+                      <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded border border-[var(--white-20)] bg-[var(--surface)] text-[var(--white-100)]" aria-hidden="true">
+                        <phase.icon className="h-4 w-4" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                          {phase.subtitle}
+                        </div>
+                        <h4 className="mt-1 text-base font-medium leading-snug text-[var(--white-100)] md:text-lg">
+                          {phase.title}
+                        </h4>
+                        <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
+                          {phase.description}
+                        </p>
+                        {phase.items ? (
+                          <ul className="mt-4 space-y-2">
+                            {phase.items.map((item) => (
+                              <li key={item} className="flex items-start gap-2 text-sm leading-relaxed text-[var(--text-muted)]">
+                                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--white-40)]" aria-hidden="true" />
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
+                      </div>
+                    </div>
+                    {idx < 3 ? (
+                      <div className="ml-4 mt-6 h-px w-[calc(100%-1rem)] bg-[var(--white-10)]" aria-hidden="true" />
+                    ) : null}
+                  </li>
+                ))}
+              </ol>
+
+              <a
+                href="/case-studies"
+                className="mt-10 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-sm uppercase tracking-[0.18em] text-[var(--white-80)] transition-colors hover:text-[var(--white-100)]"
+              >
+                Read the full case study
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+
+            {/* RIGHT — video (sticky on desktop) */}
+            <div className="order-1 md:order-2 md:sticky md:top-24 md:self-start">
+              <div className="overflow-hidden border border-[var(--white-20)] bg-black">
+                <video
+                  ref={agroVideoRef}
+                  className="block h-auto w-full"
+                  controls
+                  preload="metadata"
+                  playsInline
+                  muted
+                  loop
+                  poster="/deview-agroplatforma-poster.svg"
+                >
+                  <source src="/deview-agroplatforma-demo.mp4" type="video/mp4" />
+                  Your browser does not support embedded video.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <HomeProcessTimeline />
 
