@@ -937,8 +937,6 @@ export default function Home() {
 
       <SelectedProjectsLogoMarquee />
 
-      <HomeIndustries />
-
       <HomeServicesSection variant="home" />
 
       {/* Featured deployment — AgroPlatforma (after WHAT WE BUILD services) */}
@@ -1070,6 +1068,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <HomeIndustries />
 
       <HomeProcessTimeline />
 
