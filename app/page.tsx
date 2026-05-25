@@ -668,7 +668,7 @@ export default function Home() {
         id="featured-deployment"
         className="scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] pt-12 sm:pt-20 md:pt-28 pb-16 md:pb-28"
       >
-        <div className="section-gutter mx-auto max-w-6xl">
+        <div className="section-gutter mx-auto max-w-[96rem]">
           <p className="section-label mb-3">FEATURED DEPLOYMENT · AGRICULTURE · UKRAINE</p>
           <div className="rule mb-6" />
           <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
@@ -681,7 +681,7 @@ export default function Home() {
           </div>
 
           {/* Two-column: phased build on the left, video on the right (sticky on desktop) */}
-          <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-[1.05fr_1fr] md:gap-12 md:items-start">
+          <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)] md:gap-12 md:items-start">
             {/* LEFT — phased build narrative */}
             <div className="order-2 md:order-1">
               <h3 className="mb-4 text-2xl font-medium tracking-tight text-[var(--white-100)] md:text-3xl">
