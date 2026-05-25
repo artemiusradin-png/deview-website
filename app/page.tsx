@@ -55,6 +55,7 @@ export default function Home() {
   const interfaceUserMessage = dict.hero.interfaceUser;
   const interfaceAiMessage = dict.hero.interfaceAi;
   const heroVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const agroVideoRef = useRef<HTMLVideoElement | null>(null);
   const enterpriseModesSectionRef = useRef<HTMLDivElement | null>(null);
   const [heroVideoState, setHeroVideoState] = useState<"loading" | "playing" | "fallback">("loading");
   const [activeHeroLayer, setActiveHeroLayer] = useState(0);
@@ -99,6 +100,23 @@ export default function Home() {
     document.documentElement.dataset.theme = theme;
     window.localStorage.setItem("deview-theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    const video = agroVideoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: [0, 0.5] },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
@@ -375,18 +393,38 @@ export default function Home() {
       >
         <nav className="section-gutter mx-auto flex h-16 max-w-6xl items-center justify-between">
           <div className="nav-shell-spacer" aria-hidden="true" />
-          <button
-            type="button"
-            className="nav-toggle"
-            aria-expanded={navOpen}
-            aria-controls="mobile-site-nav"
-            aria-label={navOpen ? dict.a11y.closeMenu : dict.a11y.openMenu}
-            onClick={() => setNavOpen((open) => !open)}
-          >
-            <span className="nav-toggle-bar" />
-            <span className="nav-toggle-bar" />
-            <span className="nav-toggle-bar" />
-          </button>
+          <div className="flex items-center gap-3 md:hidden">
+            <div className="lang-toggle" role="group" aria-label={langSwitchLabel}>
+              <button
+                type="button"
+                className={`lang-toggle__opt${locale === "en" ? " is-active" : ""}`}
+                onClick={() => setLocale("en")}
+                aria-pressed={locale === "en"}
+              >
+                {dict.lang.shortEn}
+              </button>
+              <button
+                type="button"
+                className={`lang-toggle__opt${locale === "zh-HK" ? " is-active" : ""}`}
+                onClick={() => setLocale("zh-HK")}
+                aria-pressed={locale === "zh-HK"}
+              >
+                {dict.lang.shortZh}
+              </button>
+            </div>
+            <button
+              type="button"
+              className="nav-toggle"
+              aria-expanded={navOpen}
+              aria-controls="mobile-site-nav"
+              aria-label={navOpen ? dict.a11y.closeMenu : dict.a11y.openMenu}
+              onClick={() => setNavOpen((open) => !open)}
+            >
+              <span className="nav-toggle-bar" />
+              <span className="nav-toggle-bar" />
+              <span className="nav-toggle-bar" />
+            </button>
+          </div>
           <div className="hidden items-center gap-4 md:flex lg:gap-6">
             <a href="#hero" className="nav-item nav-item-active">
               {dict.nav.aiConsulting}
@@ -544,8 +582,8 @@ export default function Home() {
             </div>
           ) : null}
         </div>
-        {/* Globe — mobile hero decoration (video disabled on mobile) */}
-        <div className="pointer-events-none absolute inset-0 z-[6] overflow-hidden md:hidden" aria-hidden="true">
+        {/* Globe — desktop-only decoration; hidden on mobile to remove overlap with compressed hero */}
+        <div className="pointer-events-none absolute inset-0 z-[6] overflow-hidden hidden" aria-hidden="true">
           <Globe className="absolute left-1/2 top-1/2 w-[160%] max-w-none -translate-x-1/2 -translate-y-[55%] opacity-50" />
         </div>
 
@@ -557,7 +595,7 @@ export default function Home() {
             initial={fade.initial}
             animate={fade.animate}
             transition={{ duration: 0.6 }}
-            className="flex min-h-[calc(100svh-var(--header-stack-height)-2.25rem)] max-w-2xl flex-col md:min-h-0 md:pt-2"
+            className="flex max-w-2xl flex-col md:min-h-[calc(100svh-var(--header-stack-height)-2.25rem)] md:pt-2 lg:min-h-0"
           >
             <p className="section-label mb-4">{dict.hero.kicker}</p>
             <h1 className="hero-heading mb-6 text-[clamp(1.75rem,6.5vw,2.75rem)] leading-[1.06] text-[var(--white-100)] md:text-5xl md:leading-[1.02] lg:text-6xl">
@@ -571,7 +609,7 @@ export default function Home() {
                 </>
               ) : null}
             </h1>
-            <div className="mt-auto pt-8 md:mt-0 md:pt-12">
+            <div className="pt-4 md:mt-auto md:pt-8 lg:mt-0 lg:pt-12">
               <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
               <div className="mt-6 md:mt-7">
                 <a href="/contact" className="btn-outline inline-block w-full text-center sm:w-auto">
@@ -628,7 +666,7 @@ export default function Home() {
       {/* Featured deployment — AgroPlatforma (right after main landing) */}
       <section
         id="featured-deployment"
-        className="scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] pt-20 sm:pt-28"
+        className="scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] pt-12 sm:pt-20 md:pt-28"
       >
         <div className="section-gutter mx-auto max-w-6xl">
           <p className="section-label mb-3">FEATURED DEPLOYMENT · AGRICULTURE · UKRAINE</p>
@@ -644,11 +682,14 @@ export default function Home() {
 
           <div className="mt-10 overflow-hidden border border-[var(--white-20)] bg-black">
             <video
+              ref={agroVideoRef}
               className="block h-auto w-full"
               controls
               preload="metadata"
               playsInline
               muted
+              loop
+              poster="/deview-agroplatforma-poster.svg"
             >
               <source src="/deview-agroplatforma-demo.mp4" type="video/mp4" />
               Your browser does not support embedded video.
@@ -656,7 +697,7 @@ export default function Home() {
           </div>
         </div>
 
-        <TimeLine_01
+        {false && <TimeLine_01
           title="Phased build, in order."
           description="The Ukrainian field-to-quote workflow was rebuilt as three AI agents on a shared backend. Below is the order we shipped — each block extends the same data flywheel without rewriting what's underneath."
           entries={[
@@ -724,10 +765,10 @@ export default function Home() {
               },
             },
           ]}
-        />
+        />}
       </section>
 
-      <section
+      {false && <section
         id="enterprise-ai"
         className="enterprise-ai-section section-fullscreen relative bg-[var(--surface)] section-gutter"
       >
@@ -885,7 +926,7 @@ export default function Home() {
           </div>
 
         </motion.div>
-      </section>
+      </section>}
 
       {/* Full-bleed scroll-pinned enterprise mode stage */}
       <div
@@ -1047,6 +1088,30 @@ export default function Home() {
       </section>
 
       <SiteFooter />
+
+      {/* Mobile-only persistent CTA dock */}
+      <div
+        className="fixed inset-x-0 bottom-0 z-30 border-t border-[var(--white-20)] bg-[color-mix(in_srgb,var(--background)_88%,transparent)] px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur md:hidden"
+        role="region"
+        aria-label="Quick actions"
+      >
+        <div className="mx-auto flex max-w-md items-center gap-2">
+          <a
+            href={`mailto:${SITE_INQUIRY_EMAIL}`}
+            className="flex h-11 min-w-11 items-center justify-center rounded border border-[var(--white-20)] text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-80)]"
+            aria-label="Email DeView"
+          >
+            ✉
+          </a>
+          <a
+            href="/contact"
+            className="btn-outline flex-1 text-center text-sm"
+          >
+            {dict.hero.inquire}
+          </a>
+        </div>
+      </div>
+      <div className="h-20 md:hidden" aria-hidden="true" />
     </div>
   );
 }

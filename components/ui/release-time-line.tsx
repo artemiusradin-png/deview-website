@@ -143,18 +143,18 @@ export default function TimeLine_01({
   }, []);
 
   return (
-    <section className="py-32">
+    <section className="py-16 md:py-32">
       <div className="container">
         <div className="mx-auto max-w-3xl">
-          <h1 className="mb-4 text-3xl font-bold tracking-tight md:text-5xl">
+          <h1 className="mb-4 text-2xl font-bold tracking-tight md:text-5xl">
             {title}
           </h1>
-          <p className="mb-6 text-base text-muted-foreground md:text-lg">
+          <p className="mb-6 text-sm text-muted-foreground md:text-lg">
             {description}
           </p>
         </div>
 
-        <div className="mx-auto mt-16 max-w-3xl space-y-16 md:mt-24 md:space-y-24">
+        <div className="mx-auto mt-10 max-w-3xl space-y-10 md:mt-24 md:space-y-24">
           {entries.map((entry, index) => {
             const isActive = index === activeIndex;
 
@@ -165,7 +165,7 @@ export default function TimeLine_01({
                 ref={(el) => setItemRef(el, index)}
                 aria-current={isActive ? "true" : "false"}
               >
-                <div className="top-8 flex h-min w-64 shrink-0 items-center gap-4 md:sticky">
+                <div className="top-8 flex h-min w-full shrink-0 items-center gap-4 md:w-64 md:sticky">
                   <div className="flex items-center gap-3">
                     <div
                       className={`p-2 rounded-lg ${
