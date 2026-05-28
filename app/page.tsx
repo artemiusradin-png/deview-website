@@ -56,6 +56,7 @@ export default function Home() {
   const interfaceAiMessage = dict.hero.interfaceAi;
   const heroVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const agroVideoRef = useRef<HTMLVideoElement | null>(null);
+  const unifiedPortalVideoRef = useRef<HTMLVideoElement | null>(null);
   const enterpriseModesSectionRef = useRef<HTMLDivElement | null>(null);
   const [heroVideoState, setHeroVideoState] = useState<"loading" | "playing" | "fallback">("loading");
   const [activeHeroLayer, setActiveHeroLayer] = useState(0);
@@ -102,19 +103,24 @@ export default function Home() {
   }, [theme]);
 
   useEffect(() => {
-    const video = agroVideoRef.current;
-    if (!video) return;
+    const videos = [agroVideoRef.current, unifiedPortalVideoRef.current].filter(
+      (v): v is HTMLVideoElement => v !== null,
+    );
+    if (videos.length === 0) return;
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
+      (entries) => {
+        for (const entry of entries) {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
         }
       },
       { threshold: [0, 0.5] },
     );
-    observer.observe(video);
+    videos.forEach((v) => observer.observe(v));
     return () => observer.disconnect();
   }, []);
 
@@ -1085,6 +1091,7 @@ export default function Home() {
             <div className="order-1 md:order-2 md:sticky md:top-24 md:self-start">
               <div className="overflow-hidden border border-[var(--white-20)] bg-black">
                 <video
+                  ref={unifiedPortalVideoRef}
                   className="block h-auto w-full"
                   controls
                   preload="metadata"
