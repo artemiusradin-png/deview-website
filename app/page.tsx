@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { Rocket, X, Layers, ScanEye, FileText, BarChart3 } from "lucide-react";
+import { Rocket, X, Layers, ScanEye, FileText, BarChart3, Database, Sparkles } from "lucide-react";
 import TimeLine_01 from "@/components/ui/release-time-line";
 import { AnimatedFeatureSpotlightDemo } from "../components/AnimatedFeatureSpotlightDemo";
 import { HomeServicesSection } from "../components/HomeServicesSection";
@@ -825,6 +825,8 @@ export default function Home() {
 
       <HomeServicesSection variant="home" />
 
+      <HomeProcessTimeline />
+
       {/* Featured deployment — AgroPlatforma (after WHAT WE BUILD services) */}
       <section
         id="featured-deployment"
@@ -955,16 +957,158 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Featured deployment — DeView Unified Portal (finance / lending) */}
+      <section
+        id="featured-deployment-finance"
+        className="scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] pt-12 sm:pt-20 md:pt-28 pb-16 md:pb-28"
+      >
+        <div className="section-gutter mx-auto max-w-[96rem]">
+          <p className="section-label mb-3">FEATURED DEPLOYMENT · FINANCE / LENDING</p>
+          <div className="rule mb-6" />
+          <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
+            <h2 className="text-[clamp(1.5rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
+              DeView Unified Portal — AI-powered borrower intelligence for a multi-company lending network.
+            </h2>
+            <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
+              A single platform serving five lending companies. What used to take hours of manual spreadsheet work — looking up a borrower, checking their loans across companies, reading overdue notices, assessing risk — now happens in one search.
+            </p>
+          </div>
+
+          {/* Two-column: phased build on the left, video on the right (sticky on desktop) */}
+          <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)] md:gap-12 md:items-start">
+            {/* LEFT — phased build narrative */}
+            <div className="order-2 md:order-1">
+              <h3 className="mb-4 text-2xl font-medium tracking-tight text-[var(--white-100)] md:text-3xl">
+                Built in phases.
+              </h3>
+              <p className="mb-10 max-w-prose text-sm leading-relaxed text-[var(--text-muted)] md:text-base">
+                Each phase adds a new capability on top of the same foundation — one shared portal, one borrower database, one audit trail.
+              </p>
+
+              <ol className="space-y-8">
+                {[
+                  {
+                    icon: Database,
+                    title: "Shared backbone for five companies",
+                    subtitle: "Foundation · Portal + Database",
+                    description:
+                      "The shared backbone everything else runs on. One secure login, one database, one audit trail. Staff from any of the five companies log in and see only what they're authorised to see — their companies, their borrowers, their data. Every action is logged.",
+                  },
+                  {
+                    icon: Sparkles,
+                    title: "Five AI capabilities, one audit trail",
+                    subtitle: "AI Layer · Built on top of the portal",
+                    description:
+                      "Each AI reads from the same borrower database and writes back into the same audit trail. No data silos, no copy-paste between systems.",
+                    capabilities: [
+                      {
+                        name: "AI Credit Analyst",
+                        body:
+                          "One click generates a full case summary for any borrower — their loan history, repayment behaviour, risk signals, and overdue status across all five companies, distilled into a readable narrative. Replaces the 20-minute manual file review.",
+                      },
+                      {
+                        name: "Agentic AI Assistant",
+                        body:
+                          "Staff ask plain-language questions about a borrower or portfolio (“Which borrowers in Company 3 are 90+ days overdue?”, “Summarise this person’s history”) and get answers drawn from live data. Not a chatbot — an analyst that queries the real database.",
+                      },
+                      {
+                        name: "AI Email Processing",
+                        body:
+                          "Incoming enquiries and leads arrive by email, are automatically parsed by AI into structured records — name, loan amount, purpose, contact details — and routed into a review queue. Failed parses are classified by error type (malformed, timeout, rate-limit) so operations can act on them.",
+                      },
+                      {
+                        name: "AI Document Processing",
+                        body:
+                          "Borrower attachments, contracts, and case documents are processed and linked to the correct borrower profile, making them searchable and available inside the 360-degree borrower view.",
+                      },
+                      {
+                        name: "AI Prompt Management",
+                        body:
+                          "Operations staff can edit the AI’s instructions — what to emphasise, how to format summaries, which risk signals to flag — directly from an admin panel, without touching code. This keeps the AI aligned with changing business rules.",
+                      },
+                    ],
+                  },
+                ].map((phase, idx, arr) => (
+                  <li key={phase.title} className="relative">
+                    <div className="flex items-start gap-3">
+                      <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded border border-[var(--white-20)] bg-[var(--surface)] text-[var(--white-100)]" aria-hidden="true">
+                        <phase.icon className="h-4 w-4" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                          {phase.subtitle}
+                        </div>
+                        <h4 className="mt-1 text-base font-medium leading-snug text-[var(--white-100)] md:text-lg">
+                          {phase.title}
+                        </h4>
+                        <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
+                          {phase.description}
+                        </p>
+                        {phase.capabilities ? (
+                          <ol className="mt-5 space-y-4">
+                            {phase.capabilities.map((cap, capIdx) => (
+                              <li key={cap.name} className="flex items-start gap-3">
+                                <span className="mt-0.5 inline-flex h-6 min-w-[1.75rem] shrink-0 items-center justify-center rounded border border-[var(--white-20)] px-1 text-[0.6rem] tabular-nums uppercase tracking-[0.18em] text-[var(--white-60)]" aria-hidden="true">
+                                  {String(capIdx + 1).padStart(2, "0")}
+                                </span>
+                                <div className="min-w-0 flex-1">
+                                  <p className="text-sm font-medium leading-snug text-[var(--white-100)]">
+                                    {cap.name}
+                                  </p>
+                                  <p className="mt-1 text-sm leading-relaxed text-[var(--text-muted)]">
+                                    {cap.body}
+                                  </p>
+                                </div>
+                              </li>
+                            ))}
+                          </ol>
+                        ) : null}
+                      </div>
+                    </div>
+                    {idx < arr.length - 1 ? (
+                      <div className="ml-4 mt-6 h-px w-[calc(100%-1rem)] bg-[var(--white-10)]" aria-hidden="true" />
+                    ) : null}
+                  </li>
+                ))}
+              </ol>
+
+              <a
+                href="/case-studies"
+                className="mt-10 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-sm uppercase tracking-[0.18em] text-[var(--white-80)] transition-colors hover:text-[var(--white-100)]"
+              >
+                Read the full case study
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+
+            {/* RIGHT — video (sticky on desktop) */}
+            <div className="order-1 md:order-2 md:sticky md:top-24 md:self-start">
+              <div className="overflow-hidden border border-[var(--white-20)] bg-black">
+                <video
+                  className="block h-auto w-full"
+                  controls
+                  preload="metadata"
+                  playsInline
+                  muted
+                  loop
+                >
+                  <source src="/deview-unified-portal-demo.mp4" type="video/mp4" />
+                  Your browser does not support embedded video.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <SelectedProjectsLogoMarquee />
 
       <HomeIndustries />
 
-      <HomeProcessTimeline />
-
       <SecurityTrustSection />
 
-      {/* Full-bleed scroll-pinned enterprise mode stage */}
-      <div
+      {/* Full-bleed scroll-pinned enterprise mode stage — hidden for now (globe block). Re-enable by removing the `false &&` guard. */}
+      {false && <div
         id="enterprise-modes"
         ref={enterpriseModesSectionRef}
         className="enterprise-stage-scroll-wrapper"
@@ -1071,7 +1215,7 @@ export default function Home() {
               </motion.div>
             </div>
           </section>
-      </div>
+      </div>}
 
       <RetroFeatureCards />
 

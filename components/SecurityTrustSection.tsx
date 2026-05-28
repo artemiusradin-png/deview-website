@@ -35,7 +35,7 @@ export function SecurityTrustSection() {
       <motion.div
         {...homeSectionReveal}
         transition={{ duration: 0.5 }}
-        className="relative mx-auto flex max-w-7xl flex-col gap-10 py-14 md:py-20"
+        className="relative mx-auto flex max-w-6xl flex-col gap-10 py-14 md:py-20"
       >
         {/* Eyebrow */}
         <div>
