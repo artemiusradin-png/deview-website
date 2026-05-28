@@ -17,12 +17,20 @@ function formatDateLabel(iso: string): string {
 
 export function InquiryCalendar() {
   const today = new Date();
-  const todayDate = today.getDate();
-  const currentMonth = today.toLocaleString("default", { month: "long" });
-  const currentYear = today.getFullYear();
-  const currentMonthIndex = today.getMonth();
-  const firstDayOfWeek = new Date(currentYear, currentMonthIndex, 1).getDay();
-  const daysInMonth = new Date(currentYear, currentMonthIndex + 1, 0).getDate();
+  const todayKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+
+  // Month being viewed (defaults to current). Bounded: cannot navigate past current month.
+  const [viewYear, setViewYear] = useState<number>(today.getFullYear());
+  const [viewMonthIndex, setViewMonthIndex] = useState<number>(today.getMonth());
+
+  const viewMonthName = new Date(viewYear, viewMonthIndex, 1).toLocaleString("default", { month: "long" });
+  const firstDayOfWeek = new Date(viewYear, viewMonthIndex, 1).getDay();
+  const daysInMonth = new Date(viewYear, viewMonthIndex + 1, 0).getDate();
+
+  const monthsAheadFromCurrent =
+    (viewYear - today.getFullYear()) * 12 + (viewMonthIndex - today.getMonth());
+  const canGoPrev = monthsAheadFromCurrent > 0;
+  const canGoNext = monthsAheadFromCurrent < 11; // cap at 12 months out (Cal.com default)
 
   const [step, setStep] = useState<Step>("calendar");
   const [selectedDate, setSelectedDate] = useState<string>("");
@@ -37,7 +45,7 @@ export function InquiryCalendar() {
 
   async function handleDayClick(day: number) {
     const pad = (n: number) => String(n).padStart(2, "0");
-    const date = `${currentYear}-${pad(currentMonthIndex + 1)}-${pad(day)}`;
+    const date = `${viewYear}-${pad(viewMonthIndex + 1)}-${pad(day)}`;
     setSelectedDate(date);
     setSlots([]);
     setSelectedSlot("");
@@ -45,10 +53,23 @@ export function InquiryCalendar() {
     setSlotsLoading(true);
     setStep("slots");
 
-    const res = await fetch(`/api/cal/slots?date=${date}`);
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const res = await fetch(`/api/cal/slots?date=${date}&timeZone=${encodeURIComponent(tz)}`);
     const data = await res.json() as { slots: Slot[] };
     setSlots(data.slots ?? []);
     setSlotsLoading(false);
+  }
+
+  function shiftMonth(delta: number) {
+    let m = viewMonthIndex + delta;
+    let y = viewYear;
+    while (m < 0) { m += 12; y -= 1; }
+    while (m > 11) { m -= 12; y += 1; }
+    setViewYear(y);
+    setViewMonthIndex(m);
+    if (step !== "calendar") setStep("calendar");
+    setSelectedDate("");
+    setSlots([]);
   }
 
   async function handleBook() {
@@ -107,9 +128,27 @@ export function InquiryCalendar() {
           style={{ boxShadow: "0px 2px 1.5px 0px rgba(165,174,184,0.12) inset" }}
         >
           <div className="flex items-center gap-2">
-            <p className="text-sm font-medium text-[var(--white-90)]">
-              {currentMonth}, {currentYear}
+            <button
+              type="button"
+              onClick={() => shiftMonth(-1)}
+              disabled={!canGoPrev}
+              aria-label="Previous month"
+              className="flex h-6 w-6 items-center justify-center rounded-md text-[var(--white-60)] transition-colors hover:bg-[var(--white-10)] hover:text-[var(--white-90)] disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent"
+            >
+              ‹
+            </button>
+            <p className="text-sm font-medium text-[var(--white-90)] min-w-[7.5rem] text-center">
+              {viewMonthName}, {viewYear}
             </p>
+            <button
+              type="button"
+              onClick={() => shiftMonth(1)}
+              disabled={!canGoNext}
+              aria-label="Next month"
+              className="flex h-6 w-6 items-center justify-center rounded-md text-[var(--white-60)] transition-colors hover:bg-[var(--white-10)] hover:text-[var(--white-90)] disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent"
+            >
+              ›
+            </button>
             <span className="h-1 w-1 rounded-full bg-[var(--white-40)]" />
             <p className="text-xs text-[var(--white-40)]">30 min call</p>
           </div>
@@ -124,11 +163,11 @@ export function InquiryCalendar() {
             ))}
             {Array(daysInMonth).fill(null).map((_, i) => {
               const day = i + 1;
-              const isPast = day < todayDate;
               const pad = (n: number) => String(n).padStart(2, "0");
-              const dateStr = `${currentYear}-${pad(currentMonthIndex + 1)}-${pad(day)}`;
+              const dateStr = `${viewYear}-${pad(viewMonthIndex + 1)}-${pad(day)}`;
+              const isPast = dateStr < todayKey;
               const isSelected = dateStr === selectedDate;
-              const isToday = day === todayDate;
+              const isToday = dateStr === todayKey;
               return (
                 <button
                   key={day}

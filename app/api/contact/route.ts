@@ -45,6 +45,7 @@ async function sendNotification(input: InquiryInput) {
   const emailFrom = process.env.EMAIL_FROM?.trim();
 
   if (resendApiKey && emailFrom) {
+    const recipient = process.env.INQUIRY_NOTIFY_TO?.trim() || SITE_INQUIRY_EMAIL;
     try {
       const upstream = await fetch("https://api.resend.com/emails", {
         method: "POST",
@@ -54,7 +55,7 @@ async function sendNotification(input: InquiryInput) {
         },
         body: JSON.stringify({
           from: emailFrom,
-          to: [SITE_INQUIRY_EMAIL],
+          to: [recipient],
           subject,
           text,
           reply_to: input.email,
