@@ -208,6 +208,18 @@ html[data-theme="light"] .pixel-field {
   }
 }
 
+/* Mobile: soft-light blend disappears against the near-opaque dark overlay; render the pixels directly. */
+@media (max-width: 767px) {
+  .pixel-field {
+    mix-blend-mode: normal;
+    opacity: 0.85;
+  }
+  html[data-theme="light"] .pixel-field {
+    mix-blend-mode: normal;
+    opacity: 0.55;
+  }
+}
+
 @keyframes grid-drift {
   0% {
     transform: translate3d(0, 0, 0);
@@ -230,8 +242,23 @@ html[data-theme="light"] .pixel-field {
 
 @media (max-width: 961px) {
   .section-label {
-    font-size: 0.65rem;
+    font-size: 0.58rem;
     letter-spacing: 0.16em;
+  }
+}
+
+/* Mobile typography compaction — denser body copy + tighter leading without touching desktop. */
+@media (max-width: 767px) {
+  /* Tighter line-height for any paragraph not already opted-in to leading-snug/tight. */
+  p.leading-relaxed {
+    line-height: 1.5;
+  }
+  /* Bring body text down a hair so paragraphs feel less verbose on a phone. */
+  .text-sm {
+    font-size: 0.8125rem; /* 13px */
+  }
+  .text-base {
+    font-size: 0.9375rem; /* 15px */
   }
 }
 
@@ -1209,10 +1236,26 @@ html[data-theme="light"] .hero-fallback-beam {
   }
 
   .section-fullscreen--hero {
-    min-height: auto;
+    /* Taller on mobile so the headline owns the first screen and the CTA falls below the fold. */
+    min-height: 100svh;
     padding-top: calc(var(--header-stack-height) + 2rem);
     padding-bottom: max(2.25rem, calc(env(safe-area-inset-bottom, 0px) + 1rem));
     align-items: flex-start;
+  }
+
+  /* Lighten the hero overlay on mobile so PixelField (the pixel-city animation) reads through. */
+  .hero-overlay {
+    background:
+      radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.04), transparent 55%),
+      radial-gradient(circle at 80% 100%, rgba(255, 255, 255, 0.04), transparent 55%),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.82));
+  }
+
+  html[data-theme="light"] .hero-overlay {
+    background:
+      radial-gradient(circle at 18% 0%, rgba(255, 247, 214, 0.30), transparent 48%),
+      radial-gradient(circle at 78% 100%, rgba(171, 215, 255, 0.18), transparent 42%),
+      linear-gradient(to bottom, rgba(243, 238, 226, 0.30), rgba(243, 238, 226, 0.62));
   }
 
   .hero-aside {

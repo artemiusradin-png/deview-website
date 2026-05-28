@@ -136,10 +136,10 @@ export default function Footer4Col({
 }: FooterColumnProps) {
   return (
     <footer className="w-full place-self-end overflow-hidden border-t border-[var(--white-20)] bg-[var(--surface)] text-[var(--text)]">
-      <div className="mx-auto w-full max-w-none px-4 pb-5 pt-10 sm:px-6 lg:px-8 xl:px-10">
+      <div className="mx-auto w-full max-w-none px-4 pb-4 pt-7 sm:px-6 sm:pt-10 sm:pb-5 lg:px-8 xl:px-10">
 
         {/* CTA banner */}
-        <div className="mb-9 border border-[var(--white-20)] p-4 md:p-5">
+        <div className="mb-6 border border-[var(--white-20)] p-3 sm:mb-9 sm:p-4 md:p-5">
           <div className="grid items-stretch gap-4 md:grid-cols-[minmax(13rem,0.45fr)_minmax(0,1fr)]">
             <div className="flex items-center border-b border-[var(--white-10)] pb-4 md:border-b-0 md:border-r md:border-[var(--white-20)] md:pb-0 md:pr-5">
               <p className="text-[0.58rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
@@ -171,7 +171,7 @@ export default function Footer4Col({
         </div>
 
         {/* Main columns */}
-        <div className="grid grid-cols-1 gap-7 lg:grid-cols-[1.1fr_2.4fr]">
+        <div className="grid grid-cols-1 gap-5 sm:gap-7 lg:grid-cols-[1.1fr_2.4fr]">
 
           {/* Brand block */}
           <div>
@@ -202,11 +202,11 @@ export default function Footer4Col({
           </div>
 
           {/* Nav columns */}
-          <div className="grid grid-cols-2 gap-7 sm:grid-cols-2 md:grid-cols-4">
+          <div className="grid grid-cols-2 gap-5 sm:grid-cols-2 sm:gap-7 md:grid-cols-4">
             {columns.map((column, columnIndex) => (
               <div className="text-center sm:text-left" key={`${column.title}-${columnIndex}`}>
-                <p className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-[var(--white-60)]">{column.title}</p>
-                <ul className="mt-4 space-y-3 text-xs">
+                <p className="text-[0.55rem] font-semibold uppercase tracking-[0.16em] text-[var(--white-60)] sm:text-[0.6rem] sm:tracking-[0.2em]">{column.title}</p>
+                <ul className="mt-3 space-y-2 text-[0.7rem] sm:mt-4 sm:space-y-3 sm:text-xs">
                   {column.links.map((item, linkIndex) => (
                     <li key={`${column.title}-${item.href}-${item.text}-${linkIndex}`}>
                       <FooterNavLink item={item} rootPrefix={rootPrefix} />
@@ -218,8 +218,8 @@ export default function Footer4Col({
 
             {/* Contact column */}
             <div className="text-center sm:text-left">
-              <p className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-[var(--white-60)]">Contact</p>
-              <ul className="mt-4 space-y-3 text-xs">
+              <p className="text-[0.55rem] font-semibold uppercase tracking-[0.16em] text-[var(--white-60)] sm:text-[0.6rem] sm:tracking-[0.2em]">Contact</p>
+              <ul className="mt-3 space-y-2 text-[0.7rem] sm:mt-4 sm:space-y-3 sm:text-xs">
                 <li>
                   <a
                     className="group flex items-center justify-center gap-1.5 sm:justify-start"
@@ -252,7 +252,7 @@ export default function Footer4Col({
         </div>
 
         {/* Legal bar */}
-        <div className="mt-9 border-t border-[var(--white-10)] pt-5">
+        <div className="mt-6 border-t border-[var(--white-10)] pt-4 sm:mt-9 sm:pt-5">
           <div className="text-center sm:flex sm:items-baseline sm:justify-between sm:text-left">
             <p className="text-[0.65rem] text-[var(--white-30)]">
               {legal.copyright}

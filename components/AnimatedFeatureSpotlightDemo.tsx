@@ -140,7 +140,7 @@ export function AnimatedFeatureSpotlightDemo() {
   }
 
   return (
-    <section className="w-full bg-[var(--background)] px-3 py-5 md:px-6 md:py-9 xl:px-8">
+    <section className="w-full bg-[var(--background)] px-3 py-3 md:px-6 md:py-9 xl:px-8">
       <div
         className="relative mx-auto grid w-full max-w-[94rem] overflow-hidden rounded-lg border border-[rgba(128,184,255,0.16)] lg:grid-cols-[1.4fr_0.85fr]"
         style={{
@@ -152,7 +152,7 @@ export function AnimatedFeatureSpotlightDemo() {
 
         {/* Left: content + form, with mouse-follow glow */}
         <div
-          className="relative overflow-hidden p-5 md:p-8 lg:p-10"
+          className="relative overflow-hidden p-4 md:p-8 lg:p-10"
           onMouseMove={(e) => {
             const r = e.currentTarget.getBoundingClientRect();
             setGlow({ x: e.clientX - r.left, y: e.clientY - r.top });
@@ -186,17 +186,17 @@ export function AnimatedFeatureSpotlightDemo() {
             ) : (
               <>
                 <div
-                  className="mb-3 inline-flex w-fit items-center gap-2 rounded-md border border-[rgba(128,184,255,0.22)] px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-[#9fc4ff]"
+                  className="mb-2 inline-flex w-fit items-center gap-1.5 rounded-md border border-[rgba(128,184,255,0.22)] px-2 py-0.5 text-[0.5rem] font-semibold uppercase tracking-[0.14em] text-[#9fc4ff] md:mb-3 md:gap-2 md:px-2.5 md:py-1 md:text-[0.58rem] md:tracking-[0.16em]"
                   style={{
                     background:
                       "radial-gradient(ellipse at 70% 130%, rgba(26,51,128,0.4), transparent 62%), rgb(13, 15, 28)",
                   }}
                 >
-                  <FileText className="h-3.5 w-3.5" />
+                  <FileText className="h-3 w-3 md:h-3.5 md:w-3.5" />
                   <span>Free AI automation guide for lenders</span>
                 </div>
 
-                <h2 className="mb-3 max-w-2xl text-[clamp(1.25rem,4.2vw,2.4rem)] font-semibold leading-[1.05] tracking-tight text-[var(--white-100)]">
+                <h2 className="mb-2 max-w-2xl text-[clamp(1rem,4.2vw,2.4rem)] font-semibold leading-[1.1] tracking-tight text-[var(--white-100)] md:mb-3 md:leading-[1.05]">
                   Prioritize the{" "}
                   <span className="text-[#9fc4ff] underline decoration-[rgba(128,184,255,0.4)] decoration-1 underline-offset-4">
                     10 lending workflows
@@ -204,13 +204,14 @@ export function AnimatedFeatureSpotlightDemo() {
                   AI can automate safely
                 </h2>
 
-                <p className="max-w-xl text-[0.84rem] leading-relaxed text-[var(--text-muted)] md:text-sm">
+                <p className="hidden max-w-xl text-[0.84rem] leading-relaxed text-[var(--text-muted)] md:block md:text-sm">
                   A practical field guide for small and mid-sized lending teams. Use it to identify
                   manual-work bottlenecks, choose lower-risk pilots, and set borrower-data controls
                   before automation reaches production.
                 </p>
 
-                <div className="mt-4 grid gap-2.5">
+                {/* Insight list and chip row hidden on mobile to compress the block ~4×. */}
+                <div className="mt-4 hidden gap-2.5 md:grid">
                   {INSIGHTS.map((item, i) => (
                     <div key={item} className="grid grid-cols-[2rem_1fr] items-start gap-3">
                       <span
@@ -227,7 +228,7 @@ export function AnimatedFeatureSpotlightDemo() {
                   ))}
                 </div>
 
-                <div className="mt-5 flex flex-wrap gap-2 text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-[var(--white-80)]">
+                <div className="mt-5 hidden flex-wrap gap-2 text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-[var(--white-80)] md:flex">
                   {CHIPS.map((c) => (
                     <span
                       key={c}
@@ -242,7 +243,7 @@ export function AnimatedFeatureSpotlightDemo() {
                   ))}
                 </div>
 
-                <form className="mt-7 max-w-md space-y-3" onSubmit={handleSubmit}>
+                <form className="mt-3 max-w-md space-y-2.5 md:mt-7 md:space-y-3" onSubmit={handleSubmit}>
                   <p className="text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">Work email</p>
                   <GlowInput
                     type="email"
@@ -273,9 +274,12 @@ export function AnimatedFeatureSpotlightDemo() {
                     </span>
                   </button>
 
-                  <p className="text-xs leading-relaxed text-[var(--text-muted)]">
+                  <p className="hidden text-xs leading-relaxed text-[var(--text-muted)] md:block">
                     No newsletter signup. We send the guide and, only if useful, one practical
                     next-step option for your lending workflow.
+                  </p>
+                  <p className="text-[0.65rem] leading-snug text-[var(--text-muted)] md:hidden">
+                    No newsletter. Just the guide.
                   </p>
                 </form>
               </>

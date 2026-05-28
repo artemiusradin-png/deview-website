@@ -5,22 +5,21 @@ import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Rocket, X, Layers, ScanEye, FileText, BarChart3, Database, Sparkles } from "lucide-react";
 import TimeLine_01 from "@/components/ui/release-time-line";
-import { AnimatedFeatureSpotlightDemo } from "../components/AnimatedFeatureSpotlightDemo";
-import { HomeServicesSection } from "../components/HomeServicesSection";
-import { SecurityTrustSection } from "../components/SecurityTrustSection";
-import { SiteFooter } from "../components/SiteFooter";
-import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "../components/RetroFeatureCards";
-import { SelectedProjectsLogoMarquee } from "../components/SelectedProjectsLogoMarquee";
+import { AnimatedFeatureSpotlightDemo } from "@/components/AnimatedFeatureSpotlightDemo";
+import { HomeServicesSection } from "@/components/HomeServicesSection";
+import { SecurityTrustSection } from "@/components/SecurityTrustSection";
+import { SiteFooter } from "@/components/SiteFooter";
+import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "@/components/RetroFeatureCards";
+import { SelectedProjectsLogoMarquee } from "@/components/SelectedProjectsLogoMarquee";
 import { Banner } from "@/components/ui/banner";
 import { Globe } from "@/components/ui/globe";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
-import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
-import { HomeProcessTimeline } from "../components/HomeProcessTimeline";
-import { HomeInsightsPreview } from "../components/HomeInsightsPreview";
-import { HomeTestimonials } from "../components/HomeTestimonials";
-import { HomeIndustries } from "../components/HomeIndustries";
-import TeamMemberCard from "../components/ui/team-member-card";
+import { HomeProcessTimeline } from "@/components/HomeProcessTimeline";
+import { HomeInsightsPreview } from "@/components/HomeInsightsPreview";
+import { HomeTestimonials } from "@/components/HomeTestimonials";
+import { HomeIndustries } from "@/components/HomeIndustries";
+import TeamMemberCard from "@/components/ui/team-member-card";
 
 const fade = {
   initial: { opacity: 0, y: 18 },
@@ -400,24 +399,7 @@ export default function Home() {
         <nav className="section-gutter mx-auto flex h-16 max-w-6xl items-center justify-between">
           <div className="nav-shell-spacer" aria-hidden="true" />
           <div className="flex items-center gap-3 md:hidden">
-            <div className="lang-toggle" role="group" aria-label={langSwitchLabel}>
-              <button
-                type="button"
-                className={`lang-toggle__opt${locale === "en" ? " is-active" : ""}`}
-                onClick={() => setLocale("en")}
-                aria-pressed={locale === "en"}
-              >
-                {dict.lang.shortEn}
-              </button>
-              <button
-                type="button"
-                className={`lang-toggle__opt${locale === "zh-HK" ? " is-active" : ""}`}
-                onClick={() => setLocale("zh-HK")}
-                aria-pressed={locale === "zh-HK"}
-              >
-                {dict.lang.shortZh}
-              </button>
-            </div>
+            {/* Language toggle moved into the mobile dropdown menu — keeps the always-visible header lean. */}
             <button
               type="button"
               className="nav-toggle"
@@ -604,7 +586,7 @@ export default function Home() {
             className="flex max-w-2xl flex-col md:min-h-[calc(100svh-var(--header-stack-height)-2.25rem)] md:pt-2 lg:min-h-0"
           >
             <p className="section-label mb-4">{dict.hero.kicker}</p>
-            <h1 className="hero-heading mb-6 text-[clamp(1.75rem,6.5vw,2.75rem)] leading-[1.06] text-[var(--white-100)] md:text-5xl md:leading-[1.02] lg:text-6xl">
+            <h1 className="hero-heading mb-6 text-[clamp(2rem,6.5vw,2.75rem)] leading-[1.06] text-[var(--white-100)] md:text-5xl md:leading-[1.02] lg:text-6xl">
               {dict.hero.titleL1}
               <br />
               {dict.hero.titleL2}
@@ -615,12 +597,25 @@ export default function Home() {
                 </>
               ) : null}
             </h1>
-            <div className="pt-4 md:mt-auto md:pt-8 lg:mt-0 lg:pt-12">
+            {/* Mobile: lead + CTA sit ~25svh below the headline — past the visual centre, still on the first scroll.
+                Desktop: same wrapper, pinned to the bottom of the column via mt-auto. */}
+            <div className="mt-[25svh] md:mt-auto md:pt-8 lg:mt-0 lg:pt-12">
               <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
               <div className="mt-6 md:mt-7">
-                <a href="/contact" className="btn-outline inline-block w-full text-center sm:w-auto">
-                  {dict.hero.inquire}
+                {/* Mobile-only filled CTA — bigger, bolder, full-width. */}
+                <a
+                  href="/contact"
+                  className="group inline-flex w-full items-center justify-center gap-2 rounded-md bg-[var(--white-100)] px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--background)] shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] transition-transform active:scale-[0.98] md:hidden"
+                >
+                  <span>{dict.hero.inquire}</span>
+                  <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
                 </a>
+                {/* Desktop: outline button, unchanged. Wrapped because the .btn-outline @media (max-width: 961px) rule re-applies display:inline-flex and beats Tailwind's `hidden` on the child. */}
+                <span className="hidden md:inline-block">
+                  <a href="/contact" className="btn-outline inline-block">
+                    {dict.hero.inquire}
+                  </a>
+                </span>
               </div>
             </div>
           </motion.div>
@@ -836,13 +831,13 @@ export default function Home() {
       {/* Featured deployment — AgroPlatforma (after WHAT WE BUILD services) */}
       <section
         id="featured-deployment"
-        className="scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] pt-12 sm:pt-20 md:pt-28 pb-16 md:pb-28"
+        className="scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] pt-10 sm:pt-16 md:pt-28 pb-12 sm:pb-20 md:pb-28"
       >
         <div className="section-gutter mx-auto max-w-[96rem]">
           <p className="section-label mb-3">FEATURED DEPLOYMENT · AGRICULTURE</p>
           <div className="rule mb-6" />
           <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
-            <h2 className="text-[clamp(1.5rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
+            <h2 className="text-[clamp(1.75rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
               Inside the AgroPlatforma build — AI field diagnostics for a national agricultural network.
             </h2>
             <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
@@ -851,9 +846,9 @@ export default function Home() {
           </div>
 
           {/* Two-column: phased build on the left, video on the right (sticky on desktop) */}
-          <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)] md:gap-12 md:items-start">
-            {/* LEFT — phased build narrative */}
-            <div className="order-2 md:order-1">
+          <div className="mt-6 grid gap-6 md:mt-16 md:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)] md:gap-12 md:items-start">
+            {/* LEFT — phased build narrative (desktop-only; mobile gets a condensed summary below) */}
+            <div className="order-2 hidden md:order-1 md:block">
               <h3 className="mb-4 text-2xl font-medium tracking-tight text-[var(--white-100)] md:text-3xl">
                 Phased build, in order.
               </h3>
@@ -960,19 +955,33 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          {/* Mobile-only condensed summary — replaces the phased build OL on small screens */}
+          <div className="mt-4 md:hidden">
+            <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+              Three AI agents on a shared backend cut the field-to-quote workflow from ~40 minutes to under 30 seconds, with the live 20,000-product catalogue, Salesforce-native quote drafts, and vendor-facing analytics built on the same audit trail.
+            </p>
+            <a
+              href="/case-studies"
+              className="mt-5 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-80)]"
+            >
+              Read the full case study
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Featured deployment — DeView Unified Portal (finance / lending) */}
       <section
         id="featured-deployment-finance"
-        className="scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] pt-12 sm:pt-20 md:pt-28 pb-16 md:pb-28"
+        className="scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] pt-10 sm:pt-16 md:pt-28 pb-12 sm:pb-20 md:pb-28"
       >
         <div className="section-gutter mx-auto max-w-[96rem]">
           <p className="section-label mb-3">FEATURED DEPLOYMENT · FINANCE / LENDING</p>
           <div className="rule mb-6" />
           <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
-            <h2 className="text-[clamp(1.5rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
+            <h2 className="text-[clamp(1.75rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
               DeView Unified Portal — AI-powered borrower intelligence for a multi-company lending network.
             </h2>
             <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
@@ -981,9 +990,9 @@ export default function Home() {
           </div>
 
           {/* Two-column: phased build on the left, video on the right (sticky on desktop) */}
-          <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)] md:gap-12 md:items-start">
-            {/* LEFT — phased build narrative */}
-            <div className="order-2 md:order-1">
+          <div className="mt-6 grid gap-6 md:mt-16 md:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)] md:gap-12 md:items-start">
+            {/* LEFT — phased build narrative (desktop-only; mobile gets a condensed summary below) */}
+            <div className="order-2 hidden md:order-1 md:block">
               <h3 className="mb-4 text-2xl font-medium tracking-tight text-[var(--white-100)] md:text-3xl">
                 Built in phases.
               </h3>
@@ -1104,6 +1113,20 @@ export default function Home() {
                 </video>
               </div>
             </div>
+          </div>
+
+          {/* Mobile-only condensed summary */}
+          <div className="mt-4 md:hidden">
+            <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+              One platform serving five lending companies, with five AI capabilities — Credit Analyst, Agentic Assistant, Email Processing, Document Processing, and Prompt Management — built on top of a shared portal, borrower database, and audit trail.
+            </p>
+            <a
+              href="/industries/lending"
+              className="mt-5 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-80)]"
+            >
+              Read the full case study
+              <span aria-hidden="true">→</span>
+            </a>
           </div>
         </div>
       </section>
@@ -1265,29 +1288,7 @@ export default function Home() {
 
       <SiteFooter />
 
-      {/* Mobile-only persistent CTA dock */}
-      <div
-        className="fixed inset-x-0 bottom-0 z-30 border-t border-[var(--white-20)] bg-[color-mix(in_srgb,var(--background)_88%,transparent)] px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur md:hidden"
-        role="region"
-        aria-label="Quick actions"
-      >
-        <div className="mx-auto flex max-w-md items-center gap-2">
-          <a
-            href={`mailto:${SITE_INQUIRY_EMAIL}`}
-            className="flex h-11 min-w-11 items-center justify-center rounded border border-[var(--white-20)] text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-80)]"
-            aria-label="Email DeView"
-          >
-            ✉
-          </a>
-          <a
-            href="/contact"
-            className="btn-outline flex-1 text-center text-sm"
-          >
-            {dict.hero.inquire}
-          </a>
-        </div>
-      </div>
-      <div className="h-20 md:hidden" aria-hidden="true" />
+      {/* Removed persistent mobile CTA dock — header nav, in-page CTAs, and footer cover this without crowding the viewport. */}
     </div>
   );
 }

@@ -487,7 +487,7 @@ export const zhHK: Dictionary = {
     titleL1: "喺 AI 最具價值嘅",
     titleL2: "行業深耕細作。",
     tiles: [
-      { id: "lending", label: "貸款及金融", href: "/case-studies" },
+      { id: "lending", label: "貸款及金融", href: "/industries/lending" },
       { id: "insurance", label: "保險", href: "/industries/insurance" },
       { id: "legal", label: "法律服務", href: "/industries/legal" },
       { id: "professional", label: "專業服務", href: "/case-studies" },

@@ -35,7 +35,7 @@ export function SecurityTrustSection() {
       <motion.div
         {...homeSectionReveal}
         transition={{ duration: 0.5 }}
-        className="relative mx-auto flex max-w-6xl flex-col gap-10 py-14 md:py-20"
+        className="relative mx-auto flex max-w-6xl flex-col gap-10 py-10 md:py-20"
       >
         {/* Eyebrow */}
         <div>
@@ -49,21 +49,21 @@ export function SecurityTrustSection() {
           </p>
         </div>
 
-        {/* Pillar cards */}
-        <div className="grid gap-px border border-[var(--white-20)] bg-[var(--white-20)] md:grid-cols-3">
+        {/* Pillar cards — horizontal on every viewport (3-in-a-row on mobile too) */}
+        <div className="grid grid-cols-3 gap-px border border-[var(--white-20)] bg-[var(--white-20)]">
           {s.pillars.map((pillar, i) => (
             <motion.div
               key={pillar.label}
               {...homeSectionCardMotion}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="flex flex-col gap-4 bg-[var(--background)] px-6 py-7"
+              className="flex flex-col gap-2.5 bg-[var(--background)] px-3 py-4 sm:gap-4 sm:px-6 sm:py-7"
             >
               <span className="text-[var(--white-60)]">{PILLAR_ICONS[i]}</span>
-              <p className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-80)]">
+              <p className="text-[0.55rem] uppercase leading-tight tracking-[0.16em] text-[var(--white-80)] sm:text-[0.65rem] sm:tracking-[0.2em]">
                 {pillar.label}
               </p>
-              <p className="text-[0.8rem] leading-relaxed text-[var(--text-muted)]">
+              <p className="text-[0.7rem] leading-relaxed text-[var(--text-muted)] sm:text-[0.8rem]">
                 {pillar.body}
               </p>
             </motion.div>
@@ -77,16 +77,16 @@ export function SecurityTrustSection() {
             <p className="text-[0.6rem] uppercase tracking-[0.22em] text-[var(--white-40)]">
               {s.toolsLabel}
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {s.tools.map((tool) => (
                 <div
                   key={tool.name}
-                  className="flex flex-col gap-1 border border-[var(--white-20)] bg-[var(--background)] px-4 py-3"
+                  className="flex flex-col gap-0.5 border border-[var(--white-20)] bg-[var(--background)] px-2.5 py-2 sm:gap-1 sm:px-4 sm:py-3"
                 >
-                  <span className="text-[0.72rem] uppercase tracking-[0.14em] text-[var(--white-80)]">
+                  <span className="text-[0.62rem] uppercase tracking-[0.12em] text-[var(--white-80)] sm:text-[0.72rem] sm:tracking-[0.14em]">
                     {tool.name}
                   </span>
-                  <span className="text-[0.6rem] tracking-[0.08em] text-[var(--white-40)]">
+                  <span className="text-[0.52rem] tracking-[0.08em] text-[var(--white-40)] sm:text-[0.6rem]">
                     {tool.cert}
                   </span>
                 </div>

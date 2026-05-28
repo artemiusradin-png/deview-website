@@ -40,9 +40,9 @@ function RetroCard({
         className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-transparent from-0% via-transparent via-[18%] to-black/80 to-100%"
         aria-hidden="true"
       />
-      <div className="relative z-10 flex h-full flex-col justify-end p-5">
-        <span className="mb-1.5 block text-[15px] text-white/70">{eyebrow}</span>
-        <h2 className="mb-0 max-w-[350px] whitespace-pre-line text-lg leading-snug text-white">{title}</h2>
+      <div className="relative z-10 flex h-full flex-col justify-end p-3 sm:p-5">
+        <span className="mb-1 block text-[11px] uppercase tracking-[0.12em] text-white/65 sm:mb-1.5 sm:text-[15px] sm:tracking-normal sm:normal-case sm:text-white/70">{eyebrow}</span>
+        <h2 className="mb-0 max-w-[350px] whitespace-pre-line text-[0.82rem] leading-snug text-white sm:text-lg">{title}</h2>
       </div>
     </Link>
   );
@@ -66,13 +66,13 @@ function RetroOutcomesCard({ className = "", rootPrefix = "" }: { className?: st
         className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/50 from-0% via-black/55 via-[25%] to-black/88 to-100%"
         aria-hidden="true"
       />
-      <div className="relative z-10 flex h-full flex-col justify-end overflow-hidden p-4 text-left sm:p-5 md:p-5">
+      <div className="relative z-10 flex h-full flex-col justify-end overflow-hidden p-3 text-left sm:p-5 md:p-5">
         {/* 2×2 metric grid — stat is the dominant element */}
-        <div className="mb-3 grid grid-cols-2 gap-1.5">
+        <div className="mb-2 grid grid-cols-2 gap-1 sm:mb-3 sm:gap-1.5">
           {o.items.map((item) => (
-            <div key={item.number} className="border border-white/12 bg-black/50 p-2.5 backdrop-blur-[2px]">
-              <p className="mb-1 text-[0.5rem] uppercase tracking-[0.18em] text-white/40">{item.label}</p>
-              <p className="font-mono text-[1.1rem] font-semibold leading-none tracking-[-0.02em] text-white/90 sm:text-[1.25rem]">
+            <div key={item.number} className="border border-white/12 bg-black/50 p-1.5 backdrop-blur-[2px] sm:p-2.5">
+              <p className="mb-0.5 text-[0.45rem] uppercase tracking-[0.14em] text-white/40 sm:mb-1 sm:text-[0.5rem] sm:tracking-[0.18em]">{item.label}</p>
+              <p className="font-mono text-[0.78rem] font-semibold leading-none tracking-[-0.02em] text-white/90 sm:text-[1.1rem] md:text-[1.25rem]">
                 {(item as { stat?: string }).stat ?? item.number}
               </p>
             </div>
@@ -80,8 +80,8 @@ function RetroOutcomesCard({ className = "", rootPrefix = "" }: { className?: st
         </div>
         {/* Card title */}
         <div className="self-start">
-          <span className="mb-1 block text-[10px] uppercase tracking-[0.16em] text-white/50">{o.label}</span>
-          <h2 className="max-w-[20rem] whitespace-pre-line text-sm font-medium leading-snug text-white sm:text-base md:text-lg">
+          <span className="mb-0.5 block text-[9px] uppercase tracking-[0.14em] text-white/50 sm:mb-1 sm:text-[10px] sm:tracking-[0.16em]">{o.label}</span>
+          <h2 className="max-w-[20rem] whitespace-pre-line text-[0.78rem] font-medium leading-snug text-white sm:text-base md:text-lg">
             {o.titleL1}
             {"\n"}
             {o.titleL2}
@@ -102,7 +102,35 @@ export function RetroFeatureCards({ rootPrefix = "" }: { rootPrefix?: string }) 
       className="scroll-margin-header relative w-full bg-[var(--surface)] py-10 md:py-14"
     >
       <div className="section-gutter w-full">
-        <div className="flex w-full flex-col gap-[30px] md:flex-row md:items-stretch">
+        {/* Mobile: 2×2 square grid of all four cards. Desktop unchanged (3-column with col 1 stacked). */}
+        <div className="grid w-full grid-cols-2 gap-3 sm:gap-4 md:hidden">
+          <RetroCard
+            href="/what-makes-it-enterprise"
+            imageUrl="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80"
+            imagePosition="center 42%"
+            eyebrow={c.whatMakesEyebrow}
+            title={c.whatMakesTitle}
+            className="aspect-square"
+          />
+          <RetroCard
+            href="/architecture-reality-check"
+            imageUrl="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80"
+            imagePosition="center center"
+            eyebrow={c.archEyebrow}
+            title={c.archTitle}
+            className="aspect-square"
+          />
+          <RetroOutcomesCard rootPrefix={rootPrefix} className="aspect-square" />
+          <RetroCard
+            href="/use-cases"
+            imageUrl="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80"
+            imagePosition="center 45%"
+            eyebrow={c.useCasesEyebrow}
+            title={c.useCasesTitle}
+            className="aspect-square"
+          />
+        </div>
+        <div className="hidden w-full flex-col gap-[30px] md:flex md:flex-row md:items-stretch">
           <div className="flex flex-1 flex-col gap-[30px] md:basis-1/3">
             <RetroCard
               href="/what-makes-it-enterprise"

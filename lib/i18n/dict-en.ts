@@ -504,7 +504,7 @@ export const en = {
     titleL1: "Deep expertise where",
     titleL2: "AI delivers the most value.",
     tiles: [
-      { id: "lending", label: "LENDING & FINANCE", href: "/case-studies" },
+      { id: "lending", label: "LENDING & FINANCE", href: "/industries/lending" },
       { id: "insurance", label: "INSURANCE", href: "/industries/insurance" },
       { id: "legal", label: "LEGAL SERVICES", href: "/industries/legal" },
       { id: "professional", label: "PROFESSIONAL SERVICES", href: "/case-studies" },
