@@ -208,18 +208,6 @@ html[data-theme="light"] .pixel-field {
   }
 }
 
-/* Mobile: soft-light blend disappears against the near-opaque dark overlay; render the pixels directly. */
-@media (max-width: 767px) {
-  .pixel-field {
-    mix-blend-mode: normal;
-    opacity: 0.85;
-  }
-  html[data-theme="light"] .pixel-field {
-    mix-blend-mode: normal;
-    opacity: 0.55;
-  }
-}
-
 @keyframes grid-drift {
   0% {
     transform: translate3d(0, 0, 0);
@@ -1220,12 +1208,9 @@ html[data-theme="light"] .hero-fallback-beam {
 }
 
 @media (max-width: 767px) {
-  /* No hero animation on mobile — keep the section static */
-  .hero-video,
-  .hero-fallback,
-  .hero-media {
-    display: none !important;
-  }
+  /* Hero video re-enabled on mobile so the pink pixel-city skyline shows
+     (matches the desktop visual). Heavy file — see /public/deview-hero-animation.mp4;
+     a mobile-optimised re-encode is a separate follow-up. */
 
   .hero-heading {
     letter-spacing: 0.08em;
@@ -5806,7 +5791,8 @@ html[data-theme="light"] .btn-primary:hover {
   .hero-video-hidden {
     transition: none !important;
     transform: none !important;
-    display: none !important;
+    /* display: none removed — the hero video provides the pink pixel-city skyline
+       visual on mobile, matching the desktop. */
   }
 
   .hero-media,

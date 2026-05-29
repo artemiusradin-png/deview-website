@@ -9,12 +9,8 @@ import { useEffect, useRef } from "react";
  * pointer-events: none, blended softly over content.
  */
 
-const CELL_DESKTOP = 58; // grid spacing in CSS px (desktop)
-const CELL_MOBILE = 30; // denser grid on phones — fewer pixels per area otherwise
-const PIXEL_DESKTOP = 2; // pixel square size in CSS px (desktop)
-const PIXEL_MOBILE = 3; // bigger pixels on phones to read against the heavier overlay
-const DENSITY_DESKTOP = 0.3; // fraction of cells that carry a pixel (desktop)
-const DENSITY_MOBILE = 0.5; // more cells lit on phones
+const CELL = 58; // grid spacing in CSS px
+const PIXEL = 2; // pixel square size in CSS px
 const PARALLAX = 0.14; // fraction of scroll the field drifts by
 
 // Deterministic hash → [0,1) so pixel placement is stable & seamless on wrap.
@@ -37,7 +33,6 @@ export function PixelField() {
     let width = 0;
     let height = 0;
     let dpr = 1;
-    let isMobile = false;
     let theme: "dark" | "light" =
       (document.documentElement.dataset.theme as "dark" | "light") || "dark";
 
@@ -45,7 +40,6 @@ export function PixelField() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       width = window.innerWidth;
       height = window.innerHeight;
-      isMobile = width < 768;
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
       canvas.style.width = `${width}px`;
@@ -75,17 +69,13 @@ export function PixelField() {
 
       ctx.clearRect(0, 0, width, height);
 
-      const cell = isMobile ? CELL_MOBILE : CELL_DESKTOP;
-      const pixel = isMobile ? PIXEL_MOBILE : PIXEL_DESKTOP;
-      const density = isMobile ? DENSITY_MOBILE : DENSITY_DESKTOP;
-
       const scrollY = window.scrollY || window.pageYOffset || 0;
       const drift = scrollY * PARALLAX;
-      const offset = drift % cell;
-      const rowBase = Math.floor(drift / cell);
+      const offset = drift % CELL;
+      const rowBase = Math.floor(drift / CELL);
 
-      const cols = Math.ceil(width / cell) + 1;
-      const rows = Math.ceil(height / cell) + 1;
+      const cols = Math.ceil(width / CELL) + 1;
+      const rows = Math.ceil(height / CELL) + 1;
 
       const baseColor = theme === "light" ? "19, 31, 47" : "186, 206, 240";
       const t = reduceMotion ? 0 : now * 0.0006;
@@ -94,28 +84,20 @@ export function PixelField() {
         for (let r = 0; r < rows; r++) {
           const virtualRow = r + rowBase;
           const h1 = hash(c, virtualRow);
-          if (h1 > density) continue;
+          // Sparse — only ~30% of cells carry a pixel.
+          if (h1 > 0.3) continue;
 
           const h2 = hash(virtualRow, c);
           const phase = h2 * Math.PI * 2;
           // Slow twinkle around a faint base alpha.
           const twinkle = reduceMotion ? 0.5 : 0.5 + 0.5 * Math.sin(t + phase);
-          // Mobile boosts the base alpha ~6× because the hero overlay on phones
-          // is much more opaque than the desktop video background — at desktop
-          // alphas the pixels become invisible. Desktop subtlety preserved.
-          const baseAlpha = isMobile
-            ? theme === "light"
-              ? 0.32
-              : 0.45
-            : theme === "light"
-              ? 0.05
-              : 0.07;
+          const baseAlpha = theme === "light" ? 0.05 : 0.07;
           const alpha = baseAlpha * (0.45 + 0.55 * twinkle);
 
-          const x = c * cell + (h2 * 6 - 3);
-          const y = r * cell - offset + (h1 * 6 - 3);
+          const x = c * CELL + (h2 * 6 - 3);
+          const y = r * CELL - offset + (h1 * 6 - 3);
           // Occasional brighter "lit" pixel for skyline character.
-          const size = h1 < (isMobile ? 0.08 : 0.04) ? pixel + 1 : pixel;
+          const size = h1 < 0.04 ? PIXEL + 1 : PIXEL;
 
           ctx.fillStyle = `rgba(${baseColor}, ${alpha.toFixed(3)})`;
           ctx.fillRect(x, y, size, size);
