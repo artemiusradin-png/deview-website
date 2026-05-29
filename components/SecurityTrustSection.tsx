@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { homeSectionReveal, homeSectionCardMotion } from "@/lib/home-section-motion";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
+import { LocaleLink } from "./LocaleLink";
 
 const PILLAR_ICONS = [
   /* Lock — data isolation & encryption */
@@ -118,7 +119,7 @@ export function SecurityTrustSection() {
 
         {/* Architecture link */}
         <div>
-          <a
+          <LocaleLink
             href="/more-info"
             className="inline-flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] transition-colors hover:text-[var(--white-100)]"
           >
@@ -126,7 +127,7 @@ export function SecurityTrustSection() {
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
               <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-          </a>
+          </LocaleLink>
         </div>
       </motion.div>
     </section>

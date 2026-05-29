@@ -32,9 +32,9 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
         {
           title: f.about,
           links: [
-            { text: "About DeView", href: "/about" },
-            { text: "How We Work", href: "/how-we-work" },
-            { text: "Case Studies", href: "/case-studies" },
+            { text: f.links.aboutDeView, href: "/about" },
+            { text: f.links.howWeWork, href: "/how-we-work" },
+            { text: f.links.caseStudies, href: "/case-studies" },
             { text: f.links.clientPortal, href: "/client-portal" },
           ],
         },
@@ -43,17 +43,17 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
           links: [
             { text: f.links.outcomes, href: "/outcomes" },
             { text: f.links.useCases, href: "/use-cases" },
-            { text: "ROI Calculator", href: "/roi-calculator" },
+            { text: f.links.roiCalculator, href: "/roi-calculator" },
             { text: "Tech Stack", href: "/stack" },
-            { text: "AI guide — lending", href: "/resources/ai-guide-lending", hasIndicator: true },
+            { text: f.links.aiGuide, href: "/resources/ai-guide-lending", hasIndicator: true },
           ],
         },
         {
-          title: "Resources",
+          title: f.moreInfo,
           links: [
-            { text: "Insights & Articles", href: "/insights" },
+            { text: f.links.insightsArticles, href: "/insights" },
             { text: "FAQ", href: "/faq" },
-            { text: "Insurance AI", href: "/industries/insurance" },
+            { text: f.links.insuranceAi, href: "/industries/insurance" },
             { text: "Legal AI", href: "/industries/legal" },
             { text: f.inquiryForm, href: "/contact" },
           ],

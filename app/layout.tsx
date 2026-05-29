@@ -27,10 +27,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cookieStore = await cookies();
-  const geoLocaleCookie = cookieStore.get("deview-geo-locale")?.value;
+  const localeCookie = cookieStore.get("deview-locale")?.value ?? cookieStore.get("deview-geo-locale")?.value;
   const initialLocale: Locale =
-    geoLocaleCookie === "zh-HK" || geoLocaleCookie === "en" ? geoLocaleCookie : "en";
-  const htmlLang = initialLocale === "zh-HK" ? "zh-Hant-HK" : "en";
+    localeCookie === "zh-HK" || localeCookie === "en" || localeCookie === "de" ? localeCookie : "en";
+  const htmlLang = initialLocale === "zh-HK" ? "zh-Hant-HK" : initialLocale === "de" ? "de" : "en";
 
   return (
     <html lang={htmlLang} data-scroll-behavior="smooth" className="h-full antialiased">

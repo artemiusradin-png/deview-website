@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
+import { LocaleLink } from "./LocaleLink";
 import { homeSectionReveal, homeSectionStagger, homeSectionCardMotion } from "@/lib/home-section-motion";
 
 export function HomeProcessTimeline() {
@@ -59,12 +59,12 @@ export function HomeProcessTimeline() {
         </motion.div>
 
         <div className="mt-6 flex md:mt-10">
-          <Link
+          <LocaleLink
             href="/how-we-work"
             className="text-[0.7rem] font-medium uppercase tracking-[0.18em] text-[var(--white-60)] transition-colors hover:text-[var(--white-100)]"
           >
             {s.cta}
-          </Link>
+          </LocaleLink>
         </div>
       </motion.div>
     </section>

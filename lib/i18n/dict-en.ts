@@ -12,6 +12,11 @@ export const en = {
     useCases: "USE CASES",
     outcomes: "OUTCOMES",
     inquire: "INQUIRE",
+    caseStudies: "CASE STUDIES",
+    insights: "INSIGHTS",
+    about: "ABOUT",
+    howWeWork: "HOW WE WORK",
+    faq: "FAQ",
   },
   a11y: {
     openMenu: "Open menu",
@@ -21,8 +26,9 @@ export const en = {
     themeToDark: "Switch to dark mode",
     langToZh: "Switch to Cantonese (Traditional Chinese)",
     langToEn: "Switch to English",
+    langToDe: "Switch to German",
   },
-  lang: { shortEn: "EN", shortZh: "粵" },
+  lang: { shortEn: "EN", shortZh: "粵", shortDe: "DE" },
   mobileNav: { close: "Close", contactForm: "CONTACT FORM" },
   hero: {
     kicker: "REDUCE COSTS · AUTOMATE WORKFLOWS · MOVE FASTER",
@@ -408,6 +414,13 @@ export const en = {
       sendInquiry: "Send inquiry",
       clientPortal: "Client Portal",
       aiGuide: "AI guide — lending",
+      aboutDeView: "About DeView",
+      howWeWork: "How We Work",
+      caseStudies: "Case Studies",
+      roiCalculator: "ROI Calculator",
+      insightsArticles: "Insights & Articles",
+      insuranceAi: "Insurance AI",
+      applications: "Applications",
     },
   },
   subpages: {
@@ -478,6 +491,23 @@ export const en = {
     titleL1: "Practical AI guidance —",
     titleL2: "no hype, no vendor pitches.",
     viewAll: "View all insights →",
+    articles: [
+      {
+        label: "AI IMPLEMENTATION",
+        title: "Why most AI pilots fail — and what the ones that work have in common",
+        readTime: "6 min read",
+      },
+      {
+        label: "DOCUMENT AUTOMATION",
+        title: "Document automation: the four questions to answer before you build anything",
+        readTime: "5 min read",
+      },
+      {
+        label: "AI STRATEGY",
+        title: "The four AI projects that pay for themselves fastest in operations teams",
+        readTime: "7 min read",
+      },
+    ],
   },
   testimonials: {
     sectionLabel: "WHAT CLIENTS SAY",
@@ -503,6 +533,8 @@ export const en = {
     sectionLabel: "INDUSTRIES WE SERVE",
     titleL1: "Deep expertise where",
     titleL2: "AI delivers the most value.",
+    description: "Hover an industry to explore where we have deployed AI systems that cut cost and automate operational work.",
+    cta: "See case studies",
     tiles: [
       { id: "lending", label: "LENDING & FINANCE", href: "/industries/lending" },
       { id: "insurance", label: "INSURANCE", href: "/industries/insurance" },
@@ -534,6 +566,112 @@ export const en = {
     submitSuccessMailto:
       "Your email app should open with a draft addressed to us. Send the message to complete your inquiry.",
     submitError: "We could not send that just now. Please try again or use the email address on the right.",
+  },
+  featuredAgro: {
+    sectionLabel: "FEATURED DEPLOYMENT · AGRICULTURE",
+    title: "Inside the AgroPlatforma build — AI field diagnostics for a national agricultural network.",
+    subtitle: "A three-agent system on Claude (via Vertex AI), Salesforce and Flutter — cutting the field-to-quote workflow from ~40 minutes to under 30 seconds.",
+    phasedTitle: "Phased build, in order.",
+    phasedBody: "The field-to-quote workflow was rebuilt as three AI agents on a shared backend. Below is the order we shipped — each block extends the same data flywheel without rewriting what's underneath.",
+    readCaseStudy: "Read the full case study",
+    mobileSummary: "Three AI agents on a shared backend cut the field-to-quote workflow from ~40 minutes to under 30 seconds, with the live 20,000-product catalogue, Salesforce-native quote drafts, and vendor-facing analytics built on the same audit trail.",
+    phases: [
+      {
+        title: "Shared backend foundation",
+        subtitle: "Phase 0 · Infrastructure",
+        description: "Set up the audit-first backbone every agent runs on top of, so each block could ship independently without reinventing auth, storage, or the data layer.",
+      },
+      {
+        title: "Block A — Agro-Vision Expert (v1)",
+        subtitle: "Phase 1 · Diagnosis & recommendation",
+        description: "Field consultants photograph the affected crop in-field. Claude (multimodal, via Vertex AI) returns a diagnosis and ranked SKU recommendations from the live 20,000-product catalogue.",
+      },
+      {
+        title: "Block B — Smart Operator & Sales",
+        subtitle: "Phase 2 · Salesforce-native quote drafts",
+        description: "The diagnosis converts into a draft quotation written directly into Salesforce, layering alternatives, cross-sell and substitution rules — pending consultant sign-off before it reaches the grower.",
+      },
+      {
+        title: "Block D — Vendor Analytics",
+        subtitle: "Phase 2 · Data flywheel for vendors",
+        description: "Aggregates anonymised diagnostic and transaction data into vendor-facing dashboards with regional and product breakdowns. Read-only, row-level secured, fully auditable.",
+        items: [
+          "~20% new code — shares the same event log as Expert and Operator",
+          "Row-level security on every analytics query",
+          "Regional + product breakdowns on the deterministic SQL layer",
+          "Closes the loop: field diagnostics → sales → vendor intelligence",
+        ],
+      },
+    ],
+  },
+  featuredPortal: {
+    sectionLabel: "FEATURED DEPLOYMENT · FINANCE / LENDING",
+    title: "DeView Unified Portal — AI-powered borrower intelligence for a multi-company lending network.",
+    subtitle: "A single platform serving five lending companies. What used to take hours of manual spreadsheet work — looking up a borrower, checking their loans across companies, reading overdue notices, assessing risk — now happens in one search.",
+    phasedTitle: "Built in phases.",
+    phasedBody: "Each phase adds a new capability on top of the same foundation — one shared portal, one borrower database, one audit trail.",
+    readCaseStudy: "Read the full case study",
+    mobileSummary: "One platform, five lending companies. AI-powered borrower intelligence, credit analysis, email processing, and document handling — all on the same shared database and audit trail.",
+    phases: [
+      {
+        title: "Shared backbone for five companies",
+        subtitle: "Foundation · Portal + Database",
+        description: "The shared backbone everything else runs on. One secure login, one database, one audit trail. Staff from any of the five companies log in and see only what they're authorised to see — their companies, their borrowers, their data. Every action is logged.",
+      },
+      {
+        title: "Five AI capabilities, one audit trail",
+        subtitle: "AI Layer · Built on top of the portal",
+        description: "Each AI reads from the same borrower database and writes back into the same audit trail. No data silos, no copy-paste between systems.",
+        capabilities: [
+          {
+            name: "AI Credit Analyst",
+            body: "One click generates a full case summary for any borrower — their loan history, repayment behaviour, risk signals, and overdue status across all five companies, distilled into a readable narrative. Replaces the 20-minute manual file review.",
+          },
+          {
+            name: "Agentic AI Assistant",
+            body: "Staff ask plain-language questions about a borrower or portfolio and get answers drawn from live data. Not a chatbot — an analyst that queries the real database.",
+          },
+          {
+            name: "AI Email Processing",
+            body: "Incoming enquiries and leads arrive by email, are automatically parsed by AI into structured records — name, loan amount, purpose, contact details — and routed into a review queue.",
+          },
+          {
+            name: "AI Document Processing",
+            body: "Borrower attachments, contracts, and case documents are processed and linked to the correct borrower profile, making them searchable and available inside the 360-degree borrower view.",
+          },
+          {
+            name: "AI Prompt Management",
+            body: "Operations staff can edit the AI's instructions — what to emphasise, how to format summaries, which risk signals to flag — directly from an admin panel, without touching code.",
+          },
+        ],
+      },
+    ],
+  },
+  partners: {
+    sectionLabel: "TRUSTED PARTNERS",
+    selectedProjects: "Selected projects:",
+  },
+  lendingGuide: {
+    badge: "Prioritize the",
+    title: "Free AI automation guide for lenders",
+    description: "AI can automate safely",
+    steps: [
+      {
+        title: "The four safest AI pilots...",
+        text: "The four safest AI pilots you can run before connecting anything to core lending systems",
+      },
+      {
+        title: "Where document review, borrower follow-up, and CRM handoffs usually waste the most hours",
+        text: "Where document review, borrower follow-up, and CRM handoffs usually waste the most hours",
+      },
+      {
+        title: "A practical testing path for borrower data, approvals, permissions, and auditability",
+        text: "A practical testing path for borrower data, approvals, permissions, and auditability",
+      },
+    ],
+    stats: ["Risk-scored", "Pilot-ready", "Borrower-data aware"],
+    ctaButton: "Send me the guide",
+    ctaDisclaimer: "No newsletter signup. We send the guide and, only if useful, one practical next-step option for your team.",
   },
 };
 

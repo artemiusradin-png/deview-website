@@ -1,33 +1,17 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
+import { LocaleLink } from "./LocaleLink";
 import { homeSectionReveal, homeSectionCardMotion } from "@/lib/home-section-motion";
 
-const articles = [
-  {
-    slug: "why-most-ai-pilots-fail",
-    date: "2025-04-14",
-    label: "AI IMPLEMENTATION",
-    title: "Why most AI pilots fail — and what the ones that work have in common",
-    readTime: "6 min read",
-  },
-  {
-    slug: "document-automation-where-to-start",
-    date: "2025-03-28",
-    label: "DOCUMENT AUTOMATION",
-    title: "Document automation: the four questions to answer before you build anything",
-    readTime: "5 min read",
-  },
-  {
-    slug: "four-ai-projects-worth-doing",
-    date: "2025-03-10",
-    label: "AI STRATEGY",
-    title: "The four AI projects that pay for themselves fastest in operations teams",
-    readTime: "7 min read",
-  },
+const ARTICLE_SLUGS = [
+  "why-most-ai-pilots-fail",
+  "document-automation-where-to-start",
+  "four-ai-projects-worth-doing",
 ];
+
+const ARTICLE_DATES = ["2025-04-14", "2025-03-28", "2025-03-10"];
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
@@ -49,18 +33,18 @@ export function HomeInsightsPreview() {
         </h2>
 
         <div className="grid gap-px overflow-hidden rounded-lg border border-[var(--white-10)] bg-[var(--white-10)]">
-          {articles.map((article, i) => (
+          {s.articles.map((article, i) => (
             <motion.div
-              key={article.slug}
+              key={ARTICLE_SLUGS[i]}
               {...homeSectionCardMotion}
               transition={{ duration: 0.4, delay: i * 0.06 }}
             >
-              <Link
-                href={`/insights/${article.slug}`}
+              <LocaleLink
+                href={`/insights/${ARTICLE_SLUGS[i]}`}
                 className="group flex flex-col gap-2 bg-[var(--background)] p-5 transition-colors hover:bg-[var(--surface)] sm:flex-row sm:items-baseline sm:gap-6 sm:p-6"
               >
                 <div className="flex flex-shrink-0 items-center gap-3 text-[0.6rem] uppercase tracking-[0.16em] text-[var(--white-40)]">
-                  <span>{formatDate(article.date)}</span>
+                  <span>{formatDate(ARTICLE_DATES[i])}</span>
                   <span className="text-[var(--white-20)]">·</span>
                   <span>{article.readTime}</span>
                 </div>
@@ -75,18 +59,18 @@ export function HomeInsightsPreview() {
                 <span className="hidden flex-shrink-0 text-[0.7rem] text-[var(--white-20)] transition-colors group-hover:text-[var(--white-60)] sm:inline">
                   →
                 </span>
-              </Link>
+              </LocaleLink>
             </motion.div>
           ))}
         </div>
 
         <div className="mt-8 flex">
-          <Link
+          <LocaleLink
             href="/insights"
             className="text-[0.7rem] font-medium uppercase tracking-[0.18em] text-[var(--white-60)] transition-colors hover:text-[var(--white-100)]"
           >
             {s.viewAll}
-          </Link>
+          </LocaleLink>
         </div>
       </motion.div>
     </section>

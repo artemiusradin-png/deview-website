@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LocaleLink } from "@/components/LocaleLink";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -97,7 +97,7 @@ export function FeatureShowcase({
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" variant="secondary" className="border border-border bg-transparent">
-                <Link href="/contact">Discuss a project</Link>
+                <LocaleLink href="/contact">Discuss a project</LocaleLink>
               </Button>
             </div>
           </div>

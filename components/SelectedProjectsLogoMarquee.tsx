@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { PerspectiveMarquee, type LogoItem } from "@/components/ui/perspective-marquee";
+import { useLocaleContext } from "@/lib/i18n/locale-context";
 
 const CLIENT_LOGOS: LogoItem[] = [
   { name: "EVDEV",               src: "/client-logos/evdev.svg",         width: 96,  height: 19  },
@@ -41,6 +42,7 @@ function useIsMobileMarquee() {
 }
 
 export function SelectedProjectsLogoMarquee() {
+  const { dict } = useLocaleContext();
   const isDark = useIsDark();
   const isMobile = useIsMobileMarquee();
   const logoFilter = (name: string) => {
@@ -57,7 +59,7 @@ export function SelectedProjectsLogoMarquee() {
     >
       <div className="section-gutter mx-auto w-full max-w-6xl">
         <p id="selected-project-logos-title" className="section-label">
-          TRUSTED PARTNERS
+          {dict.partners.sectionLabel}
         </p>
       </div>
 
@@ -76,7 +78,7 @@ export function SelectedProjectsLogoMarquee() {
       </div>
 
       <p className="sr-only">
-        Selected projects: {CLIENT_LOGOS.map((l) => l.name).join(", ")}.
+        {dict.partners.selectedProjects} {CLIENT_LOGOS.map((l) => l.name).join(", ")}.
       </p>
     </section>
   );

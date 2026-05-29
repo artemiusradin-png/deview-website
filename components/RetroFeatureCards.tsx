@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
+import { LocaleLink } from "./LocaleLink";
 
 /** Hash target for “back to home” from card detail pages (`/${this}#…`). */
 export const RETRO_FEATURE_CARDS_ID = "retro-feature-cards";
@@ -27,7 +27,7 @@ function RetroCard({
   imagePosition = "center",
 }: RetroCardProps) {
   return (
-    <Link
+    <LocaleLink
       href={href}
       className={`group relative block overflow-hidden rounded-none ${className}`}
     >
@@ -44,7 +44,7 @@ function RetroCard({
         <span className="mb-1 block text-[11px] uppercase tracking-[0.12em] text-white/65 sm:mb-1.5 sm:text-[15px] sm:tracking-normal sm:normal-case sm:text-white/70">{eyebrow}</span>
         <h2 className="mb-0 max-w-[350px] whitespace-pre-line text-[0.82rem] leading-snug text-white sm:text-lg">{title}</h2>
       </div>
-    </Link>
+    </LocaleLink>
   );
 }
 
@@ -53,7 +53,7 @@ function RetroOutcomesCard({ className = "", rootPrefix = "" }: { className?: st
   const o = dict.outcomes;
 
   return (
-    <Link
+    <LocaleLink
       href={`${rootPrefix}/outcomes`}
       className={`group relative block overflow-hidden rounded-none ${className}`}
     >
@@ -88,7 +88,7 @@ function RetroOutcomesCard({ className = "", rootPrefix = "" }: { className?: st
           </h2>
         </div>
       </div>
-    </Link>
+    </LocaleLink>
   );
 }
 

@@ -1,0 +1,237 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { FormEvent, useState } from "react";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SubpageNav } from "@/components/SubpageNav";
+import RotatingEarth from "@/components/ui/wireframe-dotted-globe";
+import { InquiryCalendar } from "@/components/ui/inquiry-calendar";
+import { useLocaleContext } from "@/lib/i18n/locale-context";
+import { SITE_INQUIRY_EMAIL, buildInquiryMailto } from "@/lib/site-contact";
+
+const rise = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+};
+
+export default function ContactPage() {
+  const { dict } = useLocaleContext();
+  const sp = dict.subpages;
+  const f = dict.contactForm;
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [feedback, setFeedback] = useState<string | null>(null);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const fd = new FormData(form);
+    const honeypot = String(fd.get("company_website") ?? "").trim();
+    if (honeypot) {
+      setStatus("success");
+      setFeedback(f.submitSuccess);
+      return;
+    }
+
+    const name = String(fd.get("name") ?? "").trim();
+    const email = String(fd.get("email") ?? "").trim();
+    const company = String(fd.get("company") ?? "").trim();
+    const details = String(fd.get("details") ?? "").trim();
+
+    setStatus("sending");
+    setFeedback(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ name, email, company, details, honeypot }),
+      });
+      const data = (await res.json().catch(() => null)) as
+        | { ok?: boolean; mailto?: boolean; error?: string }
+        | null;
+
+      if (res.ok && data?.ok) {
+        setStatus("success");
+        setFeedback(f.submitSuccess);
+        form.reset();
+        return;
+      }
+
+      if (data?.mailto) {
+        window.location.href = buildInquiryMailto({ name, email, company, details });
+        setStatus("success");
+        setFeedback(f.submitSuccessMailto);
+        return;
+      }
+
+      setStatus("error");
+      setFeedback(f.submitError ?? "Something went wrong. Please try again.");
+    } catch {
+      window.location.href = buildInquiryMailto({ name, email, company, details });
+      setStatus("success");
+      setFeedback(f.submitSuccessMailto);
+    }
+  }
+
+  return (
+    <>
+      <main className="section-gutter relative isolate min-h-screen overflow-hidden bg-[var(--background)] bg-grid pb-[max(2rem,env(safe-area-inset-bottom))] pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:pb-10 sm:pt-24">
+        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+          <RotatingEarth
+            width={1280}
+            height={880}
+            framed={false}
+            interactive={false}
+            showControls={false}
+            className="absolute -right-80 -top-8 opacity-35 blur-[0.2px] md:-right-56 md:-top-16"
+          />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_28%,transparent_0,rgba(0,0,0,0.12)_34%,var(--background)_76%)]" />
+        </div>
+
+        <div className="relative mx-auto max-w-6xl">
+          <SubpageNav backHref="/" />
+
+          <div className="grid gap-8 md:grid-cols-[1.1fr_1fr] md:gap-10">
+            <motion.section
+              initial={rise.initial}
+              animate={rise.animate}
+              transition={{ duration: 0.55 }}
+              className="panel border border-[var(--white-20)] bg-[var(--surface)] p-5 md:p-8"
+            >
+              <p className="section-label mb-3">{f.label}</p>
+              <div className="rule mb-6" />
+              <h1 className="hero-heading mb-4 text-[clamp(1.5rem,5vw,2rem)] text-[var(--white-100)] md:text-4xl">
+                {sp.contactTitle}
+              </h1>
+              <p className="mb-8 max-w-xl text-sm text-[var(--text-muted)]">{sp.contactLead}</p>
+
+              <motion.form
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.55 }}
+                className="space-y-5"
+                onSubmit={handleSubmit}
+              >
+                <input
+                  type="text"
+                  name="company_website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden
+                  className="pointer-events-none absolute left-[-10000px] h-0 w-0 opacity-0"
+                />
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                    <span>
+                      {f.fullName} <span className="text-red-500">*</span>
+                    </span>
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      placeholder={f.placeholders.name}
+                      className="min-h-11 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
+                    />
+                  </label>
+                  <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                    <span>
+                      {f.workEmail} <span className="text-red-500">*</span>
+                    </span>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      placeholder={f.placeholders.email}
+                      className="min-h-11 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
+                    />
+                  </label>
+                </div>
+
+                <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                  {f.company}
+                  <input
+                    type="text"
+                    name="company"
+                    placeholder={f.placeholders.company}
+                    className="min-h-11 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
+                  />
+                </label>
+
+                <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                  <span>
+                    {f.problem} <span className="text-red-500">*</span>
+                  </span>
+                  <textarea
+                    name="details"
+                    required
+                    rows={6}
+                    placeholder={f.placeholders.details}
+                    className="w-full resize-none border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:text-sm"
+                  />
+                </label>
+
+                <motion.button
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.99 }}
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="btn-outline w-full sm:w-auto disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {status === "sending" ? f.submitSending : f.submit}
+                </motion.button>
+
+                {feedback ? (
+                  <p
+                    className={`text-sm leading-snug ${
+                      status === "error" ? "text-red-400" : "text-[var(--white-90)]"
+                    }`}
+                    role="status"
+                  >
+                    {feedback}
+                  </p>
+                ) : null}
+              </motion.form>
+            </motion.section>
+
+            <motion.aside
+              initial={rise.initial}
+              animate={rise.animate}
+              transition={{ delay: 0.08, duration: 0.55 }}
+              className="panel border border-[var(--white-20)] bg-[var(--surface-elevated)] p-6 md:p-8"
+            >
+              <p className="section-label mb-3">{f.asideTitle}</p>
+              <div className="rule mb-6" />
+              <div className="space-y-6 text-sm">
+                <div>
+                  <p className="mb-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                    {f.responseWindow}
+                  </p>
+                  <p className="text-[var(--white-90)]">{f.responseWindowValue}</p>
+                </div>
+                <div>
+                  <p className="mb-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                    {f.initialOutput}
+                  </p>
+                  <p className="text-[var(--white-90)]">{f.initialOutputValue}</p>
+                </div>
+                <div>
+                  <p className="mb-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+                    {f.directEmail}
+                  </p>
+                  <a
+                    href={`mailto:${SITE_INQUIRY_EMAIL}`}
+                    className="text-[var(--white-100)] underline underline-offset-4"
+                  >
+                    {SITE_INQUIRY_EMAIL}
+                  </a>
+                </div>
+              </div>
+              <InquiryCalendar />
+            </motion.aside>
+          </div>
+        </div>
+      </main>
+      <SiteFooter rootPrefix="/" />
+    </>
+  );
+}

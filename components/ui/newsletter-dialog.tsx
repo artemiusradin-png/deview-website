@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Mail } from "lucide-react";
+import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -21,6 +22,7 @@ type NewsletterDialogProps = {
 };
 
 export function NewsletterDialog({ trigger, title, description, source }: NewsletterDialogProps) {
+  const { localePath } = useLocaleContext();
   const [email, setEmail] = React.useState("");
   const [status, setStatus] = React.useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -95,7 +97,7 @@ export function NewsletterDialog({ trigger, title, description, source }: Newsle
 
         <p className="text-center text-xs text-[var(--text-muted)]">
           By subscribing you agree to our{" "}
-          <a className="underline hover:no-underline" href="/privacy" target="_blank" rel="noopener">
+          <a className="underline hover:no-underline" href={localePath("/privacy")} target="_blank" rel="noopener">
             Privacy Policy
           </a>
           .

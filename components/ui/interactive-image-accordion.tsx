@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
+import { LocaleLink } from "@/components/LocaleLink";
 import { homeSectionReveal } from "@/lib/home-section-motion";
 
 // Industry → cover image. Monochrome-friendly architectural/professional shots.
@@ -31,7 +31,7 @@ type AccordionPanelProps = {
 
 function AccordionPanel({ label, href, imageUrl, isActive, onActivate }: AccordionPanelProps) {
   return (
-    <Link
+    <LocaleLink
       href={href}
       onMouseEnter={onActivate}
       onFocus={onActivate}
@@ -71,7 +71,7 @@ function AccordionPanel({ label, href, imageUrl, isActive, onActivate }: Accordi
       >
         {label}
       </span>
-    </Link>
+    </LocaleLink>
   );
 }
 
@@ -99,16 +99,15 @@ export function LandingAccordionItem() {
               {s.titleL2}
             </h2>
             <p className="mt-5 max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
-              Hover an industry to explore where we have deployed AI systems that
-              cut cost and automate operational work.
+              {s.description}
             </p>
             <div className="mt-7">
-              <Link
+              <LocaleLink
                 href="/case-studies"
                 className="inline-block rounded-md border border-[var(--white-20)] px-7 py-3 text-[0.7rem] font-medium uppercase tracking-[0.16em] text-[var(--white-70)] transition-colors hover:border-[var(--white-40)] hover:text-[var(--white-100)]"
               >
-                See case studies
-              </Link>
+                {s.cta}
+              </LocaleLink>
             </div>
           </div>
 

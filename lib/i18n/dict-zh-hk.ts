@@ -14,6 +14,11 @@ export const zhHK: Dictionary = {
     useCases: "應用場景",
     outcomes: "成效成果",
     inquire: "立即查詢",
+    caseStudies: "案例研究",
+    insights: "洞察文章",
+    about: "關於我們",
+    howWeWork: "工作流程",
+    faq: "常見問題",
   },
   a11y: {
     openMenu: "開啟選單",
@@ -23,8 +28,9 @@ export const zhHK: Dictionary = {
     themeToDark: "切換暗色模式",
     langToZh: "切換為粵語（繁體中文）",
     langToEn: "切換為英文",
+    langToDe: "切換為德文",
   },
-  lang: { shortEn: "EN", shortZh: "粵" },
+  lang: { shortEn: "EN", shortZh: "粵", shortDe: "DE" },
   mobileNav: { close: "關閉", contactForm: "聯絡表格" },
   hero: {
     kicker: "降低成本 · 自動化工作流程 · 加速業務推進",
@@ -393,6 +399,13 @@ export const zhHK: Dictionary = {
       sendInquiry: "發送查詢",
       clientPortal: "客戶專區",
       aiGuide: "AI 指南 — 貸款",
+      aboutDeView: "關於DeView",
+      howWeWork: "工作流程",
+      caseStudies: "案例研究",
+      roiCalculator: "ROI計算器",
+      insightsArticles: "洞察與文章",
+      insuranceAi: "保險AI",
+      applications: "應用",
     },
   },
   subpages: {
@@ -461,6 +474,23 @@ export const zhHK: Dictionary = {
     titleL1: "務實的 AI 實踐指南——",
     titleL2: "不炒概念，不做廠商背書。",
     viewAll: "查看所有文章 →",
+    articles: [
+      {
+        label: "AI實施",
+        title: "為什麼大多數AI試點項目失敗——以及成功案例的共同點",
+        readTime: "6分鐘閱讀",
+      },
+      {
+        label: "文件自動化",
+        title: "文件自動化：在構建之前需要回答的四個問題",
+        readTime: "5分鐘閱讀",
+      },
+      {
+        label: "AI策略",
+        title: "在運營團隊中最快實現投資回報的四個AI項目",
+        readTime: "7分鐘閱讀",
+      },
+    ],
   },
   testimonials: {
     sectionLabel: "客戶評價",
@@ -486,6 +516,8 @@ export const zhHK: Dictionary = {
     sectionLabel: "服務行業",
     titleL1: "喺 AI 最具價值嘅",
     titleL2: "行業深耕細作。",
+    description: "將滑鼠移至行業上，了解我們在哪些領域部署了降低成本和自動化運營的AI系統。",
+    cta: "查看案例研究",
     tiles: [
       { id: "lending", label: "貸款及金融", href: "/industries/lending" },
       { id: "insurance", label: "保險", href: "/industries/insurance" },
@@ -516,5 +548,111 @@ export const zhHK: Dictionary = {
     submitSuccess: "已收到你的查詢，我們會在一至兩個工作天內回覆。",
     submitSuccessMailto: "應該已開啟你的電郵程式並填好草稿，請發送郵件以完成查詢。",
     submitError: "暫時無法傳送，請稍後再試，或使用右側電郵地址直接聯絡我們。",
+  },
+  featuredAgro: {
+    sectionLabel: "重點部署案例 · 農業",
+    title: "走進AgroPlatforma — 全國農業網絡的AI田間診斷系統",
+    subtitle: "基於Claude（經Vertex AI）、Salesforce及Flutter的三智能體系統——將田間到報價的流程從約40分鐘縮短至30秒以內。",
+    phasedTitle: "分階段交付",
+    phasedBody: "田間到報價的工作流程被重建為共享後端上的三個AI智能體。每個模組都擴展同一個數據飛輪，而無需重寫底層架構。",
+    readCaseStudy: "閱讀完整案例研究",
+    mobileSummary: "共享後端上的三個AI智能體將田間到報價的流程從約40分鐘縮短至30秒以內——包含20,000個產品的即時目錄、Salesforce原生報價草稿以及基於同一審計軌跡的供應商分析。",
+    phases: [
+      {
+        title: "共享後端基礎設施",
+        subtitle: "Phase 0 · 基礎設施",
+        description: "建立以審計為先的骨幹架構，讓每個智能體都能在此基礎上運行，使各模組可獨立交付，無需重新構建認證、存儲或數據層。",
+      },
+      {
+        title: "Block A — 農業視覺專家 (v1)",
+        subtitle: "Phase 1 · 診斷與建議",
+        description: "田間顧問在現場拍攝受影響的作物。Claude（多模態，經Vertex AI）從20,000產品的即時目錄中返回診斷結果和排序的SKU推薦。",
+      },
+      {
+        title: "Block B — 智能運營與銷售",
+        subtitle: "Phase 2 · Salesforce原生報價草稿",
+        description: "診斷結果轉化為直接寫入Salesforce的報價草稿，包含替代方案、交叉銷售和替換規則——待顧問簽核後再發送給種植者。",
+      },
+      {
+        title: "Block D — 供應商分析",
+        subtitle: "Phase 2 · 供應商數據飛輪",
+        description: "將匿名診斷和交易數據聚合到供應商儀表板中，提供區域和產品分類。只讀、行級安全、完全可審計。",
+        items: [
+          "~20%新代碼——共享Expert和Operator的同一事件日誌",
+          "每個分析查詢都有行級安全控制",
+          "基於確定性SQL層的區域及產品分類",
+          "閉環：田間診斷 → 銷售 → 供應商情報",
+        ],
+      },
+    ],
+  },
+  featuredPortal: {
+    sectionLabel: "重點部署案例 · 金融/借貸",
+    title: "DeView統一門戶——為多公司借貸網絡提供AI驅動的借款人情報。",
+    subtitle: "一個平台服務五家借貸公司。過去需要數小時手動表格操作的工作——查詢借款人、跨公司檢查貸款、閱讀逾期通知、評估風險——現在只需一次搜索。",
+    phasedTitle: "分階段構建。",
+    phasedBody: "每個階段在同一基礎上增加新功能——一個共享門戶、一個借款人數據庫、一條審計軌跡。",
+    readCaseStudy: "閱讀完整案例研究",
+    mobileSummary: "一個平台，五家借貸公司。AI驅動的借款人情報、信用分析、郵件處理和文件管理——全部基於同一共享數據庫和審計軌跡。",
+    phases: [
+      {
+        title: "五家公司的共享骨幹系統",
+        subtitle: "基礎 · 門戶 + 數據庫",
+        description: "一切運行的共享骨幹。一個安全登錄、一個數據庫、一條審計軌跡。五家公司的員工登錄後只能看到其授權範圍內的內容——他們的公司、他們的借款人、他們的數據。每個操作都被記錄。",
+      },
+      {
+        title: "五項AI功能，一條審計軌跡",
+        subtitle: "AI層 · 構建於門戶之上",
+        description: "每個AI從同一借款人數據庫讀取並寫回同一審計軌跡。沒有數據孤島，沒有系統間的複製粘貼。",
+        capabilities: [
+          {
+            name: "AI信用分析師",
+            body: "一鍵生成任何借款人的完整案例摘要——包括貸款歷史、還款行為、風險信號和跨五家公司的逾期狀態，濃縮為可讀的敘述。取代20分鐘的人工檔案審查。",
+          },
+          {
+            name: "智能體AI助理",
+            body: "員工用自然語言提問關於借款人或投資組合的問題，獲得基於實時數據的答案。不是聊天機器人——是查詢真實數據庫的分析師。",
+          },
+          {
+            name: "AI郵件處理",
+            body: "收到的郵件詢問和潛在客戶由AI自動解析為結構化記錄——姓名、貸款金額、用途、聯繫方式——並路由到審查隊列。",
+          },
+          {
+            name: "AI文件處理",
+            body: "借款人附件、合同和案例文件經處理後與正確的借款人檔案關聯，在360度借款人視圖中可搜索和查看。",
+          },
+          {
+            name: "AI提示詞管理",
+            body: "運營人員可以直接通過管理面板編輯AI指令——強調什麼、如何格式化摘要、標記哪些風險信號——無需觸碰代碼。",
+          },
+        ],
+      },
+    ],
+  },
+  partners: {
+    sectionLabel: "信賴夥伴",
+    selectedProjects: "精選項目：",
+  },
+  lendingGuide: {
+    badge: "優先處理",
+    title: "免費借貸AI自動化指南",
+    description: "AI可以安全地自動化",
+    steps: [
+      {
+        title: "在連接核心貸款系統之前可以運行的四個最安全的AI試點",
+        text: "在連接核心貸款系統之前可以運行的四個最安全的AI試點",
+      },
+      {
+        title: "文件審查、借款人跟進和CRM交接通常最浪費時間的地方",
+        text: "文件審查、借款人跟進和CRM交接通常最浪費時間的地方",
+      },
+      {
+        title: "借款人數據、審批、權限和可審計性的實用測試路徑",
+        text: "借款人數據、審批、權限和可審計性的實用測試路徑",
+      },
+    ],
+    stats: ["風險評分", "試點就緒", "借款人數據感知"],
+    ctaButton: "發送給我指南",
+    ctaDisclaimer: "無需訂閱電子報。我們發送指南，僅在有用時提供一個實用的下一步選項。",
   },
 };

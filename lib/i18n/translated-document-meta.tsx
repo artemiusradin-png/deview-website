@@ -6,12 +6,14 @@ import { useLocaleContext } from "./locale-context";
 import type { Dictionary } from "./dict-en";
 
 function metaForPath(pathname: string, d: Dictionary): { title: string; description: string } | null {
-  if (pathname === "/") {
+  const stripped = pathname.replace(/^\/(en|zh-HK|de)/, "") || "/";
+  const p = stripped;
+  if (p === "/") {
     return { title: d.site.title, description: d.site.description };
   }
   const sp = d.subpages;
   const arch = d.architecturePage;
-  switch (pathname) {
+  switch (p) {
     case "/services":
       return { title: sp.servicesTitle, description: sp.servicesDesc };
     case "/use-cases":
