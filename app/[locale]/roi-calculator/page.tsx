@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SubpageNav } from "@/components/SubpageNav";
+import { useLocaleContext } from "@/lib/i18n/locale-context";
 
 function Slider({
   label,
@@ -48,6 +49,8 @@ function Slider({
 const HOURLY_RATE = 35;
 
 export default function RoiCalculatorPage() {
+  const { dict } = useLocaleContext();
+
   // Document processing
   const [docsPerWeek, setDocsPerWeek] = useState(100);
   const [minsPerDoc, setMinsPerDoc] = useState(12);
@@ -74,20 +77,20 @@ export default function RoiCalculatorPage() {
   const monthlySavings = totalHoursSaved * HOURLY_RATE;
   const annualSavings = monthlySavings * 12;
 
-  const formatHours = (h: number) => `${Math.round(h)} hrs`;
+  const formatHours = (h: number) => `${Math.round(h)} ${dict.roiCalculatorPage.units.hrs}`;
   const formatCurrency = (n: number) =>
     new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
 
   const sections = [
     {
-      label: "Document Processing",
-      description: "Manual reading, classifying, extracting, and routing of inbound documents.",
-      rate: `${Math.round(DOC_AUTOMATION * 100)}% automated by AI`,
+      label: dict.roiCalculatorPage.sections[0].label,
+      description: dict.roiCalculatorPage.sections[0].description,
+      rate: `${Math.round(DOC_AUTOMATION * 100)}% ${dict.roiCalculatorPage.automatedBy}`,
       hoursSaved: docHoursSaved,
       sliders: (
         <div className="space-y-6">
           <Slider
-            label="Documents processed per week"
+            label={dict.roiCalculatorPage.sliders.docsPerWeek}
             value={docsPerWeek}
             min={10}
             max={1000}
@@ -96,26 +99,26 @@ export default function RoiCalculatorPage() {
             onChange={setDocsPerWeek}
           />
           <Slider
-            label="Average minutes per document (manual)"
+            label={dict.roiCalculatorPage.sliders.minsPerDoc}
             value={minsPerDoc}
             min={2}
             max={30}
             step={1}
-            format={(v) => `${v} min`}
+            format={(v) => `${v} ${dict.roiCalculatorPage.units.min}`}
             onChange={setMinsPerDoc}
           />
         </div>
       ),
     },
     {
-      label: "Customer Support",
-      description: "Drafting replies, retrieving account context, classifying and routing tickets.",
-      rate: `${Math.round(SUPPORT_AUTOMATION * 100)}% handle-time reduction`,
+      label: dict.roiCalculatorPage.sections[1].label,
+      description: dict.roiCalculatorPage.sections[1].description,
+      rate: `${Math.round(SUPPORT_AUTOMATION * 100)}% ${dict.roiCalculatorPage.handleTimeReduction}`,
       hoursSaved: supportHoursSaved,
       sliders: (
         <div className="space-y-6">
           <Slider
-            label="Support tickets per day"
+            label={dict.roiCalculatorPage.sliders.ticketsPerDay}
             value={ticketsPerDay}
             min={10}
             max={500}
@@ -124,26 +127,26 @@ export default function RoiCalculatorPage() {
             onChange={setTicketsPerDay}
           />
           <Slider
-            label="Average minutes per ticket (manual)"
+            label={dict.roiCalculatorPage.sliders.minsPerTicket}
             value={minsPerTicket}
             min={3}
             max={30}
             step={1}
-            format={(v) => `${v} min`}
+            format={(v) => `${v} ${dict.roiCalculatorPage.units.min}`}
             onChange={setMinsPerTicket}
           />
         </div>
       ),
     },
     {
-      label: "Reporting & Research",
-      description: "Recurring management packs, pipeline summaries, and compliance reports.",
-      rate: `${Math.round(REPORT_AUTOMATION * 100)}% of drafting automated`,
+      label: dict.roiCalculatorPage.sections[2].label,
+      description: dict.roiCalculatorPage.sections[2].description,
+      rate: `${Math.round(REPORT_AUTOMATION * 100)}% ${dict.roiCalculatorPage.draftingAutomated}`,
       hoursSaved: reportHoursSaved,
       sliders: (
         <div className="space-y-6">
           <Slider
-            label="Reports produced per month"
+            label={dict.roiCalculatorPage.sliders.reportsPerMonth}
             value={reportsPerMonth}
             min={1}
             max={20}
@@ -152,12 +155,12 @@ export default function RoiCalculatorPage() {
             onChange={setReportsPerMonth}
           />
           <Slider
-            label="Hours to produce each report (manual)"
+            label={dict.roiCalculatorPage.sliders.hoursPerReport}
             value={hoursPerReport}
             min={1}
             max={20}
             step={0.5}
-            format={(v) => `${v} hrs`}
+            format={(v) => `${v} ${dict.roiCalculatorPage.units.hrs}`}
             onChange={setHoursPerReport}
           />
         </div>
@@ -173,14 +176,14 @@ export default function RoiCalculatorPage() {
 
           {/* Header */}
           <div className="mb-12">
-            <p className="section-label mb-3">ROI CALCULATOR</p>
+            <p className="section-label mb-3">{dict.roiCalculatorPage.sectionLabel}</p>
             <div className="rule mb-6" />
             <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
               <h1 className="text-[clamp(1.5rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
-                Estimate what AI automation could save your team.
+                {dict.roiCalculatorPage.h1}
               </h1>
               <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
-                Adjust the sliders to match your current volumes. The estimate uses a conservative automation rate — real results depend on your specific workflow.
+                {dict.roiCalculatorPage.subtitle}
               </p>
             </div>
           </div>
@@ -196,19 +199,19 @@ export default function RoiCalculatorPage() {
                       <p className="mt-0.5 text-[0.72rem] text-[var(--text-muted)]">{s.description}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-[0.6rem] uppercase tracking-[0.18em] text-[var(--white-40)]">AI saves</p>
-                      <p className="text-base text-[var(--white-100)]">{formatHours(s.hoursSaved)}/mo</p>
+                      <p className="text-[0.6rem] uppercase tracking-[0.18em] text-[var(--white-40)]">{dict.roiCalculatorPage.aiSaves}</p>
+                      <p className="text-base text-[var(--white-100)]">{formatHours(s.hoursSaved)}{dict.roiCalculatorPage.perMonth}</p>
                     </div>
                   </div>
                   {s.sliders}
                   <p className="mt-4 text-[0.6rem] uppercase tracking-[0.18em] text-[var(--white-30)]">
-                    Assumption: {s.rate}
+                    {dict.roiCalculatorPage.assumption}: {s.rate}
                   </p>
                 </div>
               ))}
 
               <p className="text-[0.7rem] leading-relaxed text-[var(--text-muted)]">
-                Calculations use a blended operational staff rate of ${HOURLY_RATE}/hr. Actual savings depend on your team composition, automation rate achieved, and volume. Use this as an order-of-magnitude estimate, not a contract.
+                {dict.roiCalculatorPage.disclaimer.replace("$RATE", String(HOURLY_RATE))}
               </p>
             </div>
 
@@ -216,7 +219,7 @@ export default function RoiCalculatorPage() {
             <div className="lg:sticky lg:top-24">
               <div className="border border-[var(--white-20)] bg-[var(--surface)] p-6">
                 <p className="mb-4 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
-                  Estimated savings
+                  {dict.roiCalculatorPage.estimatedSavings}
                 </p>
 
                 <div className="mb-6 space-y-4">
@@ -224,14 +227,14 @@ export default function RoiCalculatorPage() {
                     <div key={s.label} className="flex items-center justify-between gap-4">
                       <p className="text-[0.72rem] text-[var(--text-muted)]">{s.label}</p>
                       <p className="shrink-0 text-sm text-[var(--white-80)]">
-                        {formatHours(s.hoursSaved)}/mo
+                        {formatHours(s.hoursSaved)}{dict.roiCalculatorPage.perMonth}
                       </p>
                     </div>
                   ))}
                   <div className="rule" />
                   <div className="flex items-center justify-between gap-4">
                     <p className="text-[0.72rem] uppercase tracking-[0.15em] text-[var(--white-60)]">
-                      Total hours / month
+                      {dict.roiCalculatorPage.totalHoursMonth}
                     </p>
                     <p className="shrink-0 text-base text-[var(--white-100)]">
                       {formatHours(totalHoursSaved)}
@@ -241,13 +244,13 @@ export default function RoiCalculatorPage() {
 
                 <div className="mb-6 border border-[var(--white-20)] bg-[var(--background)] p-4">
                   <p className="mb-1 text-[0.55rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
-                    Monthly savings estimate
+                    {dict.roiCalculatorPage.monthlySavingsEstimate}
                   </p>
                   <p className="text-[2rem] leading-none text-[var(--white-100)]">
                     {formatCurrency(monthlySavings)}
                   </p>
                   <p className="mt-1 text-[0.65rem] text-[var(--text-muted)]">
-                    {formatCurrency(annualSavings)} annualised
+                    {formatCurrency(annualSavings)} {dict.roiCalculatorPage.annualised}
                   </p>
                 </div>
 
@@ -255,22 +258,22 @@ export default function RoiCalculatorPage() {
                   href={`/contact?note=${encodeURIComponent(`Estimated ${formatHours(totalHoursSaved)}/mo saved across document processing, support, and reporting. Annual estimate: ${formatCurrency(annualSavings)}.`)}`}
                   className="btn-outline block text-center"
                 >
-                  Validate this with us →
+                  {dict.roiCalculatorPage.validateCta}
                 </a>
                 <p className="mt-3 text-center text-[0.6rem] text-[var(--white-30)]">
-                  We&apos;ll review your actual workflows and give you a more accurate figure.
+                  {dict.roiCalculatorPage.validateNote}
                 </p>
               </div>
 
               {/* Benchmark */}
               <div className="mt-4 border border-[var(--white-20)] bg-[var(--surface)] p-5">
                 <p className="mb-3 text-[0.55rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
-                  From live deployments
+                  {dict.roiCalculatorPage.fromLiveDeployments}
                 </p>
                 <div className="space-y-2 text-[0.72rem] text-[var(--text-muted)]">
-                  <p>— Document automation: 60–94% manual time reduction</p>
-                  <p>— Support AI: 30–50% handle time reduction</p>
-                  <p>— Reporting copilot: 70–90% draft time reduction</p>
+                  {dict.roiCalculatorPage.benchmarks.map((b, i) => (
+                    <p key={i}>— {b}</p>
+                  ))}
                 </div>
               </div>
             </div>

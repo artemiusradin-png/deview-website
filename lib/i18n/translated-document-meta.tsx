@@ -26,6 +26,8 @@ function metaForPath(pathname: string, d: Dictionary): { title: string; descript
       return { title: arch.title, description: arch.description };
     case "/contact":
       return { title: sp.contactDocumentTitle, description: sp.contactDocumentDesc };
+    case "/industries/insurance":
+      return { title: d.insurancePage.title, description: d.insurancePage.description };
     default:
       return null;
   }

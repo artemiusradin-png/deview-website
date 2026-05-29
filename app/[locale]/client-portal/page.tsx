@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SubpageNav } from "@/components/SubpageNav";
 import { Particles } from "@/components/ui/particles";
+import { useLocaleContext } from "@/lib/i18n/locale-context";
+import type { Dictionary } from "@/lib/i18n/dict-en";
 
 const STORAGE_KEY = "deview-portal-ref";
 
@@ -47,13 +49,14 @@ function fileTypeIcon(fileType: Document["fileType"]) {
   return "FILE";
 }
 
-function formatDate(iso: string) {
-  return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric" }).format(
+function formatDate(iso: string, locale: string) {
+  const loc = locale === "zh-hk" ? "zh-HK" : locale === "de" ? "de-DE" : "en-US";
+  return new Intl.DateTimeFormat(loc, { year: "numeric", month: "long", day: "numeric" }).format(
     new Date(iso),
   );
 }
 
-function PortalView({ portal, onLogout }: { portal: Portal; onLogout: () => void }) {
+function PortalView({ portal, onLogout, t, locale }: { portal: Portal; onLogout: () => void; t: Dictionary["clientPortalPage"]; locale: string }) {
   const progress = portal.milestones.length > 0
     ? Math.round(((portal.currentStage) / portal.milestones.length) * 100)
     : 0;
@@ -67,13 +70,13 @@ function PortalView({ portal, onLogout }: { portal: Portal; onLogout: () => void
       {/* Header */}
       <div className="mb-8 flex flex-col gap-2 pb-8 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="section-label mb-1">PROJECT PORTAL</p>
+          <p className="section-label mb-1">{t.projectPortal}</p>
           <h1 className="hero-heading text-[clamp(1.4rem,4vw,2rem)]">{portal.projectTitle}</h1>
           <p className="mt-1 text-sm text-[var(--text-muted)]">{portal.clientName}</p>
         </div>
         <div className="flex flex-col items-start gap-1 sm:items-end">
           <span className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
-            Reference
+            {t.referenceLabel}
           </span>
           <span className="font-mono text-xs text-[var(--white-60)]">{portal.reference}</span>
           <button
@@ -81,7 +84,7 @@ function PortalView({ portal, onLogout }: { portal: Portal; onLogout: () => void
             onClick={onLogout}
             className="mt-1 text-[0.6rem] uppercase tracking-[0.15em] text-[var(--white-40)] underline-offset-2 hover:text-[var(--white-60)] hover:underline"
           >
-            Sign out
+            {t.signOut}
           </button>
         </div>
       </div>
@@ -89,7 +92,7 @@ function PortalView({ portal, onLogout }: { portal: Portal; onLogout: () => void
       {/* Progress bar */}
       <div className="mb-10">
         <div className="mb-2 flex justify-between text-[0.6rem] uppercase tracking-[0.15em] text-[var(--white-40)]">
-          <span>Overall progress</span>
+          <span>{t.overallProgress}</span>
           <span>{progress}%</span>
         </div>
         <div className="h-px w-full bg-[var(--white-10)]">
@@ -102,7 +105,7 @@ function PortalView({ portal, onLogout }: { portal: Portal; onLogout: () => void
 
       {/* Milestone timeline */}
       <section className="mb-12">
-        <p className="section-label mb-6">PROJECT MILESTONES</p>
+        <p className="section-label mb-6">{t.milestonesLabel}</p>
         <div className="flex flex-col gap-0">
           {portal.milestones.map((m, i) => {
             const status = milestoneStatus(i, portal.currentStage);
@@ -156,7 +159,7 @@ function PortalView({ portal, onLogout }: { portal: Portal; onLogout: () => void
                             : "text-[var(--white-20)]",
                       ].join(" ")}
                     >
-                      {status === "done" ? "Complete" : status === "active" ? "In progress" : "Upcoming"}
+                      {status === "done" ? t.statusComplete : status === "active" ? t.statusInProgress : t.statusUpcoming}
                     </span>
                   </div>
                   {m.description && (
@@ -179,7 +182,7 @@ function PortalView({ portal, onLogout }: { portal: Portal; onLogout: () => void
       {/* Documents */}
       {portal.documents.length > 0 && (
         <section className="mb-10">
-          <p className="section-label mb-4">PROJECT DOCUMENTS</p>
+          <p className="section-label mb-4">{t.documentsLabel}</p>
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {portal.documents.map((doc) => (
               <a
@@ -197,7 +200,7 @@ function PortalView({ portal, onLogout }: { portal: Portal; onLogout: () => void
                     {doc.name}
                   </p>
                   <p className="text-[0.6rem] text-[var(--white-30)]">
-                    {formatDate(doc.uploadedAt)}
+                    {formatDate(doc.uploadedAt, locale)}
                   </p>
                 </div>
                 <span className="flex-shrink-0 text-[var(--white-30)] group-hover:text-[var(--white-60)]">
@@ -210,13 +213,13 @@ function PortalView({ portal, onLogout }: { portal: Portal; onLogout: () => void
       )}
 
       <p className="text-[0.6rem] uppercase tracking-[0.12em] text-[var(--white-20)]">
-        Last updated {formatDate(portal.updatedAt)}
+        {t.lastUpdated} {formatDate(portal.updatedAt, locale)}
       </p>
     </motion.div>
   );
 }
 
-function LoginView({ onSuccess }: { onSuccess: (portal: Portal, reference: string) => void }) {
+function LoginView({ onSuccess, t }: { onSuccess: (portal: Portal, reference: string) => void; t: Dictionary["clientPortalPage"] }) {
   const [reference, setReference] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -238,19 +241,19 @@ function LoginView({ onSuccess }: { onSuccess: (portal: Portal, reference: strin
       const res = await fetch(`/api/client-portal/${encodeURIComponent(ref)}`);
       if (res.status === 404) {
         setStatus("error");
-        setErrorMsg("Agreement reference not found. Please check your reference and try again.");
+        setErrorMsg(t.notFound);
         return;
       }
       if (!res.ok) {
         setStatus("error");
-        setErrorMsg("Portal unavailable. Please try again later.");
+        setErrorMsg(t.unavailable);
         return;
       }
       const portal: Portal = await res.json();
       onSuccess(portal, ref);
     } catch {
       setStatus("error");
-      setErrorMsg("Could not connect to portal service. Please try again.");
+      setErrorMsg(t.connectError);
     }
   }
 
@@ -288,20 +291,19 @@ function LoginView({ onSuccess }: { onSuccess: (portal: Portal, reference: strin
         >
           {/* Branding */}
           <div className="space-y-1">
-            <p className="section-label">CLIENT PORTAL</p>
+            <p className="section-label">{t.portalLabel}</p>
             <h1 className="hero-heading text-[clamp(1.5rem,5vw,2rem)]">
-              Access your project portal
+              {t.heading}
             </h1>
             <p className="text-sm leading-relaxed text-[var(--text-muted)]">
-              Enter the Agreement Reference from your engagement documents to view your project
-              timeline and files.
+              {t.description}
             </p>
           </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-              Agreement Reference
+              {t.refLabel}
               <input
                 ref={inputRef}
                 type="text"
@@ -310,7 +312,7 @@ function LoginView({ onSuccess }: { onSuccess: (portal: Portal, reference: strin
                 required
                 autoComplete="off"
                 spellCheck={false}
-                placeholder="e.g. CLIENT-ACME-2024"
+                placeholder={t.refPlaceholder}
                 className="min-h-14 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-5 py-4 font-mono text-base uppercase tracking-[0.2em] text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:normal-case placeholder:tracking-normal placeholder:text-[var(--white-30)] focus:border-[var(--white-80)]"
               />
             </label>
@@ -333,14 +335,13 @@ function LoginView({ onSuccess }: { onSuccess: (portal: Portal, reference: strin
               disabled={status === "loading"}
               className="w-full border border-[var(--white-40)] bg-transparent px-8 py-4 text-[0.7rem] uppercase tracking-[0.2em] text-[var(--white-90)] transition-colors hover:border-[var(--white-90)] hover:text-[var(--white-100)] disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {status === "loading" ? "Verifying…" : "Open Portal →"}
+              {status === "loading" ? t.verifying : t.openPortal}
             </button>
           </form>
 
           {/* Footer note */}
           <p className="text-[0.65rem] leading-relaxed text-[var(--white-30)]">
-            Your reference is included in your signed engagement agreement from DeView. Need
-            help?{" "}
+            {t.footerNote}{" "}
             <a href="mailto:info@deviewai.com" className="text-[var(--white-50)] hover:text-[var(--white-80)]">
               info@deviewai.com
             </a>
@@ -352,6 +353,8 @@ function LoginView({ onSuccess }: { onSuccess: (portal: Portal, reference: strin
 }
 
 export default function ClientPortalPage() {
+  const { dict, locale } = useLocaleContext();
+  const t = dict.clientPortalPage;
   const [portal, setPortal] = useState<Portal | null>(null);
   const [hydrated, setHydrated] = useState(false);
 
@@ -394,7 +397,7 @@ export default function ClientPortalPage() {
 
   // Login view is full-screen with its own layout
   if (!portal) {
-    return <LoginView onSuccess={handleSuccess} />;
+    return <LoginView onSuccess={handleSuccess} t={t} />;
   }
 
   return (
@@ -405,7 +408,7 @@ export default function ClientPortalPage() {
 
           <div className="panel border border-[var(--white-20)] bg-[var(--surface)] p-5 md:p-10">
             <AnimatePresence mode="wait">
-              <PortalView key="portal" portal={portal} onLogout={handleLogout} />
+              <PortalView key="portal" portal={portal} onLogout={handleLogout} t={t} locale={locale} />
             </AnimatePresence>
           </div>
         </div>

@@ -5,14 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SubpageNav } from "@/components/SubpageNav";
+import { useLocaleContext } from "@/lib/i18n/locale-context";
 
 const GUIDE_URL = "/resources/ai-guide-lending/guide";
-
-const BULLETS = [
-  "A risk-scored priority list for the 10 lending workflows most likely to justify automation",
-  "Where document review, borrower follow-up, and CRM handoffs usually hide the most manual work",
-  "How to test AI with borrower data controls, access permissions, approval paths, and auditability in place",
-];
 
 const PERSONAL_EMAIL_DOMAINS = new Set([
   "gmail.com", "googlemail.com", "icloud.com", "me.com", "mac.com",
@@ -28,6 +23,8 @@ function isLikelyWorkEmail(email: string) {
 }
 
 export default function LeadMagnetPage() {
+  const { dict } = useLocaleContext();
+  const t = dict.aiGuideLandingPage;
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [feedback, setFeedback] = useState<string | null>(null);
 
@@ -45,7 +42,7 @@ export default function LeadMagnetPage() {
 
     if (!isLikelyWorkEmail(email)) {
       setStatus("error");
-      setFeedback("Please enter a valid email address.");
+      setFeedback(t.errorInvalidEmail);
       return;
     }
 
@@ -64,14 +61,14 @@ export default function LeadMagnetPage() {
         setStatus("success");
       } else if (data.error === "invalid_email") {
         setStatus("error");
-        setFeedback("Please enter a valid email address.");
+        setFeedback(t.errorInvalidEmail);
       } else {
         setStatus("error");
-        setFeedback("Something went wrong — please try again.");
+        setFeedback(t.errorGeneric);
       }
     } catch {
       setStatus("error");
-      setFeedback("Something went wrong — please try again.");
+      setFeedback(t.errorGeneric);
     }
   }
 
@@ -93,18 +90,18 @@ export default function LeadMagnetPage() {
             >
               <div>
                 <p className="mb-5 label-xs text-[var(--white-30)]">
-                  Free guide · AI automation for lending teams · 10 practical use cases
+                  {t.tagline}
                 </p>
                 <h1 className="mb-5 text-[clamp(1.6rem,5vw,2.6rem)] font-semibold leading-[1.12] tracking-tight text-[var(--white-100)]">
-                  Prioritize the 10 lending workflows AI can automate safely
+                  {t.heading}
                 </h1>
                 <p className="max-w-lg text-sm leading-relaxed text-[var(--text-muted)]">
-                  Manual review, follow-up, and CRM cleanup slow lending teams long before core systems need to change. This guide helps you rank practical AI pilots by risk, effort, and ROI so you know what to automate first and how to protect borrower information from day one.
+                  {t.description}
                 </p>
               </div>
 
               <div className="flex flex-col gap-4">
-                {BULLETS.map((b) => (
+                {t.bullets.map((b) => (
                   <div key={b} className="flex items-start gap-4">
                     <span className="mt-[0.3rem] h-px w-4 shrink-0 bg-[var(--white-30)]" />
                     <span className="text-sm leading-snug text-[var(--white-80)]">{b}</span>
@@ -127,16 +124,16 @@ export default function LeadMagnetPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="border border-[var(--white-20)] bg-[var(--surface)] p-7"
                   >
-                    <p className="mb-3 label-xs text-[var(--white-40)]">Your guide is ready</p>
-                    <h2 className="mb-3 text-lg font-semibold text-[var(--white-100)]">Read it below — or bookmark this page to return to it.</h2>
+                    <p className="mb-3 label-xs text-[var(--white-40)]">{t.successLabel}</p>
+                    <h2 className="mb-3 text-lg font-semibold text-[var(--white-100)]">{t.successHeading}</h2>
                     <p className="mb-7 text-sm leading-relaxed text-[var(--text-muted)]">
-                      The full guide is below. If your situation matches one of the use cases closely, expect a short, specific follow-up from us within 1–2 days.
+                      {t.successBody}
                     </p>
                     <Link
                       href={GUIDE_URL}
                       className="btn-outline inline-block w-full text-center"
                     >
-                      Read the guide →
+                      {t.readGuide}
                     </Link>
                   </motion.div>
                 ) : (
@@ -146,7 +143,7 @@ export default function LeadMagnetPage() {
                     animate={{ opacity: 1 }}
                     className="border border-[var(--white-20)] bg-[var(--surface)] p-7"
                   >
-                    <p className="mb-2 label-xs text-[var(--white-40)]">Get the guide by email</p>
+                    <p className="mb-2 label-xs text-[var(--white-40)]">{t.formLabel}</p>
                     <div className="mb-6 h-px bg-[var(--white-10)]" />
 
                     <form className="space-y-5" onSubmit={handleSubmit}>
@@ -161,14 +158,14 @@ export default function LeadMagnetPage() {
                       />
 
                       <label className="flex flex-col gap-2 label-sm text-[var(--white-50)]">
-                        Work email
+                        {t.emailLabel}
                         <input
                           type="email"
                           name="email"
                           required
                           inputMode="email"
                           autoComplete="email"
-                          placeholder="name@company.com"
+                          placeholder={t.emailPlaceholder}
                           className="min-h-12 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 font-sans text-base normal-case tracking-normal text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-30)] focus:border-[var(--white-70)] sm:text-sm"
                         />
                       </label>
@@ -192,11 +189,11 @@ export default function LeadMagnetPage() {
                         disabled={status === "sending"}
                         className="btn-outline w-full disabled:cursor-not-allowed disabled:opacity-60"
                       >
-                        {status === "sending" ? "Sending…" : "Send me the guide →"}
+                        {status === "sending" ? t.sending : t.sendButton}
                       </button>
 
                       <p className="text-[0.6rem] leading-relaxed text-[var(--white-30)]">
-                        No newsletter subscription. We send the guide — and, only if useful, one practical next-step option for your lending workflow.
+                        {t.disclaimer}
                       </p>
                     </form>
                   </motion.div>
