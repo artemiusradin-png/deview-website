@@ -4,6 +4,7 @@ import { useState } from "react";
 import "./more-info.css";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SubpageNav } from "@/components/SubpageNav";
+import { useLocaleContext } from "@/lib/i18n/locale-context";
 
 /* ─────────────────────────────────────────
    SVG Diagrams (rendered as raw HTML for
@@ -169,6 +170,9 @@ function Flow({ steps }: { steps: string[] }) {
    Page
 ───────────────────────────────────────── */
 export default function MoreInfoPage() {
+  const { dict } = useLocaleContext();
+  const m = dict.moreInfoPage;
+
   return (
     <>
       <main className="min-h-screen overflow-x-clip bg-[var(--background)] pb-16 pt-[calc(5.5rem+env(safe-area-inset-top))]">
@@ -183,54 +187,58 @@ export default function MoreInfoPage() {
             ════════════════════════════════ */}
             <div className="module" id="mi-m1">
               <div className="module-header">
-                <div className="module-tag">Module 01</div>
-                <h1 className="module-title">The Big Picture</h1>
-                <p className="module-desc">What DeView builds, how our architecture is structured, and why production-grade AI is different from a demo.</p>
+                <div className="module-tag">{m.m1Tag}</div>
+                <h1 className="module-title">{m.m1Title}</h1>
+                <p className="module-desc">{m.m1Desc}</p>
               </div>
 
-              <h2 className="sh">The DeView Enterprise AI Architecture</h2>
-              <p className="intro-p">Every DeView engagement operates within a five-layer model. Understanding these layers lets you explain exactly where our work sits inside a client&apos;s existing technology estate.</p>
+              <h2 className="sh">{m.archHeading}</h2>
+              <p className="intro-p">{m.archIntro}</p>
               <div className="diag">
                 <div dangerouslySetInnerHTML={{ __html: SVG_ARCH }} />
-                <p className="diag-cap">Fig 1.1 — DeView&apos;s five-layer enterprise AI architecture. Every engagement touches all five layers.</p>
+                <p className="diag-cap">{m.archCaption}</p>
               </div>
 
-              <h2 className="sh">The Four AI Operating Modes</h2>
+              <h2 className="sh">{m.modesHeading}</h2>
               <div className="g2">
-                <div className="card">
-                  <div className="card-title">📈 Predictive <span className="badge b-blue">Data-driven</span></div>
-                  <p>Uses historical and real-time data to forecast outcomes. Examples: inventory demand forecasting, fraud detection scoring, credit risk assessment, workforce capacity planning.</p>
-                  <div style={{marginTop: 10}}><span className="tag">ML models</span><span className="tag">time-series</span><span className="tag">scoring APIs</span></div>
-                </div>
-                <div className="card">
-                  <div className="card-title">💬 Conversational <span className="badge b-green">User-facing</span></div>
-                  <p>AI-powered interfaces that respond to natural language. Examples: internal knowledge assistants, customer support bots, HR policy Q&amp;A, procurement request handling.</p>
-                  <div style={{marginTop: 10}}><span className="tag">LLMs</span><span className="tag">RAG</span><span className="tag">chat APIs</span></div>
-                </div>
-                <div className="card">
-                  <div className="card-title">✍️ Generative <span className="badge b-purple">Content</span></div>
-                  <p>AI that creates new documents at scale. Examples: automated report generation, loan application summaries, contract drafting, compliance document review.</p>
-                  <div style={{marginTop: 10}}><span className="tag">LLMs</span><span className="tag">templates</span><span className="tag">structured output</span></div>
-                </div>
-                <div className="card">
-                  <div className="card-title">🔬 Analytical <span className="badge b-cyan">Insight</span></div>
-                  <p>AI that surfaces hidden patterns. Examples: customer churn signals, pipeline health scoring, document classification, sentiment analysis on support tickets.</p>
-                  <div style={{marginTop: 10}}><span className="tag">NLP</span><span className="tag">classification</span><span className="tag">embeddings</span></div>
-                </div>
+                {m.modes.map((mode, i) => (
+                  <div className="card" key={i}>
+                    <div className="card-title">
+                      {mode.icon} {mode.name}{" "}
+                      <span className={`badge ${i === 0 ? "b-blue" : i === 1 ? "b-green" : i === 2 ? "b-purple" : "b-cyan"}`}>
+                        {mode.badge}
+                      </span>
+                    </div>
+                    <p>{mode.desc}</p>
+                    <div style={{ marginTop: 10 }}>
+                      {mode.tags.map((tag, j) => (
+                        <span className="tag" key={j}>{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
 
-              <h2 className="sh">Production-Grade vs. Proof-of-Concept</h2>
-              <div className="co co-info"><strong>Sales tip:</strong> Most prospects have already seen an AI demo. The real question they&apos;re asking is: &ldquo;Can this actually work inside our environment, with our data, under our security policies?&rdquo;</div>
+              <h2 className="sh">{m.prodHeading}</h2>
+              <div className="co co-info">
+                <strong>{m.prodTip}</strong> {m.prodTipText}
+              </div>
               <table className="dt">
-                <thead><tr><th>Dimension</th><th>Proof-of-Concept</th><th>DeView Production-Grade</th></tr></thead>
+                <thead>
+                  <tr>
+                    <th>{m.prodColumns.dimension}</th>
+                    <th>{m.prodColumns.poc}</th>
+                    <th>{m.prodColumns.production}</th>
+                  </tr>
+                </thead>
                 <tbody>
-                  <tr><td>Data</td><td className="comp-bad">Sample CSV or synthetic data</td><td className="comp-good">✓ Live integrations with real CRM / ERP</td></tr>
-                  <tr><td>Security</td><td className="comp-bad">No auth, shared API keys</td><td className="comp-good">✓ Role-based access, audit logs, isolated tenants</td></tr>
-                  <tr><td>Reliability</td><td className="comp-bad">Demo environment, no SLA</td><td className="comp-good">✓ Uptime monitoring, error handling, fallback logic</td></tr>
-                  <tr><td>Monitoring</td><td className="comp-bad">None</td><td className="comp-good">✓ Drift detection, evaluation pipelines, alerting</td></tr>
-                  <tr><td>Integration</td><td className="comp-bad">Standalone, copy-paste workflow</td><td className="comp-good">✓ Embedded in existing tools and workflows</td></tr>
-                  <tr><td>Compliance</td><td className="comp-bad">Not considered</td><td className="comp-good">✓ Designed for regulated industries from day one</td></tr>
-                  <tr><td>Ownership</td><td className="comp-bad">Vendor lock-in, hosted platform</td><td className="comp-good">✓ Deployed in your environment — you own the system</td></tr>
+                  {m.prodRows.map((row, i) => (
+                    <tr key={i}>
+                      <td>{row.dim}</td>
+                      <td className="comp-bad">{row.poc}</td>
+                      <td className="comp-good">✓ {row.prod}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -242,61 +250,149 @@ export default function MoreInfoPage() {
             ════════════════════════════════ */}
             <div className="module" id="mi-m2">
               <div className="module-header">
-                <div className="module-tag">Module 02</div>
-                <h1 className="module-title">Services Deep Dive</h1>
-                <p className="module-desc">A technical breakdown of each DeView service — how it works, what it connects to, and what the client receives.</p>
+                <div className="module-tag">{m.m2Tag}</div>
+                <h1 className="module-title">{m.m2Title}</h1>
+                <p className="module-desc">{m.m2Desc}</p>
               </div>
 
-              <h2 className="sh">① AI Workflow Audit</h2>
+              <h2 className="sh">① {m.svc1Heading}</h2>
               <div className="g2">
-                <div className="card"><div className="card-title">What it is</div><p>A structured analysis of one business process to identify the highest-value AI automation entry point. Delivered as a scoped report with a concrete, costed implementation pathway.</p></div>
-                <div className="card"><div className="card-title">What the client receives</div><ul className="cl"><li><strong>Process map</strong> annotated with bottleneck markers</li><li><strong>Automation score</strong> per process step (effort vs. impact)</li><li><strong>Top use case</strong> with rough ROI estimate</li><li><strong>Implementation roadmap</strong> phased into 3 stages</li></ul></div>
+                <div className="card">
+                  <div className="card-title">{m.svc1WhatTitle}</div>
+                  <p>{m.svc1WhatBody}</p>
+                </div>
+                <div className="card">
+                  <div className="card-title">{m.svc1RecTitle}</div>
+                  <ul className="cl">
+                    {m.svc1RecItems.map((item, i) => {
+                      const [bold, ...rest] = item.split(" ");
+                      return (
+                        <li key={i}><strong>{bold}</strong> {rest.join(" ")}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </div>
-              <Flow steps={["📋 Process intake interview","🔍 Bottleneck mapping","📊 Automation scoring","🎯 Use case prioritization","📄 Roadmap delivery"]} />
+              <Flow steps={m.svc1Flow.map((s, i) => {
+                const icons = ["📋", "🔍", "📊", "🎯", "📄"];
+                return `${icons[i] ?? ""} ${s}`;
+              })} />
 
               <div className="divider" />
 
-              <h2 className="sh">② Internal Knowledge Assistant</h2>
-              <div className="co co-info"><strong>Key concept — RAG:</strong> Instead of guessing answers, the AI searches your company&apos;s actual documents, retrieves the most relevant sections, then answers — grounded only in those specific documents, with citations.</div>
-              <div className="g2">
-                <div className="card"><div className="card-title">How RAG works (for clients)</div><p>Think of it as giving the AI a private search engine over your company&apos;s documents. When someone asks a question, the AI searches first, finds the right policy or procedure, then answers — quoting the source. It never makes up an answer that isn&apos;t in your documents.</p></div>
-                <div className="card"><div className="card-title">What gets connected</div><ul className="cl"><li><strong>Confluence / Notion</strong> — internal wikis and runbooks</li><li><strong>SharePoint / Google Drive</strong> — file storage and policies</li><li><strong>PDF / Word documents</strong> — procedures and compliance docs</li><li><strong>Slack history</strong> — surfacing institutional knowledge</li></ul></div>
+              <h2 className="sh">② {m.svc2Heading}</h2>
+              <div className="co co-info">
+                <strong>{m.svc2Concept}</strong> {m.svc2ConceptBody}
               </div>
-              <Flow steps={["📁 Company docs ingested","✂️ Chunked & vectorized","🗄️ Stored in vector DB","❓ User asks question","🔍 Relevant chunks retrieved","💬 LLM answers with citations"]} />
+              <div className="g2">
+                <div className="card">
+                  <div className="card-title">{m.svc2RagTitle}</div>
+                  <p>{m.svc2RagBody}</p>
+                </div>
+                <div className="card">
+                  <div className="card-title">{m.svc2ConnTitle}</div>
+                  <ul className="cl">
+                    {m.svc2ConnItems.map((item, i) => {
+                      const parts = item.split(" — ");
+                      return (
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </div>
+              <Flow steps={m.svc2Flow.map((s, i) => {
+                const icons = ["📁", "✂️", "🗄️", "❓", "🔍", "💬"];
+                return `${icons[i] ?? ""} ${s}`;
+              })} />
 
               <div className="divider" />
 
-              <h2 className="sh">③ Document Automation</h2>
+              <h2 className="sh">③ {m.svc3Heading}</h2>
               <div className="g2">
-                <div className="card"><div className="card-title">What it automates</div><p>Repetitive document processing: extracting structured data from forms, classifying incoming document types, generating outputs from unstructured text, routing documents to the correct downstream workflow.</p></div>
-                <div className="card"><div className="card-title">Human-in-the-loop (a feature, not a limitation)</div><p>When AI confidence falls below the configured threshold, the document is flagged for human review rather than processed automatically. The system never silently makes a high-stakes mistake.</p></div>
+                <div className="card">
+                  <div className="card-title">{m.svc3AutoTitle}</div>
+                  <p>{m.svc3AutoBody}</p>
+                </div>
+                <div className="card">
+                  <div className="card-title">{m.svc3LoopTitle}</div>
+                  <p>{m.svc3LoopBody}</p>
+                </div>
               </div>
-              <Flow steps={["📄 Document received","🔤 OCR / text extraction","🤖 LLM parsing & classification","✅ Confidence check","🔀 Auto-process or human review","⚙️ Downstream system updated"]} />
+              <Flow steps={m.svc3Flow.map((s, i) => {
+                const icons = ["📄", "🔤", "🤖", "✅", "🔀", "⚙️"];
+                return `${icons[i] ?? ""} ${s}`;
+              })} />
 
               <div className="divider" />
 
-              <h2 className="sh">④ Customer Support Assistant</h2>
+              <h2 className="sh">④ {m.svc4Heading}</h2>
               <div className="g2">
-                <div className="card"><div className="card-title">How intelligent routing works</div><p>The AI classifies each message by intent and confidence score. High-confidence intents are handled automatically; ambiguous ones escalate to a human agent with full conversation context pre-populated.</p></div>
-                <div className="card"><div className="card-title">CRM integration behaviour</div><ul className="cl"><li><strong>Reads</strong> full customer history before composing a reply</li><li><strong>Logs</strong> every AI interaction to the CRM record</li><li><strong>Creates</strong> tickets or updates case records automatically</li><li><strong>Escalates</strong> with conversation context pre-loaded</li></ul></div>
+                <div className="card">
+                  <div className="card-title">{m.svc4RoutTitle}</div>
+                  <p>{m.svc4RoutBody}</p>
+                </div>
+                <div className="card">
+                  <div className="card-title">{m.svc4CrmTitle}</div>
+                  <ul className="cl">
+                    {m.svc4CrmItems.map((item, i) => {
+                      const parts = item.split(" ");
+                      return (
+                        <li key={i}><strong>{parts[0]}</strong> {parts.slice(1).join(" ")}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </div>
-              <Flow steps={["📨 Customer message","🎯 Intent classification","📚 KB + CRM lookup","💬 AI response generated","📝 CRM record updated"]} />
+              <Flow steps={m.svc4Flow.map((s, i) => {
+                const icons = ["📨", "🎯", "📚", "💬", "📝"];
+                return `${icons[i] ?? ""} ${s}`;
+              })} />
 
               <div className="divider" />
 
-              <h2 className="sh">⑤ Reporting &amp; Research Copilot</h2>
+              <h2 className="sh">⑤ {m.svc5Heading}</h2>
               <div className="g2">
-                <div className="card"><div className="card-title">What it replaces</div><p>Hours of manual data gathering, spreadsheet consolidation, and report drafting. The AI connects directly to data sources, queries them on schedule, summarizes findings in your preferred format, and delivers the report automatically.</p></div>
-                <div className="card"><div className="card-title">Data connectors</div><ul className="cl"><li><strong>SQL databases</strong> — direct query via read-only credentials</li><li><strong>BI tools</strong> — Tableau, Power BI, Looker exports</li><li><strong>APIs</strong> — internal and third-party data feeds</li><li><strong>Spreadsheets</strong> — Google Sheets, Excel via scheduled sync</li></ul></div>
+                <div className="card">
+                  <div className="card-title">{m.svc5ReplTitle}</div>
+                  <p>{m.svc5ReplBody}</p>
+                </div>
+                <div className="card">
+                  <div className="card-title">{m.svc5ConnTitle}</div>
+                  <ul className="cl">
+                    {m.svc5ConnItems.map((item, i) => {
+                      const parts = item.split(" — ");
+                      return (
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </div>
-              <Flow steps={["🔗 Data source connected","⏰ Scheduled data pull","🤖 LLM summarizes & formats","📊 Report structured","📧 Delivered to stakeholders"]} />
+              <Flow steps={m.svc5Flow.map((s, i) => {
+                const icons = ["🔗", "⏰", "🤖", "📊", "📧"];
+                return `${icons[i] ?? ""} ${s}`;
+              })} />
 
               <div className="divider" />
 
-              <h2 className="sh">⑥ AI Implementation Advisory</h2>
+              <h2 className="sh">⑥ {m.svc6Heading}</h2>
               <div className="g2">
-                <div className="card"><div className="card-title">What makes this different</div><p>Recommendations scoped to the client&apos;s actual tech stack, team capabilities, and data readiness. Output is a prioritised roadmap with effort/impact scoring — not a slide deck full of buzzwords.</p></div>
-                <div className="card"><div className="card-title">Assessment dimensions</div><ul className="cl"><li><strong>Data readiness</strong> — quality, availability, governance</li><li><strong>Integration feasibility</strong> — existing systems audit</li><li><strong>Team capability</strong> — skill gaps and training needs</li><li><strong>ROI modelling</strong> — time and cost savings per use case</li></ul></div>
+                <div className="card">
+                  <div className="card-title">{m.svc6DiffTitle}</div>
+                  <p>{m.svc6DiffBody}</p>
+                </div>
+                <div className="card">
+                  <div className="card-title">{m.svc6DimTitle}</div>
+                  <ul className="cl">
+                    {m.svc6DimItems.map((item, i) => {
+                      const parts = item.split(" — ");
+                      return (
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </div>
             </div>
 
@@ -307,32 +403,41 @@ export default function MoreInfoPage() {
             ════════════════════════════════ */}
             <div className="module" id="mi-m3">
               <div className="module-header">
-                <div className="module-tag">Module 03</div>
-                <h1 className="module-title">Data Infrastructure</h1>
-                <p className="module-desc">How client data flows from existing source systems through DeView&apos;s AI pipelines — and back into the business.</p>
+                <div className="module-tag">{m.m3Tag}</div>
+                <h1 className="module-title">{m.m3Title}</h1>
+                <p className="module-desc">{m.m3Desc}</p>
               </div>
 
-              <h2 className="sh">Data Integration Map</h2>
+              <h2 className="sh">{m.dataMapHeading}</h2>
               <div className="diag">
                 <div dangerouslySetInnerHTML={{ __html: SVG_DATA }} />
-                <p className="diag-cap">Fig 3.1 — Data flow from client source systems through the ETL pipeline into the AI layer and back to business outputs.</p>
+                <p className="diag-cap">{m.dataMapCaption}</p>
               </div>
 
-              <h2 className="sh">Deployment Models</h2>
+              <h2 className="sh">{m.deployHeading}</h2>
               <div className="g3">
-                <div className="card"><div className="card-title"><span className="badge b-blue">Cloud-hosted</span></div><p style={{marginTop:8}}>Deployed within the client&apos;s own AWS, GCP, or Azure account. Data never leaves their cloud environment. DeView manages the deployment — not the data.</p></div>
-                <div className="card"><div className="card-title"><span className="badge b-green">On-premises</span></div><p style={{marginTop:8}}>Fully air-gapped within the client&apos;s physical or virtual infrastructure. Uses open-source models (Llama 3, Mistral) running locally. Required for highly regulated environments.</p></div>
-                <div className="card"><div className="card-title"><span className="badge b-amber">Hybrid</span></div><p style={{marginTop:8}}>Sensitive regulated data stays on-premises; non-sensitive processing uses cloud inference. Common in lending where some datasets are regulated and others aren&apos;t.</p></div>
+                <div className="card">
+                  <div className="card-title"><span className="badge b-blue">{m.deployCloud}</span></div>
+                  <p style={{ marginTop: 8 }}>{m.deployCloudBody}</p>
+                </div>
+                <div className="card">
+                  <div className="card-title"><span className="badge b-green">{m.deployOnPrem}</span></div>
+                  <p style={{ marginTop: 8 }}>{m.deployOnPremBody}</p>
+                </div>
+                <div className="card">
+                  <div className="card-title"><span className="badge b-amber">{m.deployHybrid}</span></div>
+                  <p style={{ marginTop: 8 }}>{m.deployHybridBody}</p>
+                </div>
               </div>
 
-              <h2 className="sh">Data Isolation &amp; Ownership</h2>
-              <div className="co co-ok"><strong>Key assurance for enterprise procurement:</strong> Each client deployment is fully isolated. No shared model learns from one client&apos;s data and applies it to another. Your data is never used to train general-purpose models.</div>
+              <h2 className="sh">{m.isoHeading}</h2>
+              <div className="co co-ok">
+                <strong>{m.isoCallout}</strong> {m.isoCalloutBody}
+              </div>
               <ul className="cl">
-                <li>Separate database schema or dedicated instance per client</li>
-                <li>API keys and credentials scoped exclusively to each deployment</li>
-                <li>Audit logs are client-specific and fully exportable on request</li>
-                <li>Data retention policies configurable per engagement agreement</li>
-                <li>Client retains full ownership — system lives in their environment</li>
+                {m.isoItems.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
               </ul>
             </div>
 
@@ -343,35 +448,85 @@ export default function MoreInfoPage() {
             ════════════════════════════════ */}
             <div className="module" id="mi-m4">
               <div className="module-header">
-                <div className="module-tag">Module 04</div>
-                <h1 className="module-title">Security &amp; Compliance</h1>
-                <p className="module-desc">How DeView handles data security, access control, audit trails, and regulated industry requirements.</p>
+                <div className="module-tag">{m.m4Tag}</div>
+                <h1 className="module-title">{m.m4Title}</h1>
+                <p className="module-desc">{m.m4Desc}</p>
               </div>
 
-              <h2 className="sh">Security Boundary Map</h2>
+              <h2 className="sh">{m.secMapHeading}</h2>
               <div className="diag">
                 <div dangerouslySetInnerHTML={{ __html: SVG_SEC }} />
-                <p className="diag-cap">Fig 4.1 — Security boundaries. Sensitive credentials exist only server-side. The client never touches secrets directly.</p>
+                <p className="diag-cap">{m.secMapCaption}</p>
               </div>
 
-              <h2 className="sh">Security Measures</h2>
+              <h2 className="sh">{m.secMeasuresHeading}</h2>
               <div className="g2">
-                <div className="card"><div className="card-title">🔑 Access Control</div><ul className="cl"><li><strong>Role-based permissions</strong> — users see only what they need</li><li><strong>Service accounts</strong> — systems talk with scoped keys only</li><li><strong>Row-level security</strong> enforced at database layer</li><li><strong>Admin access</strong> server-side only, never client-side</li></ul></div>
-                <div className="card"><div className="card-title">📋 Audit &amp; Traceability</div><ul className="cl"><li><strong>Every AI action logged</strong> — who, when, what input, what output</li><li><strong>Immutable records</strong> — logs cannot be retroactively altered</li><li><strong>Export available</strong> — full audit trail for compliance review</li><li><strong>Timestamps</strong> — created_at / updated_at on all records</li></ul></div>
-                <div className="card"><div className="card-title">🛡️ Input Security</div><ul className="cl"><li><strong>Server-side validation</strong> — all input sanitised before processing</li><li><strong>Length limits</strong> — prevent injection and overflow attempts</li><li><strong>Honeypot fields</strong> — bot and spam detection on all endpoints</li><li><strong>Domain validation</strong> — rejects personal emails for B2B flows</li></ul></div>
-                <div className="card"><div className="card-title">🤖 AI-Specific Security</div><ul className="cl"><li><strong>Prompt injection mitigation</strong> — input sanitised before LLM</li><li><strong>Output filtering</strong> — AI responses screened before delivery</li><li><strong>Domain guardrails</strong> — model constrained to defined scope</li><li><strong>Confidence thresholds</strong> — low-confidence outputs escalate to humans</li></ul></div>
+                <div className="card">
+                  <div className="card-title">🔑 {m.secAccess}</div>
+                  <ul className="cl">
+                    {m.secAccessItems.map((item, i) => {
+                      const parts = item.split(" — ");
+                      return (
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
+                <div className="card">
+                  <div className="card-title">📋 {m.secAudit}</div>
+                  <ul className="cl">
+                    {m.secAuditItems.map((item, i) => {
+                      const parts = item.split(" — ");
+                      return (
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
+                <div className="card">
+                  <div className="card-title">🛡️ {m.secInput}</div>
+                  <ul className="cl">
+                    {m.secInputItems.map((item, i) => {
+                      const parts = item.split(" — ");
+                      return (
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
+                <div className="card">
+                  <div className="card-title">🤖 {m.secAi}</div>
+                  <ul className="cl">
+                    {m.secAiItems.map((item, i) => {
+                      const parts = item.split(" — ");
+                      return (
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </div>
 
-              <h2 className="sh">Regulatory Compliance Context</h2>
-              <div className="co co-warn"><strong>Sales guidance:</strong> DeView does not currently hold SOC 2 or ISO 27001 certifications. When a prospect asks, pivot to architecture: &ldquo;We&apos;re designed with these frameworks in mind and can provide full documentation for your security review team.&rdquo;</div>
+              <h2 className="sh">{m.regHeading}</h2>
+              <div className="co co-warn">
+                <strong>{m.regTip}</strong> {m.regTipText}
+              </div>
               <table className="dt">
-                <thead><tr><th>Regulation</th><th>Who it applies to</th><th>How DeView addresses it</th></tr></thead>
+                <thead>
+                  <tr>
+                    <th>{m.regColumns.regulation}</th>
+                    <th>{m.regColumns.who}</th>
+                    <th>{m.regColumns.how}</th>
+                  </tr>
+                </thead>
                 <tbody>
-                  <tr><td>GDPR</td><td>EU-based clients or clients handling EU personal data</td><td>Data stays in client-controlled cloud; data processing agreements available</td></tr>
-                  <tr><td>PDPO</td><td>Hong Kong personal data processing</td><td>Primary jurisdiction; data residency options built into HK deployments</td></tr>
-                  <tr><td>MAS TRM</td><td>Singapore financial institutions</td><td>Audit trail requirements met; model risk documentation available</td></tr>
-                  <tr><td>HKMA</td><td>HK banks and licensed lenders</td><td>On-premises deployment for regulated data; full audit exports</td></tr>
-                  <tr><td>SOC 2</td><td>US enterprise and SaaS buyers</td><td>Architecture follows SOC 2 principles; formal certification on roadmap</td></tr>
+                  {m.regRows.map((row, i) => (
+                    <tr key={i}>
+                      <td>{row.reg}</td>
+                      <td>{row.who}</td>
+                      <td>{row.how}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -383,32 +538,62 @@ export default function MoreInfoPage() {
             ════════════════════════════════ */}
             <div className="module" id="mi-m5">
               <div className="module-header">
-                <div className="module-tag">Module 05</div>
-                <h1 className="module-title">MLOps &amp; Monitoring</h1>
-                <p className="module-desc">How DeView ensures AI systems keep working correctly after they go live. Use this to answer &ldquo;what happens after deployment?&rdquo;</p>
+                <div className="module-tag">{m.m5Tag}</div>
+                <h1 className="module-title">{m.m5Title}</h1>
+                <p className="module-desc">{m.m5Desc}</p>
               </div>
 
-              <h2 className="sh">The MLOps Lifecycle</h2>
+              <h2 className="sh">{m.mlopsHeading}</h2>
               <div className="diag">
                 <div dangerouslySetInnerHTML={{ __html: SVG_MLOPS }} />
-                <p className="diag-cap">Fig 5.1 — MLOps lifecycle: Deploy → Monitor → Evaluate → Retrain → back to Deploy.</p>
+                <p className="diag-cap">{m.mlopsCaption}</p>
               </div>
 
               <div className="g2">
-                <div className="card"><div className="card-title" style={{color:"var(--gi-cyan)"}}>👁 Monitor — What is tracked</div><ul className="cl"><li><strong>Response latency</strong> — is the AI responding within SLA?</li><li><strong>Error rates</strong> — are requests failing or timing out?</li><li><strong>Input distribution</strong> — are query types shifting?</li><li><strong>Output consistency</strong> — are answers staying on-topic?</li></ul></div>
-                <div className="card"><div className="card-title" style={{color:"var(--gi-amber)"}}>📊 Evaluate — What is scored</div><ul className="cl"><li><strong>Accuracy</strong> — are answers factually correct?</li><li><strong>Relevance</strong> — are answers appropriate for each query?</li><li><strong>Drift score</strong> — how far has performance shifted from baseline?</li><li><strong>Human feedback</strong> — thumbs up/down signals from end users</li></ul></div>
+                <div className="card">
+                  <div className="card-title" style={{ color: "var(--gi-cyan)" }}>👁 {m.monitorTitle}</div>
+                  <ul className="cl">
+                    {m.monitorItems.map((item, i) => {
+                      const parts = item.split(" — ");
+                      return (
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
+                <div className="card">
+                  <div className="card-title" style={{ color: "var(--gi-amber)" }}>📊 {m.evaluateTitle}</div>
+                  <ul className="cl">
+                    {m.evaluateItems.map((item, i) => {
+                      const parts = item.split(" — ");
+                      return (
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </div>
 
-              <h2 className="sh">Model Drift — Explained Simply</h2>
-              <div className="co co-warn"><strong>What is drift?</strong> An AI model trained on last year&apos;s data may become less accurate as the world changes. A lending risk model trained before a rate hike may score applications differently than intended after the hike. Drift monitoring catches this before it causes problems.</div>
+              <h2 className="sh">{m.driftHeading}</h2>
+              <div className="co co-warn">
+                <strong>{m.driftCallout}</strong> {m.driftCalloutBody}
+              </div>
               <div className="g2">
-                <div className="card"><div className="card-title">Data drift</div><p>Incoming data starts looking different from the training data. Example: new product categories appear in queries the model wasn&apos;t trained on. Detected by comparing statistical distributions of inputs over time.</p></div>
-                <div className="card"><div className="card-title">Concept drift</div><p>The relationship between input and correct output changes. Example: customer sentiment language evolves and the model no longer interprets it correctly. Detected by declining accuracy scores on sampled outputs.</p></div>
+                <div className="card">
+                  <div className="card-title">{m.dataDrift}</div>
+                  <p>{m.dataDriftBody}</p>
+                </div>
+                <div className="card">
+                  <div className="card-title">{m.conceptDrift}</div>
+                  <p>{m.conceptDriftBody}</p>
+                </div>
               </div>
 
-              <h2 className="sh">Human-in-the-Loop Escalation</h2>
-              <Flow steps={["AI generates output","Confidence scored","High confidence → auto-deliver","Low confidence → human review","Human approves / corrects","Correction logged for retraining"]} />
-              <div className="co co-ok"><strong>Why this matters in sales:</strong> Human-in-the-loop is a professional risk management feature. Frame it as governance, not a limitation.</div>
+              <h2 className="sh">{m.hitlHeading}</h2>
+              <Flow steps={m.hitlFlow} />
+              <div className="co co-ok">
+                <strong>{m.hitlCallout}</strong> {m.hitlCalloutBody}
+              </div>
             </div>
 
             <div className="divider" />
@@ -418,33 +603,61 @@ export default function MoreInfoPage() {
             ════════════════════════════════ */}
             <div className="module" id="mi-m6">
               <div className="module-header">
-                <div className="module-tag">Module 06</div>
-                <h1 className="module-title">DeView&apos;s Own Technical Stack</h1>
-                <p className="module-desc">The infrastructure DeView runs on — demonstrating we operate with the same engineering standards we build for clients.</p>
+                <div className="module-tag">{m.m6Tag}</div>
+                <h1 className="module-title">{m.m6Title}</h1>
+                <p className="module-desc">{m.m6Desc}</p>
               </div>
 
               <table className="dt">
-                <thead><tr><th>Layer</th><th>Technology</th><th>Version</th><th>Purpose</th></tr></thead>
+                <thead>
+                  <tr>
+                    <th>{m.stackColumns.layer}</th>
+                    <th>{m.stackColumns.tech}</th>
+                    <th>{m.stackColumns.version}</th>
+                    <th>{m.stackColumns.purpose}</th>
+                  </tr>
+                </thead>
                 <tbody>
-                  <tr><td>Frontend</td><td><strong>Next.js + React</strong></td><td>16.2 / 19.2</td><td>Server-side rendering, App Router, API routes</td></tr>
-                  <tr><td>Language</td><td><strong>TypeScript</strong></td><td>5.x strict</td><td>Type-safe development — catches errors at compile time</td></tr>
-                  <tr><td>Styling</td><td><strong>Tailwind CSS</strong></td><td>4.x</td><td>Utility-first design system</td></tr>
-                  <tr><td>Animation</td><td><strong>Framer Motion</strong></td><td>11.x</td><td>Scroll-triggered reveals, reduced-motion support</td></tr>
-                  <tr><td>Database</td><td><strong>Supabase (PostgreSQL)</strong></td><td>Latest</td><td>Client portal data, lead capture, project milestones</td></tr>
-                  <tr><td>Email</td><td><strong>Resend + Web3Forms</strong></td><td>—</td><td>Multi-tier fallback delivery chain</td></tr>
-                  <tr><td>Hosting</td><td><strong>Netlify</strong></td><td>—</td><td>Serverless deployment, global CDN, automatic deploys</td></tr>
-                  <tr><td>Runtime</td><td><strong>Node.js</strong></td><td>20 LTS</td><td>Server-side API route execution</td></tr>
-                  <tr><td>i18n</td><td><strong>Custom context system</strong></td><td>—</td><td>English + Traditional Chinese (zh-HK)</td></tr>
+                  {m.stackRows.map((row, i) => (
+                    <tr key={i}>
+                      <td>{row.layer}</td>
+                      <td><strong>{row.tech}</strong></td>
+                      <td>{row.version}</td>
+                      <td>{row.purpose}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
 
-              <h2 className="sh">Client Portal Architecture</h2>
-              <Flow steps={["Client receives reference code","Enters code on portal page","API call to /api/client-portal","Server queries Supabase (RLS bypassed server-side only)","Portal + milestones returned","Timeline rendered with Framer Motion"]} />
+              <h2 className="sh">{m.portalHeading}</h2>
+              <Flow steps={m.portalFlow} />
               <div className="g2">
-                <div className="card"><div className="card-title">What clients see in their portal</div><ul className="cl"><li><strong>Project title</strong> and client name from Supabase</li><li><strong>Current stage indicator</strong> — which phase the engagement is in</li><li><strong>Milestone timeline</strong> — done / active / upcoming with animations</li><li><strong>Progress bar</strong> — currentStage ÷ total milestones</li></ul></div>
-                <div className="card"><div className="card-title">Security design</div><ul className="cl"><li><strong>Reference code</strong> acts as access token — no password required</li><li><strong>Server-side queries only</strong> — Supabase key never in browser</li><li><strong>is_active flag</strong> — any portal disabled instantly</li><li><strong>Fallback resilience</strong> — Task Manager API if Supabase unavailable</li></ul></div>
+                <div className="card">
+                  <div className="card-title">{m.portalViewTitle}</div>
+                  <ul className="cl">
+                    {m.portalViewItems.map((item, i) => {
+                      const parts = item.split(" — ");
+                      return (
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
+                <div className="card">
+                  <div className="card-title">{m.portalSecTitle}</div>
+                  <ul className="cl">
+                    {m.portalSecItems.map((item, i) => {
+                      const parts = item.split(" — ");
+                      return (
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </div>
-              <div className="co co-info"><strong>Credibility point:</strong> When a prospect asks &ldquo;have you built production systems like this before?&rdquo; — walk them through DeView&apos;s own infrastructure. A bilingual (English / Traditional Chinese) client portal backed by a production PostgreSQL database with proper access controls is a working demonstration of our engineering standards.</div>
+              <div className="co co-info">
+                <strong>{m.portalCredibility}</strong> {m.portalCredibilityBody}
+              </div>
             </div>
 
             <div className="divider" />
@@ -454,29 +667,17 @@ export default function MoreInfoPage() {
             ════════════════════════════════ */}
             <div className="module" id="mi-m7">
               <div className="module-header">
-                <div className="module-tag">Module 07</div>
-                <h1 className="module-title">Sales FAQ</h1>
-                <p className="module-desc">The 15 most common technical questions from enterprise prospects — with answers your sales team can use immediately.</p>
+                <div className="module-tag">{m.m7Tag}</div>
+                <h1 className="module-title">{m.m7Title}</h1>
+                <p className="module-desc">{m.m7Desc}</p>
               </div>
 
-              <FaqItem q="Where is our data stored?" a="Your data stays in your own environment. For cloud deployments, we deploy into your existing AWS, GCP, or Azure account — we never have persistent access to your data. For on-premises deployments, nothing leaves your physical network. DeView does not store client data in DeView-owned infrastructure." />
-              <FaqItem q="Can this connect to our existing CRM or ERP?" a="Yes. DeView builds native integrations with Salesforce, HubSpot, SAP, Oracle, and most SQL databases via standard APIs and connectors. Integration scope is agreed upfront during the AI Implementation Advisory phase so there are no surprises mid-project." />
-              <FaqItem q="What LLM do you use — is it OpenAI / ChatGPT?" a="We are model-agnostic and select the best option for your use case and compliance requirements. Options include OpenAI GPT-4o, Anthropic Claude, Google Gemini, or open-source models like Llama 3 and Mistral for fully on-premises deployments where zero data leaves your network." />
-              <FaqItem q="Who has access to our data?" a="Access is scoped by role and enforced at both application and database level. Only the service accounts required for each specific integration have access. No DeView engineers hold standing access to production client data — any deployment access is time-limited and logged in full." />
-              <FaqItem q="What happens if the AI gives a wrong answer?" a="Every DeView deployment includes a human-in-the-loop escalation path. When the AI's confidence score falls below the threshold for your use case, it flags the item for human review rather than delivering a low-confidence answer automatically. All AI outputs are logged so any errors can be traced, corrected, and used to improve the model." />
-              <FaqItem q="Is this GDPR / PDPO compliant?" a="Our architecture is designed to support compliance with GDPR and Hong Kong's PDPO. Data stays in client-controlled environments, data processing agreements are available on request, data retention is configurable, and audit trails are fully exportable. We recommend your DPO review our architecture documentation as part of procurement." />
-              <FaqItem q="Can we run this on-premises?" a="Yes. For clients in regulated industries or with strict data residency requirements, we deploy fully air-gapped solutions using open-source models such as Llama 3 or Mistral. The AI never calls an external API — all inference runs locally on your infrastructure." />
-              <FaqItem q="What is the typical integration timeline?" a="An AI Workflow Audit delivers in 1–2 weeks. A fully deployed Internal Knowledge Assistant typically takes 4–8 weeks end-to-end. The AI Implementation Advisory phase (2 weeks) runs first and produces a detailed timeline specific to your stack and access approval process." />
-              <FaqItem q="How do we know it's working correctly after go-live?" a="Every production deployment includes monitoring dashboards showing AI performance metrics, accuracy scores, and drift indicators in real time. We also configure evaluation pipelines that run on a schedule and alert your team if performance degrades below agreed thresholds." />
-              <FaqItem q="What's the difference between this and us just using ChatGPT ourselves?" a="ChatGPT is a general-purpose tool with no access to your internal data, no integration with your systems, no audit trail, and no reliability guarantees. A DeView deployment is purpose-built: it knows your company's specific data, integrates with your CRM and documents, enforces your access controls, and includes monitoring. The gap is between a consumer tool and an enterprise system." />
-              <FaqItem q="Does your AI learn from our data and share it with other clients?" a="No. Each client deployment is fully isolated. Your data is never used to train shared models, and outputs from your deployment never influence another client's system. This is an architectural guarantee — there is no shared model layer across client deployments." />
-              <FaqItem q="Do you have SOC 2 or ISO 27001 certification?" a="We do not currently hold these certifications, though our architecture is built with their requirements in mind. For enterprise procurement, we can provide a detailed security architecture document, data flow diagrams, and completed security questionnaire responses for your security team." />
-              <FaqItem q="What happens to our AI system if we stop working with DeView?" a="Because deployments live in your own cloud account or on-premises infrastructure, you retain full ownership. The code, models, configuration, and data are all yours. DeView provides complete handover documentation. You are not locked into a DeView-controlled platform." />
-              <FaqItem q="Can the AI handle our industry-specific terminology?" a="Yes. During implementation we configure prompts and retrieval systems using the client's own internal documents, policy glossaries, and operational procedures. For lending clients, the assistant understands LTV, DSR, HIBOR, and facility terms because it's trained on your materials — not generic internet text." />
-              <FaqItem q="What level of support do we get after launch?" a="Post-launch support includes monitoring setup, a defined escalation path for performance issues, and scheduled review cycles to assess drift and retraining needs. DeView offers both a managed service model (DeView monitors and maintains) and a handover model (client team owns operations with DeView on retainer for major updates)." />
+              {m.faq.map((item, i) => (
+                <FaqItem key={i} q={item.q} a={item.a} />
+              ))}
             </div>
 
-            <div style={{height: 40}} />
+            <div style={{ height: 40 }} />
           </div>
           {/* end .gw */}
         </div>
