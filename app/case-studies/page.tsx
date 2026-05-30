@@ -85,6 +85,82 @@ const cases = [
       "Friday mornings used to be chaos. Now the draft is in our inbox before we arrive. We spend 20 minutes reviewing instead of a full day building.",
     quoteRole: "Chief Financial Officer, HK financial services company",
   },
+  {
+    number: "05",
+    sector: "NGO · GLOBAL",
+    service: "Document Automation",
+    headline: "Field-to-donor reporting cycle cut from 12 days to same-day delivery",
+    challenge:
+      "IRVA coordinates post-disaster building reconstruction across developing regions, managing 15–20 active sites with 400+ registered volunteer engineers and architects. Field teams submitted damage assessments, progress photos, and material requests via WhatsApp and email — nothing structured, nothing searchable. A 3-person HQ team spent 4+ hours daily copy-pasting updates into spreadsheets. Donor reports for 12 active grants — each with different KPI formats — took one coordinator 10–12 days per reporting cycle. Volunteer-to-project matching relied on memory and a shared Google Sheet.",
+    solution:
+      "DeView ran a workflow audit to map IRVA's coordination pipeline end-to-end, then built three integrated systems. First, a document automation layer that ingests WhatsApp messages and email attachments, classifies them by site and report type (damage assessment, progress update, material request, safety incident), extracts structured data, and writes it into a central project tracker. Second, a reporting copilot connected to the project database and each donor's reporting template — generating grant reports in the required format with one click. Third, a knowledge assistant indexing building codes, safety standards, and IRVA's construction playbooks across 30+ countries — so volunteers can ask 'What is the seismic foundation requirement for a two-storey school in Nepal?' and get a cited, current answer.",
+    outcomes: [
+      { metric: "92%", label: "reduction in HQ manual data processing time" },
+      { metric: "Same-day", label: "field-to-report turnaround (was 12 days)" },
+      { metric: "30+", label: "country building codes indexed and searchable" },
+      { metric: "6 weeks", label: "phased deployment across all active sites" },
+    ],
+    quote:
+      "Our reporting coordinator used to disappear for two weeks every quarter just to produce donor reports. Now she generates all twelve in a single morning and spends the rest of her time on what actually matters — getting materials to sites faster.",
+    quoteRole: "Programme Director, IRVA",
+  },
+  {
+    number: "06",
+    sector: "LOGISTICS · HONG KONG",
+    service: "Document Automation",
+    headline: "Customs documentation processing cut from 45 minutes to 4 minutes per shipment",
+    challenge:
+      "PacificPort Logistics handles 200+ ocean and air freight shipments daily through Hong Kong, connecting manufacturers across southern China with buyers in 40+ destination markets. Each shipment generates 6–12 documents — bills of lading, commercial invoices, packing lists, certificates of origin, customs declarations, and carrier manifests. Operations staff manually keyed data from each document into the TMS, cross-referencing tariff codes and compliance requirements. The process consumed 45 minutes per shipment and was the single largest bottleneck in the operation. Clients called or emailed 80–120 times per day asking for shipment status, ETAs, and document copies.",
+    solution:
+      "DeView deployed four connected systems. A document automation pipeline ingests all inbound shipping documents — PDF, scanned paper, and EDI — classifies each by document type, extracts structured fields (consignee, HS codes, weights, values, port pairs), validates against customs requirements for the destination market, and writes clean data directly into PacificPort's TMS. A customer support assistant handles inbound client enquiries — connected to live tracking data, it answers shipment status questions with real-time ETAs and links to relevant documents. A knowledge assistant indexes customs regulations, tariff schedules, and restricted-goods lists across 40+ trade lanes so operations staff get instant cited answers instead of searching government portals. A daily reporting copilot auto-generates the operations dashboard, exception alerts, and weekly carrier performance reports.",
+    outcomes: [
+      { metric: "91%", label: "reduction in per-shipment documentation time" },
+      { metric: "4 min", label: "average document processing time (was 45 min)" },
+      { metric: "70%", label: "of client enquiries resolved without human intervention" },
+      { metric: "5 weeks", label: "from kick-off to full production deployment" },
+    ],
+    quote:
+      "We used to have six people doing nothing but typing numbers from one document into another system. Now the data flows automatically and my team focuses on the shipments that actually need human judgment — the exceptions, the customs holds, the urgent re-routes.",
+    quoteRole: "General Manager, PacificPort Logistics",
+  },
+  {
+    number: "07",
+    sector: "LEGAL · HONG KONG",
+    service: "Document Automation",
+    headline: "Due diligence review time reduced from 3 days to 4 hours per transaction",
+    challenge:
+      "Ashford & Lam is a 45-lawyer commercial law firm in Hong Kong with practices in M&A, banking & finance, and corporate advisory. During due diligence, junior associates spent 60% of their billable time reading contracts — manually extracting key clauses, flagging non-standard terms, and building comparison matrices across stacks of 50–200 documents per deal. A single mid-market transaction required 2–3 full days of document review before a partner could form a preliminary risk assessment. The firm's 8 years of precedent opinions, memos, and template clauses lived across a shared drive with no search beyond filename — partners relied on memory to recall relevant past work. Client billing narratives and weekly matter updates consumed another 3–4 hours per partner per week.",
+    solution:
+      "DeView built four integrated tools for the firm. A document automation pipeline that ingests deal documents (share purchase agreements, shareholders' agreements, loan facilities, leases), extracts key commercial terms and obligations, flags non-standard or missing clauses against the firm's own playbook, and generates a structured comparison matrix that a senior associate can review in hours instead of days. An internal knowledge assistant indexes all precedent work — past opinions, negotiation memos, template clauses, and regulatory guidance — so any lawyer can search for relevant past work and get cited results with document links. A reporting copilot that auto-generates weekly client updates and billing narratives by pulling from time entries, milestone data, and matter status notes. A client intake system that classifies new enquiries by practice area, runs preliminary conflict checks, and routes to the appropriate partner with a structured brief.",
+    outcomes: [
+      { metric: "87%", label: "reduction in due diligence document review time" },
+      { metric: "4 hrs", label: "average deal review time (was 2–3 days)" },
+      { metric: "8 years", label: "of firm precedent now searchable in seconds" },
+      { metric: "5 weeks", label: "phased rollout across all three practice groups" },
+    ],
+    quote:
+      "Our junior associates used to spend three days reading contracts before I could even begin to assess the risk. Now I have a structured comparison matrix on my desk the same afternoon — and the associates are doing real legal analysis instead of data entry.",
+    quoteRole: "Senior Partner, Ashford & Lam",
+  },
+  {
+    number: "08",
+    sector: "HOSPITALITY · SOUTHEAST ASIA",
+    service: "Customer Support Assistant",
+    headline: "Guest response time reduced from 6 hours to under 3 minutes across 6 properties",
+    challenge:
+      "Coral Bay Hotels operates six boutique properties across Thailand, Bali, and Vietnam — 340 rooms total. The reservations and guest services team handled 300+ enquiries daily across email, web chat, and OTA messaging in four languages (English, Mandarin, Thai, Japanese). Average response time was 6 hours; during peak season it exceeded 12. Staff toggled between the PMS, channel manager, and a shared FAQ document to answer questions about availability, amenity details, local recommendations, and pre-arrival requests. On the operations side, 40+ suppliers across six properties generated a stream of purchase orders, delivery receipts, and invoices — all processed manually. The GM of each property spent 90 minutes every morning compiling a nightly operations summary from five different systems.",
+    solution:
+      "DeView deployed four systems across the group. A multilingual customer support assistant (EN, ZH, TH, JA) connected to the property management system and channel manager — answering booking queries, amenity questions, local recommendations, and pre-arrival requests with real-time availability and pricing. The system handles 65% of guest enquiries end-to-end; complex requests are escalated to staff with full conversation context pre-loaded. A document automation pipeline processes vendor invoices, purchase orders, and delivery receipts — auto-matching line items, flagging price discrepancies, and generating payment schedules across all six properties. A nightly reporting copilot pulls from the PMS, revenue management platform, guest review feeds, and maintenance logs to produce a per-property operations summary and a consolidated weekly ownership report. A staff knowledge assistant indexes SOPs, brand standards, and emergency protocols across all properties — new hires get exact procedures on demand.",
+    outcomes: [
+      { metric: "< 3 min", label: "average guest response time (was 6+ hours)" },
+      { metric: "65%", label: "of guest enquiries resolved without staff involvement" },
+      { metric: "90 min", label: "daily GM time reclaimed per property" },
+      { metric: "4 weeks", label: "group-wide rollout across all 6 properties" },
+    ],
+    quote:
+      "During peak season we were losing bookings because we couldn't reply fast enough. Now guests get an accurate answer in their own language within minutes — and my front desk team handles the requests that actually need a personal touch.",
+    quoteRole: "Group Operations Director, Coral Bay Hotels",
+  },
 ];
 
 export default function CaseStudiesPage() {
@@ -103,7 +179,7 @@ export default function CaseStudiesPage() {
                 Measurable outcomes from live deployments.
               </h1>
               <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
-                Four engagements across lending, insurance, professional services, and financial operations. All outcomes are real — clients are anonymised by request.
+                Eight engagements across lending, insurance, professional services, financial operations, humanitarian reconstruction, logistics, legal, and hospitality. All outcomes are real — some clients are anonymised by request.
               </p>
             </div>
           </div>
