@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SubpageNav } from "@/components/SubpageNav";
 import { LendingContent } from "./lending-content";
 
 export const metadata: Metadata = {
@@ -10,15 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function LendingPage() {
-  return (
-    <>
-      <main className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid pb-[max(2rem,env(safe-area-inset-bottom))] pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:pb-16 sm:pt-24">
-        <div className="section-gutter mx-auto max-w-6xl">
-          <SubpageNav backHref="/" />
-          <LendingContent />
-        </div>
-      </main>
-      <SiteFooter />
-    </>
-  );
+  return <LendingContent />;
 }

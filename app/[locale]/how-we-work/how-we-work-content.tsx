@@ -2,6 +2,8 @@
 
 import { LocaleLink } from "@/components/LocaleLink";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
+import { SubpageNav } from "@/components/SubpageNav";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export function HowWeWorkContent() {
   const { dict } = useLocaleContext();
@@ -9,7 +11,10 @@ export function HowWeWorkContent() {
 
   return (
     <>
-      {/* Header */}
+      <main className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid pb-[max(2rem,env(safe-area-inset-bottom))] pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:pb-16 sm:pt-24">
+        <div className="section-gutter mx-auto max-w-6xl">
+          <SubpageNav backHref="/" />
+          {/* Header */}
       <div className="mb-12 sm:mb-16">
         <p className="section-label mb-3">{h.sectionLabel}</p>
         <div className="rule mb-6" />
@@ -140,7 +145,10 @@ export function HowWeWorkContent() {
             </LocaleLink>
           </div>
         </div>
-      </div>
+          </div>
+        </div>
+      </main>
+      <SiteFooter />
     </>
   );
 }

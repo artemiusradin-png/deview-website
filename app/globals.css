@@ -3787,7 +3787,7 @@ html[data-theme="light"] .enterprise-ft-svg .enterprise-ft-icon-stroke {
 
 /* Label row — shown on current + adjacent cards */
 .svoyage-slide__label-line {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .svoyage-slide__label-line span {
@@ -5779,10 +5779,6 @@ html[data-theme="light"] .btn-primary:hover {
 
   .nav-shell {
     transition: none !important;
-  }
-
-  .brand-mark {
-    position: absolute;
   }
 
   .hero-video,

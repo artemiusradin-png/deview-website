@@ -3,14 +3,17 @@
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { LocaleLink } from "@/components/LocaleLink";
 import { SubpageNav } from "@/components/SubpageNav";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export function PilotsFailContent() {
   const { dict } = useLocaleContext();
   const d = dict.articlePilotsFail;
 
   return (
-    <div className="section-gutter mx-auto max-w-3xl">
-      <SubpageNav backHref="/insights" />
+    <>
+      <main className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid pb-[max(2rem,env(safe-area-inset-bottom))] pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:pb-16 sm:pt-24">
+        <div className="section-gutter mx-auto max-w-3xl">
+          <SubpageNav backHref="/insights" />
 
       {/* Article header */}
       <div className="mb-10">
@@ -130,6 +133,9 @@ export function PilotsFailContent() {
           </div>
         </div>
       </div>
-    </div>
+        </div>
+      </main>
+      <SiteFooter />
+    </>
   );
 }

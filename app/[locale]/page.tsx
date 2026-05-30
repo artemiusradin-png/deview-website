@@ -280,8 +280,11 @@ export default function Home() {
       setHeroVideoState("playing");
       setFadingHeroLayer(currentLayer);
       setActiveHeroLayer(nextLayer);
+      standbyStartedRef.current = false;
     } catch {
       setHeroVideoState("fallback");
+      standbyStartedRef.current = false;
+      return;
     }
 
     if (crossfadeTimeoutRef.current) {
@@ -295,7 +298,6 @@ export default function Home() {
         previousVideo.currentTime = 0;
       }
       setFadingHeroLayer((layer) => (layer === currentLayer ? null : layer));
-      standbyStartedRef.current = false;
     }, HERO_VIDEO_CROSSFADE_SECONDS * 1000);
   };
 
@@ -863,7 +865,7 @@ export default function Home() {
               </ol>
 
               <a
-                href={localePath("/case-studies")}
+                href={localePath("/more-info")}
                 className="mt-10 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-sm uppercase tracking-[0.18em] text-[var(--white-80)] transition-colors hover:text-[var(--white-100)]"
               >
                 {dict.featuredAgro.readCaseStudy}
@@ -897,7 +899,7 @@ export default function Home() {
               {dict.featuredAgro.mobileSummary}
             </p>
             <a
-              href={localePath("/case-studies")}
+              href={localePath("/more-info")}
               className="mt-5 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-80)]"
             >
               {dict.featuredAgro.readCaseStudy}
