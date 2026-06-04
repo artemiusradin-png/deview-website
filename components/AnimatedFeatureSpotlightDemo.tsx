@@ -47,7 +47,7 @@ function GlowInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
     <div className="relative w-full">
       <input
         {...props}
-        className="peer relative z-10 h-12 w-full rounded-md border border-[rgba(128,184,255,0.2)] bg-[rgb(13,15,28)] px-4 text-base text-[var(--white-90)] outline-none transition-colors duration-200 placeholder:text-[var(--white-30)] focus:border-[rgba(128,184,255,0.55)] sm:text-sm"
+        className="peer relative z-10 h-12 w-full rounded-md border border-[rgba(128,184,255,0.2)] bg-[rgb(13,15,28)] px-4 text-base text-[rgba(240,240,250,0.9)] outline-none transition-colors duration-200 placeholder:text-[rgba(240,240,250,0.3)] focus:border-[rgba(128,184,255,0.55)] sm:text-sm"
         onMouseMove={(e) => {
           const r = e.currentTarget.getBoundingClientRect();
           setMx(e.clientX - r.left);
@@ -173,12 +173,12 @@ export function AnimatedFeatureSpotlightDemo() {
           <div className="relative z-10">
             {status === "sent" ? (
               <div className="flex min-h-[16rem] flex-col justify-center">
-                <CheckCircle2 className="mb-3 h-8 w-8 text-[var(--white-70)]" />
-                <p className="mb-2 text-xs font-medium uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                <CheckCircle2 className="mb-3 h-8 w-8 text-[rgba(240,240,250,0.7)]" />
+                <p className="mb-2 text-xs font-medium uppercase tracking-[0.16em] text-[rgba(240,240,250,0.6)]">
                   Information sent
                 </p>
-                <h3 className="mb-3 text-2xl font-semibold text-[var(--white-100)]">Check your email.</h3>
-                <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
+                <h3 className="mb-3 text-2xl font-semibold text-[#f0f0fa]">Check your email.</h3>
+                <p className="max-w-md text-sm leading-relaxed text-[rgba(240,240,250,0.6)]">
                   We sent the AI use-case guide to {email}. The DeView team may follow up with a short
                   note if your company looks like a fit for an AI workflow audit.
                 </p>
@@ -196,7 +196,7 @@ export function AnimatedFeatureSpotlightDemo() {
                   <span>Free AI automation guide for lenders</span>
                 </div>
 
-                <h2 className="mb-2 max-w-2xl text-[clamp(1rem,4.2vw,2.4rem)] font-semibold leading-[1.1] tracking-tight text-[var(--white-100)] md:mb-3 md:leading-[1.05]">
+                <h2 className="mb-2 max-w-2xl text-[clamp(1rem,4.2vw,2.4rem)] font-semibold leading-[1.1] tracking-tight text-[#f0f0fa] md:mb-3 md:leading-[1.05]">
                   Prioritize the{" "}
                   <span className="text-[#9fc4ff] underline decoration-[rgba(128,184,255,0.4)] decoration-1 underline-offset-4">
                     10 lending workflows
@@ -204,7 +204,7 @@ export function AnimatedFeatureSpotlightDemo() {
                   AI can automate safely
                 </h2>
 
-                <p className="hidden max-w-xl text-[0.84rem] leading-relaxed text-[var(--text-muted)] md:block md:text-sm">
+                <p className="hidden max-w-xl text-[0.84rem] leading-relaxed text-[rgba(240,240,250,0.6)] md:block md:text-sm">
                   A practical field guide for small and mid-sized lending teams. Use it to identify
                   manual-work bottlenecks, choose lower-risk pilots, and set borrower-data controls
                   before automation reaches production.
@@ -223,12 +223,12 @@ export function AnimatedFeatureSpotlightDemo() {
                       >
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <span className="text-xs leading-relaxed text-[var(--white-80)]">{item}</span>
+                      <span className="text-xs leading-relaxed text-[rgba(240,240,250,0.8)]">{item}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-5 hidden flex-wrap gap-2 text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-[var(--white-80)] md:flex">
+                <div className="mt-5 hidden flex-wrap gap-2 text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-[rgba(240,240,250,0.8)] md:flex">
                   {CHIPS.map((c) => (
                     <span
                       key={c}
@@ -244,7 +244,7 @@ export function AnimatedFeatureSpotlightDemo() {
                 </div>
 
                 <form className="mt-3 max-w-md space-y-2.5 md:mt-7 md:space-y-3" onSubmit={handleSubmit}>
-                  <p className="text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">Work email</p>
+                  <p className="text-xs uppercase tracking-[0.16em] text-[rgba(240,240,250,0.6)]">Work email</p>
                   <GlowInput
                     type="email"
                     required
@@ -274,11 +274,11 @@ export function AnimatedFeatureSpotlightDemo() {
                     </span>
                   </button>
 
-                  <p className="hidden text-xs leading-relaxed text-[var(--text-muted)] md:block">
+                  <p className="hidden text-xs leading-relaxed text-[rgba(240,240,250,0.6)] md:block">
                     No newsletter signup. We send the guide and, only if useful, one practical
                     next-step option for your lending workflow.
                   </p>
-                  <p className="text-[0.65rem] leading-snug text-[var(--text-muted)] md:hidden">
+                  <p className="text-[0.65rem] leading-snug text-[rgba(240,240,250,0.6)] md:hidden">
                     No newsletter. Just the guide.
                   </p>
                 </form>

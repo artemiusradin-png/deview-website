@@ -930,7 +930,7 @@ export default function Home() {
               </ol>
 
               <a
-                href="/more-info"
+                href="/case-studies"
                 className="mt-10 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-sm uppercase tracking-[0.18em] text-[var(--white-80)] transition-colors hover:text-[var(--white-100)]"
               >
                 Read the full case study
@@ -964,7 +964,7 @@ export default function Home() {
               Three AI agents on a shared backend cut the field-to-quote workflow from ~40 minutes to under 30 seconds, with the live 20,000-product catalogue, Salesforce-native quote drafts, and vendor-facing analytics built on the same audit trail.
             </p>
             <a
-              href="/more-info"
+              href="/case-studies"
               className="mt-5 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-80)]"
             >
               Read the full case study
@@ -1123,7 +1123,7 @@ export default function Home() {
               One platform serving five lending companies, with five AI capabilities — Credit Analyst, Agentic Assistant, Email Processing, Document Processing, and Prompt Management — built on top of a shared portal, borrower database, and audit trail.
             </p>
             <a
-              href="/industries/lending"
+              href="/case-studies"
               className="mt-5 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-80)]"
             >
               Read the full case study

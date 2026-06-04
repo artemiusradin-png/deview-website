@@ -10,7 +10,7 @@ type SiteFooterProps = {
 };
 
 export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
-  const { dict } = useLocaleContext();
+  const { dict, localePath } = useLocaleContext();
   const f = dict.footer;
 
   const [showTop, setShowTop] = useState(false);
@@ -46,7 +46,7 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
         label: f.ctaLabel,
         copy: f.ctaCopy,
         primaryText: f.contactUs,
-        primaryHref: "/contact",
+        primaryHref: localePath("/contact"),
         secondaryText: f.emailDirect,
         secondaryHref: `mailto:${SITE_INQUIRY_EMAIL}`,
       }}
@@ -54,30 +54,30 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
         {
           title: f.about,
           links: [
-            { text: f.links.aboutDeView, href: "/about" },
-            { text: f.links.howWeWork, href: "/how-we-work" },
-            { text: f.links.caseStudies, href: "/case-studies" },
-            { text: f.links.clientPortal, href: "/client-portal" },
+            { text: f.links.aboutDeView, href: localePath("/about") },
+            { text: f.links.howWeWork, href: localePath("/how-we-work") },
+            { text: f.links.caseStudies, href: localePath("/case-studies") },
+            { text: f.links.clientPortal, href: localePath("/client-portal") },
           ],
         },
         {
           title: f.explore,
           links: [
-            { text: f.links.outcomes, href: "/outcomes" },
-            { text: f.links.useCases, href: "/use-cases" },
-            { text: f.links.roiCalculator, href: "/roi-calculator" },
-            { text: "Tech Stack", href: "/stack" },
-            { text: f.links.aiGuide, href: "/resources/ai-guide-lending", hasIndicator: true },
+            { text: f.links.outcomes, href: localePath("/outcomes") },
+            { text: f.links.useCases, href: localePath("/use-cases") },
+            { text: f.links.roiCalculator, href: localePath("/roi-calculator") },
+            { text: "Tech Stack", href: localePath("/stack") },
+            { text: f.links.aiGuide, href: localePath("/resources/ai-guide-lending"), hasIndicator: true },
           ],
         },
         {
           title: f.moreInfo,
           links: [
-            { text: f.links.insightsArticles, href: "/insights" },
-            { text: "FAQ", href: "/faq" },
-            { text: f.links.insuranceAi, href: "/industries/insurance" },
-            { text: "Legal AI", href: "/industries/legal" },
-            { text: f.inquiryForm, href: "/contact" },
+            { text: f.links.insightsArticles, href: localePath("/insights") },
+            { text: "FAQ", href: localePath("/faq") },
+            { text: f.links.insuranceAi, href: localePath("/industries/insurance") },
+            { text: "Legal AI", href: localePath("/industries/legal") },
+            { text: f.inquiryForm, href: localePath("/contact") },
           ],
         },
       ]}

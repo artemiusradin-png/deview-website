@@ -1,26 +1,53 @@
 "use client";
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Rocket, X, Layers, ScanEye, FileText, BarChart3, Database, Sparkles } from "lucide-react";
-import TimeLine_01 from "@/components/ui/release-time-line";
-import { AnimatedFeatureSpotlightDemo } from "@/components/AnimatedFeatureSpotlightDemo";
-import { HomeServicesSection } from "@/components/HomeServicesSection";
-import { SecurityTrustSection } from "@/components/SecurityTrustSection";
-import { SiteFooter } from "@/components/SiteFooter";
-import { RETRO_FEATURE_CARDS_ID, RetroFeatureCards } from "@/components/RetroFeatureCards";
-import { SelectedProjectsLogoMarquee } from "@/components/SelectedProjectsLogoMarquee";
 import { Banner } from "@/components/ui/banner";
-import { Globe } from "@/components/ui/globe";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
-import { HomeProcessTimeline } from "@/components/HomeProcessTimeline";
-import { HomeInsightsPreview } from "@/components/HomeInsightsPreview";
-import { HomeTestimonials } from "@/components/HomeTestimonials";
-import { HomeIndustries } from "@/components/HomeIndustries";
 import TeamMemberCard from "@/components/ui/team-member-card";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+
+// Below-the-fold sections are loaded as separate chunks to shrink the initial JS bundle.
+// Keep the RetroFeatureCards anchor id in sync with components/RetroFeatureCards.tsx.
+const RETRO_FEATURE_CARDS_ID = "retro-feature-cards";
+const TimeLine_01 = dynamic(() => import("@/components/ui/release-time-line"));
+const AnimatedFeatureSpotlightDemo = dynamic(() =>
+  import("@/components/AnimatedFeatureSpotlightDemo").then((m) => m.AnimatedFeatureSpotlightDemo),
+);
+const HomeServicesSection = dynamic(() =>
+  import("@/components/HomeServicesSection").then((m) => m.HomeServicesSection),
+);
+const AnimatedServiceCardStack = dynamic(
+  () => import("@/components/ui/animate-card-animation"),
+  { ssr: false },
+);
+const SecurityTrustSection = dynamic(() =>
+  import("@/components/SecurityTrustSection").then((m) => m.SecurityTrustSection),
+);
+const SiteFooter = dynamic(() => import("@/components/SiteFooter").then((m) => m.SiteFooter));
+const RetroFeatureCards = dynamic(() =>
+  import("@/components/RetroFeatureCards").then((m) => m.RetroFeatureCards),
+);
+const SelectedProjectsLogoMarquee = dynamic(() =>
+  import("@/components/SelectedProjectsLogoMarquee").then((m) => m.SelectedProjectsLogoMarquee),
+);
+const Globe = dynamic(() => import("@/components/ui/globe").then((m) => m.Globe), { ssr: false });
+const HomeProcessTimeline = dynamic(() =>
+  import("@/components/HomeProcessTimeline").then((m) => m.HomeProcessTimeline),
+);
+const HomeInsightsPreview = dynamic(() =>
+  import("@/components/HomeInsightsPreview").then((m) => m.HomeInsightsPreview),
+);
+const HomeTestimonials = dynamic(() =>
+  import("@/components/HomeTestimonials").then((m) => m.HomeTestimonials),
+);
+const HomeIndustries = dynamic(() =>
+  import("@/components/HomeIndustries").then((m) => m.HomeIndustries),
+);
 
 const fade = {
   initial: { opacity: 0, y: 18 },
@@ -539,11 +566,6 @@ export default function Home() {
             </div>
           ) : null}
         </div>
-        {/* Globe — desktop-only decoration; hidden on mobile to remove overlap with compressed hero */}
-        <div className="pointer-events-none absolute inset-0 z-[6] overflow-hidden hidden" aria-hidden="true">
-          <Globe className="absolute left-1/2 top-1/2 w-[160%] max-w-none -translate-x-1/2 -translate-y-[55%] opacity-50" />
-        </div>
-
         <div
           className={`absolute inset-0 ${heroVideoState === "fallback" ? "hero-overlay" : "hero-overlay hero-overlay-video"}`}
         />
@@ -795,6 +817,24 @@ export default function Home() {
 
       <HomeServicesSection variant="home" />
 
+      <section className="border-t border-[var(--white-20)] bg-[var(--background)] px-4 py-16 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
+            <div>
+              <p className="section-label mb-3">CURRENT AI SERVICES</p>
+              <div className="rule mb-6" />
+              <h2 className="text-[clamp(1.5rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
+                Four production-ready services. Pick where to start.
+              </h2>
+            </div>
+            <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
+              Each service ships in 1–5 weeks with measurable outcomes. Click through the stack to preview what we deliver.
+            </p>
+          </div>
+          <AnimatedServiceCardStack />
+        </div>
+      </section>
+
       <HomeProcessTimeline />
 
       {/* Featured deployment — AgroPlatforma (after WHAT WE BUILD services) */}
@@ -865,7 +905,7 @@ export default function Home() {
               </ol>
 
               <a
-                href={localePath("/more-info")}
+                href={localePath("/case-studies")}
                 className="mt-10 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-sm uppercase tracking-[0.18em] text-[var(--white-80)] transition-colors hover:text-[var(--white-100)]"
               >
                 {dict.featuredAgro.readCaseStudy}
@@ -899,7 +939,7 @@ export default function Home() {
               {dict.featuredAgro.mobileSummary}
             </p>
             <a
-              href={localePath("/more-info")}
+              href={localePath("/case-studies")}
               className="mt-5 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-80)]"
             >
               {dict.featuredAgro.readCaseStudy}
@@ -1019,7 +1059,7 @@ export default function Home() {
               {dict.featuredPortal.mobileSummary}
             </p>
             <a
-              href={localePath("/industries/lending")}
+              href={localePath("/case-studies")}
               className="mt-5 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-80)]"
             >
               {dict.featuredPortal.readCaseStudy}
