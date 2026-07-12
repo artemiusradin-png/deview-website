@@ -50,12 +50,12 @@ function buildField(): Dash[] {
 
   // Cluster centres spread across the frame, denser toward the edges so the
   // headline area stays quiet.
-  const clusters = Array.from({ length: 12 }, () => ({
+  const clusters = Array.from({ length: 16 }, () => ({
     cx: rnd(),
     cy: 0.12 + rnd() * 0.76,
-    spreadCols: 3 + Math.floor(rnd() * 9),
+    spreadCols: 4 + Math.floor(rnd() * 10),
     spreadY: 0.08 + rnd() * 0.3,
-    density: 0.4 + rnd() * 0.6,
+    density: 0.6 + rnd() * 0.6,
     depthBias: rnd(),
   }));
 
@@ -144,19 +144,20 @@ export function HeroPulseField({ className = "" }: { className?: string }) {
       ctx.clearRect(0, 0, width, height);
       ctx.globalCompositeOperation = dark ? "lighter" : "source-over";
 
-      // Slow brightness wave sweeping across the field.
-      const wave = (xNorm: number) => 0.75 + 0.25 * Math.sin(xNorm * Math.PI * 2 - t * 0.35);
+      // Brightness wave sweeping across the field — a visible band of light
+      // travelling left→right, so the motion reads even at a glance.
+      const wave = (xNorm: number) => 0.55 + 0.45 * Math.sin(xNorm * Math.PI * 2.4 - t * 0.7);
 
       for (const d of dashes) {
-        // Breathing + occasional on/off toggling for the data-shimmer feel.
-        const breath = 0.65 + 0.35 * Math.sin(t * d.flickerSpeed * Math.PI * 2 + d.flickerPhase);
+        // Breathing + frequent on/off toggling for the data-shimmer feel.
+        const breath = 0.55 + 0.45 * Math.sin(t * d.flickerSpeed * Math.PI * 2 + d.flickerPhase);
         const gate =
-          d.toggle > 0.72
-            ? Math.sin(t * (0.2 + d.toggle) + d.flickerPhase * 3) > -0.35
+          d.toggle > 0.5
+            ? Math.sin(t * (0.6 + d.toggle * 1.5) + d.flickerPhase * 3) > -0.25
               ? 1
-              : 0
+              : 0.12
             : 1;
-        const alpha = d.baseAlpha * breath * gate * wave(d.x) * (dark ? 1.4 : 0.85);
+        const alpha = d.baseAlpha * breath * gate * wave(d.x) * (dark ? 1.7 : 1);
         if (alpha <= 0.01) continue;
 
         const sprite = sprites[d.depth];
