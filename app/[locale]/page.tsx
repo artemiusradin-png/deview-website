@@ -327,7 +327,7 @@ export default function Home() {
             className="flex max-w-2xl flex-col md:min-h-[calc(100svh-var(--header-stack-height)-2.25rem)] md:pt-2 lg:min-h-0"
           >
             <p className="section-label mb-4">{dict.hero.kicker}</p>
-            <h1 className="hero-heading mb-6 text-[clamp(2rem,6.5vw,2.75rem)] leading-[1.06] text-[var(--white-100)] md:text-5xl md:leading-[1.02] lg:text-6xl">
+            <h1 className="hero-heading mb-6 text-[clamp(1.6rem,5.2vw,2.25rem)] leading-[1.1] tracking-[0.03em] text-[var(--white-100)] md:text-4xl md:leading-[1.06] lg:text-[3.25rem]">
               {dict.hero.titleL1}
               <br />
               {dict.hero.titleL2}
@@ -351,10 +351,22 @@ export default function Home() {
                   <span>{dict.hero.inquire}</span>
                   <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
                 </a>
-                {/* Desktop: outline button, unchanged. Wrapped because the .btn-outline @media (max-width: 961px) rule re-applies display:inline-flex and beats Tailwind's `hidden` on the child. */}
-                <span className="hidden md:inline-block">
-                  <a href={localePath("/contact")} className="btn-outline inline-block">
+                {/* Desktop: compact outline button + a secondary case-studies link. Wrapped because the
+                    .btn-outline @media (max-width: 961px) rule re-applies display:inline-flex and beats
+                    Tailwind's `hidden` on the child. */}
+                <span className="hidden items-center gap-4 md:inline-flex">
+                  <a
+                    href={localePath("/contact")}
+                    className="inline-flex items-center rounded-md border border-[var(--white-40)] px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[var(--white-100)] transition-colors hover:border-[var(--white-80)]"
+                  >
                     {dict.hero.inquire}
+                  </a>
+                  <a
+                    href={localePath("/case-studies")}
+                    className="inline-flex items-center gap-1.5 text-[0.7rem] uppercase tracking-[0.14em] text-[var(--white-60)] transition-colors hover:text-[var(--white-100)]"
+                  >
+                    {dict.nav.caseStudies}
+                    <span aria-hidden="true">→</span>
                   </a>
                 </span>
               </div>
@@ -372,35 +384,7 @@ export default function Home() {
                 <div key={line}>{line}</div>
               ))}
             </div>
-            <div className="hidden w-full space-y-3 text-sm md:block md:w-auto">
-              <div className="flex flex-col gap-1 sm:items-end">
-                <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
-                  {dict.hero.clients}
-                </span>
-                <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.clientsValue}</span>
-              </div>
-              <div className="flex flex-col gap-1 sm:items-end">
-                <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
-                  {dict.hero.focus}
-                </span>
-                <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.focusValue}</span>
-              </div>
-              <div className="flex flex-col gap-1 sm:items-end">
-                <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:text-xs">
-                  {dict.hero.engagements}
-                </span>
-                <span className="text-sm text-[var(--white-100)] sm:text-base">{dict.hero.engagementsValue}</span>
-              </div>
-            </div>
             <div className="h-16 w-full md:hidden" aria-hidden="true" />
-            <div className="flex w-full flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6 md:w-auto md:justify-end md:gap-8">
-              <div className="flex flex-col items-center gap-3 sm:ml-auto sm:items-end md:ml-0">
-                <div className="scroll-cue" />
-                <span className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                  {dict.hero.scroll}
-                </span>
-              </div>
-            </div>
           </motion.div>
         </div>
       </section>
