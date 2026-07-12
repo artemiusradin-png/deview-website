@@ -15,9 +15,6 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 // Below-the-fold sections are loaded as separate chunks to shrink the initial JS bundle.
 // Keep the RetroFeatureCards anchor id in sync with components/RetroFeatureCards.tsx.
 const RETRO_FEATURE_CARDS_ID = "retro-feature-cards";
-const AnimatedFeatureSpotlightDemo = dynamic(() =>
-  import("@/components/AnimatedFeatureSpotlightDemo").then((m) => m.AnimatedFeatureSpotlightDemo),
-);
 const HomeServicesSection = dynamic(() =>
   import("@/components/HomeServicesSection").then((m) => m.HomeServicesSection),
 );
@@ -671,8 +668,6 @@ export default function Home() {
       <HomeIndustries />
 
       <RetroFeatureCards />
-
-      <AnimatedFeatureSpotlightDemo />
 
       <HomeOutcomesStrip />
 
