@@ -60,6 +60,8 @@ _bmad/
 _bmad-output/
 
 # Local working files (drafts, screen recordings, output dumps)
+media-masters/
+investigations/
 New-Landing-Page/
 output/
 *.JPEG

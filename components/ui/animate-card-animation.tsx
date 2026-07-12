@@ -25,7 +25,7 @@ const defaultCards: AnimatedServiceCard[] = [
     title: "Find the best automation opportunity",
     description: "Workflow review, bottlenecks, priority use case · 1–2 weeks",
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=70",
+      "/images/stock/dashboard-laptop-900.webp",
     href: "/services#workflow-audit",
     ctaLabel: "Explore",
   },
@@ -34,7 +34,7 @@ const defaultCards: AnimatedServiceCard[] = [
     title: "Search answers across documents and SOPs",
     description: "Knowledge base, retrieval, internal assistant · 2–4 weeks",
     image:
-      "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=70",
+      "/images/stock/desk-notebook-900.webp",
     href: "/services#knowledge-assistant",
     ctaLabel: "Explore",
   },
@@ -43,7 +43,7 @@ const defaultCards: AnimatedServiceCard[] = [
     title: "Extract, summarise, classify, route documents",
     description: "PDFs, forms, email intake, structured outputs · 2–5 weeks",
     image:
-      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=70",
+      "/images/stock/finance-calculator-1200.webp",
     href: "/services#document-automation",
     ctaLabel: "Explore",
   },
@@ -52,7 +52,7 @@ const defaultCards: AnimatedServiceCard[] = [
     title: "Help support teams draft replies and pull context",
     description: "Ticket support, knowledge retrieval, response drafts · 2–4 weeks",
     image:
-      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=70",
+      "/images/stock/team-meeting-900.webp",
     href: "/services#support-assistant",
     ctaLabel: "Explore",
   },

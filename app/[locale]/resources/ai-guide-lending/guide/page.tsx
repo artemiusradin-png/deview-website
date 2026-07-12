@@ -10,16 +10,16 @@ import { FeatureSpotlight } from "@/components/ui/feature-spotlight";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 
 const USE_CASE_IMAGES = [
-  "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1553484771-371a605b060b?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&w=800&q=80",
+  "/images/stock/tax-documents-800.webp",
+  "/images/stock/desk-phone-800.webp",
+  "/images/stock/signature-doc-800.webp",
+  "/images/stock/code-review-800.webp",
+  "/images/stock/whiteboard-plan-800.webp",
+  "/images/stock/laptop-analytics-1200.webp",
+  "/images/stock/dashboard-laptop-900.webp",
+  "/images/stock/document-pen-900.webp",
+  "/images/stock/strategy-docs-800.webp",
+  "/images/stock/charts-print-800.webp",
 ];
 
 export default function AiGuideLendingPage() {

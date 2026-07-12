@@ -9,13 +9,13 @@ import { homeSectionReveal } from "@/lib/home-section-motion";
 // Industry → cover image. Monochrome-friendly architectural/professional shots.
 const INDUSTRY_IMAGES: Record<string, string> = {
   lending:
-    "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1974&auto=format&fit=crop",
+    "/images/stock/finance-calculator-1200.webp",
   insurance:
-    "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop",
+    "/images/stock/document-pen-900.webp",
   legal:
-    "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070&auto=format&fit=crop",
+    "/images/stock/justice-scales-900.webp",
   professional:
-    "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2070&auto=format&fit=crop",
+    "/images/stock/modern-office-900.webp",
 };
 
 const FALLBACK_IMAGE =

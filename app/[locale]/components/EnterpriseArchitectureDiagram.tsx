@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 
-const FONT = "D-DIN, Arial, sans-serif";
+const FONT = "var(--font-archivo), system-ui, sans-serif";
 const BOX_RX = 2;
 const ZONE_RX = 4;
 

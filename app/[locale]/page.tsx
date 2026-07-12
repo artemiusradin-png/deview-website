@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { Rocket, X, Layers, ScanEye, FileText, BarChart3, Database, Sparkles } from "lucide-react";
-import { Banner } from "@/components/ui/banner";
+import { motion, useReducedMotion } from "framer-motion";
+import { Layers, ScanEye, FileText, BarChart3, Database, Sparkles } from "lucide-react";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
+import { PixelField } from "@/components/PixelField";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
 import TeamMemberCard from "@/components/ui/team-member-card";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -14,7 +14,6 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 // Below-the-fold sections are loaded as separate chunks to shrink the initial JS bundle.
 // Keep the RetroFeatureCards anchor id in sync with components/RetroFeatureCards.tsx.
 const RETRO_FEATURE_CARDS_ID = "retro-feature-cards";
-const TimeLine_01 = dynamic(() => import("@/components/ui/release-time-line"));
 const AnimatedFeatureSpotlightDemo = dynamic(() =>
   import("@/components/AnimatedFeatureSpotlightDemo").then((m) => m.AnimatedFeatureSpotlightDemo),
 );
@@ -35,7 +34,6 @@ const RetroFeatureCards = dynamic(() =>
 const SelectedProjectsLogoMarquee = dynamic(() =>
   import("@/components/SelectedProjectsLogoMarquee").then((m) => m.SelectedProjectsLogoMarquee),
 );
-const Globe = dynamic(() => import("@/components/ui/globe").then((m) => m.Globe), { ssr: false });
 const HomeProcessTimeline = dynamic(() =>
   import("@/components/HomeProcessTimeline").then((m) => m.HomeProcessTimeline),
 );
@@ -68,42 +66,22 @@ const cardMotion = {
 const HERO_VIDEO_SRC = "/deview-hero-animation.mp4";
 const HERO_VIDEO_CROSSFADE_SECONDS = 0.9;
 
-const ENTERPRISE_MODE_IDS = ["predictive", "conversational", "generative", "analytical"] as const;
-type EnterpriseModeId = (typeof ENTERPRISE_MODE_IDS)[number];
-
 
 export default function Home() {
   const { dict, locale, setLocale, localePath } = useLocaleContext();
-  const enterpriseModes = ENTERPRISE_MODE_IDS.map((id) => ({
-    id,
-    ...dict.enterpriseModes[id],
-  }));
-  const axes = dict.enterpriseAxes;
-  const interfaceUserMessage = dict.hero.interfaceUser;
-  const interfaceAiMessage = dict.hero.interfaceAi;
   const heroVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const agroVideoRef = useRef<HTMLVideoElement | null>(null);
   const unifiedPortalVideoRef = useRef<HTMLVideoElement | null>(null);
-  const enterpriseModesSectionRef = useRef<HTMLDivElement | null>(null);
   const [heroVideoState, setHeroVideoState] = useState<"loading" | "playing" | "fallback">("loading");
   const [activeHeroLayer, setActiveHeroLayer] = useState(0);
   const [fadingHeroLayer, setFadingHeroLayer] = useState<number | null>(null);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
-  const [activeEnterpriseMode, setActiveEnterpriseMode] = useState<EnterpriseModeId>(ENTERPRISE_MODE_IDS[0]);
   const [navVisible, setNavVisible] = useState(true);
-  const [typedUserMessage, setTypedUserMessage] = useState("");
-  const [typedAiMessage, setTypedAiMessage] = useState("");
   const [heroVideoPreload, setHeroVideoPreload] = useState<"auto" | "metadata">("metadata");
-  const [isCompactEnterpriseLayout, setIsCompactEnterpriseLayout] = useState(false);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
-  const [guideCtaVisible, setGuideCtaVisible] = useState(true);
   const standbyStartedRef = useRef(false);
   const crossfadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prefersReducedMotion = useReducedMotion();
-  const { scrollYProgress: enterpriseModesProgress } = useScroll({
-    target: enterpriseModesSectionRef,
-    offset: ["start start", "end end"],
-  });
   const pathname = usePathname();
 
   useEffect(() => {
@@ -161,14 +139,6 @@ export default function Home() {
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
-    const apply = () => setIsCompactEnterpriseLayout(mq.matches);
-    apply();
-    mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
-  }, []);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
     const apply = () => setIsMobileViewport(mq.matches);
     apply();
     mq.addEventListener("change", apply);
@@ -211,85 +181,6 @@ export default function Home() {
       }
     };
   }, [isMobileViewport]);
-
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      return;
-    }
-
-    let mounted = true;
-    let userTimeout: ReturnType<typeof setTimeout> | null = null;
-    let aiTimeout: ReturnType<typeof setTimeout> | null = null;
-
-    const runTypingLoop = () => {
-      let userIndex = 0;
-      let aiIndex = 0;
-
-      setTypedUserMessage("");
-      setTypedAiMessage("");
-
-      const typeUser = () => {
-        if (!mounted) {
-          return;
-        }
-
-        userIndex += 1;
-        setTypedUserMessage(interfaceUserMessage.slice(0, userIndex));
-
-        if (userIndex < interfaceUserMessage.length) {
-          userTimeout = setTimeout(typeUser, 42);
-          return;
-        }
-
-        aiTimeout = setTimeout(typeAi, 520);
-      };
-
-      const typeAi = () => {
-        if (!mounted) {
-          return;
-        }
-
-        aiIndex += 1;
-        setTypedAiMessage(interfaceAiMessage.slice(0, aiIndex));
-
-        if (aiIndex < interfaceAiMessage.length) {
-          aiTimeout = setTimeout(typeAi, 18);
-          return;
-        }
-      };
-
-      userTimeout = setTimeout(typeUser, 500);
-    };
-
-    runTypingLoop();
-
-    return () => {
-      mounted = false;
-      if (userTimeout) {
-        clearTimeout(userTimeout);
-      }
-      if (aiTimeout) {
-        clearTimeout(aiTimeout);
-      }
-    };
-  }, [prefersReducedMotion, interfaceUserMessage, interfaceAiMessage]);
-
-  useMotionValueEvent(enterpriseModesProgress, "change", (latest) => {
-    if (prefersReducedMotion || isCompactEnterpriseLayout) {
-      return;
-    }
-
-    const nextModeId =
-      latest < 0.25
-        ? enterpriseModes[0].id
-        : latest < 0.5
-          ? enterpriseModes[1].id
-          : latest < 0.75
-            ? enterpriseModes[2].id
-            : enterpriseModes[3].id;
-
-    setActiveEnterpriseMode((current) => (current === nextModeId ? current : nextModeId));
-  });
 
   const startStandbyLayer = async (currentLayer: number) => {
     const nextLayer = currentLayer === 0 ? 1 : 0;
@@ -402,14 +293,8 @@ export default function Home() {
 
   const closeNav = () => setNavOpen(false);
   const toggleTheme = () => setTheme((current) => (current === "dark" ? "light" : "dark"));
-  const selectedMode = enterpriseModes.find((mode) => mode.id === activeEnterpriseMode) ?? enterpriseModes[0];
-  const displayedUserMessage = prefersReducedMotion ? interfaceUserMessage : typedUserMessage;
-  const displayedAiMessage = prefersReducedMotion ? interfaceAiMessage : typedAiMessage;
   const themeAria =
     theme === "dark" ? dict.a11y.themeToLight : dict.a11y.themeToDark;
-  const langSwitchLabel = locale === "en" ? "Language" : "語言";
-  /** Keep shell transform-free — scale/rotateX on an ancestor rasterizes type and looks blurry while scrolling. */
-  const enterpriseRailFill = useTransform(enterpriseModesProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <div className="min-h-screen bg-[var(--background)] bg-grid text-[var(--text)]">
@@ -547,7 +432,7 @@ export default function Home() {
               autoPlay={layerIndex === 0}
               muted
               playsInline
-              preload={heroVideoPreload}
+              preload={layerIndex === 0 ? heroVideoPreload : "none"}
               onLoadedData={() => setHeroVideoState((current) => (current === "fallback" ? current : "playing"))}
               onPlay={() => setHeroVideoState("playing")}
               onTimeUpdate={() => handleHeroTimeUpdate(layerIndex)}
@@ -655,165 +540,6 @@ export default function Home() {
         </div>
       </section>
 
-      {false && <section
-        id="enterprise-ai"
-        className="enterprise-ai-section section-fullscreen relative bg-[var(--surface)] section-gutter"
-      >
-        <motion.div
-          {...reveal}
-          transition={{ duration: 0.5 }}
-          className="mx-auto flex h-full min-h-0 max-w-6xl flex-col justify-between gap-6 overflow-hidden md:gap-10"
-        >
-          <div className="section-shell flex min-h-0 flex-1 flex-col">
-            <p className="section-label mb-3">{dict.enterpriseAi.label}</p>
-            <div className="rule mb-6" />
-            <div className="enterprise-difference-grid grid min-h-0 flex-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(12rem,16rem)] lg:items-stretch lg:gap-8">
-              <div className="enterprise-opener">
-                <div className="enterprise-statement-stack">
-                  <p
-                    className={`enterprise-statement-line hero-heading ${
-                      dict.enterpriseAi.statement2 ? "text-[var(--white-80)]" : "text-[var(--white-100)]"
-                    }`}
-                  >
-                    {dict.enterpriseAi.statement1}
-                  </p>
-                  {dict.enterpriseAi.statement2 ? (
-                    <>
-                      <div className="rule enterprise-statement-rule" />
-                      <p className="enterprise-statement-line hero-heading text-[var(--white-100)]">
-                        {dict.enterpriseAi.statement2}
-                      </p>
-                    </>
-                  ) : null}
-                </div>
-                <p className="enterprise-opener-body max-w-3xl text-[0.84rem] leading-relaxed text-[var(--text-muted)] md:text-[0.9rem]">
-                  {dict.enterpriseAi.opener}
-                </p>
-
-                {/* Visual: interface-only vs operational AI */}
-                <motion.div
-                  variants={cardMotion}
-                  initial="initial"
-                  whileInView="whileInView"
-                  viewport={reveal.viewport}
-                  transition={{ duration: 0.45, delay: 0.1 }}
-                  className="enterprise-system-compare mt-6 grid gap-px border border-[var(--white-20)] bg-[var(--white-20)] md:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]"
-                >
-                  {/* Left panel: interface only */}
-                  <div className="enterprise-compare-panel enterprise-compare-panel--chat flex flex-col bg-[var(--background)]">
-                    <p className="enterprise-compare-heading text-[var(--white-30)]">
-                      {dict.enterpriseAi.compare.interfaceOnly}
-                    </p>
-
-                    <div className="enterprise-chat-stack">
-                      <div className="flex justify-end">
-                        <div className="enterprise-chat-bubble enterprise-chat-bubble--user">
-                          <p className="enterprise-chat-label text-[var(--white-30)]">
-                            {dict.hero.labels.user}
-                          </p>
-                          <p className="enterprise-chat-copy text-[var(--white-40)]">
-                            {displayedUserMessage}
-                            <span className="type-caret" aria-hidden="true" />
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex justify-start">
-                        <div className="enterprise-chat-bubble enterprise-chat-bubble--ai">
-                          <p className="enterprise-chat-label text-[var(--white-30)]">
-                            {dict.hero.labels.ai}
-                          </p>
-                          <p className="enterprise-chat-copy enterprise-chat-copy--ai text-[var(--white-30)]">
-                            {displayedAiMessage}
-                            <span className="type-caret" aria-hidden="true" />
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="enterprise-compare-bullets enterprise-compare-bullets--muted mt-auto">
-                      {dict.enterpriseAi.compare.interfaceBullets.map((item) => (
-                        <div key={item} className="enterprise-compare-bullet">
-                          <span className="shrink-0 text-[0.6rem] text-[var(--white-20)]">—</span>
-                          <span>{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Right panel: operational AI */}
-                  <div className="enterprise-compare-panel enterprise-compare-panel--system flex flex-col bg-[var(--surface)]">
-                    <p className="enterprise-compare-heading text-[var(--white-80)]">
-                      {dict.enterpriseAi.compare.operational}
-                    </p>
-
-                    <div className="enterprise-operational-flow">
-                      <div className="min-w-0">
-                        <p className="enterprise-flow-label text-[var(--white-40)]">
-                          {dict.enterpriseAi.compare.inputs}
-                        </p>
-                        {dict.enterpriseAi.compare.sources.map((src) => (
-                          <div key={src} className="enterprise-flow-tile">
-                            <span>{src}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="enterprise-flow-ai">
-                        <span>
-                          {dict.hero.labels.ai}
-                        </span>
-                        <span aria-hidden="true">→</span>
-                      </div>
-
-                      <div className="min-w-0">
-                        <p className="enterprise-flow-label text-[var(--white-40)]">
-                          {dict.enterpriseAi.compare.actions}
-                        </p>
-                        {dict.enterpriseAi.compare.outputs.map((out) => (
-                          <div key={out} className="enterprise-flow-tile enterprise-flow-tile--active">
-                            <span>{out}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="enterprise-compare-bullets mt-auto">
-                      {dict.enterpriseAi.compare.opBullets.map((item) => (
-                        <div key={item} className="enterprise-compare-bullet enterprise-compare-bullet--active">
-                          <span className="shrink-0 text-[0.6rem] text-[var(--white-60)]">+</span>
-                          <span>{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-              <aside className="enterprise-opener-aside flex flex-col justify-end pt-8 lg:border-l lg:pt-0 lg:pl-10">
-                <div className="space-y-4 text-[0.72rem] text-[var(--white-80)] sm:text-xs">
-                  <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-6 lg:flex-col lg:gap-1">
-                    <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">
-                      {dict.enterpriseAi.aside.weDo}
-                    </span>
-                    <span className="lg:text-[0.78rem] lg:leading-snug lg:text-[var(--white-80)]">
-                      {dict.enterpriseAi.aside.weDoBody}
-                    </span>
-                  </div>
-                  <div className="rule opacity-60 lg:hidden" />
-                  <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-6 lg:flex-col lg:gap-1">
-                    <span className="shrink-0 uppercase tracking-[0.2em] text-[var(--white-60)]">
-                      {dict.enterpriseAi.aside.focus}
-                    </span>
-                    <span className="lg:text-[0.78rem] lg:leading-snug lg:text-[var(--white-80)]">
-                      {dict.enterpriseAi.aside.focusBody}
-                    </span>
-                  </div>
-                </div>
-              </aside>
-            </div>
-          </div>
-
-        </motion.div>
-      </section>}
 
       <HomeServicesSection variant="home" />
 
@@ -920,7 +646,7 @@ export default function Home() {
                   ref={agroVideoRef}
                   className="block h-auto w-full"
                   controls
-                  preload="metadata"
+                  preload="none"
                   playsInline
                   muted
                   loop
@@ -1041,10 +767,11 @@ export default function Home() {
                   ref={unifiedPortalVideoRef}
                   className="block h-auto w-full"
                   controls
-                  preload="metadata"
+                  preload="none"
                   playsInline
                   muted
                   loop
+                  poster="/deview-unified-portal-poster.svg"
                 >
                   <source src="/deview-unified-portal-demo.mp4" type="video/mp4" />
                   Your browser does not support embedded video.
@@ -1075,115 +802,6 @@ export default function Home() {
 
       <SecurityTrustSection />
 
-      {/* Full-bleed scroll-pinned enterprise mode stage — hidden for now (globe block). Re-enable by removing the `false &&` guard. */}
-      {false && <div
-        id="enterprise-modes"
-        ref={enterpriseModesSectionRef}
-        className="enterprise-stage-scroll-wrapper"
-      >
-        <section
-          className="enterprise-mode-stage enterprise-mode-stage--frameless bg-[var(--background)]"
-        >
-            {/* Globe — stays fixed with the pinned panel on desktop; flows below intro copy on mobile */}
-            <div
-              className="enterprise-globe-wrapper pointer-events-none absolute inset-y-0 right-0 z-[40] w-[44%] overflow-visible"
-              aria-hidden="true"
-            >
-              <Globe className="absolute left-[-8%] top-1/2 z-[40] w-[108%] max-w-none -translate-y-[48%]" />
-            </div>
-
-            <div className="enterprise-map-shell enterprise-mode-stage-shell">
-              <div className="enterprise-scroll-rail" aria-hidden="true">
-                <motion.div className="enterprise-scroll-rail-fill" style={{ height: enterpriseRailFill }} />
-              </div>
-              <motion.div
-                className="enterprise-mode-cards-motion"
-                style={{ filter: "none" }}
-              >
-              <div className={`enterprise-mode-text-stage enterprise-mode-text-stage-${selectedMode.id}`}>
-                <div className={`enterprise-mode-ambient enterprise-mode-ambient-${selectedMode.id}`} aria-hidden="true" />
-                <div className="enterprise-mode-text-axes enterprise-mode-text-axes-top" aria-hidden="true">
-                  <span>{axes.top}</span>
-                </div>
-                <div className="enterprise-mode-text-axes enterprise-mode-text-axes-left" aria-hidden="true">
-                  <span>{axes.left}</span>
-                </div>
-                <div className="enterprise-mode-text-axes enterprise-mode-text-axes-right" aria-hidden="true">
-                  <span>{axes.right}</span>
-                </div>
-                <div className="enterprise-mode-text-axes enterprise-mode-text-axes-bottom" aria-hidden="true">
-                  <span>{axes.bottom}</span>
-                </div>
-                <div className="enterprise-mode-text-main">
-                  <motion.p
-                    key={selectedMode.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-                    className="enterprise-mode-text-label"
-                  >
-                    {selectedMode.label}
-                  </motion.p>
-                  <motion.p
-                    key={`${selectedMode.id}-axis`}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.28, delay: 0.06 }}
-                    className="enterprise-mode-text-axis"
-                  >
-                    {selectedMode.axis}
-                  </motion.p>
-                </div>
-                <div className="enterprise-mode-card-footer">
-                  <div className="enterprise-mode-sequence">
-                    <motion.p
-                      key={`${selectedMode.id}-position`}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.26 }}
-                      className="enterprise-mode-text-position"
-                      aria-hidden="true"
-                    >
-                      {selectedMode.position}
-                    </motion.p>
-                    <div className="enterprise-mode-text-list">
-                      {enterpriseModes.map((mode, index) => (
-                        <button
-                          type="button"
-                          key={mode.id}
-                          className={`enterprise-mode-text-list-item ${
-                            activeEnterpriseMode === mode.id ? "enterprise-mode-text-list-item-active" : ""
-                          }`}
-                          onClick={() => setActiveEnterpriseMode(mode.id)}
-                          aria-current={activeEnterpriseMode === mode.id ? "true" : undefined}
-                        >
-                          <span className="enterprise-mode-text-list-index">{String(index + 1).padStart(2, "0")}</span>
-                          <span>{mode.label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  <div
-                    key={selectedMode.id}
-                    className="enterprise-mode-stage-detail enterprise-mode-stage-detail--in-card"
-                  >
-                    <div className="enterprise-mode-stage-detail-meta">
-                      <p className="mb-2 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
-                        {dict.modeDetail.activeMode}
-                      </p>
-                      <p className="text-base uppercase tracking-[0.16em] text-[var(--white-100)]">{selectedMode.label}</p>
-                      <p className="mt-1 text-[0.6rem] uppercase tracking-[0.16em] text-[var(--white-40)]">
-                        {selectedMode.axis}
-                      </p>
-                    </div>
-                    <p className="enterprise-mode-stage-detail-copy text-[var(--text-muted)]">{selectedMode.body}</p>
-                  </div>
-                </div>
-              </div>
-              </motion.div>
-            </div>
-          </section>
-      </div>}
 
       <RetroFeatureCards />
 
@@ -1225,6 +843,8 @@ export default function Home() {
       </section>
 
       <SiteFooter />
+
+      <PixelField />
 
       {/* Removed persistent mobile CTA dock — header nav, in-page CTAs, and footer cover this without crowding the viewport. */}
     </div>

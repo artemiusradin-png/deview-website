@@ -1,10 +1,28 @@
 import type { Metadata, Viewport } from "next";
 import { cookies } from "next/headers";
+import localFont from "next/font/local";
 import "./globals.css";
 import { AppProviders } from "./providers";
 import { ThemeSync } from "./theme-sync";
-import { PixelField } from "@/components/PixelField";
 import type { Locale } from "@/lib/i18n/types";
+
+const archivo = localFont({
+  src: [
+    { path: "./fonts/archivo-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/archivo-500.woff2", weight: "500", style: "normal" },
+  ],
+  variable: "--font-archivo",
+  display: "swap",
+});
+
+const clashDisplay = localFont({
+  src: [
+    { path: "./fonts/clash-display-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/clash-display-700.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-clash-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "DeView | AI Consulting & Data Engineering",
@@ -33,19 +51,15 @@ export default async function RootLayout({
   const htmlLang = initialLocale === "zh-HK" ? "zh-Hant-HK" : initialLocale === "de" ? "de" : "en";
 
   return (
-    <html lang={htmlLang} data-scroll-behavior="smooth" className="h-full antialiased">
-      <head>
-        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=archivo@300,400,500&f[]=clash-display@600,700&display=swap"
-        />
-      </head>
+    <html
+      lang={htmlLang}
+      data-scroll-behavior="smooth"
+      className={`h-full antialiased ${archivo.variable} ${clashDisplay.variable}`}
+    >
       <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--text)]">
         <AppProviders initialLocale={initialLocale}>
           <ThemeSync />
           {children}
-          <PixelField />
         </AppProviders>
       </body>
     </html>

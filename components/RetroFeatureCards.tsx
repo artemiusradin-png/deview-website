@@ -7,7 +7,7 @@ import { LocaleLink } from "./LocaleLink";
 export const RETRO_FEATURE_CARDS_ID = "retro-feature-cards";
 
 const OUTCOMES_CARD_IMAGE =
-  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80";
+  "/images/stock/laptop-analytics-1200.webp";
 
 type RetroCardProps = {
   href: string;
@@ -106,7 +106,7 @@ export function RetroFeatureCards({ rootPrefix = "" }: { rootPrefix?: string }) 
         <div className="grid w-full grid-cols-2 gap-3 sm:gap-4 md:hidden">
           <RetroCard
             href="/what-makes-it-enterprise"
-            imageUrl="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80"
+            imageUrl="/images/stock/earth-network-1200.webp"
             imagePosition="center 42%"
             eyebrow={c.whatMakesEyebrow}
             title={c.whatMakesTitle}
@@ -114,7 +114,7 @@ export function RetroFeatureCards({ rootPrefix = "" }: { rootPrefix?: string }) 
           />
           <RetroCard
             href="/architecture-reality-check"
-            imageUrl="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80"
+            imageUrl="/images/stock/circuit-board-1200.webp"
             imagePosition="center center"
             eyebrow={c.archEyebrow}
             title={c.archTitle}
@@ -123,7 +123,7 @@ export function RetroFeatureCards({ rootPrefix = "" }: { rootPrefix?: string }) 
           <RetroOutcomesCard rootPrefix={rootPrefix} className="aspect-square" />
           <RetroCard
             href="/use-cases"
-            imageUrl="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80"
+            imageUrl="/images/stock/finance-calculator-1200.webp"
             imagePosition="center 45%"
             eyebrow={c.useCasesEyebrow}
             title={c.useCasesTitle}
@@ -134,7 +134,7 @@ export function RetroFeatureCards({ rootPrefix = "" }: { rootPrefix?: string }) 
           <div className="flex flex-1 flex-col gap-[30px] md:basis-1/3">
             <RetroCard
               href="/what-makes-it-enterprise"
-              imageUrl="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80"
+              imageUrl="/images/stock/earth-network-1200.webp"
               imagePosition="center 42%"
               eyebrow={c.whatMakesEyebrow}
               title={c.whatMakesTitle}
@@ -142,7 +142,7 @@ export function RetroFeatureCards({ rootPrefix = "" }: { rootPrefix?: string }) 
             />
             <RetroCard
               href="/architecture-reality-check"
-              imageUrl="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80"
+              imageUrl="/images/stock/circuit-board-1200.webp"
               imagePosition="center center"
               eyebrow={c.archEyebrow}
               title={c.archTitle}
@@ -158,7 +158,7 @@ export function RetroFeatureCards({ rootPrefix = "" }: { rootPrefix?: string }) 
           <div className="md:basis-1/3">
             <RetroCard
               href="/use-cases"
-              imageUrl="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80"
+              imageUrl="/images/stock/finance-calculator-1200.webp"
               imagePosition="center 45%"
               eyebrow={c.useCasesEyebrow}
               title={c.useCasesTitle}

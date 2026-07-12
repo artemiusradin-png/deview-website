@@ -291,7 +291,7 @@ export function AnimatedFeatureSpotlightDemo() {
         <div className="relative hidden overflow-hidden border-l border-[rgba(128,184,255,0.16)] lg:block">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop"
+            src="/images/stock/earth-network-1200.webp"
             alt=""
             aria-hidden="true"
             className="h-full w-full object-cover"
