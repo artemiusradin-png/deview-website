@@ -1017,6 +1017,20 @@ html[data-theme="light"] .footer-link-row {
   min-height: 100dvh;
 }
 
+/* The hero should not claim the entire first viewport — leave roughly a
+   third of the initial screen for the next section (practice areas) to
+   peek through, so it's visible without scrolling. Overrides the shared
+   .section-fullscreen fixed height + overflow:hidden (used by other
+   full-screen sections) with a flexible min-height instead, so hero
+   content can never be clipped if it needs more room. */
+.section-fullscreen.section-fullscreen--hero {
+  height: auto;
+  min-height: 68vh;
+  min-height: 68dvh;
+  max-height: none;
+  overflow: visible;
+}
+
 @media (max-width: 961px) {
   .section-fullscreen {
     height: auto;
@@ -1034,6 +1048,11 @@ html[data-theme="light"] .footer-link-row {
     padding-top: calc(var(--header-stack-height) + 1.35rem);
     padding-bottom: max(1.75rem, env(safe-area-inset-bottom, 0px));
     align-items: flex-end;
+  }
+
+  .section-fullscreen.section-fullscreen--hero {
+    min-height: 70dvh;
+    min-height: 70svh;
   }
 
   .enterprise-detail {
@@ -1059,8 +1078,8 @@ html[data-theme="light"] .footer-link-row {
   }
 
   .section-fullscreen--hero {
-    /* Taller on mobile so the headline owns the first screen and the CTA falls below the fold. */
-    min-height: 100svh;
+    /* Height itself comes from the higher-specificity .section-fullscreen.section-fullscreen--hero
+       override above (~70svh) so the next section peeks through on load. */
     padding-top: calc(var(--header-stack-height) + 2rem);
     padding-bottom: max(2.25rem, calc(env(safe-area-inset-bottom, 0px) + 1rem));
     align-items: flex-start;
@@ -4165,14 +4184,19 @@ html[data-theme="light"] .btn-primary:hover {
 }
 
 @media (max-width: 767px) {
-  .section-fullscreen,
-  .section-fullscreen--hero {
+  .section-fullscreen {
     height: auto !important;
     min-height: auto !important;
     max-height: none !important;
   }
 
+  /* Hero keeps its own ~70svh floor (see .section-fullscreen.section-fullscreen--hero
+     above) so the next section still peeks through on load; only drop the
+     height/max-height locks that would otherwise clip taller content. */
   .section-fullscreen--hero {
+    height: auto !important;
+    max-height: none !important;
+    min-height: 70svh !important;
     align-items: flex-start;
   }
 
