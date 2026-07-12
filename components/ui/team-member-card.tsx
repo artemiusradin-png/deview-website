@@ -73,6 +73,7 @@ export default function TeamMemberCard({
           <img
             src={imageUrl}
             alt={fullName}
+            loading="lazy"
             className="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-105"
           />
         </motion.div>

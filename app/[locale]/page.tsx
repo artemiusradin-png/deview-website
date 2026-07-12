@@ -187,6 +187,27 @@ export default function Home() {
     ctaLabel: dict.practices.exploreCta,
   }));
 
+  // Leadership spotlight cards — the founder uses the richer dict.leadership bio;
+  // the rest come from the About page's team roster so both sections share one source.
+  // Filtering on name+photo skips in-progress placeholder rows (see public/team/README.md) —
+  // they still render on the About page grid, just not in this larger spotlight format.
+  const founderName = `${dict.leadership.firstName} ${dict.leadership.lastName}`;
+  const leadershipMembers = dict.aboutPage.team.members
+    .filter((member) => member.name && member.photo)
+    .map((member, index) => {
+      const isFounder = member.name === founderName;
+      const [firstName, ...lastNameParts] = member.name.split(" ");
+      return {
+        position: index % 2 === 0 ? ("left" as const) : ("right" as const),
+        jobPosition: isFounder ? dict.leadership.jobPosition : member.role,
+        firstName,
+        lastName: lastNameParts.join(" "),
+        imageUrl: member.photo,
+        description: isFounder ? dict.leadership.description : member.bio,
+        key: `${member.role}-${member.initials}`,
+      };
+    });
+
   return (
     <div className="min-h-screen bg-[var(--background)] bg-grid text-[var(--text)]">
       <a
@@ -651,15 +672,18 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <p className="section-label mb-3">{dict.leadership.sectionLabel}</p>
           <div className="rule mb-2" />
-          <TeamMemberCard
-            position="left"
-            jobPosition={dict.leadership.jobPosition}
-            firstName={dict.leadership.firstName}
-            lastName={dict.leadership.lastName}
-            imageUrl="/team/artemis-radin-800.webp"
-            href={localePath("/contact")}
-            description={dict.leadership.description}
-          />
+          {leadershipMembers.map((member) => (
+            <TeamMemberCard
+              key={member.key}
+              position={member.position}
+              jobPosition={member.jobPosition}
+              firstName={member.firstName}
+              lastName={member.lastName}
+              imageUrl={member.imageUrl}
+              href={localePath("/contact")}
+              description={member.description}
+            />
+          ))}
         </div>
       </section>
 
