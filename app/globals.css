@@ -660,18 +660,6 @@ html[data-theme="light"] .hero-overlay {
     linear-gradient(to bottom, rgba(243, 238, 226, 0.58), rgba(243, 238, 226, 0.9));
 }
 
-.hero-overlay-video {
-  background:
-    linear-gradient(to right, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0.1) 46%, rgba(0, 0, 0, 0.22) 100%),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.3));
-}
-
-html[data-theme="light"] .hero-overlay-video {
-  background:
-    linear-gradient(to right, rgba(243, 238, 226, 0.2) 0%, rgba(243, 238, 226, 0.04) 46%, rgba(243, 238, 226, 0.16) 100%),
-    linear-gradient(to bottom, rgba(243, 238, 226, 0.08), rgba(243, 238, 226, 0.2));
-}
-
 .hero-media {
   overflow: hidden;
   background:
@@ -685,27 +673,6 @@ html[data-theme="light"] .hero-media {
     radial-gradient(circle at 50% 28%, rgba(255, 247, 214, 0.55), transparent 30%),
     linear-gradient(135deg, rgba(171, 215, 255, 0.28), transparent 42%),
     #efe8d7;
-}
-
-.hero-video {
-  /* Dark mode: purple-blue tinted skyline */
-  filter: grayscale(100%) sepia(80%) hue-rotate(205deg) saturate(260%) brightness(0.92) contrast(1.08);
-  object-position: 44% 14%;
-  transform: scale(1.14);
-  transform-origin: center top;
-  transition:
-    opacity 1500ms ease,
-    transform 1800ms ease;
-}
-
-html[data-theme="light"] .hero-video {
-  /* Bright mode: neutral grey skyline */
-  filter: invert(1) grayscale(100%) brightness(1.06) contrast(0.92);
-}
-
-.hero-video-visible {
-  opacity: 1;
-  transform: scale(1.14);
 }
 
 .hero-delivery-visual {
@@ -986,104 +953,6 @@ html[data-theme="light"] .footer-link-row {
   }
 }
 
-.hero-video-fading {
-  opacity: 0;
-  transform: scale(1.155);
-}
-
-.hero-video-hidden {
-  opacity: 0;
-  transform: scale(1.16);
-}
-
-.hero-fallback {
-  background:
-    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.14), transparent 28%),
-    linear-gradient(120deg, rgba(255, 255, 255, 0.06), transparent 48%),
-    linear-gradient(to bottom, rgba(8, 8, 8, 0.86), rgba(0, 0, 0, 0.98));
-}
-
-html[data-theme="light"] .hero-fallback {
-  background:
-    radial-gradient(circle at 50% 42%, rgba(255, 248, 217, 0.56), transparent 28%),
-    linear-gradient(120deg, rgba(174, 219, 255, 0.28), transparent 48%),
-    linear-gradient(to bottom, rgba(255, 252, 244, 0.88), rgba(239, 232, 215, 0.98));
-}
-
-html[data-theme="light"] .hero-fallback-grid {
-  background-image:
-    linear-gradient(rgba(19, 31, 47, 0.16) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(19, 31, 47, 0.12) 1px, transparent 1px);
-  opacity: 1;
-}
-
-html[data-theme="light"] .hero-fallback-rings {
-  border-color: rgba(19, 31, 47, 0.38);
-  box-shadow:
-    0 0 0 48px rgba(19, 31, 47, 0.14),
-    0 0 0 112px rgba(19, 31, 47, 0.07);
-  opacity: 0.85;
-}
-
-html[data-theme="light"] .hero-fallback-beam {
-  background: linear-gradient(to bottom, transparent, rgba(19, 31, 47, 0.32), transparent);
-  opacity: 0.7;
-}
-
-.hero-fallback-visible {
-  animation: hero-fallback-fade 1s ease forwards;
-}
-
-.hero-fallback-grid,
-.hero-fallback-rings,
-.hero-fallback-beam {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.hero-fallback-grid {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 96px 96px;
-  mask-image: radial-gradient(circle at center, black 42%, transparent 78%);
-  opacity: 0.5;
-  animation: hero-grid-drift 26s linear infinite;
-}
-
-.hero-fallback-rings {
-  inset: 12% 18%;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow:
-    0 0 0 48px rgba(255, 255, 255, 0.035),
-    0 0 0 112px rgba(255, 255, 255, 0.02);
-  filter: blur(0.2px);
-  opacity: 0.42;
-  animation: hero-rings-pulse 7s ease-in-out infinite;
-}
-
-.hero-fallback-beam {
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.15), transparent);
-  filter: blur(28px);
-  opacity: 0.3;
-}
-
-.hero-fallback-beam-left {
-  inset: 0 auto 0 16%;
-  width: 18%;
-  transform: skewX(-14deg);
-  animation: hero-beam-sway-left 12s ease-in-out infinite;
-}
-
-.hero-fallback-beam-right {
-  inset: 0 12% 0 auto;
-  width: 14%;
-  transform: skewX(-10deg);
-  animation: hero-beam-sway-right 15s ease-in-out infinite;
-}
-
 @keyframes hero-grid-drift {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
@@ -1132,15 +1001,6 @@ html[data-theme="light"] .hero-fallback-beam {
   }
 }
 
-@keyframes hero-fallback-fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 .section-fullscreen {
   height: 100vh;
   height: 100dvh;
@@ -1186,23 +1046,6 @@ html[data-theme="light"] .hero-fallback-beam {
     align-items: center;
     display: inline-flex;
     justify-content: center;
-  }
-
-  .hero-video {
-    object-position: 50% 20%;
-    transform: scale(1.08);
-  }
-
-  .hero-video-visible {
-    transform: scale(1.08);
-  }
-
-  .hero-video-fading {
-    transform: scale(1.1);
-  }
-
-  .hero-video-hidden {
-    transform: scale(1.11);
   }
 
 }
@@ -3468,15 +3311,6 @@ html[data-theme="light"] .btn-primary:hover {
   inset: 0;
 }
 
-.landing-hero-video {
-  z-index: -3;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: saturate(1.12) contrast(1.08);
-  opacity: 0.45;
-}
-
 .landing-hero-shade {
   z-index: -2;
   background:
@@ -4875,26 +4709,10 @@ html[data-theme="light"] .btn-primary:hover {
     transition: none !important;
   }
 
-  .hero-video,
-  .hero-video-visible,
-  .hero-video-fading,
-  .hero-video-hidden {
-    transition: none !important;
-    transform: none !important;
-    /* display: none removed — the hero video provides the pink pixel-city skyline
-       visual on mobile, matching the desktop. */
-  }
-
   .hero-media,
   .hero-overlay,
   .hero-overlay-video {
     background-attachment: scroll;
-  }
-
-  .hero-overlay-video {
-    background:
-      linear-gradient(to right, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.08) 48%, rgba(0, 0, 0, 0.16) 100%),
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
   }
 
   .section-fullscreen,

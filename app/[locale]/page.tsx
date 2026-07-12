@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import { Layers, ScanEye, FileText, BarChart3, Database, Sparkles } from "lucide-react";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
+import { HeroFlowField } from "@/components/HeroFlowField";
 import { PixelField } from "@/components/PixelField";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
 import TeamMemberCard from "@/components/ui/team-member-card";
@@ -66,24 +67,12 @@ const cardMotion = {
   whileInView: { opacity: 1, y: 0 },
 };
 
-const HERO_VIDEO_SRC = "/deview-hero-animation.mp4";
-const HERO_VIDEO_CROSSFADE_SECONDS = 0.9;
-
-
 export default function Home() {
   const { dict, locale, setLocale, localePath } = useLocaleContext();
-  const heroVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const agroVideoRef = useRef<HTMLVideoElement | null>(null);
   const unifiedPortalVideoRef = useRef<HTMLVideoElement | null>(null);
-  const [heroVideoState, setHeroVideoState] = useState<"loading" | "playing" | "fallback">("loading");
-  const [activeHeroLayer, setActiveHeroLayer] = useState(0);
-  const [fadingHeroLayer, setFadingHeroLayer] = useState<number | null>(null);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [navVisible, setNavVisible] = useState(true);
-  const [heroVideoPreload, setHeroVideoPreload] = useState<"auto" | "metadata">("metadata");
-  const [isMobileViewport, setIsMobileViewport] = useState(false);
-  const standbyStartedRef = useRef(false);
-  const crossfadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prefersReducedMotion = useReducedMotion();
   const pathname = usePathname();
 
@@ -131,114 +120,6 @@ export default function Home() {
     videos.forEach((v) => observer.observe(v));
     return () => observer.disconnect();
   }, []);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    const apply = () => setHeroVideoPreload(mq.matches ? "auto" : "metadata");
-    apply();
-    mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
-  }, []);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    const apply = () => setIsMobileViewport(mq.matches);
-    apply();
-    mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
-  }, []);
-
-  useEffect(() => {
-    if (isMobileViewport) {
-      setHeroVideoState("fallback");
-      return;
-    }
-
-    const primaryVideo = heroVideoRefs.current[0];
-
-    if (!primaryVideo) {
-      const fallbackTimeout = window.setTimeout(() => {
-        setHeroVideoState("fallback");
-      }, 0);
-
-      return () => {
-        window.clearTimeout(fallbackTimeout);
-      };
-    }
-
-    const attemptPlayback = async () => {
-      try {
-        primaryVideo.currentTime = 0;
-        await primaryVideo.play();
-        setHeroVideoState("playing");
-      } catch {
-        setHeroVideoState("fallback");
-      }
-    };
-
-    void attemptPlayback();
-
-    return () => {
-      if (crossfadeTimeoutRef.current) {
-        clearTimeout(crossfadeTimeoutRef.current);
-      }
-    };
-  }, [isMobileViewport]);
-
-  const startStandbyLayer = async (currentLayer: number) => {
-    const nextLayer = currentLayer === 0 ? 1 : 0;
-    const standbyVideo = heroVideoRefs.current[nextLayer];
-
-    if (!standbyVideo || standbyStartedRef.current) {
-      return;
-    }
-
-    standbyStartedRef.current = true;
-
-    try {
-      standbyVideo.currentTime = 0;
-      await standbyVideo.play();
-      setHeroVideoState("playing");
-      setFadingHeroLayer(currentLayer);
-      setActiveHeroLayer(nextLayer);
-      standbyStartedRef.current = false;
-    } catch {
-      setHeroVideoState("fallback");
-      standbyStartedRef.current = false;
-      return;
-    }
-
-    if (crossfadeTimeoutRef.current) {
-      clearTimeout(crossfadeTimeoutRef.current);
-    }
-
-    crossfadeTimeoutRef.current = setTimeout(() => {
-      const previousVideo = heroVideoRefs.current[currentLayer];
-      if (previousVideo) {
-        previousVideo.pause();
-        previousVideo.currentTime = 0;
-      }
-      setFadingHeroLayer((layer) => (layer === currentLayer ? null : layer));
-    }, HERO_VIDEO_CROSSFADE_SECONDS * 1000);
-  };
-
-  const handleHeroTimeUpdate = (layerIndex: number) => {
-    if (layerIndex !== activeHeroLayer) {
-      return;
-    }
-
-    const activeVideo = heroVideoRefs.current[layerIndex];
-
-    if (!activeVideo || !Number.isFinite(activeVideo.duration) || activeVideo.duration <= 0) {
-      return;
-    }
-
-    const remaining = activeVideo.duration - activeVideo.currentTime;
-
-    if (remaining <= HERO_VIDEO_CROSSFADE_SECONDS) {
-      void startStandbyLayer(layerIndex);
-    }
-  };
 
   const handleContactMouseMove = (event: MouseEvent<HTMLAnchorElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -441,44 +322,9 @@ export default function Home() {
         className="section-fullscreen section-fullscreen--hero relative flex items-center justify-center section-gutter py-12 md:py-0"
       >
         <div className="hero-media absolute inset-0">
-          {[0, 1].map((layerIndex) => (
-            <video
-              key={layerIndex}
-              ref={(node) => {
-                heroVideoRefs.current[layerIndex] = node;
-              }}
-              className={`hero-video pointer-events-none absolute inset-0 h-full w-full object-cover ${
-                heroVideoState === "playing" && activeHeroLayer === layerIndex
-                  ? "hero-video-visible"
-                  : fadingHeroLayer === layerIndex
-                    ? "hero-video-fading"
-                    : "hero-video-hidden"
-              }`}
-              autoPlay={layerIndex === 0}
-              muted
-              playsInline
-              preload={layerIndex === 0 ? heroVideoPreload : "none"}
-              onLoadedData={() => setHeroVideoState((current) => (current === "fallback" ? current : "playing"))}
-              onPlay={() => setHeroVideoState("playing")}
-              onTimeUpdate={() => handleHeroTimeUpdate(layerIndex)}
-              onEnded={() => void startStandbyLayer(layerIndex)}
-              onError={() => setHeroVideoState("fallback")}
-            >
-              <source src={HERO_VIDEO_SRC} type="video/mp4" />
-            </video>
-          ))}
-          {heroVideoState === "fallback" ? (
-            <div className="hero-fallback hero-fallback-visible absolute inset-0" aria-hidden="true">
-              <div className="hero-fallback-grid" />
-              <div className="hero-fallback-rings" />
-              <div className="hero-fallback-beam hero-fallback-beam-left" />
-              <div className="hero-fallback-beam hero-fallback-beam-right" />
-            </div>
-          ) : null}
+          <HeroFlowField className="absolute inset-0" />
         </div>
-        <div
-          className={`absolute inset-0 ${heroVideoState === "fallback" ? "hero-overlay" : "hero-overlay hero-overlay-video"}`}
-        />
+        <div className="absolute inset-0 hero-overlay" />
         <div className="relative z-20 mx-auto flex w-full max-w-7xl flex-col justify-start gap-6 md:-mt-16 md:flex-row md:items-start md:gap-12">
           <motion.div
             initial={fade.initial}
