@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import { Layers, ScanEye, FileText, BarChart3, Database, Sparkles } from "lucide-react";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
-import { HeroFlowField } from "@/components/HeroFlowField";
+import { HeroPulseField } from "@/components/HeroPulseField";
 import { PixelField } from "@/components/PixelField";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
 import TeamMemberCard from "@/components/ui/team-member-card";
@@ -322,7 +322,7 @@ export default function Home() {
         className="section-fullscreen section-fullscreen--hero relative flex items-center justify-center section-gutter py-12 md:py-0"
       >
         <div className="hero-media absolute inset-0">
-          <HeroFlowField className="absolute inset-0" />
+          <HeroPulseField className="absolute inset-0" />
         </div>
         <div className="absolute inset-0 hero-overlay" />
         <div className="relative z-20 mx-auto flex w-full max-w-7xl flex-col justify-start gap-6 md:-mt-16 md:flex-row md:items-start md:gap-12">
