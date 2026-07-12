@@ -39,6 +39,48 @@ export function LendingContent() {
         ))}
       </div>
 
+      {/* AI adoption & integration grid */}
+      <div className="mb-16">
+        <p className="section-label mb-3">{lp.adoptionGrid.sectionLabel}</p>
+        <div className="rule mb-6" />
+        <div className="mb-10 grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
+          <h2 className="text-[clamp(1.25rem,4vw,1.9rem)] leading-snug text-[var(--white-100)]">
+            {lp.adoptionGrid.title}
+          </h2>
+          <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
+            {lp.adoptionGrid.intro}
+          </p>
+        </div>
+        <div className="grid gap-px overflow-hidden rounded-lg border border-[var(--white-20)] bg-[var(--white-20)] sm:grid-cols-2 lg:grid-cols-5">
+          {lp.adoptionGrid.categories.map((cat) => (
+            <div key={cat.id} className="flex flex-col gap-3 bg-[var(--background)] px-5 py-6">
+              <h3 className="text-sm font-medium text-[var(--white-100)]">{cat.title}</h3>
+              <p className="text-[0.75rem] leading-relaxed text-[var(--text-muted)]">
+                {cat.description}
+              </p>
+              <ul className="mt-1 space-y-1.5">
+                {cat.items.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-2 text-[0.72rem] leading-snug text-[var(--white-70)]"
+                  >
+                    <span className="mt-[0.4rem] h-1 w-1 shrink-0 rounded-full bg-[var(--white-40)]" aria-hidden="true" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <a
+          href="/contact"
+          className="mt-8 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-80)] transition-colors hover:text-[var(--white-100)]"
+        >
+          {lp.adoptionGrid.cta}
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+
       {/* Featured deployment pointer */}
       <div className="mb-16 border border-[var(--white-20)] bg-[var(--surface)] p-6 sm:p-8">
         <p className="mb-2 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">

@@ -23,6 +23,8 @@ type Dash = {
   h: number;
   /** depth layer: 0 = crisp, 1 = soft, 2 = deep blur */
   depth: 0 | 1 | 2;
+  /** most dashes are the primary tone; a minority are the gold accent */
+  tone: "primary" | "gold";
   baseAlpha: number;
   flickerPhase: number;
   flickerSpeed: number;
@@ -50,12 +52,12 @@ function buildField(): Dash[] {
 
   // Cluster centres spread across the frame, denser toward the edges so the
   // headline area stays quiet.
-  const clusters = Array.from({ length: 16 }, () => ({
+  const clusters = Array.from({ length: 20 }, () => ({
     cx: rnd(),
-    cy: 0.12 + rnd() * 0.76,
-    spreadCols: 4 + Math.floor(rnd() * 10),
-    spreadY: 0.08 + rnd() * 0.3,
-    density: 0.6 + rnd() * 0.6,
+    cy: 0.1 + rnd() * 0.8,
+    spreadCols: 5 + Math.floor(rnd() * 11),
+    spreadY: 0.08 + rnd() * 0.32,
+    density: 0.7 + rnd() * 0.6,
     depthBias: rnd(),
   }));
 
@@ -64,15 +66,18 @@ function buildField(): Dash[] {
       // Column position snapped to a pitch grid (fraction resolved at draw
       // time against real width; store pitch offset in px via marker < 0..1).
       const falloff = 1 - Math.abs(col) / (c.spreadCols + 1);
-      const segments = Math.round((1 + rnd() * 4) * c.density * falloff);
+      const segments = Math.round((1.5 + rnd() * 4) * c.density * falloff);
       for (let s = 0; s < segments; s++) {
         const depthRoll = rnd() * 0.7 + c.depthBias * 0.3;
         const depth = (depthRoll < 0.35 ? 0 : depthRoll < 0.7 ? 1 : 2) as 0 | 1 | 2;
+        // Roughly one dash in five carries the gold accent tone.
+        const tone: Dash["tone"] = rnd() < 0.2 ? "gold" : "primary";
         dashes.push({
           x: c.cx + (col * COLUMN_PITCH) / 1440, // resolved against a 1440 ref width
           y: c.cy + (rnd() - 0.5) * c.spreadY,
           h: 0.015 + rnd() * rnd() * 0.16,
           depth,
+          tone,
           baseAlpha: (0.25 + rnd() * 0.65) * (depth === 2 ? 0.7 : 1),
           flickerPhase: rnd() * Math.PI * 2,
           flickerSpeed: 0.15 + rnd() * 0.55,
@@ -84,29 +89,37 @@ function buildField(): Dash[] {
   return dashes;
 }
 
-/** Pre-render one glowing bar sprite per depth layer for cheap stamping. */
-function buildSprites(dark: boolean): HTMLCanvasElement[] {
+/** Pre-render one glowing bar sprite per depth layer x tone for cheap stamping. */
+function buildSprites(dark: boolean): Record<Dash["tone"], HTMLCanvasElement[]> {
   const blurs = dark ? [0, 3, 9] : [0, 2, 6];
-  return blurs.map((blur) => {
-    const w = 28;
-    const h = 160;
-    const sprite = document.createElement("canvas");
-    sprite.width = w;
-    sprite.height = h;
-    const sctx = sprite.getContext("2d")!;
-    const pad = 20;
-    const grad = sctx.createLinearGradient(0, pad, 0, h - pad);
-    const ink = dark ? "255, 255, 255" : "14, 14, 14";
-    grad.addColorStop(0, `rgba(${ink}, 0)`);
-    grad.addColorStop(0.18, `rgba(${ink}, 0.9)`);
-    grad.addColorStop(0.82, `rgba(${ink}, 0.9)`);
-    grad.addColorStop(1, `rgba(${ink}, 0)`);
-    sctx.filter = blur ? `blur(${blur}px)` : "none";
-    sctx.fillStyle = grad;
-    const barW = 8 - (blur ? 0 : 2);
-    sctx.fillRect((w - barW) / 2, pad, barW, h - pad * 2);
-    return sprite;
-  });
+  // Dark theme: white primary bars, warm gold accents.
+  // Light theme: dark-ink primary bars, a deeper old-gold accent for contrast on cream.
+  const inks: Record<Dash["tone"], string> = dark
+    ? { primary: "255, 255, 255", gold: "255, 197, 110" }
+    : { primary: "14, 14, 14", gold: "150, 106, 26" };
+
+  const build = (ink: string) =>
+    blurs.map((blur) => {
+      const w = 28;
+      const h = 160;
+      const sprite = document.createElement("canvas");
+      sprite.width = w;
+      sprite.height = h;
+      const sctx = sprite.getContext("2d")!;
+      const pad = 20;
+      const grad = sctx.createLinearGradient(0, pad, 0, h - pad);
+      grad.addColorStop(0, `rgba(${ink}, 0)`);
+      grad.addColorStop(0.18, `rgba(${ink}, 0.9)`);
+      grad.addColorStop(0.82, `rgba(${ink}, 0.9)`);
+      grad.addColorStop(1, `rgba(${ink}, 0)`);
+      sctx.filter = blur ? `blur(${blur}px)` : "none";
+      sctx.fillStyle = grad;
+      const barW = 8 - (blur ? 0 : 2);
+      sctx.fillRect((w - barW) / 2, pad, barW, h - pad * 2);
+      return sprite;
+    });
+
+  return { primary: build(inks.primary), gold: build(inks.gold) };
 }
 
 export function HeroPulseField({ className = "" }: { className?: string }) {
@@ -160,7 +173,7 @@ export function HeroPulseField({ className = "" }: { className?: string }) {
         const alpha = d.baseAlpha * breath * gate * wave(d.x) * (dark ? 1.7 : 1);
         if (alpha <= 0.01) continue;
 
-        const sprite = sprites[d.depth];
+        const sprite = sprites[d.tone][d.depth];
         const barH = Math.max(8, d.h * height) + (d.depth === 2 ? 26 : d.depth === 1 ? 12 : 0);
         const barW = (d.depth === 2 ? 26 : d.depth === 1 ? 14 : 9) * (barH / 120 + 0.6);
         ctx.globalAlpha = Math.min(1, alpha);

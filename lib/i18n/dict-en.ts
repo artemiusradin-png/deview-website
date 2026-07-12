@@ -839,6 +839,69 @@ export const en = {
     featuredBody:
       "Shared backbone for portal, database, and audit trail. AI Credit Analyst, Agentic AI Assistant, AI Email Processing, AI Document Processing, and AI Prompt Management — each reading from the same borrower database and writing back to the same audit trail. No silos, no copy-paste between systems.",
     featuredLink: "See the build",
+    adoptionGrid: {
+      sectionLabel: "AI ADOPTION & INTEGRATION",
+      title: "Where AI integrates across the lending and fintech stack.",
+      intro: "From payment rails to regulatory reporting, we scope and build AI directly into the systems your fintech or lending operation already runs on.",
+      categories: [
+        {
+          id: "payments",
+          title: "Payments",
+          description: "Card acquiring, wallets, and billing systems that move and reconcile money.",
+          items: [
+            "Payment gateway & processing (card acquiring, orchestration)",
+            "Digital wallets / neobank apps",
+            "Credit card processing & tokenization",
+            "Subscription billing & revenue recognition",
+            "Chargeback / dispute management",
+          ],
+        },
+        {
+          id: "lending-credit",
+          title: "Lending & Credit",
+          description: "Underwriting, scoring, and financing platforms across the credit lifecycle.",
+          items: [
+            "BNPL (Buy Now, Pay Later) platforms",
+            "Lending & credit scoring platforms",
+            "Invoice factoring / supply chain finance",
+            "Trade finance platforms",
+          ],
+        },
+        {
+          id: "risk-compliance",
+          title: "Risk & Compliance",
+          description: "Identity, fraud, and regulatory systems that keep operations defensible.",
+          items: [
+            "KYC/AML & identity verification",
+            "Fraud detection & risk scoring engines",
+            "RegTech / compliance automation (monitoring, reporting)",
+            "Tax automation & filing platforms",
+          ],
+        },
+        {
+          id: "banking-infrastructure",
+          title: "Banking Infrastructure",
+          description: "Embedded, open, and advisory platforms built on top of core banking rails.",
+          items: [
+            "Embedded finance / Banking-as-a-Service (BaaS)",
+            "Open banking / account aggregation",
+            "Robo-advisory / wealth management",
+            "Insurtech (claims automation, underwriting)",
+          ],
+        },
+        {
+          id: "treasury-expense",
+          title: "Treasury & Expense",
+          description: "Cash, cards, and personal finance tools for corporates and consumers alike.",
+          items: [
+            "Expense management & corporate card platforms",
+            "Treasury management & cash flow forecasting",
+            "Personal finance management (PFM) apps",
+          ],
+        },
+      ],
+      cta: "Talk to us about your stack",
+    },
     useCasesLabel: "Use cases",
     whatChangesLabel: "What changes",
     useCases: [
@@ -1212,7 +1275,7 @@ export const en = {
   caseStudiesPage: {
     sectionLabel: "CASE STUDIES",
     h1: "Measurable outcomes from live deployments.",
-    subtitle: "Eight engagements across lending, insurance, professional services, financial operations, humanitarian reconstruction, logistics, legal, and hospitality. All outcomes are real — some clients are anonymised by request.",
+    subtitle: "Nine engagements across lending, insurance, professional services, financial operations, humanitarian reconstruction, logistics, legal, hospitality, and senior care. All outcomes are real — some clients are anonymised by request.",
     challengeLabel: "The Challenge",
     solutionLabel: "What We Built",
     capabilitiesLabel: "AI Capabilities",
@@ -1369,6 +1432,27 @@ export const en = {
         ],
         quote: "During peak season we were losing bookings because we couldn't reply fast enough. Now guests get an accurate answer in their own language within minutes — and my front desk team handles the requests that actually need a personal touch.",
         quoteRole: "Group Operations Director, Coral Bay Hotels",
+      },
+      {
+        number: "09",
+        sector: "SENIOR CARE · SWITZERLAND",
+        service: "Document Automation",
+        headline: "Nursing documentation time cut by 74%, returning two hours per shift to resident care",
+        challenge: "Altersheim Switzerland operates three residential care homes across the German- and French-speaking cantons, supporting 210 residents around the clock. Cantonal health authorities require detailed care documentation for every resident on every shift — medication administered, mobility changes, meals, incidents, and vital signs — recorded in strict formats for regulatory audit. Nursing staff were completing this documentation by hand or in an unstructured legacy system, spending 2.5–3 hours of every 8-hour shift on paperwork instead of resident care. Shift handovers relied on staff reading through scattered notes, and the monthly cantonal compliance report took one senior nurse two full days to compile from paper records.",
+        solution: "DeView built a document automation and reporting system tailored to Swiss cantonal care-documentation standards. Nursing staff dictate or type shift notes in German or French; the system extracts structured entries — medication given, vitals, mobility, incidents, and meals — and writes them directly into each resident's care record in the format cantonal auditors require. Anomalies such as a missed medication, an unusual weight trend, or a repeated incident are flagged for the duty nurse's attention. At shift end, a structured handover summary is generated automatically for the incoming team, and the monthly compliance report is compiled and ready for review rather than assembled by hand.",
+        outcomes: [
+          { metric: "74%", label: "reduction in per-shift documentation time" },
+          { metric: "2 hrs", label: "nursing time returned to resident care per shift" },
+          { metric: "2 days → 45 min", label: "monthly cantonal compliance report" },
+          { metric: "5 weeks", label: "phased rollout across all three homes" },
+        ],
+        capabilities: [
+          { name: "Bilingual Care Note Extraction", body: "Shift notes dictated or typed in German or French are parsed into structured care-record fields — medication, vitals, mobility, incidents, and meals — written directly into each resident's file in the format cantonal auditors expect." },
+          { name: "Automated Shift Handover", body: "A structured handover summary is generated at the end of every shift, surfacing what changed, what needs follow-up, and any flagged anomalies — so incoming staff start with context instead of piecing it together from scattered notes." },
+          { name: "Cantonal Compliance Reporting", body: "Monthly regulatory reports are compiled automatically from the underlying care records in the exact format cantonal health authorities require, ready for a senior nurse to review and sign off." },
+        ],
+        quote: "Our nurses went into this profession to care for people, not to fill out forms. Getting two hours back per shift means more time at the bedside — and our compliance reporting hasn't missed a deadline since.",
+        quoteRole: "Director of Care, Altersheim Switzerland",
       },
     ],
     ctaLabel: "Start a conversation",
