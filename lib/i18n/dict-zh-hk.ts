@@ -215,6 +215,7 @@ export const zhHK: Dictionary = {
       {
         id: "ai-solutions",
         label: "AI 方案",
+        heading: "AI 方案",
         title: "消除人手作業的自動化",
         body: "直接部署於您營運核心的 AI 系統——文件自動化、知識助手、客服輔助及報告管道。接通您的 CRM、ERP 及文件庫，並在關鍵環節保留人工覆核。",
         subs: [
@@ -228,6 +229,7 @@ export const zhHK: Dictionary = {
       {
         id: "software-engineering",
         label: "軟件工程",
+        heading: "軟件工程",
         title: "圍繞您工作流程打造的客製平台",
         body: "網上平台、客戶門戶及內部工具——由架構設計到投入生產，全程一手包辦。AgroPlatforma 市場平台及我們的統一貸款門戶正是這樣建成。",
         subs: [
@@ -241,6 +243,7 @@ export const zhHK: Dictionary = {
       {
         id: "data-science",
         label: "數據科學",
+        heading: "數據科學",
         title: "以您自己的數據支持決策",
         body: "由數據管道到預測模型——我們整合分散的數據、自動化報告流程，並構建將您的紀錄轉化為預測與決策的模型。",
         subs: [
@@ -563,7 +566,7 @@ export const zhHK: Dictionary = {
   },
   leadership: {
     sectionLabel: "領導團隊",
-    jobPosition: "董事總經理",
+    jobPosition: "營運及 AI 提示工程",
     firstName: "Artemis",
     lastName: "Radin",
     description:
@@ -878,13 +881,14 @@ export const zhHK: Dictionary = {
       members: [
         {
           name: "Artemis Radin",
-          role: "董事總經理",
+          role: "營運及 AI 提示工程",
           photo: "/team/artemis-radin-800.webp",
           initials: "AR",
           bio: "全程主理 DeView 的項目——由釐定最耗費成本的工作流程，到交付解決問題的系統。",
         },
-        { name: "", role: "工程", photo: "", initials: "EN", bio: "" },
-        { name: "", role: "數據科學", photo: "", initials: "DS", bio: "" },
+        { name: "Stepan Pashchenko", role: "銷售主管", photo: "", initials: "SP", bio: "" },
+        { name: "Stanislav Dupllyakov", role: "瑞士客戶關係", photo: "", initials: "SD", bio: "" },
+        { name: "Eden Lam", role: "軟件工程師", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "" },
       ],
     },
     h1: "我們構建真正完成工作的 AI——而非只能回答相關問題的 AI。",

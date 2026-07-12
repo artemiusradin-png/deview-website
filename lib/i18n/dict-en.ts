@@ -209,6 +209,7 @@ export const en = {
       {
         id: "ai-solutions",
         label: "AI SOLUTIONS",
+        heading: "AI Solutions",
         title: "Automation that removes manual work",
         body: "AI systems deployed inside your operations — document automation, knowledge assistants, support copilots, and reporting pipelines. Connected to your CRM, ERP, and documents, with human review where it matters.",
         subs: [
@@ -222,6 +223,7 @@ export const en = {
       {
         id: "software-engineering",
         label: "SOFTWARE ENGINEERING",
+        heading: "Software Engineering",
         title: "Custom platforms built around your workflow",
         body: "Web platforms, client portals, and internal tools engineered end to end — from architecture to production. The AgroPlatforma marketplace and our unified lending portal were built exactly this way.",
         subs: [
@@ -235,6 +237,7 @@ export const en = {
       {
         id: "data-science",
         label: "DATA SCIENCE",
+        heading: "Data Science",
         title: "Decisions backed by your own data",
         body: "From pipelines to predictions — we consolidate fragmented data, automate reporting, and build the models that turn your records into forecasts and decisions.",
         subs: [
@@ -580,7 +583,7 @@ export const en = {
   },
   leadership: {
     sectionLabel: "LEADERSHIP",
-    jobPosition: "Managing Director",
+    jobPosition: "Operations & AI Prompt Engineering",
     firstName: "Artemis",
     lastName: "Radin",
     description:
@@ -1135,13 +1138,14 @@ export const en = {
       members: [
         {
           name: "Artemis Radin",
-          role: "Managing Director",
+          role: "Operations & AI Prompt Engineering",
           photo: "/team/artemis-radin-800.webp",
           initials: "AR",
           bio: "Leads DeView's engagements end to end — from scoping the workflows that cost the most to shipping the systems that fix them.",
         },
-        { name: "", role: "Engineering", photo: "", initials: "EN", bio: "" },
-        { name: "", role: "Data Science", photo: "", initials: "DS", bio: "" },
+        { name: "Stepan Pashchenko", role: "Head of Sales", photo: "", initials: "SP", bio: "" },
+        { name: "Stanislav Dupllyakov", role: "Switzerland Customer Relations", photo: "", initials: "SD", bio: "" },
+        { name: "Eden Lam", role: "Software Developer", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "" },
       ],
     },
     h1: "We build AI that does the work — not AI that answers questions about it.",

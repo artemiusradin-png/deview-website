@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
-import { PRACTICE_IDS, practiceMeta } from "@/lib/practice-areas";
+import { PRACTICE_IDS } from "@/lib/practice-areas";
 
 type HomePracticeAreasProps = {
   variant?: "home" | "standalone";
@@ -36,68 +36,35 @@ export function HomePracticeAreas({ variant = "home" }: HomePracticeAreasProps) 
           </div>
         </motion.div>
 
-        <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-3">
+        <div className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 md:mt-16 lg:grid-cols-3 lg:gap-x-10">
           {PRACTICE_IDS.map((id, index) => {
             const item = p.items[index];
-            const meta = practiceMeta[id];
             return (
               <motion.a
                 key={id}
                 id={variant === "standalone" ? id : undefined}
                 href={variant === "standalone" ? undefined : localePath(`/services#${id}`)}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45, delay: index * 0.08 }}
-                className={`group flex flex-col overflow-hidden rounded-lg border border-[var(--white-20)] bg-[var(--surface)] transition-colors hover:border-[var(--white-40)] ${
+                transition={{ duration: 0.4, delay: index * 0.07 }}
+                className={`group block border-t border-[var(--white-20)] pt-6 transition-colors ${
                   variant === "standalone" ? "scroll-margin-header" : ""
                 }`}
               >
-                <div className="relative h-44 overflow-hidden border-b border-[var(--white-10)]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={meta.image}
-                    alt=""
-                    loading="lazy"
-                    className="h-full w-full object-cover opacity-70 transition-transform duration-500 group-hover:scale-105 group-hover:opacity-90"
-                  />
-                  <div
-                    className="pointer-events-none absolute inset-0"
-                    style={{ background: `linear-gradient(to top, ${meta.accent}, transparent 60%)` }}
-                    aria-hidden="true"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <p className="text-[0.65rem] uppercase tracking-[0.22em] text-[var(--white-60)]">
-                    {item.label}
-                  </p>
-                  <h3 className="mt-2 text-lg font-medium leading-snug text-[var(--white-100)]">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">{item.body}</p>
-                  <ul className="mt-5 space-y-2">
-                    {item.subs.map((sub) => (
-                      <li
-                        key={sub}
-                        className="flex items-start gap-2 text-[0.8rem] leading-snug text-[var(--white-80)]"
-                      >
-                        <span className="mt-[0.45rem] h-1 w-1 shrink-0 rounded-full bg-[var(--white-40)]" aria-hidden="true" />
-                        <span>{sub}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-auto pt-6">
-                    <p className="text-[0.65rem] uppercase tracking-[0.16em] text-[var(--white-40)]">
-                      {item.proof}
-                    </p>
-                    {variant === "home" ? (
-                      <span className="mt-4 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-80)] transition-colors group-hover:text-[var(--white-100)]">
-                        {p.explore}
-                        <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
-                      </span>
-                    ) : null}
-                  </div>
-                </div>
+                <p className="text-[0.95rem] leading-relaxed text-[var(--white-90)] sm:text-base">
+                  <span className="font-medium text-[var(--white-100)] underline decoration-[var(--white-20)] decoration-1 underline-offset-4 transition-colors group-hover:decoration-[var(--white-60)]">
+                    {item.heading}.
+                  </span>{" "}
+                  {item.title}.
+                </p>
+                <ul className="mt-4 space-y-1.5">
+                  {item.subs.map((sub) => (
+                    <li key={sub} className="text-[0.78rem] leading-snug text-[var(--text-muted)]">
+                      {sub}
+                    </li>
+                  ))}
+                </ul>
               </motion.a>
             );
           })}

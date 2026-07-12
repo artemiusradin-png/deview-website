@@ -211,6 +211,7 @@ export const de: Dictionary = {
       {
         id: "ai-solutions",
         label: "KI-LÖSUNGEN",
+        heading: "KI-Lösungen",
         title: "Automatisierung, die manuelle Arbeit eliminiert",
         body: "KI-Systeme, die direkt in Ihrem Betrieb arbeiten — Dokumentenautomatisierung, Wissensassistenten, Support-Copilots und Reporting-Pipelines. Verbunden mit Ihrem CRM, ERP und Ihren Dokumenten, mit menschlicher Prüfung, wo sie zählt.",
         subs: [
@@ -224,6 +225,7 @@ export const de: Dictionary = {
       {
         id: "software-engineering",
         label: "SOFTWARE-ENGINEERING",
+        heading: "Software-Engineering",
         title: "Individuelle Plattformen rund um Ihren Workflow",
         body: "Web-Plattformen, Kundenportale und interne Tools — von der Architektur bis zur Produktion durchgängig entwickelt. Der AgroPlatforma-Marktplatz und unser Kreditportal sind genau so entstanden.",
         subs: [
@@ -237,6 +239,7 @@ export const de: Dictionary = {
       {
         id: "data-science",
         label: "DATA SCIENCE",
+        heading: "Data Science",
         title: "Entscheidungen auf Basis Ihrer eigenen Daten",
         body: "Von Pipelines bis zu Prognosen — wir konsolidieren fragmentierte Daten, automatisieren das Reporting und bauen die Modelle, die aus Ihren Datensätzen Prognosen und Entscheidungen machen.",
         subs: [
@@ -582,7 +585,7 @@ export const de: Dictionary = {
   },
   leadership: {
     sectionLabel: "LEADERSHIP",
-    jobPosition: "Managing Director",
+    jobPosition: "Operations & AI Prompt Engineering",
     firstName: "Artemis",
     lastName: "Radin",
     description:
@@ -898,13 +901,14 @@ export const de: Dictionary = {
       members: [
         {
           name: "Artemis Radin",
-          role: "Managing Director",
+          role: "Operations & AI Prompt Engineering",
           photo: "/team/artemis-radin-800.webp",
           initials: "AR",
           bio: "Führt DeViews Engagements von Anfang bis Ende — vom Scoping der teuersten Workflows bis zum Deployment der Systeme, die sie beheben.",
         },
-        { name: "", role: "Engineering", photo: "", initials: "EN", bio: "" },
-        { name: "", role: "Data Science", photo: "", initials: "DS", bio: "" },
+        { name: "Stepan Pashchenko", role: "Head of Sales", photo: "", initials: "SP", bio: "" },
+        { name: "Stanislav Dupllyakov", role: "Kundenbeziehungen Schweiz", photo: "", initials: "SD", bio: "" },
+        { name: "Eden Lam", role: "Software-Entwickler", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "" },
       ],
     },
     h1: "Wir bauen KI, die die Arbeit erledigt — nicht KI, die Fragen darüber beantwortet.",
