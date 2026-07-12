@@ -28,9 +28,6 @@ const AnimatedServiceCardStack = dynamic(
   () => import("@/components/ui/animate-card-animation"),
   { ssr: false },
 );
-const SecurityTrustSection = dynamic(() =>
-  import("@/components/SecurityTrustSection").then((m) => m.SecurityTrustSection),
-);
 const SiteFooter = dynamic(() => import("@/components/SiteFooter").then((m) => m.SiteFooter));
 const RetroFeatureCards = dynamic(() =>
   import("@/components/RetroFeatureCards").then((m) => m.RetroFeatureCards),
@@ -672,9 +669,6 @@ export default function Home() {
       <SelectedProjectsLogoMarquee />
 
       <HomeIndustries />
-
-      <SecurityTrustSection />
-
 
       <RetroFeatureCards />
 
