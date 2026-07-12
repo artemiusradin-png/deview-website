@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ServicesVoyageSlider } from "@/components/ServicesVoyageSlider";
+import { ServicesFeatureGrid } from "@/components/ServicesFeatureGrid";
 import { homeSectionReveal } from "@/lib/home-section-motion";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 
@@ -40,7 +40,7 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
         </div>
 
         <div className="w-full" aria-live="polite">
-          <ServicesVoyageSlider services={s} />
+          <ServicesFeatureGrid services={s} />
         </div>
       </motion.div>
     </section>
