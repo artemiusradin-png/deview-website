@@ -95,6 +95,60 @@ export function AboutContent() {
         </div>
       </div>
 
+      {/* Team */}
+      <div className="mb-16">
+        <p className="mb-3 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
+          {a.team.label}
+        </p>
+        <div className="rule mb-8" />
+        <div className="mb-10 grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
+          <h2 className="text-[clamp(1.25rem,4vw,1.75rem)] leading-snug text-[var(--white-100)]">
+            {a.team.title}
+          </h2>
+          <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">{a.team.intro}</p>
+        </div>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {a.team.members.map((member) => (
+            <div
+              key={`${member.role}-${member.initials}`}
+              className="flex flex-col overflow-hidden rounded-lg border border-[var(--white-20)] bg-[var(--surface)]"
+            >
+              <div className="relative aspect-[4/5] overflow-hidden border-b border-[var(--white-10)] bg-[var(--background)]">
+                {member.photo ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <div className="flex h-full w-full flex-col items-center justify-center gap-3" aria-hidden="true">
+                    <span className="flex h-20 w-20 items-center justify-center rounded-full border border-[var(--white-20)] text-xl tracking-[0.1em] text-[var(--white-40)]">
+                      {member.initials}
+                    </span>
+                    <span className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-30)]">
+                      {a.team.comingSoon}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <div className="flex flex-1 flex-col gap-1 p-5">
+                <p className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
+                  {member.role}
+                </p>
+                {member.name ? (
+                  <p className="text-base font-medium text-[var(--white-100)]">{member.name}</p>
+                ) : null}
+                {member.bio ? (
+                  <p className="mt-1 text-[0.8rem] leading-relaxed text-[var(--text-muted)]">{member.bio}</p>
+                ) : null}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Location & context */}
       <div className="mb-16 grid gap-8 md:grid-cols-3">
         <div>

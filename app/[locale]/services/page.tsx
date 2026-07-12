@@ -1,24 +1,26 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/SiteFooter";
 import { HomeServicesSection } from "@/components/HomeServicesSection";
+import { HomePracticeAreas } from "@/components/HomePracticeAreas";
 import { SubpageNav } from "@/components/SubpageNav";
 import { RETRO_FEATURE_CARDS_ID } from "@/components/RetroFeatureCards";
 
 const homeWithRetroCards = `/#${RETRO_FEATURE_CARDS_ID}`;
 
 export const metadata: Metadata = {
-  title: "Services | DeView",
+  title: "Services — AI, Software Engineering & Data Science | DeView",
   description:
-    "End-to-end services for implementing AI in business operations — strategy, custom solutions, implementation, and integration.",
+    "Three practices — AI solutions, software engineering, and data science — that reduce manual work, cut operating costs, and ship working systems in 1–8 weeks.",
 };
 
 export default function ServicesPage() {
   return (
     <>
-      <main className="section-gutter min-h-screen overflow-x-clip bg-[var(--background)] bg-grid pb-[max(1rem,env(safe-area-inset-bottom))] pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:pb-10 sm:pt-24">
-        <div className="mx-auto max-w-6xl">
+      <main className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid pb-[max(1rem,env(safe-area-inset-bottom))] pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:pb-10 sm:pt-24">
+        <div className="section-gutter mx-auto max-w-6xl">
           <SubpageNav backHref={homeWithRetroCards} />
         </div>
+        <HomePracticeAreas variant="standalone" />
         <HomeServicesSection variant="standalone" />
       </main>
       <SiteFooter />

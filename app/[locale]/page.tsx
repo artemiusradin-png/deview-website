@@ -20,6 +20,9 @@ const AnimatedFeatureSpotlightDemo = dynamic(() =>
 const HomeServicesSection = dynamic(() =>
   import("@/components/HomeServicesSection").then((m) => m.HomeServicesSection),
 );
+const HomePracticeAreas = dynamic(() =>
+  import("@/components/HomePracticeAreas").then((m) => m.HomePracticeAreas),
+);
 const AnimatedServiceCardStack = dynamic(
   () => import("@/components/ui/animate-card-animation"),
   { ssr: false },
@@ -40,8 +43,8 @@ const HomeProcessTimeline = dynamic(() =>
 const HomeInsightsPreview = dynamic(() =>
   import("@/components/HomeInsightsPreview").then((m) => m.HomeInsightsPreview),
 );
-const HomeTestimonials = dynamic(() =>
-  import("@/components/HomeTestimonials").then((m) => m.HomeTestimonials),
+const HomeOutcomesStrip = dynamic(() =>
+  import("@/components/HomeOutcomesStrip").then((m) => m.HomeOutcomesStrip),
 );
 const HomeIndustries = dynamic(() =>
   import("@/components/HomeIndustries").then((m) => m.HomeIndustries),
@@ -296,6 +299,22 @@ export default function Home() {
   const themeAria =
     theme === "dark" ? dict.a11y.themeToLight : dict.a11y.themeToDark;
 
+  // First four flagship AI services drive the animated card stack — copy comes from the dictionary.
+  const serviceStackImages = [
+    "/images/stock/dashboard-laptop-900.webp",
+    "/images/stock/desk-notebook-900.webp",
+    "/images/stock/finance-calculator-1200.webp",
+    "/images/stock/team-meeting-900.webp",
+  ];
+  const serviceStackCards = dict.services.items.slice(0, 4).map((item, index) => ({
+    label: item.label,
+    title: item.title,
+    description: `${item.scope} · ${item.duration}`,
+    image: serviceStackImages[index],
+    href: localePath(`/services#${item.id}`),
+    ctaLabel: dict.practices.exploreCta,
+  }));
+
   return (
     <div className="min-h-screen bg-[var(--background)] bg-grid text-[var(--text)]">
       <a
@@ -332,8 +351,11 @@ export default function Home() {
             <a href="#hero" className="nav-item nav-item-active">
               {dict.nav.aiConsulting}
             </a>
-            <a href="#services" className="nav-item">
+            <a href={localePath("/services")} className="nav-item">
               {dict.nav.services}
+            </a>
+            <a href={localePath("/pricing")} className="nav-item">
+              {dict.nav.pricing}
             </a>
             <a href={localePath("/case-studies")} className="nav-item">
               {dict.nav.caseStudies}
@@ -374,8 +396,11 @@ export default function Home() {
           <a href="#hero" className="nav-item-active" onClick={closeNav}>
             {dict.nav.aiConsulting}
           </a>
-          <a href="#services" onClick={closeNav}>
+          <a href={localePath("/services")} onClick={closeNav}>
             {dict.nav.services}
+          </a>
+          <a href={localePath("/pricing")} onClick={closeNav}>
+            {dict.nav.pricing}
           </a>
           <a href={localePath("/case-studies")} onClick={closeNav}>
             {dict.nav.caseStudies}
@@ -541,23 +566,25 @@ export default function Home() {
       </section>
 
 
+      <HomePracticeAreas />
+
       <HomeServicesSection variant="home" />
 
       <section className="border-t border-[var(--white-20)] bg-[var(--background)] px-4 py-16 sm:py-20 md:py-24">
         <div className="mx-auto max-w-6xl">
           <div className="mb-10 grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
             <div>
-              <p className="section-label mb-3">CURRENT AI SERVICES</p>
+              <p className="section-label mb-3">{dict.practices.flagshipLabel}</p>
               <div className="rule mb-6" />
               <h2 className="text-[clamp(1.5rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
-                Four production-ready services. Pick where to start.
+                {dict.practices.flagshipTitle}
               </h2>
             </div>
             <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
-              Each service ships in 1–5 weeks with measurable outcomes. Click through the stack to preview what we deliver.
+              {dict.practices.flagshipIntro}
             </p>
           </div>
-          <AnimatedServiceCardStack />
+          <AnimatedServiceCardStack cards={serviceStackCards} nextLabel={dict.practices.nextService} />
         </div>
       </section>
 
@@ -807,25 +834,23 @@ export default function Home() {
 
       <AnimatedFeatureSpotlightDemo />
 
-      {/* <HomeTestimonials /> */}
+      <HomeOutcomesStrip />
 
-      {/* Leadership section hidden for now
       <section className="relative overflow-hidden bg-[var(--background)] section-gutter py-10 md:py-14">
         <div className="mx-auto max-w-6xl">
-          <p className="section-label mb-3">LEADERSHIP</p>
+          <p className="section-label mb-3">{dict.leadership.sectionLabel}</p>
           <div className="rule mb-2" />
           <TeamMemberCard
             position="left"
-            jobPosition="Managing Director"
-            firstName="Artemis"
-            lastName="Radin"
-            imageUrl="/team/artemis-radin.jpg"
+            jobPosition={dict.leadership.jobPosition}
+            firstName={dict.leadership.firstName}
+            lastName={dict.leadership.lastName}
+            imageUrl="/team/artemis-radin-800.webp"
             href={localePath("/contact")}
-            description="Artemis leads DeView's engagements end to end — from scoping the workflows that cost clients the most to shipping the AI systems that fix them. He works directly with operations and finance leaders across the firm's offices, holding every build to one standard: measurable outcomes in weeks, not roadmaps in quarters."
+            description={dict.leadership.description}
           />
         </div>
       </section>
-      */}
 
       <HomeInsightsPreview />
 

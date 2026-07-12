@@ -36,6 +36,12 @@ export function PilotsFailContent() {
         </p>
       </div>
 
+      {/* Cover */}
+      <div className="mb-10 overflow-hidden rounded-lg border border-[var(--white-10)]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/insights/why-most-ai-pilots-fail-1200.webp" alt="" className="aspect-video w-full object-cover" />
+      </div>
+
       <div className="rule mb-10" />
 
       {/* Article body */}

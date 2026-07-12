@@ -3,14 +3,15 @@ import type { Dictionary } from "./dict-en";
 /** 繁體中文（香港）— 書面語為主，配合粵語區讀者習慣 */
 export const zhHK: Dictionary = {
   site: {
-    title: "DeView | AI 顧問及數據工程",
+    title: "DeView | AI 方案、軟件工程及數據科學",
     description:
-      "DeView 為企業構建能真正消除成本的 AI 系統——自動化重複性工作流程，減少人工失誤與營運開支。",
+      "DeView 構建 AI 自動化、客製軟件平台及數據管道，直接部署於您現有的工具之中——降低成本、消除人手作業。",
   },
   nav: {
-    aiConsulting: "AI 顧問",
+    aiConsulting: "主頁",
     enterpriseAi: "企業 AI",
     services: "服務項目",
+    pricing: "價格",
     useCases: "應用場景",
     outcomes: "成效成果",
     inquire: "立即查詢",
@@ -33,13 +34,13 @@ export const zhHK: Dictionary = {
   lang: { shortEn: "EN", shortZh: "粵", shortDe: "DE" },
   mobileNav: { close: "關閉", contactForm: "聯絡表格" },
   hero: {
-    kicker: "降低成本 · 自動化工作流程 · 加速業務推進",
-    titleL1: "深植運營核心",
-    titleL2: "的人工智能",
+    kicker: "AI 方案 · 軟件工程 · 數據科學",
+    titleL1: "真正做事的系統",
+    titleL2: "數週內上線",
     titleL3: "",
     lead:
-      "貴公司團隊正將大量時間耗費於文件處理、數據輸入、研究調查、報告撰寫及客戶跟進等繁瑣事務——而人工智能僅需數分鐘即可高效完成。我們專為企業構建能真正消除這些成本的智能系統。",
-    col1: ["降低成本", "工作流程自動化", "決策提速", "減少人工失誤"],
+      "三大專業範疇，同一標準：交付真正投入生產的系統。我們構建 AI 自動化、客製軟件平台及數據管道，直接部署於您現有的工具之中——降低成本、消除人手作業。",
+    col1: ["AI 方案", "軟件工程", "數據科學", "數週內投入生產"],
     clients: "服務對象",
     clientsValue: "運營及財務管理團隊",
     focus: "工作重心",
@@ -203,11 +204,65 @@ export const zhHK: Dictionary = {
       "可預測的企業成本",
     ],
   },
+  practices: {
+    sectionLabel: "我們的專業",
+    titleL1: "三大專業範疇。",
+    titleL2: "同一標準：系統投入生產。",
+    intro:
+      "AI 自動化、客製軟件及數據科學——明確範疇、快速構建，數週內交付至您的營運之中。每個項目以真正運作的系統作結，而非簡報文件。",
+    explore: "了解此範疇",
+    items: [
+      {
+        id: "ai-solutions",
+        label: "AI 方案",
+        title: "消除人手作業的自動化",
+        body: "直接部署於您營運核心的 AI 系統——文件自動化、知識助手、客服輔助及報告管道。接通您的 CRM、ERP 及文件庫，並在關鍵環節保留人工覆核。",
+        subs: [
+          "AI 工作流程審計",
+          "文件自動化",
+          "知識及客服助手",
+          "報告及研究輔助",
+        ],
+        proof: "旗艦範疇——下方為六大產品化服務",
+      },
+      {
+        id: "software-engineering",
+        label: "軟件工程",
+        title: "圍繞您工作流程打造的客製平台",
+        body: "網上平台、客戶門戶及內部工具——由架構設計到投入生產，全程一手包辦。AgroPlatforma 市場平台及我們的統一貸款門戶正是這樣建成。",
+        subs: [
+          "客製平台及門戶",
+          "系統整合及 API",
+          "舊系統現代化",
+          "MVP 及產品開發",
+        ],
+        proof: "實證：AgroPlatforma 及統一門戶案例研究",
+      },
+      {
+        id: "data-science",
+        label: "數據科學",
+        title: "以您自己的數據支持決策",
+        body: "由數據管道到預測模型——我們整合分散的數據、自動化報告流程，並構建將您的紀錄轉化為預測與決策的模型。",
+        subs: [
+          "數據工程及 ETL",
+          "分析及自動化報告",
+          "預測模型及趨勢推算",
+          "儀表板及決策支援",
+        ],
+        proof: "實證：每週 8 小時報告工作縮減至 12 分鐘",
+      },
+    ],
+    flagshipLabel: "AI 方案——旗艦服務",
+    flagshipTitle: "可即時投產的 AI 服務。選擇您的起點。",
+    flagshipIntro: "每項服務於 1–5 週內上線，成效可量化。點擊卡片瀏覽我們交付的內容。",
+    nextService: "下一項服務",
+    exploreCta: "了解更多",
+  },
   services: {
     clientsLabel: "精選項目",
     clientsIntro: "以下為我們曾支援的部分公司，涵蓋產品、營運及數碼交付工作。",
-    sectionLabel: "服務項目",
-    titleL1: "六大服務模塊，降低成本、",
+    sectionLabel: "AI 方案——服務項目",
+    titleL1: "六大 AI 服務模塊，降低成本、",
     titleL2: "自動化工作、加速落地。",
     intro:
       "每項服務針對特定的運營問題，提供清晰的項目範疇定義、透明報價及以週計算的快速交付——無需前期簽署長期顧問合約。",
@@ -406,11 +461,13 @@ export const zhHK: Dictionary = {
       insightsArticles: "洞察與文章",
       insuranceAi: "保險AI",
       applications: "應用",
+      services: "服務及專業範疇",
+      pricing: "價格",
     },
   },
   subpages: {
-    servicesTitle: "服務 | DeView",
-    servicesDesc: "以端到端方式將 AI 落實於業務營運，涵蓋策略、客製方案、實施及整合。",
+    servicesTitle: "服務——AI、軟件工程及數據科學 | DeView",
+    servicesDesc: "三大專業範疇——AI 方案、軟件工程及數據科學——減少人手作業、降低營運成本，並於 1–8 週內交付真正運作的系統。",
     useCasesTitle: "應用 | DeView",
     useCasesDesc:
       "圍繞真實營運難題而設計的 AI 方案，涵蓋客戶營運、內部知識及營運。",
@@ -492,25 +549,25 @@ export const zhHK: Dictionary = {
       },
     ],
   },
-  testimonials: {
-    sectionLabel: "客戶評價",
+  outcomesStrip: {
+    sectionLabel: "實地成果",
+    title: "來自生產環境系統的真實數字。",
+    intro: "以下每個數字均來自已交付的項目——於上線後實測，並非預測。",
+    cta: "閱讀案例研究",
     items: [
-      {
-        quote: "以前每日十點前已經積壓，而家做到即日處理。團隊終於可以專注喺例外情況同客戶關係——唔使再睇 PDF。",
-        name: "營運主管",
-        company: "香港中型貸款機構",
-      },
-      {
-        quote: "AI 負責資料檢索同草擬回覆，我哋團隊負責判斷。呢個先係正確嘅分工。",
-        name: "客戶服務經理",
-        company: "亞太區保險公司",
-      },
-      {
-        quote: "我哋之前唔知原來咁多高級員工嘅時間都花喺答已經有答案嘅問題度。",
-        name: "董事總經理",
-        company: "新加坡專業服務公司",
-      },
+      { metric: "45 分鐘 → 4 分鐘", label: "每份貸款檔案處理時間", client: "Grand Finance Group" },
+      { metric: "−70%", label: "服務請求分流時間", client: "Nextair" },
+      { metric: "−60%", label: "建議書初審時間", client: "EVDEV" },
+      { metric: "8 小時 → 12 分鐘", label: "每週報告週期", client: "Fizkultura" },
     ],
+  },
+  leadership: {
+    sectionLabel: "領導團隊",
+    jobPosition: "董事總經理",
+    firstName: "Artemis",
+    lastName: "Radin",
+    description:
+      "Artemis 全程主理 DeView 的每個項目——由釐定最耗費客戶成本的工作流程，到交付解決問題的系統。他直接與各地辦公室的營運及財務負責人合作，每個項目堅持同一標準：數週內見到可量度的成果，而非以季度計的路線圖。",
   },
   industries: {
     sectionLabel: "服務行業",
@@ -749,6 +806,24 @@ export const zhHK: Dictionary = {
   },
   aboutPage: {
     sectionLabel: "關於 DEVIEW",
+    team: {
+      label: "團隊",
+      title: "親手構建、親手交付的團隊。",
+      intro:
+        "為您釐定項目範疇的人，正是親手構建系統的人——工程師與顧問直接與您的營運團隊合作，而非傳話的客戶經理。",
+      comingSoon: "簡介即將推出",
+      members: [
+        {
+          name: "Artemis Radin",
+          role: "董事總經理",
+          photo: "/team/artemis-radin-800.webp",
+          initials: "AR",
+          bio: "全程主理 DeView 的項目——由釐定最耗費成本的工作流程，到交付解決問題的系統。",
+        },
+        { name: "", role: "工程", photo: "", initials: "EN", bio: "" },
+        { name: "", role: "數據科學", photo: "", initials: "DS", bio: "" },
+      ],
+    },
     h1: "我們構建真正完成工作的 AI——而非只能回答相關問題的 AI。",
     introHK: "DeView 是一間 AI 顧問及工程公司，總部設於香港，並在溫哥華、愛丁堡及斯圖加特設有銷售辦公室。我們與中型及大型企業的運營及財務團隊合作，構建能減少人工操作、降低營運成本及自動化重複性工作流程的 AI 系統。",
     introNonHK: "DeView 是一間 AI 顧問及工程公司，團隊分佈於香港、溫哥華、愛丁堡及斯圖加特。我們與中型及大型企業的運營及財務團隊合作，構建能減少人工操作、降低營運成本及自動化重複性工作流程的 AI 系統。",
@@ -1048,7 +1123,7 @@ export const zhHK: Dictionary = {
     sectionLabel: "價格",
     h1L1: "透明定價。",
     h1L2: "固定範疇。無意外。",
-    subtitle: "每個項目均以明確的範疇和固定價格開始——在開發啟動前達成共識。無需預付費即可開始。",
+    subtitle: "每個項目——不論 AI、軟件工程或數據科學——均以明確的範疇和固定價格開始，在開發啟動前達成共識。無需預付費即可開始。",
     includesLabel: "包含內容",
     bestForLabel: "適合：",
     tiers: [
@@ -1072,7 +1147,7 @@ export const zhHK: Dictionary = {
         price: "由 $15,000 起",
         timeline: "2–6 週",
         featured: true,
-        description: "一個 AI 系統——定義範疇、開發、用您的真實數據測試並部署。",
+        description: "一個系統——AI 自動化、客製軟件或數據管道——定義範疇、開發、用您的真實數據測試並部署。",
         includes: [
           "工作流程審計的所有內容",
           "解決方案架構及範疇文件",
@@ -1082,7 +1157,7 @@ export const zhHK: Dictionary = {
           "30 天上線後支援",
           "完整運營文件",
         ],
-        best: "準備好自動化特定工作流程的團隊——文件處理、支援分流、報告或知識檢索。",
+        best: "想解決特定工作流程的團隊——文件處理、支援分流、報告、客戶門戶或數據管道。",
         cta: "定義開發範疇",
       },
       {

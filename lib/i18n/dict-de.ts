@@ -3,14 +3,15 @@ import type { Dictionary } from "./dict-en";
 /** Deutsche Übersetzung — Hochdeutsch (DE/AT/CH) */
 export const de: Dictionary = {
   site: {
-    title: "DeView | KI, die Kosten senkt und Abläufe automatisiert",
+    title: "DeView | KI-Lösungen, Software-Engineering & Data Science",
     description:
-      "DeView entwickelt KI-Systeme, die manuelle Arbeit reduzieren, Betriebskosten senken und repetitive Workflows automatisieren — direkt in Ihren bestehenden Systemen, nicht daneben.",
+      "DeView entwickelt KI-Automatisierung, individuelle Software-Plattformen und Datenpipelines, die Kosten senken und manuelle Arbeit eliminieren — direkt in Ihren bestehenden Systemen, nicht daneben.",
   },
   nav: {
-    aiConsulting: "KI-BERATUNG",
+    aiConsulting: "START",
     enterpriseAi: "ENTERPRISE KI",
     services: "LEISTUNGEN",
+    pricing: "PREISE",
     useCases: "ANWENDUNGEN",
     outcomes: "ERGEBNISSE",
     inquire: "ANFRAGE",
@@ -33,13 +34,13 @@ export const de: Dictionary = {
   lang: { shortEn: "EN", shortZh: "粵", shortDe: "DE" },
   mobileNav: { close: "Schließen", contactForm: "KONTAKTFORMULAR" },
   hero: {
-    kicker: "KOSTEN SENKEN · WORKFLOWS AUTOMATISIEREN · SCHNELLER HANDELN",
-    titleL1: "KI, DIE IN",
-    titleL2: "IHREM BETRIEB",
-    titleL3: "FUNKTIONIERT",
+    kicker: "KI-LÖSUNGEN · SOFTWARE-ENGINEERING · DATA SCIENCE",
+    titleL1: "SYSTEME, DIE",
+    titleL2: "DIE ARBEIT MACHEN —",
+    titleL3: "LIVE IN WOCHEN",
     lead:
-      "Ihr Team verbringt Stunden mit Aufgaben, die KI in Minuten erledigt — Dokumentenverarbeitung, Dateneingabe, Recherche, Berichtserstellung und Kunden-Nachverfolgung. Wir bauen die Systeme, die diese Kosten eliminieren.",
-    col1: ["KOSTENREDUKTION", "WORKFLOW-AUTOMATISIERUNG", "SCHNELLERE ENTSCHEIDUNGEN", "WENIGER MANUELLE FEHLER"],
+      "Drei Praxisfelder, ein Standard: funktionierende Systeme in Produktion. Wir bauen KI-Automatisierung, individuelle Software-Plattformen und Datenpipelines, die Kosten senken und manuelle Arbeit eliminieren — in den Tools, die Sie bereits nutzen.",
+    col1: ["KI-LÖSUNGEN", "SOFTWARE-ENGINEERING", "DATA SCIENCE", "PRODUKTIV IN WOCHEN"],
     clients: "KUNDEN",
     clientsValue: "OPERATIONS- & FINANZTEAMS",
     focus: "FOKUS",
@@ -199,11 +200,65 @@ export const de: Dictionary = {
       "Vollständiger Audit-Log — jede Aktion, jeder Benutzer, jeder Zeitstempel",
     ],
   },
+  practices: {
+    sectionLabel: "WAS WIR TUN",
+    titleL1: "Drei Praxisfelder.",
+    titleL2: "Ein Standard: Systeme in Produktion.",
+    intro:
+      "KI-Automatisierung, individuelle Software und Data Science — definiert, gebaut und in Wochen in Ihren Betrieb geliefert. Jedes Engagement endet mit einem funktionierenden System, nicht mit einem Foliensatz.",
+    explore: "PRAXISFELD ANSEHEN",
+    items: [
+      {
+        id: "ai-solutions",
+        label: "KI-LÖSUNGEN",
+        title: "Automatisierung, die manuelle Arbeit eliminiert",
+        body: "KI-Systeme, die direkt in Ihrem Betrieb arbeiten — Dokumentenautomatisierung, Wissensassistenten, Support-Copilots und Reporting-Pipelines. Verbunden mit Ihrem CRM, ERP und Ihren Dokumenten, mit menschlicher Prüfung, wo sie zählt.",
+        subs: [
+          "KI-Workflow-Audit",
+          "Dokumentenautomatisierung",
+          "Wissens- & Support-Assistenten",
+          "Reporting- & Recherche-Copilots",
+        ],
+        proof: "Kernpraxis — sechs produktisierte Services unten",
+      },
+      {
+        id: "software-engineering",
+        label: "SOFTWARE-ENGINEERING",
+        title: "Individuelle Plattformen rund um Ihren Workflow",
+        body: "Web-Plattformen, Kundenportale und interne Tools — von der Architektur bis zur Produktion durchgängig entwickelt. Der AgroPlatforma-Marktplatz und unser Kreditportal sind genau so entstanden.",
+        subs: [
+          "Individuelle Plattformen & Portale",
+          "Systemintegration & APIs",
+          "Legacy-Modernisierung",
+          "MVP- & Produktentwicklung",
+        ],
+        proof: "Beleg: Fallstudien AgroPlatforma & Unified Portal",
+      },
+      {
+        id: "data-science",
+        label: "DATA SCIENCE",
+        title: "Entscheidungen auf Basis Ihrer eigenen Daten",
+        body: "Von Pipelines bis zu Prognosen — wir konsolidieren fragmentierte Daten, automatisieren das Reporting und bauen die Modelle, die aus Ihren Datensätzen Prognosen und Entscheidungen machen.",
+        subs: [
+          "Data Engineering & ETL",
+          "Analytik & automatisiertes Reporting",
+          "Prognosemodelle & Forecasting",
+          "Dashboards & Entscheidungsunterstützung",
+        ],
+        proof: "Beleg: 8h Wochenreporting auf 12 Minuten reduziert",
+      },
+    ],
+    flagshipLabel: "KI-LÖSUNGEN — FLAGGSCHIFF-SERVICES",
+    flagshipTitle: "Produktionsreife KI-Services. Wählen Sie den Einstieg.",
+    flagshipIntro: "Jeder Service ist in 1–5 Wochen live, mit messbaren Ergebnissen. Klicken Sie durch den Stapel, um zu sehen, was wir liefern.",
+    nextService: "Nächster Service",
+    exploreCta: "Ansehen",
+  },
   services: {
     clientsLabel: "AUSGEWÄHLTE KUNDEN",
     clientsIntro: "Unternehmen, denen wir geholfen haben, manuelle Arbeit zu reduzieren, Workflows zu automatisieren und KI in Betrieb, Finanzen und Kundenservice zu implementieren.",
-    sectionLabel: "UNSERE LEISTUNGEN",
-    titleL1: "Sechs Services, die Kosten senken,",
+    sectionLabel: "KI-LÖSUNGEN — WAS WIR BAUEN",
+    titleL1: "Sechs KI-Services, die Kosten senken,",
     titleL2: "Arbeit automatisieren und Tempo machen.",
     intro:
       "Jeder Service löst ein spezifisches operatives Problem. Wir definieren den Scope, kalkulieren den Preis und liefern in Wochen — nicht Quartalen. Kein Retainer nötig.",
@@ -423,12 +478,14 @@ export const de: Dictionary = {
       insightsArticles: "Insights & Artikel",
       insuranceAi: "Versicherungs-KI",
       applications: "Anwendungen",
+      services: "Leistungen & Praxisfelder",
+      pricing: "Preise",
     },
   },
   subpages: {
-    servicesTitle: "Leistungen — Was wir bauen | DeView",
+    servicesTitle: "Leistungen — KI, Software-Engineering & Data Science | DeView",
     servicesDesc:
-      "Sechs KI-Services, die manuelle Arbeit reduzieren, Betriebskosten senken und repetitive Workflows automatisieren — geliefert in 1–8 Wochen.",
+      "Drei Praxisfelder — KI-Lösungen, Software-Engineering und Data Science — die manuelle Arbeit reduzieren, Betriebskosten senken und funktionierende Systeme in 1–8 Wochen liefern.",
     useCasesTitle: "Einsatzgebiete | DeView",
     useCasesDesc:
       "Echte KI-Deployments in Kundenbetrieb, Dokumentenverarbeitung und internem Wissensmanagement — jedes ersetzt manuelle Arbeit durch Automatisierung.",
@@ -511,25 +568,25 @@ export const de: Dictionary = {
       },
     ],
   },
-  testimonials: {
-    sectionLabel: "WAS KUNDEN SAGEN",
+  outcomesStrip: {
+    sectionLabel: "ERGEBNISSE AUS DER PRAXIS",
+    title: "Zahlen aus Systemen im Produktivbetrieb.",
+    intro: "Jede Zahl unten stammt aus einem gelieferten Projekt — gemessen nach Go-Live, nicht prognostiziert.",
+    cta: "ZU DEN FALLSTUDIEN",
     items: [
-      {
-        quote: "Wir gingen von einem täglichen Rückstau um 10 Uhr zur taggleichen Bearbeitung. Das Team verbringt jetzt Zeit mit Ausnahmen und Kundenbeziehungen — nicht mit dem Lesen von PDFs.",
-        name: "Leiter Operations",
-        company: "Mittelständischer HK-Kreditgeber",
-      },
-      {
-        quote: "Die KI übernimmt Recherche und Entwurf. Mein Team trifft die Entscheidungen. Genau so sollte es sein.",
-        name: "Kundenservice-Manager",
-        company: "APAC-Versicherungsunternehmen",
-      },
-      {
-        quote: "Wir wussten nicht, wie viel Senior-Zeit für Fragen draufging, die bereits irgendwo beantwortet waren.",
-        name: "Geschäftsführer",
-        company: "Singapur Professional Services",
-      },
+      { metric: "45 Min → 4 Min", label: "Bearbeitungszeit pro Kreditakte", client: "Grand Finance Group" },
+      { metric: "−70 %", label: "Triage-Zeit für Serviceanfragen", client: "Nextair" },
+      { metric: "−60 %", label: "Zeit für die Erstprüfung von Angeboten", client: "EVDEV" },
+      { metric: "8 Std → 12 Min", label: "Wöchentlicher Reporting-Zyklus", client: "Fizkultura" },
     ],
+  },
+  leadership: {
+    sectionLabel: "LEADERSHIP",
+    jobPosition: "Managing Director",
+    firstName: "Artemis",
+    lastName: "Radin",
+    description:
+      "Artemis führt DeViews Engagements von Anfang bis Ende — vom Scoping der Workflows, die Kunden am meisten kosten, bis zum Deployment der Systeme, die sie beheben. Er arbeitet direkt mit Operations- und Finanzverantwortlichen an allen Standorten und hält jeden Build an einem Standard fest: messbare Ergebnisse in Wochen, nicht Roadmaps in Quartalen.",
   },
   industries: {
     sectionLabel: "BRANCHEN",
@@ -769,6 +826,24 @@ export const de: Dictionary = {
   },
   aboutPage: {
     sectionLabel: "ÜBER DEVIEW",
+    team: {
+      label: "DAS TEAM",
+      title: "Die Menschen, die bauen und liefern.",
+      intro:
+        "Die Menschen, die Ihr Projekt scopen, sind dieselben, die es bauen — Ingenieure und Berater, die direkt mit Ihrem Operations-Team arbeiten, keine Account-Manager, die Notizen weiterreichen.",
+      comingSoon: "Profil folgt in Kürze",
+      members: [
+        {
+          name: "Artemis Radin",
+          role: "Managing Director",
+          photo: "/team/artemis-radin-800.webp",
+          initials: "AR",
+          bio: "Führt DeViews Engagements von Anfang bis Ende — vom Scoping der teuersten Workflows bis zum Deployment der Systeme, die sie beheben.",
+        },
+        { name: "", role: "Engineering", photo: "", initials: "EN", bio: "" },
+        { name: "", role: "Data Science", photo: "", initials: "DS", bio: "" },
+      ],
+    },
     h1: "Wir bauen KI, die die Arbeit erledigt — nicht KI, die Fragen darüber beantwortet.",
     introHK: "DeView ist ein KI-Beratungs- und Engineering-Unternehmen mit Hauptsitz in Hongkong und Vertriebsbüros in Vancouver, Edinburgh und Stuttgart. Wir arbeiten mit Operations- und Finanzteams in mittelständischen und großen Unternehmen, um KI-Systeme zu bauen, die manuelle Arbeit reduzieren, Betriebskosten senken und repetitive Workflows automatisieren.",
     introNonHK: "DeView ist ein KI-Beratungs- und Engineering-Unternehmen mit Teams in Hongkong, Vancouver, Edinburgh und Stuttgart. Wir arbeiten mit Operations- und Finanzteams in mittelständischen und großen Unternehmen, um KI-Systeme zu bauen, die manuelle Arbeit reduzieren, Betriebskosten senken und repetitive Workflows automatisieren.",
@@ -1068,7 +1143,7 @@ export const de: Dictionary = {
     sectionLabel: "PREISE",
     h1L1: "Transparente Preise.",
     h1L2: "Fester Scope. Keine Überraschungen.",
-    subtitle: "Jedes Engagement beginnt mit einem definierten Scope und Festpreis — vereinbart, bevor der Bau beginnt. Kein Retainer nötig.",
+    subtitle: "Jedes Engagement — KI, Software-Engineering oder Data Science — beginnt mit einem definierten Scope und Festpreis, vereinbart, bevor der Bau beginnt. Kein Retainer nötig.",
     includesLabel: "ENTHÄLT",
     bestForLabel: "Ideal für: ",
     tiers: [
@@ -1092,7 +1167,7 @@ export const de: Dictionary = {
         price: "Ab $15.000",
         timeline: "2–6 Wochen",
         featured: true,
-        description: "Ein KI-System — definiert, gebaut, mit Ihren echten Daten getestet und deployed.",
+        description: "Ein System — KI-Automatisierung, individuelle Software oder eine Datenpipeline — definiert, gebaut, mit Ihren echten Daten getestet und deployed.",
         includes: [
           "Alles aus dem Workflow-Audit",
           "Lösungsarchitektur und Scope-Dokument",
@@ -1102,7 +1177,7 @@ export const de: Dictionary = {
           "30-Tage-Post-Launch-Support",
           "Vollständige Betriebsdokumentation",
         ],
-        best: "Teams, die bereit sind, einen spezifischen Workflow zu automatisieren — Dokumentenverarbeitung, Support-Triage, Reporting oder Wissensabruf.",
+        best: "Teams, die einen spezifischen Workflow lösen wollen — Dokumentenverarbeitung, Support-Triage, Reporting, ein Kundenportal oder eine Datenpipeline.",
         cta: "Build definieren",
       },
       {

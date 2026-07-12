@@ -4,21 +4,15 @@ import { motion } from "framer-motion";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { LocaleLink } from "./LocaleLink";
 import { homeSectionReveal, homeSectionCardMotion } from "@/lib/home-section-motion";
+import { INSIGHT_ARTICLES } from "@/lib/insights";
 
-const ARTICLE_SLUGS = [
-  "why-most-ai-pilots-fail",
-  "document-automation-where-to-start",
-  "four-ai-projects-worth-doing",
-];
-
-const ARTICLE_DATES = ["2025-04-14", "2025-03-28", "2025-03-10"];
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+function formatDate(iso: string, locale: string) {
+  const dtLocale = locale === "de" ? "de-DE" : locale === "zh-HK" ? "zh-HK" : "en-GB";
+  return new Date(iso).toLocaleDateString(dtLocale, { day: "numeric", month: "long", year: "numeric" });
 }
 
 export function HomeInsightsPreview() {
-  const { dict } = useLocaleContext();
+  const { dict, locale } = useLocaleContext();
   const s = dict.insights;
 
   return (
@@ -32,36 +26,48 @@ export function HomeInsightsPreview() {
           {s.titleL2}
         </h2>
 
-        <div className="grid gap-px overflow-hidden rounded-lg border border-[var(--white-10)] bg-[var(--white-10)]">
-          {s.articles.map((article, i) => (
-            <motion.div
-              key={ARTICLE_SLUGS[i]}
-              {...homeSectionCardMotion}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-            >
-              <LocaleLink
-                href={`/insights/${ARTICLE_SLUGS[i]}`}
-                className="group flex flex-col gap-2 bg-[var(--background)] p-5 transition-colors hover:bg-[var(--surface)] sm:flex-row sm:items-baseline sm:gap-6 sm:p-6"
+        <div className="grid gap-5 md:grid-cols-3">
+          {s.articles.map((article, i) => {
+            const meta = INSIGHT_ARTICLES[i];
+            return (
+              <motion.div
+                key={meta.slug}
+                {...homeSectionCardMotion}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
               >
-                <div className="flex flex-shrink-0 items-center gap-3 text-[0.6rem] uppercase tracking-[0.16em] text-[var(--white-40)]">
-                  <span>{formatDate(ARTICLE_DATES[i])}</span>
-                  <span className="text-[var(--white-20)]">·</span>
-                  <span>{article.readTime}</span>
-                </div>
-                <div className="flex-1">
-                  <p className="mb-1 text-[0.58rem] font-medium uppercase tracking-[0.2em] text-[var(--white-40)]">
-                    {article.label}
-                  </p>
-                  <p className="text-[0.95rem] leading-snug text-[var(--white-85)] transition-colors group-hover:text-[var(--white-100)]">
-                    {article.title}
-                  </p>
-                </div>
-                <span className="hidden flex-shrink-0 text-[0.7rem] text-[var(--white-20)] transition-colors group-hover:text-[var(--white-60)] sm:inline">
-                  →
-                </span>
-              </LocaleLink>
-            </motion.div>
-          ))}
+                <LocaleLink
+                  href={`/insights/${meta.slug}`}
+                  className="group flex h-full flex-col overflow-hidden rounded-lg border border-[var(--white-20)] bg-[var(--surface)] transition-colors hover:border-[var(--white-40)]"
+                >
+                  <div className="relative aspect-video overflow-hidden border-b border-[var(--white-10)]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={meta.coverSmall}
+                      alt=""
+                      loading="lazy"
+                      className="h-full w-full object-cover opacity-80 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-5">
+                    <div className="mb-3 flex items-center gap-3 text-[0.58rem] uppercase tracking-[0.16em] text-[var(--white-40)]">
+                      <span>{formatDate(meta.date, locale)}</span>
+                      <span className="text-[var(--white-20)]">·</span>
+                      <span>{article.readTime}</span>
+                    </div>
+                    <p className="mb-1 text-[0.58rem] font-medium uppercase tracking-[0.2em] text-[var(--white-40)]">
+                      {article.label}
+                    </p>
+                    <p className="text-[0.95rem] leading-snug text-[var(--white-85)] transition-colors group-hover:text-[var(--white-100)]">
+                      {article.title}
+                    </p>
+                    <span className="mt-auto pt-4 text-[0.7rem] text-[var(--white-20)] transition-colors group-hover:text-[var(--white-60)]" aria-hidden="true">
+                      →
+                    </span>
+                  </div>
+                </LocaleLink>
+              </motion.div>
+            );
+          })}
         </div>
 
         <div className="mt-8 flex">

@@ -35,6 +35,12 @@ export function DocAutomationContent() {
         </p>
       </div>
 
+      {/* Cover */}
+      <div className="mb-10 overflow-hidden rounded-lg border border-[var(--white-10)]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/insights/document-automation-where-to-start-1200.webp" alt="" className="aspect-video w-full object-cover" />
+      </div>
+
       <div className="rule mb-10" />
 
       <div className="space-y-6 text-sm leading-relaxed text-[var(--text-muted)]">

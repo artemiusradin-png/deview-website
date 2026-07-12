@@ -156,8 +156,10 @@ function AnimatedCard({
 
 export default function AnimatedCardStack({
   cards = defaultCards,
+  nextLabel = "Next service",
 }: {
   cards?: AnimatedServiceCard[];
+  nextLabel?: string;
 }) {
   const total = cards.length;
   const [stack, setStack] = useState(initialCards);
@@ -195,7 +197,7 @@ export default function AnimatedCardStack({
           onClick={handleAnimate}
           className="flex h-9 cursor-pointer select-none items-center justify-center gap-1 overflow-hidden rounded-lg border border-border bg-background px-3 font-medium text-secondary-foreground transition-all hover:bg-secondary/80 active:scale-[0.98]"
         >
-          Next service
+          {nextLabel}
         </button>
       </div>
     </div>

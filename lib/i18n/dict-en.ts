@@ -1,14 +1,15 @@
 /** English source strings — used as the shape source for zh-HK. */
 export const en = {
   site: {
-    title: "DeView | AI That Cuts Costs and Automates Operations",
+    title: "DeView | AI Solutions, Software Engineering & Data Science",
     description:
-      "DeView builds AI systems that reduce manual work, cut operating costs, and automate repetitive workflows — deployed into your existing tools, not alongside them.",
+      "DeView builds AI automation, custom software platforms, and data pipelines that cut costs and remove manual work — deployed into your existing tools, not alongside them.",
   },
   nav: {
-    aiConsulting: "AI CONSULTING",
+    aiConsulting: "HOME",
     enterpriseAi: "ENTERPRISE AI",
     services: "SERVICES",
+    pricing: "PRICING",
     useCases: "USE CASES",
     outcomes: "OUTCOMES",
     inquire: "INQUIRE",
@@ -31,13 +32,13 @@ export const en = {
   lang: { shortEn: "EN", shortZh: "粵", shortDe: "DE" },
   mobileNav: { close: "Close", contactForm: "CONTACT FORM" },
   hero: {
-    kicker: "REDUCE COSTS · AUTOMATE WORKFLOWS · MOVE FASTER",
-    titleL1: "AI THAT WORKS",
-    titleL2: "INSIDE YOUR",
-    titleL3: "OPERATIONS",
+    kicker: "AI SOLUTIONS · SOFTWARE ENGINEERING · DATA SCIENCE",
+    titleL1: "SYSTEMS THAT",
+    titleL2: "DO THE WORK —",
+    titleL3: "SHIPPED IN WEEKS",
     lead:
-      "Your team is spending hours on tasks that AI handles in minutes — document processing, data entry, research, reporting, and customer follow-up. We build the systems that eliminate that cost.",
-    col1: ["COST REDUCTION", "WORKFLOW AUTOMATION", "FASTER DECISIONS", "FEWER MANUAL ERRORS"],
+      "Three practices, one standard: working systems in production. We build AI automation, custom software platforms, and data pipelines that cut costs and remove manual work — inside the tools you already use.",
+    col1: ["AI SOLUTIONS", "SOFTWARE ENGINEERING", "DATA SCIENCE", "PRODUCTION IN WEEKS"],
     clients: "CLIENTS",
     clientsValue: "OPERATIONS & FINANCE TEAMS",
     focus: "FOCUS",
@@ -197,11 +198,65 @@ export const en = {
       "Full audit log — every action, every user, every timestamp",
     ],
   },
+  practices: {
+    sectionLabel: "WHAT WE DO",
+    titleL1: "Three practices.",
+    titleL2: "One standard: systems in production.",
+    intro:
+      "AI automation, custom software, and data science — scoped, built, and shipped into your operation in weeks. Every engagement ends with a working system, not a slide deck.",
+    explore: "EXPLORE THE PRACTICE",
+    items: [
+      {
+        id: "ai-solutions",
+        label: "AI SOLUTIONS",
+        title: "Automation that removes manual work",
+        body: "AI systems deployed inside your operations — document automation, knowledge assistants, support copilots, and reporting pipelines. Connected to your CRM, ERP, and documents, with human review where it matters.",
+        subs: [
+          "AI workflow audit",
+          "Document automation",
+          "Knowledge & support assistants",
+          "Reporting & research copilots",
+        ],
+        proof: "Flagship practice — six productised services below",
+      },
+      {
+        id: "software-engineering",
+        label: "SOFTWARE ENGINEERING",
+        title: "Custom platforms built around your workflow",
+        body: "Web platforms, client portals, and internal tools engineered end to end — from architecture to production. The AgroPlatforma marketplace and our unified lending portal were built exactly this way.",
+        subs: [
+          "Custom platforms & portals",
+          "Systems integration & APIs",
+          "Legacy modernization",
+          "MVP & product engineering",
+        ],
+        proof: "Proof: AgroPlatforma & Unified Portal case studies",
+      },
+      {
+        id: "data-science",
+        label: "DATA SCIENCE",
+        title: "Decisions backed by your own data",
+        body: "From pipelines to predictions — we consolidate fragmented data, automate reporting, and build the models that turn your records into forecasts and decisions.",
+        subs: [
+          "Data engineering & ETL",
+          "Analytics & automated reporting",
+          "Predictive modeling & forecasting",
+          "Dashboards & decision support",
+        ],
+        proof: "Proof: 8h weekly reporting cut to 12 minutes",
+      },
+    ],
+    flagshipLabel: "AI SOLUTIONS — FLAGSHIP SERVICES",
+    flagshipTitle: "Production-ready AI services. Pick where to start.",
+    flagshipIntro: "Each service ships in 1–5 weeks with measurable outcomes. Click through the stack to preview what we deliver.",
+    nextService: "Next service",
+    exploreCta: "Explore",
+  },
   services: {
     clientsLabel: "SELECTED CLIENTS",
     clientsIntro: "Companies we have helped reduce manual work, automate workflows, and implement AI across operations, finance, and customer service.",
-    sectionLabel: "WHAT WE BUILD",
-    titleL1: "Six services that reduce cost,",
+    sectionLabel: "AI SOLUTIONS — WHAT WE BUILD",
+    titleL1: "Six AI services that reduce cost,",
     titleL2: "automate work, and move faster.",
     intro:
       "Each service solves a specific operational problem. We scope it, price it, and deliver it in weeks — not quarters. No retainers required to start.",
@@ -421,12 +476,14 @@ export const en = {
       insightsArticles: "Insights & Articles",
       insuranceAi: "Insurance AI",
       applications: "Applications",
+      services: "Services & Practices",
+      pricing: "Pricing",
     },
   },
   subpages: {
-    servicesTitle: "Services — What We Build | DeView",
+    servicesTitle: "Services — AI, Software Engineering & Data Science | DeView",
     servicesDesc:
-      "Six AI services that reduce manual work, cut operating costs, and automate repetitive workflows — delivered in 1–8 weeks.",
+      "Three practices — AI solutions, software engineering, and data science — that reduce manual work, cut operating costs, and ship working systems in 1–8 weeks.",
     useCasesTitle: "Where We're Deployed | DeView",
     useCasesDesc:
       "Real AI deployments across customer operations, document processing, and internal knowledge — each one replacing manual work with automation.",
@@ -509,25 +566,25 @@ export const en = {
       },
     ],
   },
-  testimonials: {
-    sectionLabel: "WHAT CLIENTS SAY",
+  outcomesStrip: {
+    sectionLabel: "OUTCOMES FROM THE FIELD",
+    title: "Numbers from systems running in production.",
+    intro: "Every figure below comes from a delivered project — measured after go-live, not projected.",
+    cta: "READ THE CASE STUDIES",
     items: [
-      {
-        quote: "We went from a backlog by 10am every day to same-day processing. The team now spends time on exceptions and client relationships — not reading PDFs.",
-        name: "Head of Operations",
-        company: "Mid-sized HK lender",
-      },
-      {
-        quote: "The AI does the retrieval and drafting. My team does the judgment calls. That's exactly how it should work.",
-        name: "Customer Service Manager",
-        company: "APAC insurance firm",
-      },
-      {
-        quote: "We didn't realise how much senior time was going to questions that were already answered somewhere.",
-        name: "Managing Director",
-        company: "Singapore professional services firm",
-      },
+      { metric: "45 min → 4 min", label: "Loan file processing time", client: "Grand Finance Group" },
+      { metric: "−70%", label: "Service request triage time", client: "Nextair" },
+      { metric: "−60%", label: "First-pass proposal review time", client: "EVDEV" },
+      { metric: "8 h → 12 min", label: "Weekly reporting cycle", client: "Fizkultura" },
     ],
+  },
+  leadership: {
+    sectionLabel: "LEADERSHIP",
+    jobPosition: "Managing Director",
+    firstName: "Artemis",
+    lastName: "Radin",
+    description:
+      "Artemis leads DeView's engagements end to end — from scoping the workflows that cost clients the most to shipping the systems that fix them. He works directly with operations and finance leaders across the firm's offices, holding every build to one standard: measurable outcomes in weeks, not roadmaps in quarters.",
   },
   industries: {
     sectionLabel: "INDUSTRIES WE SERVE",
@@ -1006,6 +1063,24 @@ export const en = {
   },
   aboutPage: {
     sectionLabel: "ABOUT DEVIEW",
+    team: {
+      label: "THE TEAM",
+      title: "The people who build and ship.",
+      intro:
+        "The people who scope your project are the people who build it — engineers and consultants working directly with your operations team, not account managers passing notes.",
+      comingSoon: "Profile coming soon",
+      members: [
+        {
+          name: "Artemis Radin",
+          role: "Managing Director",
+          photo: "/team/artemis-radin-800.webp",
+          initials: "AR",
+          bio: "Leads DeView's engagements end to end — from scoping the workflows that cost the most to shipping the systems that fix them.",
+        },
+        { name: "", role: "Engineering", photo: "", initials: "EN", bio: "" },
+        { name: "", role: "Data Science", photo: "", initials: "DS", bio: "" },
+      ],
+    },
     h1: "We build AI that does the work — not AI that answers questions about it.",
     introHK: "DeView is an AI consulting and engineering firm headquartered in Hong Kong, with sales offices in Vancouver, Edinburgh, and Stuttgart. We work with operations and finance teams at mid-market and enterprise companies to build AI systems that reduce manual work, cut operating costs, and automate repetitive workflows.",
     introNonHK: "DeView is an AI consulting and engineering firm with teams in Hong Kong, Vancouver, Edinburgh, and Stuttgart. We work with operations and finance teams at mid-market and enterprise companies to build AI systems that reduce manual work, cut operating costs, and automate repetitive workflows.",
@@ -1305,7 +1380,7 @@ export const en = {
     sectionLabel: "PRICING",
     h1L1: "Transparent pricing.",
     h1L2: "Fixed scope. No surprises.",
-    subtitle: "Every engagement starts with a defined scope and fixed price — agreed before any build begins. No retainers required to start.",
+    subtitle: "Every engagement — AI, software engineering, or data science — starts with a defined scope and fixed price, agreed before any build begins. No retainers required to start.",
     includesLabel: "INCLUDES",
     bestForLabel: "Best for: ",
     tiers: [
@@ -1329,7 +1404,7 @@ export const en = {
         price: "From $15,000",
         timeline: "2–6 weeks",
         featured: true,
-        description: "One AI system — scoped, built, tested against your real data, and deployed.",
+        description: "One system — AI automation, custom software, or a data pipeline — scoped, built, tested against your real data, and deployed.",
         includes: [
           "Everything in Workflow Audit",
           "Solution architecture and scope document",
@@ -1339,7 +1414,7 @@ export const en = {
           "30-day post-launch support",
           "Full operational documentation",
         ],
-        best: "Teams ready to automate a specific workflow — document processing, support triage, reporting, or knowledge retrieval.",
+        best: "Teams ready to fix a specific workflow — document processing, support triage, reporting, a client portal, or a data pipeline.",
         cta: "Scope a build",
       },
       {

@@ -25,8 +25,9 @@ const clashDisplay = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "DeView | AI Consulting & Data Engineering",
-  description: "DeView partners with enterprises to design, build, and scale AI systems and data platforms with production-grade reliability.",
+  title: "DeView | AI Solutions, Software Engineering & Data Science",
+  description:
+    "DeView builds AI automation, custom software platforms, and data pipelines that cut costs and remove manual work — deployed into your existing tools, not alongside them.",
 };
 
 export const viewport: Viewport = {
