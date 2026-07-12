@@ -18,7 +18,7 @@ export function HomePracticeAreas({ variant = "home" }: HomePracticeAreasProps) 
       className="border-t border-[var(--white-20)] bg-[var(--background)] section-gutter pb-8 pt-4 sm:pb-10 sm:pt-5 md:pb-12 md:pt-6"
     >
       <div className="mx-auto max-w-6xl">
-        <div className="grid items-start gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
+        <div className="-mx-4 flex snap-x snap-mandatory gap-6 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:snap-none sm:items-start sm:gap-x-8 sm:gap-y-8 sm:overflow-visible sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
           {PRACTICE_IDS.map((id, index) => {
             const item = p.items[index];
             return (
@@ -30,7 +30,7 @@ export function HomePracticeAreas({ variant = "home" }: HomePracticeAreasProps) 
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.4, delay: index * 0.07 }}
-                className={`group block border-t border-[var(--white-20)] pt-6 transition-colors ${
+                className={`group block w-[85vw] shrink-0 snap-start border-t border-[var(--white-20)] pt-6 transition-colors sm:w-auto sm:shrink ${
                   variant === "standalone" ? "scroll-margin-header" : ""
                 }`}
               >

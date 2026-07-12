@@ -15,9 +15,6 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 // Below-the-fold sections are loaded as separate chunks to shrink the initial JS bundle.
 // Keep the RetroFeatureCards anchor id in sync with components/RetroFeatureCards.tsx.
 const RETRO_FEATURE_CARDS_ID = "retro-feature-cards";
-const HomeServicesSection = dynamic(() =>
-  import("@/components/HomeServicesSection").then((m) => m.HomeServicesSection),
-);
 const HomePracticeAreas = dynamic(() =>
   import("@/components/HomePracticeAreas").then((m) => m.HomePracticeAreas),
 );
@@ -176,9 +173,9 @@ export default function Home() {
 
   // First four flagship AI services drive the animated card stack — copy comes from the dictionary.
   const serviceStackImages = [
-    "/images/stock/dashboard-laptop-900.webp",
-    "/images/stock/desk-notebook-900.webp",
-    "/images/stock/finance-calculator-1200.webp",
+    "/images/stock/workflow-audit-person-900.webp",
+    "/images/stock/knowledge-person-900.webp",
+    "/images/stock/document-person-900.webp",
     "/images/stock/team-meeting-900.webp",
   ];
   const serviceStackCards = dict.services.items.slice(0, 4).map((item, index) => ({
@@ -319,14 +316,14 @@ export default function Home() {
           <HeroPulseField className="absolute inset-0" />
         </div>
         <div className="absolute inset-0 hero-overlay" />
-        <div className="relative z-20 mx-auto flex w-full max-w-7xl flex-col justify-start gap-6 md:-mt-16 md:flex-row md:items-start md:gap-12">
+        <div className="relative z-20 mx-auto flex w-full max-w-7xl flex-col justify-start gap-6 md:-mt-8 md:flex-row md:items-start md:gap-12">
           <motion.div
             initial={fade.initial}
             animate={fade.animate}
             transition={{ duration: 0.6 }}
             className="flex max-w-2xl flex-col md:min-h-[calc(100svh-var(--header-stack-height)-2.25rem)] md:pt-2 lg:min-h-0"
           >
-            <p className="section-label mb-4">{dict.hero.kicker}</p>
+            <p className="section-label mb-4 text-[#ffc933]!">{dict.hero.kicker}</p>
             <h1 className="hero-heading mb-6 text-[clamp(1.6rem,5.2vw,2.25rem)] leading-[1.1] tracking-[0.06em] text-[var(--white-100)] md:text-4xl md:leading-[1.06] lg:text-[3.25rem]">
               {dict.hero.titleL1}
               <br />
@@ -388,8 +385,6 @@ export default function Home() {
 
 
       <HomePracticeAreas />
-
-      <HomeServicesSection variant="home" />
 
       <section className="border-t border-[var(--white-20)] bg-[var(--background)] px-4 py-16 sm:py-20 md:py-24">
         <div className="mx-auto max-w-6xl">
