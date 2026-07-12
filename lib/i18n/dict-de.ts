@@ -210,7 +210,7 @@ export const de: Dictionary = {
         id: "ai-solutions",
         label: "KI-LÖSUNGEN",
         heading: "KI-Lösungen",
-        title: "Automatisierung, die manuelle Arbeit eliminiert",
+        title: "Automatisierung statt manueller Arbeit",
         body: "KI-Systeme, die direkt in Ihrem Betrieb arbeiten — Dokumentenautomatisierung, Wissensassistenten, Support-Copilots und Reporting-Pipelines. Verbunden mit Ihrem CRM, ERP und Ihren Dokumenten, mit menschlicher Prüfung, wo sie zählt.",
         subs: [
           "Betrugserkennung & Risiko-Scoring-Engines",
@@ -225,7 +225,7 @@ export const de: Dictionary = {
         id: "software-engineering",
         label: "SOFTWARE-ENGINEERING",
         heading: "Software-Engineering",
-        title: "Individuelle Plattformen rund um Ihren Workflow",
+        title: "Individuelle Plattformen für Ihren Workflow",
         body: "Web-Plattformen, Kundenportale und interne Tools — von der Architektur bis zur Produktion durchgängig entwickelt. Der AgroPlatforma-Marktplatz und unser Kreditportal sind genau so entstanden.",
         subs: [
           "Payment-Gateway- & -Verarbeitungsintegrationen (Kartenakquisition, Orchestrierung, Tokenisierung)",
@@ -240,7 +240,7 @@ export const de: Dictionary = {
         id: "data-science",
         label: "DATA SCIENCE",
         heading: "Data Science",
-        title: "Entscheidungen auf Basis Ihrer eigenen Daten",
+        title: "Entscheidungen aus Ihren eigenen Daten",
         body: "Von Pipelines bis zu Prognosen — wir konsolidieren fragmentierte Daten, automatisieren das Reporting und bauen die Modelle, die aus Ihren Datensätzen Prognosen und Entscheidungen machen.",
         subs: [
           "RegTech & Steuer-Compliance-Automatisierung (Transaktionsüberwachung, Reporting, Einreichung)",
