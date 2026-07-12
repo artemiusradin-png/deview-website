@@ -327,7 +327,7 @@ export default function Home() {
             className="flex max-w-2xl flex-col md:min-h-[calc(100svh-var(--header-stack-height)-2.25rem)] md:pt-2 lg:min-h-0"
           >
             <p className="section-label mb-4">{dict.hero.kicker}</p>
-            <h1 className="hero-heading mb-6 text-[clamp(1.6rem,5.2vw,2.25rem)] leading-[1.1] tracking-[0.03em] text-[var(--white-100)] md:text-4xl md:leading-[1.06] lg:text-[3.25rem]">
+            <h1 className="hero-heading mb-6 text-[clamp(1.6rem,5.2vw,2.25rem)] leading-[1.1] tracking-[0.06em] text-[var(--white-100)] md:text-4xl md:leading-[1.06] lg:text-[3.25rem]">
               {dict.hero.titleL1}
               <br />
               {dict.hero.titleL2}
@@ -341,35 +341,32 @@ export default function Home() {
             {/* Mobile: lead + CTA sit ~25svh below the headline — past the visual centre, still on the first scroll.
                 Desktop: same wrapper, pinned to the bottom of the column via mt-auto. */}
             <div className="mt-[25svh] md:mt-auto md:pt-8 lg:mt-0 lg:pt-12">
-              <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-base">{dict.hero.lead}</p>
-              <div className="mt-6 md:mt-7">
-                {/* Mobile-only filled CTA — bigger, bolder, full-width. */}
+              {/* Mobile-only filled CTA — bigger, bolder, full-width. */}
+              <a
+                href={localePath("/contact")}
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-md bg-[var(--white-100)] px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--background)] shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] transition-transform active:scale-[0.98] md:hidden"
+              >
+                <span>{dict.hero.inquire}</span>
+                <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
+              </a>
+              {/* Desktop: compact outline button + a secondary case-studies link. Wrapped because the
+                  .btn-outline @media (max-width: 961px) rule re-applies display:inline-flex and beats
+                  Tailwind's `hidden` on the child. */}
+              <span className="hidden items-center gap-4 md:inline-flex">
                 <a
                   href={localePath("/contact")}
-                  className="group inline-flex w-full items-center justify-center gap-2 rounded-md bg-[var(--white-100)] px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--background)] shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] transition-transform active:scale-[0.98] md:hidden"
+                  className="inline-flex items-center rounded-md border border-[var(--white-40)] px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[var(--white-100)] transition-colors hover:border-[var(--white-80)]"
                 >
-                  <span>{dict.hero.inquire}</span>
-                  <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
+                  {dict.hero.inquire}
                 </a>
-                {/* Desktop: compact outline button + a secondary case-studies link. Wrapped because the
-                    .btn-outline @media (max-width: 961px) rule re-applies display:inline-flex and beats
-                    Tailwind's `hidden` on the child. */}
-                <span className="hidden items-center gap-4 md:inline-flex">
-                  <a
-                    href={localePath("/contact")}
-                    className="inline-flex items-center rounded-md border border-[var(--white-40)] px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[var(--white-100)] transition-colors hover:border-[var(--white-80)]"
-                  >
-                    {dict.hero.inquire}
-                  </a>
-                  <a
-                    href={localePath("/case-studies")}
-                    className="inline-flex items-center gap-1.5 text-[0.7rem] uppercase tracking-[0.14em] text-[var(--white-60)] transition-colors hover:text-[var(--white-100)]"
-                  >
-                    {dict.nav.caseStudies}
-                    <span aria-hidden="true">→</span>
-                  </a>
-                </span>
-              </div>
+                <a
+                  href={localePath("/case-studies")}
+                  className="inline-flex items-center gap-1.5 text-[0.7rem] uppercase tracking-[0.14em] text-[var(--white-60)] transition-colors hover:text-[var(--white-100)]"
+                >
+                  {dict.nav.caseStudies}
+                  <span aria-hidden="true">→</span>
+                </a>
+              </span>
             </div>
           </motion.div>
 
