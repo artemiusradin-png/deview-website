@@ -21,10 +21,12 @@ export function HomePracticeAreas({ variant = "home" }: HomePracticeAreasProps) 
         {/* Mobile: horizontal snap-carousel that stays within the page's section-gutter
             (no more -mx-4/px-4 full-bleed, which pinned the first card ~2px off the left
             edge instead of the ~18px gutter every other block uses).
-            touch-action:pan-x + overscroll-x-contain lock the carousel to horizontal
-            gestures only, so a vertical swipe scrolls the page instead of getting eaten by
-            this scroller. sm+: static grid. */}
-        <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain pb-2 [touch-action:pan-x] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:snap-none sm:items-start sm:gap-x-8 sm:gap-y-8 sm:overflow-visible sm:pb-0 sm:[touch-action:auto] sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
+            overflow-y-hidden is essential: `overflow-x:auto` with the default
+            `overflow-y:visible` gets promoted by the CSS spec to `overflow-y:auto`, which
+            made the carousel vertically scrollable too and stole downward page swipes.
+            Explicit hidden + touch-action:pan-x + overscroll-x-contain lock it to horizontal
+            gestures only. sm+: static grid. */}
+        <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-hidden overscroll-x-contain pb-2 [touch-action:pan-x] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:snap-none sm:items-start sm:gap-x-8 sm:gap-y-8 sm:overflow-x-visible sm:overflow-y-visible sm:pb-0 sm:[touch-action:auto] sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
           {PRACTICE_IDS.map((id, index) => {
             const item = p.items[index];
             return (
@@ -46,12 +48,12 @@ export function HomePracticeAreas({ variant = "home" }: HomePracticeAreasProps) 
                   </span>{" "}
                   {item.title}.
                 </p>
-                {/* Roomier on phones (larger type, more line spacing) so the 5-item list
-                    doesn't read as a dense block of text; tighter again on sm+ where the
-                    cards sit three-up. */}
-                <ul className="mt-5 space-y-2.5 sm:mt-4 sm:space-y-1.5">
+                {/* Sub-item list is desktop-only: on phones each card stays a compact
+                    heading + one-line description (≤3 lines), and the detailed 5-item list
+                    only shows in the sm+ three-up grid where there's room for it. */}
+                <ul className="mt-4 hidden space-y-1.5 sm:block">
                   {item.subs.map((sub) => (
-                    <li key={sub} className="text-[0.9rem] leading-relaxed text-[var(--text-muted)] sm:text-[0.78rem] sm:leading-snug">
+                    <li key={sub} className="text-[0.78rem] leading-snug text-[var(--text-muted)]">
                       {sub}
                     </li>
                   ))}
