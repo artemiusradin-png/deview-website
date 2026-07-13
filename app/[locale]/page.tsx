@@ -9,6 +9,7 @@ import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { HeroPulseField } from "@/components/HeroPulseField";
 import { PixelField } from "@/components/PixelField";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
+import { CaseMediaFrame } from "@/components/ui/case-media-frame";
 import TeamMemberCard from "@/components/ui/team-member-card";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
@@ -500,7 +501,7 @@ export default function Home() {
 
             {/* RIGHT — video (sticky on desktop) */}
             <div className="order-1 md:order-2 md:sticky md:top-24 md:self-start">
-              <div className="overflow-hidden border border-[var(--white-20)] bg-black">
+              <CaseMediaFrame label="AgroPlatforma">
                 <video
                   ref={agroVideoRef}
                   className="block h-auto w-full"
@@ -514,7 +515,7 @@ export default function Home() {
                   <source src="/deview-agroplatforma-demo.mp4" type="video/mp4" />
                   Your browser does not support embedded video.
                 </video>
-              </div>
+              </CaseMediaFrame>
             </div>
           </div>
 
@@ -621,7 +622,7 @@ export default function Home() {
 
             {/* RIGHT — video (sticky on desktop) */}
             <div className="order-1 md:order-2 md:sticky md:top-24 md:self-start">
-              <div className="overflow-hidden border border-[var(--white-20)] bg-black">
+              <CaseMediaFrame label="DeView Unified Portal">
                 <video
                   ref={unifiedPortalVideoRef}
                   className="block h-auto w-full"
@@ -635,7 +636,7 @@ export default function Home() {
                   <source src="/deview-unified-portal-demo.mp4" type="video/mp4" />
                   Your browser does not support embedded video.
                 </video>
-              </div>
+              </CaseMediaFrame>
             </div>
           </div>
 
