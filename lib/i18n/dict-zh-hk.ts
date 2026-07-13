@@ -889,7 +889,7 @@ export const zhHK: Dictionary = {
         },
         { name: "Eden Lam", role: "軟件工程師", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "建構並交付支撐 DeView 客戶項目的平台與系統整合。" },
         { name: "Stepan Pashchenko", role: "銷售主管", photo: "/team/stepan-pashchenko-800.webp", initials: "SP", bio: "主理新客戶開發——由第一次接觸到落實項目範圍。" },
-        { name: "Stanislav Dupllyakov", role: "瑞士客戶關係", photo: "/team/stanislav-dupllyakov-800.webp", initials: "SD", bio: "DeView 瑞士客戶的主要聯絡人，由項目交付到後續支援全程跟進。" },
+        { name: "Stanislav Dupliakov", role: "瑞士客戶關係", photo: "/team/stanislav-dupllyakov-800.webp", initials: "SD", bio: "DeView 瑞士客戶的主要聯絡人，由項目交付到後續支援全程跟進。" },
       ],
     },
     h1: "我們構建真正完成工作的 AI——而非只能回答相關問題的 AI。",

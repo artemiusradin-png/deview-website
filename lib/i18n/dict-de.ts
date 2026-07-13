@@ -909,7 +909,7 @@ export const de: Dictionary = {
         },
         { name: "Eden Lam", role: "Software-Entwickler", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "Baut und liefert die Plattformen und Integrationen hinter DeViews Kundenprojekten." },
         { name: "Stepan Pashchenko", role: "Head of Sales", photo: "/team/stepan-pashchenko-800.webp", initials: "SP", bio: "Führt die Neukundengewinnung — vom ersten Gespräch bis zum unterschriebenen Scope." },
-        { name: "Stanislav Dupllyakov", role: "Kundenbeziehungen Schweiz", photo: "/team/stanislav-dupllyakov-800.webp", initials: "SD", bio: "Erster Ansprechpartner für DeViews Kunden in der Schweiz, von der Umsetzung bis zum laufenden Support." },
+        { name: "Stanislav Dupliakov", role: "Kundenbeziehungen Schweiz", photo: "/team/stanislav-dupllyakov-800.webp", initials: "SD", bio: "Erster Ansprechpartner für DeViews Kunden in der Schweiz, von der Umsetzung bis zum laufenden Support." },
       ],
     },
     h1: "Wir bauen KI, die die Arbeit erledigt — nicht KI, die Fragen darüber beantwortet.",

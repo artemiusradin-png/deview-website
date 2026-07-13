@@ -1146,7 +1146,7 @@ export const en = {
         },
         { name: "Eden Lam", role: "Software Developer", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "Builds and ships the platforms and integrations behind DeView's client engagements." },
         { name: "Stepan Pashchenko", role: "Head of Sales", photo: "/team/stepan-pashchenko-800.webp", initials: "SP", bio: "Leads new business development — from first conversation to signed scope." },
-        { name: "Stanislav Dupllyakov", role: "Switzerland Customer Relations", photo: "/team/stanislav-dupllyakov-800.webp", initials: "SD", bio: "The main point of contact for DeView's clients in Switzerland, from delivery through ongoing support." },
+        { name: "Stanislav Dupliakov", role: "Switzerland Customer Relations", photo: "/team/stanislav-dupllyakov-800.webp", initials: "SD", bio: "The main point of contact for DeView's clients in Switzerland, from delivery through ongoing support." },
       ],
     },
     h1: "We build AI that does the work — not AI that answers questions about it.",
