@@ -1144,7 +1144,7 @@ export const en = {
           initials: "AR",
           bio: "Leads DeView's engagements end to end — from scoping the workflows that cost the most to shipping the systems that fix them.",
         },
-        { name: "Eden Lam", role: "Software Developer", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "Builds and ships the platforms and integrations behind DeView's client engagements." },
+        { name: "Eden Lam", role: "Software Engineer & Hong Kong Relations", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "Builds the platforms behind DeView's client work and is the main point of contact for clients in Hong Kong." },
         { name: "Stepan Pashchenko", role: "Head of Sales", photo: "/team/stepan-pashchenko-800.webp", initials: "SP", bio: "Leads new business development — from first conversation to signed scope." },
         { name: "Stanislav Dupliakov", role: "Switzerland Customer Relations", photo: "/team/stanislav-dupllyakov-800.webp", initials: "SD", bio: "The main point of contact for DeView's clients in Switzerland, from delivery through ongoing support." },
       ],

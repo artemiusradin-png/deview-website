@@ -907,7 +907,7 @@ export const de: Dictionary = {
           initials: "AR",
           bio: "Führt DeViews Engagements von Anfang bis Ende — vom Scoping der teuersten Workflows bis zum Deployment der Systeme, die sie beheben.",
         },
-        { name: "Eden Lam", role: "Software-Entwickler", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "Baut und liefert die Plattformen und Integrationen hinter DeViews Kundenprojekten." },
+        { name: "Eden Lam", role: "Software-Engineer & Kundenbeziehungen Hongkong", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "Baut die Plattformen hinter DeViews Kundenprojekten und ist erster Ansprechpartner für Kunden in Hongkong." },
         { name: "Stepan Pashchenko", role: "Head of Sales", photo: "/team/stepan-pashchenko-800.webp", initials: "SP", bio: "Führt die Neukundengewinnung — vom ersten Gespräch bis zum unterschriebenen Scope." },
         { name: "Stanislav Dupliakov", role: "Kundenbeziehungen Schweiz", photo: "/team/stanislav-dupllyakov-800.webp", initials: "SD", bio: "Erster Ansprechpartner für DeViews Kunden in der Schweiz, von der Umsetzung bis zum laufenden Support." },
       ],

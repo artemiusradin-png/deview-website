@@ -887,7 +887,7 @@ export const zhHK: Dictionary = {
           initials: "AR",
           bio: "全程主理 DeView 的項目——由釐定最耗費成本的工作流程，到交付解決問題的系統。",
         },
-        { name: "Eden Lam", role: "軟件工程師", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "建構並交付支撐 DeView 客戶項目的平台與系統整合。" },
+        { name: "Eden Lam", role: "軟件工程師及香港客戶關係", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "建構支撐 DeView 客戶項目的平台，同時是香港客戶的主要聯絡人。" },
         { name: "Stepan Pashchenko", role: "銷售主管", photo: "/team/stepan-pashchenko-800.webp", initials: "SP", bio: "主理新客戶開發——由第一次接觸到落實項目範圍。" },
         { name: "Stanislav Dupliakov", role: "瑞士客戶關係", photo: "/team/stanislav-dupllyakov-800.webp", initials: "SD", bio: "DeView 瑞士客戶的主要聯絡人，由項目交付到後續支援全程跟進。" },
       ],
