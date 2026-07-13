@@ -503,8 +503,10 @@ export default function Home() {
 
       <section id="contact" className="scroll-margin-header pt-6 md:pt-8">
         <CtaCard
-          title={`${dict.contact.titleL1} ${dict.contact.titleL2}`}
-          description={`${dict.contact.leadL1} ${dict.contact.leadL2}`}
+          // Swapped: the "Describe the process… we reply in 1–2 days" line is now the
+          // prominent title, and "Tell us the workflow…" is the supporting description.
+          title={`${dict.contact.leadL1} ${dict.contact.leadL2}`}
+          description={`${dict.contact.titleL1} ${dict.contact.titleL2}`}
           buttonText={dict.contact.sendInquiry}
           inputPlaceholder="Your email address"
           onButtonClick={(email) => {

@@ -21,12 +21,13 @@ export function HomePracticeAreas({ variant = "home" }: HomePracticeAreasProps) 
         {/* Mobile: horizontal snap-carousel that stays within the page's section-gutter
             (no more -mx-4/px-4 full-bleed, which pinned the first card ~2px off the left
             edge instead of the ~18px gutter every other block uses).
-            overflow-y-hidden is essential: `overflow-x:auto` with the default
-            `overflow-y:visible` gets promoted by the CSS spec to `overflow-y:auto`, which
-            made the carousel vertically scrollable too and stole downward page swipes.
-            Explicit hidden + touch-action:pan-x + overscroll-x-contain lock it to horizontal
-            gestures only. sm+: static grid. */}
-        <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-hidden overscroll-x-contain pb-2 [touch-action:pan-x] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:snap-none sm:items-start sm:gap-x-8 sm:gap-y-8 sm:overflow-x-visible sm:overflow-y-visible sm:pb-0 sm:[touch-action:auto] sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
+            overflow-y-hidden makes the module itself un-scrollable vertically (without it,
+            `overflow-x:auto` + default `overflow-y:visible` is promoted by the CSS spec to
+            `overflow-y:auto`). We deliberately do NOT set touch-action here: with the module
+            unable to scroll vertically, the browser's default routes a vertical swipe to the
+            page (so you can still scroll the site by dragging on a card), while a horizontal
+            swipe scrolls the carousel. sm+: static grid. */}
+        <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-hidden overscroll-x-contain pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:snap-none sm:items-start sm:gap-x-8 sm:gap-y-8 sm:overflow-x-visible sm:overflow-y-visible sm:pb-0 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
           {PRACTICE_IDS.map((id, index) => {
             const item = p.items[index];
             return (
