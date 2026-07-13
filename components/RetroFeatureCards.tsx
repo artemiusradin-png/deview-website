@@ -99,7 +99,7 @@ export function RetroFeatureCards({ rootPrefix = "" }: { rootPrefix?: string }) 
   return (
     <section
       id={RETRO_FEATURE_CARDS_ID}
-      className="scroll-margin-header relative w-full bg-[var(--surface)] py-10 md:py-14"
+      className="hidden scroll-margin-header relative w-full bg-[var(--surface)] py-10 md:block md:py-14"
     >
       <div className="section-gutter w-full">
         {/* Mobile: 2×2 square grid of all four cards. Desktop unchanged (3-column with col 1 stacked). */}
