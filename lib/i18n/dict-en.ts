@@ -588,7 +588,7 @@ export const en = {
     firstName: "Artemis",
     lastName: "Radin",
     description:
-      "Artemis leads DeView's engagements end to end — from scoping the workflows that cost clients the most to shipping the systems that fix them. He works directly with operations and finance leaders across the firm's offices, holding every build to one standard: measurable outcomes in weeks, not roadmaps in quarters.",
+      "Artemis leads DeView's engagements end to end — from scoping the costliest workflows to shipping the systems that fix them. One standard: measurable outcomes in weeks, not roadmaps in quarters.",
   },
   industries: {
     sectionLabel: "INDUSTRIES WE SERVE",

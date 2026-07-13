@@ -345,7 +345,7 @@ export default function Home() {
             className="flex max-w-2xl flex-col"
           >
             <p className="section-label mb-4 text-[#ffc933]!">{dict.hero.kicker}</p>
-            <h1 className="hero-heading mb-6 text-[clamp(1.6rem,5.2vw,2.25rem)] leading-[1.1] tracking-[0.06em] text-[var(--white-100)] md:text-4xl md:leading-[1.06] lg:text-[3.25rem]">
+            <h1 className="hero-heading mb-4 text-[clamp(1.6rem,5.2vw,2.25rem)] leading-[1.1] tracking-[0.06em] text-[var(--white-100)] md:mb-6 md:text-4xl md:leading-[1.06] lg:text-[3.25rem]">
               {dict.hero.titleL1}
               <br />
               {dict.hero.titleL2}
@@ -359,10 +359,10 @@ export default function Home() {
             {/* Compact outline button + a secondary case-studies link — same size on every
                 breakpoint, mobile included (was previously a separate, much larger filled
                 mobile-only button). The whole hero column is bottom-aligned via the section's
-                `items-end`, so a plain `mt-8` gap under the heading is all that's needed — no
+                `items-end`, so a small `mt-4` gap under the heading is all that's needed — no
                 more full-height column + `mt-auto` push (that forced the hero to ~100vh on
                 tablet/iPad and buried the practice-areas section below it). */}
-            <div className="mt-8">
+            <div className="mt-4">
               <span className="flex items-center gap-4">
                 <a
                   href={localePath("/contact")}

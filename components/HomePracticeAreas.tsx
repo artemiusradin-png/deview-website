@@ -20,8 +20,11 @@ export function HomePracticeAreas({ variant = "home" }: HomePracticeAreasProps) 
       <div className="mx-auto max-w-6xl">
         {/* Mobile: horizontal snap-carousel that stays within the page's section-gutter
             (no more -mx-4/px-4 full-bleed, which pinned the first card ~2px off the left
-            edge instead of the ~18px gutter every other block uses). sm+: static grid. */}
-        <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:snap-none sm:items-start sm:gap-x-8 sm:gap-y-8 sm:overflow-visible sm:pb-0 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
+            edge instead of the ~18px gutter every other block uses).
+            touch-action:pan-x + overscroll-x-contain lock the carousel to horizontal
+            gestures only, so a vertical swipe scrolls the page instead of getting eaten by
+            this scroller. sm+: static grid. */}
+        <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain pb-2 [touch-action:pan-x] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:snap-none sm:items-start sm:gap-x-8 sm:gap-y-8 sm:overflow-visible sm:pb-0 sm:[touch-action:auto] sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
           {PRACTICE_IDS.map((id, index) => {
             const item = p.items[index];
             return (

@@ -571,7 +571,7 @@ export const zhHK: Dictionary = {
     firstName: "Artemis",
     lastName: "Radin",
     description:
-      "Artemis 全程主理 DeView 的每個項目——由釐定最耗費客戶成本的工作流程，到交付解決問題的系統。他直接與各地辦公室的營運及財務負責人合作，每個項目堅持同一標準：數週內見到可量度的成果，而非以季度計的路線圖。",
+      "Artemis 全程主理 DeView 的每個項目——由釐定最耗費成本的工作流程，到交付解決問題的系統。堅持同一標準：數週內見到可量度的成果，而非以季度計的路線圖。",
   },
   industries: {
     sectionLabel: "服務行業",

@@ -1080,7 +1080,7 @@ html[data-theme="light"] .footer-link-row {
     /* Height itself comes from the higher-specificity .section-fullscreen.section-fullscreen--hero
        override above (~70svh) so the next section peeks through on load. */
     padding-top: calc(var(--header-stack-height) + 2rem);
-    padding-bottom: max(2.25rem, calc(env(safe-area-inset-bottom, 0px) + 1rem));
+    padding-bottom: max(1.1rem, env(safe-area-inset-bottom, 0px));
     /* align-items is controlled by the `items-end md:items-center` Tailwind classes on the
        <section> in page.tsx, not here — this file has no @layer scoping, so an unlayered
        plain CSS rule here would win the cascade over Tailwind's utility and silently

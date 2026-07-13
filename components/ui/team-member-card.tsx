@@ -62,8 +62,10 @@ export default function TeamMemberCard({
       >
         <p
           className={cn(
-            "mb-3 text-[0.6rem] font-medium uppercase tracking-[0.3em] text-[var(--white-40)] md:mb-4 md:text-[0.65rem]",
-            isPositionRight && "text-right",
+            // Cap the width on phones so a long role (e.g. "Operations & AI Prompt
+            // Engineering") wraps to two lines instead of one edge-to-edge line; full width on md+.
+            "mb-3 max-w-[13rem] text-[0.6rem] font-medium uppercase leading-[1.5] tracking-[0.3em] text-[var(--white-40)] md:mb-4 md:max-w-none md:text-[0.65rem]",
+            isPositionRight && "ml-auto text-right md:ml-0",
           )}
         >
           {jobPosition}

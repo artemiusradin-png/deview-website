@@ -590,7 +590,7 @@ export const de: Dictionary = {
     firstName: "Artemis",
     lastName: "Radin",
     description:
-      "Artemis führt DeViews Engagements von Anfang bis Ende — vom Scoping der Workflows, die Kunden am meisten kosten, bis zum Deployment der Systeme, die sie beheben. Er arbeitet direkt mit Operations- und Finanzverantwortlichen an allen Standorten und hält jeden Build an einem Standard fest: messbare Ergebnisse in Wochen, nicht Roadmaps in Quartalen.",
+      "Artemis führt DeViews Engagements von Anfang bis Ende — vom Scoping der teuersten Workflows bis zum Deployment der Systeme, die sie beheben. Ein Standard: messbare Ergebnisse in Wochen, nicht Roadmaps in Quartalen.",
   },
   industries: {
     sectionLabel: "BRANCHEN",
