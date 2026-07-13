@@ -4,12 +4,11 @@ import { useEffect, useRef, useState, type MouseEvent } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
-import { Layers, ScanEye, FileText, BarChart3, Database, Sparkles } from "lucide-react";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { HeroPulseField } from "@/components/HeroPulseField";
 import { PixelField } from "@/components/PixelField";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
-import { CaseMediaFrame } from "@/components/ui/case-media-frame";
+import { FeaturedCaseCard } from "@/components/FeaturedCaseCard";
 import TeamMemberCard from "@/components/ui/team-member-card";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
@@ -423,238 +422,57 @@ export default function Home() {
 
       <HomeProcessTimeline />
 
-      {/* Featured deployment — AgroPlatforma (after WHAT WE BUILD services) */}
-      <section
+      {/* Featured deployment — AgroPlatforma */}
+      <FeaturedCaseCard
         id="featured-deployment"
-        className="scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] pt-10 sm:pt-16 md:pt-28 pb-12 sm:pb-20 md:pb-28"
-      >
-        <div className="section-gutter mx-auto max-w-[96rem]">
-          <p className="section-label mb-3">{dict.featuredAgro.sectionLabel}</p>
-          <div className="rule mb-6" />
-          <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
-            <h2 className="text-[clamp(1.75rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
-              {dict.featuredAgro.title}
-            </h2>
-            <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
-              {dict.featuredAgro.subtitle}
-            </p>
-          </div>
-
-          {/* Two-column: phased build on the left, video on the right (sticky on desktop) */}
-          <div className="mt-6 grid gap-6 md:mt-16 md:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)] md:gap-12 md:items-start">
-            {/* LEFT — phased build narrative (desktop-only; mobile gets a condensed summary below) */}
-            <div className="order-2 hidden md:order-1 md:block">
-              <h3 className="mb-4 text-2xl font-medium tracking-tight text-[var(--white-100)] md:text-3xl">
-                {dict.featuredAgro.phasedTitle}
-              </h3>
-              <p className="mb-10 max-w-prose text-sm leading-relaxed text-[var(--text-muted)] md:text-base">
-                {dict.featuredAgro.phasedBody}
-              </p>
-
-              <ol className="space-y-8">
-                {dict.featuredAgro.phases.map((phase, idx) => {
-                  const PhaseIcon = [Layers, ScanEye, FileText, BarChart3][idx];
-                  return (
-                  <li key={phase.title} className="relative">
-                    <div className="flex items-start gap-3">
-                      <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded border border-[var(--white-20)] bg-[var(--surface)] text-[var(--white-100)]" aria-hidden="true">
-                        {PhaseIcon && <PhaseIcon className="h-4 w-4" />}
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                          {phase.subtitle}
-                        </div>
-                        <h4 className="mt-1 text-base font-medium leading-snug text-[var(--white-100)] md:text-lg">
-                          {phase.title}
-                        </h4>
-                        <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
-                          {phase.description}
-                        </p>
-                        {"items" in phase && phase.items ? (
-                          <ul className="mt-4 space-y-2">
-                            {phase.items.map((item: string) => (
-                              <li key={item} className="flex items-start gap-2 text-sm leading-relaxed text-[var(--text-muted)]">
-                                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--white-40)]" aria-hidden="true" />
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : null}
-                      </div>
-                    </div>
-                    {idx < 3 ? (
-                      <div className="ml-4 mt-6 h-px w-[calc(100%-1rem)] bg-[var(--white-10)]" aria-hidden="true" />
-                    ) : null}
-                  </li>
-                  );
-                })}
-              </ol>
-
-              <a
-                href={localePath("/case-studies")}
-                className="mt-10 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-sm uppercase tracking-[0.18em] text-[var(--white-80)] transition-colors hover:text-[var(--white-100)]"
-              >
-                {dict.featuredAgro.readCaseStudy}
-                <span aria-hidden="true">→</span>
-              </a>
-            </div>
-
-            {/* RIGHT — video (sticky on desktop) */}
-            <div className="order-1 md:order-2 md:sticky md:top-24 md:self-start">
-              <CaseMediaFrame label="AgroPlatforma">
-                <video
-                  ref={agroVideoRef}
-                  className="block h-auto w-full"
-                  controls
-                  preload="none"
-                  playsInline
-                  muted
-                  loop
-                  poster="/deview-agroplatforma-poster.svg"
-                >
-                  <source src="/deview-agroplatforma-demo.mp4" type="video/mp4" />
-                  Your browser does not support embedded video.
-                </video>
-              </CaseMediaFrame>
-            </div>
-          </div>
-
-          {/* Mobile-only condensed summary — replaces the phased build OL on small screens */}
-          <div className="mt-4 md:hidden">
-            <p className="text-sm leading-relaxed text-[var(--text-muted)]">
-              {dict.featuredAgro.mobileSummary}
-            </p>
-            <a
-              href={localePath("/case-studies")}
-              className="mt-5 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-80)]"
-            >
-              {dict.featuredAgro.readCaseStudy}
-              <span aria-hidden="true">→</span>
-            </a>
-          </div>
-        </div>
-      </section>
+        sectionLabel={dict.featuredAgro.sectionLabel}
+        title={dict.featuredAgro.title}
+        subtitle={dict.featuredAgro.subtitle}
+        ctaLabel={dict.featuredAgro.readCaseStudy}
+        ctaHref={localePath("/case-studies")}
+        mediaLabel="AgroPlatforma"
+        media={
+          <video
+            ref={agroVideoRef}
+            className="block h-auto w-full"
+            controls
+            preload="none"
+            playsInline
+            muted
+            loop
+            poster="/deview-agroplatforma-poster.svg"
+          >
+            <source src="/deview-agroplatforma-demo.mp4" type="video/mp4" />
+            Your browser does not support embedded video.
+          </video>
+        }
+      />
 
       {/* Featured deployment — DeView Unified Portal (finance / lending) */}
-      <section
+      <FeaturedCaseCard
         id="featured-deployment-finance"
-        className="scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] pt-10 sm:pt-16 md:pt-28 pb-12 sm:pb-20 md:pb-28"
-      >
-        <div className="section-gutter mx-auto max-w-[96rem]">
-          <p className="section-label mb-3">{dict.featuredPortal.sectionLabel}</p>
-          <div className="rule mb-6" />
-          <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
-            <h2 className="text-[clamp(1.75rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
-              {dict.featuredPortal.title}
-            </h2>
-            <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
-              {dict.featuredPortal.subtitle}
-            </p>
-          </div>
-
-          {/* Two-column: phased build on the left, video on the right (sticky on desktop) */}
-          <div className="mt-6 grid gap-6 md:mt-16 md:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)] md:gap-12 md:items-start">
-            {/* LEFT — phased build narrative (desktop-only; mobile gets a condensed summary below) */}
-            <div className="order-2 hidden md:order-1 md:block">
-              <h3 className="mb-4 text-2xl font-medium tracking-tight text-[var(--white-100)] md:text-3xl">
-                {dict.featuredPortal.phasedTitle}
-              </h3>
-              <p className="mb-10 max-w-prose text-sm leading-relaxed text-[var(--text-muted)] md:text-base">
-                {dict.featuredPortal.phasedBody}
-              </p>
-
-              <ol className="space-y-8">
-                {dict.featuredPortal.phases.map((phase, idx, arr) => {
-                  const PortalIcon = [Database, Sparkles][idx];
-                  return (
-                  <li key={phase.title} className="relative">
-                    <div className="flex items-start gap-3">
-                      <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded border border-[var(--white-20)] bg-[var(--surface)] text-[var(--white-100)]" aria-hidden="true">
-                        {PortalIcon && <PortalIcon className="h-4 w-4" />}
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                          {phase.subtitle}
-                        </div>
-                        <h4 className="mt-1 text-base font-medium leading-snug text-[var(--white-100)] md:text-lg">
-                          {phase.title}
-                        </h4>
-                        <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
-                          {phase.description}
-                        </p>
-                        {"capabilities" in phase && phase.capabilities ? (
-                          <ol className="mt-5 space-y-4">
-                            {phase.capabilities.map((cap: { name: string; body: string }, capIdx: number) => (
-                              <li key={cap.name} className="flex items-start gap-3">
-                                <span className="mt-0.5 inline-flex h-6 min-w-[1.75rem] shrink-0 items-center justify-center rounded border border-[var(--white-20)] px-1 text-[0.6rem] tabular-nums uppercase tracking-[0.18em] text-[var(--white-60)]" aria-hidden="true">
-                                  {String(capIdx + 1).padStart(2, "0")}
-                                </span>
-                                <div className="min-w-0 flex-1">
-                                  <p className="text-sm font-medium leading-snug text-[var(--white-100)]">
-                                    {cap.name}
-                                  </p>
-                                  <p className="mt-1 text-sm leading-relaxed text-[var(--text-muted)]">
-                                    {cap.body}
-                                  </p>
-                                </div>
-                              </li>
-                            ))}
-                          </ol>
-                        ) : null}
-                      </div>
-                    </div>
-                    {idx < arr.length - 1 ? (
-                      <div className="ml-4 mt-6 h-px w-[calc(100%-1rem)] bg-[var(--white-10)]" aria-hidden="true" />
-                    ) : null}
-                  </li>
-                  );
-                })}
-              </ol>
-
-              <a
-                href={localePath("/case-studies")}
-                className="mt-10 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-sm uppercase tracking-[0.18em] text-[var(--white-80)] transition-colors hover:text-[var(--white-100)]"
-              >
-                {dict.featuredPortal.readCaseStudy}
-                <span aria-hidden="true">→</span>
-              </a>
-            </div>
-
-            {/* RIGHT — video (sticky on desktop) */}
-            <div className="order-1 md:order-2 md:sticky md:top-24 md:self-start">
-              <CaseMediaFrame label="DeView Unified Portal">
-                <video
-                  ref={unifiedPortalVideoRef}
-                  className="block h-auto w-full"
-                  controls
-                  preload="none"
-                  playsInline
-                  muted
-                  loop
-                  poster="/deview-unified-portal-poster.svg"
-                >
-                  <source src="/deview-unified-portal-demo.mp4" type="video/mp4" />
-                  Your browser does not support embedded video.
-                </video>
-              </CaseMediaFrame>
-            </div>
-          </div>
-
-          {/* Mobile-only condensed summary */}
-          <div className="mt-4 md:hidden">
-            <p className="text-sm leading-relaxed text-[var(--text-muted)]">
-              {dict.featuredPortal.mobileSummary}
-            </p>
-            <a
-              href={localePath("/case-studies")}
-              className="mt-5 inline-flex items-center gap-2 border-b border-[var(--white-30)] pb-1 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-80)]"
-            >
-              {dict.featuredPortal.readCaseStudy}
-              <span aria-hidden="true">→</span>
-            </a>
-          </div>
-        </div>
-      </section>
+        sectionLabel={dict.featuredPortal.sectionLabel}
+        title={dict.featuredPortal.title}
+        subtitle={dict.featuredPortal.subtitle}
+        ctaLabel={dict.featuredPortal.readCaseStudy}
+        ctaHref={localePath("/case-studies")}
+        mediaLabel="DeView Unified Portal"
+        media={
+          <video
+            ref={unifiedPortalVideoRef}
+            className="block h-auto w-full"
+            controls
+            preload="none"
+            playsInline
+            muted
+            loop
+            poster="/deview-unified-portal-poster.svg"
+          >
+            <source src="/deview-unified-portal-demo.mp4" type="video/mp4" />
+            Your browser does not support embedded video.
+          </video>
+        }
+      />
 
       <SelectedProjectsLogoMarquee />
 
