@@ -331,7 +331,7 @@ export default function Home() {
       {/* Free AI guide CTA removed */}
       <section
         id="hero"
-        className="section-fullscreen section-fullscreen--hero relative flex items-center justify-center section-gutter py-12 md:py-0"
+        className="section-fullscreen section-fullscreen--hero relative flex items-end justify-center section-gutter py-12 md:py-0"
       >
         <div className="hero-media absolute inset-0">
           <HeroPulseField className="absolute inset-0" />
@@ -342,7 +342,7 @@ export default function Home() {
             initial={fade.initial}
             animate={fade.animate}
             transition={{ duration: 0.6 }}
-            className="flex max-w-2xl flex-col md:min-h-[calc(100svh-var(--header-stack-height)-2.25rem)] md:pt-2 lg:min-h-0"
+            className="flex max-w-2xl flex-col"
           >
             <p className="section-label mb-4 text-[#ffc933]!">{dict.hero.kicker}</p>
             <h1 className="hero-heading mb-6 text-[clamp(1.6rem,5.2vw,2.25rem)] leading-[1.1] tracking-[0.06em] text-[var(--white-100)] md:text-4xl md:leading-[1.06] lg:text-[3.25rem]">
@@ -356,21 +356,14 @@ export default function Home() {
                 </>
               ) : null}
             </h1>
-            {/* Mobile: lead + CTA sit ~25svh below the headline — past the visual centre, still on the first scroll.
-                Desktop: same wrapper, pinned to the bottom of the column via mt-auto. */}
-            <div className="mt-[25svh] md:mt-auto md:pt-8 lg:mt-0 lg:pt-12">
-              {/* Mobile-only filled CTA — bigger, bolder, full-width. */}
-              <a
-                href={localePath("/contact")}
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-md bg-[var(--white-100)] px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--background)] shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] transition-transform active:scale-[0.98] md:hidden"
-              >
-                <span>{dict.hero.inquire}</span>
-                <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
-              </a>
-              {/* Desktop: compact outline button + a secondary case-studies link. Wrapped because the
-                  .btn-outline @media (max-width: 961px) rule re-applies display:inline-flex and beats
-                  Tailwind's `hidden` on the child. */}
-              <span className="hidden items-center gap-4 md:inline-flex">
+            {/* Compact outline button + a secondary case-studies link — same size on every
+                breakpoint, mobile included (was previously a separate, much larger filled
+                mobile-only button). The whole hero column is bottom-aligned via the section's
+                `items-end`, so a plain `mt-8` gap under the heading is all that's needed — no
+                more full-height column + `mt-auto` push (that forced the hero to ~100vh on
+                tablet/iPad and buried the practice-areas section below it). */}
+            <div className="mt-8">
+              <span className="flex items-center gap-4">
                 <a
                   href={localePath("/contact")}
                   className="inline-flex items-center rounded-md border border-[var(--white-40)] px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[var(--white-100)] transition-colors hover:border-[var(--white-80)]"

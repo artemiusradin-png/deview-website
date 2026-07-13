@@ -15,7 +15,7 @@ export function HomePracticeAreas({ variant = "home" }: HomePracticeAreasProps) 
   return (
     <section
       id={variant === "home" ? "practices" : undefined}
-      className="border-t border-[var(--white-20)] bg-[var(--background)] section-gutter pb-8 pt-4 sm:pb-10 sm:pt-5 md:pb-12 md:pt-6"
+      className="bg-[var(--background)] section-gutter pb-8 pt-4 sm:pb-10 sm:pt-5 md:pb-12 md:pt-6"
     >
       <div className="mx-auto max-w-6xl">
         <div className="-mx-4 flex snap-x snap-mandatory gap-6 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:snap-none sm:items-start sm:gap-x-8 sm:gap-y-8 sm:overflow-visible sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">

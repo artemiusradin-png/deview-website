@@ -4,8 +4,9 @@
  * Editorial-style team member card — adapted to DeView's theme tokens.
  * Overlapping portrait, large display name, circular CTA, staggered motion.
  */
+import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface TeamMemberCardProps {
@@ -31,9 +32,19 @@ export default function TeamMemberCard({
 }: TeamMemberCardProps) {
   const fullName = `${firstName} ${lastName}`;
   const isPositionRight = position === "right";
+  const cardRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  // Name text keeps drifting with scroll (rather than settling once, like the rest of the
+  // card) — a larger, quicker-feeling range than the card's own one-shot entrance motions.
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"],
+  });
+  const nameParallaxY = useTransform(scrollYProgress, [0, 1], prefersReducedMotion ? [0, 0] : [90, -90]);
 
   return (
     <motion.div
+      ref={cardRef}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -89,11 +100,14 @@ export default function TeamMemberCard({
             isPositionRight && "left-8 items-end",
           )}
         >
-          <p className="text-[clamp(2.25rem,6vw,3.5rem)] leading-[1.1] font-extralight tracking-tight text-[var(--white-100)]">
+          <motion.p
+            style={{ y: nameParallaxY }}
+            className="text-[clamp(2.25rem,6vw,3.5rem)] leading-[1.1] font-extralight tracking-tight text-[var(--white-100)]"
+          >
             {firstName}
             <br />
             <span className="font-normal">{lastName}</span>
-          </p>
+          </motion.p>
 
           <div className={cn("flex gap-6 md:gap-8", isPositionRight && "justify-end")}>
             <motion.a

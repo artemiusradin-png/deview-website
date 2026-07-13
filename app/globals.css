@@ -1047,7 +1047,6 @@ html[data-theme="light"] .footer-link-row {
     min-height: 100svh;
     padding-top: calc(var(--header-stack-height) + 1.35rem);
     padding-bottom: max(1.75rem, env(safe-area-inset-bottom, 0px));
-    align-items: flex-end;
   }
 
   .section-fullscreen.section-fullscreen--hero {
@@ -1082,7 +1081,11 @@ html[data-theme="light"] .footer-link-row {
        override above (~70svh) so the next section peeks through on load. */
     padding-top: calc(var(--header-stack-height) + 2rem);
     padding-bottom: max(2.25rem, calc(env(safe-area-inset-bottom, 0px) + 1rem));
-    align-items: flex-start;
+    /* align-items is controlled by the `items-end md:items-center` Tailwind classes on the
+       <section> in page.tsx, not here — this file has no @layer scoping, so an unlayered
+       plain CSS rule here would win the cascade over Tailwind's utility and silently
+       reintroduce the bug this comment replaced (see the two other `.section-fullscreen--hero`
+       blocks in this file that had the same issue). */
   }
 
   /* Lighten the hero overlay on mobile so PixelField (the pixel-city animation) reads through. */
@@ -4192,12 +4195,13 @@ html[data-theme="light"] .btn-primary:hover {
 
   /* Hero keeps its own ~70svh floor (see .section-fullscreen.section-fullscreen--hero
      above) so the next section still peeks through on load; only drop the
-     height/max-height locks that would otherwise clip taller content. */
+     height/max-height locks that would otherwise clip taller content.
+     align-items is controlled by the `items-end md:items-center` Tailwind classes
+     on the <section> in page.tsx, not here. */
   .section-fullscreen--hero {
     height: auto !important;
     max-height: none !important;
     min-height: 70svh !important;
-    align-items: flex-start;
   }
 
   html {
