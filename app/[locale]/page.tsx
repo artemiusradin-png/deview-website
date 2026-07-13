@@ -9,6 +9,8 @@ import { HeroPulseField } from "@/components/HeroPulseField";
 import { PixelField } from "@/components/PixelField";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
 import { FeaturedCaseCard } from "@/components/FeaturedCaseCard";
+import { FooterCtaBanner } from "@/components/FooterCtaBanner";
+import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 import TeamMemberCard from "@/components/ui/team-member-card";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
@@ -501,12 +503,27 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Footer-style "Tell us what to automate" CTA, relocated here from the footer —
+          swapped positions with the email-form card, which now sits at the bottom. */}
+      <section className="section-gutter pt-6 md:pt-8">
+        <div className="mx-auto max-w-6xl">
+          <FooterCtaBanner
+            label={dict.footer.ctaLabel}
+            copy={dict.footer.ctaCopy}
+            primaryText={dict.footer.contactUs}
+            primaryHref={localePath("/contact")}
+            secondaryText={dict.footer.emailDirect}
+            secondaryHref={`mailto:${SITE_INQUIRY_EMAIL}`}
+          />
+        </div>
+      </section>
+
+      <HomeInsightsPreview />
+
       <section id="contact" className="scroll-margin-header pt-6 md:pt-8">
         <CtaCard
-          // Swapped: the "Describe the process… we reply in 1–2 days" line is now the
-          // prominent title, and "Tell us the workflow…" is the supporting description.
-          title={`${dict.contact.leadL1} ${dict.contact.leadL2}`}
-          description={`${dict.contact.titleL1} ${dict.contact.titleL2}`}
+          title={`${dict.contact.titleL1} ${dict.contact.titleL2}`}
+          description={`${dict.contact.leadL1} ${dict.contact.leadL2}`}
           buttonText={dict.contact.sendInquiry}
           inputPlaceholder="Your email address"
           onButtonClick={(email) => {
@@ -516,9 +533,8 @@ export default function Home() {
         />
       </section>
 
-      <HomeInsightsPreview />
-
-      <SiteFooter />
+      {/* Footer's own CTA banner is hidden here since it now lives after the leadership block. */}
+      <SiteFooter hideCta />
 
       <PixelField />
 

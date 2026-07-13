@@ -7,9 +7,11 @@ import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 
 type SiteFooterProps = {
   rootPrefix?: string;
+  /** Hide the footer's top CTA banner (used when it's relocated higher up the page). */
+  hideCta?: boolean;
 };
 
-export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
+export function SiteFooter({ rootPrefix = "", hideCta = false }: SiteFooterProps) {
   const { dict, localePath } = useLocaleContext();
   const f = dict.footer;
 
@@ -37,6 +39,7 @@ export function SiteFooter({ rootPrefix = "" }: SiteFooterProps) {
       )}
       <Footer4Col
       rootPrefix={rootPrefix}
+      showCta={!hideCta}
       brand={{
         name: "DeView",
         description: f.intro,
