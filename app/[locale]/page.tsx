@@ -682,8 +682,6 @@ export default function Home() {
         </div>
       </section>
 
-      <HomeInsightsPreview />
-
       <section id="contact" className="scroll-margin-header pt-6 md:pt-8">
         <CtaCard
           title={`${dict.contact.titleL1} ${dict.contact.titleL2}`}
@@ -696,6 +694,8 @@ export default function Home() {
           className="min-h-[180px]"
         />
       </section>
+
+      <HomeInsightsPreview />
 
       <SiteFooter />
 

@@ -40,15 +40,18 @@ export function HomePracticeAreas({ variant = "home" }: HomePracticeAreasProps) 
                   variant === "standalone" ? "scroll-margin-header" : ""
                 }`}
               >
-                <p className="text-[0.95rem] leading-relaxed text-[var(--white-90)] sm:text-base">
+                <p className="text-[1.05rem] leading-relaxed text-[var(--white-90)] sm:text-base">
                   <span className="font-medium text-[var(--white-100)] underline decoration-[var(--white-20)] decoration-1 underline-offset-4 transition-colors group-hover:decoration-[var(--white-60)]">
                     {item.heading}.
                   </span>{" "}
                   {item.title}.
                 </p>
-                <ul className="mt-4 space-y-1.5">
+                {/* Roomier on phones (larger type, more line spacing) so the 5-item list
+                    doesn't read as a dense block of text; tighter again on sm+ where the
+                    cards sit three-up. */}
+                <ul className="mt-5 space-y-2.5 sm:mt-4 sm:space-y-1.5">
                   {item.subs.map((sub) => (
-                    <li key={sub} className="text-[0.78rem] leading-snug text-[var(--text-muted)]">
+                    <li key={sub} className="text-[0.9rem] leading-relaxed text-[var(--text-muted)] sm:text-[0.78rem] sm:leading-snug">
                       {sub}
                     </li>
                   ))}
