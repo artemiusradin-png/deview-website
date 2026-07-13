@@ -337,7 +337,7 @@ export default function Home() {
           <HeroPulseField className="absolute inset-0" />
         </div>
         <div className="absolute inset-0 hero-overlay" />
-        <div className="relative z-20 mx-auto flex w-full max-w-7xl flex-col justify-start gap-6 md:-mt-8 md:flex-row md:items-start md:gap-12">
+        <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col justify-start gap-6 md:-mt-8 md:flex-row md:items-start md:gap-12">
           <motion.div
             initial={fade.initial}
             animate={fade.animate}
