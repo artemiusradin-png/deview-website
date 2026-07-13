@@ -3,7 +3,7 @@ import type { Dictionary } from "./dict-en";
 /** Deutsche Übersetzung — Hochdeutsch (DE/AT/CH) */
 export const de: Dictionary = {
   site: {
-    title: "DeView | KI-Lösungen, Software-Engineering & Data Science",
+    title: "DeView | KI-Lösungen, Software-Engineering & Data Engineering",
     description:
       "DeView entwickelt KI-Automatisierung, individuelle Software-Plattformen und Datenpipelines, die Kosten senken und manuelle Arbeit eliminieren — direkt in Ihren bestehenden Systemen, nicht daneben.",
   },
@@ -34,11 +34,11 @@ export const de: Dictionary = {
   lang: { shortEn: "EN", shortZh: "粵", shortDe: "DE" },
   mobileNav: { close: "Schließen", contactForm: "KONTAKTFORMULAR" },
   hero: {
-    kicker: "KI-LÖSUNGEN · SOFTWARE-ENGINEERING · DATA SCIENCE",
+    kicker: "KI-LÖSUNGEN · SOFTWARE-ENGINEERING · DATA ENGINEERING",
     titleL1: "SYSTEME, DIE",
     titleL2: "DIE ARBEIT MACHEN —",
     titleL3: "LIVE IN WOCHEN",
-    col1: ["KI-LÖSUNGEN", "SOFTWARE-ENGINEERING", "DATA SCIENCE", "PRODUKTIV IN WOCHEN"],
+    col1: ["KI-LÖSUNGEN", "SOFTWARE-ENGINEERING", "DATA ENGINEERING", "PRODUKTIV IN WOCHEN"],
     clients: "KUNDEN",
     clientsValue: "OPERATIONS- & FINANZTEAMS",
     focus: "FOKUS",
@@ -203,7 +203,7 @@ export const de: Dictionary = {
     titleL1: "Drei Praxisfelder.",
     titleL2: "Ein Standard: Systeme in Produktion.",
     intro:
-      "KI-Automatisierung, individuelle Software und Data Science — definiert, gebaut und in Wochen in Ihren Betrieb geliefert. Jedes Engagement endet mit einem funktionierenden System, nicht mit einem Foliensatz.",
+      "KI-Automatisierung, individuelle Software und Data Engineering — definiert, gebaut und in Wochen in Ihren Betrieb geliefert. Jedes Engagement endet mit einem funktionierenden System, nicht mit einem Foliensatz.",
     explore: "PRAXISFELD ANSEHEN",
     items: [
       {
@@ -238,8 +238,8 @@ export const de: Dictionary = {
       },
       {
         id: "data-science",
-        label: "DATA SCIENCE",
-        heading: "Data Science",
+        label: "DATA ENGINEERING",
+        heading: "Data Engineering",
         title: "Entscheidungen aus Ihren eigenen Daten",
         body: "Von Pipelines bis zu Prognosen — wir konsolidieren fragmentierte Daten, automatisieren das Reporting und bauen die Modelle, die aus Ihren Datensätzen Prognosen und Entscheidungen machen.",
         subs: [
@@ -487,9 +487,9 @@ export const de: Dictionary = {
     },
   },
   subpages: {
-    servicesTitle: "Leistungen — KI, Software-Engineering & Data Science | DeView",
+    servicesTitle: "Leistungen — KI, Software-Engineering & Data Engineering | DeView",
     servicesDesc:
-      "Drei Praxisfelder — KI-Lösungen, Software-Engineering und Data Science — die manuelle Arbeit reduzieren, Betriebskosten senken und funktionierende Systeme in 1–8 Wochen liefern.",
+      "Drei Praxisfelder — KI-Lösungen, Software-Engineering und Data Engineering — die manuelle Arbeit reduzieren, Betriebskosten senken und funktionierende Systeme in 1–8 Wochen liefern.",
     useCasesTitle: "Einsatzgebiete | DeView",
     useCasesDesc:
       "Echte KI-Deployments in Kundenbetrieb, Dokumentenverarbeitung und internem Wissensmanagement — jedes ersetzt manuelle Arbeit durch Automatisierung.",
@@ -1232,7 +1232,7 @@ export const de: Dictionary = {
     sectionLabel: "PREISE",
     h1L1: "Transparente Preise.",
     h1L2: "Fester Scope. Keine Überraschungen.",
-    subtitle: "Jedes Engagement — KI, Software-Engineering oder Data Science — beginnt mit einem definierten Scope und Festpreis, vereinbart, bevor der Bau beginnt. Kein Retainer nötig.",
+    subtitle: "Jedes Engagement — KI, Software-Engineering oder Data Engineering — beginnt mit einem definierten Scope und Festpreis, vereinbart, bevor der Bau beginnt. Kein Retainer nötig.",
     includesLabel: "ENTHÄLT",
     bestForLabel: "Ideal für: ",
     tiers: [

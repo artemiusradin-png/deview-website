@@ -3,7 +3,7 @@ import type { Dictionary } from "./dict-en";
 /** 繁體中文（香港）— 書面語為主，配合粵語區讀者習慣 */
 export const zhHK: Dictionary = {
   site: {
-    title: "DeView | AI 方案、軟件工程及數據科學",
+    title: "DeView | AI 方案、軟件工程及數據工程",
     description:
       "DeView 構建 AI 自動化、客製軟件平台及數據管道，直接部署於您現有的工具之中——降低成本、消除人手作業。",
   },
@@ -34,11 +34,11 @@ export const zhHK: Dictionary = {
   lang: { shortEn: "EN", shortZh: "粵", shortDe: "DE" },
   mobileNav: { close: "關閉", contactForm: "聯絡表格" },
   hero: {
-    kicker: "AI 方案 · 軟件工程 · 數據科學",
+    kicker: "AI 方案 · 軟件工程 · 數據工程",
     titleL1: "真正做事的系統",
     titleL2: "數週內上線",
     titleL3: "",
-    col1: ["AI 方案", "軟件工程", "數據科學", "數週內投入生產"],
+    col1: ["AI 方案", "軟件工程", "數據工程", "數週內投入生產"],
     clients: "服務對象",
     clientsValue: "運營及財務管理團隊",
     focus: "工作重心",
@@ -207,7 +207,7 @@ export const zhHK: Dictionary = {
     titleL1: "三大專業範疇。",
     titleL2: "同一標準：系統投入生產。",
     intro:
-      "AI 自動化、客製軟件及數據科學——明確範疇、快速構建，數週內交付至您的營運之中。每個項目以真正運作的系統作結，而非簡報文件。",
+      "AI 自動化、客製軟件及數據工程——明確範疇、快速構建，數週內交付至您的營運之中。每個項目以真正運作的系統作結，而非簡報文件。",
     explore: "了解此範疇",
     items: [
       {
@@ -242,8 +242,8 @@ export const zhHK: Dictionary = {
       },
       {
         id: "data-science",
-        label: "數據科學",
-        heading: "數據科學",
+        label: "數據工程",
+        heading: "數據工程",
         title: "以您自己的數據支持決策",
         body: "由數據管道到預測模型——我們整合分散的數據、自動化報告流程，並構建將您的紀錄轉化為預測與決策的模型。",
         subs: [
@@ -470,8 +470,8 @@ export const zhHK: Dictionary = {
     },
   },
   subpages: {
-    servicesTitle: "服務——AI、軟件工程及數據科學 | DeView",
-    servicesDesc: "三大專業範疇——AI 方案、軟件工程及數據科學——減少人手作業、降低營運成本，並於 1–8 週內交付真正運作的系統。",
+    servicesTitle: "服務——AI、軟件工程及數據工程 | DeView",
+    servicesDesc: "三大專業範疇——AI 方案、軟件工程及數據工程——減少人手作業、降低營運成本，並於 1–8 週內交付真正運作的系統。",
     useCasesTitle: "應用 | DeView",
     useCasesDesc:
       "圍繞真實營運難題而設計的 AI 方案，涵蓋客戶營運、內部知識及營運。",
@@ -1212,7 +1212,7 @@ export const zhHK: Dictionary = {
     sectionLabel: "價格",
     h1L1: "透明定價。",
     h1L2: "固定範疇。無意外。",
-    subtitle: "每個項目——不論 AI、軟件工程或數據科學——均以明確的範疇和固定價格開始，在開發啟動前達成共識。無需預付費即可開始。",
+    subtitle: "每個項目——不論 AI、軟件工程或數據工程——均以明確的範疇和固定價格開始，在開發啟動前達成共識。無需預付費即可開始。",
     includesLabel: "包含內容",
     bestForLabel: "適合：",
     tiers: [

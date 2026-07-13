@@ -48,12 +48,12 @@ export function HomePracticeAreas({ variant = "home" }: HomePracticeAreasProps) 
                   </span>{" "}
                   {item.title}.
                 </p>
-                {/* Sub-item list is desktop-only: on phones each card stays a compact
-                    heading + one-line description (≤3 lines), and the detailed 5-item list
-                    only shows in the sm+ three-up grid where there's room for it. */}
-                <ul className="mt-4 hidden space-y-1.5 sm:block">
+                {/* On phones each card shows the heading + one-line description plus the
+                    first service (clamped to a single line) → a consistent 3-line card.
+                    The full 5-item list only shows in the sm+ three-up grid. */}
+                <ul className="mt-3 space-y-1.5 sm:mt-4 [&>li:nth-child(n+2)]:hidden sm:[&>li:nth-child(n+2)]:block">
                   {item.subs.map((sub) => (
-                    <li key={sub} className="text-[0.78rem] leading-snug text-[var(--text-muted)]">
+                    <li key={sub} className="line-clamp-1 text-[0.85rem] leading-snug text-[var(--text-muted)] sm:line-clamp-none sm:text-[0.78rem]">
                       {sub}
                     </li>
                   ))}

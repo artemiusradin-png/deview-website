@@ -1,7 +1,7 @@
 /** English source strings — used as the shape source for zh-HK. */
 export const en = {
   site: {
-    title: "DeView | AI Solutions, Software Engineering & Data Science",
+    title: "DeView | AI Solutions, Software Engineering & Data Engineering",
     description:
       "DeView builds AI automation, custom software platforms, and data pipelines that cut costs and remove manual work — deployed into your existing tools, not alongside them.",
   },
@@ -32,11 +32,11 @@ export const en = {
   lang: { shortEn: "EN", shortZh: "粵", shortDe: "DE" },
   mobileNav: { close: "Close", contactForm: "CONTACT FORM" },
   hero: {
-    kicker: "AI SOLUTIONS · SOFTWARE ENGINEERING · DATA SCIENCE",
+    kicker: "AI SOLUTIONS · SOFTWARE ENGINEERING · DATA ENGINEERING",
     titleL1: "SYSTEMS THAT",
     titleL2: "DO THE WORK —",
     titleL3: "SHIPPED IN WEEKS",
-    col1: ["AI SOLUTIONS", "SOFTWARE ENGINEERING", "DATA SCIENCE", "PRODUCTION IN WEEKS"],
+    col1: ["AI SOLUTIONS", "SOFTWARE ENGINEERING", "DATA ENGINEERING", "PRODUCTION IN WEEKS"],
     clients: "CLIENTS",
     clientsValue: "OPERATIONS & FINANCE TEAMS",
     focus: "FOCUS",
@@ -201,7 +201,7 @@ export const en = {
     titleL1: "Three practices.",
     titleL2: "One standard: systems in production.",
     intro:
-      "AI automation, custom software, and data science — scoped, built, and shipped into your operation in weeks. Every engagement ends with a working system, not a slide deck.",
+      "AI automation, custom software, and data engineering — scoped, built, and shipped into your operation in weeks. Every engagement ends with a working system, not a slide deck.",
     explore: "EXPLORE THE PRACTICE",
     items: [
       {
@@ -236,8 +236,8 @@ export const en = {
       },
       {
         id: "data-science",
-        label: "DATA SCIENCE",
-        heading: "Data Science",
+        label: "DATA ENGINEERING",
+        heading: "Data Engineering",
         title: "Decisions backed by your own data",
         body: "From pipelines to predictions — we consolidate fragmented data, automate reporting, and build the models that turn your records into forecasts and decisions.",
         subs: [
@@ -485,9 +485,9 @@ export const en = {
     },
   },
   subpages: {
-    servicesTitle: "Services — AI, Software Engineering & Data Science | DeView",
+    servicesTitle: "Services — AI, Software Engineering & Data Engineering | DeView",
     servicesDesc:
-      "Three practices — AI solutions, software engineering, and data science — that reduce manual work, cut operating costs, and ship working systems in 1–8 weeks.",
+      "Three practices — AI solutions, software engineering, and data engineering — that reduce manual work, cut operating costs, and ship working systems in 1–8 weeks.",
     useCasesTitle: "Where We're Deployed | DeView",
     useCasesDesc:
       "Real AI deployments across customer operations, document processing, and internal knowledge — each one replacing manual work with automation.",
@@ -1469,7 +1469,7 @@ export const en = {
     sectionLabel: "PRICING",
     h1L1: "Transparent pricing.",
     h1L2: "Fixed scope. No surprises.",
-    subtitle: "Every engagement — AI, software engineering, or data science — starts with a defined scope and fixed price, agreed before any build begins. No retainers required to start.",
+    subtitle: "Every engagement — AI, software engineering, or data engineering — starts with a defined scope and fixed price, agreed before any build begins. No retainers required to start.",
     includesLabel: "INCLUDES",
     bestForLabel: "Best for: ",
     tiers: [

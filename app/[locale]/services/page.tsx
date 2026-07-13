@@ -8,9 +8,9 @@ import { RETRO_FEATURE_CARDS_ID } from "@/components/RetroFeatureCards";
 const homeWithRetroCards = `/#${RETRO_FEATURE_CARDS_ID}`;
 
 export const metadata: Metadata = {
-  title: "Services — AI, Software Engineering & Data Science | DeView",
+  title: "Services — AI, Software Engineering & Data Engineering | DeView",
   description:
-    "Three practices — AI solutions, software engineering, and data science — that reduce manual work, cut operating costs, and ship working systems in 1–8 weeks.",
+    "Three practices — AI solutions, software engineering, and data engineering — that reduce manual work, cut operating costs, and ship working systems in 1–8 weeks.",
 };
 
 export default function ServicesPage() {
