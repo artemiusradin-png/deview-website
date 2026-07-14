@@ -218,6 +218,15 @@ export const en = {
           "Insurtech (claims automation & underwriting engines)",
         ],
         proof: "Flagship practice — six productised services below",
+        ctaLabel: "See the six AI services",
+        // One line per `subs` entry, same order — descriptions for the rich services-page grid.
+        capabilityNotes: [
+          "Real-time transaction scoring that flags anomalies as fraud patterns shift.",
+          "Automated identity, sanctions, and PEP checks with audit-ready case files.",
+          "Applicant decisioning on your own data and lending policy rules.",
+          "Model-driven portfolio guidance with compliance controls built in.",
+          "Straight-through claims and underwriting that route edge cases to people.",
+        ],
       },
       {
         id: "software-engineering",
@@ -233,6 +242,14 @@ export const en = {
           "BNPL (Buy Now, Pay Later) platforms",
         ],
         proof: "Proof: AgroPlatforma & Unified Portal case studies",
+        ctaLabel: "View case studies",
+        capabilityNotes: [
+          "Card acquiring, routing, and tokenization wired into checkout and ledger.",
+          "Accounts, balances, and transfers built to banking-grade standards.",
+          "Financial products embedded into your platform through provider APIs.",
+          "Consent-based account and transaction data from connected banks.",
+          "Instalment checkout, eligibility, and repayment flows end to end.",
+        ],
       },
       {
         id: "data-science",
@@ -248,8 +265,17 @@ export const en = {
           "Subscription billing, revenue recognition & dispute management",
         ],
         proof: "Proof: 8h weekly reporting cut to 12 minutes",
+        ctaLabel: "View case studies",
+        capabilityNotes: [
+          "Transaction monitoring and regulatory filings generated on schedule.",
+          "Consolidated cash positions and forward forecasts from your ledgers.",
+          "Spend categorised, reconciled, and surfaced as finance analytics.",
+          "Ledgers and risk scoring for receivables and trade finance flows.",
+          "Recurring billing, revenue schedules, and disputes kept in sync.",
+        ],
       },
     ],
+    detailCapabilitiesLabel: "WHAT WE BUILD",
     flagshipLabel: "AI SOLUTIONS — FLAGSHIP SERVICES",
     flagshipTitle: "Production-ready AI services. Pick where to start.",
     flagshipIntro: "Each service ships in 1–5 weeks with measurable outcomes. Click through the stack to preview what we deliver.",

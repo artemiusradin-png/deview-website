@@ -5,21 +5,16 @@ import { ServicesFeatureGrid } from "@/components/ServicesFeatureGrid";
 import { homeSectionReveal } from "@/lib/home-section-motion";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 
-type HomeServicesSectionProps = {
-  /** `home`: in-page `#services` anchor. `standalone`: dedicated route (no id). */
-  variant?: "home" | "standalone";
-};
-
-
-export function HomeServicesSection({ variant = "home" }: HomeServicesSectionProps) {
+/** Six productised AI services grid. Rendered on /services with the `#services`
+ *  anchor so the AI Solutions detail CTA can scroll here. */
+export function HomeServicesSection() {
   const { dict } = useLocaleContext();
   const s = dict.services;
 
   return (
-    <>
     <section
-      id={variant === "home" ? "services" : undefined}
-      className="relative overflow-hidden bg-[var(--background)] section-gutter"
+      id="services"
+      className="scroll-margin-header relative overflow-hidden bg-[var(--background)] section-gutter"
     >
       <motion.div
         {...homeSectionReveal}
@@ -44,7 +39,5 @@ export function HomeServicesSection({ variant = "home" }: HomeServicesSectionPro
         </div>
       </motion.div>
     </section>
-
-    </>
   );
 }

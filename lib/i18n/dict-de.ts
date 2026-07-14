@@ -220,6 +220,15 @@ export const de: Dictionary = {
           "Insurtech (Schadenautomatisierung & Underwriting-Engines)",
         ],
         proof: "Kernpraxis — sechs produktisierte Services unten",
+        ctaLabel: "Die sechs KI-Services ansehen",
+        // Eine Zeile pro `subs`-Eintrag, gleiche Reihenfolge.
+        capabilityNotes: [
+          "Echtzeit-Transaktions-Scoring, das Anomalien erkennt, wenn sich Betrugsmuster verändern.",
+          "Automatisierte Identitäts-, Sanktions- und PEP-Prüfungen mit prüfsicheren Fallakten.",
+          "Antragsentscheidungen auf Basis Ihrer eigenen Daten und Kreditrichtlinien.",
+          "Modellgestützte Portfolioberatung mit integrierten Compliance-Kontrollen.",
+          "Durchgängige Schadens- und Underwriting-Prozesse, die Grenzfälle an Menschen leiten.",
+        ],
       },
       {
         id: "software-engineering",
@@ -235,6 +244,14 @@ export const de: Dictionary = {
           "BNPL (Buy Now, Pay Later)-Plattformen",
         ],
         proof: "Beleg: Fallstudien AgroPlatforma & Unified Portal",
+        ctaLabel: "Fallstudien ansehen",
+        capabilityNotes: [
+          "Kartenakquisition, Routing und Tokenisierung — eingebunden in Checkout und Ledger.",
+          "Konten, Salden und Überweisungen in Banken-Qualität umgesetzt.",
+          "Finanzprodukte über Provider-APIs direkt in Ihre Plattform eingebettet.",
+          "Einwilligungsbasierte Konto- und Transaktionsdaten aus angebundenen Banken.",
+          "Ratenkauf-Checkout, Bonitätsprüfung und Rückzahlungsflüsse — durchgängig.",
+        ],
       },
       {
         id: "data-science",
@@ -250,8 +267,17 @@ export const de: Dictionary = {
           "Abo-Abrechnung, Umsatzrealisierung & Streitfallmanagement",
         ],
         proof: "Beleg: 8h Wochenreporting auf 12 Minuten reduziert",
+        ctaLabel: "Fallstudien ansehen",
+        capabilityNotes: [
+          "Transaktionsüberwachung und regulatorische Meldungen, planmäßig erzeugt.",
+          "Konsolidierte Liquiditätslage und Prognosen aus Ihren Ledgern.",
+          "Ausgaben kategorisiert, abgestimmt und als Finanzanalytik aufbereitet.",
+          "Ledger und Risiko-Scoring für Forderungen und Handelsfinanzierung.",
+          "Wiederkehrende Abrechnung, Umsatzpläne und Streitfälle synchron gehalten.",
+        ],
       },
     ],
+    detailCapabilitiesLabel: "WAS WIR BAUEN",
     flagshipLabel: "KI-LÖSUNGEN — FLAGGSCHIFF-SERVICES",
     flagshipTitle: "Produktionsreife KI-Services. Wählen Sie den Einstieg.",
     flagshipIntro: "Jeder Service ist in 1–5 Wochen live, mit messbaren Ergebnissen. Klicken Sie durch den Stapel, um zu sehen, was wir liefern.",

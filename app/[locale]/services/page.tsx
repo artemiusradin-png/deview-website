@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/SiteFooter";
 import { HomeServicesSection } from "@/components/HomeServicesSection";
-import { HomePracticeAreas } from "@/components/HomePracticeAreas";
+import { ServicesPracticeSections } from "@/components/ServicesPracticeSections";
 import { SubpageNav } from "@/components/SubpageNav";
 import { RETRO_FEATURE_CARDS_ID } from "@/components/RetroFeatureCards";
 
@@ -20,8 +20,8 @@ export default function ServicesPage() {
         <div className="section-gutter mx-auto max-w-6xl">
           <SubpageNav backHref={homeWithRetroCards} />
         </div>
-        <HomePracticeAreas variant="standalone" />
-        <HomeServicesSection variant="standalone" />
+        <ServicesPracticeSections />
+        <HomeServicesSection />
       </main>
       <SiteFooter />
     </>
