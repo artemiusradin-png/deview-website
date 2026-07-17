@@ -137,21 +137,23 @@ export function CaseStudiesContent() {
                   ) : null}
 
                   {/* Metrics */}
-                  <div className="mb-10 grid grid-cols-2 gap-px border border-[var(--white-20)] bg-[var(--white-20)] sm:grid-cols-4">
-                    {c.outcomes.map((o) => (
-                      <div
-                        key={o.label}
-                        className="flex flex-col gap-1 bg-[var(--background)] px-4 py-5 sm:px-6"
-                      >
-                        <span className="text-[clamp(1.4rem,4vw,2rem)] font-medium leading-none text-[var(--white-100)]">
-                          {o.metric}
-                        </span>
-                        <span className="text-[0.65rem] leading-snug text-[var(--text-muted)]">
-                          {o.label}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                  {c.outcomes ? (
+                    <div className="mb-10 grid grid-cols-2 gap-px border border-[var(--white-20)] bg-[var(--white-20)] sm:grid-cols-4">
+                      {c.outcomes.map((o) => (
+                        <div
+                          key={o.label}
+                          className="flex flex-col gap-1 bg-[var(--background)] px-4 py-5 sm:px-6"
+                        >
+                          <span className="text-[clamp(1.4rem,4vw,2rem)] font-medium leading-none text-[var(--white-100)]">
+                            {o.metric}
+                          </span>
+                          <span className="text-[0.65rem] leading-snug text-[var(--text-muted)]">
+                            {o.label}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
 
                   {/* Quote */}
                   <blockquote className="border-l-2 border-[var(--white-20)] pl-5">

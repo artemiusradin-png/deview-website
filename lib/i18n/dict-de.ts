@@ -1081,12 +1081,6 @@ export const de: Dictionary = {
         headline: "Dokumentenbearbeitungszeit von 4 Stunden auf 11 Minuten pro Datei reduziert",
         challenge: "Ein mittelständischer Hongkonger Kreditgeber verarbeitete 80–120 Kreditantragsdateien pro Tag. Jede Datei erforderte einen Mitarbeiter zum Öffnen, Lesen, Klassifizieren, Extrahieren von Schlüsselfeldern und Weiterleiten an die Kreditprüfung. Der Prozess dauerte 3–4 Minuten pro Seite bei durchschnittlich 6 Seiten pro Datei — fast 4 Vollzeitstunden Kapazität täglich.",
         solution: "DeView baute eine Dokumentenautomatisierungs-Pipeline: Eingehende PDFs und gescannte Formulare werden durch eine Extraktionsschicht verarbeitet, die den Dokumententyp klassifiziert, strukturierte Felder extrahiert (Antragstellername, Einkommenszahlen, LTV-Quoten, Arbeitgeberdetails) und an die richtige Kreditprüfungswarteschlange weiterleitet. Ausgaben mit niedriger Konfidenz werden zur menschlichen Prüfung markiert; alles andere bewegt sich automatisch.",
-        outcomes: [
-          { metric: "94%", label: "Reduktion der manuellen Dokumentenbearbeitungszeit" },
-          { metric: "11 Min.", label: "durchschnittliche Bearbeitungszeit pro Datei (vorher 4+ Stunden)" },
-          { metric: "3,5 VZÄ", label: "Mitarbeiterkapazität für höherwertige Arbeit freigesetzt" },
-          { metric: "4 Wochen", label: "vom Kick-off bis zum Live-Deployment" },
-        ],
         capabilities: [
           { name: "KI-Dokumentenklassifikation", body: "Eingehende PDFs werden automatisch nach Dokumententyp klassifiziert — Antragsformular, Einkommensnachweis, Ausweisdokument, Immobilienbewertung — und an die richtige Verarbeitungswarteschlange weitergeleitet." },
           { name: "Strukturierte Datenextraktion", body: "Schlüsselfelder werden aus jedem Dokument extrahiert: Antragstellername, Einkommenszahlen, LTV-Quoten, Arbeitgeberdetails und Begleitdokument-IDs. Ausgabe als strukturierte Daten, bereit für Downstream-Systeme." },
@@ -1102,12 +1096,6 @@ export const de: Dictionary = {
         headline: "Durchschnittliche Bearbeitungszeit um 44% reduziert bei über 600 täglichen Support-Interaktionen",
         challenge: "Das Support-Team eines regionalen Versicherungsunternehmens bearbeitete 600–800 Anfragen pro Tag über E-Mail und Web-Chat — hauptsächlich Policenfragen, Schadenstatus-Prüfungen und Verlängerungserinnerungen. Agenten verbrachten 8–12 Minuten pro Interaktion mit manueller Suche in Policendokumenten, Kontorecherche und dem Schreiben von Antworten.",
         solution: "DeView baute eine Support-KI, verbunden mit der Policen-Wissensbasis und dem CRM des Unternehmens. Für jede eingehende Anfrage klassifiziert das System die Absicht, ruft den relevanten Policenabschnitt und Kontokontext ab und entwirft eine Antwort, die für die Agenten-Prüfung bereit ist. Eskalationen werden automatisch mit vollständig vorladenem Kontext weitergeleitet.",
-        outcomes: [
-          { metric: "44%", label: "Reduktion der durchschnittlichen Bearbeitungszeit" },
-          { metric: "91%", label: "Erstlösungsrate (von 67% gestiegen)" },
-          { metric: "2,3×", label: "Steigerung der täglich bearbeiteten Fälle pro Agent" },
-          { metric: "6 Wochen", label: "vom Scoping bis zur Produktion" },
-        ],
         quote: "Die KI übernimmt Recherche und Entwurf. Mein Team trifft die Entscheidungen. Genau so sollte es sein.",
         quoteRole: "Kundenservice-Manager, APAC-Versicherungsunternehmen",
       },

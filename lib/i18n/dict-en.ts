@@ -1318,12 +1318,6 @@ export const en = {
         headline: "Document processing time cut from 4 hours to 11 minutes per file",
         challenge: "A mid-sized Hong Kong lender was processing 80–120 loan application files per day. Each file required a staff member to open, read, classify, extract key fields, and route to underwriting. The process took 3–4 minutes per page across an average 6-page file — consuming nearly 4 full-time hours of capacity daily.",
         solution: "DeView built a document automation pipeline: inbound PDFs and scanned forms are processed through an extraction layer that classifies document type, pulls structured fields (applicant name, income figures, LTV ratios, employer details), and routes to the correct underwriting queue. Low-confidence outputs are flagged for human review; everything else moves automatically.",
-        outcomes: [
-          { metric: "94%", label: "reduction in manual document handling time" },
-          { metric: "11 min", label: "average processing time per file (was 4+ hours)" },
-          { metric: "3.5 FTE", label: "staff capacity freed for higher-value work" },
-          { metric: "4 weeks", label: "from kick-off to live deployment" },
-        ],
         capabilities: [
           { name: "AI Document Classification", body: "Inbound PDFs automatically classified by document type — application form, income verification, identity document, property valuation — and routed to the correct processing queue." },
           { name: "Structured Data Extraction", body: "Key fields extracted from each document: applicant name, income figures, LTV ratios, employer details, and supporting document IDs. Output delivered as structured data ready for downstream systems." },
@@ -1339,12 +1333,6 @@ export const en = {
         headline: "Average handle time reduced by 44% across 600+ daily support interactions",
         challenge: "A regional insurance company's support team was handling 600–800 enquiries per day across email and web chat — primarily policy questions, claim status checks, and renewal reminders. Agents spent 8–12 minutes per interaction manually searching policy documents, looking up account records, and writing responses from scratch.",
         solution: "DeView built a support AI connected to the company's policy knowledge base and CRM. For each incoming enquiry, the system classifies intent, retrieves the relevant policy section and account context, and drafts a response ready for agent review. Escalations are automatically routed with full context pre-loaded — the agent sees the customer history, the issue category, and the AI's draft before picking up the conversation.",
-        outcomes: [
-          { metric: "44%", label: "reduction in average handle time" },
-          { metric: "91%", label: "first-contact resolution rate (up from 67%)" },
-          { metric: "2.3×", label: "increase in daily cases handled per agent" },
-          { metric: "6 weeks", label: "from scoping to production" },
-        ],
         quote: "The AI does the retrieval and drafting. My team does the judgment calls. That's exactly how it should work.",
         quoteRole: "Customer Service Manager, APAC insurance firm",
       },
