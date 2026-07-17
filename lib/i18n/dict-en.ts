@@ -1,4 +1,17 @@
 /** English source strings — used as the shape source for zh-HK. */
+type CaseStudy = {
+  number: string;
+  sector: string;
+  service: string;
+  headline: string;
+  challenge: string;
+  solution: string;
+  capabilities?: { name: string; body: string }[];
+  outcomes?: { metric: string; label: string }[];
+  quote: string;
+  quoteRole: string;
+};
+
 export const en = {
   site: {
     title: "DeView | AI Solutions, Software Engineering & Data Engineering",
@@ -1336,7 +1349,7 @@ export const en = {
         quote: "The AI does the retrieval and drafting. My team does the judgment calls. That's exactly how it should work.",
         quoteRole: "Customer Service Manager, APAC insurance firm",
       },
-    ],
+    ] as CaseStudy[],
     ctaLabel: "Start a conversation",
     ctaTitle: "Tell us the workflow that's costing the most time or money.",
     ctaBody: "We review the process and reply within 1–2 business days with a specific recommendation — what AI can do, how long it takes, and a cost range.",
