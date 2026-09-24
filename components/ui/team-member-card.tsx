@@ -18,6 +18,7 @@ interface TeamMemberCardProps {
   firstName?: string;
   lastName?: string;
   imageUrl?: string;
+  initials?: string;
   description?: string;
   href?: string;
   className?: string;
@@ -29,6 +30,7 @@ export default function TeamMemberCard({
   firstName = "Artemis",
   lastName = "Radin",
   imageUrl = "/team/artemis-radin.jpg",
+  initials,
   description = "Artemis leads DeView's engagements end to end — from scoping the workflows that cost clients the most to shipping the AI systems that fix them.",
   href = "/contact",
   className,
@@ -85,13 +87,25 @@ export default function TeamMemberCard({
           )}
         >
           <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={imageUrl}
-            alt={fullName}
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-105"
-          />
+          {imageUrl ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={imageUrl}
+              alt={fullName}
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-105"
+            />
+          ) : (
+            <div
+              className="grid h-full w-full place-items-center bg-[linear-gradient(145deg,var(--surface-elevated),var(--background))]"
+              role="img"
+              aria-label={fullName}
+            >
+              <span className="font-mono text-[clamp(1.5rem,5vw,3.5rem)] tracking-[0.12em] text-[var(--white-40)]">
+                {initials ?? `${firstName[0] ?? ""}${lastName[0] ?? ""}`}
+              </span>
+            </div>
+          )}
         </motion.div>
 
         {/* Info block — flex-1 so it always fills the space next to the portrait (was a

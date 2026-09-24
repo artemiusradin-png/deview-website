@@ -154,10 +154,7 @@ export default function Footer4Col({
 
           {/* Brand block */}
           <div>
-            <div className="flex justify-center gap-3 sm:justify-start">
-              <div className="flex size-7 items-center justify-center border border-[var(--white-20)] text-[0.65rem] font-semibold tracking-[0.1em] text-[var(--white-70)]">
-                DV
-              </div>
+            <div className="flex justify-center sm:justify-start">
               <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--white-80)]">{brand.name}</span>
             </div>
 

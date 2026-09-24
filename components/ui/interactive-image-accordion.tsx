@@ -81,7 +81,7 @@ export function LandingAccordionItem() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="relative overflow-hidden bg-[var(--background)] section-gutter py-10 md:py-14">
+    <section className="home-section-dark relative overflow-hidden bg-[var(--background)] section-gutter py-10 md:py-14">
       <motion.div
         {...homeSectionReveal}
         transition={{ duration: 0.5 }}

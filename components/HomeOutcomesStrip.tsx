@@ -13,7 +13,7 @@ export function HomeOutcomesStrip() {
   const s = dict.outcomesStrip;
 
   return (
-    <section className="relative overflow-hidden border-t border-[var(--white-20)] bg-[var(--background)] section-gutter py-10 md:py-20">
+    <section className="product-outcomes relative overflow-hidden border-t border-[var(--white-20)] bg-[var(--background)] section-gutter py-10 md:py-20">
       <motion.div {...homeSectionReveal} transition={{ duration: 0.5 }} className="mx-auto max-w-6xl">
         <p className="section-label mb-3">{s.sectionLabel}</p>
         <div className="rule mb-6" />

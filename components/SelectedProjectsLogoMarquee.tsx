@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useEffect, useState } from "react";
 import { PerspectiveMarquee, type LogoItem } from "@/components/ui/perspective-marquee";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 
@@ -11,26 +11,10 @@ const CLIENT_LOGOS: LogoItem[] = [
   { name: "Lending Platform",    src: "/client-logos/grandfg-white.png", width: 266, height: 62  },
 ];
 
-function useIsDark() {
-  const [isDark, setIsDark] = React.useState(true);
-  React.useEffect(() => {
-    const update = () =>
-      setIsDark(document.documentElement.dataset.theme !== "light");
-    update();
-    const obs = new MutationObserver(update);
-    obs.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["data-theme"],
-    });
-    return () => obs.disconnect();
-  }, []);
-  return isDark;
-}
-
 function useIsMobileMarquee() {
-  const [isMobile, setIsMobile] = React.useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const mq = window.matchMedia("(max-width: 640px)");
     const update = () => setIsMobile(mq.matches);
     update();
@@ -43,19 +27,12 @@ function useIsMobileMarquee() {
 
 export function SelectedProjectsLogoMarquee() {
   const { dict } = useLocaleContext();
-  const isDark = useIsDark();
   const isMobile = useIsMobileMarquee();
-  const logoFilter = (name: string) => {
-    if (name === "Grand Finance Group") return isDark ? "none" : "invert(1)";
-    return isDark
-      ? "grayscale(1) brightness(0) invert(1)"
-      : "grayscale(1) brightness(0)";
-  };
 
   return (
     <section
       aria-labelledby="selected-project-logos-title"
-      className="selected-project-logos relative overflow-hidden bg-[var(--background)] py-10 md:py-14"
+      className="home-section-light selected-project-logos relative overflow-hidden bg-[var(--background)] py-10 md:py-14"
     >
       <div className="section-gutter mx-auto w-full max-w-6xl">
         <p id="selected-project-logos-title" className="section-label">
@@ -66,7 +43,7 @@ export function SelectedProjectsLogoMarquee() {
       <div className="selected-project-logos__marquee mt-8">
         <PerspectiveMarquee
           logos={CLIENT_LOGOS}
-          isDark={isDark}
+          isDark={false}
           pixelsPerFrame={isMobile ? 1.2 : 1.8}
           rotateY={isMobile ? 0 : -28}
           rotateX={isMobile ? 0 : 8}

@@ -15,7 +15,7 @@ export function HomePracticeAreas({ variant = "home" }: HomePracticeAreasProps) 
   return (
     <section
       id={variant === "home" ? "practices" : undefined}
-      className="bg-[var(--background)] section-gutter pb-8 pt-4 sm:pb-10 sm:pt-5 md:pb-12 md:pt-6"
+      className="home-section-dark product-practices bg-[var(--background)] section-gutter pb-8 pt-4 sm:pb-10 sm:pt-5 md:pb-12 md:pt-6"
     >
       <div className="mx-auto max-w-6xl">
         {/* Mobile: horizontal snap-carousel that stays within the page's section-gutter

@@ -2,21 +2,19 @@
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import dynamic from "next/dynamic";
-import { usePathname } from "next/navigation";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { HeroPulseField } from "@/components/HeroPulseField";
 import { PixelField } from "@/components/PixelField";
 import { CtaCard } from "@/components/ui/call-to-action-cta";
 import { FeaturedCaseCard } from "@/components/FeaturedCaseCard";
+import { FeaturedCasesCarousel } from "@/components/FeaturedCasesCarousel";
 import { FooterCtaBanner } from "@/components/FooterCtaBanner";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 import TeamMemberCard from "@/components/ui/team-member-card";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 // Below-the-fold sections are loaded as separate chunks to shrink the initial JS bundle.
-// Keep the RetroFeatureCards anchor id in sync with components/RetroFeatureCards.tsx.
-const RETRO_FEATURE_CARDS_ID = "retro-feature-cards";
 const HomePracticeAreas = dynamic(() =>
   import("@/components/HomePracticeAreas").then((m) => m.HomePracticeAreas),
 );
@@ -25,9 +23,6 @@ const AnimatedServiceCardStack = dynamic(
   { ssr: false },
 );
 const SiteFooter = dynamic(() => import("@/components/SiteFooter").then((m) => m.SiteFooter));
-const RetroFeatureCards = dynamic(() =>
-  import("@/components/RetroFeatureCards").then((m) => m.RetroFeatureCards),
-);
 const SelectedProjectsLogoMarquee = dynamic(() =>
   import("@/components/SelectedProjectsLogoMarquee").then((m) => m.SelectedProjectsLogoMarquee),
 );
@@ -66,26 +61,6 @@ export default function Home() {
   const unifiedPortalVideoRef = useRef<HTMLVideoElement | null>(null);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [navVisible, setNavVisible] = useState(true);
-  const prefersReducedMotion = useReducedMotion();
-  const pathname = usePathname();
-
-  useEffect(() => {
-    if (pathname !== "/") return;
-    const scrollToRetroCards = () => {
-      if (window.location.hash !== `#${RETRO_FEATURE_CARDS_ID}`) return;
-      document.getElementById(RETRO_FEATURE_CARDS_ID)?.scrollIntoView({
-        block: "start",
-        behavior: prefersReducedMotion ? "auto" : "smooth",
-      });
-    };
-    scrollToRetroCards();
-    const t0 = window.setTimeout(scrollToRetroCards, 0);
-    const t1 = window.setTimeout(scrollToRetroCards, 100);
-    return () => {
-      window.clearTimeout(t0);
-      window.clearTimeout(t1);
-    };
-  }, [pathname, prefersReducedMotion]);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -191,11 +166,10 @@ export default function Home() {
 
   // Leadership spotlight cards — the founder uses the richer dict.leadership bio;
   // the rest come from the About page's team roster so both sections share one source.
-  // Filtering on name+photo skips in-progress placeholder rows (see public/team/README.md) —
-  // they still render on the About page grid, just not in this larger spotlight format.
+  // Named members without a portrait use the same initials fallback as the About page.
   const founderName = `${dict.leadership.firstName} ${dict.leadership.lastName}`;
   const leadershipMembers = dict.aboutPage.team.members
-    .filter((member) => member.name && member.photo)
+    .filter((member) => member.name)
     .map((member, index) => {
       const isFounder = member.name === founderName;
       const [firstName, ...lastNameParts] = member.name.split(" ");
@@ -205,13 +179,14 @@ export default function Home() {
         firstName,
         lastName: lastNameParts.join(" "),
         imageUrl: member.photo,
+        initials: member.initials,
         description: isFounder ? dict.leadership.description : member.bio,
         key: `${member.role}-${member.initials}`,
       };
     });
 
   return (
-    <div className="min-h-screen bg-[var(--background)] bg-grid text-[var(--text)]">
+    <div className="product-home min-h-screen bg-[var(--background)] bg-grid text-[var(--text)]">
       <a
         href="#"
         className="brand-mark fixed left-0 top-0 z-50 flex h-16 items-center px-4 pt-[env(safe-area-inset-top)] text-[12px] tracking-[0.25em] text-[var(--white-80)] sm:px-6 sm:text-[13px]"
@@ -333,7 +308,7 @@ export default function Home() {
       {/* Free AI guide CTA removed */}
       <section
         id="hero"
-        className="section-fullscreen section-fullscreen--hero relative flex items-end justify-center section-gutter py-12 md:py-0"
+        className="home-section-dark section-fullscreen section-fullscreen--hero relative flex items-end justify-center section-gutter py-12 md:py-0"
       >
         <div className="hero-media absolute inset-0">
           <HeroPulseField className="absolute inset-0" />
@@ -344,19 +319,19 @@ export default function Home() {
             initial={fade.initial}
             animate={fade.animate}
             transition={{ duration: 0.6 }}
-            className="flex max-w-2xl flex-col"
+            className="flex min-w-0 flex-1 flex-col md:max-w-[820px]"
           >
-            <p className="section-label mb-4 text-[#ffc933]!">{dict.hero.kicker}</p>
-            <h1 className="hero-heading mb-4 text-[clamp(1.6rem,5.2vw,2.25rem)] leading-[1.1] tracking-[0.06em] text-[var(--white-100)] md:mb-6 md:text-4xl md:leading-[1.06] lg:text-[3.25rem]">
-              {dict.hero.titleL1}
-              <br />
-              {dict.hero.titleL2}
-              {dict.hero.titleL3 ? (
-                <>
-                  <br />
-                  {dict.hero.titleL3}
-                </>
-              ) : null}
+            {dict.hero.kicker ? (
+              <p className="section-label mb-4 text-[#ffc933]!">{dict.hero.kicker}</p>
+            ) : null}
+            <h1 className="hero-practices-heading mb-4 text-[var(--white-100)] md:mb-6">
+              {[dict.hero.titleL1, dict.hero.titleL2, dict.hero.titleL3]
+                .filter(Boolean)
+                .map((line) => (
+                  <span className="hero-practice-line" key={line}>
+                    <span>{line}</span>
+                  </span>
+                ))}
             </h1>
             {/* Compact outline button + a secondary case-studies link — same size on every
                 breakpoint, mobile included (was previously a separate, much larger filled
@@ -392,9 +367,16 @@ export default function Home() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="hero-aside hidden flex-col items-start justify-between gap-8 text-left md:flex md:ml-auto md:items-end md:gap-10 md:text-right"
           >
-            <div className="space-y-2 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)] sm:text-xs">
-              {dict.hero.col1.map((line) => (
-                <div key={line}>{line}</div>
+            <div className="hero-facts">
+              {[
+                [dict.hero.clients, dict.hero.clientsValue],
+                [dict.hero.focus, dict.hero.focusValue],
+                [dict.hero.engagements, dict.hero.engagementsValue],
+              ].map(([label, value]) => (
+                <div className="hero-fact" key={label}>
+                  <span>{label}</span>
+                  <strong>{value}</strong>
+                </div>
               ))}
             </div>
           </motion.div>
@@ -404,7 +386,7 @@ export default function Home() {
 
       <HomePracticeAreas />
 
-      <section className="border-t border-[var(--white-20)] bg-[var(--background)] px-4 py-16 sm:py-20 md:py-24">
+      <section className="home-section-light product-section product-section--services border-t border-[var(--white-20)] bg-[var(--background)] px-4 py-16 sm:py-20 md:py-24">
         <div className="mx-auto max-w-6xl">
           <div className="mb-10 grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
             <div>
@@ -424,67 +406,67 @@ export default function Home() {
 
       <HomeProcessTimeline />
 
-      {/* Featured deployment — AgroPlatforma */}
-      <FeaturedCaseCard
-        id="featured-deployment"
-        sectionLabel={dict.featuredAgro.sectionLabel}
-        title={dict.featuredAgro.title}
-        subtitle={dict.featuredAgro.subtitle}
-        ctaLabel={dict.featuredAgro.readCaseStudy}
-        ctaHref={localePath("/case-studies")}
-        mediaLabel="AgroPlatforma"
-        media={
-          <video
-            ref={agroVideoRef}
-            className="block h-auto w-full"
-            controls
-            preload="none"
-            playsInline
-            muted
-            loop
-            poster="/deview-agroplatforma-poster.svg"
-          >
-            <source src="/deview-agroplatforma-demo.mp4" type="video/mp4" />
-            Your browser does not support embedded video.
-          </video>
-        }
-      />
+      <FeaturedCasesCarousel ariaLabel={dict.nav.caseStudies}>
+        <FeaturedCaseCard
+          id="featured-deployment"
+          theme="light"
+          sectionLabel={dict.featuredAgro.sectionLabel}
+          title={dict.featuredAgro.title}
+          subtitle={dict.featuredAgro.subtitle}
+          ctaLabel={dict.featuredAgro.readCaseStudy}
+          ctaHref={localePath("/case-studies")}
+          mediaLabel="AgroPlatforma"
+          media={
+            <video
+              ref={agroVideoRef}
+              className="block h-auto w-full"
+              controls
+              preload="none"
+              playsInline
+              muted
+              loop
+              poster="/deview-agroplatforma-poster.svg"
+            >
+              <source src="/deview-agroplatforma-demo.mp4" type="video/mp4" />
+              Your browser does not support embedded video.
+            </video>
+          }
+        />
 
-      {/* Featured deployment — DeView Unified Portal (finance / lending) */}
-      <FeaturedCaseCard
-        id="featured-deployment-finance"
-        sectionLabel={dict.featuredPortal.sectionLabel}
-        title={dict.featuredPortal.title}
-        subtitle={dict.featuredPortal.subtitle}
-        ctaLabel={dict.featuredPortal.readCaseStudy}
-        ctaHref={localePath("/case-studies")}
-        mediaLabel="DeView Unified Portal"
-        media={
-          <video
-            ref={unifiedPortalVideoRef}
-            className="block h-auto w-full"
-            controls
-            preload="none"
-            playsInline
-            muted
-            loop
-            poster="/deview-unified-portal-poster.svg"
-          >
-            <source src="/deview-unified-portal-demo.mp4" type="video/mp4" />
-            Your browser does not support embedded video.
-          </video>
-        }
-      />
+        <FeaturedCaseCard
+          id="featured-deployment-finance"
+          theme="dark"
+          sectionLabel={dict.featuredPortal.sectionLabel}
+          title={dict.featuredPortal.title}
+          subtitle={dict.featuredPortal.subtitle}
+          ctaLabel={dict.featuredPortal.readCaseStudy}
+          ctaHref={localePath("/case-studies")}
+          mediaLabel="DeView Unified Portal"
+          media={
+            <video
+              ref={unifiedPortalVideoRef}
+              className="block h-auto w-full"
+              controls
+              preload="none"
+              playsInline
+              muted
+              loop
+              poster="/deview-unified-portal-poster.svg"
+            >
+              <source src="/deview-unified-portal-demo.mp4" type="video/mp4" />
+              Your browser does not support embedded video.
+            </video>
+          }
+        />
+      </FeaturedCasesCarousel>
 
       <SelectedProjectsLogoMarquee />
 
       <HomeIndustries />
 
-      <RetroFeatureCards />
-
       <HomeOutcomesStrip />
 
-      <section className="relative overflow-hidden bg-[var(--background)] section-gutter py-10 md:py-14">
+      <section className="home-section-light relative overflow-hidden bg-[var(--background)] section-gutter py-10 md:py-14">
         <div className="mx-auto max-w-6xl">
           <p className="section-label mb-3">{dict.leadership.sectionLabel}</p>
           <div className="rule mb-2" />
@@ -496,6 +478,7 @@ export default function Home() {
               firstName={member.firstName}
               lastName={member.lastName}
               imageUrl={member.imageUrl}
+              initials={member.initials}
               href={localePath("/contact")}
               description={member.description}
             />
@@ -505,7 +488,7 @@ export default function Home() {
 
       {/* Footer-style "Tell us what to automate" CTA, relocated here from the footer —
           swapped positions with the email-form card, which now sits at the bottom. */}
-      <section className="section-gutter pt-6 md:pt-8">
+      <section className="home-section-dark section-gutter py-10 md:py-14">
         <div className="mx-auto max-w-6xl">
           <FooterCtaBanner
             label={dict.footer.ctaLabel}
@@ -520,23 +503,25 @@ export default function Home() {
 
       <HomeInsightsPreview />
 
-      <section id="contact" className="scroll-margin-header pt-6 md:pt-8">
-        <CtaCard
-          title={`${dict.contact.titleL1} ${dict.contact.titleL2}`}
-          description={`${dict.contact.leadL1} ${dict.contact.leadL2}`}
-          buttonText={dict.contact.sendInquiry}
-          inputPlaceholder="Your email address"
-          onButtonClick={(email) => {
-            window.location.href = `/contact?email=${encodeURIComponent(email)}`;
-          }}
-          className="min-h-[180px]"
-        />
-      </section>
+      <div className="home-section-dark">
+        <section id="contact" className="scroll-margin-header pt-6 md:pt-8">
+          <CtaCard
+            title={`${dict.contact.titleL1} ${dict.contact.titleL2}`}
+            description={`${dict.contact.leadL1} ${dict.contact.leadL2}`}
+            buttonText={dict.contact.sendInquiry}
+            inputPlaceholder="Your email address"
+            onButtonClick={(email) => {
+              window.location.href = `/contact?email=${encodeURIComponent(email)}`;
+            }}
+            className="min-h-[180px]"
+          />
+        </section>
 
-      {/* Footer's own CTA banner is hidden here since it now lives after the leadership block. */}
-      <SiteFooter hideCta />
+        {/* Footer's own CTA banner is hidden here since it now lives after the leadership block. */}
+        <SiteFooter hideCta />
 
-      <PixelField />
+        <PixelField />
+      </div>
 
       {/* Removed persistent mobile CTA dock — header nav, in-page CTAs, and footer cover this without crowding the viewport. */}
     </div>

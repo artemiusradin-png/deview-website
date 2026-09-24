@@ -20,6 +20,7 @@ export function FeaturedCaseCard({
   ctaHref,
   mediaLabel,
   media,
+  theme = "dark",
 }: {
   id?: string;
   sectionLabel: string;
@@ -29,6 +30,7 @@ export function FeaturedCaseCard({
   ctaHref: string;
   mediaLabel: string;
   media: ReactNode;
+  theme?: "light" | "dark";
 }) {
   const [lead, ...rest] = title.split(" — ");
   const tail = rest.join(" — ");
@@ -36,7 +38,7 @@ export function FeaturedCaseCard({
   return (
     <section
       id={id}
-      className="scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] section-gutter py-14 sm:py-20 md:py-28"
+      className={`${theme === "light" ? "home-section-light" : "home-section-dark"} product-case scroll-margin-header border-t border-[var(--white-20)] bg-[var(--background)] section-gutter py-14 sm:py-20 md:py-28`}
     >
       <div className="mx-auto max-w-5xl">
         <p className="section-label mb-3">{sectionLabel}</p>

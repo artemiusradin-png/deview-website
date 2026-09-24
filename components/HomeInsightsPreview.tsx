@@ -16,7 +16,7 @@ export function HomeInsightsPreview() {
   const s = dict.insights;
 
   return (
-    <section className="relative overflow-hidden bg-[var(--background)] section-gutter py-10 md:py-14">
+    <section className="home-section-light product-insights relative overflow-hidden bg-[var(--background)] section-gutter py-10 md:py-14">
       <motion.div {...homeSectionReveal} transition={{ duration: 0.5 }} className="mx-auto max-w-6xl">
         <p className="section-label mb-3">{s.sectionLabel}</p>
         <div className="rule mb-6" />
