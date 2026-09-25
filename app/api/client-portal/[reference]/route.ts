@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
-const DEFAULT_TASK_MANAGER_URL = "https://deview-task-manager.netlify.app";
+const DEFAULT_TASK_MANAGER_URL = "https://ai-consulting-task-manager.vercel.app";
 
 export async function GET(
   _request: Request,
