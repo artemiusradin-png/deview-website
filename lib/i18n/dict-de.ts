@@ -1715,6 +1715,10 @@ export const de: Dictionary = {
     statusInProgress: "In Bearbeitung",
     statusUpcoming: "Ausstehend",
     documentsLabel: "PROJEKTDOKUMENTE",
+    documentCountSingular: "Dokument",
+    documentCountPlural: "Dokumente",
+    noDocuments: "Freigegebene Projektdokumente werden hier angezeigt.",
+    adminLogin: "Team-Admin-Anmeldung",
     lastUpdated: "Zuletzt aktualisiert",
   },
 

@@ -1695,6 +1695,10 @@ export const zhHK: Dictionary = {
     statusInProgress: "進行中",
     statusUpcoming: "待開展",
     documentsLabel: "項目文件",
+    documentCountSingular: "份文件",
+    documentCountPlural: "份文件",
+    noDocuments: "此項目的共享文件將顯示在這裡。",
+    adminLogin: "團隊管理員登入",
     lastUpdated: "最後更新",
   },
 

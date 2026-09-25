@@ -1726,6 +1726,10 @@ export const en = {
     statusInProgress: "In progress",
     statusUpcoming: "Upcoming",
     documentsLabel: "PROJECT DOCUMENTS",
+    documentCountSingular: "document",
+    documentCountPlural: "documents",
+    noDocuments: "Documents shared for this project will appear here.",
+    adminLogin: "Team admin login",
     lastUpdated: "Last updated",
   },
 

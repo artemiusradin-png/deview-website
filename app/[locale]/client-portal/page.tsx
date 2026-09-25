@@ -9,6 +9,7 @@ import { useLocaleContext } from "@/lib/i18n/locale-context";
 import type { Dictionary } from "@/lib/i18n/dict-en";
 
 const STORAGE_KEY = "deview-portal-ref";
+const ADMIN_PORTAL_URL = "https://deview-task-manager.netlify.app";
 
 type Milestone = {
   id: string;
@@ -180,37 +181,47 @@ function PortalView({ portal, onLogout, t, locale }: { portal: Portal; onLogout:
       </section>
 
       {/* Documents */}
-      {portal.documents.length > 0 && (
-        <section className="mb-10">
-          <p className="section-label mb-4">{t.documentsLabel}</p>
-          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-            {portal.documents.map((doc) => (
-              <a
-                key={doc.id}
-                href={doc.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-3 border border-[var(--white-10)] bg-[var(--surface)] p-4 transition-colors hover:border-[var(--white-30)] hover:bg-[var(--surface-elevated)]"
-              >
-                <span className="flex-shrink-0 text-[0.55rem] font-bold uppercase tracking-wider text-[var(--white-40)] group-hover:text-[var(--white-60)]">
-                  {fileTypeIcon(doc.fileType)}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-xs text-[var(--white-80)] group-hover:text-[var(--white-100)]">
-                    {doc.name}
-                  </p>
-                  <p className="text-[0.6rem] text-[var(--white-30)]">
-                    {formatDate(doc.uploadedAt, locale)}
-                  </p>
-                </div>
-                <span className="flex-shrink-0 text-[var(--white-30)] group-hover:text-[var(--white-60)]">
-                  ↗
-                </span>
-              </a>
-            ))}
-          </div>
-        </section>
-      )}
+      <details className="group/documents mb-10 border-y border-[var(--white-10)]" open={portal.documents.length > 0}>
+        <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
+          <span className="section-label">{t.documentsLabel}</span>
+          <span className="flex items-center gap-3 text-[0.6rem] uppercase tracking-[0.14em] text-[var(--white-40)]">
+            {portal.documents.length} {portal.documents.length === 1 ? t.documentCountSingular : t.documentCountPlural}
+            <span aria-hidden className="text-base font-light transition-transform duration-200 group-open/documents:rotate-45">+</span>
+          </span>
+        </summary>
+        <div className="pb-5">
+          {portal.documents.length > 0 ? (
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              {portal.documents.map((doc) => (
+                <a
+                  key={doc.id}
+                  href={doc.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 border border-[var(--white-10)] bg-[var(--surface)] p-4 transition-colors hover:border-[var(--white-30)] hover:bg-[var(--surface-elevated)]"
+                >
+                  <span className="flex-shrink-0 text-[0.55rem] font-bold uppercase tracking-wider text-[var(--white-40)] group-hover:text-[var(--white-60)]">
+                    {fileTypeIcon(doc.fileType)}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-xs text-[var(--white-80)] group-hover:text-[var(--white-100)]">
+                      {doc.name}
+                    </p>
+                    <p className="text-[0.6rem] text-[var(--white-30)]">
+                      {formatDate(doc.uploadedAt, locale)}
+                    </p>
+                  </div>
+                  <span className="flex-shrink-0 text-[var(--white-30)] group-hover:text-[var(--white-60)]">
+                    ↗
+                  </span>
+                </a>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-[var(--white-40)]">{t.noDocuments}</p>
+          )}
+        </div>
+      </details>
 
       <p className="text-[0.6rem] uppercase tracking-[0.12em] text-[var(--white-20)]">
         {t.lastUpdated} {formatDate(portal.updatedAt, locale)}
@@ -346,6 +357,15 @@ function LoginView({ onSuccess, t }: { onSuccess: (portal: Portal, reference: st
               info@deviewai.com
             </a>
           </p>
+
+          <a
+            href={ADMIN_PORTAL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-[0.6rem] uppercase tracking-[0.15em] text-[var(--white-30)] underline-offset-4 hover:text-[var(--white-60)] hover:underline"
+          >
+            {t.adminLogin} ↗
+          </a>
         </motion.div>
       </div>
     </div>

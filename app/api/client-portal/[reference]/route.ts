@@ -84,5 +84,20 @@ export async function GET(
     return NextResponse.json({ error: "Invalid response" }, { status: 502 });
   }
 
+  // The task manager stores download routes as relative URLs so they remain
+  // valid if its deployment hostname changes. Make them absolute before the
+  // portal sends the payload to a browser on deviewai.com.
+  if (data && typeof data === "object" && Array.isArray((data as { documents?: unknown }).documents)) {
+    const portal = data as { documents: Array<Record<string, unknown>> };
+    portal.documents = portal.documents.map((document) => {
+      if (typeof document.url !== "string") return document;
+      try {
+        return { ...document, url: new URL(document.url, `${taskManagerUrl}/`).toString() };
+      } catch {
+        return document;
+      }
+    });
+  }
+
   return NextResponse.json(data);
 }
