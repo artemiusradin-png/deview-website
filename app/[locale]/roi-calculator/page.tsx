@@ -215,7 +215,7 @@ export default function RoiCalculatorPage() {
               </p>
             </div>
 
-            {/* Results panel — sticky on desktop */}
+            {/* Results panel: sticky on desktop */}
             <div className="lg:sticky lg:top-24">
               <div className="border border-[var(--white-20)] bg-[var(--surface)] p-6">
                 <p className="mb-4 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
@@ -272,7 +272,7 @@ export default function RoiCalculatorPage() {
                 </p>
                 <div className="space-y-2 text-[0.72rem] text-[var(--text-muted)]">
                   {dict.roiCalculatorPage.benchmarks.map((b, i) => (
-                    <p key={i}>— {b}</p>
+                    <p key={i}>- {b}</p>
                   ))}
                 </div>
               </div>

@@ -6,18 +6,18 @@ import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { LocaleLink } from "./LocaleLink";
 
 const PILLAR_ICONS = [
-  /* Lock — data isolation & encryption */
+  /* Lock: data isolation & encryption */
   <svg key="lock" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
     <rect x="4" y="9" width="12" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
     <path d="M7 9V6.5a3 3 0 0 1 6 0V9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
     <circle cx="10" cy="13.5" r="1.25" fill="currentColor" />
   </svg>,
-  /* List-check — audit trail */
+  /* List-check: audit trail */
   <svg key="list" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
     <path d="M7 5h8M7 10h8M7 15h5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
     <path d="M3.5 5l.75.75L5.5 4M3.5 10l.75.75L5.5 9M3.5 15l.75.75L5.5 14" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
   </svg>,
-  /* Shield-check — compliance */
+  /* Shield-check: compliance */
   <svg key="shield" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
     <path d="M10 2L4 4.5v5.3C4 13.6 6.6 16.8 10 18c3.4-1.2 6-4.4 6-8.2V4.5L10 2Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
     <path d="M7.5 10l1.8 1.8L13 8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
@@ -50,7 +50,7 @@ export function SecurityTrustSection() {
           </p>
         </div>
 
-        {/* Pillar cards — horizontal on every viewport (3-in-a-row on mobile too) */}
+        {/* Pillar cards: horizontal on every viewport (3-in-a-row on mobile too) */}
         <div className="grid grid-cols-3 gap-px border border-[var(--white-20)] bg-[var(--white-20)]">
           {s.pillars.map((pillar, i) => (
             <motion.div

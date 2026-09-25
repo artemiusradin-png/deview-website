@@ -1,4 +1,4 @@
-# Team photos — how to add a member
+# Team photos: how to add a member
 
 The team grid on the About page and the homepage Leadership card read from the
 dictionaries, so adding a member is two steps:
@@ -34,5 +34,5 @@ placeholder rows (the ones with an empty `name`) or append a new row:
 
 Rows with an empty `name` render as monogram placeholder tiles ("Profile
 coming soon"). Rows with a `photo` render the photo. TypeScript enforces that
-all three dictionaries stay in sync — `npm run build` will fail if one locale
+all three dictionaries stay in sync: `npm run build` will fail if one locale
 is missed.

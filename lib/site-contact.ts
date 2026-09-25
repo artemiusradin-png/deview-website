@@ -10,7 +10,7 @@ export function buildInquiryText(input: {
   company: string;
   details: string;
 }): string {
-  return `Work email: ${input.email}\nCompany: ${input.company || "—"}\n\n${input.details}`;
+  return `Work email: ${input.email}\nCompany: ${input.company || "-"}\n\n${input.details}`;
 }
 
 export function buildInquiryMailto(input: {

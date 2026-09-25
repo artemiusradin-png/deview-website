@@ -19,7 +19,7 @@ type Props = {
   services: ServicesBlock;
 };
 
-/** Flat, static grid of service cards — all six visible at once, no slider. */
+/** Flat, static grid of service cards: all six visible at once, no slider. */
 export function ServicesFeatureGrid({ services: s }: Props) {
   const { localePath } = useLocaleContext();
 

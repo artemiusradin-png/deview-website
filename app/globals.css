@@ -4248,15 +4248,15 @@ html[data-theme="light"] .btn-primary:hover {
     max-height: none !important;
   }
 
-  /* Hero keeps its own ~70svh floor (see .section-fullscreen.section-fullscreen--hero
-     above) so the next section still peeks through on load; only drop the
-     height/max-height locks that would otherwise clip taller content.
+  /* On phones the hero owns the first viewport; supporting sections begin only
+     after the first scroll. Drop the height/max-height locks that would
+     otherwise clip taller content.
      align-items is controlled by the `items-end md:items-center` Tailwind classes
      on the <section> in page.tsx, not here. */
   .section-fullscreen--hero {
     height: auto !important;
     max-height: none !important;
-    min-height: 70svh !important;
+    min-height: 100svh !important;
   }
 
   html {
@@ -4548,96 +4548,61 @@ html[data-theme="light"] .product-home .home-section-dark .hero-media {
   z-index: 20;
   display: flex;
   align-items: center;
-  overflow: hidden;
-  border: 1px solid rgba(255, 201, 51, 0.38);
-  border-radius: 0.35rem;
-  background: rgba(5, 5, 4, 0.9);
+  gap: 0.55rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.35rem 0.45rem;
+  background: rgba(5, 5, 4, 0.66);
   color: rgba(240, 240, 250, 0.78);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.24);
+  box-shadow: none;
   backdrop-filter: blur(14px);
 }
 
 .featured-cases-carousel__controls > button {
   display: grid;
-  width: 2.65rem;
-  height: 2.65rem;
+  width: 1.65rem;
+  height: 1.65rem;
   place-items: center;
   color: inherit;
   transition: color 180ms ease, background-color 180ms ease;
 }
 
 .featured-cases-carousel__controls > button:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
   color: #ffc933;
 }
 
 .featured-cases-carousel__controls > button svg {
-  width: 0.95rem;
-  height: 0.95rem;
+  width: 0.78rem;
+  height: 0.78rem;
 }
 
 .featured-cases-carousel__pages {
   display: flex;
   align-items: center;
-  align-self: stretch;
-  border-right: 1px solid rgba(255, 255, 255, 0.11);
-  border-left: 1px solid rgba(255, 255, 255, 0.11);
+  gap: 0.32rem;
 }
 
 .featured-cases-carousel__pages button {
-  min-width: 2.55rem;
-  height: 100%;
-  color: rgba(240, 240, 250, 0.38);
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.12em;
-  transition: color 180ms ease, background-color 180ms ease;
+  width: 1.35rem;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(240, 240, 250, 0.25);
+  transition: width 240ms ease, background-color 180ms ease;
 }
 
 .featured-cases-carousel__pages button:hover,
 .featured-cases-carousel__pages button.is-active {
-  color: #ffc933;
+  background: #ffc933;
 }
 
 .featured-cases-carousel__pages button.is-active {
-  background: rgba(255, 201, 51, 0.08);
-}
-
-.featured-cases-carousel__progress {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.featured-cases-carousel__progress span {
-  display: block;
-  width: 100%;
-  height: 100%;
-  transform-origin: left;
-  background: #ffc933;
-  animation: featured-case-progress 8s linear forwards;
-}
-
-.featured-cases-carousel__progress span.is-paused {
-  animation-play-state: paused;
-}
-
-@keyframes featured-case-progress {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
+  width: 2.1rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .featured-cases-carousel__track {
     transition: none;
-  }
-
-  .featured-cases-carousel__progress span {
-    animation: none;
   }
 }
 
@@ -4712,33 +4677,129 @@ html[data-theme="light"] .product-home .home-section-dark .hero-media {
   }
 
   .featured-cases-carousel__controls > button {
-    width: 2.45rem;
-    height: 2.45rem;
+    width: 1.55rem;
+    height: 1.55rem;
   }
 
   .featured-cases-carousel__pages button {
-    min-width: 2.25rem;
+    width: 1.15rem;
+  }
+
+  .featured-cases-carousel__pages button.is-active {
+    width: 1.8rem;
   }
 
   .product-home .product-practices {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .product-home .product-practices > div > div {
-    gap: 0.75rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    overflow: visible;
+    padding-bottom: 0;
   }
 
   .product-home .product-practices a {
-    min-height: 15.5rem;
-    width: min(82vw, 21rem);
-    border: 1px solid var(--product-line);
-    border-radius: 0.45rem;
-    padding: 1.5rem;
+    min-height: 0;
+    width: 100%;
+    border: 0;
+    border-top: 1px solid var(--product-line);
+    border-radius: 0;
+    padding: 1rem 0 1.05rem;
+    background: transparent;
+    scroll-snap-align: none;
+  }
+
+  .product-home .product-practices a:last-child {
+    border-bottom: 1px solid var(--product-line);
   }
 
   .product-home .product-practices a::before {
-    margin-bottom: 3.3rem;
+    content: none;
+    display: none;
+  }
+
+  .product-home .product-practices a::after {
+    content: none;
+    display: none;
+  }
+
+  .product-home .product-practices a p:first-of-type {
+    display: block;
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: var(--white-60);
+  }
+
+  .product-home .product-practices a p:first-of-type > span:first-child {
+    color: var(--product-accent);
+    font-size: 0.86rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: inherit;
+    text-decoration: none;
+    text-transform: none;
+  }
+
+  .product-home .product-practices .practice-card-summary {
+    display: inline;
+    margin-left: 0.2rem;
+  }
+
+  .product-home .product-practices a ul {
+    margin-top: 0.45rem;
+    border: 0;
+    padding: 0;
+  }
+
+  .product-home .product-practices a li:first-child {
+    display: block;
+    position: relative;
+    overflow: visible;
+    padding-left: 0.75rem;
+    color: var(--white-40);
+    font-size: 0.64rem;
+    line-height: 1.4;
+    -webkit-box-orient: initial;
+    -webkit-line-clamp: unset;
+  }
+
+  .product-home .product-practices a li:first-child::before {
+    content: "";
+    position: absolute;
+    top: 0.44rem;
+    left: 0;
+    width: 0.28rem;
+    height: 1px;
+    background: var(--product-accent);
+  }
+
+  .product-home .product-case .featured-case-footer {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 1rem;
+    border: 0;
+    background: transparent;
+    padding: 0;
+  }
+
+  .product-home .product-case .featured-case-description {
+    display: none;
+  }
+
+  .product-home .product-case .featured-case-cta {
+    margin-top: 0;
+    gap: 0.35rem;
+    border: 0;
+    border-bottom: 1px solid currentColor;
+    border-radius: 0;
+    background: transparent;
+    padding: 0.2rem 0;
+    font-size: 0.52rem;
+    letter-spacing: 0.12em;
   }
 
   .product-home .product-section--services,

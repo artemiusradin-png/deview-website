@@ -5,7 +5,7 @@ import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { homeSectionReveal } from "@/lib/home-section-motion";
 
 /**
- * Social-proof strip built from published case-study metrics — real, verifiable
+ * Social-proof strip built from published case-study metrics: real, verifiable
  * numbers instead of quotes. Each figure links back to /case-studies.
  */
 export function HomeOutcomesStrip() {

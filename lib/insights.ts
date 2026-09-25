@@ -1,7 +1,7 @@
 /**
  * Single source of truth for insights article metadata (slugs, dates, covers).
  * Article copy lives in the dictionaries under `insightsPage.articles` /
- * `insights.articles` — kept in the same order as this list.
+ * `insights.articles`: kept in the same order as this list.
  */
 export type InsightArticle = {
   slug: string;

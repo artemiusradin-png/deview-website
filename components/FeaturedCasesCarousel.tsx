@@ -86,7 +86,7 @@ export function FeaturedCasesCarousel({
                 aria-label={`Show deployment ${index + 1}`}
                 aria-current={index === activeIndex ? "true" : undefined}
               >
-                {String(index + 1).padStart(2, "0")}
+                <span className="sr-only">{`Deployment ${index + 1}`}</span>
               </button>
             ))}
           </div>
@@ -99,12 +99,6 @@ export function FeaturedCasesCarousel({
             <ArrowRight aria-hidden="true" />
           </button>
 
-          <span className="featured-cases-carousel__progress" aria-hidden="true">
-            <span
-              key={activeIndex}
-              className={isPaused || prefersReducedMotion ? "is-paused" : undefined}
-            />
-          </span>
         </div>
       ) : null}
     </div>

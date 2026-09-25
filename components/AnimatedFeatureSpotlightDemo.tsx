@@ -97,7 +97,7 @@ export function AnimatedFeatureSpotlightDemo() {
 
     const GUIDE_URL = "/resources/ai-guide-lending/guide";
 
-    // Record the lead (Supabase via server route — best-effort).
+    // Record the lead (Supabase via server route: best-effort).
     void fetch("/api/lead-magnet", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -106,11 +106,11 @@ export function AnimatedFeatureSpotlightDemo() {
         email,
         company: "",
         industry: "Lending / Financial Services",
-        challenge: "Homepage lead magnet — 10 AI lending use cases guide",
+        challenge: "Homepage lead magnet: 10 AI lending use cases guide",
       }),
     }).catch(() => {});
 
-    // Notify the team with the captured email (Web3Forms client-side —
+    // Notify the team with the captured email (Web3Forms client-side -
     // the server-side path is blocked on the free plan).
     const web3Key = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
     if (web3Key) {

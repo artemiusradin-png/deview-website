@@ -43,21 +43,6 @@ export function AboutContent() {
         </div>
       </div>
 
-      {/* What we are not */}
-      <div className="mb-16 border border-[var(--white-20)] bg-[var(--surface)] p-8 sm:p-10">
-        <p className="mb-4 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
-          {a.whatWeAreNotLabel}
-        </p>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {a.whatWeAreNotItems.map((item) => (
-            <div key={item} className="flex gap-3">
-              <span className="mt-0.5 shrink-0 text-[0.7rem] text-[var(--white-30)]">—</span>
-              <p className="text-sm text-[var(--text-muted)]">{item}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* Values */}
       <div className="mb-16">
         <p className="mb-3 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
@@ -107,11 +92,11 @@ export function AboutContent() {
           </h2>
           <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">{a.team.intro}</p>
         </div>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-3 gap-2 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
           {a.team.members.map((member) => (
             <div
               key={`${member.role}-${member.initials}`}
-              className="flex flex-col overflow-hidden rounded-lg border border-[var(--white-20)] bg-[var(--surface)]"
+              className="flex min-w-0 flex-col overflow-hidden rounded-sm border border-[var(--white-20)] bg-[var(--surface)] sm:rounded-lg"
             >
               <div className="relative aspect-[4/5] overflow-hidden border-b border-[var(--white-10)] bg-[var(--background)]">
                 {member.photo ? (
@@ -133,15 +118,15 @@ export function AboutContent() {
                   </div>
                 )}
               </div>
-              <div className="flex flex-1 flex-col gap-1 p-5">
-                <p className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
+              <div className="flex min-w-0 flex-1 flex-col gap-1 p-2 sm:p-5">
+                <p className="hidden text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-40)] sm:block">
                   {member.role}
                 </p>
                 {member.name ? (
-                  <p className="text-base font-medium text-[var(--white-100)]">{member.name}</p>
+                  <p className="text-[0.68rem] font-medium leading-tight text-[var(--white-100)] sm:text-base">{member.name}</p>
                 ) : null}
                 {member.bio ? (
-                  <p className="mt-1 text-[0.8rem] leading-relaxed text-[var(--text-muted)]">{member.bio}</p>
+                  <p className="mt-1 hidden text-[0.8rem] leading-relaxed text-[var(--text-muted)] sm:block">{member.bio}</p>
                 ) : null}
               </div>
             </div>
@@ -199,7 +184,7 @@ export function AboutContent() {
       </div>
         </div>
       </main>
-      <SiteFooter />
+      <SiteFooter hideCta />
     </>
   );
 }

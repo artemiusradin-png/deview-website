@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Hero background animation — a defocused field of vertical light bars
+ * Hero background animation: a defocused field of vertical light bars
  * (original work, inspired by the "blurred data pulse" aesthetic of modern
  * database landing pages): clusters of short glowing dashes aligned to
  * columns, at three depths of blur, slowly shimmering as segments fade in
@@ -157,7 +157,7 @@ export function HeroPulseField({ className = "" }: { className?: string }) {
       ctx.clearRect(0, 0, width, height);
       ctx.globalCompositeOperation = dark ? "lighter" : "source-over";
 
-      // Brightness wave sweeping across the field — a visible band of light
+      // Brightness wave sweeping across the field: a visible band of light
       // travelling left→right, so the motion reads even at a glance.
       const wave = (xNorm: number) => 0.55 + 0.45 * Math.sin(xNorm * Math.PI * 2.4 - t * 0.7);
 

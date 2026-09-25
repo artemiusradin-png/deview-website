@@ -1,7 +1,7 @@
 /**
  * Structural metadata for the three practice areas.
  * All display strings live in the dictionaries under `dict.practices.items`
- * (same order as PRACTICE_IDS) — this file holds only non-translatable data.
+ * (same order as PRACTICE_IDS): this file holds only non-translatable data.
  */
 export const PRACTICE_IDS = ["ai-solutions", "software-engineering", "data-science"] as const;
 

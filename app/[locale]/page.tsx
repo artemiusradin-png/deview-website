@@ -32,9 +32,6 @@ const HomeProcessTimeline = dynamic(() =>
 const HomeInsightsPreview = dynamic(() =>
   import("@/components/HomeInsightsPreview").then((m) => m.HomeInsightsPreview),
 );
-const HomeOutcomesStrip = dynamic(() =>
-  import("@/components/HomeOutcomesStrip").then((m) => m.HomeOutcomesStrip),
-);
 const HomeIndustries = dynamic(() =>
   import("@/components/HomeIndustries").then((m) => m.HomeIndustries),
 );
@@ -148,7 +145,7 @@ export default function Home() {
   const themeAria =
     theme === "dark" ? dict.a11y.themeToLight : dict.a11y.themeToDark;
 
-  // First four flagship AI services drive the animated card stack — copy comes from the dictionary.
+  // First four flagship AI services drive the animated card stack: copy comes from the dictionary.
   const serviceStackImages = [
     "/images/stock/workflow-audit-person-900.webp",
     "/images/stock/knowledge-person-900.webp",
@@ -164,7 +161,7 @@ export default function Home() {
     ctaLabel: dict.practices.exploreCta,
   }));
 
-  // Leadership spotlight cards — the founder uses the richer dict.leadership bio;
+  // Leadership spotlight cards: the founder uses the richer dict.leadership bio;
   // the rest come from the About page's team roster so both sections share one source.
   // Named members without a portrait use the same initials fallback as the About page.
   const founderName = `${dict.leadership.firstName} ${dict.leadership.lastName}`;
@@ -203,7 +200,7 @@ export default function Home() {
         <nav className="section-gutter mx-auto flex h-16 max-w-6xl items-center justify-between">
           <div className="nav-shell-spacer" aria-hidden="true" />
           <div className="flex items-center gap-3 md:hidden">
-            {/* Language toggle moved into the mobile dropdown menu — keeps the always-visible header lean. */}
+            {/* Language toggle moved into the mobile dropdown menu: keeps the always-visible header lean. */}
             <button
               type="button"
               className="nav-toggle"
@@ -333,10 +330,10 @@ export default function Home() {
                   </span>
                 ))}
             </h1>
-            {/* Compact outline button + a secondary case-studies link — same size on every
+            {/* Compact outline button + a secondary case-studies link: same size on every
                 breakpoint, mobile included (was previously a separate, much larger filled
                 mobile-only button). The whole hero column is bottom-aligned via the section's
-                `items-end`, so a small `mt-4` gap under the heading is all that's needed — no
+                `items-end`, so a small `mt-4` gap under the heading is all that's needed: no
                 more full-height column + `mt-auto` push (that forced the hero to ~100vh on
                 tablet/iPad and buried the practice-areas section below it). */}
             <div className="mt-4">
@@ -358,7 +355,7 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Right-hand kicker column — desktop only. Its sole mobile content used to be a
+          {/* Right-hand kicker column: desktop only. Its sole mobile content used to be a
               64px spacer that held the hero text up off the bottom; removed so the text now
               sits flush at the bottom of the hero, right above the practice-areas section. */}
           <motion.div
@@ -464,8 +461,6 @@ export default function Home() {
 
       <HomeIndustries />
 
-      <HomeOutcomesStrip />
-
       <section className="home-section-light relative overflow-hidden bg-[var(--background)] section-gutter py-10 md:py-14">
         <div className="mx-auto max-w-6xl">
           <p className="section-label mb-3">{dict.leadership.sectionLabel}</p>
@@ -486,7 +481,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer-style "Tell us what to automate" CTA, relocated here from the footer —
+      {/* Footer-style "Tell us what to automate" CTA, relocated here from the footer -
           swapped positions with the email-form card, which now sits at the bottom. */}
       <section className="home-section-dark section-gutter py-10 md:py-14">
         <div className="mx-auto max-w-6xl">
@@ -523,7 +518,7 @@ export default function Home() {
         <PixelField />
       </div>
 
-      {/* Removed persistent mobile CTA dock — header nav, in-page CTAs, and footer cover this without crowding the viewport. */}
+      {/* Removed persistent mobile CTA dock: header nav, in-page CTAs, and footer cover this without crowding the viewport. */}
     </div>
   );
 }

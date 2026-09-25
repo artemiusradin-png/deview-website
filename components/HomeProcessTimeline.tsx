@@ -34,7 +34,7 @@ export function HomeProcessTimeline() {
               transition={{ duration: 0.4, delay: i * 0.08 }}
               className="group relative flex items-center gap-3 py-2.5 md:flex-col md:items-start md:gap-3 md:px-4 md:py-0"
             >
-              {/* Step dot — smaller on mobile */}
+              {/* Step dot: smaller on mobile */}
               <div className="relative z-10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-[var(--white-20)] bg-[var(--surface)] text-[0.55rem] font-bold tracking-[0.12em] text-[var(--white-60)] transition-colors group-hover:border-[var(--white-40)] group-hover:text-[var(--white-100)] md:h-9 md:w-9 md:text-[0.6rem]">
                 {step.number}
               </div>

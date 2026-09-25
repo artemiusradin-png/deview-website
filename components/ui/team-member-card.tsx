@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Editorial-style team member card — adapted to DeView's theme tokens.
+ * Editorial-style team member card: adapted to DeView's theme tokens.
  * Same overlapping layout at every breakpoint (portrait + large display name
  * overlapping it, circular CTA, left/right mirroring for alternating cards);
  * the portrait, name and CTA just scale down on small screens so the whole
@@ -31,7 +31,7 @@ export default function TeamMemberCard({
   lastName = "Radin",
   imageUrl = "/team/artemis-radin.jpg",
   initials,
-  description = "Artemis leads DeView's engagements end to end — from scoping the workflows that cost clients the most to shipping the AI systems that fix them.",
+  description = "Artemis leads DeView's engagements end to end: from scoping the workflows that cost clients the most to shipping the AI systems that fix them.",
   href = "/contact",
   className,
 }: TeamMemberCardProps) {
@@ -40,7 +40,7 @@ export default function TeamMemberCard({
   const cardRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   // Name text keeps drifting with scroll (rather than settling once, like the rest of the
-  // card) — a larger, quicker-feeling range than the card's own one-shot entrance motions.
+  // card): a larger, quicker-feeling range than the card's own one-shot entrance motions.
   const { scrollYProgress } = useScroll({
     target: cardRef,
     offset: ["start end", "end start"],
@@ -75,7 +75,7 @@ export default function TeamMemberCard({
       </motion.div>
 
       <div className="flex items-center justify-end">
-        {/* Portrait — scales from a compact phone size up to the full editorial size on md+. */}
+        {/* Portrait: scales from a compact phone size up to the full editorial size on md+. */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -108,7 +108,7 @@ export default function TeamMemberCard({
           )}
         </motion.div>
 
-        {/* Info block — flex-1 so it always fills the space next to the portrait (was a
+        {/* Info block: flex-1 so it always fills the space next to the portrait (was a
             hardcoded calc(100%-300px) that collapsed to ~75px on a phone), overlapping the
             portrait via left/-left. */}
         <motion.div

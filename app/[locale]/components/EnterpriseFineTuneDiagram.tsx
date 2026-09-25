@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 const FOUNDATION_MODELS = ["GPT-N", "Cohere", "Bard", "Dolly"] as const;
 
-/** Small database stack (cylinders) — matches reference iconography */
+/** Small database stack (cylinders): matches reference iconography */
 function DbIcon({ x, y, scale = 1 }: { x: number; y: number; scale?: number }) {
   const s = scale;
   return (
@@ -38,7 +38,7 @@ function QueryIcon({ x, y }: { x: number; y: number }) {
 }
 
 /**
- * Enterprise fine-tuning lifecycle — layout and topology aligned to the reference:
+ * Enterprise fine-tuning lifecycle: layout and topology aligned to the reference:
  * triangular Train / Evaluate / Monitor loop; Evaluate → Deploy; Deploy → Fine Tuned Model;
  * Fine Tuned Model → Monitor (User Prompt + Model Response); Query ↔ model (Prompt / Response).
  */
@@ -81,7 +81,7 @@ export function EnterpriseFineTuneDiagram({ className = "" }: { className?: stri
 
           <rect x="0" y="0" width="940" height="392" className="enterprise-ft-canvas-bg" rx="0" />
 
-          {/* Orthogonal edges — grid-style routing */}
+          {/* Orthogonal edges: grid-style routing */}
           <g
             className="enterprise-ft-edges-stroke"
             fill="none"
@@ -112,7 +112,7 @@ export function EnterpriseFineTuneDiagram({ className = "" }: { className?: stri
             <path d="M 630 92 L 630 148" />
             {/* Fine Tuned Model → Monitor (feedback; reference direction) */}
             <path d="M 572 170 L 488 170 L 488 244 L 330 244" />
-            {/* Query → Fine Tuned Model (Prompt) — slight x-offset so both directions read */}
+            {/* Query → Fine Tuned Model (Prompt): slight x-offset so both directions read */}
             <path d="M 626 258 L 626 192" />
             {/* Fine Tuned Model → Query (Response) */}
             <path d="M 634 192 L 634 258" />
@@ -139,7 +139,7 @@ export function EnterpriseFineTuneDiagram({ className = "" }: { className?: stri
             </text>
           </g>
 
-          {/* —— Left column: inputs —— */}
+          {/* -- Left column: inputs -- */}
           <rect x="20" y="14" width="208" height="92" rx="8" className="enterprise-ft-panel enterprise-ft-panel-outer" />
           <text x="124" y="32" textAnchor="middle" className="enterprise-ft-panel-title" fontSize="10.5" fontWeight="500">
             Foundation Models
@@ -175,7 +175,7 @@ export function EnterpriseFineTuneDiagram({ className = "" }: { className?: stri
             Tokenization
           </text>
 
-          {/* —— Center: process loop (black nodes) —— */}
+          {/* -- Center: process loop (black nodes) -- */}
           <rect x="276" y="108" width="88" height="52" rx="6" className="enterprise-ft-process" />
           <text x="320" y="140" textAnchor="middle" fontSize="12" fontWeight="600" className="enterprise-ft-process-label">
             Train
@@ -197,7 +197,7 @@ export function EnterpriseFineTuneDiagram({ className = "" }: { className?: stri
           </text>
           <DbIcon x={412} y={288} scale={0.75} />
 
-          {/* —— Right: deploy stack —— */}
+          {/* -- Right: deploy stack -- */}
           <rect x="582" y="48" width="96" height="44" rx="6" className="enterprise-ft-process" />
           <text x="630" y="76" textAnchor="middle" fontSize="12" fontWeight="600" className="enterprise-ft-process-label">
             Deploy

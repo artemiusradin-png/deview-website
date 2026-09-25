@@ -182,7 +182,7 @@ export default function AiGuideLendingPage() {
                       <td className="py-3 pl-3 text-center">
                         {row.recommended
                           ? <span className="text-[0.6rem] uppercase tracking-[0.14em] text-[var(--white-80)]">✓</span>
-                          : <span className="text-[0.6rem] text-[var(--white-20)]">—</span>}
+                          : <span className="text-[0.6rem] text-[var(--white-20)]">-</span>}
                       </td>
                     </tr>
                   ))}

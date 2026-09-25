@@ -60,7 +60,7 @@ export function PixelField() {
     let lastDraw = 0;
 
     const draw = (now: number) => {
-      // Throttle to ~24fps — refined, not busy, and easy on the CPU.
+      // Throttle to ~24fps: refined, not busy, and easy on the CPU.
       if (now - lastDraw < 42) {
         frame = requestAnimationFrame(draw);
         return;
@@ -84,7 +84,7 @@ export function PixelField() {
         for (let r = 0; r < rows; r++) {
           const virtualRow = r + rowBase;
           const h1 = hash(c, virtualRow);
-          // Sparse — only ~30% of cells carry a pixel.
+          // Sparse: only ~30% of cells carry a pixel.
           if (h1 > 0.3) continue;
 
           const h2 = hash(virtualRow, c);

@@ -62,7 +62,7 @@ const CtaCard = React.forwardRef<HTMLDivElement, CtaCardProps>(
         )}
         {...props}
       >
-        {/* Subtle globe-palette gradient — reads on both themes */}
+        {/* Subtle globe-palette gradient: reads on both themes */}
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(26,51,128,0.18)_0%,rgba(128,184,255,0.06)_45%,transparent_70%)]" />
         {/* Hairline top border for visual separation */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[var(--white-20)]" />

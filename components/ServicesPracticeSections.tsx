@@ -26,7 +26,7 @@ const reveal = {
 } as const;
 
 /**
- * Rich, anchored detail sections for the three practice areas — the landing
+ * Rich, anchored detail sections for the three practice areas: the landing
  * targets for /services#ai-solutions, #software-engineering and #data-science.
  * Replaces the thin standalone practice cards with a header, a described
  * capabilities grid, a proof band and a contextual CTA per practice.
@@ -40,7 +40,7 @@ export function ServicesPracticeSections() {
 
   return (
     <>
-      {/* Region header — reuses the existing translated practices intro copy. */}
+      {/* Region header: reuses the existing translated practices intro copy. */}
       <section className="section-gutter pt-2 pb-2">
         <div className="mx-auto max-w-6xl">
           <p className="section-label mb-3">{p.sectionLabel}</p>
@@ -111,7 +111,7 @@ export function ServicesPracticeSections() {
                 </div>
               </div>
 
-              {/* Capabilities — the sub-areas, each with a one-line description. */}
+              {/* Capabilities: the sub-areas, each with a one-line description. */}
               <div className="mt-9 md:mt-12">
                 <p className="section-label mb-4">{p.detailCapabilitiesLabel}</p>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

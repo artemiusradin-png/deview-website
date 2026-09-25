@@ -47,7 +47,7 @@ export function HomePracticeAreas({ variant = "home" }: HomePracticeAreasProps) 
                   <span className="font-medium text-[var(--white-100)] underline decoration-[var(--white-20)] decoration-1 underline-offset-4 transition-colors group-hover:decoration-[var(--white-60)]">
                     {item.heading}.
                   </span>{" "}
-                  {item.title}.
+                  <span className="practice-card-summary">{item.title}.</span>
                 </p>
                 {/* On phones each card shows the heading + one-line description plus the
                     first service (clamped to a single line) → a consistent 3-line card.

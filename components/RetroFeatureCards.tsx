@@ -67,7 +67,7 @@ function RetroOutcomesCard({ className = "", rootPrefix = "" }: { className?: st
         aria-hidden="true"
       />
       <div className="relative z-10 flex h-full flex-col justify-end overflow-hidden p-3 text-left sm:p-5 md:p-5">
-        {/* 2×2 metric grid — stat is the dominant element */}
+        {/* 2×2 metric grid: stat is the dominant element */}
         <div className="mb-2 grid grid-cols-2 gap-1 sm:mb-3 sm:gap-1.5">
           {o.items.map((item) => (
             <div key={item.number} className="border border-white/12 bg-black/50 p-1.5 backdrop-blur-[2px] sm:p-2.5">

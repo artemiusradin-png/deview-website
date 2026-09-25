@@ -30,7 +30,7 @@ export async function POST(req: Request) {
       });
   }
 
-  const subject = `[DeView Newsletter] ${email} — ${source}`;
+  const subject = `[DeView Newsletter] ${email}: ${source}`;
   const message = `New newsletter signup\n\nEmail: ${email}\nSource: ${source}`;
 
   const resendApiKey = process.env.RESEND_API_KEY?.trim();

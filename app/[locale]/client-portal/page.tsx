@@ -259,7 +259,7 @@ function LoginView({ onSuccess, t }: { onSuccess: (portal: Portal, reference: st
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-[var(--background)]">
-      {/* Particle field — needs a concrete pixel height, so parent is h-screen */}
+      {/* Particle field: needs a concrete pixel height, so parent is h-screen */}
       <Particles
         color="#888888"
         quantity={120}

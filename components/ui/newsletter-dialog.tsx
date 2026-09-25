@@ -83,7 +83,7 @@ export function NewsletterDialog({ trigger, title, description, source }: Newsle
               </div>
             </div>
             {status === "error" && (
-              <p className="text-xs text-red-400">Something went wrong — please try again.</p>
+              <p className="text-xs text-red-400">Something went wrong: please try again.</p>
             )}
             <Button
               type="submit"

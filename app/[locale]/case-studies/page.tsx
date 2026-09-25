@@ -4,7 +4,7 @@ import { CaseStudiesContent } from "./case-studies-content";
 export const metadata: Metadata = {
   title: "Case Studies | DeView",
   description:
-    "How DeView has helped operations and finance teams cut manual work, automate workflows, and reduce costs — with measurable outcomes.",
+    "How DeView has helped operations and finance teams cut manual work, automate workflows, and reduce costs: with measurable outcomes.",
 };
 
 export default function CaseStudiesPage() {

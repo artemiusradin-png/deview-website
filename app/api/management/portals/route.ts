@@ -30,7 +30,7 @@ function validMilestones(value: unknown): value is MilestoneInput[] {
   );
 }
 
-// GET /api/management/portals — list all portals with their milestones
+// GET /api/management/portals: list all portals with their milestones
 export async function GET(req: Request) {
   if (!authorized(req)) {
     return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
@@ -64,7 +64,7 @@ export async function GET(req: Request) {
   return NextResponse.json({ ok: true, portals: data });
 }
 
-// POST /api/management/portals — create a new portal
+// POST /api/management/portals: create a new portal
 export async function POST(req: Request) {
   if (!authorized(req)) {
     return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
@@ -132,7 +132,7 @@ export async function POST(req: Request) {
     const { error: msError } = await supabase.from("client_portal_milestones").insert(rows);
     if (msError) {
       console.error("[management/portals] milestone insert failed:", msError.message);
-      // portal was created — still return it, but flag the partial failure
+      // portal was created: still return it, but flag the partial failure
       return NextResponse.json({ ok: true, portal, milestoneError: "milestone_insert_failed" });
     }
   }
@@ -140,7 +140,7 @@ export async function POST(req: Request) {
   return NextResponse.json({ ok: true, portal }, { status: 201 });
 }
 
-// PATCH /api/management/portals — update a portal's stage, active state, or milestones
+// PATCH /api/management/portals: update a portal's stage, active state, or milestones
 export async function PATCH(req: Request) {
   if (!authorized(req)) {
     return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });

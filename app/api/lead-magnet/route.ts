@@ -78,13 +78,13 @@ export async function POST(req: Request) {
     }
   }
 
-  const subject = `[DeView Lead] ${name} — AI Guide for Lending`;
+  const subject = `[DeView Lead] ${name}: AI Guide for Lending`;
   const message = [
     `Name: ${name}`,
     `Email: ${email}`,
-    `Company: ${company || "—"}`,
-    `Industry: ${industry || "—"}`,
-    `Main challenge: ${challenge || "—"}`,
+    `Company: ${company || "-"}`,
+    `Industry: ${industry || "-"}`,
+    `Main challenge: ${challenge || "-"}`,
     ``,
     `Guide: 10 Practical AI Use Cases for Lending Companies`,
   ].join("\n");

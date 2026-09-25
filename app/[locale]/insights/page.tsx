@@ -5,7 +5,7 @@ import { InsightsContent } from "./insights-content";
 export const metadata: Metadata = {
   title: "Insights | DeView",
   description:
-    "Practical AI guidance for operations and finance teams — what works, what doesn't, and where to start.",
+    "Practical AI guidance for operations and finance teams: what works, what doesn't, and where to start.",
 };
 
 export default function InsightsPage() {

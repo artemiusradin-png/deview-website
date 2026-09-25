@@ -11,7 +11,10 @@ const caseMedia: Record<string, { video: string; poster?: string }> = {
     video: "/deview-agroplatforma-demo.mp4",
     poster: "/deview-agroplatforma-poster.svg",
   },
-  "02": { video: "/deview-unified-portal-demo.mp4" },
+  "02": {
+    video: "/deview-unified-portal-demo.mp4",
+    poster: "/deview-unified-portal-poster.svg",
+  },
 };
 
 export function CaseStudiesContent() {
@@ -156,14 +159,18 @@ export function CaseStudiesContent() {
                   ) : null}
 
                   {/* Quote */}
-                  <blockquote className="border-l-2 border-[var(--white-20)] pl-5">
-                    <p className="mb-2 text-sm italic leading-relaxed text-[var(--white-80)]">
-                      &ldquo;{c.quote}&rdquo;
-                    </p>
-                    <cite className="text-[0.6rem] not-italic uppercase tracking-[0.2em] text-[var(--white-40)]">
-                      {c.quoteRole}
-                    </cite>
-                  </blockquote>
+                  {c.quote ? (
+                    <blockquote className="border-l-2 border-[var(--white-20)] pl-5">
+                      <p className="mb-2 text-sm italic leading-relaxed text-[var(--white-80)]">
+                        &ldquo;{c.quote}&rdquo;
+                      </p>
+                      {c.quoteRole ? (
+                        <cite className="text-[0.6rem] not-italic uppercase tracking-[0.2em] text-[var(--white-40)]">
+                          {c.quoteRole}
+                        </cite>
+                      ) : null}
+                    </blockquote>
+                  ) : null}
                 </article>
               );
             })}

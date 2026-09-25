@@ -14,23 +14,23 @@ import { useLocaleContext } from "@/lib/i18n/locale-context";
 const SVG_ARCH = `<svg width="820" height="390" viewBox="0 0 820 390" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
   <defs><marker id="mi-a1" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#3f3f46"/></marker></defs>
   <rect x="20" y="10" width="780" height="60" rx="8" fill="#16162a" stroke="#6366f1" stroke-width="1.5"/>
-  <text x="42" y="34" fill="#818cf8" font-size="10" font-weight="700" letter-spacing="1.8">LAYER 5 — BUSINESS</text>
+  <text x="42" y="34" fill="#818cf8" font-size="10" font-weight="700" letter-spacing="1.8">LAYER 5: BUSINESS</text>
   <text x="42" y="55" fill="#a1a1aa" font-size="13">Business Processes · Strategic Goals · KPI Dashboards · Executive Reporting · ROI Tracking</text>
   <line x1="410" y1="70" x2="410" y2="86" stroke="#3f3f46" stroke-width="2" marker-end="url(#mi-a1)"/>
   <rect x="20" y="86" width="780" height="60" rx="8" fill="#111118" stroke="#3b82f6" stroke-width="1.5"/>
-  <text x="42" y="110" fill="#60a5fa" font-size="10" font-weight="700" letter-spacing="1.8">LAYER 4 — APPLICATION</text>
+  <text x="42" y="110" fill="#60a5fa" font-size="10" font-weight="700" letter-spacing="1.8">LAYER 4: APPLICATION</text>
   <text x="42" y="131" fill="#a1a1aa" font-size="13">User Interfaces · ERP (SAP / Oracle) · CRM (Salesforce / HubSpot) · Slack · Document Platforms</text>
   <line x1="410" y1="146" x2="410" y2="162" stroke="#3f3f46" stroke-width="2" marker-end="url(#mi-a1)"/>
   <rect x="20" y="162" width="780" height="60" rx="8" fill="#111118" stroke="#06b6d4" stroke-width="1.5"/>
-  <text x="42" y="186" fill="#22d3ee" font-size="10" font-weight="700" letter-spacing="1.8">LAYER 3 — DATA FOUNDATION</text>
+  <text x="42" y="186" fill="#22d3ee" font-size="10" font-weight="700" letter-spacing="1.8">LAYER 3: DATA FOUNDATION</text>
   <text x="42" y="207" fill="#a1a1aa" font-size="13">Data Sources · ETL Pipelines · Data Integration · Vector Stores · Feature Engineering · Data Quality</text>
   <line x1="410" y1="222" x2="410" y2="238" stroke="#3f3f46" stroke-width="2" marker-end="url(#mi-a1)"/>
   <rect x="20" y="238" width="780" height="60" rx="8" fill="#111118" stroke="#22c55e" stroke-width="1.5"/>
-  <text x="42" y="262" fill="#4ade80" font-size="10" font-weight="700" letter-spacing="1.8">LAYER 2 — INFRASTRUCTURE</text>
+  <text x="42" y="262" fill="#4ade80" font-size="10" font-weight="700" letter-spacing="1.8">LAYER 2: INFRASTRUCTURE</text>
   <text x="42" y="283" fill="#a1a1aa" font-size="13">Security &amp; Access Control · Cloud / On-Premises · MLOps · Audit Logging · Monitoring &amp; Alerting</text>
   <line x1="410" y1="298" x2="410" y2="314" stroke="#3f3f46" stroke-width="2" marker-end="url(#mi-a1)"/>
   <rect x="20" y="314" width="780" height="60" rx="8" fill="#1a1428" stroke="#a855f7" stroke-width="1.5"/>
-  <text x="42" y="338" fill="#c084fc" font-size="10" font-weight="700" letter-spacing="1.8">LAYER 1 — AI / ML CORE</text>
+  <text x="42" y="338" fill="#c084fc" font-size="10" font-weight="700" letter-spacing="1.8">LAYER 1: AI / ML CORE</text>
   <text x="42" y="359" fill="#a1a1aa" font-size="13">LLMs · ML Classifiers · Model Registry · Serving Infrastructure · Evaluation Framework · Embeddings</text>
 </svg>`;
 
@@ -109,7 +109,7 @@ const SVG_SEC = `<svg width="820" height="290" viewBox="0 0 820 290" xmlns="http
   <rect x="616" y="68" width="176" height="38" rx="6" fill="#1a0a2a" stroke="#a855f7" stroke-width="1"/><text x="704" y="92" fill="#d8b4fe" font-size="12" text-anchor="middle">Supabase (PostgreSQL)</text>
   <rect x="616" y="128" width="176" height="38" rx="6" fill="#1a0a2a" stroke="#a855f7" stroke-width="1"/><text x="704" y="152" fill="#d8b4fe" font-size="12" text-anchor="middle">LLM / AI APIs</text>
   <rect x="616" y="188" width="176" height="38" rx="6" fill="#1a0a2a" stroke="#a855f7" stroke-width="1"/><text x="704" y="212" fill="#d8b4fe" font-size="12" text-anchor="middle">Email / Notifications</text>
-  <text x="704" y="258" fill="#3f3f46" font-size="11" text-anchor="middle">Server-proxied — never direct</text>
+  <text x="704" y="258" fill="#3f3f46" font-size="11" text-anchor="middle">Server-proxied: never direct</text>
 </svg>`;
 
 const SVG_MLOPS = `<svg width="720" height="280" viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
@@ -183,7 +183,7 @@ export default function MoreInfoPage() {
           <div className="gw">
 
             {/* ════════════════════════════════
-                MODULE 1 — THE BIG PICTURE
+                MODULE 1: THE BIG PICTURE
             ════════════════════════════════ */}
             <div className="module" id="mi-m1">
               <div className="module-header">
@@ -246,7 +246,7 @@ export default function MoreInfoPage() {
             <div className="divider" />
 
             {/* ════════════════════════════════
-                MODULE 2 — SERVICES
+                MODULE 2: SERVICES
             ════════════════════════════════ */}
             <div className="module" id="mi-m2">
               <div className="module-header">
@@ -293,9 +293,9 @@ export default function MoreInfoPage() {
                   <div className="card-title">{m.svc2ConnTitle}</div>
                   <ul className="cl">
                     {m.svc2ConnItems.map((item, i) => {
-                      const parts = item.split(" — ");
+                      const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
                       );
                     })}
                   </ul>
@@ -361,9 +361,9 @@ export default function MoreInfoPage() {
                   <div className="card-title">{m.svc5ConnTitle}</div>
                   <ul className="cl">
                     {m.svc5ConnItems.map((item, i) => {
-                      const parts = item.split(" — ");
+                      const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
                       );
                     })}
                   </ul>
@@ -386,9 +386,9 @@ export default function MoreInfoPage() {
                   <div className="card-title">{m.svc6DimTitle}</div>
                   <ul className="cl">
                     {m.svc6DimItems.map((item, i) => {
-                      const parts = item.split(" — ");
+                      const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
                       );
                     })}
                   </ul>
@@ -399,7 +399,7 @@ export default function MoreInfoPage() {
             <div className="divider" />
 
             {/* ════════════════════════════════
-                MODULE 3 — DATA INFRASTRUCTURE
+                MODULE 3: DATA INFRASTRUCTURE
             ════════════════════════════════ */}
             <div className="module" id="mi-m3">
               <div className="module-header">
@@ -444,7 +444,7 @@ export default function MoreInfoPage() {
             <div className="divider" />
 
             {/* ════════════════════════════════
-                MODULE 4 — SECURITY
+                MODULE 4: SECURITY
             ════════════════════════════════ */}
             <div className="module" id="mi-m4">
               <div className="module-header">
@@ -465,9 +465,9 @@ export default function MoreInfoPage() {
                   <div className="card-title">🔑 {m.secAccess}</div>
                   <ul className="cl">
                     {m.secAccessItems.map((item, i) => {
-                      const parts = item.split(" — ");
+                      const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
                       );
                     })}
                   </ul>
@@ -476,9 +476,9 @@ export default function MoreInfoPage() {
                   <div className="card-title">📋 {m.secAudit}</div>
                   <ul className="cl">
                     {m.secAuditItems.map((item, i) => {
-                      const parts = item.split(" — ");
+                      const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
                       );
                     })}
                   </ul>
@@ -487,9 +487,9 @@ export default function MoreInfoPage() {
                   <div className="card-title">🛡️ {m.secInput}</div>
                   <ul className="cl">
                     {m.secInputItems.map((item, i) => {
-                      const parts = item.split(" — ");
+                      const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
                       );
                     })}
                   </ul>
@@ -498,9 +498,9 @@ export default function MoreInfoPage() {
                   <div className="card-title">🤖 {m.secAi}</div>
                   <ul className="cl">
                     {m.secAiItems.map((item, i) => {
-                      const parts = item.split(" — ");
+                      const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
                       );
                     })}
                   </ul>
@@ -534,7 +534,7 @@ export default function MoreInfoPage() {
             <div className="divider" />
 
             {/* ════════════════════════════════
-                MODULE 5 — MLOPS
+                MODULE 5: MLOPS
             ════════════════════════════════ */}
             <div className="module" id="mi-m5">
               <div className="module-header">
@@ -554,9 +554,9 @@ export default function MoreInfoPage() {
                   <div className="card-title" style={{ color: "var(--gi-cyan)" }}>👁 {m.monitorTitle}</div>
                   <ul className="cl">
                     {m.monitorItems.map((item, i) => {
-                      const parts = item.split(" — ");
+                      const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
                       );
                     })}
                   </ul>
@@ -565,9 +565,9 @@ export default function MoreInfoPage() {
                   <div className="card-title" style={{ color: "var(--gi-amber)" }}>📊 {m.evaluateTitle}</div>
                   <ul className="cl">
                     {m.evaluateItems.map((item, i) => {
-                      const parts = item.split(" — ");
+                      const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
                       );
                     })}
                   </ul>
@@ -599,7 +599,7 @@ export default function MoreInfoPage() {
             <div className="divider" />
 
             {/* ════════════════════════════════
-                MODULE 6 — DEVIEW STACK
+                MODULE 6: DEVIEW STACK
             ════════════════════════════════ */}
             <div className="module" id="mi-m6">
               <div className="module-header">
@@ -636,9 +636,9 @@ export default function MoreInfoPage() {
                   <div className="card-title">{m.portalViewTitle}</div>
                   <ul className="cl">
                     {m.portalViewItems.map((item, i) => {
-                      const parts = item.split(" — ");
+                      const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
                       );
                     })}
                   </ul>
@@ -647,9 +647,9 @@ export default function MoreInfoPage() {
                   <div className="card-title">{m.portalSecTitle}</div>
                   <ul className="cl">
                     {m.portalSecItems.map((item, i) => {
-                      const parts = item.split(" — ");
+                      const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? ` — ${parts[1]}` : ""}</li>
+                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
                       );
                     })}
                   </ul>
@@ -663,7 +663,7 @@ export default function MoreInfoPage() {
             <div className="divider" />
 
             {/* ════════════════════════════════
-                MODULE 7 — FAQ
+                MODULE 7: FAQ
             ════════════════════════════════ */}
             <div className="module" id="mi-m7">
               <div className="module-header">

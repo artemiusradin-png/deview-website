@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 /**
  * Neon-style decorative frame for case-study demo media: a soft gradient glow
  * behind, a halftone-dot border, and a browser-window chrome bar above the
- * media. Purely presentational — pass the <video> (or image) as children.
+ * media. Purely presentational: pass the <video> (or image) as children.
  */
 export function CaseMediaFrame({ label, children }: { label: string; children: ReactNode }) {
   return (

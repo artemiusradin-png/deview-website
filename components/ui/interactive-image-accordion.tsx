@@ -52,7 +52,7 @@ function AccordionPanel({ label, href, imageUrl, isActive, onActivate }: Accordi
           t.src = FALLBACK_IMAGE;
         }}
       />
-      {/* Tint — deeper when collapsed, lighter when active */}
+      {/* Tint: deeper when collapsed, lighter when active */}
       <div
         className="absolute inset-0 transition-opacity duration-700"
         style={{
