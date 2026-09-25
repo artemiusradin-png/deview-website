@@ -9,7 +9,7 @@ import { useLocaleContext } from "@/lib/i18n/locale-context";
 import type { Dictionary } from "@/lib/i18n/dict-en";
 
 const STORAGE_KEY = "deview-portal-ref";
-const ADMIN_PORTAL_URL = "https://ai-consulting-task-manager.vercel.app";
+const ADMIN_PORTAL_URL = "https://deview-task-manager.netlify.app";
 
 type Milestone = {
   id: string;
