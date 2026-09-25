@@ -12,8 +12,9 @@ type SiteFooterProps = {
 };
 
 export function SiteFooter({ rootPrefix = "", hideCta = false }: SiteFooterProps) {
-  const { dict, localePath } = useLocaleContext();
+  const { dict, locale, localePath } = useLocaleContext();
   const f = dict.footer;
+  const marketsLabel = locale === "zh-HK" ? "亞太市場" : locale === "de" ? "Asien-Pazifik-Märkte" : "Asia-Pacific markets";
 
   const [showTop, setShowTop] = useState(false);
   useEffect(() => {
@@ -80,6 +81,7 @@ export function SiteFooter({ rootPrefix = "", hideCta = false }: SiteFooterProps
           links: [
             { text: f.links.insightsArticles, href: localePath("/insights") },
             { text: "FAQ", href: localePath("/faq") },
+            { text: marketsLabel, href: "/en/markets" },
             { text: f.links.insuranceAi, href: localePath("/industries/insurance") },
             { text: "Legal AI", href: localePath("/industries/legal") },
             { text: f.inquiryForm, href: localePath("/contact") },
