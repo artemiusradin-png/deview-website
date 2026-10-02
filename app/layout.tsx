@@ -1,10 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { cookies } from "next/headers";
 import localFont from "next/font/local";
 import "./globals.css";
 import { AppProviders } from "./providers";
 import { ThemeSync } from "./theme-sync";
-import type { Locale } from "@/lib/i18n/types";
 
 const archivo = localFont({
   src: [
@@ -29,6 +27,8 @@ export const metadata: Metadata = {
   title: "DeView | AI Solutions, Software Engineering & Data Engineering",
   description:
     "DeView builds AI automation, custom software platforms, and data pipelines that cut costs and remove manual work: deployed into your existing tools, not alongside them.",
+  /** Search Console ownership for the https://deviewai.com/ URL-prefix property. Removing it un-verifies the site. */
+  verification: { google: "SQp0k0tERoRnCl3ZnDc1Z4ypLXfYr7DIy8SeJe6Kdlk" },
 };
 
 export const viewport: Viewport = {
@@ -41,25 +41,19 @@ export const viewport: Viewport = {
   ],
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-  const localeCookie = cookieStore.get("deview-locale")?.value ?? cookieStore.get("deview-geo-locale")?.value;
-  const initialLocale: Locale =
-    localeCookie === "zh-HK" || localeCookie === "en" || localeCookie === "de" ? localeCookie : "en";
-  const htmlLang = initialLocale === "zh-HK" ? "zh-Hant-HK" : initialLocale === "de" ? "de" : "en";
-
   return (
     <html
-      lang={htmlLang}
+      lang="en"
       data-scroll-behavior="smooth"
       className={`h-full antialiased ${archivo.variable} ${clashDisplay.variable}`}
     >
       <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--text)]">
-        <AppProviders initialLocale={initialLocale}>
+        <AppProviders>
           <ThemeSync />
           {children}
         </AppProviders>

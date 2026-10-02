@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Use cases | DeView",
   description:
     "AI solutions built around concrete operational problems: customer operations, internal knowledge, and operations.",
+  alternates: { canonical: "/en/use-cases" },
 };
 
 export default function UseCasesPage() {

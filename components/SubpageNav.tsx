@@ -3,7 +3,6 @@
 import { RETRO_FEATURE_CARDS_ID } from "./RetroFeatureCards";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { LocaleLink } from "./LocaleLink";
-import { LanguageSwitcher } from "./LanguageSwitcher";
 
 type SubpageNavProps = {
   /** Default: home with hash to retro cards grid. */
@@ -46,12 +45,10 @@ export function SubpageNav({ backHref = `/#${RETRO_FEATURE_CARDS_ID}` }: Subpage
           <LocaleLink href="/contact" className="nav-item">
             {dict.nav.inquire}
           </LocaleLink>
-          <LanguageSwitcher />
         </div>
 
-        {/* Mobile: back link + language switcher */}
+        {/* Mobile: back link */}
         <div className="flex items-center gap-3 md:hidden">
-          <LanguageSwitcher />
           <LocaleLink
             href={backHref}
             className="inline-flex min-h-11 shrink-0 items-center text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)] sm:min-h-0"

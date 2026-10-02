@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [{ url: "/images/insights/document-automation-where-to-start-1200.webp", width: 1200, height: 675 }],
   },
+  alternates: { canonical: "/en/insights/document-automation-where-to-start" },
 };
 
 export default function ArticlePage() {

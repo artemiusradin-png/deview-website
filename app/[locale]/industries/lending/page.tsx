@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "AI for Lending & Finance Operations | DeView",
   description:
     "AI automation for lending and credit teams: borrower intelligence, loan document processing, credit analyst copilots, and regulatory reporting. Built for HKMA, PDPO, MAS TRM, and GDPR. Deployed in 3–6 weeks.",
+  alternates: { canonical: "/en/industries/lending" },
 };
 
 export default function LendingPage() {

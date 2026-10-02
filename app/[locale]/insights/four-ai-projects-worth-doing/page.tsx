@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [{ url: "/images/insights/four-ai-projects-worth-doing-1200.webp", width: 1200, height: 675 }],
   },
+  alternates: { canonical: "/en/insights/four-ai-projects-worth-doing" },
 };
 
 export default function ArticlePage() {

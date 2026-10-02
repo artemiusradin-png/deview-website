@@ -50,14 +50,13 @@ function fileTypeIcon(fileType: Document["fileType"]) {
   return "FILE";
 }
 
-function formatDate(iso: string, locale: string) {
-  const loc = locale === "zh-hk" ? "zh-HK" : locale === "de" ? "de-DE" : "en-US";
-  return new Intl.DateTimeFormat(loc, { year: "numeric", month: "long", day: "numeric" }).format(
+function formatDate(iso: string) {
+  return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric" }).format(
     new Date(iso),
   );
 }
 
-function PortalView({ portal, onLogout, t, locale }: { portal: Portal; onLogout: () => void; t: Dictionary["clientPortalPage"]; locale: string }) {
+function PortalView({ portal, onLogout, t }: { portal: Portal; onLogout: () => void; t: Dictionary["clientPortalPage"] }) {
   const progress = portal.milestones.length > 0
     ? Math.round(((portal.currentStage) / portal.milestones.length) * 100)
     : 0;
@@ -208,7 +207,7 @@ function PortalView({ portal, onLogout, t, locale }: { portal: Portal; onLogout:
                       {doc.name}
                     </p>
                     <p className="text-[0.6rem] text-[var(--white-30)]">
-                      {formatDate(doc.uploadedAt, locale)}
+                      {formatDate(doc.uploadedAt)}
                     </p>
                   </div>
                   <span className="flex-shrink-0 text-[var(--white-30)] group-hover:text-[var(--white-60)]">
@@ -224,7 +223,7 @@ function PortalView({ portal, onLogout, t, locale }: { portal: Portal; onLogout:
       </details>
 
       <p className="text-[0.6rem] uppercase tracking-[0.12em] text-[var(--white-20)]">
-        {t.lastUpdated} {formatDate(portal.updatedAt, locale)}
+        {t.lastUpdated} {formatDate(portal.updatedAt)}
       </p>
     </motion.div>
   );
@@ -373,7 +372,7 @@ function LoginView({ onSuccess, t }: { onSuccess: (portal: Portal, reference: st
 }
 
 export default function ClientPortalPage() {
-  const { dict, locale } = useLocaleContext();
+  const { dict } = useLocaleContext();
   const t = dict.clientPortalPage;
   const [portal, setPortal] = useState<Portal | null>(null);
   const [hydrated, setHydrated] = useState(false);
@@ -428,7 +427,7 @@ export default function ClientPortalPage() {
 
           <div className="panel border border-[var(--white-20)] bg-[var(--surface)] p-5 md:p-10">
             <AnimatePresence mode="wait">
-              <PortalView key="portal" portal={portal} onLogout={handleLogout} t={t} locale={locale} />
+              <PortalView key="portal" portal={portal} onLogout={handleLogout} t={t} />
             </AnimatePresence>
           </div>
         </div>

@@ -1,5 +1,5 @@
 export function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "zh-HK" }, { locale: "de" }];
+  return [{ locale: "en" }];
 }
 
 export default function LocaleLayout({

@@ -5,13 +5,12 @@ import { LocaleLink } from "@/components/LocaleLink";
 import { SubpageNav } from "@/components/SubpageNav";
 import { getInsightArticle } from "@/lib/insights";
 
-function formatDate(iso: string, locale: string) {
-  const dtLocale = locale === "de" ? "de-DE" : locale === "zh-HK" ? "zh-HK" : "en-GB";
-  return new Date(iso).toLocaleDateString(dtLocale, { day: "numeric", month: "long", year: "numeric" });
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 }
 
 export function InsightsContent() {
-  const { locale, dict } = useLocaleContext();
+  const { dict } = useLocaleContext();
   const d = dict.insightsPage;
 
   return (
@@ -61,7 +60,7 @@ export function InsightsContent() {
                     </span>
                     <span className="text-[0.55rem] text-[var(--white-30)]">&middot;</span>
                     <span className="text-[0.55rem] uppercase tracking-[0.18em] text-[var(--white-30)]">
-                      {formatDate(a.date, locale)}
+                      {formatDate(a.date)}
                     </span>
                     <span className="text-[0.55rem] text-[var(--white-30)]">&middot;</span>
                     <span className="text-[0.55rem] uppercase tracking-[0.18em] text-[var(--white-30)]">

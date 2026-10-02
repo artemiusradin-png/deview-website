@@ -16,7 +16,7 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: MarketPageProps): Promise<Metadata> {
-  const { locale, market: marketSlug } = await params;
+  const { market: marketSlug } = await params;
 
   if (!isMarketSlug(marketSlug)) {
     return { robots: { index: false, follow: false } };
@@ -29,7 +29,6 @@ export async function generateMetadata({ params }: MarketPageProps): Promise<Met
     title: market.seoTitle,
     description: market.seoDescription,
     alternates: { canonical: canonicalUrl },
-    robots: locale === "en" ? { index: true, follow: true } : { index: false, follow: true },
     openGraph: {
       title: market.seoTitle,
       description: market.seoDescription,
