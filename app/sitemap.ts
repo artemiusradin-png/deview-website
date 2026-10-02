@@ -1,5 +1,11 @@
 import type { MetadataRoute } from "next";
 import { MARKET_SLUGS } from "@/lib/markets";
+import {
+  OIL_GAS_CASE_SLUGS,
+  OIL_GAS_HUB_PATH,
+  OIL_GAS_PAGES_UPDATED,
+  oilGasCasePath,
+} from "@/lib/oil-gas-cases";
 
 const SITE_URL = "https://deviewai.com";
 
@@ -44,5 +50,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
-  return [...existingPages, ...marketPages];
+  const oilGasPages = [
+    {
+      url: `${SITE_URL}${OIL_GAS_HUB_PATH}`,
+      lastModified: OIL_GAS_PAGES_UPDATED,
+    },
+    ...OIL_GAS_CASE_SLUGS.map((slug) => ({
+      url: `${SITE_URL}${oilGasCasePath(slug)}`,
+      lastModified: OIL_GAS_PAGES_UPDATED,
+    })),
+  ];
+
+  return [...existingPages, ...marketPages, ...oilGasPages];
 }

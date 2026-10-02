@@ -1,9 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { LocaleLink } from "@/components/LocaleLink";
 import { SubpageNav } from "@/components/SubpageNav";
 import { SiteFooter } from "@/components/SiteFooter";
+import { OilGasProjectList } from "@/components/OilGasProjectList";
+import { OIL_GAS_CASE_LIST, OIL_GAS_HUB_PATH } from "@/lib/oil-gas-cases";
 
 /** Static video/poster assets keyed by case number (not translatable). */
 const caseMedia: Record<string, { video: string; poster?: string }> = {
@@ -175,6 +178,32 @@ export function CaseStudiesContent() {
               );
             })}
           </div>
+
+          {/* Oil & gas project portfolio (each project has its own page) */}
+          <section className="mt-16 sm:mt-20" aria-labelledby="oil-gas-cases-heading">
+            <p className="section-label mb-3">Oil &amp; gas</p>
+            <div className="rule mb-6" />
+            <div className="mb-7 grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
+              <h2
+                id="oil-gas-cases-heading"
+                className="text-[clamp(1.1rem,3.5vw,1.5rem)] leading-snug text-[var(--white-100)]"
+              >
+                Oil &amp; gas project experience.
+              </h2>
+              <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
+                Six planning, control and reporting systems developed for oil &amp; gas companies between 2010 and
+                2020.{" "}
+                <Link
+                  href={OIL_GAS_HUB_PATH}
+                  className="text-[var(--white-80)] underline decoration-[var(--white-30)] underline-offset-4 hover:text-[var(--white-100)]"
+                >
+                  See the oil &amp; gas page
+                </Link>
+                .
+              </p>
+            </div>
+            <OilGasProjectList cases={OIL_GAS_CASE_LIST} variant="compact" />
+          </section>
 
           {/* CTA */}
           <div className="mt-16 border border-[var(--white-20)] bg-[var(--surface)] p-8 sm:p-12">

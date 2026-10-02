@@ -83,6 +83,7 @@ export function SiteFooter({ rootPrefix = "", hideCta = false }: SiteFooterProps
             { text: "Asia-Pacific markets", href: localePath("/markets") },
             { text: f.links.insuranceAi, href: localePath("/industries/insurance") },
             { text: "Legal AI", href: localePath("/industries/legal") },
+            { text: "Oil & gas", href: localePath("/industries/oil-and-gas") },
             { text: f.inquiryForm, href: localePath("/contact") },
           ],
         },
