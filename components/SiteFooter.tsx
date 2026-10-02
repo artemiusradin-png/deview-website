@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Footer4Col from "@/components/ui/footer-column";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
-import { LEGAL_ENTITY, SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
+import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 
 type SiteFooterProps = {
   rootPrefix?: string;
@@ -92,7 +92,7 @@ export function SiteFooter({ rootPrefix = "", hideCta = false }: SiteFooterProps
         inquiryLabel: f.inquiryForm,
       }}
       legal={{
-        copyright: `© ${new Date().getFullYear()} DeView. Operated by ${LEGAL_ENTITY.name}, Hong Kong Companies Registry No. ${LEGAL_ENTITY.registryNumber}.`,
+        copyright: `© ${new Date().getFullYear()} DeView`,
         tagline: f.tagline,
       }}
     />
