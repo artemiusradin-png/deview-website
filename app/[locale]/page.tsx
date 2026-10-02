@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
+import { LEGAL_ENTITY, SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 import { HomeContent } from "./home-content";
 
 export const metadata: Metadata = {
@@ -16,6 +16,12 @@ const structuredData = {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
       name: "DeView",
+      legalName: LEGAL_ENTITY.name.toUpperCase(),
+      identifier: {
+        "@type": "PropertyValue",
+        propertyID: "Hong Kong Companies Registry",
+        value: LEGAL_ENTITY.registryNumber,
+      },
       url: SITE_URL,
       logo: `${SITE_URL}/logo.svg`,
       email: SITE_INQUIRY_EMAIL,
@@ -23,8 +29,10 @@ const structuredData = {
         "AI consulting and engineering firm building AI automation, custom software platforms, and data pipelines for operations and finance teams.",
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Hong Kong",
-        addressCountry: "HK",
+        streetAddress: LEGAL_ENTITY.streetAddress,
+        addressLocality: LEGAL_ENTITY.addressLocality,
+        addressRegion: LEGAL_ENTITY.addressRegion,
+        addressCountry: LEGAL_ENTITY.addressCountry,
       },
       sameAs: ["https://www.linkedin.com/company/115044062"],
     },

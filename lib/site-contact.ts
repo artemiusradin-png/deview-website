@@ -1,6 +1,16 @@
 /** Primary inbox for inquiries (mailto links + form delivery). */
 export const SITE_INQUIRY_EMAIL = "info@deviewai.com";
 
+/** The registered company that operates DeView (Hong Kong Companies Registry). */
+export const LEGAL_ENTITY = {
+  name: "Covenant Desk Limited",
+  registryNumber: "80827838",
+  streetAddress: "Unit 2904-05, 29/F, Universal Trade Centre, 3 Arbuthnot Road",
+  addressLocality: "Central",
+  addressRegion: "Hong Kong",
+  addressCountry: "HK",
+} as const;
+
 /** Booking page URL (e.g. cal.com/deview). Set to empty string to hide the calendar CTA. */
 export const SITE_BOOKING_URL = "https://calendly.com/artemius-radin/new-meeting";
 

@@ -1177,7 +1177,7 @@ export const en = {
           role: "Operations & AI Prompt Engineering",
           photo: "/team/artemis-radin-800.webp",
           initials: "AR",
-          bio: "Brings experience from BNP Paribas and Covenant Desk to leading DeView's engagements: from scoping the costliest workflows to shipping measurable systems in weeks.",
+          bio: "Founder and Managing Director of Covenant Desk Limited, the registered company behind DeView. Brings experience from BNP Paribas to leading DeView's engagements: from scoping the costliest workflows to shipping measurable systems in weeks.",
         },
         { name: "Eden Lam", role: "Software Engineer & Hong Kong Relations", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "Builds the platforms behind DeView's client work and is the main point of contact for clients in Hong Kong." },
         {
