@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [{ url: "/images/insights/why-most-ai-pilots-fail-1200.webp", width: 1200, height: 675 }],
   },
+  alternates: { canonical: "/en/insights/why-most-ai-pilots-fail" },
 };
 
 export default function ArticlePage() {

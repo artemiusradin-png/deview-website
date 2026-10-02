@@ -6,13 +6,12 @@ import { LocaleLink } from "./LocaleLink";
 import { homeSectionReveal, homeSectionCardMotion } from "@/lib/home-section-motion";
 import { INSIGHT_ARTICLES } from "@/lib/insights";
 
-function formatDate(iso: string, locale: string) {
-  const dtLocale = locale === "de" ? "de-DE" : locale === "zh-HK" ? "zh-HK" : "en-GB";
-  return new Date(iso).toLocaleDateString(dtLocale, { day: "numeric", month: "long", year: "numeric" });
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 }
 
 export function HomeInsightsPreview() {
-  const { dict, locale } = useLocaleContext();
+  const { dict } = useLocaleContext();
   const s = dict.insights;
 
   return (
@@ -50,7 +49,7 @@ export function HomeInsightsPreview() {
                   </div>
                   <div className="flex flex-1 flex-col p-5">
                     <div className="mb-3 flex items-center gap-3 text-[0.58rem] uppercase tracking-[0.16em] text-[var(--white-40)]">
-                      <span>{formatDate(meta.date, locale)}</span>
+                      <span>{formatDate(meta.date)}</span>
                       <span className="text-[var(--white-20)]">·</span>
                       <span>{article.readTime}</span>
                     </div>

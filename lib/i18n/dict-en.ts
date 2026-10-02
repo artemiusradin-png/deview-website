@@ -1,4 +1,4 @@
-/** English source strings: used as the shape source for zh-HK. */
+/** English site copy: the single source for all UI strings. */
 type CaseStudy = {
   number: string;
   sector: string;
@@ -38,11 +38,7 @@ export const en = {
     siteNav: "Site navigation",
     themeToLight: "Switch to bright mode",
     themeToDark: "Switch to dark mode",
-    langToZh: "Switch to Cantonese (Traditional Chinese)",
-    langToEn: "Switch to English",
-    langToDe: "Switch to German",
   },
-  lang: { shortEn: "EN", shortZh: "粵", shortDe: "DE" },
   mobileNav: { close: "Close", contactForm: "CONTACT FORM" },
   hero: {
     kicker: "WHAT WE BUILD",
@@ -2001,7 +1997,6 @@ export const en = {
       { layer: "Email", tech: "Resend + Web3Forms", version: "-", purpose: "Multi-tier fallback delivery chain" },
       { layer: "Hosting", tech: "Netlify", version: "-", purpose: "Serverless deployment, global CDN, automatic deploys" },
       { layer: "Runtime", tech: "Node.js", version: "20 LTS", purpose: "Server-side API route execution" },
-      { layer: "i18n", tech: "Custom context system", version: "-", purpose: "English + Traditional Chinese (zh-HK)" },
     ],
     portalHeading: "Client Portal Architecture",
     portalFlow: ["Client receives reference code", "Enters code on portal page", "API call to /api/client-portal", "Server queries Supabase", "Portal + milestones returned", "Timeline rendered with Framer Motion"],

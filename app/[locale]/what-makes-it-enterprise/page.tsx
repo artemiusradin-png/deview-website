@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "What makes it enterprise | DeView",
   description:
     "Enterprise AI architecture across business systems, data foundation, infrastructure, and AI/ML operations.",
+  alternates: { canonical: "/en/what-makes-it-enterprise" },
 };
 
 export default function WhatMakesItEnterprisePage() {

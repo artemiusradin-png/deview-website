@@ -6,27 +6,18 @@ import { MARKETS, MARKET_SLUGS } from "@/lib/markets";
 
 const canonicalUrl = "https://deviewai.com/en/markets";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-
-  return {
-    title: "AI Consulting Across Asia-Pacific Markets | DeView",
-    description:
-      "Explore DeView's AI consulting, software engineering, and data engineering services for teams in Hong Kong, Singapore, and Taiwan.",
-    alternates: { canonical: canonicalUrl },
-    robots: locale === "en" ? { index: true, follow: true } : { index: false, follow: true },
-    openGraph: {
-      title: "DeView in Asia-Pacific",
-      description: "Production AI and software engineering for Hong Kong, Singapore, and Taiwan operations teams.",
-      url: canonicalUrl,
-      type: "website",
-    },
-  };
-}
+export const metadata: Metadata = {
+  title: "AI Consulting Across Asia-Pacific Markets | DeView",
+  description:
+    "Explore DeView's AI consulting, software engineering, and data engineering services for teams in Hong Kong, Singapore, and Taiwan.",
+  alternates: { canonical: canonicalUrl },
+  openGraph: {
+    title: "DeView in Asia-Pacific",
+    description: "Production AI and software engineering for Hong Kong, Singapore, and Taiwan operations teams.",
+    url: canonicalUrl,
+    type: "website",
+  },
+};
 
 export default function MarketsPage() {
   return (

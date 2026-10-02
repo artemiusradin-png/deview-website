@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Outcomes | DeView",
   description:
     "Business value from implemented AI systems: efficiency, service quality, decision support, and cost control.",
+  alternates: { canonical: "/en/outcomes" },
 };
 
 export default function OutcomesPage() {

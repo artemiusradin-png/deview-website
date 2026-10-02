@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Services: AI, Software Engineering & Data Engineering | DeView",
   description:
     "Three practices: AI solutions, software engineering, and data engineering: that reduce manual work, cut operating costs, and ship working systems in 1–8 weeks.",
+  alternates: { canonical: "/en/services" },
 };
 
 export default function ServicesPage() {

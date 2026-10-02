@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Architecture reality check | DeView",
   description:
     "How infrastructure determines whether an AI system belongs in an enterprise: public vs enterprise deployment.",
+  alternates: { canonical: "/en/architecture-reality-check" },
 };
 
 export default function ArchitectureRealityCheckLayout({ children }: { children: ReactNode }) {
