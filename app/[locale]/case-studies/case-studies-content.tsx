@@ -5,8 +5,15 @@ import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { LocaleLink } from "@/components/LocaleLink";
 import { SubpageNav } from "@/components/SubpageNav";
 import { SiteFooter } from "@/components/SiteFooter";
-import { OilGasProjectList } from "@/components/OilGasProjectList";
-import { OIL_GAS_CASE_LIST, OIL_GAS_HUB_PATH } from "@/lib/oil-gas-cases";
+import { OilGasCaseCards } from "@/components/OilGasCaseCards";
+import { OIL_GAS_CASES_NEWEST_FIRST, OIL_GAS_HUB_PATH } from "@/lib/oil-gas-cases";
+
+/** Licence credits for the logos shown on the oil & gas cards (one per distinct file). */
+const oilGasLogoCredits = [
+  ...new Map(
+    OIL_GAS_CASES_NEWEST_FIRST.flatMap((c) => (c.logo?.credit ? [[c.logo.src, c.logo.credit] as const] : [])),
+  ).values(),
+];
 
 /** Static video/poster assets keyed by case number (not translatable). */
 const caseMedia: Record<string, { video: string; poster?: string }> = {
@@ -45,6 +52,46 @@ export function CaseStudiesContent() {
             </div>
           </div>
 
+          {/* Oil & gas portfolio, newest first (each project has its own page) */}
+          <section className="mb-16 sm:mb-20" aria-labelledby="oil-gas-cases-heading">
+            <p className="section-label mb-3">Oil &amp; gas</p>
+            <div className="rule mb-6" />
+            <div className="mb-4 grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
+              <h2
+                id="oil-gas-cases-heading"
+                className="text-[clamp(1.25rem,4vw,1.85rem)] leading-snug text-[var(--white-100)]"
+              >
+                Oil &amp; gas project experience.
+              </h2>
+              <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
+                Six planning, control and reporting systems developed for oil &amp; gas companies between 2010 and
+                2020, most recent first.{" "}
+                <Link
+                  href={OIL_GAS_HUB_PATH}
+                  className="text-[var(--white-80)] underline decoration-[var(--white-30)] underline-offset-4 hover:text-[var(--white-100)]"
+                >
+                  See the oil &amp; gas page
+                </Link>
+                .
+              </p>
+            </div>
+            <OilGasCaseCards cases={OIL_GAS_CASES_NEWEST_FIRST} />
+            {oilGasLogoCredits.length > 0 ? (
+              <p className="mt-4 text-[0.6rem] leading-relaxed text-[var(--white-40)]">
+                {oilGasLogoCredits.map((credit, i) => (
+                  <span key={credit.href}>
+                    {i > 0 ? " · " : null}
+                    <a href={credit.href} className="underline underline-offset-2 hover:text-[var(--white-60)]">
+                      {credit.text}
+                    </a>
+                  </span>
+                ))}
+              </p>
+            ) : null}
+          </section>
+
+          {/* Production systems */}
+          <p className="section-label mb-3">Production systems</p>
           {/* Case study cards */}
           <div className="space-y-0">
             {cases.map((c, i) => {
@@ -178,32 +225,6 @@ export function CaseStudiesContent() {
               );
             })}
           </div>
-
-          {/* Oil & gas project portfolio (each project has its own page) */}
-          <section className="mt-16 sm:mt-20" aria-labelledby="oil-gas-cases-heading">
-            <p className="section-label mb-3">Oil &amp; gas</p>
-            <div className="rule mb-6" />
-            <div className="mb-7 grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
-              <h2
-                id="oil-gas-cases-heading"
-                className="text-[clamp(1.1rem,3.5vw,1.5rem)] leading-snug text-[var(--white-100)]"
-              >
-                Oil &amp; gas project experience.
-              </h2>
-              <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
-                Six planning, control and reporting systems developed for oil &amp; gas companies between 2010 and
-                2020.{" "}
-                <Link
-                  href={OIL_GAS_HUB_PATH}
-                  className="text-[var(--white-80)] underline decoration-[var(--white-30)] underline-offset-4 hover:text-[var(--white-100)]"
-                >
-                  See the oil &amp; gas page
-                </Link>
-                .
-              </p>
-            </div>
-            <OilGasProjectList cases={OIL_GAS_CASE_LIST} variant="compact" />
-          </section>
 
           {/* CTA */}
           <div className="mt-16 border border-[var(--white-20)] bg-[var(--surface)] p-8 sm:p-12">
