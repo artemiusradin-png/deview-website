@@ -23,7 +23,6 @@ const structuredData = {
         value: LEGAL_ENTITY.registryNumber,
       },
       url: SITE_URL,
-      logo: `${SITE_URL}/logo.svg`,
       email: SITE_INQUIRY_EMAIL,
       description:
         "AI consulting and engineering firm building AI automation, custom software platforms, and data pipelines for operations and finance teams.",
