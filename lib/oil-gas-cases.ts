@@ -18,10 +18,39 @@ export const OIL_GAS_CASE_SLUGS = [
 
 export type OilGasCaseSlug = (typeof OIL_GAS_CASE_SLUGS)[number];
 
+export type OilGasLogo = {
+  src: string;
+  /** Intrinsic size of the file, so the browser reserves the right space before it loads. */
+  width: number;
+  height: number;
+  alt: string;
+  /** Attribution the file's licence requires (CC BY); shown under the case cards. */
+  credit?: { text: string; href: string };
+};
+
+/** Company logos from Wikimedia Commons. Lukoil-Engineering uses its parent group's Lukoil mark. */
+const LOGOS = {
+  gazpromNeft: { src: "/client-logos/oil-gas/gazprom-neft.png", width: 878, height: 433, alt: "Gazprom Neft logo" },
+  tomskneft: { src: "/client-logos/oil-gas/tomskneft.png", width: 138, height: 83, alt: "Tomskneft logo" },
+  lukoil: { src: "/client-logos/oil-gas/lukoil.svg", width: 157, height: 32, alt: "Lukoil logo" },
+  gazpromInternational: {
+    src: "/client-logos/oil-gas/gazprom-international.png",
+    width: 203,
+    height: 100,
+    alt: "Gazprom International logo",
+    credit: {
+      text: "Gazprom International logo: Wikimedia Commons, CC BY 3.0",
+      href: "https://commons.wikimedia.org/wiki/File:GInt_Blue.png",
+    },
+  },
+} satisfies Record<string, OilGasLogo>;
+
 export type OilGasCase = {
   slug: OilGasCaseSlug;
   year: number;
   company: string;
+  /** Company logo; when absent, cards show the company name in its place. */
+  logo?: OilGasLogo;
   /**
    * Where the project was delivered, only when the portfolio gives a non-Russian place.
    * Russian projects deliberately carry no location line; never label them "Worldwide".
@@ -50,6 +79,7 @@ export const OIL_GAS_CASES: Record<OilGasCaseSlug, OilGasCase> = {
     slug: "gazprom-neft-project-scheduling-control-system",
     year: 2010,
     company: "Gazprom Neft",
+    logo: LOGOS.gazpromNeft,
     companyNote: { label: "Unit", value: "Exploration and Production department" },
     project: "Project Scheduling and Control System",
     workType: "Development and implementation",
@@ -68,6 +98,7 @@ export const OIL_GAS_CASES: Record<OilGasCaseSlug, OilGasCase> = {
     slug: "tomskneft-project-management-system",
     year: 2013,
     company: "Tomskneft",
+    logo: LOGOS.tomskneft,
     project: "Project Management System",
     workType: "Development",
     discipline: "Project management",
@@ -84,6 +115,7 @@ export const OIL_GAS_CASES: Record<OilGasCaseSlug, OilGasCase> = {
     slug: "lukoil-engineering-engineering-data-management-system",
     year: 2013,
     company: "Lukoil-Engineering",
+    logo: LOGOS.lukoil,
     project: "Engineering Data Management System (Pilot)",
     workType: "Pilot implementation",
     discipline: "Engineering data management",
@@ -120,6 +152,7 @@ export const OIL_GAS_CASES: Record<OilGasCaseSlug, OilGasCase> = {
     slug: "gazprom-international-planning-control-system",
     year: 2018,
     company: "Gazprom International",
+    logo: LOGOS.gazpromInternational,
     project: "Planning and Control System for All Assets",
     workType: "Development and implementation",
     discipline: "Planning and control",
@@ -137,6 +170,7 @@ export const OIL_GAS_CASES: Record<OilGasCaseSlug, OilGasCase> = {
     slug: "gazprom-international-management-reporting-analytics-portal",
     year: 2020,
     company: "Gazprom International",
+    logo: LOGOS.gazpromInternational,
     project: "Management Reporting and Analytics Portal",
     workType: "Development",
     discipline: "Management reporting and analytics",
@@ -159,6 +193,9 @@ export const OIL_GAS_CASES: Record<OilGasCaseSlug, OilGasCase> = {
 };
 
 export const OIL_GAS_CASE_LIST: OilGasCase[] = OIL_GAS_CASE_SLUGS.map((slug) => OIL_GAS_CASES[slug]);
+
+/** Same projects, most recent first (projects from the same year keep their list order). */
+export const OIL_GAS_CASES_NEWEST_FIRST: OilGasCase[] = [...OIL_GAS_CASE_LIST].sort((a, b) => b.year - a.year);
 
 export function isOilGasCaseSlug(value: string): value is OilGasCaseSlug {
   return (OIL_GAS_CASE_SLUGS as readonly string[]).includes(value);

@@ -1329,7 +1329,7 @@ export const en = {
   caseStudiesPage: {
     sectionLabel: "CASE STUDIES",
     h1: "Measurable outcomes from live deployments.",
-    subtitle: "Three production systems across agriculture, lending, and senior care: each built around a real operational workflow.",
+    subtitle: "Oil & gas planning, control and reporting systems from 2010 to 2020, followed by three production systems across agriculture, lending, and senior care.",
     challengeLabel: "The Challenge",
     solutionLabel: "What We Built",
     capabilitiesLabel: "AI Capabilities",
