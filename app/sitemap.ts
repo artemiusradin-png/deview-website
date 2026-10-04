@@ -25,7 +25,6 @@ const publicEnglishPaths = [
   "/insights/four-ai-projects-worth-doing",
   "/insights/why-most-ai-pilots-fail",
   "/outcomes",
-  "/pricing",
   "/resources/ai-guide-lending",
   "/resources/ai-guide-lending/guide",
   "/roi-calculator",

@@ -27,9 +27,6 @@ export function SubpageNav({ backHref = `/#${RETRO_FEATURE_CARDS_ID}` }: Subpage
           <LocaleLink href="/services" className="nav-item">
             {dict.nav.services}
           </LocaleLink>
-          <LocaleLink href="/pricing" className="nav-item">
-            {dict.nav.pricing}
-          </LocaleLink>
           <LocaleLink href="/case-studies" className="nav-item">
             {dict.nav.caseStudies}
           </LocaleLink>

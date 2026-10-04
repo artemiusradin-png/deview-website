@@ -67,7 +67,6 @@ export function SiteFooter({ rootPrefix = "", hideCta = false }: SiteFooterProps
           title: f.explore,
           links: [
             { text: f.links.services, href: localePath("/services") },
-            { text: f.links.pricing, href: localePath("/pricing") },
             { text: f.links.outcomes, href: localePath("/outcomes") },
             { text: f.links.useCases, href: localePath("/use-cases") },
             { text: f.links.roiCalculator, href: localePath("/roi-calculator") },
