@@ -220,9 +220,6 @@ export function HomeContent() {
             <a href={localePath("/services")} className="nav-item">
               {dict.nav.services}
             </a>
-            <a href={localePath("/pricing")} className="nav-item">
-              {dict.nav.pricing}
-            </a>
             <a href={localePath("/case-studies")} className="nav-item">
               {dict.nav.caseStudies}
             </a>
@@ -263,9 +260,6 @@ export function HomeContent() {
           </a>
           <a href={localePath("/services")} onClick={closeNav}>
             {dict.nav.services}
-          </a>
-          <a href={localePath("/pricing")} onClick={closeNav}>
-            {dict.nav.pricing}
           </a>
           <a href={localePath("/case-studies")} onClick={closeNav}>
             {dict.nav.caseStudies}
