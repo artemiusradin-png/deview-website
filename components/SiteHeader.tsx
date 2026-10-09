@@ -60,7 +60,7 @@ export function SiteHeader({ home = false }: { home?: boolean }) {
           ref={wordmark}
           href={localePath("")}
           className={styles.wordmark}
-          aria-label="DeView home"
+          aria-label="Deview home"
           onClick={() => {
             close();
             playWordmarkFlash(wordmark.current);

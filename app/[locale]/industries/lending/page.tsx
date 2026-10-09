@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { LendingContent } from "./lending-content";
 
 export const metadata: Metadata = {
-  title: "AI for Lending & Finance Operations | DeView",
+  title: "AI for Lending & Finance Operations | Deview",
   description:
     "AI automation for lending and credit teams: borrower intelligence, loan document processing, credit analyst copilots, and regulatory reporting. Built for HKMA, PDPO, MAS TRM, and GDPR. Deployed in 3–6 weeks.",
   alternates: { canonical: "/en/industries/lending" },

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "Client Portal | DeView",
-  description: "Private project portal for DeView clients.",
+  title: "Client Portal | Deview",
+  description: "Private project portal for Deview clients.",
   robots: { index: false, follow: false },
 };
 

@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Editorial-style team member card: adapted to DeView's theme tokens.
+ * Editorial-style team member card: adapted to Deview's theme tokens.
  * Same overlapping layout at every breakpoint (portrait + large display name
  * overlapping it, circular CTA, left/right mirroring for alternating cards);
  * the portrait, name and CTA just scale down on small screens so the whole
@@ -31,7 +31,7 @@ export default function TeamMemberCard({
   lastName = "Radin",
   imageUrl = "/team/artemis-radin.jpg",
   initials,
-  description = "Artemis leads DeView's engagements end to end: from scoping the workflows that cost clients the most to shipping the AI systems that fix them.",
+  description = "Artemis leads Deview's engagements end to end: from scoping the workflows that cost clients the most to shipping the AI systems that fix them.",
   href = "/contact",
   className,
 }: TeamMemberCardProps) {
