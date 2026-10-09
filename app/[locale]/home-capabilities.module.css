@@ -81,10 +81,6 @@
   right: 28px;
   font-size: 30px;
   line-height: 1;
-  transition: transform 180ms;
-}
-.tabs button:hover .tabArrow {
-  transform: translate(2px, 2px);
 }
 .panel {
   display: grid;
@@ -128,60 +124,52 @@
   text-align: center;
   margin-top: 15px;
 }
-/* Line drawing (CapabilityDiagram is shared, so it is animated from here): the strokes trace
-   in, then the yellow focal shape settles and the labels appear. The panel remounts on every
-   tab change, so the drawing replays for each problem. A fixed dash longer than any stroke
-   keeps an even pen speed without editing the shared SVG. */
-.diagram svg g[stroke] > *,
-.diagram svg > path[stroke] {
+/* Line drawing (CapabilityDiagram is shared, so it is animated from here; see home-motion.tsx):
+   the strokes trace in, then the yellow shape settles and the bars rise. A fixed dash longer
+   than any stroke keeps an even pen speed without editing the shared SVG. */
+[data-motion="in"] .diagram svg g[stroke] > *,
+[data-motion="in"] .diagram svg > path[stroke] {
   animation: diagramDraw 1400ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
 }
-/* The finer detail (text lines, the tick) and the trend line come after the frame. */
-.diagram svg g[stroke] ~ g[stroke] > *,
-.diagram svg > rect ~ path[stroke] {
+[data-motion="in"] .diagram svg g[stroke] ~ g[stroke] > *,
+[data-motion="in"] .diagram svg > rect ~ path[stroke] {
   animation-delay: 450ms;
 }
-.diagram svg > :is(circle, rect)[stroke] {
+[data-motion="in"] .diagram svg > :is(circle, rect)[stroke] {
   transform-box: fill-box;
   transform-origin: center;
   animation: diagramFocal 800ms cubic-bezier(0.2, 0.7, 0.2, 1) 500ms backwards;
 }
-/* Bar chart: the bars rise from the axis in turn. */
-.diagram svg > rect:not([stroke]) {
+[data-motion="in"] .diagram svg > rect:not([stroke]) {
   transform-box: fill-box;
   transform-origin: bottom;
-  animation: diagramBar 800ms cubic-bezier(0.2, 0.7, 0.2, 1) 250ms backwards;
+  animation: diagramBar 800ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  animation-delay: calc(250ms + var(--bar, 0) * 70ms);
 }
 .diagram svg > rect:nth-of-type(2) {
-  animation-delay: 320ms;
+  --bar: 1;
 }
 .diagram svg > rect:nth-of-type(3) {
-  animation-delay: 390ms;
+  --bar: 2;
 }
 .diagram svg > rect:nth-of-type(4) {
-  animation-delay: 460ms;
+  --bar: 3;
 }
 .diagram svg > rect:nth-of-type(5) {
-  animation-delay: 530ms;
+  --bar: 4;
 }
 .diagram svg > rect:nth-of-type(6) {
-  animation-delay: 600ms;
+  --bar: 5;
 }
-.diagram svg text {
-  animation: diagramLabel 700ms ease 650ms backwards;
-}
-/* Below the fold: hold the blank page until the panel scrolls into view. */
-[data-reveal-state="armed"] .diagram svg :is(g[stroke] > *, path[stroke]) {
-  animation: none;
+[data-motion="armed"] .diagram svg g[stroke] > *,
+[data-motion="armed"] .diagram svg > path[stroke] {
   stroke-dasharray: 700;
   stroke-dashoffset: 700;
 }
-[data-reveal-state="armed"] .diagram svg :is(circle, rect[stroke], text) {
-  animation: none;
+[data-motion="armed"] .diagram svg > :is(circle, rect)[stroke] {
   opacity: 0;
 }
-[data-reveal-state="armed"] .diagram svg > rect:not([stroke]) {
-  animation: none;
+[data-motion="armed"] .diagram svg > rect:not([stroke]) {
   transform: scaleY(0);
 }
 @keyframes diagramDraw {
@@ -205,17 +193,7 @@
     transform: scaleY(0);
   }
 }
-@keyframes diagramLabel {
-  from {
-    opacity: 0;
-  }
-}
-/* Quick enough to replay on every tab change without feeling slow. */
 .panelCopy {
-  --reveal-delay: 60ms;
-  --reveal-step: 60ms;
-  --reveal-duration: 700ms;
-  --reveal-distance: 16px;
   padding: 40px;
   align-self: center;
 }
@@ -248,7 +226,6 @@
   color: #806000;
 }
 .panelCopy a {
-  --rule-color: #171207;
   display: flex;
   width: fit-content;
   align-items: center;
@@ -259,10 +236,6 @@
 }
 .panelCopy a span {
   font-size: 23px;
-  transition: transform 180ms;
-}
-.panelCopy a:hover span {
-  transform: translate(2px, -2px);
 }
 .services {
   display: grid;
@@ -277,15 +250,11 @@
   margin-top: 15px;
 }
 .serviceLinks {
-  --reveal-delay: 150ms;
-  --reveal-step: 70ms;
-  --reveal-distance: 12px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 32px;
 }
 .serviceLinks a {
-  --rule-color: #d7cfbf;
   display: flex;
   gap: 15px;
   justify-content: space-between;
@@ -294,15 +263,8 @@
   padding-block: 15px;
   font-size: 14px;
 }
-/* The rule is drawn by a pseudo-element (home-reveal.module.css), so hover recolours that. */
 .serviceLinks a:hover {
-  --rule-color: #171207;
-}
-.serviceLinks a span:last-child {
-  transition: transform 180ms;
-}
-.serviceLinks a:hover span:last-child {
-  transform: translate(2px, -2px);
+  border-color: #171207;
 }
 .section :is(button, a, [role="tabpanel"]):focus-visible {
   outline: 2px solid #171207;
