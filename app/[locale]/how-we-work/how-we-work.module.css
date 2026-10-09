@@ -1,0 +1,305 @@
+/* /how-we-work: phase timeline, one section per phase, and the promises row.
+   Selectors pair two classes where they must beat the `.site-interior main h2/h3`
+   type rules in app/editorial.css. */
+
+/* Four phases sized by how long each one takes. */
+.timeline {
+  margin-bottom: 120px;
+}
+.timelineLabel {
+  margin-bottom: 18px;
+}
+.track {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.track > li {
+  flex: var(--grow) 1 0;
+  min-width: 0;
+}
+.track a {
+  display: flex;
+  flex-direction: column;
+  color: #171207;
+}
+.mark {
+  display: flex;
+  align-items: end;
+  height: 46px;
+  padding: 0 0 10px 10px;
+  border-left: 1px solid #171207;
+  color: #806000;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.markEnd {
+  justify-content: end;
+  padding: 0 10px 10px 0;
+  border-left: 0;
+  border-right: 1px solid #171207;
+}
+.markEmpty {
+  border-left-color: transparent;
+}
+.bar {
+  height: 18px;
+  background: #171207;
+  transition: background 180ms;
+}
+.accent .bar {
+  background: #ffc933;
+  box-shadow: inset 0 0 0 1px #171207;
+}
+.track a:hover .bar {
+  background: #ffc933;
+}
+.phaseMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+  color: #806000;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+.phaseMeta span:last-child {
+  color: #655f54;
+  letter-spacing: 0;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.phaseName {
+  margin-top: 10px;
+  font-size: clamp(24px, 2.3vw, 36px);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+/* One phase: heading + what you get beside a large drawing. */
+.phase {
+  padding-bottom: 120px;
+}
+.phaseGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "head diagram"
+    "details diagram";
+  column-gap: 72px;
+  padding-top: 44px;
+  border-top: 1px solid #171207;
+}
+.flip .phaseGrid {
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-areas:
+    "diagram head"
+    "diagram details";
+}
+.phaseHead {
+  grid-area: head;
+}
+.kicker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.duration {
+  padding: 5px 11px;
+  border: 1px solid #d7cfbf;
+  color: #171207;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.phase .phaseTitle {
+  margin-top: 22px;
+  max-width: 16ch;
+  font-size: clamp(36px, 3.9vw, 60px);
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+}
+.phaseBody {
+  margin-top: 24px;
+  max-width: 42ch;
+  color: #655f54;
+}
+.phaseDiagram {
+  grid-area: diagram;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+  padding: 40px;
+  background: #f3eee2;
+  border: 1px solid #d7cfbf;
+  color: #171207;
+}
+.phaseDiagram svg {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+}
+.facts {
+  grid-area: details;
+  align-self: end;
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding-top: 48px;
+}
+.facts > div {
+  padding-block: 18px;
+  border-top: 1px solid #d7cfbf;
+}
+.facts > div:last-child {
+  border-bottom: 1px solid #d7cfbf;
+}
+.facts dd {
+  margin: 8px 0 0;
+  font-size: 20px;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+}
+
+/* Promises: four short facts in place of a FAQ. */
+.promises {
+  padding-top: 44px;
+  border-top: 1px solid #171207;
+}
+.promises .promisesTitle {
+  margin-top: 22px;
+  margin-bottom: 44px;
+  font-size: clamp(40px, 4.4vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+.promiseGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid #d7cfbf;
+  border-left: 1px solid #d7cfbf;
+}
+.promiseGrid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  min-height: 220px;
+  padding: 28px 28px 30px;
+  border-right: 1px solid #d7cfbf;
+  border-bottom: 1px solid #d7cfbf;
+}
+.promiseNumber {
+  color: #806000;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+.promiseText {
+  margin-top: auto;
+}
+.promises .promiseTitle {
+  font-size: clamp(28px, 2.6vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+.promiseBody {
+  margin-top: 12px;
+  color: #514a3e;
+}
+
+@media (max-width: 1100px) {
+  .timeline {
+    margin-bottom: 90px;
+  }
+  .phase {
+    padding-bottom: 90px;
+  }
+  .phaseGrid,
+  .flip .phaseGrid {
+    column-gap: 40px;
+  }
+  .phaseDiagram {
+    min-height: 400px;
+    padding: 32px;
+  }
+  .promiseGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  /* Stacked rows; each bar keeps its length relative to the longest phase. */
+  .track {
+    flex-direction: column;
+    gap: 22px;
+  }
+  .track > li {
+    flex: none;
+  }
+  .mark {
+    display: none;
+  }
+  .bar {
+    order: 1;
+    width: var(--w);
+    height: 14px;
+    margin-top: 12px;
+  }
+  .phaseGrid,
+  .flip .phaseGrid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+      "head"
+      "diagram"
+      "details";
+  }
+  .phaseDiagram {
+    min-height: 0;
+    margin-top: 32px;
+    padding: 28px 18px;
+  }
+  .facts {
+    padding-top: 32px;
+  }
+}
+
+@media (max-width: 760px) {
+  .timeline {
+    margin-bottom: 60px;
+  }
+  .phase {
+    padding-bottom: 70px;
+  }
+  .phaseGrid,
+  .promises {
+    padding-top: 32px;
+  }
+  /* Full-bleed drawing on phones so its labels stay legible. */
+  .phaseDiagram {
+    margin-inline: -20px;
+    padding: 24px 8px;
+    border-inline: 0;
+  }
+  .facts dd {
+    font-size: 18px;
+  }
+  .promises .promisesTitle {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 560px) {
+  .promiseGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .promiseGrid > div {
+    min-height: 0;
+    gap: 32px;
+  }
+}

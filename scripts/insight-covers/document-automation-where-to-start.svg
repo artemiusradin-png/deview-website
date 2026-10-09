@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <!-- A document passes four checkpoints before it becomes structured data. -->
+  <rect width="1200" height="675" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3">
+    <path d="M134 202v-20h180v230h-20M122 222v-20h180v230h-20"/>
+    <rect x="110" y="222" width="180" height="230"/>
+    <path d="M140 270h120M140 298h92M140 326h110M140 384h80M140 412h104"/>
+    <path d="M314 337h566"/>
+  </g>
+  <g fill="#f3eee2" stroke="#171207" stroke-width="3">
+    <circle cx="410" cy="337" r="36"/>
+    <circle cx="530" cy="337" r="36"/>
+    <circle cx="650" cy="337" r="36"/>
+    <circle cx="770" cy="337" r="36"/>
+  </g>
+  <path d="M394 338l11 11 22-25M514 338l11 11 22-25M634 338l11 11 22-25M754 338l11 11 22-25" stroke="#171207" stroke-width="4"/>
+  <rect x="880" y="232" width="210" height="210" fill="#ffc933" stroke="#171207" stroke-width="3"/>
+  <g stroke="#171207" stroke-width="3">
+    <path d="M880 302h210M880 372h210M960 232v210"/>
+    <path d="M900 267h40M980 267h86M900 337h40M980 337h66M900 407h40M980 407h78"/>
+  </g>
+</svg>
