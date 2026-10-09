@@ -1,0 +1,11 @@
+/* CountUp: the final value and the counting value share one grid cell. */
+.count {
+  display: inline-grid;
+  font-variant-numeric: tabular-nums;
+}
+.count > span {
+  grid-area: 1 / 1;
+}
+.count > span:first-child {
+  visibility: hidden;
+}

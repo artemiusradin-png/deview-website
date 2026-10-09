@@ -7,27 +7,18 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { TeamGrid } from "@/components/TeamGrid";
 import { HomeCapabilities } from "./home-capabilities";
 import { HeroBackgroundVideo } from "./home-hero-video";
-import {
-  RevealLines,
-  revealDelay,
-  revealIndex,
-  useHomeReveal,
-} from "./home-reveal";
+import { CountUp, useMotionOnView } from "./home-motion";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { INSIGHT_ARTICLES } from "@/lib/insights";
 import { SITE_INQUIRY_EMAIL, buildInquiryMailto } from "@/lib/site-contact";
 import styles from "./home.module.css";
-import reveal from "./home-reveal.module.css";
 
 function Arrow({
   diagonal = false,
-  draw = false,
   className = "",
 }: {
   diagonal?: boolean;
-  /** Trace the arrow in, shaft first, as part of a reveal. */
-  draw?: boolean;
   className?: string;
 }) {
   return (
@@ -41,8 +32,7 @@ function Arrow({
         d={diagonal ? "M7 25 25 7M7 7h18v18" : "M4 16h23M17 6l10 10-10 10"}
         stroke="currentColor"
         strokeWidth="1.5"
-        pathLength={draw ? 1 : undefined}
-        className={draw ? reveal.draw : undefined}
+        pathLength={1}
       />
     </svg>
   );
@@ -124,24 +114,20 @@ function SectionHeading({
 }: {
   number: string;
   label: string;
-  /** Display lines of the heading. */
-  title: string[];
+  title: ReactNode;
   id: string;
-  /** Give it `reveal.rise` so it follows the heading in. */
   children?: ReactNode;
 }) {
   return (
-    <div data-reveal>
-      <p className={`${styles.eyebrow} ${reveal.fade}`}>
+    <>
+      <p className={styles.eyebrow}>
         {number} / {label}
       </p>
       <div className={styles.sectionIntro}>
-        <h2 id={id} style={revealDelay(80)}>
-          <RevealLines lines={title} />
-        </h2>
+        <h2 id={id}>{title}</h2>
         {children}
       </div>
-    </div>
+    </>
   );
 }
 
@@ -150,9 +136,13 @@ export function HomeContent({
   heroVideoPoster,
 }: { heroVideoSrc?: string; heroVideoPoster?: string } = {}) {
   const { dict, localePath } = useLocaleContext();
-  const pageRef = useRef<HTMLDivElement>(null);
-  useHomeReveal(pageRef);
   const [logosPaused, setLogosPaused] = useState(false);
+  const portalRef = useRef<SVGSVGElement>(null);
+  const processRef = useRef<HTMLOListElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
+  useMotionOnView(portalRef);
+  useMotionOnView(processRef, 0.5);
+  useMotionOnView(contactRef);
   const [inquiryStatus, setInquiryStatus] = useState<
     "idle" | "sending" | "success" | "error"
   >("idle");
@@ -195,7 +185,7 @@ export function HomeContent({
   }
 
   return (
-    <div ref={pageRef} className={styles.page}>
+    <div className={styles.page}>
       <a href="#main-content" className={styles.skipLink}>
         Skip to content
       </a>
@@ -211,37 +201,25 @@ export function HomeContent({
               />
             )}
             <div className={`${styles.heroContent} ${styles.container}`}>
-              <div className={`${styles.heroEyebrow} ${reveal.fade}`}>
+              <div className={styles.heroEyebrow}>
                 <p className={styles.eyebrow}>AI + software + data</p>
                 <span>Built for the real world.</span>
               </div>
-              <h1
-                id="hero-title"
-                className={styles.heroTitle}
-                style={revealDelay(80)}
-              >
-                <span className={reveal.line}>
-                  <span>Less busywork.</span>
-                </span>{" "}
-                <span
-                  className={`${reveal.line} ${styles.heroSecondLine}`}
-                  style={revealIndex(1)}
-                >
-                  <span>More impact.</span>
-                  <Arrow draw className={styles.heroArrow} />
+              <h1 id="hero-title" className={styles.heroTitle}>
+                <span>Less busywork.</span>
+                <span className={styles.heroSecondLine}>
+                  More impact.
+                  <Arrow className={styles.heroArrow} />
                 </span>
               </h1>
               <div className={styles.heroBottom}>
                 <div className={styles.heroIntro}>
-                  <p className={reveal.rise} style={revealDelay(420)}>
+                  <p>
                     We build AI, software, and data systems that take the
                     busywork off your plate. So your people can get back to what
                     matters.
                   </p>
-                  <div
-                    className={`${styles.heroActions} ${reveal.rise}`}
-                    style={revealDelay(540)}
-                  >
+                  <div className={styles.heroActions}>
                     <Link
                       href={localePath("/contact")}
                       className={`${styles.button} ${styles.buttonAccent}`}
@@ -257,15 +235,14 @@ export function HomeContent({
             </div>
           </div>
           <div
-            className={`${styles.clients} ${styles.container} ${reveal.rule} ${reveal.ruleBottom}`}
+            className={`${styles.clients} ${styles.container}`}
             data-paused={logosPaused}
-            style={revealDelay(640)}
           >
-            <p className={reveal.fade}>
+            <p>
               Good company.
               <br /> Real projects.
             </p>
-            <div className={`${styles.clientMarquee} ${reveal.fade}`}>
+            <div className={styles.clientMarquee}>
               <div className={styles.clientTrack}>
                 <ProjectLogos />
                 <ProjectLogos duplicate />
@@ -273,7 +250,7 @@ export function HomeContent({
             </div>
             <button
               type="button"
-              className={`${styles.clientPause} ${reveal.fade}`}
+              className={styles.clientPause}
               aria-label={
                 logosPaused
                   ? "Resume scrolling companies"
@@ -306,13 +283,18 @@ export function HomeContent({
           <SectionHeading
             number="02"
             label="Selected work"
-            title={["Less talk.", "More working."]}
+            title={
+              <>
+                Less talk.
+                <br />
+                More working.
+              </>
+            }
             id="work-title"
           >
             <Link
               href={localePath("/case-studies")}
-              className={`${styles.textLink} ${reveal.rise}`}
-              style={revealDelay(320)}
+              className={styles.textLink}
             >
               All case studies <Arrow diagonal />
             </Link>
@@ -321,9 +303,7 @@ export function HomeContent({
             <Link
               id="featured-deployment"
               href={localePath("/case-studies")}
-              className={`${styles.project} ${reveal.rise}`}
-              style={revealIndex(0)}
-              data-reveal
+              className={styles.project}
               aria-label="Read the AgroPlatforma case study"
             >
               <div className={`${styles.projectArtwork} ${styles.agroArtwork}`}>
@@ -334,7 +314,10 @@ export function HomeContent({
                 <div className={styles.timeResult}>
                   <span className={styles.oldTime}>~40 min</span>
                   <div className={styles.newTime}>
-                    <span>&lt;30</span>
+                    <span>
+                      &lt;
+                      <CountUp to={30} />
+                    </span>
                     <span>sec.</span>
                   </div>
                 </div>
@@ -362,9 +345,7 @@ export function HomeContent({
             <Link
               id="featured-deployment-finance"
               href={localePath("/case-studies")}
-              className={`${styles.project} ${reveal.rise}`}
-              style={revealIndex(1)}
-              data-reveal
+              className={styles.project}
               aria-label="Read the DeView Unified Portal case study"
             >
               <div
@@ -380,6 +361,7 @@ export function HomeContent({
                   One clear view.
                 </div>
                 <svg
+                  ref={portalRef}
                   className={styles.portalDrawing}
                   viewBox="0 0 500 220"
                   fill="none"
@@ -387,20 +369,18 @@ export function HomeContent({
                 >
                   <g stroke="currentColor" strokeWidth="1.5">
                     <path
+                      className={styles.portalLinks}
                       d="M80 33h64c36 0 17 77 64 77h77M80 71h42c36 0 22 39 68 39M80 110h205M80 149h42c36 0 22-39 68-39M80 187h64c36 0 17-77 64-77h77"
                       pathLength={1}
-                      className={reveal.draw}
-                      style={revealDelay(560)}
                     />
-                    {[15, 53, 92, 131, 169].map((y, index) => (
+                    {[15, 53, 92, 131, 169].map((y) => (
                       <rect
                         key={y}
                         x="43"
                         y={y}
                         width="36"
                         height="36"
-                        className={`${styles.diagramNode} ${reveal.fade}`}
-                        style={revealDelay(380 + index * 60)}
+                        className={styles.diagramNode}
                       />
                     ))}
                     <rect
@@ -409,25 +389,21 @@ export function HomeContent({
                       width="160"
                       height="124"
                       fill="#171207"
-                      className={reveal.fade}
-                      style={revealDelay(950)}
                     />
                   </g>
                   <path
+                    className={styles.portalLines}
                     d="M310 75h39m-39 13h66m-66 15h110"
                     stroke="#f3eee2"
                     strokeWidth="2"
                     pathLength={1}
-                    className={reveal.draw}
-                    style={revealDelay(1150)}
                   />
                   <path
+                    className={styles.portalTick}
                     d="m332 137 19 14 46-38"
                     stroke="#ffc933"
                     strokeWidth="5"
                     pathLength={1}
-                    className={reveal.draw}
-                    style={revealDelay(1350)}
                   />
                 </svg>
                 <div className={styles.artworkBottom}>
@@ -462,74 +438,52 @@ export function HomeContent({
           <SectionHeading
             number="03"
             label={dict.process.sectionLabel}
-            title={["Small team.", "Full follow-through."]}
+            title={
+              <>
+                Small team.
+                <br />
+                Full follow-through.
+              </>
+            }
             id="approach-title"
           >
-            <p className={reveal.rise} style={revealDelay(320)}>
+            <p>
               You work directly with the people who design and build your
               system. We scope the problem, ship in weeks, and stay for what
               comes next.
             </p>
           </SectionHeading>
-          <ol className={styles.processSteps}>
-            {dict.process.steps.map((step, index) => (
-              <li
-                key={step.number}
-                className={reveal.rule}
-                style={revealIndex(index)}
-                data-reveal
-              >
-                <div
-                  className={`${styles.processStepTop} ${reveal.fade}`}
-                  style={revealDelay(120)}
-                >
+          <ol ref={processRef} className={styles.processSteps}>
+            {dict.process.steps.map((step) => (
+              <li key={step.number}>
+                <div className={styles.processStepTop}>
                   <span>{step.number}</span>
-                  <Arrow draw />
+                  <Arrow />
                 </div>
-                <h3 className={reveal.rise} style={revealDelay(200)}>
+                <h3>
                   {step.label.charAt(0) + step.label.slice(1).toLowerCase()}
                 </h3>
-                <p className={reveal.rise} style={revealDelay(280)}>
-                  {step.body}
-                </p>
+                <p>{step.body}</p>
               </li>
             ))}
           </ol>
-          <Link
-            href={localePath("/how-we-work")}
-            className={`${styles.textLink} ${reveal.rise}`}
-            data-reveal
-          >
+          <Link href={localePath("/how-we-work")} className={styles.textLink}>
             A closer look at our process <Arrow diagonal />
           </Link>
         </section>
 
         <section
           id="industries"
-          className={`${styles.industries} ${styles.container} ${reveal.rule} ${reveal.ruleBottom}`}
+          className={`${styles.industries} ${styles.container}`}
           aria-label="Industries we serve"
-          data-reveal
         >
-          <p
-            className={`${styles.eyebrow} ${reveal.fade}`}
-            style={revealDelay(200)}
-          >
-            Experience across
-          </p>
+          <p className={styles.eyebrow}>Experience across</p>
           <nav aria-label="Industries">
-            <Link
-              href={localePath("/industries/oil-and-gas")}
-              className={reveal.rise}
-            >
+            <Link href={localePath("/industries/oil-and-gas")}>
               Oil &amp; gas <Arrow diagonal />
             </Link>
-            {dict.industries.tiles.map((industry, index) => (
-              <Link
-                key={industry.id}
-                href={localePath(industry.href)}
-                className={reveal.rise}
-                style={revealIndex(index + 1)}
-              >
+            {dict.industries.tiles.map((industry) => (
+              <Link key={industry.id} href={localePath(industry.href)}>
                 {industry.label.toLowerCase()} <Arrow diagonal />
               </Link>
             ))}
@@ -545,33 +499,24 @@ export function HomeContent({
             <SectionHeading
               number="04"
               label="The people"
-              title={["Good minds.", "Better together."]}
+              title={
+                <>
+                  Good minds.
+                  <br />
+                  Better together.
+                </>
+              }
               id="team-title"
             >
-              <p className={reveal.rise} style={revealDelay(320)}>
+              <p>
                 The people you talk to are the people who build it. Meet the
                 team behind your next move.
               </p>
             </SectionHeading>
-            <div
-              className={styles.teamReveal}
-              data-reveal
-              data-reveal-items="li"
-            >
-              <TeamGrid />
-            </div>
-            <div
-              className={`${styles.teamFooter} ${reveal.rule}`}
-              data-reveal
-            >
-              <p className={reveal.fade} style={revealDelay(250)}>
-                Hong Kong · Vancouver · Edinburgh · Stuttgart
-              </p>
-              <Link
-                href={localePath("/about")}
-                className={`${styles.textLink} ${reveal.rise}`}
-                style={revealDelay(350)}
-              >
+            <TeamGrid />
+            <div className={styles.teamFooter}>
+              <p>Hong Kong · Vancouver · Edinburgh · Stuttgart</p>
+              <Link href={localePath("/about")} className={styles.textLink}>
                 More about DeView <Arrow diagonal />
               </Link>
             </div>
@@ -587,14 +532,16 @@ export function HomeContent({
             <SectionHeading
               number="05"
               label={dict.insights.sectionLabel}
-              title={["Good questions.", "Useful answers."]}
+              title={
+                <>
+                  Good questions.
+                  <br />
+                  Useful answers.
+                </>
+              }
               id="insights-title"
             >
-              <Link
-                href={localePath("/insights")}
-                className={`${styles.textLink} ${reveal.rise}`}
-                style={revealDelay(320)}
-              >
+              <Link href={localePath("/insights")} className={styles.textLink}>
                 All insights <Arrow diagonal />
               </Link>
             </SectionHeading>
@@ -605,24 +552,14 @@ export function HomeContent({
                   <Link
                     key={meta.slug}
                     href={localePath(`/insights/${meta.slug}`)}
-                    className={`${styles.insightCard} ${reveal.rule}`}
-                    style={revealIndex(index)}
-                    data-reveal
+                    className={styles.insightCard}
                   >
-                    <div
-                      className={`${styles.insightMeta} ${reveal.fade}`}
-                      style={revealDelay(250)}
-                    >
+                    <div className={styles.insightMeta}>
                       <span>{article.label}</span>
                       <span>{article.readTime}</span>
                     </div>
-                    <h3 className={reveal.rise} style={revealDelay(300)}>
-                      {article.title}
-                    </h3>
-                    <span
-                      className={`${styles.textLink} ${reveal.rise}`}
-                      style={revealDelay(400)}
-                    >
+                    <h3>{article.title}</h3>
+                    <span className={styles.textLink}>
                       Read the story <Arrow diagonal />
                     </span>
                   </Link>
@@ -634,51 +571,34 @@ export function HomeContent({
 
         <section
           id="contact"
+          ref={contactRef}
           className={styles.contact}
           aria-labelledby="contact-title"
         >
           <div className={styles.container}>
-            <p className={`${styles.eyebrow} ${reveal.fade}`} data-reveal>
-              {dict.footer.ctaLabel}
-            </p>
-            <Link
-              href={localePath("/contact")}
-              className={styles.contactLink}
-              data-reveal
-            >
+            <p className={styles.eyebrow}>{dict.footer.ctaLabel}</p>
+            <Link href={localePath("/contact")} className={styles.contactLink}>
               <h2 id="contact-title">
-                <RevealLines lines={["Your next", "move."]} />
+                Your next
+                <br />
+                move.
               </h2>
-              <Arrow diagonal draw className={styles.contactArrow} />
+              <Arrow diagonal className={styles.contactArrow} />
             </Link>
-            <div
-              className={`${styles.contactBottom} ${reveal.rule}`}
-              data-reveal
-            >
-              <p className={reveal.rise} style={revealDelay(200)}>
-                {dict.footer.ctaCopy}
-              </p>
-              <Link
-                href={localePath("/contact")}
-                className={`${styles.button} ${reveal.rise}`}
-                style={revealDelay(300)}
-              >
+            <div className={styles.contactBottom}>
+              <p>{dict.footer.ctaCopy}</p>
+              <Link href={localePath("/contact")} className={styles.button}>
                 Let’s talk <Arrow diagonal />
               </Link>
               <a
                 href={`mailto:${SITE_INQUIRY_EMAIL}`}
-                className={`${styles.contactEmail} ${reveal.rise}`}
-                style={revealDelay(380)}
+                className={styles.contactEmail}
               >
                 {SITE_INQUIRY_EMAIL}
               </a>
             </div>
-            <details
-              id="inquiry"
-              className={`${styles.inquiryDisclosure} ${reveal.rule}`}
-              data-reveal
-            >
-              <summary className={reveal.fade} style={revealDelay(250)}>
+            <details id="inquiry" className={styles.inquiryDisclosure}>
+              <summary>
                 <span>Prefer to write?</span>
                 <span>
                   Send us a note{" "}

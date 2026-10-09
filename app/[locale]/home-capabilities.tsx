@@ -4,9 +4,8 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { CapabilityDiagram } from "@/components/CapabilityDiagram";
-import { RevealLines, revealDelay, revealIndex } from "./home-reveal";
+import { useMotionOnView } from "./home-motion";
 import styles from "./home-capabilities.module.css";
-import reveal from "./home-reveal.module.css";
 
 const directions = [
   {
@@ -33,6 +32,10 @@ export function HomeCapabilities() {
   const { dict, localePath } = useLocaleContext();
   const [active, setActive] = useState(0);
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
+  // The drawing traces in when the panel scrolls into view, and again on every tab change
+  // (the panel remounts, so its animation restarts).
+  const panels = useRef<HTMLDivElement>(null);
+  useMotionOnView(panels);
   const practice = dict.practices.items[active];
   const direction = directions[active];
   return (
@@ -42,16 +45,16 @@ export function HomeCapabilities() {
       aria-labelledby="expertise-title"
     >
       <div id="retro-feature-cards" />
-      <div className={styles.heading} data-reveal>
+      <div className={styles.heading}>
         <div>
-          <p className={`${styles.kicker} ${reveal.fade}`}>
-            01 / A better way to work
-          </p>
-          <h2 id="expertise-title" style={revealDelay(80)}>
-            <RevealLines lines={["Less friction.", "More possibility."]} />
+          <p className={styles.kicker}>01 / A better way to work</p>
+          <h2 id="expertise-title">
+            Less friction.
+            <br />
+            More possibility.
           </h2>
         </div>
-        <p className={reveal.rise} style={revealDelay(320)}>
+        <p>
           Start with what’s getting in the way.
           <br />
           We’ll build what moves you forward.
@@ -62,7 +65,6 @@ export function HomeCapabilities() {
         role="tablist"
         aria-label="What is slowing your business down?"
         className={styles.tabs}
-        data-reveal
       >
         {directions.map((item, index) => (
           <button
@@ -73,7 +75,6 @@ export function HomeCapabilities() {
             aria-selected={index === active}
             aria-controls={`capability-panel-${index}`}
             tabIndex={index === active ? 0 : -1}
-            style={revealIndex(index)}
             ref={(el) => {
               buttons.current[index] = el;
             }}
@@ -96,77 +97,54 @@ export function HomeCapabilities() {
               }
             }}
           >
-            <span className={`${styles.tabMeta} ${reveal.fade}`}>
+            <span className={styles.tabMeta}>
               0{index + 1}
               <span>{dict.practices.items[index].heading}</span>
             </span>
-            <span
-              className={`${styles.problem} ${reveal.rise}`}
-              style={revealDelay(80)}
-            >
-              {item.problem}
-            </span>
-            <span
-              className={`${styles.tabArrow} ${reveal.fade}`}
-              style={revealDelay(300)}
-              aria-hidden="true"
-            >
+            <span className={styles.problem}>{item.problem}</span>
+            <span className={styles.tabArrow} aria-hidden="true">
               ↘
             </span>
           </button>
         ))}
       </div>
-      {directions.map((item, index) => (
-        <div
-          key={item.problem}
-          role="tabpanel"
-          id={`capability-panel-${index}`}
-          aria-labelledby={`capability-tab-${index}`}
-          hidden={index !== active}
-          tabIndex={0}
-          data-reveal
-        >
-          {index === active && (
-            <div className={styles.panel}>
-              <div className={styles.diagram}>
-                <CapabilityDiagram mode={active} />
-                <p className={reveal.fade} style={revealDelay(700)}>
-                  {direction.note}
-                </p>
+      <div ref={panels}>
+        {directions.map((item, index) => (
+          <div
+            key={item.problem}
+            role="tabpanel"
+            id={`capability-panel-${index}`}
+            aria-labelledby={`capability-tab-${index}`}
+            hidden={index !== active}
+            tabIndex={0}
+          >
+            {index === active && (
+              <div className={styles.panel}>
+                <div className={styles.diagram}>
+                  <CapabilityDiagram mode={active} />
+                  <p>{direction.note}</p>
+                </div>
+                <div className={styles.panelCopy}>
+                  <p className={styles.kicker}>{practice.heading}</p>
+                  <h3>{direction.title}</h3>
+                  <p>{direction.copy}</p>
+                  <ul>
+                    {practice.subs.slice(0, 4).map((capability) => (
+                      <li key={capability}>{capability}</li>
+                    ))}
+                  </ul>
+                  <Link href={localePath(`/services#${practice.id}`)}>
+                    Explore {practice.heading.toLowerCase()}{" "}
+                    <span aria-hidden="true">↗</span>
+                  </Link>
+                </div>
               </div>
-              <div className={styles.panelCopy}>
-                <p
-                  className={`${styles.kicker} ${reveal.fade}`}
-                  style={revealIndex(0)}
-                >
-                  {practice.heading}
-                </p>
-                <h3 className={reveal.rise} style={revealIndex(1)}>
-                  {direction.title}
-                </h3>
-                <p className={reveal.rise} style={revealIndex(2)}>
-                  {direction.copy}
-                </p>
-                <ul className={reveal.rise} style={revealIndex(3)}>
-                  {practice.subs.slice(0, 4).map((capability) => (
-                    <li key={capability}>{capability}</li>
-                  ))}
-                </ul>
-                <Link
-                  href={localePath(`/services#${practice.id}`)}
-                  className={`${reveal.rise} ${reveal.ruleBottom}`}
-                  style={revealIndex(4)}
-                >
-                  Explore {practice.heading.toLowerCase()}{" "}
-                  <span aria-hidden="true">↗</span>
-                </Link>
-              </div>
-            </div>
-          )}
-        </div>
-      ))}
-      <div id="services" className={styles.services} data-reveal>
-        <div className={reveal.rise}>
+            )}
+          </div>
+        ))}
+      </div>
+      <div id="services" className={styles.services}>
+        <div>
           <p className={styles.kicker}>A place to start</p>
           <h3>
             One useful change
@@ -175,13 +153,8 @@ export function HomeCapabilities() {
           </h3>
         </div>
         <div className={styles.serviceLinks}>
-          {dict.services.items.map((service, index) => (
-            <Link
-              key={service.id}
-              href={localePath(`/services#${service.id}`)}
-              className={`${reveal.rise} ${reveal.ruleBottom}`}
-              style={revealIndex(index)}
-            >
+          {dict.services.items.map((service) => (
+            <Link key={service.id} href={localePath(`/services#${service.id}`)}>
               <span>{service.label}</span>
               <span aria-hidden="true">↗</span>
             </Link>
