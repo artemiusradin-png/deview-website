@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <!-- Four pilots set off; three stall before production, one gets there. -->
+  <rect width="1200" height="675" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3">
+    <rect x="150" y="110" width="90" height="80"/>
+    <rect x="150" y="225" width="90" height="80"/>
+    <rect x="150" y="340" width="90" height="80"/>
+    <rect x="150" y="455" width="90" height="80"/>
+    <path d="M170 140h48M170 156h32M170 255h48M170 271h32M170 370h48M170 386h32M170 485h48M170 501h32"/>
+    <path d="M240 150h280M240 265h400M240 495h200" stroke-dasharray="12 12"/>
+    <path d="M520 128v44M640 243v44M440 473v44" stroke-width="4"/>
+    <path d="M240 380c300 0 260-43 560-43"/>
+  </g>
+  <rect x="800" y="232" width="250" height="210" fill="#ffc933" stroke="#171207" stroke-width="3"/>
+  <path d="m872 340 40 40 88-98" stroke="#171207" stroke-width="7"/>
+</svg>

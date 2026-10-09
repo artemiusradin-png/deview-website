@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <!-- Four projects: document intake (first to pay back), knowledge search, support drafting, reporting. -->
+  <rect width="1200" height="675" fill="#f3eee2"/>
+  <rect x="135" y="232" width="210" height="210" fill="#ffc933" stroke="#171207" stroke-width="3"/>
+  <g stroke="#171207" stroke-width="3">
+    <rect x="375" y="232" width="210" height="210"/>
+    <rect x="615" y="232" width="210" height="210"/>
+    <rect x="855" y="232" width="210" height="210"/>
+    <!-- document intake -->
+    <path d="M196 282h66l26 26v84h-92z M262 282v26h26"/>
+    <path d="M214 326h56M214 346h44M214 366h52"/>
+    <!-- knowledge search -->
+    <path d="M420 290h86M420 312h64M420 334h78M420 356h50"/>
+    <circle cx="500" cy="352" r="34" fill="#f3eee2"/>
+    <path d="m524 376 28 28" stroke-width="6"/>
+    <!-- support drafting -->
+    <path d="M652 278h100v56h-62l-20 18v-18h-18z"/>
+    <path d="M690 354h100v56h-18v18l-20-18h-62z"/>
+    <path d="M670 300h62M670 314h44M708 376h62M708 390h40"/>
+    <!-- reporting -->
+    <path d="M895 280v122h130"/>
+    <path d="m905 372 34-30 28 16 48-52"/>
+  </g>
+  <g fill="#171207">
+    <rect x="915" y="378" width="16" height="24"/>
+    <rect x="945" y="364" width="16" height="38"/>
+    <rect x="975" y="346" width="16" height="56"/>
+    <rect x="1005" y="326" width="16" height="76"/>
+  </g>
+</svg>
