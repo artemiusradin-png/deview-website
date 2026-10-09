@@ -1,0 +1,151 @@
+/* Landing-page reveals (see home-reveal.tsx). Every piece plays once as it mounts, so the page
+   always settles in its final state. A [data-reveal] block that home-reveal.tsx arms below the
+   fold holds its pieces on their opening frame until it scrolls into view. Pieces inherit two
+   timings: --i (place in a staggered row, times --reveal-step) and --reveal-delay. */
+.rise,
+.fade,
+.line > span,
+.rule::before,
+.ruleBottom::after,
+.draw {
+  animation-duration: var(--reveal-duration, 900ms);
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+  animation-fill-mode: backwards;
+  animation-delay: calc(
+    var(--reveal-delay, 0ms) + var(--i, 0) * var(--reveal-step, 90ms)
+  );
+}
+
+/* Rise: fades up into place. */
+.rise {
+  animation-name: revealRise;
+}
+/* Fade: opacity only, for small labels. */
+.fade {
+  animation-name: revealFade;
+}
+
+/* Line: a display line slides up out of its own mask. The bottom padding, cancelled by the
+   negative margin, leaves room for descenders, so the mask never moves the layout. */
+.line {
+  --reveal-step: 110ms;
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+.line > span {
+  --reveal-duration: 1000ms;
+  display: block;
+  animation-name: revealLine;
+}
+
+/* Rule: a hairline drawn left to right. It stands in for the element's top (or bottom) border,
+   in the same place and colour (--rule-color), so the finished frame is unchanged. */
+.rule,
+.ruleBottom {
+  position: relative;
+}
+.rule {
+  border-top-color: transparent !important;
+}
+.ruleBottom {
+  border-bottom-color: transparent !important;
+}
+.rule::before,
+.ruleBottom::after {
+  --reveal-duration: 1200ms;
+  content: "";
+  position: absolute;
+  left: var(--rule-start, 0);
+  right: 0;
+  height: 1px;
+  background: var(--rule-color, currentColor);
+  transform-origin: left;
+  animation-name: revealRule;
+}
+.rule::before {
+  top: -1px;
+}
+.ruleBottom::after {
+  bottom: -1px;
+}
+
+/* Draw: a stroke traced along its length (the path needs pathLength="1"). */
+.draw {
+  --reveal-duration: 1100ms;
+  animation-name: revealDraw;
+}
+
+/* Armed: hold the opening frame until the block scrolls into view. */
+:is([data-reveal-state="armed"], [data-reveal-state="armed"] *):is(
+    .rise,
+    .fade
+  ) {
+  animation: none;
+  opacity: 0;
+}
+:is([data-reveal-state="armed"], [data-reveal-state="armed"] *).rise {
+  transform: translateY(var(--reveal-distance, 24px));
+}
+[data-reveal-state="armed"] .line > span {
+  animation: none;
+  transform: translateY(110%);
+}
+:is([data-reveal-state="armed"], [data-reveal-state="armed"] *).rule::before,
+:is(
+    [data-reveal-state="armed"],
+    [data-reveal-state="armed"] *
+  ).ruleBottom::after {
+  animation: none;
+  transform: scaleX(0);
+}
+[data-reveal-state="armed"] .draw {
+  animation: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+@keyframes revealRise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance, 24px));
+  }
+}
+@keyframes revealFade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes revealLine {
+  from {
+    transform: translateY(110%);
+  }
+}
+@keyframes revealRule {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes revealDraw {
+  from {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Reduced motion: everything is simply there (home-reveal.tsx never arms a block either). */
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .fade,
+  .line > span,
+  .rule::before,
+  .ruleBottom::after,
+  .draw {
+    animation: none !important;
+  }
+}
