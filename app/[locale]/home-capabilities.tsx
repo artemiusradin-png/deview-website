@@ -4,7 +4,9 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { CapabilityDiagram } from "@/components/CapabilityDiagram";
+import { RevealLines, revealDelay, revealIndex } from "./home-reveal";
 import styles from "./home-capabilities.module.css";
+import reveal from "./home-reveal.module.css";
 
 const directions = [
   {
@@ -40,16 +42,16 @@ export function HomeCapabilities() {
       aria-labelledby="expertise-title"
     >
       <div id="retro-feature-cards" />
-      <div className={styles.heading}>
+      <div className={styles.heading} data-reveal>
         <div>
-          <p className={styles.kicker}>01 / A better way to work</p>
-          <h2 id="expertise-title">
-            Less friction.
-            <br />
-            More possibility.
+          <p className={`${styles.kicker} ${reveal.fade}`}>
+            01 / A better way to work
+          </p>
+          <h2 id="expertise-title" style={revealDelay(80)}>
+            <RevealLines lines={["Less friction.", "More possibility."]} />
           </h2>
         </div>
-        <p>
+        <p className={reveal.rise} style={revealDelay(320)}>
           Start with what’s getting in the way.
           <br />
           We’ll build what moves you forward.
@@ -60,6 +62,7 @@ export function HomeCapabilities() {
         role="tablist"
         aria-label="What is slowing your business down?"
         className={styles.tabs}
+        data-reveal
       >
         {directions.map((item, index) => (
           <button
@@ -70,6 +73,7 @@ export function HomeCapabilities() {
             aria-selected={index === active}
             aria-controls={`capability-panel-${index}`}
             tabIndex={index === active ? 0 : -1}
+            style={revealIndex(index)}
             ref={(el) => {
               buttons.current[index] = el;
             }}
@@ -92,12 +96,21 @@ export function HomeCapabilities() {
               }
             }}
           >
-            <span className={styles.tabMeta}>
+            <span className={`${styles.tabMeta} ${reveal.fade}`}>
               0{index + 1}
               <span>{dict.practices.items[index].heading}</span>
             </span>
-            <span className={styles.problem}>{item.problem}</span>
-            <span className={styles.tabArrow} aria-hidden="true">
+            <span
+              className={`${styles.problem} ${reveal.rise}`}
+              style={revealDelay(80)}
+            >
+              {item.problem}
+            </span>
+            <span
+              className={`${styles.tabArrow} ${reveal.fade}`}
+              style={revealDelay(300)}
+              aria-hidden="true"
+            >
               ↘
             </span>
           </button>
@@ -111,23 +124,39 @@ export function HomeCapabilities() {
           aria-labelledby={`capability-tab-${index}`}
           hidden={index !== active}
           tabIndex={0}
+          data-reveal
         >
           {index === active && (
             <div className={styles.panel}>
               <div className={styles.diagram}>
                 <CapabilityDiagram mode={active} />
-                <p>{direction.note}</p>
+                <p className={reveal.fade} style={revealDelay(700)}>
+                  {direction.note}
+                </p>
               </div>
               <div className={styles.panelCopy}>
-                <p className={styles.kicker}>{practice.heading}</p>
-                <h3>{direction.title}</h3>
-                <p>{direction.copy}</p>
-                <ul>
+                <p
+                  className={`${styles.kicker} ${reveal.fade}`}
+                  style={revealIndex(0)}
+                >
+                  {practice.heading}
+                </p>
+                <h3 className={reveal.rise} style={revealIndex(1)}>
+                  {direction.title}
+                </h3>
+                <p className={reveal.rise} style={revealIndex(2)}>
+                  {direction.copy}
+                </p>
+                <ul className={reveal.rise} style={revealIndex(3)}>
                   {practice.subs.slice(0, 4).map((capability) => (
                     <li key={capability}>{capability}</li>
                   ))}
                 </ul>
-                <Link href={localePath(`/services#${practice.id}`)}>
+                <Link
+                  href={localePath(`/services#${practice.id}`)}
+                  className={`${reveal.rise} ${reveal.ruleBottom}`}
+                  style={revealIndex(4)}
+                >
                   Explore {practice.heading.toLowerCase()}{" "}
                   <span aria-hidden="true">↗</span>
                 </Link>
@@ -136,8 +165,8 @@ export function HomeCapabilities() {
           )}
         </div>
       ))}
-      <div id="services" className={styles.services}>
-        <div>
+      <div id="services" className={styles.services} data-reveal>
+        <div className={reveal.rise}>
           <p className={styles.kicker}>A place to start</p>
           <h3>
             One useful change
@@ -146,8 +175,13 @@ export function HomeCapabilities() {
           </h3>
         </div>
         <div className={styles.serviceLinks}>
-          {dict.services.items.map((service) => (
-            <Link key={service.id} href={localePath(`/services#${service.id}`)}>
+          {dict.services.items.map((service, index) => (
+            <Link
+              key={service.id}
+              href={localePath(`/services#${service.id}`)}
+              className={`${reveal.rise} ${reveal.ruleBottom}`}
+              style={revealIndex(index)}
+            >
               <span>{service.label}</span>
               <span aria-hidden="true">↗</span>
             </Link>
