@@ -40,7 +40,7 @@
   letter-spacing: 0.19em;
   line-height: 1;
 }
-/* Click: a DeView-yellow bar sweeps in under the letters and out again with a slight lift. */
+/* Click: a Deview-yellow bar sweeps in under the letters and out again with a slight lift. */
 .wordmark::before {
   content: "";
   position: absolute;

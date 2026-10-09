@@ -25,7 +25,7 @@ function Arrow() {
   );
 }
 
-/* Line pictograms for the four principles: ink strokes with one DeView-yellow element each. */
+/* Line pictograms for the four principles: ink strokes with one Deview-yellow element each. */
 const ink = { stroke: "currentColor", strokeWidth: 1.5, fill: "none" } as const;
 const YELLOW = "#ffc933";
 
@@ -150,7 +150,7 @@ export function AboutContent() {
           className={`${styles.hero} ${styles.container}`}
           aria-labelledby="about-title"
         >
-          <span className={styles.kicker}>About DeView</span>
+          <span className={styles.kicker}>About Deview</span>
           <div className={styles.heroGrid}>
             <h1 id="about-title" className={styles.heroTitle}>
               Good people.

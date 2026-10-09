@@ -1,6 +1,6 @@
-# DeView — AI Enterprise Infrastructure
+# Deview — AI Enterprise Infrastructure
 
-A modern marketing website for DeView, an AI enterprise infrastructure services startup.
+A modern marketing website for Deview, an AI enterprise infrastructure services startup.
 
 ## Design
 

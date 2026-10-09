@@ -78,7 +78,7 @@ export async function POST(req: Request) {
     }
   }
 
-  const subject = `[DeView Lead] ${name}: AI Guide for Lending`;
+  const subject = `[Deview Lead] ${name}: AI Guide for Lending`;
   const message = [
     `Name: ${name}`,
     `Email: ${email}`,

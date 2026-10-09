@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { LEGAL_ENTITY, SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
+import {
+  LEGAL_ENTITY,
+  ORGANIZATION_PROFILE_URLS,
+  SITE_INQUIRY_EMAIL,
+  SITE_PHONE,
+} from "@/lib/site-contact";
 import { HomeContent } from "./home-content";
 
 export const metadata: Metadata = {
@@ -8,14 +13,15 @@ export const metadata: Metadata = {
 
 const SITE_URL = "https://deviewai.com";
 
-/** Tells search engines who DeView is, so brand searches resolve to one clear entity. */
+/** Tells search engines who Deview is, so brand searches resolve to one clear entity. */
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
-      name: "DeView",
+      name: "Deview",
+      alternateName: ["DeView", "Deview AI"],
       legalName: LEGAL_ENTITY.name.toUpperCase(),
       identifier: {
         "@type": "PropertyValue",
@@ -23,7 +29,14 @@ const structuredData = {
         value: LEGAL_ENTITY.registryNumber,
       },
       url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/deview-logo.png`,
+        width: 400,
+        height: 400,
+      },
       email: SITE_INQUIRY_EMAIL,
+      telephone: SITE_PHONE,
       description:
         "AI consulting and engineering firm building AI automation, custom software platforms, and data pipelines for operations and finance teams.",
       address: {
@@ -33,12 +46,12 @@ const structuredData = {
         addressRegion: LEGAL_ENTITY.addressRegion,
         addressCountry: LEGAL_ENTITY.addressCountry,
       },
-      sameAs: ["https://www.linkedin.com/company/115044062"],
+      sameAs: ORGANIZATION_PROFILE_URLS,
     },
     {
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
-      name: "DeView",
+      name: "Deview",
       url: SITE_URL,
       inLanguage: "en",
       publisher: { "@id": `${SITE_URL}/#organization` },

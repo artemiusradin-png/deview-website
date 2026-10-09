@@ -4,7 +4,7 @@
  * Every fact here (company, year, type of work, scope) comes from the portfolio the user
  * supplied. `context` and `today` are general explanations of the kind of system, not
  * claims about results. Do not add outcomes, metrics, locations or technology that the
- * portfolio does not state, and do not state that DeView worked with these companies:
+ * portfolio does not state, and do not state that Deview worked with these companies:
  * describe the projects, not a relationship.
  */
 export const OIL_GAS_CASE_SLUGS = [
@@ -68,7 +68,7 @@ export type OilGasCase = {
   scope?: string[];
   /** General explanation of this kind of system (not a claim about this company's results). */
   context: string;
-  /** What DeView builds in this discipline today (a statement about current services, not about the project). */
+  /** What Deview builds in this discipline today (a statement about current services, not about the project). */
   today: string;
   seoTitle: string;
   seoDescription: string;
@@ -89,8 +89,8 @@ export const OIL_GAS_CASES: Record<OilGasCaseSlug, OilGasCase> = {
     context:
       "Exploration and production work runs as a portfolio of projects with long lead times and many dependencies. A scheduling and control system holds the plan for each project in one managed structure, so progress can be compared with plan in the same way across projects and reviewed at department level.",
     today:
-      "For operations teams today, DeView builds this as custom software and data engineering: bring project data from separate files into one governed record, and give managers a plan to compare progress against.",
-    seoTitle: "Gazprom Neft Project Scheduling & Control System | DeView",
+      "For operations teams today, Deview builds this as custom software and data engineering: bring project data from separate files into one governed record, and give managers a plan to compare progress against.",
+    seoTitle: "Gazprom Neft Project Scheduling & Control System | Deview",
     seoDescription:
       "Project scheduling and control system for Gazprom Neft's Exploration and Production department, developed and implemented in 2010.",
   },
@@ -106,8 +106,8 @@ export const OIL_GAS_CASES: Record<OilGasCaseSlug, OilGasCase> = {
     context:
       "A project management system gives a company a common method for initiating, planning, tracking and reporting its projects. Teams work in the same structure, which makes the status of one project comparable with the next.",
     today:
-      "At DeView we build this kind of internal platform as custom software: a tool shaped around the way a team already runs its projects, connected to the systems it already uses.",
-    seoTitle: "Tomskneft Project Management System | DeView",
+      "At Deview we build this kind of internal platform as custom software: a tool shaped around the way a team already runs its projects, connected to the systems it already uses.",
+    seoTitle: "Tomskneft Project Management System | Deview",
     seoDescription:
       "Development of a project management system for Tomskneft (2013): an oil & gas project case study.",
   },
@@ -124,8 +124,8 @@ export const OIL_GAS_CASES: Record<OilGasCaseSlug, OilGasCase> = {
     context:
       "Engineering projects produce large volumes of technical documents and data: drawings, specifications, calculations and their revisions. An engineering data management system keeps them organised and versioned in one place so project teams work from the same, current information. A pilot implementation applies the approach to a limited scope first.",
     today:
-      "DeView's data engineering practice covers this today: organising documents and records so that teams, and AI assistants working on those records, can find what they need with the source attached.",
-    seoTitle: "Lukoil-Engineering Engineering Data Management Pilot | DeView",
+      "Deview's data engineering practice covers this today: organising documents and records so that teams, and AI assistants working on those records, can find what they need with the source attached.",
+    seoTitle: "Lukoil-Engineering Engineering Data Management Pilot | Deview",
     seoDescription:
       "Pilot implementation of an engineering data management system for Lukoil-Engineering (2013): an oil & gas project case study.",
   },
@@ -143,8 +143,8 @@ export const OIL_GAS_CASES: Record<OilGasCaseSlug, OilGasCase> = {
     context:
       "A planning and control system connects an organisation's plans with the progress actually made, so management can see where work is on plan and where it is not.",
     today:
-      "DeView builds planning and control tools for operations teams: define the plan once, collect actuals from the systems that already hold them, and show the gap.",
-    seoTitle: "JOC Vietgazprom Planning & Control System | DeView",
+      "Deview builds planning and control tools for operations teams: define the plan once, collect actuals from the systems that already hold them, and show the gap.",
+    seoTitle: "JOC Vietgazprom Planning & Control System | Deview",
     seoDescription:
       "Development and implementation of a planning and control system for JOC Vietgazprom (Hanoi, Vietnam, 2016): an oil & gas project case study.",
   },
@@ -161,8 +161,8 @@ export const OIL_GAS_CASES: Record<OilGasCaseSlug, OilGasCase> = {
     context:
       "A planning and control system that covers all of a company's assets applies one planning method across the portfolio. Assets can then be compared on the same basis, and management sees the whole portfolio rather than one asset at a time.",
     today:
-      "In data engineering, DeView applies this principle: standardise how information is captured at each site or system, then consolidate it so decisions rest on the whole picture.",
-    seoTitle: "Gazprom International Planning & Control System | DeView",
+      "In data engineering, Deview applies this principle: standardise how information is captured at each site or system, then consolidate it so decisions rest on the whole picture.",
+    seoTitle: "Gazprom International Planning & Control System | Deview",
     seoDescription:
       "Planning and control system for all assets, developed and implemented for Gazprom International (2018): an oil & gas project case study.",
   },
@@ -185,8 +185,8 @@ export const OIL_GAS_CASES: Record<OilGasCaseSlug, OilGasCase> = {
     context:
       "A management reporting and analytics portal brings figures from several functions into one interactive view. Here that meant production and reserves, budgets, project and portfolio financial modelling, and project scheduling in a single portal for management.",
     today:
-      "Reporting and BI are a core part of DeView's data engineering work: connect the underlying systems, model the figures once, and give managers interactive views they can explore themselves.",
-    seoTitle: "Gazprom International Reporting & Analytics Portal | DeView",
+      "Reporting and BI are a core part of Deview's data engineering work: connect the underlying systems, model the figures once, and give managers interactive views they can explore themselves.",
+    seoTitle: "Gazprom International Reporting & Analytics Portal | Deview",
     seoDescription:
       "Interactive management reporting and analytics portal for Gazprom International (2020): production and reserves, budgets, portfolio modelling and scheduling.",
   },

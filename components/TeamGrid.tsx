@@ -31,7 +31,7 @@ export function TeamGrid({ variant = "strip" }: { variant?: "strip" | "grid" }) 
     <ul
       className={styles.grid}
       data-variant={variant}
-      aria-label="The DeView team"
+      aria-label="The Deview team"
     >
       {dict.aboutPage.team.members
         .filter((member) => member.name)

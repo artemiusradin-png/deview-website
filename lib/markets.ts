@@ -38,13 +38,13 @@ export const MARKETS: Record<MarketSlug, Market> = {
     slug: "hong-kong",
     name: "Hong Kong",
     countryCode: "HK",
-    seoTitle: "AI Consulting & Software Engineering in Hong Kong | DeView",
+    seoTitle: "AI Consulting & Software Engineering in Hong Kong | Deview",
     seoDescription:
       "Hong Kong-headquartered AI consulting, software engineering, and data engineering for operations and finance teams. Fixed-scope systems shipped in weeks.",
     eyebrow: "Hong Kong AI consulting",
     headline: "Production AI and software for Hong Kong operations teams.",
     introduction:
-      "DeView is headquartered in Hong Kong. We help operations and finance teams replace document-heavy, repetitive work with secure AI systems, custom platforms, and reliable data pipelines.",
+      "Deview is headquartered in Hong Kong. We help operations and finance teams replace document-heavy, repetitive work with secure AI systems, custom platforms, and reliable data pipelines.",
     presence: "Hong Kong headquarters and local client coordination.",
     contextTitle: "Built for bilingual, regulated, high-volume operations",
     context:
@@ -95,9 +95,9 @@ export const MARKETS: Record<MarketSlug, Market> = {
     ],
     faqs: [
       {
-        question: "Does DeView have a Hong Kong presence?",
+        question: "Does Deview have a Hong Kong presence?",
         answer:
-          "Yes. DeView is headquartered in Hong Kong, and Eden Lam is the main point of contact for Hong Kong client coordination.",
+          "Yes. Deview is headquartered in Hong Kong, and Eden Lam is the main point of contact for Hong Kong client coordination.",
       },
       {
         question: "Can the system process Traditional Chinese and English?",
@@ -115,14 +115,14 @@ export const MARKETS: Record<MarketSlug, Market> = {
     slug: "singapore",
     name: "Singapore",
     countryCode: "SG",
-    seoTitle: "AI Consulting & Software Engineering in Singapore | DeView",
+    seoTitle: "AI Consulting & Software Engineering in Singapore | Deview",
     seoDescription:
       "AI consulting, custom software, and data engineering for Singapore operations and finance teams. Secure, auditable systems deployed into your existing stack.",
     eyebrow: "Singapore AI consulting",
     headline: "AI systems that fit Singapore’s regional operations.",
     introduction:
-      "DeView helps Singapore operations and finance teams automate high-volume work without creating another disconnected tool. We build, integrate, and hand over production systems with clear controls and measurable operating outcomes.",
-    presence: "Serving Singapore through DeView’s Asia-Pacific delivery team.",
+      "Deview helps Singapore operations and finance teams automate high-volume work without creating another disconnected tool. We build, integrate, and hand over production systems with clear controls and measurable operating outcomes.",
+    presence: "Serving Singapore through Deview’s Asia-Pacific delivery team.",
     contextTitle: "Designed for regional teams and accountable AI adoption",
     context:
       "Singapore teams often coordinate processes across entities, markets, and data sources. Our projects focus on the operational layer: making the workflow faster while preserving traceability, permissions, review steps, and the client’s control over infrastructure.",
@@ -192,14 +192,14 @@ export const MARKETS: Record<MarketSlug, Market> = {
     slug: "taiwan",
     name: "Taiwan",
     countryCode: "TW",
-    seoTitle: "AI Consulting & Software Engineering in Taiwan | DeView",
+    seoTitle: "AI Consulting & Software Engineering in Taiwan | Deview",
     seoDescription:
       "AI consulting, software engineering, and data automation for Taiwan operations and finance teams, including bilingual documents and system integration.",
     eyebrow: "Taiwan AI consulting",
     headline: "Practical AI automation for Taiwan’s document and data workflows.",
     introduction:
-      "DeView helps Taiwan teams turn repetitive document, reporting, and coordination work into production software. We connect AI to existing systems, keep review points explicit, and hand over a system your team can operate.",
-    presence: "Serving Taiwan through DeView’s Asia-Pacific delivery team.",
+      "Deview helps Taiwan teams turn repetitive document, reporting, and coordination work into production software. We connect AI to existing systems, keep review points explicit, and hand over a system your team can operate.",
+    presence: "Serving Taiwan through Deview’s Asia-Pacific delivery team.",
     contextTitle: "Built around bilingual data and existing systems",
     context:
       "Many Taiwan workflows combine Traditional Chinese and English material with spreadsheets, email, ERP, and supplier or customer portals. We design around those real inputs and exceptions, rather than asking the team to move its work into a generic AI interface.",
