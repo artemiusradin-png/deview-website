@@ -1,515 +1,706 @@
 "use client";
 
-import { useEffect, useRef, useState, type MouseEvent } from "react";
-import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
+import { useState, type FormEvent, type ReactNode } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { SiteHeader } from "@/components/SiteHeader";
+import { TeamGrid } from "@/components/TeamGrid";
+import { HomeCapabilities } from "./home-capabilities";
+import { HeroBackgroundVideo } from "./home-hero-video";
+import { SiteFooter } from "@/components/SiteFooter";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
-import { HeroPulseField } from "@/components/HeroPulseField";
-import { PixelField } from "@/components/PixelField";
-import { CtaCard } from "@/components/ui/call-to-action-cta";
-import { FeaturedCaseCard } from "@/components/FeaturedCaseCard";
-import { FeaturedCasesCarousel } from "@/components/FeaturedCasesCarousel";
-import { FooterCtaBanner } from "@/components/FooterCtaBanner";
-import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
-import TeamMemberCard from "@/components/ui/team-member-card";
+import { INSIGHT_ARTICLES } from "@/lib/insights";
+import { SITE_INQUIRY_EMAIL, buildInquiryMailto } from "@/lib/site-contact";
+import styles from "./home.module.css";
 
-// Below-the-fold sections are loaded as separate chunks to shrink the initial JS bundle.
-const HomePracticeAreas = dynamic(() =>
-  import("@/components/HomePracticeAreas").then((m) => m.HomePracticeAreas),
-);
-const AnimatedServiceCardStack = dynamic(
-  () => import("@/components/ui/animate-card-animation"),
-  { ssr: false },
-);
-const SiteFooter = dynamic(() => import("@/components/SiteFooter").then((m) => m.SiteFooter));
-const SelectedProjectsLogoMarquee = dynamic(() =>
-  import("@/components/SelectedProjectsLogoMarquee").then((m) => m.SelectedProjectsLogoMarquee),
-);
-const HomeProcessTimeline = dynamic(() =>
-  import("@/components/HomeProcessTimeline").then((m) => m.HomeProcessTimeline),
-);
-const HomeInsightsPreview = dynamic(() =>
-  import("@/components/HomeInsightsPreview").then((m) => m.HomeInsightsPreview),
-);
-const HomeIndustries = dynamic(() =>
-  import("@/components/HomeIndustries").then((m) => m.HomeIndustries),
-);
+function Arrow({
+  diagonal = false,
+  className = "",
+}: {
+  diagonal?: boolean;
+  className?: string;
+}) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 32 32"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d={diagonal ? "M7 25 25 7M7 7h18v18" : "M4 16h23M17 6l10 10-10 10"}
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+    </svg>
+  );
+}
 
-const fade = {
-  initial: { opacity: 0, y: 18 },
-  animate: { opacity: 1, y: 0 },
-};
-
-const reveal = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-};
-
-const cardMotion = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-};
-
-export function HomeContent() {
-  const { dict, localePath } = useLocaleContext();
-  const agroVideoRef = useRef<HTMLVideoElement | null>(null);
-  const unifiedPortalVideoRef = useRef<HTMLVideoElement | null>(null);
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
-  const [navVisible, setNavVisible] = useState(true);
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    window.localStorage.setItem("deview-theme", theme);
-  }, [theme]);
-
-  useEffect(() => {
-    const videos = [agroVideoRef.current, unifiedPortalVideoRef.current].filter(
-      (v): v is HTMLVideoElement => v !== null,
-    );
-    if (videos.length === 0) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          const video = entry.target as HTMLVideoElement;
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-            video.play().catch(() => {});
-          } else {
-            video.pause();
-          }
-        }
-      },
-      { threshold: [0, 0.5] },
-    );
-    videos.forEach((v) => observer.observe(v));
-    return () => observer.disconnect();
-  }, []);
-
-  const handleContactMouseMove = (event: MouseEvent<HTMLAnchorElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width) * 100;
-    const y = ((event.clientY - rect.top) / rect.height) * 100;
-
-    event.currentTarget.style.setProperty("--contact-x", `${x}%`);
-    event.currentTarget.style.setProperty("--contact-y", `${y}%`);
-  };
-
-  const handleContactMouseLeave = (event: MouseEvent<HTMLAnchorElement>) => {
-    event.currentTarget.style.setProperty("--contact-x", "50%");
-    event.currentTarget.style.setProperty("--contact-y", "50%");
-  };
-
-  const [navOpen, setNavOpen] = useState(false);
-
-  useEffect(() => {
-    if (navOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [navOpen]);
-
-  useEffect(() => {
-    const isMobileViewport = window.matchMedia("(max-width: 767px)").matches;
-    if (isMobileViewport) {
-      // Avoid per-scroll React state churn on iOS, which can cause visible jumpiness.
-      setNavVisible(true);
-      return;
-    }
-
-    let lastScrollY = window.scrollY;
-
-    const updateNavVisibility = () => {
-      const currentScrollY = window.scrollY;
-      const scrollingUp = currentScrollY < lastScrollY;
-      const nearTop = currentScrollY < 40;
-
-      setNavVisible(nearTop || scrollingUp || navOpen);
-      lastScrollY = currentScrollY;
-    };
-
-    updateNavVisibility();
-    window.addEventListener("scroll", updateNavVisibility, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", updateNavVisibility);
-    };
-  }, [navOpen]);
-
-  const closeNav = () => setNavOpen(false);
-  const toggleTheme = () => setTheme((current) => (current === "dark" ? "light" : "dark"));
-  const themeAria =
-    theme === "dark" ? dict.a11y.themeToLight : dict.a11y.themeToDark;
-
-  // First four flagship AI services drive the animated card stack: copy comes from the dictionary.
-  const serviceStackImages = [
-    "/images/stock/workflow-audit-person-900.webp",
-    "/images/stock/knowledge-person-900.webp",
-    "/images/stock/document-person-900.webp",
-    "/images/stock/team-meeting-900.webp",
+function ProjectLogos({ duplicate = false }: { duplicate?: boolean }) {
+  const logos = [
+    {
+      name: "EVDEV",
+      src: "/client-logos/evdev.svg",
+      width: 96,
+      height: 19,
+      className: styles.clientEvdev,
+    },
+    {
+      name: "Fizkultura",
+      src: "/client-logos/fizkultura.png",
+      width: 118,
+      height: 79,
+      className: styles.clientFizkultura,
+    },
+    {
+      name: "Gazprom International",
+      src: "/client-logos/oil-gas/gazprom-international.png",
+      width: 203,
+      height: 100,
+      className: styles.clientGazprom,
+    },
+    {
+      name: "Jetfans",
+      src: "/client-logos/jetfans-eu.png",
+      width: 181,
+      height: 242,
+      className: styles.clientJetfans,
+    },
+    {
+      name: "Covenant Desk",
+      src: "/client-logos/covenant-desk.png",
+      width: 1855,
+      height: 427,
+      className: styles.clientCovenant,
+    },
   ];
-  const serviceStackCards = dict.services.items.slice(0, 4).map((item, index) => ({
-    label: item.label,
-    title: item.title,
-    description: `${item.scope} · ${item.duration}`,
-    image: serviceStackImages[index],
-    href: localePath(`/services#${item.id}`),
-    ctaLabel: dict.practices.exploreCta,
-  }));
-
-  // Leadership spotlight cards: the founder uses the richer dict.leadership bio;
-  // the rest come from the About page's team roster so both sections share one source.
-  // Named members without a portrait use the same initials fallback as the About page.
-  const founderName = `${dict.leadership.firstName} ${dict.leadership.lastName}`;
-  const leadershipMembers = dict.aboutPage.team.members
-    .filter((member) => member.name)
-    .map((member, index) => {
-      const isFounder = member.name === founderName;
-      const [firstName, ...lastNameParts] = member.name.split(" ");
-      return {
-        position: index % 2 === 0 ? ("left" as const) : ("right" as const),
-        jobPosition: isFounder ? dict.leadership.jobPosition : member.role,
-        firstName,
-        lastName: lastNameParts.join(" "),
-        imageUrl: member.photo,
-        initials: member.initials,
-        description: isFounder ? dict.leadership.description : member.bio,
-        key: `${member.role}-${member.initials}`,
-      };
-    });
 
   return (
-    <div className="product-home min-h-screen bg-[var(--background)] bg-grid text-[var(--text)]">
-      <a
-        href="#"
-        className="brand-mark fixed left-0 top-0 z-50 flex h-16 items-center px-4 pt-[env(safe-area-inset-top)] text-[12px] tracking-[0.25em] text-[var(--white-80)] sm:px-6 sm:text-[13px]"
-        onClick={closeNav}
-      >
-        {dict.whatMakesEnterprise.backBrand}
-      </a>
+    <ul
+      className={styles.clientList}
+      aria-label={duplicate ? undefined : "Selected project companies"}
+      aria-hidden={duplicate || undefined}
+    >
+      <li className={styles.clientGrand}>
+        GRAND<span>FINANCE GROUP</span>
+      </li>
+      <li className={styles.clientNextair}>
+        nextair<span aria-hidden="true">↗</span>
+      </li>
+      {logos.map((logo) => (
+        <li key={logo.name} className={styles.clientLogo}>
+          <Image
+            src={logo.src}
+            alt={logo.name}
+            width={logo.width}
+            height={logo.height}
+            className={logo.className}
+            unoptimized
+          />
+        </li>
+      ))}
+    </ul>
+  );
+}
 
-      <header
-        className={`nav-shell fixed inset-x-0 top-0 z-40 bg-gradient-to-b from-[var(--black-80)] to-transparent pt-[env(safe-area-inset-top)] ${
-          navVisible ? "nav-shell-visible" : "nav-shell-hidden"
-        }`}
-      >
-        <nav className="section-gutter mx-auto flex h-16 max-w-6xl items-center justify-between">
-          <div className="nav-shell-spacer" aria-hidden="true" />
-          <div className="flex items-center gap-3 md:hidden">
-            {/* Language toggle moved into the mobile dropdown menu: keeps the always-visible header lean. */}
+function SectionHeading({
+  number,
+  label,
+  title,
+  id,
+  children,
+}: {
+  number: string;
+  label: string;
+  title: ReactNode;
+  id: string;
+  children?: ReactNode;
+}) {
+  return (
+    <>
+      <p className={styles.eyebrow}>
+        {number} / {label}
+      </p>
+      <div className={styles.sectionIntro}>
+        <h2 id={id}>{title}</h2>
+        {children}
+      </div>
+    </>
+  );
+}
+
+export function HomeContent({
+  heroVideoSrc,
+  heroVideoPoster,
+}: { heroVideoSrc?: string; heroVideoPoster?: string } = {}) {
+  const { dict, localePath } = useLocaleContext();
+  const [logosPaused, setLogosPaused] = useState(false);
+  const [inquiryStatus, setInquiryStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const [emailDraft, setEmailDraft] = useState<string | null>(null);
+
+  async function submitInquiry(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (inquiryStatus === "sending") return;
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const inquiry = {
+      name: String(data.get("name") ?? "").trim(),
+      email: String(data.get("email") ?? "").trim(),
+      company: String(data.get("company") ?? "").trim(),
+      details: String(data.get("details") ?? "").trim(),
+      honeypot: String(data.get("company_website") ?? ""),
+    };
+    setInquiryStatus("sending");
+    setEmailDraft(null);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(inquiry),
+      });
+      const result = await response.json().catch(() => null);
+      if (response.ok && result?.ok) {
+        setInquiryStatus("success");
+        form.reset();
+        return;
+      }
+    } catch {
+      // Keep the completed inquiry available through the existing email fallback.
+    }
+    setEmailDraft(buildInquiryMailto(inquiry));
+    setInquiryStatus("error");
+  }
+
+  return (
+    <div className={styles.page}>
+      <a href="#main-content" className={styles.skipLink}>
+        Skip to content
+      </a>
+      <SiteHeader home />
+
+      <main id="main-content" tabIndex={-1}>
+        <section id="hero" className={styles.hero} aria-labelledby="hero-title">
+          <div className={styles.heroCanvas}>
+            {heroVideoSrc && (
+              <HeroBackgroundVideo
+                src={heroVideoSrc}
+                poster={heroVideoPoster}
+              />
+            )}
+            <div className={`${styles.heroContent} ${styles.container}`}>
+              <div className={styles.heroEyebrow}>
+                <p className={styles.eyebrow}>AI + software + data</p>
+                <span>Built for the real world.</span>
+              </div>
+              <h1 id="hero-title" className={styles.heroTitle}>
+                <span>Less busywork.</span>
+                <span className={styles.heroSecondLine}>
+                  More impact.
+                  <Arrow className={styles.heroArrow} />
+                </span>
+              </h1>
+              <div className={styles.heroBottom}>
+                <div className={styles.heroIntro}>
+                  <p>
+                    We build AI, software, and data systems that take the
+                    busywork off your plate. So your people can get back to what
+                    matters.
+                  </p>
+                  <div className={styles.heroActions}>
+                    <Link
+                      href={localePath("/contact")}
+                      className={`${styles.button} ${styles.buttonAccent}`}
+                    >
+                      Let’s build something <Arrow diagonal />
+                    </Link>
+                    <a href="#work" className={styles.textLink}>
+                      See our work <span aria-hidden="true">↓</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className={`${styles.clients} ${styles.container}`}
+            data-paused={logosPaused}
+          >
+            <p>
+              Good company.
+              <br /> Real projects.
+            </p>
+            <div className={styles.clientMarquee}>
+              <div className={styles.clientTrack}>
+                <ProjectLogos />
+                <ProjectLogos duplicate />
+              </div>
+            </div>
             <button
               type="button"
-              className="nav-toggle"
-              aria-expanded={navOpen}
-              aria-controls="mobile-site-nav"
-              aria-label={navOpen ? dict.a11y.closeMenu : dict.a11y.openMenu}
-              onClick={() => setNavOpen((open) => !open)}
+              className={styles.clientPause}
+              aria-label={
+                logosPaused
+                  ? "Resume scrolling companies"
+                  : "Pause scrolling companies"
+              }
+              onClick={() => setLogosPaused((paused) => !paused)}
             >
-              <span className="nav-toggle-bar" />
-              <span className="nav-toggle-bar" />
-              <span className="nav-toggle-bar" />
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                {logosPaused ? (
+                  <path d="m7 4 9 6-9 6V4Z" fill="currentColor" />
+                ) : (
+                  <path
+                    d="M7 4v12M13 4v12"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                )}
+              </svg>
             </button>
           </div>
-          <div className="hidden items-center gap-4 md:flex lg:gap-6">
-            <a href="#hero" className="nav-item nav-item-active">
-              {dict.nav.aiConsulting}
-            </a>
-            <a href={localePath("/services")} className="nav-item">
-              {dict.nav.services}
-            </a>
-            <a href={localePath("/case-studies")} className="nav-item">
-              {dict.nav.caseStudies}
-            </a>
-            <a href={localePath("/insights")} className="nav-item">
-              {dict.nav.insights}
-            </a>
-            <a href={localePath("/about")} className="nav-item">
-              {dict.nav.about}
-            </a>
-            <a href={localePath("/contact")} className="nav-item">
-              {dict.nav.inquire}
-            </a>
-            <div className="flex items-center gap-2 lg:gap-2.5">
-              <button type="button" className="theme-toggle" onClick={toggleTheme} aria-label={themeAria} title={themeAria}>
-                <span className={`theme-icon theme-icon-sun ${theme === "light" ? "theme-icon-active" : ""}`} aria-hidden="true">
-                  <span className="theme-icon-sun-core" />
-                </span>
-                <span className={`theme-icon theme-icon-moon ${theme === "dark" ? "theme-icon-active" : ""}`} aria-hidden="true" />
-              </button>
-            </div>
-          </div>
-        </nav>
-      </header>
-
-      {navOpen ? (
-        <div
-          id="mobile-site-nav"
-          className="mobile-nav-overlay md:hidden"
-          role="dialog"
-          aria-modal="true"
-          aria-label={dict.a11y.siteNav}
-        >
-          <button type="button" className="mb-4 self-end text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]" onClick={closeNav}>
-            {dict.mobileNav.close}
-          </button>
-          <a href="#hero" className="nav-item-active" onClick={closeNav}>
-            {dict.nav.aiConsulting}
-          </a>
-          <a href={localePath("/services")} onClick={closeNav}>
-            {dict.nav.services}
-          </a>
-          <a href={localePath("/case-studies")} onClick={closeNav}>
-            {dict.nav.caseStudies}
-          </a>
-          <a href={localePath("/insights")} onClick={closeNav}>
-            {dict.nav.insights}
-          </a>
-          <a href={localePath("/about")} onClick={closeNav}>
-            {dict.nav.about}
-          </a>
-          <a href={localePath("/how-we-work")} onClick={closeNav}>
-            {dict.nav.howWeWork}
-          </a>
-          <a href={localePath("/faq")} onClick={closeNav}>
-            {dict.nav.faq}
-          </a>
-          <a href={localePath("/contact")} onClick={closeNav}>
-            {dict.nav.inquire}
-          </a>
-          <a href={localePath("/contact")} onClick={closeNav}>
-            {dict.mobileNav.contactForm}
-          </a>
-          <div className="mt-4 flex items-center gap-3">
-            <button type="button" className="theme-toggle" onClick={toggleTheme} aria-label={themeAria}>
-              <span className={`theme-icon theme-icon-sun ${theme === "light" ? "theme-icon-active" : ""}`} aria-hidden="true">
-                <span className="theme-icon-sun-core" />
-              </span>
-              <span className={`theme-icon theme-icon-moon ${theme === "dark" ? "theme-icon-active" : ""}`} aria-hidden="true" />
-            </button>
-          </div>
-        </div>
-      ) : null}
-
-      {/* Free AI guide CTA removed */}
-      <section
-        id="hero"
-        className="home-section-dark section-fullscreen section-fullscreen--hero relative flex items-end justify-center section-gutter py-12 md:py-0"
-      >
-        <div className="hero-media absolute inset-0">
-          <HeroPulseField className="absolute inset-0" />
-        </div>
-        <div className="absolute inset-0 hero-overlay" />
-        <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-col justify-start gap-6 md:-mt-8 md:flex-row md:items-start md:gap-12">
-          <motion.div
-            initial={fade.initial}
-            animate={fade.animate}
-            transition={{ duration: 0.6 }}
-            className="flex min-w-0 flex-1 flex-col md:max-w-[820px]"
-          >
-            {dict.hero.kicker ? (
-              <p className="section-label mb-4 text-[#ffc933]!">{dict.hero.kicker}</p>
-            ) : null}
-            <h1 className="hero-practices-heading mb-4 text-[var(--white-100)] md:mb-6">
-              {[dict.hero.titleL1, dict.hero.titleL2, dict.hero.titleL3]
-                .filter(Boolean)
-                .map((line) => (
-                  <span className="hero-practice-line" key={line}>
-                    <span>{line}</span>
-                  </span>
-                ))}
-            </h1>
-            {/* Compact outline button + a secondary case-studies link: same size on every
-                breakpoint, mobile included (was previously a separate, much larger filled
-                mobile-only button). The whole hero column is bottom-aligned via the section's
-                `items-end`, so a small `mt-4` gap under the heading is all that's needed: no
-                more full-height column + `mt-auto` push (that forced the hero to ~100vh on
-                tablet/iPad and buried the practice-areas section below it). */}
-            <div className="mt-4">
-              <span className="flex items-center gap-4">
-                <a
-                  href={localePath("/contact")}
-                  className="inline-flex items-center rounded-md border border-[var(--white-40)] px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[var(--white-100)] transition-colors hover:border-[var(--white-80)]"
-                >
-                  {dict.hero.inquire}
-                </a>
-                <a
-                  href={localePath("/case-studies")}
-                  className="inline-flex items-center gap-1.5 text-[0.7rem] uppercase tracking-[0.14em] text-[var(--white-60)] transition-colors hover:text-[var(--white-100)]"
-                >
-                  {dict.nav.caseStudies}
-                  <span aria-hidden="true">→</span>
-                </a>
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Right-hand kicker column: desktop only. Its sole mobile content used to be a
-              64px spacer that held the hero text up off the bottom; removed so the text now
-              sits flush at the bottom of the hero, right above the practice-areas section. */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="hero-aside hidden flex-col items-start justify-between gap-8 text-left md:flex md:ml-auto md:items-end md:gap-10 md:text-right"
-          >
-            <div className="hero-facts">
-              {[
-                [dict.hero.clients, dict.hero.clientsValue],
-                [dict.hero.focus, dict.hero.focusValue],
-                [dict.hero.engagements, dict.hero.engagementsValue],
-              ].map(([label, value]) => (
-                <div className="hero-fact" key={label}>
-                  <span>{label}</span>
-                  <strong>{value}</strong>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-
-      <HomePracticeAreas />
-
-      <section className="home-section-light product-section product-section--services border-t border-[var(--white-20)] bg-[var(--background)] px-4 py-16 sm:py-20 md:py-24">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-10 grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
-            <div>
-              <p className="section-label mb-3">{dict.practices.flagshipLabel}</p>
-              <div className="rule mb-6" />
-              <h2 className="text-[clamp(1.5rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
-                {dict.practices.flagshipTitle}
-              </h2>
-            </div>
-            <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
-              {dict.practices.flagshipIntro}
-            </p>
-          </div>
-          <AnimatedServiceCardStack cards={serviceStackCards} nextLabel={dict.practices.nextService} />
-        </div>
-      </section>
-
-      <HomeProcessTimeline />
-
-      <FeaturedCasesCarousel ariaLabel={dict.nav.caseStudies}>
-        <FeaturedCaseCard
-          id="featured-deployment"
-          theme="light"
-          sectionLabel={dict.featuredAgro.sectionLabel}
-          title={dict.featuredAgro.title}
-          subtitle={dict.featuredAgro.subtitle}
-          ctaLabel={dict.featuredAgro.readCaseStudy}
-          ctaHref={localePath("/case-studies")}
-          mediaLabel="AgroPlatforma"
-          media={
-            <video
-              ref={agroVideoRef}
-              className="block h-auto w-full"
-              controls
-              preload="none"
-              playsInline
-              muted
-              loop
-              poster="/deview-agroplatforma-poster.svg"
-            >
-              <source src="/deview-agroplatforma-demo.mp4" type="video/mp4" />
-              Your browser does not support embedded video.
-            </video>
-          }
-        />
-
-        <FeaturedCaseCard
-          id="featured-deployment-finance"
-          theme="dark"
-          sectionLabel={dict.featuredPortal.sectionLabel}
-          title={dict.featuredPortal.title}
-          subtitle={dict.featuredPortal.subtitle}
-          ctaLabel={dict.featuredPortal.readCaseStudy}
-          ctaHref={localePath("/case-studies")}
-          mediaLabel="DeView Unified Portal"
-          media={
-            <video
-              ref={unifiedPortalVideoRef}
-              className="block h-auto w-full"
-              controls
-              preload="none"
-              playsInline
-              muted
-              loop
-              poster="/deview-unified-portal-poster.svg"
-            >
-              <source src="/deview-unified-portal-demo.mp4" type="video/mp4" />
-              Your browser does not support embedded video.
-            </video>
-          }
-        />
-      </FeaturedCasesCarousel>
-
-      <SelectedProjectsLogoMarquee />
-
-      <HomeIndustries />
-
-      <section className="home-section-light relative overflow-hidden bg-[var(--background)] section-gutter py-10 md:py-14">
-        <div className="mx-auto max-w-6xl">
-          <p className="section-label mb-3">{dict.leadership.sectionLabel}</p>
-          <div className="rule mb-2" />
-          {leadershipMembers.map((member) => (
-            <TeamMemberCard
-              key={member.key}
-              position={member.position}
-              jobPosition={member.jobPosition}
-              firstName={member.firstName}
-              lastName={member.lastName}
-              imageUrl={member.imageUrl}
-              initials={member.initials}
-              href={localePath("/contact")}
-              description={member.description}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* Footer-style "Tell us what to automate" CTA, relocated here from the footer -
-          swapped positions with the email-form card, which now sits at the bottom. */}
-      <section className="home-section-dark section-gutter py-10 md:py-14">
-        <div className="mx-auto max-w-6xl">
-          <FooterCtaBanner
-            label={dict.footer.ctaLabel}
-            copy={dict.footer.ctaCopy}
-            primaryText={dict.footer.contactUs}
-            primaryHref={localePath("/contact")}
-            secondaryText={dict.footer.emailDirect}
-            secondaryHref={`mailto:${SITE_INQUIRY_EMAIL}`}
-          />
-        </div>
-      </section>
-
-      <HomeInsightsPreview />
-
-      <div className="home-section-dark">
-        <section id="contact" className="scroll-margin-header pt-6 md:pt-8">
-          <CtaCard
-            title={`${dict.contact.titleL1} ${dict.contact.titleL2}`}
-            description={`${dict.contact.leadL1} ${dict.contact.leadL2}`}
-            buttonText={dict.contact.sendInquiry}
-            inputPlaceholder="Your email address"
-            onButtonClick={(email) => {
-              window.location.href = `/contact?email=${encodeURIComponent(email)}`;
-            }}
-            className="min-h-[180px]"
-          />
         </section>
 
-        {/* Footer's own CTA banner is hidden here since it now lives after the leadership block. */}
+        <HomeCapabilities />
+
+        <section
+          id="work"
+          className={`${styles.section} ${styles.container}`}
+          aria-labelledby="work-title"
+        >
+          <SectionHeading
+            number="02"
+            label="Selected work"
+            title={
+              <>
+                Less talk.
+                <br />
+                More working.
+              </>
+            }
+            id="work-title"
+          >
+            <Link
+              href={localePath("/case-studies")}
+              className={styles.textLink}
+            >
+              All case studies <Arrow diagonal />
+            </Link>
+          </SectionHeading>
+          <div className={styles.projectGrid}>
+            <Link
+              id="featured-deployment"
+              href={localePath("/case-studies")}
+              className={styles.project}
+              aria-label="Read the AgroPlatforma case study"
+            >
+              <div className={`${styles.projectArtwork} ${styles.agroArtwork}`}>
+                <div className={styles.artworkTop}>
+                  <span>AgroPlatforma</span>
+                  <span className={styles.projectTag}>AI in the field</span>
+                </div>
+                <div className={styles.timeResult}>
+                  <span className={styles.oldTime}>~40 min</span>
+                  <div className={styles.newTime}>
+                    <span>&lt;30</span>
+                    <span>sec.</span>
+                  </div>
+                </div>
+                <div className={styles.artworkBottom}>
+                  <span>From field diagnosis to quote.</span>
+                  <Arrow diagonal />
+                </div>
+              </div>
+              <div className={styles.projectCaption}>
+                <h3>
+                  A whole new pace
+                  <br />
+                  for agriculture.
+                </h3>
+                <Arrow diagonal />
+              </div>
+              <p>
+                Three connected AI agents. One field-to-quote workflow. Built
+                into the tools the team already uses.
+              </p>
+              <span className={styles.projectCategory}>
+                AI automation / Software engineering
+              </span>
+            </Link>
+            <Link
+              id="featured-deployment-finance"
+              href={localePath("/case-studies")}
+              className={styles.project}
+              aria-label="Read the DeView Unified Portal case study"
+            >
+              <div
+                className={`${styles.projectArtwork} ${styles.portalArtwork}`}
+              >
+                <div className={styles.artworkTop}>
+                  <span>DeView Unified Portal</span>
+                  <span className={styles.projectTag}>Connected finance</span>
+                </div>
+                <div className={styles.portalTitle}>
+                  Five companies.
+                  <br />
+                  One clear view.
+                </div>
+                <svg
+                  className={styles.portalDrawing}
+                  viewBox="0 0 500 220"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <g stroke="currentColor" strokeWidth="1.5">
+                    <path d="M80 33h64c36 0 17 77 64 77h77M80 71h42c36 0 22 39 68 39M80 110h205M80 149h42c36 0 22-39 68-39M80 187h64c36 0 17-77 64-77h77" />
+                    {[15, 53, 92, 131, 169].map((y) => (
+                      <rect
+                        key={y}
+                        x="43"
+                        y={y}
+                        width="36"
+                        height="36"
+                        className={styles.diagramNode}
+                      />
+                    ))}
+                    <rect
+                      x="285"
+                      y="48"
+                      width="160"
+                      height="124"
+                      fill="#171207"
+                    />
+                  </g>
+                  <path
+                    d="M310 75h39m-39 13h66m-66 15h110"
+                    stroke="#f3eee2"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="m332 137 19 14 46-38"
+                    stroke="#ffc933"
+                    strokeWidth="5"
+                  />
+                </svg>
+                <div className={styles.artworkBottom}>
+                  <span>Borrower intelligence, brought together.</span>
+                  <Arrow diagonal />
+                </div>
+              </div>
+              <div className={styles.projectCaption}>
+                <h3>
+                  The full picture.
+                  <br />
+                  Finally in one place.
+                </h3>
+                <Arrow diagonal />
+              </div>
+              <p>
+                One portal brings borrower data, credit analysis, and document
+                processing together for five lending companies.
+              </p>
+              <span className={styles.projectCategory}>
+                Custom platform / Data engineering
+              </span>
+            </Link>
+          </div>
+        </section>
+
+        <section
+          id="approach"
+          className={`${styles.section} ${styles.container}`}
+          aria-labelledby="approach-title"
+        >
+          <SectionHeading
+            number="03"
+            label={dict.process.sectionLabel}
+            title={
+              <>
+                Small team.
+                <br />
+                Full follow-through.
+              </>
+            }
+            id="approach-title"
+          >
+            <p>
+              You work directly with the people who design and build your
+              system. We scope the problem, ship in weeks, and stay for what
+              comes next.
+            </p>
+          </SectionHeading>
+          <ol className={styles.processSteps}>
+            {dict.process.steps.map((step) => (
+              <li key={step.number}>
+                <div className={styles.processStepTop}>
+                  <span>{step.number}</span>
+                  <Arrow />
+                </div>
+                <h3>
+                  {step.label.charAt(0) + step.label.slice(1).toLowerCase()}
+                </h3>
+                <p>{step.body}</p>
+              </li>
+            ))}
+          </ol>
+          <Link href={localePath("/how-we-work")} className={styles.textLink}>
+            A closer look at our process <Arrow diagonal />
+          </Link>
+        </section>
+
+        <section
+          id="industries"
+          className={`${styles.industries} ${styles.container}`}
+          aria-label="Industries we serve"
+        >
+          <p className={styles.eyebrow}>Experience across</p>
+          <nav aria-label="Industries">
+            <Link href={localePath("/industries/oil-and-gas")}>
+              Oil &amp; gas <Arrow diagonal />
+            </Link>
+            {dict.industries.tiles.map((industry) => (
+              <Link key={industry.id} href={localePath(industry.href)}>
+                {industry.label.toLowerCase()} <Arrow diagonal />
+              </Link>
+            ))}
+          </nav>
+        </section>
+
+        <section
+          id="team"
+          className={`${styles.section} ${styles.teamSection}`}
+          aria-labelledby="team-title"
+        >
+          <div className={styles.container}>
+            <SectionHeading
+              number="04"
+              label="The people"
+              title={
+                <>
+                  Good minds.
+                  <br />
+                  Better together.
+                </>
+              }
+              id="team-title"
+            >
+              <p>
+                The people you talk to are the people who build it. Meet the
+                team behind your next move.
+              </p>
+            </SectionHeading>
+            <TeamGrid />
+            <div className={styles.teamFooter}>
+              <p>Hong Kong · Vancouver · Edinburgh · Stuttgart</p>
+              <Link href={localePath("/about")} className={styles.textLink}>
+                More about DeView <Arrow diagonal />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="insights"
+          className={styles.section}
+          aria-labelledby="insights-title"
+        >
+          <div className={styles.container}>
+            <SectionHeading
+              number="05"
+              label={dict.insights.sectionLabel}
+              title={
+                <>
+                  Good questions.
+                  <br />
+                  Useful answers.
+                </>
+              }
+              id="insights-title"
+            >
+              <Link href={localePath("/insights")} className={styles.textLink}>
+                All insights <Arrow diagonal />
+              </Link>
+            </SectionHeading>
+            <div className={styles.insightGrid}>
+              {dict.insights.articles.map((article, index) => {
+                const meta = INSIGHT_ARTICLES[index];
+                return (
+                  <Link
+                    key={meta.slug}
+                    href={localePath(`/insights/${meta.slug}`)}
+                    className={styles.insightCard}
+                  >
+                    <div className={styles.insightMeta}>
+                      <span>{article.label}</span>
+                      <span>{article.readTime}</span>
+                    </div>
+                    <h3>{article.title}</h3>
+                    <span className={styles.textLink}>
+                      Read the story <Arrow diagonal />
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="contact"
+          className={styles.contact}
+          aria-labelledby="contact-title"
+        >
+          <div className={styles.container}>
+            <p className={styles.eyebrow}>{dict.footer.ctaLabel}</p>
+            <Link href={localePath("/contact")} className={styles.contactLink}>
+              <h2 id="contact-title">
+                Your next
+                <br />
+                move.
+              </h2>
+              <Arrow diagonal className={styles.contactArrow} />
+            </Link>
+            <div className={styles.contactBottom}>
+              <p>{dict.footer.ctaCopy}</p>
+              <Link href={localePath("/contact")} className={styles.button}>
+                Let’s talk <Arrow diagonal />
+              </Link>
+              <a
+                href={`mailto:${SITE_INQUIRY_EMAIL}`}
+                className={styles.contactEmail}
+              >
+                {SITE_INQUIRY_EMAIL}
+              </a>
+            </div>
+            <details id="inquiry" className={styles.inquiryDisclosure}>
+              <summary>
+                <span>Prefer to write?</span>
+                <span>
+                  Send us a note{" "}
+                  <span className={styles.practiceToggle} aria-hidden="true" />
+                </span>
+              </summary>
+              <form
+                className={styles.inquiryForm}
+                onSubmit={submitInquiry}
+                aria-label="Project inquiry"
+                aria-busy={inquiryStatus === "sending"}
+              >
+                <div className={styles.formRow}>
+                  <label>
+                    {dict.contactForm.fullName}
+                    <input
+                      name="name"
+                      autoComplete="name"
+                      required
+                      maxLength={200}
+                      placeholder="Your name"
+                    />
+                  </label>
+                  <label>
+                    {dict.contactForm.workEmail}
+                    <input
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      required
+                      maxLength={320}
+                      placeholder="name@company.com"
+                    />
+                  </label>
+                  <label>
+                    {dict.contactForm.company} <span>(optional)</span>
+                    <input
+                      name="company"
+                      autoComplete="organization"
+                      maxLength={200}
+                      placeholder="Company name"
+                    />
+                  </label>
+                </div>
+                <label>
+                  {dict.contactForm.problem}
+                  <textarea
+                    name="details"
+                    required
+                    minLength={10}
+                    maxLength={5000}
+                    rows={3}
+                    placeholder="Tell us about the process and what a better outcome would look like."
+                  />
+                </label>
+                <div className={styles.honeypot} aria-hidden="true">
+                  <label>
+                    Leave this empty
+                    <input
+                      name="company_website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </label>
+                </div>
+                <div className={styles.formActions}>
+                  <p>
+                    No commitment required. A specific recommendation within 1–2
+                    business days.
+                  </p>
+                  <button
+                    type="submit"
+                    className={styles.button}
+                    disabled={inquiryStatus === "sending"}
+                  >
+                    {inquiryStatus === "sending" ? "Sending…" : "Send inquiry"}
+                    <Arrow diagonal />
+                  </button>
+                </div>
+                <div
+                  aria-live="polite"
+                  role="status"
+                  className={styles.formFeedback}
+                >
+                  {inquiryStatus === "success" && (
+                    <p>{dict.contactForm.submitSuccess}</p>
+                  )}
+                  {inquiryStatus === "error" && (
+                    <p>
+                      We couldn’t send this just now. Your details are still
+                      here. Try again
+                      {emailDraft && (
+                        <>
+                          , or{" "}
+                          <a href={emailDraft}>
+                            send this inquiry using your email app
+                          </a>
+                        </>
+                      )}
+                      .
+                    </p>
+                  )}
+                </div>
+              </form>
+            </details>
+          </div>
+        </section>
+      </main>
+      <div className={styles.footerShell}>
         <SiteFooter hideCta />
-
-        <PixelField />
+        <details className={`${styles.logoCredits} ${styles.container}`}>
+          <summary>Logo credits</summary>
+          <p>
+            Gazprom International logo by Gazprom International, via{" "}
+            <a href="https://commons.wikimedia.org/wiki/File:GInt_Blue.png">
+              Wikimedia Commons
+            </a>
+            , displayed in monochrome and licensed under{" "}
+            <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
+            .
+          </p>
+        </details>
       </div>
-
-      {/* Removed persistent mobile CTA dock: header nav, in-page CTAs, and footer cover this without crowding the viewport. */}
     </div>
   );
 }

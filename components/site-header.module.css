@@ -1,0 +1,205 @@
+.header {
+  position: relative;
+  z-index: 60;
+  background: #f3eee2;
+  color: #171207;
+  font-family: var(--font-archivo), sans-serif;
+}
+.header[data-fixed="true"] {
+  position: fixed;
+  inset: 0 0 auto;
+}
+/* Landing page: the header sits on top of the hero film instead of a cream bar. */
+.header[data-overlay="true"] {
+  position: absolute;
+  inset: 0 0 auto;
+  background: transparent;
+}
+.header[data-overlay="true"] .inner {
+  border-bottom-color: rgba(23, 18, 7, 0.16);
+}
+.inner {
+  width: min(100% - 112px, 1488px);
+  min-height: 90px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  border-bottom: 1px solid #d7cfbf;
+}
+.header a {
+  color: inherit;
+  text-decoration: none;
+}
+.wordmark {
+  position: relative;
+  isolation: isolate;
+  flex-shrink: 0;
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: 0.19em;
+  line-height: 1;
+}
+/* Click: a DeView-yellow bar sweeps in under the letters and out again with a slight lift. */
+.wordmark::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -7px -6px -7px -10px;
+  background: #ffc933;
+  transform: scaleX(0);
+  transform-origin: left center;
+  pointer-events: none;
+}
+.wordmark.flash::before {
+  animation: wordmarkSweep 900ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.wordmark.flash {
+  animation: wordmarkBreathe 900ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+@keyframes wordmarkSweep {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+  42% {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+  58% {
+    transform: scaleX(1);
+    transform-origin: right center;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: right center;
+  }
+}
+@keyframes wordmarkBreathe {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wordmark.flash,
+  .wordmark.flash::before {
+    animation: none;
+  }
+}
+.note {
+  margin-left: 28px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #655f54;
+}
+.navigation {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 29px;
+  font-size: 14px;
+}
+.navigation > a {
+  padding-block: 12px;
+}
+.navigation > a:not(.contact):hover,
+.navigation > a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-color: #806000;
+  text-underline-offset: 6px;
+}
+.navigation .contact {
+  display: flex;
+  align-items: center;
+  gap: 27px;
+  padding: 12px 18px;
+  border: 1px solid #171207;
+}
+.contact svg {
+  width: 21px;
+  height: 21px;
+}
+.contact:hover {
+  background: #ffc933;
+}
+.header :is(a, button):focus-visible {
+  outline: 2px solid #171207;
+  outline-offset: 5px;
+}
+.menu {
+  display: none;
+}
+@media (max-width: 1100px) {
+  .inner {
+    width: calc(100% - 64px);
+    gap: 24px;
+  }
+  .note {
+    display: none;
+  }
+  .navigation {
+    gap: 24px;
+  }
+}
+@media (max-width: 760px) {
+  .inner {
+    width: calc(100% - 40px);
+    min-height: 78px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0;
+  }
+  .wordmark {
+    font-size: 17px;
+  }
+  .menu {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 19px;
+    border: 0;
+    background: none;
+    color: #171207;
+    font: inherit;
+    font-size: 14px;
+    padding: 12px 0 12px 10px;
+    cursor: pointer;
+  }
+  .menu span {
+    font-size: 24px;
+    line-height: 1;
+  }
+  .navigation {
+    display: none;
+    order: 4;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+    padding: 8px 0 23px;
+    max-height: calc(100svh - 78px);
+    overflow-y: auto;
+  }
+  .navigation[data-open="true"] {
+    display: flex;
+  }
+  /* An open menu needs a solid backdrop over the film. */
+  .header[data-overlay="true"][data-menu-open="true"] {
+    background: #f3eee2;
+  }
+  .navigation > a {
+    font-size: 22px;
+    border-top: 1px solid #d7cfbf;
+    padding-block: 13px;
+  }
+  .navigation .contact {
+    margin-top: 10px;
+    justify-content: space-between;
+    padding: 14px 18px;
+  }
+}

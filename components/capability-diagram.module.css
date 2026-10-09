@@ -1,0 +1,20 @@
+.drawing {
+  width: 100%;
+  max-width: 580px;
+  height: auto;
+}
+.drawing text {
+  fill: currentColor;
+  font-family: var(--font-archivo), sans-serif;
+}
+.diagramBig {
+  font-size: 34px;
+  letter-spacing: -0.04em;
+}
+.diagramMedium {
+  font-size: 26px;
+  letter-spacing: -0.025em;
+}
+.diagramLabel {
+  font-size: 14px;
+}

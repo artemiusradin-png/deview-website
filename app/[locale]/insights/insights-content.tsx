@@ -2,11 +2,16 @@
 
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { LocaleLink } from "@/components/LocaleLink";
+import { PageIntro } from "@/components/PageIntro";
 import { SubpageNav } from "@/components/SubpageNav";
 import { getInsightArticle } from "@/lib/insights";
 
 function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+  return new Date(iso).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 }
 
 export function InsightsContent() {
@@ -17,22 +22,21 @@ export function InsightsContent() {
     <div className="section-gutter mx-auto max-w-6xl">
       <SubpageNav backHref="/" />
 
-      {/* Header */}
-      <div className="mb-12 sm:mb-16">
-        <p className="section-label mb-3">{d.sectionLabel}</p>
-        <div className="rule mb-6" />
-        <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
-          <h1 className="text-[clamp(1.5rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
-            {d.h1}
-          </h1>
-          <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
-            {d.subtitle}
-          </p>
-        </div>
-      </div>
+      <PageIntro
+        label={d.sectionLabel}
+        title={
+          <>
+            Ideas worth
+            <br />
+            putting to work.
+          </>
+        }
+      >
+        <p>{d.subtitle}</p>
+      </PageIntro>
 
       {/* Article list */}
-      <div className="space-y-0">
+      <div className="insight-index space-y-0">
         {d.articles.map((a, i) => {
           const meta = getInsightArticle(a.slug);
           return (
@@ -58,11 +62,15 @@ export function InsightsContent() {
                     <span className="text-[0.55rem] uppercase tracking-[0.22em] text-[var(--white-40)]">
                       {a.label}
                     </span>
-                    <span className="text-[0.55rem] text-[var(--white-30)]">&middot;</span>
+                    <span className="text-[0.55rem] text-[var(--white-30)]">
+                      &middot;
+                    </span>
                     <span className="text-[0.55rem] uppercase tracking-[0.18em] text-[var(--white-30)]">
                       {formatDate(a.date)}
                     </span>
-                    <span className="text-[0.55rem] text-[var(--white-30)]">&middot;</span>
+                    <span className="text-[0.55rem] text-[var(--white-30)]">
+                      &middot;
+                    </span>
                     <span className="text-[0.55rem] uppercase tracking-[0.18em] text-[var(--white-30)]">
                       {a.readTime}
                     </span>
@@ -70,7 +78,9 @@ export function InsightsContent() {
                   <h2 className="mb-3 text-[clamp(1rem,3vw,1.35rem)] leading-snug text-[var(--white-100)] transition-colors group-hover:text-[var(--white-80)] md:max-w-3xl">
                     {a.title}
                   </h2>
-                  <p className="max-w-2xl text-sm leading-relaxed text-[var(--text-muted)]">{a.lead}</p>
+                  <p className="max-w-2xl text-sm leading-relaxed text-[var(--text-muted)]">
+                    {a.lead}
+                  </p>
                   <p className="mt-4 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-40)] transition-colors group-hover:text-[var(--white-60)]">
                     {d.readArticle}
                   </p>

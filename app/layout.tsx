@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "./editorial.css";
 import { AppProviders } from "./providers";
-import { ThemeSync } from "./theme-sync";
+import { FaviconTheme } from "./favicon-theme";
 
 const archivo = localFont({
   src: [
@@ -22,6 +23,16 @@ const clashDisplay = localFont({
   display: "swap",
 });
 
+/** Display face for the landing page's large headlines (Satoshi, ITF Free Font License via Fontshare). */
+const satoshi = localFont({
+  src: [
+    { path: "./fonts/satoshi-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/satoshi-700.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-satoshi",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://deviewai.com"),
   title: "DeView | AI Solutions, Software Engineering & Data Engineering",
@@ -35,10 +46,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-    { media: "(prefers-color-scheme: light)", color: "#f3eee2" },
-  ],
+  themeColor: "#f3eee2",
 };
 
 export default function RootLayout({
@@ -49,14 +57,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-theme="light"
       data-scroll-behavior="smooth"
-      className={`h-full antialiased ${archivo.variable} ${clashDisplay.variable}`}
+      className={`h-full antialiased ${archivo.variable} ${clashDisplay.variable} ${satoshi.variable}`}
     >
       <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--text)]">
-        <AppProviders>
-          <ThemeSync />
-          {children}
-        </AppProviders>
+        <FaviconTheme />
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );

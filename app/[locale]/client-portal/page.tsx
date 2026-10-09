@@ -4,7 +4,6 @@ import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SubpageNav } from "@/components/SubpageNav";
-import { Particles } from "@/components/ui/particles";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import type { Dictionary } from "@/lib/i18n/dict-en";
 
@@ -51,15 +50,26 @@ function fileTypeIcon(fileType: Document["fileType"]) {
 }
 
 function formatDate(iso: string) {
-  return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric" }).format(
-    new Date(iso),
-  );
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(new Date(iso));
 }
 
-function PortalView({ portal, onLogout, t }: { portal: Portal; onLogout: () => void; t: Dictionary["clientPortalPage"] }) {
-  const progress = portal.milestones.length > 0
-    ? Math.round(((portal.currentStage) / portal.milestones.length) * 100)
-    : 0;
+function PortalView({
+  portal,
+  onLogout,
+  t,
+}: {
+  portal: Portal;
+  onLogout: () => void;
+  t: Dictionary["clientPortalPage"];
+}) {
+  const progress =
+    portal.milestones.length > 0
+      ? Math.round((portal.currentStage / portal.milestones.length) * 100)
+      : 0;
 
   return (
     <motion.div
@@ -71,14 +81,20 @@ function PortalView({ portal, onLogout, t }: { portal: Portal; onLogout: () => v
       <div className="mb-8 flex flex-col gap-2 pb-8 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="section-label mb-1">{t.projectPortal}</p>
-          <h1 className="hero-heading text-[clamp(1.4rem,4vw,2rem)]">{portal.projectTitle}</h1>
-          <p className="mt-1 text-sm text-[var(--text-muted)]">{portal.clientName}</p>
+          <h1 className="hero-heading text-[clamp(1.4rem,4vw,2rem)]">
+            {portal.projectTitle}
+          </h1>
+          <p className="mt-1 text-sm text-[var(--text-muted)]">
+            {portal.clientName}
+          </p>
         </div>
         <div className="flex flex-col items-start gap-1 sm:items-end">
           <span className="text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
             {t.referenceLabel}
           </span>
-          <span className="font-mono text-xs text-[var(--white-60)]">{portal.reference}</span>
+          <span className="font-mono text-xs text-[var(--white-60)]">
+            {portal.reference}
+          </span>
           <button
             type="button"
             onClick={onLogout}
@@ -130,12 +146,17 @@ function PortalView({ portal, onLogout, t }: { portal: Portal; onLogout: () => v
                     ].join(" ")}
                   />
                   {i < portal.milestones.length - 1 && (
-                    <div className="mt-1 w-px flex-1 bg-[var(--white-10)]" style={{ minHeight: "2rem" }} />
+                    <div
+                      className="mt-1 w-px flex-1 bg-[var(--white-10)]"
+                      style={{ minHeight: "2rem" }}
+                    />
                   )}
                 </div>
 
                 {/* Content */}
-                <div className={`pb-8 ${i === portal.milestones.length - 1 ? "pb-2" : ""}`}>
+                <div
+                  className={`pb-8 ${i === portal.milestones.length - 1 ? "pb-2" : ""}`}
+                >
                   <div className="flex flex-wrap items-center gap-2">
                     <span
                       className={[
@@ -159,14 +180,20 @@ function PortalView({ portal, onLogout, t }: { portal: Portal; onLogout: () => v
                             : "text-[var(--white-20)]",
                       ].join(" ")}
                     >
-                      {status === "done" ? t.statusComplete : status === "active" ? t.statusInProgress : t.statusUpcoming}
+                      {status === "done"
+                        ? t.statusComplete
+                        : status === "active"
+                          ? t.statusInProgress
+                          : t.statusUpcoming}
                     </span>
                   </div>
                   {m.description && (
                     <p
                       className={[
                         "mt-1 max-w-xl text-sm leading-relaxed",
-                        status === "upcoming" ? "text-[var(--white-20)]" : "text-[var(--text-muted)]",
+                        status === "upcoming"
+                          ? "text-[var(--white-20)]"
+                          : "text-[var(--text-muted)]",
                       ].join(" ")}
                     >
                       {m.description}
@@ -180,12 +207,23 @@ function PortalView({ portal, onLogout, t }: { portal: Portal; onLogout: () => v
       </section>
 
       {/* Documents */}
-      <details className="group/documents mb-10 border-y border-[var(--white-10)]" open={portal.documents.length > 0}>
+      <details
+        className="group/documents mb-10 border-y border-[var(--white-10)]"
+        open={portal.documents.length > 0}
+      >
         <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
           <span className="section-label">{t.documentsLabel}</span>
           <span className="flex items-center gap-3 text-[0.6rem] uppercase tracking-[0.14em] text-[var(--white-40)]">
-            {portal.documents.length} {portal.documents.length === 1 ? t.documentCountSingular : t.documentCountPlural}
-            <span aria-hidden className="text-base font-light transition-transform duration-200 group-open/documents:rotate-45">+</span>
+            {portal.documents.length}{" "}
+            {portal.documents.length === 1
+              ? t.documentCountSingular
+              : t.documentCountPlural}
+            <span
+              aria-hidden
+              className="text-base font-light transition-transform duration-200 group-open/documents:rotate-45"
+            >
+              +
+            </span>
           </span>
         </summary>
         <div className="pb-5">
@@ -229,7 +267,13 @@ function PortalView({ portal, onLogout, t }: { portal: Portal; onLogout: () => v
   );
 }
 
-function LoginView({ onSuccess, t }: { onSuccess: (portal: Portal, reference: string) => void; t: Dictionary["clientPortalPage"] }) {
+function LoginView({
+  onSuccess,
+  t,
+}: {
+  onSuccess: (portal: Portal, reference: string) => void;
+  t: Dictionary["clientPortalPage"];
+}) {
   const [reference, setReference] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -268,22 +312,7 @@ function LoginView({ onSuccess, t }: { onSuccess: (portal: Portal, reference: st
   }
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-[var(--background)]">
-      {/* Particle field: needs a concrete pixel height, so parent is h-screen */}
-      <Particles
-        color="#888888"
-        quantity={120}
-        ease={20}
-        className="pointer-events-none absolute inset-0 z-0"
-      />
-
-      {/* Ambient blobs */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute left-0 top-0 h-[80vh] w-[35vw] -translate-y-1/2 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,rgba(255,255,255,0.05)_0,rgba(140,140,140,0.015)_50%,rgba(255,255,255,0.008)_80%)]" />
-        <div className="absolute left-0 top-0 h-[80vh] w-[15vw] -translate-y-1/2 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,0.03)_0,rgba(255,255,255,0.008)_80%,transparent_100%)] [translate:5%_-50%]" />
-        <div className="absolute left-0 top-0 h-[80vh] w-[15vw] -translate-y-1/2 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,0.03)_0,rgba(255,255,255,0.008)_80%,transparent_100%)]" />
-      </div>
-
+    <main className="portal-login min-h-screen">
       {/* Back nav */}
       <div className="absolute left-0 right-0 top-0 z-10 section-gutter">
         <div className="mx-auto max-w-6xl pt-5">
@@ -292,7 +321,7 @@ function LoginView({ onSuccess, t }: { onSuccess: (portal: Portal, reference: st
       </div>
 
       {/* Centred card */}
-      <div className="relative z-10 flex h-full items-center justify-center overflow-y-auto px-4 py-24">
+      <div className="relative flex w-full items-center justify-center px-5">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -352,7 +381,10 @@ function LoginView({ onSuccess, t }: { onSuccess: (portal: Portal, reference: st
           {/* Footer note */}
           <p className="text-[0.65rem] leading-relaxed text-[var(--white-30)]">
             {t.footerNote}{" "}
-            <a href="mailto:info@deviewai.com" className="text-[var(--white-50)] hover:text-[var(--white-80)]">
+            <a
+              href="mailto:info@deviewai.com"
+              className="text-[var(--white-50)] underline underline-offset-4 hover:text-[var(--white-80)]"
+            >
               info@deviewai.com
             </a>
           </p>
@@ -367,7 +399,7 @@ function LoginView({ onSuccess, t }: { onSuccess: (portal: Portal, reference: st
           </a>
         </motion.div>
       </div>
-    </div>
+    </main>
   );
 }
 
@@ -384,7 +416,9 @@ export default function ClientPortalPage() {
       return;
     }
     try {
-      const res = await fetch(`/api/client-portal/${encodeURIComponent(saved)}`);
+      const res = await fetch(
+        `/api/client-portal/${encodeURIComponent(saved)}`,
+      );
       if (res.ok) {
         setPortal(await res.json());
       } else {
@@ -427,7 +461,12 @@ export default function ClientPortalPage() {
 
           <div className="panel border border-[var(--white-20)] bg-[var(--surface)] p-5 md:p-10">
             <AnimatePresence mode="wait">
-              <PortalView key="portal" portal={portal} onLogout={handleLogout} t={t} />
+              <PortalView
+                key="portal"
+                portal={portal}
+                onLogout={handleLogout}
+                t={t}
+              />
             </AnimatePresence>
           </div>
         </div>

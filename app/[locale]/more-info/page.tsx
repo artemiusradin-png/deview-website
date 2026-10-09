@@ -181,7 +181,6 @@ export default function MoreInfoPage() {
 
           {/* ── Guide wrapper ── */}
           <div className="gw">
-
             {/* ════════════════════════════════
                 MODULE 1: THE BIG PICTURE
             ════════════════════════════════ */}
@@ -194,7 +193,12 @@ export default function MoreInfoPage() {
 
               <h2 className="sh">{m.archHeading}</h2>
               <p className="intro-p">{m.archIntro}</p>
-              <div className="diag">
+              <div
+                className="diag"
+                tabIndex={0}
+                role="group"
+                aria-label="Five-layer architecture diagram"
+              >
                 <div dangerouslySetInnerHTML={{ __html: SVG_ARCH }} />
                 <p className="diag-cap">{m.archCaption}</p>
               </div>
@@ -205,14 +209,18 @@ export default function MoreInfoPage() {
                   <div className="card" key={i}>
                     <div className="card-title">
                       {mode.icon} {mode.name}{" "}
-                      <span className={`badge ${i === 0 ? "b-blue" : i === 1 ? "b-green" : i === 2 ? "b-purple" : "b-cyan"}`}>
+                      <span
+                        className={`badge ${i === 0 ? "b-blue" : i === 1 ? "b-green" : i === 2 ? "b-purple" : "b-cyan"}`}
+                      >
                         {mode.badge}
                       </span>
                     </div>
                     <p>{mode.desc}</p>
                     <div style={{ marginTop: 10 }}>
                       {mode.tags.map((tag, j) => (
-                        <span className="tag" key={j}>{tag}</span>
+                        <span className="tag" key={j}>
+                          {tag}
+                        </span>
                       ))}
                     </div>
                   </div>
@@ -223,24 +231,32 @@ export default function MoreInfoPage() {
               <div className="co co-info">
                 <strong>{m.prodTip}</strong> {m.prodTipText}
               </div>
-              <table className="dt">
-                <thead>
-                  <tr>
-                    <th>{m.prodColumns.dimension}</th>
-                    <th>{m.prodColumns.poc}</th>
-                    <th>{m.prodColumns.production}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {m.prodRows.map((row, i) => (
-                    <tr key={i}>
-                      <td>{row.dim}</td>
-                      <td className="comp-bad">{row.poc}</td>
-                      <td className="comp-good">✓ {row.prod}</td>
+
+              <div
+                className="data-table-scroll"
+                tabIndex={0}
+                role="group"
+                aria-label="Production requirements comparison"
+              >
+                <table className="dt">
+                  <thead>
+                    <tr>
+                      <th>{m.prodColumns.dimension}</th>
+                      <th>{m.prodColumns.poc}</th>
+                      <th>{m.prodColumns.production}</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {m.prodRows.map((row, i) => (
+                      <tr key={i}>
+                        <td>{row.dim}</td>
+                        <td className="comp-bad">{row.poc}</td>
+                        <td className="comp-good">✓ {row.prod}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             <div className="divider" />
@@ -251,7 +267,7 @@ export default function MoreInfoPage() {
             <div className="module" id="mi-m2">
               <div className="module-header">
                 <div className="module-tag">{m.m2Tag}</div>
-                <h1 className="module-title">{m.m2Title}</h1>
+                <h2 className="module-title">{m.m2Title}</h2>
                 <p className="module-desc">{m.m2Desc}</p>
               </div>
 
@@ -267,16 +283,20 @@ export default function MoreInfoPage() {
                     {m.svc1RecItems.map((item, i) => {
                       const [bold, ...rest] = item.split(" ");
                       return (
-                        <li key={i}><strong>{bold}</strong> {rest.join(" ")}</li>
+                        <li key={i}>
+                          <strong>{bold}</strong> {rest.join(" ")}
+                        </li>
                       );
                     })}
                   </ul>
                 </div>
               </div>
-              <Flow steps={m.svc1Flow.map((s, i) => {
-                const icons = ["📋", "🔍", "📊", "🎯", "📄"];
-                return `${icons[i] ?? ""} ${s}`;
-              })} />
+              <Flow
+                steps={m.svc1Flow.map((s, i) => {
+                  const icons = ["📋", "🔍", "📊", "🎯", "📄"];
+                  return `${icons[i] ?? ""} ${s}`;
+                })}
+              />
 
               <div className="divider" />
 
@@ -295,16 +315,21 @@ export default function MoreInfoPage() {
                     {m.svc2ConnItems.map((item, i) => {
                       const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
+                        <li key={i}>
+                          <strong>{parts[0]}</strong>
+                          {parts[1] ? `: ${parts[1]}` : ""}
+                        </li>
                       );
                     })}
                   </ul>
                 </div>
               </div>
-              <Flow steps={m.svc2Flow.map((s, i) => {
-                const icons = ["📁", "✂️", "🗄️", "❓", "🔍", "💬"];
-                return `${icons[i] ?? ""} ${s}`;
-              })} />
+              <Flow
+                steps={m.svc2Flow.map((s, i) => {
+                  const icons = ["📁", "✂️", "🗄️", "❓", "🔍", "💬"];
+                  return `${icons[i] ?? ""} ${s}`;
+                })}
+              />
 
               <div className="divider" />
 
@@ -319,10 +344,12 @@ export default function MoreInfoPage() {
                   <p>{m.svc3LoopBody}</p>
                 </div>
               </div>
-              <Flow steps={m.svc3Flow.map((s, i) => {
-                const icons = ["📄", "🔤", "🤖", "✅", "🔀", "⚙️"];
-                return `${icons[i] ?? ""} ${s}`;
-              })} />
+              <Flow
+                steps={m.svc3Flow.map((s, i) => {
+                  const icons = ["📄", "🔤", "🤖", "✅", "🔀", "⚙️"];
+                  return `${icons[i] ?? ""} ${s}`;
+                })}
+              />
 
               <div className="divider" />
 
@@ -338,16 +365,20 @@ export default function MoreInfoPage() {
                     {m.svc4CrmItems.map((item, i) => {
                       const parts = item.split(" ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong> {parts.slice(1).join(" ")}</li>
+                        <li key={i}>
+                          <strong>{parts[0]}</strong> {parts.slice(1).join(" ")}
+                        </li>
                       );
                     })}
                   </ul>
                 </div>
               </div>
-              <Flow steps={m.svc4Flow.map((s, i) => {
-                const icons = ["📨", "🎯", "📚", "💬", "📝"];
-                return `${icons[i] ?? ""} ${s}`;
-              })} />
+              <Flow
+                steps={m.svc4Flow.map((s, i) => {
+                  const icons = ["📨", "🎯", "📚", "💬", "📝"];
+                  return `${icons[i] ?? ""} ${s}`;
+                })}
+              />
 
               <div className="divider" />
 
@@ -363,16 +394,21 @@ export default function MoreInfoPage() {
                     {m.svc5ConnItems.map((item, i) => {
                       const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
+                        <li key={i}>
+                          <strong>{parts[0]}</strong>
+                          {parts[1] ? `: ${parts[1]}` : ""}
+                        </li>
                       );
                     })}
                   </ul>
                 </div>
               </div>
-              <Flow steps={m.svc5Flow.map((s, i) => {
-                const icons = ["🔗", "⏰", "🤖", "📊", "📧"];
-                return `${icons[i] ?? ""} ${s}`;
-              })} />
+              <Flow
+                steps={m.svc5Flow.map((s, i) => {
+                  const icons = ["🔗", "⏰", "🤖", "📊", "📧"];
+                  return `${icons[i] ?? ""} ${s}`;
+                })}
+              />
 
               <div className="divider" />
 
@@ -388,7 +424,10 @@ export default function MoreInfoPage() {
                     {m.svc6DimItems.map((item, i) => {
                       const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
+                        <li key={i}>
+                          <strong>{parts[0]}</strong>
+                          {parts[1] ? `: ${parts[1]}` : ""}
+                        </li>
                       );
                     })}
                   </ul>
@@ -404,12 +443,17 @@ export default function MoreInfoPage() {
             <div className="module" id="mi-m3">
               <div className="module-header">
                 <div className="module-tag">{m.m3Tag}</div>
-                <h1 className="module-title">{m.m3Title}</h1>
+                <h2 className="module-title">{m.m3Title}</h2>
                 <p className="module-desc">{m.m3Desc}</p>
               </div>
 
               <h2 className="sh">{m.dataMapHeading}</h2>
-              <div className="diag">
+              <div
+                className="diag"
+                tabIndex={0}
+                role="group"
+                aria-label="Data pipeline diagram"
+              >
                 <div dangerouslySetInnerHTML={{ __html: SVG_DATA }} />
                 <p className="diag-cap">{m.dataMapCaption}</p>
               </div>
@@ -417,15 +461,21 @@ export default function MoreInfoPage() {
               <h2 className="sh">{m.deployHeading}</h2>
               <div className="g3">
                 <div className="card">
-                  <div className="card-title"><span className="badge b-blue">{m.deployCloud}</span></div>
+                  <div className="card-title">
+                    <span className="badge b-blue">{m.deployCloud}</span>
+                  </div>
                   <p style={{ marginTop: 8 }}>{m.deployCloudBody}</p>
                 </div>
                 <div className="card">
-                  <div className="card-title"><span className="badge b-green">{m.deployOnPrem}</span></div>
+                  <div className="card-title">
+                    <span className="badge b-green">{m.deployOnPrem}</span>
+                  </div>
                   <p style={{ marginTop: 8 }}>{m.deployOnPremBody}</p>
                 </div>
                 <div className="card">
-                  <div className="card-title"><span className="badge b-amber">{m.deployHybrid}</span></div>
+                  <div className="card-title">
+                    <span className="badge b-amber">{m.deployHybrid}</span>
+                  </div>
                   <p style={{ marginTop: 8 }}>{m.deployHybridBody}</p>
                 </div>
               </div>
@@ -449,12 +499,17 @@ export default function MoreInfoPage() {
             <div className="module" id="mi-m4">
               <div className="module-header">
                 <div className="module-tag">{m.m4Tag}</div>
-                <h1 className="module-title">{m.m4Title}</h1>
+                <h2 className="module-title">{m.m4Title}</h2>
                 <p className="module-desc">{m.m4Desc}</p>
               </div>
 
               <h2 className="sh">{m.secMapHeading}</h2>
-              <div className="diag">
+              <div
+                className="diag"
+                tabIndex={0}
+                role="group"
+                aria-label="Security boundaries diagram"
+              >
                 <div dangerouslySetInnerHTML={{ __html: SVG_SEC }} />
                 <p className="diag-cap">{m.secMapCaption}</p>
               </div>
@@ -467,7 +522,10 @@ export default function MoreInfoPage() {
                     {m.secAccessItems.map((item, i) => {
                       const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
+                        <li key={i}>
+                          <strong>{parts[0]}</strong>
+                          {parts[1] ? `: ${parts[1]}` : ""}
+                        </li>
                       );
                     })}
                   </ul>
@@ -478,7 +536,10 @@ export default function MoreInfoPage() {
                     {m.secAuditItems.map((item, i) => {
                       const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
+                        <li key={i}>
+                          <strong>{parts[0]}</strong>
+                          {parts[1] ? `: ${parts[1]}` : ""}
+                        </li>
                       );
                     })}
                   </ul>
@@ -489,7 +550,10 @@ export default function MoreInfoPage() {
                     {m.secInputItems.map((item, i) => {
                       const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
+                        <li key={i}>
+                          <strong>{parts[0]}</strong>
+                          {parts[1] ? `: ${parts[1]}` : ""}
+                        </li>
                       );
                     })}
                   </ul>
@@ -500,7 +564,10 @@ export default function MoreInfoPage() {
                     {m.secAiItems.map((item, i) => {
                       const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
+                        <li key={i}>
+                          <strong>{parts[0]}</strong>
+                          {parts[1] ? `: ${parts[1]}` : ""}
+                        </li>
                       );
                     })}
                   </ul>
@@ -511,24 +578,31 @@ export default function MoreInfoPage() {
               <div className="co co-warn">
                 <strong>{m.regTip}</strong> {m.regTipText}
               </div>
-              <table className="dt">
-                <thead>
-                  <tr>
-                    <th>{m.regColumns.regulation}</th>
-                    <th>{m.regColumns.who}</th>
-                    <th>{m.regColumns.how}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {m.regRows.map((row, i) => (
-                    <tr key={i}>
-                      <td>{row.reg}</td>
-                      <td>{row.who}</td>
-                      <td>{row.how}</td>
+              <div
+                className="data-table-scroll"
+                tabIndex={0}
+                role="group"
+                aria-label="Regulatory frameworks"
+              >
+                <table className="dt">
+                  <thead>
+                    <tr>
+                      <th>{m.regColumns.regulation}</th>
+                      <th>{m.regColumns.who}</th>
+                      <th>{m.regColumns.how}</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {m.regRows.map((row, i) => (
+                      <tr key={i}>
+                        <td>{row.reg}</td>
+                        <td>{row.who}</td>
+                        <td>{row.how}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             <div className="divider" />
@@ -539,35 +613,56 @@ export default function MoreInfoPage() {
             <div className="module" id="mi-m5">
               <div className="module-header">
                 <div className="module-tag">{m.m5Tag}</div>
-                <h1 className="module-title">{m.m5Title}</h1>
+                <h2 className="module-title">{m.m5Title}</h2>
                 <p className="module-desc">{m.m5Desc}</p>
               </div>
 
               <h2 className="sh">{m.mlopsHeading}</h2>
-              <div className="diag">
+              <div
+                className="diag"
+                tabIndex={0}
+                role="group"
+                aria-label="Model operations diagram"
+              >
                 <div dangerouslySetInnerHTML={{ __html: SVG_MLOPS }} />
                 <p className="diag-cap">{m.mlopsCaption}</p>
               </div>
 
               <div className="g2">
                 <div className="card">
-                  <div className="card-title" style={{ color: "var(--gi-cyan)" }}>👁 {m.monitorTitle}</div>
+                  <div
+                    className="card-title"
+                    style={{ color: "var(--gi-cyan)" }}
+                  >
+                    👁 {m.monitorTitle}
+                  </div>
                   <ul className="cl">
                     {m.monitorItems.map((item, i) => {
                       const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
+                        <li key={i}>
+                          <strong>{parts[0]}</strong>
+                          {parts[1] ? `: ${parts[1]}` : ""}
+                        </li>
                       );
                     })}
                   </ul>
                 </div>
                 <div className="card">
-                  <div className="card-title" style={{ color: "var(--gi-amber)" }}>📊 {m.evaluateTitle}</div>
+                  <div
+                    className="card-title"
+                    style={{ color: "var(--gi-amber)" }}
+                  >
+                    📊 {m.evaluateTitle}
+                  </div>
                   <ul className="cl">
                     {m.evaluateItems.map((item, i) => {
                       const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
+                        <li key={i}>
+                          <strong>{parts[0]}</strong>
+                          {parts[1] ? `: ${parts[1]}` : ""}
+                        </li>
                       );
                     })}
                   </ul>
@@ -604,30 +699,39 @@ export default function MoreInfoPage() {
             <div className="module" id="mi-m6">
               <div className="module-header">
                 <div className="module-tag">{m.m6Tag}</div>
-                <h1 className="module-title">{m.m6Title}</h1>
+                <h2 className="module-title">{m.m6Title}</h2>
                 <p className="module-desc">{m.m6Desc}</p>
               </div>
 
-              <table className="dt">
-                <thead>
-                  <tr>
-                    <th>{m.stackColumns.layer}</th>
-                    <th>{m.stackColumns.tech}</th>
-                    <th>{m.stackColumns.version}</th>
-                    <th>{m.stackColumns.purpose}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {m.stackRows.map((row, i) => (
-                    <tr key={i}>
-                      <td>{row.layer}</td>
-                      <td><strong>{row.tech}</strong></td>
-                      <td>{row.version}</td>
-                      <td>{row.purpose}</td>
+              <div
+                className="data-table-scroll"
+                tabIndex={0}
+                role="group"
+                aria-label="Technology stack"
+              >
+                <table className="dt">
+                  <thead>
+                    <tr>
+                      <th>{m.stackColumns.layer}</th>
+                      <th>{m.stackColumns.tech}</th>
+                      <th>{m.stackColumns.version}</th>
+                      <th>{m.stackColumns.purpose}</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {m.stackRows.map((row, i) => (
+                      <tr key={i}>
+                        <td>{row.layer}</td>
+                        <td>
+                          <strong>{row.tech}</strong>
+                        </td>
+                        <td>{row.version}</td>
+                        <td>{row.purpose}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
 
               <h2 className="sh">{m.portalHeading}</h2>
               <Flow steps={m.portalFlow} />
@@ -638,7 +742,10 @@ export default function MoreInfoPage() {
                     {m.portalViewItems.map((item, i) => {
                       const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
+                        <li key={i}>
+                          <strong>{parts[0]}</strong>
+                          {parts[1] ? `: ${parts[1]}` : ""}
+                        </li>
                       );
                     })}
                   </ul>
@@ -649,7 +756,10 @@ export default function MoreInfoPage() {
                     {m.portalSecItems.map((item, i) => {
                       const parts = item.split(": ");
                       return (
-                        <li key={i}><strong>{parts[0]}</strong>{parts[1] ? `: ${parts[1]}` : ""}</li>
+                        <li key={i}>
+                          <strong>{parts[0]}</strong>
+                          {parts[1] ? `: ${parts[1]}` : ""}
+                        </li>
                       );
                     })}
                   </ul>
@@ -668,7 +778,7 @@ export default function MoreInfoPage() {
             <div className="module" id="mi-m7">
               <div className="module-header">
                 <div className="module-tag">{m.m7Tag}</div>
-                <h1 className="module-title">{m.m7Title}</h1>
+                <h2 className="module-title">{m.m7Title}</h2>
                 <p className="module-desc">{m.m7Desc}</p>
               </div>
 

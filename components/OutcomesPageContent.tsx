@@ -1,5 +1,6 @@
 "use client";
 
+import { PageIntro } from "@/components/PageIntro";
 import { motion } from "framer-motion";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 
@@ -34,22 +35,18 @@ export function OutcomesPageContent() {
         transition={{ duration: 0.5 }}
         className="mx-auto flex h-full max-w-6xl flex-col justify-between gap-6 md:gap-10"
       >
-        <div className="section-shell">
-          <p className="section-label mb-3">{o.label}</p>
-          <div className="rule mb-6" />
-          <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
-            <div>
-              <h1 className="mb-4 text-[clamp(1.25rem,4.5vw,1.75rem)] leading-snug text-[var(--white-100)] md:text-3xl">
-                {o.titleL1}
-                <br />
-                {o.titleL2}
-              </h1>
-            </div>
-            <div>
-              <p className="max-w-md text-sm text-[var(--text-muted)]">{o.subtitle}</p>
-            </div>
-          </div>
-        </div>
+        <PageIntro
+          label={o.label}
+          title={
+            <>
+              Less effort.
+              <br />
+              More value.
+            </>
+          }
+        >
+          <p>{o.subtitle}</p>
+        </PageIntro>
 
         <motion.div
           variants={stagger}

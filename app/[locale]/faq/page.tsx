@@ -3,13 +3,26 @@
 import { useState } from "react";
 import { LocaleLink } from "@/components/LocaleLink";
 import { SiteFooter } from "@/components/SiteFooter";
+import { PageIntro } from "@/components/PageIntro";
 import { SubpageNav } from "@/components/SubpageNav";
 import { ChevronDown } from "lucide-react";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 
-function FaqItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boolean; onToggle: () => void }) {
+function FaqItem({
+  q,
+  a,
+  isOpen,
+  onToggle,
+}: {
+  q: string;
+  a: string;
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
   return (
-    <div className={`border-b border-[var(--white-20)] ${isOpen ? "bg-[var(--surface)]" : ""}`}>
+    <div
+      className={`border-b border-[var(--white-20)] ${isOpen ? "bg-[var(--surface)]" : ""}`}
+    >
       <button
         type="button"
         className="flex w-full items-start justify-between gap-6 py-5 text-left"
@@ -24,7 +37,9 @@ function FaqItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boo
       </button>
       {isOpen && (
         <div className="pb-5 pr-10">
-          <p className="text-sm leading-relaxed text-[var(--text-muted)]">{a}</p>
+          <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+            {a}
+          </p>
         </div>
       )}
     </div>
@@ -35,7 +50,8 @@ export default function FaqPage() {
   const [openKey, setOpenKey] = useState<string | null>("0-0");
   const { dict } = useLocaleContext();
 
-  const toggle = (key: string) => setOpenKey((prev) => (prev === key ? null : key));
+  const toggle = (key: string) =>
+    setOpenKey((prev) => (prev === key ? null : key));
 
   return (
     <>
@@ -43,19 +59,18 @@ export default function FaqPage() {
         <div className="section-gutter mx-auto max-w-6xl">
           <SubpageNav backHref="/" />
 
-          {/* Header */}
-          <div className="mb-12 sm:mb-16">
-            <p className="section-label mb-3">{dict.faqPage.sectionLabel}</p>
-            <div className="rule mb-6" />
-            <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
-              <h1 className="text-[clamp(1.5rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
-                {dict.faqPage.h1}
-              </h1>
-              <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
-                {dict.faqPage.subtitle}
-              </p>
-            </div>
-          </div>
+          <PageIntro
+            label={dict.faqPage.sectionLabel}
+            title={
+              <>
+                Good questions.
+                <br />
+                Straight answers.
+              </>
+            }
+          >
+            <p>{dict.faqPage.subtitle}</p>
+          </PageIntro>
 
           {/* FAQ categories */}
           <div className="space-y-14">
