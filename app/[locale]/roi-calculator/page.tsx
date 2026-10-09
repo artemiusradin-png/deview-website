@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { SiteFooter } from "@/components/SiteFooter";
+import { PageIntro } from "@/components/PageIntro";
 import { SubpageNav } from "@/components/SubpageNav";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 
@@ -22,13 +23,20 @@ function Slider({
   format: (v: number) => string;
   onChange: (v: number) => void;
 }) {
+  const id = useId();
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <label className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-60)]">{label}</label>
+        <label
+          htmlFor={id}
+          className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--white-60)]"
+        >
+          {label}
+        </label>
         <span className="text-sm text-[var(--white-100)]">{format(value)}</span>
       </div>
       <input
+        id={id}
         type="range"
         min={min}
         max={max}
@@ -65,21 +73,27 @@ export default function RoiCalculatorPage() {
 
   // Automation rates (what % AI handles)
   const DOC_AUTOMATION = 0.75;
-  const SUPPORT_AUTOMATION = 0.40;
+  const SUPPORT_AUTOMATION = 0.4;
   const REPORT_AUTOMATION = 0.85;
 
   // Monthly calculations
   const docHoursSaved = (docsPerWeek * 4 * minsPerDoc * DOC_AUTOMATION) / 60;
-  const supportHoursSaved = (ticketsPerDay * 22 * minsPerTicket * SUPPORT_AUTOMATION) / 60;
+  const supportHoursSaved =
+    (ticketsPerDay * 22 * minsPerTicket * SUPPORT_AUTOMATION) / 60;
   const reportHoursSaved = reportsPerMonth * hoursPerReport * REPORT_AUTOMATION;
 
   const totalHoursSaved = docHoursSaved + supportHoursSaved + reportHoursSaved;
   const monthlySavings = totalHoursSaved * HOURLY_RATE;
   const annualSavings = monthlySavings * 12;
 
-  const formatHours = (h: number) => `${Math.round(h)} ${dict.roiCalculatorPage.units.hrs}`;
+  const formatHours = (h: number) =>
+    `${Math.round(h)} ${dict.roiCalculatorPage.units.hrs}`;
   const formatCurrency = (n: number) =>
-    new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    }).format(n);
 
   const sections = [
     {
@@ -174,33 +188,43 @@ export default function RoiCalculatorPage() {
         <div className="section-gutter mx-auto max-w-6xl">
           <SubpageNav backHref="/" />
 
-          {/* Header */}
-          <div className="mb-12">
-            <p className="section-label mb-3">{dict.roiCalculatorPage.sectionLabel}</p>
-            <div className="rule mb-6" />
-            <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
-              <h1 className="text-[clamp(1.5rem,5vw,2.25rem)] leading-snug text-[var(--white-100)]">
-                {dict.roiCalculatorPage.h1}
-              </h1>
-              <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
-                {dict.roiCalculatorPage.subtitle}
-              </p>
-            </div>
-          </div>
+          <PageIntro
+            label={dict.roiCalculatorPage.sectionLabel}
+            title={
+              <>
+                A little less work.
+                <br />A lot more time.
+              </>
+            }
+          >
+            <p>{dict.roiCalculatorPage.subtitle}</p>
+          </PageIntro>
 
           <div className="grid gap-10 lg:grid-cols-[1fr_320px] lg:items-start">
             {/* Inputs */}
             <div className="space-y-8">
               {sections.map((s) => (
-                <div key={s.label} className="border border-[var(--white-20)] bg-[var(--surface)] p-6 sm:p-8">
+                <div
+                  key={s.label}
+                  className="border border-[var(--white-20)] bg-[var(--surface)] p-6 sm:p-8"
+                >
                   <div className="mb-6 flex flex-wrap items-start justify-between gap-3">
                     <div>
-                      <p className="text-sm uppercase tracking-[0.15em] text-[var(--white-80)]">{s.label}</p>
-                      <p className="mt-0.5 text-[0.72rem] text-[var(--text-muted)]">{s.description}</p>
+                      <p className="text-sm uppercase tracking-[0.15em] text-[var(--white-80)]">
+                        {s.label}
+                      </p>
+                      <p className="mt-0.5 text-[0.72rem] text-[var(--text-muted)]">
+                        {s.description}
+                      </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-[0.6rem] uppercase tracking-[0.18em] text-[var(--white-40)]">{dict.roiCalculatorPage.aiSaves}</p>
-                      <p className="text-base text-[var(--white-100)]">{formatHours(s.hoursSaved)}{dict.roiCalculatorPage.perMonth}</p>
+                      <p className="text-[0.6rem] uppercase tracking-[0.18em] text-[var(--white-40)]">
+                        {dict.roiCalculatorPage.aiSaves}
+                      </p>
+                      <p className="text-base text-[var(--white-100)]">
+                        {formatHours(s.hoursSaved)}
+                        {dict.roiCalculatorPage.perMonth}
+                      </p>
                     </div>
                   </div>
                   {s.sliders}
@@ -211,7 +235,10 @@ export default function RoiCalculatorPage() {
               ))}
 
               <p className="text-[0.7rem] leading-relaxed text-[var(--text-muted)]">
-                {dict.roiCalculatorPage.disclaimer.replace("$RATE", String(HOURLY_RATE))}
+                {dict.roiCalculatorPage.disclaimer.replace(
+                  "$RATE",
+                  String(HOURLY_RATE),
+                )}
               </p>
             </div>
 
@@ -224,10 +251,16 @@ export default function RoiCalculatorPage() {
 
                 <div className="mb-6 space-y-4">
                   {sections.map((s) => (
-                    <div key={s.label} className="flex items-center justify-between gap-4">
-                      <p className="text-[0.72rem] text-[var(--text-muted)]">{s.label}</p>
+                    <div
+                      key={s.label}
+                      className="flex items-center justify-between gap-4"
+                    >
+                      <p className="text-[0.72rem] text-[var(--text-muted)]">
+                        {s.label}
+                      </p>
                       <p className="shrink-0 text-sm text-[var(--white-80)]">
-                        {formatHours(s.hoursSaved)}{dict.roiCalculatorPage.perMonth}
+                        {formatHours(s.hoursSaved)}
+                        {dict.roiCalculatorPage.perMonth}
                       </p>
                     </div>
                   ))}
@@ -246,11 +279,12 @@ export default function RoiCalculatorPage() {
                   <p className="mb-1 text-[0.55rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
                     {dict.roiCalculatorPage.monthlySavingsEstimate}
                   </p>
-                  <p className="text-[2rem] leading-none text-[var(--white-100)]">
+                  <p className="roi-savings text-[2rem] leading-none text-[var(--white-100)]">
                     {formatCurrency(monthlySavings)}
                   </p>
                   <p className="mt-1 text-[0.65rem] text-[var(--text-muted)]">
-                    {formatCurrency(annualSavings)} {dict.roiCalculatorPage.annualised}
+                    {formatCurrency(annualSavings)}{" "}
+                    {dict.roiCalculatorPage.annualised}
                   </p>
                 </div>
 

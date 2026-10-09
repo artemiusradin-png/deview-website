@@ -51,9 +51,14 @@ export default function HomePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
       />
-      <HomeContent />
+      <HomeContent
+        heroVideoSrc="/video/deview-industries.mp4"
+        heroVideoPoster="/video/deview-industries-poster.jpg"
+      />
     </>
   );
 }

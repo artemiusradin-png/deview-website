@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="21.4 23.55 56 56">
+  <!-- DeView "D" mark, traced from the LinkedIn profile picture, white on a transparent background
+       (served by app/favicon-theme.tsx). The mask keeps the D outline and the facet lines and cuts out
+       the seven facets; facets touching the outline are clipped to the inner counter. -->
+  <defs>
+    <clipPath id="counter">
+      <path d="M34.1 30H46A19 16 0 0 1 65 46V55.5A19 17.9 0 0 1 46 73.4H34.1Z" />
+    </clipPath>
+    <mask id="mark" maskUnits="userSpaceOnUse" x="21.4" y="23.55" width="56" height="56">
+      <path fill="#fff" d="M27.9 24.3H45.7A25.2 19.9 0 0 1 70.9 44.2V58A25.2 20.8 0 0 1 45.7 78.8H27.9Z" />
+      <g fill="#000" clip-path="url(#counter)">
+        <path d="M30 26H50.46L30 53.9Z" />
+        <path d="M39.25 46.6L55 26H69V35.67Z" />
+        <path d="M50.9 47.25L69 40.87V51.37Z" />
+        <path d="M34.1 53.1L45.75 49L63.4 53.75L53.1 60Z" />
+        <path d="M58.1 61.5L69 54.92V64.53Z" />
+        <path d="M30 56.16L48.6 62.9L30 74.62Z" />
+        <path d="M53.1 64.4L69 70.86V78H32.1Z" />
+      </g>
+    </mask>
+  </defs>
+  <rect fill="#fff" x="21.4" y="23.55" width="56" height="56" mask="url(#mark)" />
+</svg>

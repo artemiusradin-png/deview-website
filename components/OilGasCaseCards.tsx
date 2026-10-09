@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { oilGasCasePath, type OilGasCase } from "@/lib/oil-gas-cases";
 
-const labelClass = "text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]";
+const labelClass =
+  "text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]";
 
 /** White plate so every logo shows in its own colours on both the dark and light theme. */
 function LogoPlate({ c }: { c: OilGasCase }) {
@@ -29,7 +30,7 @@ function LogoPlate({ c }: { c: OilGasCase }) {
 /** Large case-study cards for the oil & gas portfolio; each links to the project's own page. */
 export function OilGasCaseCards({ cases }: { cases: OilGasCase[] }) {
   return (
-    <div>
+    <div className="case-projects">
       {cases.map((c, i) => {
         const facts = [
           { label: "Company", value: c.company },
@@ -52,22 +53,35 @@ export function OilGasCaseCards({ cases }: { cases: OilGasCase[] }) {
                     {c.year}
                   </span>
                   <div className="flex flex-col gap-1 pt-1">
-                    <span className="text-[0.6rem] uppercase tracking-[0.22em] text-[var(--white-40)]">Oil &amp; gas</span>
-                    <span className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)]">{c.discipline}</span>
+                    <span className="text-[0.6rem] uppercase tracking-[0.22em] text-[var(--white-40)]">
+                      Oil &amp; gas
+                    </span>
+                    <span className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--white-60)]">
+                      {c.discipline}
+                    </span>
                   </div>
                 </div>
 
-                <p className="mb-3 text-sm uppercase tracking-[0.18em] text-[var(--white-60)]">{c.company}</p>
+                <p className="mb-3 text-sm uppercase tracking-[0.18em] text-[var(--white-60)]">
+                  {c.company}
+                </p>
                 <h3 className="mb-6 text-[clamp(1.35rem,4vw,2rem)] leading-tight text-[var(--white-100)] md:max-w-3xl">
-                  <Link href={oilGasCasePath(c.slug)} className="transition hover:text-[var(--white-80)]">
+                  <Link
+                    href={oilGasCasePath(c.slug)}
+                    className="transition hover:text-[var(--white-80)]"
+                  >
                     {c.project}
                   </Link>
                 </h3>
-                <p className="mb-10 max-w-3xl text-base leading-relaxed text-[var(--white-80)]">{c.summary}</p>
+                <p className="mb-10 max-w-3xl text-base leading-relaxed text-[var(--white-80)]">
+                  {c.summary}
+                </p>
 
                 <div className="mb-10 max-w-3xl">
                   <p className={`mb-2 ${labelClass}`}>The system</p>
-                  <p className="text-sm leading-relaxed text-[var(--text-muted)]">{c.context}</p>
+                  <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+                    {c.context}
+                  </p>
                 </div>
 
                 {c.scope ? (
@@ -100,9 +114,14 @@ export function OilGasCaseCards({ cases }: { cases: OilGasCase[] }) {
                 <LogoPlate c={c} />
                 <dl className="mt-6 border-t border-[var(--white-10)]">
                   {facts.map((f) => (
-                    <div key={f.label} className="flex items-baseline justify-between gap-4 border-b border-[var(--white-10)] py-3">
+                    <div
+                      key={f.label}
+                      className="flex items-baseline justify-between gap-4 border-b border-[var(--white-10)] py-3"
+                    >
                       <dt className={labelClass}>{f.label}</dt>
-                      <dd className="text-right text-sm text-[var(--white-80)]">{f.value}</dd>
+                      <dd className="text-right text-sm text-[var(--white-80)]">
+                        {f.value}
+                      </dd>
                     </div>
                   ))}
                 </dl>

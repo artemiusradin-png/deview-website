@@ -3,8 +3,8 @@
 import { motion } from "framer-motion";
 import { FormEvent, useState } from "react";
 import { SiteFooter } from "@/components/SiteFooter";
+import { PageIntro } from "@/components/PageIntro";
 import { SubpageNav } from "@/components/SubpageNav";
-import RotatingEarth from "@/components/ui/wireframe-dotted-globe";
 import { CalendlyInlineWidget } from "@/components/ui/calendly-inline-widget";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL, buildInquiryMailto } from "@/lib/site-contact";
@@ -18,7 +18,9 @@ export default function ContactPage() {
   const { dict } = useLocaleContext();
   const sp = dict.subpages;
   const f = dict.contactForm;
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
   const [feedback, setFeedback] = useState<string | null>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -43,12 +45,17 @@ export default function ContactPage() {
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify({ name, email, company, details, honeypot }),
       });
-      const data = (await res.json().catch(() => null)) as
-        | { ok?: boolean; mailto?: boolean; error?: string }
-        | null;
+      const data = (await res.json().catch(() => null)) as {
+        ok?: boolean;
+        mailto?: boolean;
+        error?: string;
+      } | null;
 
       if (res.ok && data?.ok) {
         setStatus("success");
@@ -58,7 +65,12 @@ export default function ContactPage() {
       }
 
       if (data?.mailto) {
-        window.location.href = buildInquiryMailto({ name, email, company, details });
+        window.location.href = buildInquiryMailto({
+          name,
+          email,
+          company,
+          details,
+        });
         setStatus("success");
         setFeedback(f.submitSuccessMailto);
         return;
@@ -67,7 +79,12 @@ export default function ContactPage() {
       setStatus("error");
       setFeedback(f.submitError ?? "Something went wrong. Please try again.");
     } catch {
-      window.location.href = buildInquiryMailto({ name, email, company, details });
+      window.location.href = buildInquiryMailto({
+        name,
+        email,
+        company,
+        details,
+      });
       setStatus("success");
       setFeedback(f.submitSuccessMailto);
     }
@@ -76,34 +93,32 @@ export default function ContactPage() {
   return (
     <>
       <main className="section-gutter relative isolate min-h-screen overflow-hidden bg-[var(--background)] bg-grid pb-[max(2rem,env(safe-area-inset-bottom))] pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:pb-10 sm:pt-24">
-        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
-          <RotatingEarth
-            width={1280}
-            height={880}
-            framed={false}
-            interactive={false}
-            showControls={false}
-            className="absolute -right-80 -top-8 opacity-35 blur-[0.2px] md:-right-56 md:-top-16"
-          />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_28%,transparent_0,rgba(0,0,0,0.12)_34%,var(--background)_76%)]" />
-        </div>
-
         <div className="relative mx-auto max-w-6xl">
           <SubpageNav backHref="/" />
+          <PageIntro
+            label="Let’s talk"
+            title={
+              <>
+                Your next move.
+                <br />
+                Let’s make it.
+              </>
+            }
+          >
+            <p>{sp.contactLead}</p>
+          </PageIntro>
 
-          <div className="grid gap-8 md:grid-cols-[1.1fr_1fr] md:gap-10">
+          <div className="contact-layout grid gap-10 md:grid-cols-[1.1fr_1fr] md:gap-16">
             <motion.section
               initial={rise.initial}
               animate={rise.animate}
               transition={{ duration: 0.55 }}
               className="panel border border-[var(--white-20)] bg-[var(--surface)] p-5 md:p-8"
             >
-              <p className="section-label mb-3">{f.label}</p>
-              <div className="rule mb-6" />
-              <h1 className="hero-heading mb-4 text-[clamp(1.5rem,5vw,2rem)] text-[var(--white-100)] md:text-4xl">
-                {sp.contactTitle}
-              </h1>
-              <p className="mb-8 max-w-xl text-sm text-[var(--text-muted)]">{sp.contactLead}</p>
+              <h2 className="mb-8">
+                A few details.
+                <br />A good start.
+              </h2>
 
               <motion.form
                 initial={{ opacity: 0, y: 16 }}
@@ -183,7 +198,9 @@ export default function ContactPage() {
                 {feedback ? (
                   <p
                     className={`text-sm leading-snug ${
-                      status === "error" ? "text-red-400" : "text-[var(--white-90)]"
+                      status === "error"
+                        ? "text-red-400"
+                        : "text-[var(--white-90)]"
                     }`}
                     role="status"
                   >
@@ -206,13 +223,17 @@ export default function ContactPage() {
                   <p className="mb-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
                     {f.responseWindow}
                   </p>
-                  <p className="text-[var(--white-90)]">{f.responseWindowValue}</p>
+                  <p className="text-[var(--white-90)]">
+                    {f.responseWindowValue}
+                  </p>
                 </div>
                 <div>
                   <p className="mb-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
                     {f.initialOutput}
                   </p>
-                  <p className="text-[var(--white-90)]">{f.initialOutputValue}</p>
+                  <p className="text-[var(--white-90)]">
+                    {f.initialOutputValue}
+                  </p>
                 </div>
                 <div>
                   <p className="mb-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">

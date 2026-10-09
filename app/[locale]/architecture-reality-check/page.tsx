@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArchitectureRealityPanel } from "@/components/ArchitectureRealityPanel";
 import { SubpageNav } from "@/components/SubpageNav";
+import { PageIntro } from "@/components/PageIntro";
 import { RETRO_FEATURE_CARDS_ID } from "@/components/RetroFeatureCards";
 
 const homeWithRetroCards = `/#${RETRO_FEATURE_CARDS_ID}`;
@@ -18,11 +19,34 @@ export default function ArchitectureRealityCheckPage() {
     <>
       <main className="section-gutter min-h-screen overflow-x-clip bg-[var(--background)] bg-grid pb-[max(2rem,env(safe-area-inset-bottom))] pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:pb-10 sm:pt-24">
         <div className="mx-auto max-w-6xl">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7 }}
+          >
             <SubpageNav backHref={homeWithRetroCards} />
           </motion.div>
 
-          <motion.div initial={rise.initial} animate={rise.animate} transition={{ duration: 0.55 }}>
+          <motion.div
+            initial={rise.initial}
+            animate={rise.animate}
+            transition={{ duration: 0.55 }}
+          >
+            <PageIntro
+              label="Architecture reality check"
+              title={
+                <>
+                  Built to work.
+                  <br />
+                  Built to last.
+                </>
+              }
+            >
+              <p>
+                Look beyond the demo. See how the right foundations turn an AI
+                idea into a system your team can depend on.
+              </p>
+            </PageIntro>
             <ArchitectureRealityPanel />
           </motion.div>
         </div>

@@ -1,8 +1,10 @@
 "use client";
 
+import { PageIntro } from "./PageIntro";
+import { CapabilityDiagram } from "./CapabilityDiagram";
 import { motion } from "framer-motion";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
-import { PRACTICE_IDS, practiceMeta, type PracticeId } from "@/lib/practice-areas";
+import { PRACTICE_IDS, type PracticeId } from "@/lib/practice-areas";
 
 /** Anchor id of the six-service grid lower on the /services page (see services/page.tsx). */
 export const SERVICES_GRID_ID = "services";
@@ -36,22 +38,26 @@ export function ServicesPracticeSections() {
   const p = dict.practices;
 
   const ctaHref = (id: PracticeId) =>
-    id === "ai-solutions" ? `#${SERVICES_GRID_ID}` : localePath("/case-studies");
+    id === "ai-solutions"
+      ? `#${SERVICES_GRID_ID}`
+      : localePath("/case-studies");
 
   return (
     <>
-      {/* Region header: reuses the existing translated practices intro copy. */}
-      <section className="section-gutter pt-2 pb-2">
+      <section className="section-gutter">
         <div className="mx-auto max-w-6xl">
-          <p className="section-label mb-3">{p.sectionLabel}</p>
-          <div className="rule mb-6" />
-          <div className="grid gap-5 md:grid-cols-[1.4fr_1fr] md:items-end">
-            <h1 className="text-[clamp(1.6rem,5vw,2.5rem)] font-medium leading-[1.1] tracking-tight text-[var(--white-100)]">
-              <span>{p.titleL1} </span>
-              <span className="text-[var(--white-50)]">{p.titleL2}</span>
-            </h1>
-            <p className="max-w-md text-sm leading-relaxed text-[var(--text-muted)]">{p.intro}</p>
-          </div>
+          <PageIntro
+            label="What we do"
+            title={
+              <>
+                Built around
+                <br />
+                your business.
+              </>
+            }
+          >
+            <p>{p.intro}</p>
+          </PageIntro>
         </div>
       </section>
 
@@ -59,29 +65,22 @@ export function ServicesPracticeSections() {
         const item = p.items[index];
         const accent = ACCENT_RAW[id];
         const solid = `rgb(${accent})`;
-        const meta = practiceMeta[id];
 
         return (
           <section
             key={id}
             id={id}
-            className="scroll-margin-header relative overflow-hidden border-t border-[var(--white-10)] section-gutter py-11 md:py-16"
+            className="service-detail scroll-margin-header relative overflow-hidden border-t border-[var(--white-10)] section-gutter py-11 md:py-16"
           >
-            {/* Soft accent glow anchored to the top-left of each section. */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0"
-              style={{
-                background: `radial-gradient(760px 340px at 4% -18%, rgb(${accent} / 0.13), transparent 70%)`,
-              }}
-            />
-
             <motion.div {...reveal} className="relative mx-auto max-w-6xl">
               {/* Heading row + supporting image (image is desktop-only to keep phones light). */}
               <div className="grid gap-8 md:grid-cols-[1.6fr_1fr] md:items-center md:gap-12">
                 <div>
                   <div className="flex items-baseline gap-3">
-                    <span className="text-sm font-semibold tabular-nums" style={{ color: solid }}>
+                    <span
+                      className="text-sm font-semibold tabular-nums"
+                      style={{ color: solid }}
+                    >
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <p className="section-label">{item.label}</p>
@@ -94,26 +93,16 @@ export function ServicesPracticeSections() {
                   </p>
                 </div>
 
-                <div className="hidden md:block">
-                  <div className="relative overflow-hidden rounded-lg border border-[var(--white-10)]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={meta.image}
-                      alt=""
-                      loading="lazy"
-                      className="aspect-[4/3] w-full object-cover opacity-70"
-                    />
-                    <div
-                      className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--surface)] via-transparent to-transparent"
-                      aria-hidden="true"
-                    />
-                  </div>
+                <div className="service-illustration">
+                  <CapabilityDiagram mode={index} />
                 </div>
               </div>
 
               {/* Capabilities: the sub-areas, each with a one-line description. */}
               <div className="mt-9 md:mt-12">
-                <p className="section-label mb-4">{p.detailCapabilitiesLabel}</p>
+                <p className="section-label mb-4">
+                  {p.detailCapabilitiesLabel}
+                </p>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {item.subs.map((sub, i) => (
                     <div

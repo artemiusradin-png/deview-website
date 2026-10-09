@@ -617,7 +617,7 @@ export const en = {
   },
   leadership: {
     sectionLabel: "LEADERSHIP",
-    jobPosition: "Operations & AI Prompt Engineering",
+    jobPosition: "Managing Director & Operations",
     firstName: "Artemis",
     lastName: "Radin",
     description:
@@ -1172,19 +1172,19 @@ export const en = {
       members: [
         {
           name: "Artemis Radin",
-          role: "Operations & AI Prompt Engineering",
+          role: "Managing Director & Operations",
           photo: "/team/artemis-radin-800.webp",
           initials: "AR",
           bio: "Founder and Managing Director of Covenant Desk Limited, the registered company behind DeView. Brings experience from BNP Paribas to leading DeView's engagements: from scoping the costliest workflows to shipping measurable systems in weeks.",
         },
-        { name: "Eden Lam", role: "Software Engineer & Hong Kong Relations", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "Builds the platforms behind DeView's client work and is the main point of contact for clients in Hong Kong." },
         {
           name: "Mikhail Shishlenin",
-          role: "Head of Software Engineering",
+          role: "Data Science & Software Engineering",
           photo: "/team/mikhail-shishlenin-800.webp",
           initials: "MS",
           bio: "Leads DeView's software engineering practice and architecture for complex enterprise systems, bringing experience from Gazprom and the delivery of a digital platform for a major oil and gas company.",
         },
+        { name: "Eden Lam", role: "Software Engineer & Hong Kong Relations", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "Builds the platforms behind DeView's client work and is the main point of contact for clients in Hong Kong." },
         {
           name: "Yevhen Lahodiuk",
           role: "Software Engineer, Project Manager & Coordinator",
@@ -1192,7 +1192,7 @@ export const en = {
           initials: "YL",
           bio: "Builds software, manages project delivery, and coordinates teams and client work across DeView engagements.",
         },
-        { name: "Stepan Pashchenko", role: "Head of Sales", photo: "/team/stepan-pashchenko-800.webp", initials: "SP", bio: "Leads new business development: from first conversation to signed scope." },
+        { name: "Stepan Pashchenko", role: "Head of Sales & Key Account Manager", photo: "/team/stepan-pashchenko-800.webp", initials: "SP", bio: "Leads new business development: from first conversation to signed scope." },
         { name: "Stanislav Dupliakov", role: "Switzerland Customer Relations", photo: "/team/stanislav-dupllyakov-800.webp", initials: "SD", bio: "The main point of contact for DeView's clients in Switzerland, from delivery through ongoing support." },
       ],
     },
