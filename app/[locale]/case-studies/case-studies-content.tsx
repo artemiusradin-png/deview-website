@@ -54,6 +54,12 @@ const productionGroups = [
     teaser: "Bilingual care documentation and compliance reporting.",
     numbers: ["03"],
   },
+  {
+    id: "e-commerce",
+    title: "E-commerce",
+    teaser: "StorePilot: AI conversion insights and reliable A/B testing for Shopify merchants.",
+    numbers: ["04"],
+  },
 ];
 
 /** One industry as a collapsible block: the summary row opens and closes the projects. */
@@ -190,6 +196,18 @@ export function CaseStudiesContent() {
                           {c.headline}
                         </h3>
 
+                        {c.website ? (
+                          <a
+                            href={c.website.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-outline mb-8 inline-block"
+                          >
+                            {c.website.label}
+                            <span className="sr-only"> (opens in a new tab)</span>
+                          </a>
+                        ) : null}
+
                         {/* Video (featured cases only) */}
                         {media?.video ? (
                           <div className="mb-10 overflow-hidden border border-[var(--white-20)] bg-black">
@@ -221,7 +239,7 @@ export function CaseStudiesContent() {
                           </div>
                           <div>
                             <p className="mb-2 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
-                              {d.solutionLabel}
+                              {c.solutionLabel ?? d.solutionLabel}
                             </p>
                             <p className="text-sm leading-relaxed text-[var(--text-muted)]">
                               {c.solution}
@@ -233,7 +251,7 @@ export function CaseStudiesContent() {
                         {c.capabilities ? (
                           <div className="mb-10">
                             <p className="mb-4 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
-                              {d.capabilitiesLabel}
+                              {c.capabilitiesLabel ?? d.capabilitiesLabel}
                             </p>
                             <ol className="space-y-4">
                               {c.capabilities.map((cap, capIdx) => (
@@ -260,7 +278,7 @@ export function CaseStudiesContent() {
 
                         {/* Metrics */}
                         {c.outcomes ? (
-                          <div className="mb-10 grid grid-cols-2 gap-px border border-[var(--white-20)] bg-[var(--white-20)] sm:grid-cols-4">
+                          <div className={`mb-10 grid grid-cols-2 gap-px border border-[var(--white-20)] bg-[var(--white-20)] ${c.outcomes.length > 2 ? "sm:grid-cols-4" : ""}`}>
                             {c.outcomes.map((o) => (
                               <div
                                 key={o.label}
@@ -275,6 +293,12 @@ export function CaseStudiesContent() {
                               </div>
                             ))}
                           </div>
+                        ) : null}
+
+                        {c.outcomesNote ? (
+                          <p className="mb-10 text-sm leading-relaxed text-[var(--text-muted)]">
+                            {c.outcomesNote}
+                          </p>
                         ) : null}
 
                         {/* Quote */}

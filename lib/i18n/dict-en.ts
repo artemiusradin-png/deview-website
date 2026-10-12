@@ -4,10 +4,14 @@ type CaseStudy = {
   sector: string;
   service: string;
   headline: string;
+  website?: { href: string; label: string };
   challenge: string;
   solution: string;
+  solutionLabel?: string;
+  capabilitiesLabel?: string;
   capabilities?: { name: string; body: string }[];
   outcomes?: { metric: string; label: string }[];
+  outcomesNote?: string;
   quote?: string;
   quoteRole?: string;
 };
@@ -1254,7 +1258,7 @@ export const en = {
   caseStudiesPage: {
     sectionLabel: "CASE STUDIES",
     h1: "Measurable outcomes from live deployments.",
-    subtitle: "Oil & gas planning, control and reporting systems from 2010 to 2020, followed by three production systems across agriculture, lending, and senior care.",
+    subtitle: "Oil & gas planning, control and reporting systems from 2010 to 2020, alongside AI and software projects across agriculture, lending, senior care, and e-commerce.",
     challengeLabel: "The Challenge",
     solutionLabel: "What We Built",
     capabilitiesLabel: "AI Capabilities",
@@ -1315,6 +1319,29 @@ export const en = {
           { metric: "2 days → 45 min", label: "monthly cantonal compliance report" },
           { metric: "5 weeks", label: "phased rollout across all three homes" },
         ],
+      },
+      {
+        number: "04",
+        sector: "E-COMMERCE · SHOPIFY · EVDEV",
+        service: "AI Analytics, Experimentation & Product Design",
+        headline: "StorePilot: sharper AI conversion insights for Shopify merchants",
+        website: { href: "https://www.usestorepilot.com/pricing/", label: "Visit StorePilot →" },
+        challenge: "EVDEV, a Shopify agency with 180+ e-commerce stores delivered, had already built StorePilot: an AI app that finds where shoppers drop off and tests fixes. The team brought DeView in to improve detection accuracy, make recommendations more specific to each store, and give merchants clearer, more reliable experiment results.",
+        solutionLabel: "What We Improved",
+        solution: "DeView worked as an extension of EVDEV's team to improve the existing app's analytics, AI recommendations, A/B testing, reporting, and interface. We focused on helping merchants understand which problems cost them sales, which fixes to test, and what the results mean. EVDEV retained ownership of the product, merchant experience, and client relationships.",
+        capabilitiesLabel: "Project Scope",
+        capabilities: [
+          { name: "More Precise Drop-off Detection", body: "Improved how StorePilot identifies friction on product pages, add-to-cart flows, cart, mobile layouts, and checkout, catching more real issues with fewer false alarms." },
+          { name: "Store-specific Recommendations", body: "Made suggested fixes more relevant to each store, with estimated revenue impact expressed as realistic ranges rather than single-point guesses." },
+          { name: "More Reliable A/B Testing", body: "Refined experiment logic to reach reliable results faster, with safeguards against declaring a winner before the data supports it." },
+          { name: "Clearer Merchant Reporting", body: "Reworked results views so merchants can see what changed, what it earned, and what to do next without needing an analyst." },
+          { name: "Interface & Performance Improvements", body: "Redesigned the interface for a cleaner, more consistent experience and improved speed and usability with Built-for-Shopify requirements in mind." },
+        ],
+        outcomes: [
+          { metric: "17%", label: "more precise issue detection, with fewer false alarms" },
+          { metric: "26%", label: "improvement in StorePilot's merchant acquisition funnel" },
+        ],
+        outcomesNote: "Results reported by EVDEV for this engagement. The acquisition improvement relates to merchants discovering, installing, and starting to use StorePilot.",
       },
     ] as CaseStudy[],
     ctaLabel: "Start a conversation",
