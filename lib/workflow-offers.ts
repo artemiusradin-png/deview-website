@@ -109,7 +109,7 @@ export const INDUSTRY_OFFERS: IndustryOffer[] = [
       },
     ],
     experience:
-      "We have worked with ventilation companies, including Jetfans and Nextair, so we know how equipment is specified, quoted and serviced.",
+      "We built the Jetfans site on car-park ventilation, smoke extraction and CFD modelling, so we know how this equipment is specified and sold.",
     guardrail:
       "Equipment selection, smoke control and compliance stay with qualified engineers.",
     whoFor: [
@@ -202,7 +202,7 @@ export const INDUSTRY_OFFERS: IndustryOffer[] = [
       },
     ],
     experience:
-      "Our ventilation work means we already speak the language of mechanical contractors: specifications, equipment schedules and submittals.",
+      "Our team built project planning, control and reporting systems for large energy projects from 2010 to 2020.",
     guardrail: "Design, calculations and code compliance stay with your engineers.",
     whoFor: [
       "Mechanical and electrical contractors",
@@ -353,7 +353,7 @@ export const SOLUTIONS: Solution[] = [
       { industry: "Construction", example: "RFIs and site issues" },
       { industry: "Oil & gas", example: "Maintenance and field service requests" },
     ],
-    proof: "Service-request triage for ventilation equipment at Nextair.",
+    proof: "Works inside the email, CRM or ticketing tools your team already uses.",
   },
 ];
 
