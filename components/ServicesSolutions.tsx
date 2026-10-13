@@ -2,9 +2,18 @@
 
 import { motion } from "framer-motion";
 import { PageIntro } from "./PageIntro";
+import { CapabilityDiagram } from "./CapabilityDiagram";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SERVICE_LINES } from "@/lib/workflow-offers";
 import styles from "./services-page.module.css";
+
+/** The line drawing for each service line (same hand as the homepage drawings). */
+const DRAWING_MODE: Record<string, number> = {
+  "software-development": 1,
+  "cloud-security": 3,
+  "ai-automation": 0,
+  "tech-consulting": 4,
+};
 
 const reveal = {
   initial: { opacity: 0, y: 20 },
@@ -85,8 +94,13 @@ export function ServicesSolutions() {
             </div>
 
             <div className={`${styles.practiceDiagram} ${styles.applies}`}>
+              {solution.id in DRAWING_MODE ? (
+                <div className={styles.appliesDrawing}>
+                  <CapabilityDiagram mode={DRAWING_MODE[solution.id]} />
+                </div>
+              ) : null}
               <span className={styles.appliesLabel}>Where it applies</span>
-              <dl className={styles.appliesList}>
+              <dl className={`${styles.appliesList} ${styles.appliesCompact}`}>
                 {solution.applies.map((row) => (
                   <div key={row.industry}>
                     <dt>{row.industry}</dt>

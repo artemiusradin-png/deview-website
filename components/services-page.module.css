@@ -433,3 +433,22 @@
     font-size: 17px;
   }
 }
+
+/* Service lines: the yellow line drawing sits above "Where it applies" in the cream panel. */
+.appliesDrawing {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+  color: #171207;
+}
+.appliesDrawing svg {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+}
+.appliesCompact > div {
+  padding-block: 12px;
+}
+.appliesCompact dd {
+  font-size: 16px;
+}
