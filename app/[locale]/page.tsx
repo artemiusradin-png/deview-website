@@ -26,6 +26,8 @@ const structuredData = {
       email: SITE_INQUIRY_EMAIL,
       description:
         "AI consulting and engineering firm building AI automation, custom software platforms, and data pipelines for operations and finance teams.",
+      /** Headcount as stated by the company (October 2026); keep in step with LinkedIn and directory listings. */
+      numberOfEmployees: { "@type": "QuantitativeValue", value: 11 },
       address: {
         "@type": "PostalAddress",
         streetAddress: LEGAL_ENTITY.streetAddress,
