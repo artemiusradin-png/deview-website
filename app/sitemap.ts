@@ -27,6 +27,7 @@ const publicEnglishPaths = [
   "/outcomes",
   "/resources/ai-guide-lending",
   "/resources/ai-guide-lending/guide",
+  "/resources/automation-playbook",
   "/roi-calculator",
   "/services",
   "/stack",

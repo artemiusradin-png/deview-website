@@ -3,7 +3,18 @@ import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
 const MAX = { name: 200, email: 320, company: 200, industry: 100, challenge: 200 } as const;
-const LEAD_SOURCE = "ai-guide-lending" as const;
+/** Guides that collect sign-ups here, keyed by the `source` the form sends. */
+const GUIDES = {
+  "ai-guide-lending": "10 Practical AI Use Cases for Lending Companies",
+  "automation-playbook": "The automation playbook",
+} as const;
+type GuideSource = keyof typeof GUIDES;
+
+function guideSource(value: unknown): GuideSource {
+  return typeof value === "string" && value in GUIDES
+    ? (value as GuideSource)
+    : "ai-guide-lending";
+}
 const PERSONAL_EMAIL_DOMAINS = new Set([
   "gmail.com",
   "googlemail.com",
@@ -53,8 +64,11 @@ export async function POST(req: Request) {
   const company = String(data.company ?? "").trim().slice(0, MAX.company);
   const industry = String(data.industry ?? "").trim().slice(0, MAX.industry);
   const challenge = String(data.challenge ?? "").trim().slice(0, MAX.challenge);
+  const source = guideSource(data.source);
+  const guide = GUIDES[source];
 
-  if (!name || !email) {
+  // The lending guide form only asks for an email, so the name is optional.
+  if (!email) {
     return NextResponse.json({ ok: false, error: "missing_fields" }, { status: 400 });
   }
 
@@ -65,12 +79,12 @@ export async function POST(req: Request) {
   const supabase = getSupabaseAdmin();
   if (supabase) {
     const { error } = await supabase.from("lead_magnet_signups").insert({
-      name,
+      name: name || "(not given)",
       email,
       company: company || null,
       industry: industry || null,
       challenge: challenge || null,
-      source: LEAD_SOURCE,
+      source,
     });
     if (error) {
       console.error("[lead-magnet] supabase insert failed:", error.message);
@@ -78,15 +92,15 @@ export async function POST(req: Request) {
     }
   }
 
-  const subject = `[DeView Lead] ${name}: AI Guide for Lending`;
+  const subject = `[DeView Lead] ${name || email}: ${guide}`;
   const message = [
-    `Name: ${name}`,
+    `Name: ${name || "-"}`,
     `Email: ${email}`,
     `Company: ${company || "-"}`,
     `Industry: ${industry || "-"}`,
     `Main challenge: ${challenge || "-"}`,
     ``,
-    `Guide: 10 Practical AI Use Cases for Lending Companies`,
+    `Guide: ${guide}`,
   ].join("\n");
 
   const resendApiKey = process.env.RESEND_API_KEY?.trim();
@@ -123,7 +137,7 @@ export async function POST(req: Request) {
         body: JSON.stringify({
           access_key: web3Key,
           subject,
-          name,
+          name: name || email,
           email,
           replyto: email,
           message,

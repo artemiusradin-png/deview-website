@@ -21,7 +21,12 @@ const reveal = {
  * for /services#ai-solutions, #software-engineering and #data-science. Each
  * section pairs a short heading and capability list with a large drawing.
  */
-export function ServicesPracticeSections() {
+export function ServicesPracticeSections({
+  supporting = false,
+}: {
+  /** Lower on the page, under the four solutions: a section heading instead of the page intro. */
+  supporting?: boolean;
+} = {}) {
   const { dict, localePath } = useLocaleContext();
   const p = dict.practices;
 
@@ -32,20 +37,39 @@ export function ServicesPracticeSections() {
 
   return (
     <>
-      <section className="section-gutter">
+      <section
+        className={`section-gutter ${supporting ? styles.catalogSection : ""}`}
+      >
         <div className="mx-auto max-w-6xl">
-          <PageIntro
-            label="What we do"
-            title={
-              <>
-                Built around
-                <br />
-                your business.
-              </>
-            }
-          >
-            <p>{p.intro}</p>
-          </PageIntro>
+          {supporting ? (
+            <div className={styles.catalogHeading}>
+              <div>
+                <p className="section-label">How we build it</p>
+                <h2 className={styles.catalogTitle}>
+                  Three practices.
+                  <br />
+                  <span>One team behind every solution.</span>
+                </h2>
+              </div>
+              <p className={styles.catalogIntro}>
+                AI, software and data engineering are how we deliver the four
+                solutions above.
+              </p>
+            </div>
+          ) : (
+            <PageIntro
+              label="What we do"
+              title={
+                <>
+                  Built around
+                  <br />
+                  your business.
+                </>
+              }
+            >
+              <p>{p.intro}</p>
+            </PageIntro>
+          )}
 
           <nav aria-label="Practices" className={styles.index}>
             {PRACTICE_IDS.map((id, index) => (

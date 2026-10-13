@@ -18,9 +18,9 @@ type CaseStudy = {
 
 export const en = {
   site: {
-    title: "DeView | AI Solutions, Software Engineering & Data Engineering",
+    title: "DeView | AI Workflow Automation for Financial & Industrial Companies",
     description:
-      "DeView builds AI automation, custom software platforms, and data pipelines that cut costs and remove manual work: deployed into your existing tools, not alongside them.",
+      "AI and software that automate document-heavy work in lending, ventilation, agriculture, construction and oil and gas: built into your existing tools, approved by your people.",
   },
   nav: {
     aiConsulting: "HOME",

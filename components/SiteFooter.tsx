@@ -71,7 +71,8 @@ export function SiteFooter({ rootPrefix = "", hideCta = false }: SiteFooterProps
             { text: f.links.useCases, href: localePath("/use-cases") },
             { text: f.links.roiCalculator, href: localePath("/roi-calculator") },
             { text: "Tech Stack", href: localePath("/stack") },
-            { text: f.links.aiGuide, href: localePath("/resources/ai-guide-lending"), hasIndicator: true },
+            { text: "Automation playbook", href: localePath("/resources/automation-playbook"), hasIndicator: true },
+            { text: f.links.aiGuide, href: localePath("/resources/ai-guide-lending") },
           ],
         },
         {

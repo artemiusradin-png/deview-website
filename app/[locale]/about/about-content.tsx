@@ -158,9 +158,13 @@ export function AboutContent() {
               Better systems.
             </h1>
             <div className={styles.heroLead}>
-              <strong>An AI consulting and engineering firm.</strong> We build
-              the AI, software and data systems that take manual work off
-              operations and finance teams.
+              <strong>
+                AI and software for the document-heavy work in financial and
+                industrial companies.
+              </strong>{" "}
+              Lending operations, technical quotes, field sales, engineering
+              documents and reporting, built into the tools your team already
+              uses.
             </div>
           </div>
           <dl className={styles.facts}>
@@ -193,8 +197,9 @@ export function AboutContent() {
               deployed in weeks.
             </div>
             <div className={styles.statementNote}>
-              Specific processes that cost time or money today, automated and
-              connected to the systems you already use.
+              We start with the one workflow that costs you most. AI prepares
+              the work, your people approve it, and it runs inside the systems
+              you already use.
             </div>
           </div>
         </section>
