@@ -11,7 +11,7 @@ import {
   PLAYBOOK_PATH,
   AUTOMATION_SOLUTIONS,
 } from "@/lib/workflow-offers";
-import styles from "../playbook.module.css";
+import styles from "@/components/lead-magnet.module.css";
 
 const RULES = [
   {

@@ -38,7 +38,7 @@ export const MARKETS: Record<MarketSlug, Market> = {
     slug: "hong-kong",
     name: "Hong Kong",
     countryCode: "HK",
-    seoTitle: "AI Consulting & Software Engineering in Hong Kong | DeView",
+    seoTitle: "Software Development & AI Consulting in Hong Kong | DeView",
     seoDescription:
       "Hong Kong-headquartered AI consulting, software engineering, and data engineering for operations and finance teams. Fixed-scope systems shipped in weeks.",
     eyebrow: "Hong Kong AI consulting",
@@ -115,7 +115,7 @@ export const MARKETS: Record<MarketSlug, Market> = {
     slug: "singapore",
     name: "Singapore",
     countryCode: "SG",
-    seoTitle: "AI Consulting & Software Engineering in Singapore | DeView",
+    seoTitle: "Software Development & AI Consulting in Singapore | DeView",
     seoDescription:
       "AI consulting, custom software, and data engineering for Singapore operations and finance teams. Secure, auditable systems deployed into your existing stack.",
     eyebrow: "Singapore AI consulting",
@@ -192,7 +192,7 @@ export const MARKETS: Record<MarketSlug, Market> = {
     slug: "taiwan",
     name: "Taiwan",
     countryCode: "TW",
-    seoTitle: "AI Consulting & Software Engineering in Taiwan | DeView",
+    seoTitle: "Software Development & AI Consulting in Taiwan | DeView",
     seoDescription:
       "AI consulting, software engineering, and data automation for Taiwan operations and finance teams, including bilingual documents and system integration.",
     eyebrow: "Taiwan AI consulting",

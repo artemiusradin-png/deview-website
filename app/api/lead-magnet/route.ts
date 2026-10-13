@@ -7,6 +7,8 @@ const MAX = { name: 200, email: 320, company: 200, industry: 100, challenge: 200
 const GUIDES = {
   "ai-guide-lending": "10 Practical AI Use Cases for Lending Companies",
   "automation-playbook": "The automation playbook",
+  "lms-checklist": "Loan management system checklist",
+  "ai-security-checklist": "AI security checklist for LLM applications",
 } as const;
 type GuideSource = keyof typeof GUIDES;
 

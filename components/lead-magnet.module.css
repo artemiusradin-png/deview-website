@@ -532,3 +532,81 @@
 .labelGap {
   margin-top: 24px;
 }
+
+/* Checklist guides: one area per section, square boxes to tick. */
+.page .checklist {
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--ink);
+}
+.page .checklist li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding-block: 13px;
+  border-bottom: 1px solid var(--line);
+  font-size: 16px;
+  line-height: 1.5;
+}
+.page .checklist li::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  border: 1.5px solid var(--ink);
+}
+.areaGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 56px 64px;
+  margin-top: 44px;
+}
+.page .areaGrid h2 {
+  margin-top: 12px;
+  font-size: 28px;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+.risk {
+  display: block;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.covered {
+  padding-block: 72px 24px;
+}
+.page .coveredList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 48px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--ink);
+}
+.page .coveredList li {
+  display: grid;
+  gap: 4px;
+  padding-block: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.page .coveredList strong {
+  font-weight: 500;
+  font-size: 18px;
+}
+.source {
+  display: block;
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: 13px;
+}
+@media (max-width: 1000px) {
+  .areaGrid,
+  .page .coveredList {
+    grid-template-columns: 1fr;
+  }
+}

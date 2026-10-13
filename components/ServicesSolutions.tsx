@@ -5,6 +5,7 @@ import { PageIntro } from "./PageIntro";
 import { CapabilityDiagram } from "./CapabilityDiagram";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SERVICE_LINES } from "@/lib/workflow-offers";
+import { servicePageFor, servicePagePath } from "@/lib/service-pages";
 import styles from "./services-page.module.css";
 
 /** The line drawing for each service line (same hand as the homepage drawings). */
@@ -132,10 +133,21 @@ export function ServicesSolutions() {
                 </ul>
               )}
               <div className={styles.practiceFooter}>
-                <a href={localePath("/contact")}>
-                  Tell us what you need built
-                  <span aria-hidden="true">→</span>
-                </a>
+                {servicePageFor(solution.id) ? (
+                  <a
+                    href={localePath(
+                      servicePagePath(servicePageFor(solution.id)!.slug),
+                    )}
+                  >
+                    Explore {solution.name.toLowerCase()}
+                    <span aria-hidden="true">→</span>
+                  </a>
+                ) : (
+                  <a href={localePath("/contact")}>
+                    Tell us what you need built
+                    <span aria-hidden="true">→</span>
+                  </a>
+                )}
                 <span className={styles.proof}>{solution.proof}</span>
               </div>
             </div>

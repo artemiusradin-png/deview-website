@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AboutContent } from "./about-content";
 
 export const metadata: Metadata = {
-  title: "About | DeView",
+  title: "About DeView: Custom Software Development Team in Hong Kong",
   description:
     "A custom software development company with 15+ years of enterprise delivery: product, AI/ML, data and cloud engineering and enterprise platforms, with teams in Hong Kong, Vancouver, Edinburgh, and Stuttgart.",
   alternates: { canonical: "/en/about" },

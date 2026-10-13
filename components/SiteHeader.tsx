@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SERVICE_LINES } from "@/lib/workflow-offers";
+import { servicePageFor, servicePagePath } from "@/lib/service-pages";
 import styles from "./site-header.module.css";
 
 /** Set when the wordmark is clicked, so the header on the page it opens plays the sweep too. */
@@ -111,7 +112,13 @@ export function SiteHeader({ home = false }: { home?: boolean }) {
                   {SERVICE_LINES.map((service) => (
                     <li key={service.id}>
                       <Link
-                        href={`${link.href}#${service.id}`}
+                        href={
+                          servicePageFor(service.id)
+                            ? localePath(
+                                servicePagePath(servicePageFor(service.id)!.slug),
+                              )
+                            : `${link.href}#${service.id}`
+                        }
                         onClick={close}
                       >
                         <span>{service.name}</span>
