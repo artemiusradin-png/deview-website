@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { TeamGrid } from "@/components/TeamGrid";
 import { HomeCapabilities } from "./home-capabilities";
 import { HeroBackgroundVideo } from "./home-hero-video";
+import { HeroInquiryForm } from "./home-hero-form";
 import { CountUp, useMotionOnView } from "./home-motion";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
@@ -102,6 +103,45 @@ function ProjectLogos({ duplicate = false }: { duplicate?: boolean }) {
           />
         </li>
       ))}
+    </ul>
+  );
+}
+
+/**
+ * Directory badges under the hero buttons. Clutch shows its five stars (rated 5.0 there);
+ * GoodFirms has no review yet, so it says "Listed" until one is published. Review counts are
+ * left out on purpose until there are more reviews.
+ */
+function ReviewBadges() {
+  return (
+    <ul className={styles.reviewBadges} aria-label="Reviews">
+      <li>
+        <a
+          href="https://clutch.co/profile/deview"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className={styles.badgeName}>Clutch</span>
+          <span className={styles.stars} aria-hidden="true">
+            ★★★★★
+          </span>
+          <span className={styles.badgeScore}>5.0</span>
+          <span className="sr-only">
+            Rated 5.0 out of 5 on Clutch (opens in a new tab)
+          </span>
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://www.goodfirms.co/company/deview"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className={styles.badgeName}>GoodFirms</span>
+          <span className={styles.badgeScore}>Listed</span>
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      </li>
     </ul>
   );
 }
@@ -204,34 +244,38 @@ export function HomeContent({
             <div className={`${styles.heroContent} ${styles.container}`}>
               <div className={styles.heroEyebrow}>
                 <p className={styles.eyebrow}>Custom software development</p>
-                <span>Cloud security. AI automation. Tech consulting.</span>
+                <span>Product · AI/ML · Data · Cloud · Platforms</span>
               </div>
-              <h1 id="hero-title" className={styles.heroTitle}>
-                <span>Custom software.</span>
-                <span className={styles.heroSecondLine}>
-                  Real impact.
-                  <Arrow className={styles.heroArrow} />
-                </span>
-              </h1>
-              <div className={styles.heroBottom}>
-                <div className={styles.heroIntro}>
-                  <p>
-                    We ship software development, cloud security, AI automation
-                    and tech consulting for financial and industrial companies.
-                    Our team has built enterprise systems since 2010.
-                  </p>
-                  <div className={styles.heroActions}>
-                    <Link
-                      href={localePath("/contact")}
-                      className={`${styles.button} ${styles.buttonAccent}`}
-                    >
-                      Let’s build something <Arrow diagonal />
-                    </Link>
-                    <a href="#work" className={styles.textLink}>
-                      See our work <span aria-hidden="true">↓</span>
-                    </a>
+              <div className={styles.heroGrid}>
+                <div>
+                  <h1 id="hero-title" className={styles.heroTitle}>
+                    <span>Custom software.</span>
+                    <span className={styles.heroSecondLine}>Real impact.</span>
+                  </h1>
+                  <div className={styles.heroBottom}>
+                    <div className={styles.heroIntro}>
+                      <p>
+                        Product engineering, AI/ML, data, cloud and DevOps, and
+                        enterprise platforms for financial and industrial
+                        companies. Our team has built enterprise systems since
+                        2010.
+                      </p>
+                      <div className={styles.heroActions}>
+                        <Link
+                          href={localePath("/contact")}
+                          className={`${styles.button} ${styles.buttonAccent}`}
+                        >
+                          Let’s build something <Arrow diagonal />
+                        </Link>
+                        <a href="#work" className={styles.textLink}>
+                          See our work <span aria-hidden="true">↓</span>
+                        </a>
+                      </div>
+                      <ReviewBadges />
+                    </div>
                   </div>
                 </div>
+                <HeroInquiryForm />
               </div>
             </div>
           </div>
@@ -287,14 +331,14 @@ export function HomeContent({
               label="What we ship"
               title={
                 <>
-                  Four things.
+                  Five services.
                   <br />
-                  Done properly.
+                  One senior team.
                 </>
               }
               id="ship-title"
             >
-              <p>One senior team, from first design to running in production.</p>
+              <p>From first design to running in production, with security built in.</p>
             </SectionHeading>
             <ol className={styles.whyList}>
               {SERVICE_LINES.map((line, index) => (

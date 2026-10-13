@@ -1,7 +1,7 @@
 /**
- * What we ship (four service lines) and what we build per industry. Service lines feed the
- * homepage and /services; the industry chapters feed the playbook. Deview is a custom
- * software development company that also ships cloud security, AI automation and consulting.
+ * What we ship (five services) and what we build per industry. Services feed the header
+ * menu, homepage and /services; the industry chapters feed the playbook. Deview is a custom
+ * software development company.
  * English only (the site has no translations).
  */
 
@@ -16,6 +16,8 @@ export type ServiceLine = {
   /** One short line: used on the homepage. */
   title: string;
   body: string;
+  /** Named offerings with one short line each; shown instead of `builds` when present. */
+  offerings?: { name: string; line: string }[];
   builds: string[];
   /** Where this service line shows up, by industry name. */
   applies: { industry: string; example: string }[];
@@ -24,20 +26,25 @@ export type ServiceLine = {
   aliases?: string[];
 };
 
-/** What we ship. Software development is the specialisation; the other three support it. */
+/**
+ * The five services, named the way the market names them (Simform-style service taxonomy).
+ * Custom software is the specialisation; consulting sits inside product engineering and
+ * security inside AI/ML and cloud. Order matters: it drives the header menu, homepage and
+ * /services.
+ */
 export const SERVICE_LINES: ServiceLine[] = [
   {
-    id: "software-development",
-    name: "Software development",
-    title: "Custom platforms, portals, apps and integrations.",
-    body: "Web platforms, client portals, internal systems, mobile apps and SaaS products, engineered from architecture to production. You own the code.",
-    builds: [
-      "Web platforms and client portals",
-      "Internal business systems",
-      "Mobile apps",
-      "SaaS products",
-      "APIs, integrations and data pipelines",
+    id: "product-engineering",
+    name: "Digital product engineering",
+    title: "Web platforms, portals, mobile apps and SaaS products.",
+    body: "From discovery and architecture to build, launch and continuous engineering. You own the code.",
+    offerings: [
+      { name: "Custom application development", line: "Web, mobile and enterprise apps built around your workflows." },
+      { name: "Software product engineering", line: "Digital products from architecture to continuous releases." },
+      { name: "Application modernization", line: "Legacy apps and databases rearchitected and migrated." },
+      { name: "Systems integration & API engineering", line: "Applications, platforms and data connected through APIs." },
     ],
+    builds: [],
     applies: [
       { industry: "Lending & finance", example: "Loan management platforms and borrower portals" },
       { industry: "Ventilation & HVAC", example: "Product selection and quoting tools" },
@@ -46,70 +53,94 @@ export const SERVICE_LINES: ServiceLine[] = [
       { industry: "Oil & gas", example: "Planning, control and reporting systems" },
     ],
     proof: "AgroPlatforma, Covenant Desk and a five-company lending portal.",
-    aliases: ["software-engineering", "data-science"],
+    aliases: ["software-development", "software-engineering", "tech-consulting"],
   },
   {
-    id: "cloud-security",
-    name: "Cloud security",
-    title: "Secure cloud infrastructure, including the AI inside it.",
-    body: "We build, migrate and secure infrastructure on AWS, Google Cloud and Azure, and protect the AI systems running in it.",
-    builds: [
-      "Cloud architecture and migration",
-      "Access control, encryption and data residency",
-      "Monitoring, logging and alerts",
-      "AI security: private models, prompt-injection and data-leak protection",
-      "Compliance with GDPR, PDPO, HKMA and MAS TRM",
+    id: "ai-ml",
+    name: "AI/ML engineering",
+    title: "Generative AI, AI agents and machine learning in production.",
+    body: "AI built into your software, connected to your data and secured from the first sprint.",
+    offerings: [
+      { name: "AI & GenAI application engineering", line: "Search, summaries, copilots and GenAI workflows inside your software." },
+      { name: "Agentic AI development", line: "AI agents and multi-agent workflows that carry out tasks end to end." },
+      { name: "Machine learning", line: "Forecasting and predictive models trained on your own data." },
+      { name: "AI security & monitoring", line: "Evaluation, guardrails and monitoring in production." },
     ],
-    applies: [
-      { industry: "Lending & finance", example: "Borrower data and regulator audits" },
-      { industry: "Ventilation & HVAC", example: "Customer projects and pricing" },
-      { industry: "Agriculture", example: "Grower and supplier data" },
-      { industry: "Construction", example: "Tender and contract documents" },
-      { industry: "Oil & gas", example: "Separation from operational technology" },
-    ],
-    proof: "Every system we deliver runs in the client’s own cloud.",
-  },
-  {
-    id: "ai-automation",
-    name: "AI automation",
-    title: "AI agents and automation built into your systems.",
-    body: "AI agents, document processing, knowledge search and automated reporting, connected to your data. Your people keep the final say.",
-    builds: [
-      "AI agents and assistants",
-      "Document processing and data extraction",
-      "Search over your own documents",
-      "Automated reports and dashboards",
-      "Forecasting models",
-    ],
+    builds: [],
     applies: [
       { industry: "Lending & finance", example: "Credit document checks" },
       { industry: "Ventilation & HVAC", example: "RFQ specifications to draft quotes" },
       { industry: "Agriculture", example: "Field diagnostics" },
       { industry: "Construction", example: "Tender and revision analysis" },
-      { industry: "Oil & gas", example: "Production reporting" },
+      { industry: "Oil & gas", example: "Technical document search" },
     ],
     proof: "AgroPlatforma: field diagnosis to quote in under 30 seconds.",
-    aliases: ["ai-solutions"],
+    aliases: ["ai-automation", "ai-solutions"],
   },
   {
-    id: "tech-consulting",
-    name: "Tech consulting",
-    title: "Clear technical decisions before you spend on a build.",
-    body: "Architecture, technology choices and AI plans reviewed by engineers who build systems, with costs and risks set out up front.",
+    id: "data-engineering",
+    name: "Data engineering",
+    title: "Pipelines, warehouses, dashboards and reporting.",
+    body: "Data from your systems and spreadsheets brought together, checked and turned into dashboards and reports that managers trust.",
     builds: [
-      "Technology strategy and roadmaps",
-      "Architecture and code reviews",
-      "Build-or-buy and vendor selection",
-      "AI readiness and use-case assessment",
+      "Data pipelines and ETL",
+      "Data warehouses",
+      "Dashboards and BI: Power BI, Tableau, Looker",
+      "Automated reporting",
+      "Data quality and governance",
     ],
     applies: [
-      { industry: "Lending & finance", example: "Platform and compliance architecture" },
-      { industry: "Ventilation & HVAC", example: "Digital sales and quoting roadmap" },
-      { industry: "Agriculture", example: "Field and CRM system choices" },
-      { industry: "Construction", example: "Project system selection" },
-      { industry: "Oil & gas", example: "Reporting and data architecture" },
+      { industry: "Lending & finance", example: "Portfolio, overdue and exposure reporting" },
+      { industry: "Ventilation & HVAC", example: "Quote pipeline and service analytics" },
+      { industry: "Agriculture", example: "Seasonal demand and stock" },
+      { industry: "Construction", example: "Cost and schedule dashboards" },
+      { industry: "Oil & gas", example: "Production and downtime reporting" },
     ],
-    proof: "Grounded in 15+ years of building enterprise systems.",
+    proof: "Planning, control and reporting systems for oil & gas projects since 2010.",
+    aliases: ["data-science"],
+  },
+  {
+    id: "cloud-devops",
+    name: "Cloud & DevOps engineering",
+    title: "Cloud infrastructure that scales, stays up and stays secure.",
+    body: "Architecture, migration and DevOps on AWS, Google Cloud and Azure, with security designed in from the start.",
+    builds: [
+      "Cloud architecture and migration",
+      "CI/CD, containers and Kubernetes",
+      "Monitoring, logging and alerts",
+      "Cloud security, access control and encryption",
+      "Compliance with GDPR, PDPO, HKMA and MAS TRM",
+    ],
+    applies: [
+      { industry: "Lending & finance", example: "Borrower data and regulator audits" },
+      { industry: "Ventilation & HVAC", example: "Partner tools offered as SaaS" },
+      { industry: "Agriculture", example: "Platforms shared by field teams nationwide" },
+      { industry: "Construction", example: "Project systems reachable from every site" },
+      { industry: "Oil & gas", example: "Separation from operational technology" },
+    ],
+    proof: "Every system we deliver runs in the client’s own cloud.",
+    aliases: ["cloud-security", "cloud"],
+  },
+  {
+    id: "enterprise-platforms",
+    name: "Enterprise platforms",
+    title: "Salesforce, CRM and ERP, extended and connected.",
+    body: "We customise and extend the platforms you already run, and connect them to each other and to your own software.",
+    builds: [
+      "Salesforce development and integration",
+      "HubSpot and CRM integration",
+      "SAP and Oracle ERP integration",
+      "Microsoft 365 and SharePoint",
+      "APIs and integration layers",
+    ],
+    applies: [
+      { industry: "Lending & finance", example: "Loan systems connected to CRM and accounting" },
+      { industry: "Ventilation & HVAC", example: "Quotes synced to your CRM" },
+      { industry: "Agriculture", example: "Quoting built inside Salesforce" },
+      { industry: "Construction", example: "Project systems connected to ERP" },
+      { industry: "Oil & gas", example: "Reporting connected to ERP and maintenance systems" },
+    ],
+    proof: "AgroPlatforma runs inside Salesforce.",
   },
 ];
 

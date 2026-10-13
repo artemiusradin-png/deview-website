@@ -9,9 +9,9 @@ import { RETRO_FEATURE_CARDS_ID } from "@/components/RetroFeatureCards";
 const homeWithRetroCards = `/#${RETRO_FEATURE_CARDS_ID}`;
 
 export const metadata: Metadata = {
-  title: "Services: Software Development, Cloud Security, AI Automation & Tech Consulting | DeView",
+  title: "Services: Product, AI/ML, Data, Cloud & DevOps Engineering and Enterprise Platforms | DeView",
   description:
-    "Deview ships software development, cloud security, AI automation and tech consulting for financial and industrial companies, built by a team with 15+ years of enterprise delivery.",
+    "Digital product engineering, AI/ML engineering, data engineering, cloud and DevOps engineering, and enterprise platforms for financial and industrial companies.",
   alternates: { canonical: "/en/services" },
 };
 

@@ -18,9 +18,9 @@ type CaseStudy = {
 
 export const en = {
   site: {
-    title: "DeView | Software Development, Cloud Security, AI Automation & Tech Consulting",
+    title: "DeView | Custom Software Development: Product, AI/ML, Data & Cloud Engineering",
     description:
-      "Deview ships software development, cloud security, AI automation and tech consulting for financial and industrial companies, built by a team with 15+ years of enterprise delivery.",
+      "Custom software development for financial and industrial companies: digital product engineering, AI/ML engineering, data engineering, cloud and DevOps, and enterprise platforms, from a team with 15+ years of enterprise delivery.",
   },
   nav: {
     aiConsulting: "HOME",

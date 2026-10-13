@@ -369,6 +369,12 @@
 .indexFour {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
+.indexFive {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.indexFive .indexName {
+  font-size: clamp(22px, 2vw, 32px);
+}
 .indexFour .indexName {
   font-size: clamp(22px, 2vw, 32px);
 }
@@ -407,8 +413,15 @@
   letter-spacing: -0.01em;
 }
 @media (max-width: 1100px) {
-  .indexFour {
+  .indexFour,
+  .indexFive {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .indexFive a:nth-child(odd) {
+    border-left: 0;
+  }
+  .indexFive a:nth-child(n + 3) {
+    border-top: 1px solid #d7cfbf;
   }
   .indexFour a:nth-child(odd) {
     border-left: 0;
@@ -418,7 +431,8 @@
   }
 }
 @media (max-width: 760px) {
-  .indexFour {
+  .indexFour,
+  .indexFive {
     grid-template-columns: minmax(0, 1fr);
   }
   /* The drawing slot runs edge to edge on phones; text needs the normal gutter. */
@@ -451,4 +465,15 @@
 }
 .appliesCompact dd {
   font-size: 16px;
+}
+
+/* Named offerings (product engineering, AI/ML): bold name over one short line. */
+.offerings strong {
+  display: block;
+  font-weight: 500;
+  color: #171207;
+}
+.practice .offerings li {
+  font-size: 15px;
+  color: #655f54;
 }

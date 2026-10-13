@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
+import { SERVICE_LINES } from "@/lib/workflow-offers";
 import styles from "./site-header.module.css";
 
 /** Set when the wordmark is clicked, so the header on the page it opens plays the sweep too. */
@@ -75,9 +76,9 @@ export function SiteHeader({ home = false }: { home?: boolean }) {
           DEVIEW
         </Link>
         <span className={styles.note}>
-          Software development.
+          Custom software.
           <br />
-          Cloud · AI · Consulting.
+          AI · Data · Cloud.
         </span>
         <nav
           id="site-navigation"
@@ -85,20 +86,45 @@ export function SiteHeader({ home = false }: { home?: boolean }) {
           data-open={menuOpen}
           aria-label="Main navigation"
         >
-          {links.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={close}
-              aria-current={
-                pathname === link.href || pathname.startsWith(`${link.href}/`)
-                  ? "page"
-                  : undefined
-              }
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map((link, index) => {
+            const item = (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={close}
+                aria-current={
+                  pathname === link.href || pathname.startsWith(`${link.href}/`)
+                    ? "page"
+                    : undefined
+                }
+              >
+                {link.label}
+              </Link>
+            );
+            // "What we do" carries the five services: a hover/focus dropdown on desktop,
+            // indented sub-links in the phone menu.
+            if (index !== 0) return item;
+            return (
+              <div key={link.label} className={styles.servicesItem}>
+                {item}
+                <ul className={styles.servicesMenu} aria-label="Services">
+                  {SERVICE_LINES.map((service) => (
+                    <li key={service.id}>
+                      <Link
+                        href={`${link.href}#${service.id}`}
+                        onClick={close}
+                      >
+                        <span>{service.name}</span>
+                        <span className={styles.servicesLine}>
+                          {service.title}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
           <Link
             href={localePath("/contact")}
             className={styles.contact}
