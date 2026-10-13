@@ -1859,13 +1859,13 @@
   gap: 10px;
   font-size: 14px;
 }
-.reviewBadges a:hover .badgeName {
-  text-decoration: underline;
-  text-underline-offset: 4px;
+.badgeLogo {
+  display: block;
+  width: auto;
+  height: 18px;
 }
-.badgeName {
-  font-weight: 600;
-  letter-spacing: -0.01em;
+.reviewBadges a:hover .stars {
+  color: #b88a00;
 }
 .stars {
   color: #e0a800;

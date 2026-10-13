@@ -108,8 +108,9 @@ function ProjectLogos({ duplicate = false }: { duplicate?: boolean }) {
 }
 
 /**
- * Directory ratings under the hero buttons: name and five stars, no frame. Review counts are
- * left out on purpose until there are more reviews.
+ * Directory ratings under the hero buttons: each site's own logo (copied from its header,
+ * public/review-logos) and five stars, no frame. Review counts are left out on purpose until
+ * there are more reviews.
  */
 function ReviewBadges() {
   return (
@@ -120,7 +121,14 @@ function ReviewBadges() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <span className={styles.badgeName}>Clutch</span>
+          <Image
+            unoptimized
+            src="/review-logos/clutch.svg"
+            alt="Clutch"
+            width={64}
+            height={18}
+            className={styles.badgeLogo}
+          />
           <span className={styles.stars} aria-hidden="true">
             ★★★★★
           </span>
@@ -135,7 +143,14 @@ function ReviewBadges() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <span className={styles.badgeName}>GoodFirms</span>
+          <Image
+            unoptimized
+            src="/review-logos/goodfirms.svg"
+            alt="GoodFirms"
+            width={98}
+            height={19}
+            className={styles.badgeLogo}
+          />
           <span className={styles.stars} aria-hidden="true">
             ★★★★★
           </span>

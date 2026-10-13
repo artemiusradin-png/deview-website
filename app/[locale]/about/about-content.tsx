@@ -38,9 +38,9 @@ const PROJECTS = [
     text: "Three AI agents in Salesforce and a mobile app take field diagnosis to a quote in under 30 seconds.",
   },
   {
-    meta: "Lending",
-    name: "Unified lending portal",
-    text: "Borrower data, credit analysis and documents for five lending companies in one portal.",
+    meta: "Lending · Hong Kong",
+    name: "Loan management systems",
+    text: "For Grand Finance, KK Credit, Wah Wei Credit, Every Success Credit and Rich Eagle Capital.",
   },
   {
     meta: "Lending · Hong Kong",
