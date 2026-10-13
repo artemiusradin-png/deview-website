@@ -1755,3 +1755,206 @@
   width: 16px;
   height: 16px;
 }
+
+/* Hero: smaller headline on the left, the short inquiry form on the right. */
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.75fr);
+  gap: 56px;
+  align-items: end;
+}
+.page .heroTitle {
+  font-size: clamp(54px, 6.6vw, 112px);
+}
+/* Hero form: paper card with a yellow top rule, underlined fields, in the site's type. */
+.heroForm {
+  display: grid;
+  gap: 22px;
+  padding: 30px 32px 28px;
+  background: rgba(255, 253, 247, 0.97);
+  border-top: 4px solid var(--accent);
+  box-shadow: 0 24px 60px rgba(23, 18, 7, 0.16);
+}
+.heroFormHead {
+  display: grid;
+  gap: 10px;
+}
+.heroFormTitle {
+  font-family: var(--font-satoshi), var(--font-archivo), sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.heroFormRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+.heroForm label {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.heroForm label > span {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+.heroForm :is(input, textarea) {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 9px 0 10px;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  font: inherit;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  transition: border-color 180ms;
+}
+.heroForm :is(input, textarea)::placeholder {
+  color: #a39c8f;
+}
+.heroForm :is(input, textarea):focus {
+  outline: none;
+  border-bottom-color: var(--ink);
+  box-shadow: 0 1px 0 var(--ink);
+}
+.heroForm textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+.heroForm .button {
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 4px;
+}
+.heroFormNote {
+  margin-top: -8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.heroForm .formFeedback:not(:empty) {
+  margin-top: 0;
+  font-size: 14px;
+}
+/* Directory ratings under the hero buttons: no frame, name and stars only. */
+.reviewBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.reviewBadges a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+.reviewBadges a:hover .badgeName {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.badgeName {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.stars {
+  color: #e0a800;
+  font-size: 15px;
+  letter-spacing: 2px;
+}
+@media (max-width: 1100px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .heroForm {
+    max-width: 560px;
+  }
+}
+/* Phones: a hero that reads in one screen, then a compact form. Desktop is unchanged. */
+@media (max-width: 760px) {
+  .heroCanvas {
+    padding-bottom: 28px;
+  }
+  .page .heroTitle {
+    font-size: 10.4vw;
+    line-height: 1.02;
+  }
+  .heroTitle .heroSecondLine {
+    margin-top: 0;
+  }
+  .heroBottom {
+    margin-top: 20px;
+  }
+  .heroIntro > p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .heroActions {
+    margin-top: 20px;
+  }
+  .reviewBadges {
+    margin-top: 20px;
+    gap: 8px 22px;
+  }
+  .heroGrid {
+    gap: 28px;
+  }
+  .heroForm {
+    gap: 16px;
+    padding: 22px 18px 20px;
+    box-shadow: 0 12px 30px rgba(23, 18, 7, 0.12);
+  }
+  .heroFormHead {
+    gap: 6px;
+  }
+  .heroFormTitle {
+    font-size: 22px;
+  }
+  .heroFormRow {
+    gap: 14px;
+  }
+  .heroForm :is(input, textarea) {
+    padding: 7px 0 8px;
+    font-size: 16px;
+  }
+  .heroForm textarea {
+    min-height: 54px;
+  }
+  .heroFormOptional {
+    display: none !important;
+  }
+  .heroFormNote {
+    margin-top: -6px;
+    font-size: 11px;
+  }
+}
+@media (max-width: 380px) {
+  .page .heroTitle {
+    font-size: 10vw;
+  }
+}
+/* Five services in the "What we ship" band. */
+.whyList:has(> li:nth-child(5)) {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+@media (max-width: 1100px) {
+  .whyList:has(> li:nth-child(5)) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 760px) {
+  .whyList:has(> li:nth-child(5)) {
+    grid-template-columns: 1fr;
+  }
+}

@@ -4,7 +4,7 @@ import { AboutContent } from "./about-content";
 export const metadata: Metadata = {
   title: "About | DeView",
   description:
-    "A custom software development company with 15+ years of enterprise delivery, shipping software, cloud security, AI automation and tech consulting, with teams in Hong Kong, Vancouver, Edinburgh, and Stuttgart.",
+    "A custom software development company with 15+ years of enterprise delivery: product, AI/ML, data and cloud engineering and enterprise platforms, with teams in Hong Kong, Vancouver, Edinburgh, and Stuttgart.",
   alternates: { canonical: "/en/about" },
 };
 

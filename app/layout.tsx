@@ -35,9 +35,9 @@ const satoshi = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://deviewai.com"),
-  title: "DeView | Software Development, Cloud Security, AI Automation & Tech Consulting",
+  title: "DeView | Custom Software Development: Product, AI/ML, Data & Cloud Engineering",
   description:
-    "Deview ships software development, cloud security, AI automation and tech consulting for financial and industrial companies, built by a team with 15+ years of enterprise delivery.",
+    "Custom software development for financial and industrial companies: digital product engineering, AI/ML engineering, data engineering, cloud and DevOps, and enterprise platforms, from a team with 15+ years of enterprise delivery.",
   /** Search Console ownership for the https://deviewai.com/ URL-prefix property. Removing it un-verifies the site. */
   verification: { google: "SQp0k0tERoRnCl3ZnDc1Z4ypLXfYr7DIy8SeJe6Kdlk" },
 };

@@ -9,10 +9,11 @@ import styles from "./services-page.module.css";
 
 /** The line drawing for each service line (same hand as the homepage drawings). */
 const DRAWING_MODE: Record<string, number> = {
-  "software-development": 1,
-  "cloud-security": 3,
-  "ai-automation": 0,
-  "tech-consulting": 4,
+  "product-engineering": 1,
+  "ai-ml": 0,
+  "data-engineering": 2,
+  "cloud-devops": 3,
+  "enterprise-platforms": 4,
 };
 
 const reveal = {
@@ -22,9 +23,9 @@ const reveal = {
 } as const;
 
 /**
- * Top of /services: the four service lines, software development first, each with what we
- * build and where it shows up in every industry we serve. Anchors (#software-development, …)
- * are the homepage link targets; the old practice anchors are kept as aliases.
+ * Top of /services: the five services, product engineering first, each with a drawing, what
+ * we build and where it shows up in every industry we serve. Anchors (#product-engineering, …)
+ * are the header menu and homepage link targets; older anchors are kept as aliases.
  */
 export function ServicesSolutions() {
   const { localePath } = useLocaleContext();
@@ -44,15 +45,15 @@ export function ServicesSolutions() {
             }
           >
             <p>
-              We ship four things for financial and industrial companies:
-              software development, cloud security, AI automation and tech
-              consulting.
+              Five engineering services for financial and industrial
+              companies, delivered by one senior team with 15+ years of
+              enterprise work.
             </p>
           </PageIntro>
 
           <nav
             aria-label="Solutions"
-            className={`${styles.index} ${styles.indexFour}`}
+            className={`${styles.index} ${styles.indexFive}`}
           >
             {SERVICE_LINES.map((solution, index) => (
               <a key={solution.id} href={`#${solution.id}`}>
@@ -112,11 +113,24 @@ export function ServicesSolutions() {
 
             <div className={styles.practiceDetails}>
               <p className="section-label">What we build</p>
-              <ul className={styles.capabilities}>
-                {solution.builds.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
+              {solution.offerings ? (
+                <ul className={`${styles.capabilities} ${styles.offerings}`}>
+                  {solution.offerings.map((item) => (
+                    <li key={item.name}>
+                      <span>
+                        <strong>{item.name}</strong>
+                        {item.line}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <ul className={styles.capabilities}>
+                  {solution.builds.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              )}
               <div className={styles.practiceFooter}>
                 <a href={localePath("/contact")}>
                   Tell us what you need built

@@ -103,14 +103,56 @@
   gap: 29px;
   font-size: 14px;
 }
-.navigation > a {
+.navigation > a,
+.servicesItem > a {
   padding-block: 12px;
 }
 .navigation > a:not(.contact):hover,
-.navigation > a[aria-current="page"] {
+.navigation > a[aria-current="page"],
+.servicesItem > a:hover,
+.servicesItem > a[aria-current="page"] {
   text-decoration: underline;
   text-decoration-color: #806000;
   text-underline-offset: 6px;
+}
+/* "What we do" dropdown: the five services, opened by hover or keyboard focus. */
+.servicesItem {
+  position: relative;
+}
+.servicesMenu {
+  position: absolute;
+  top: 100%;
+  left: -24px;
+  z-index: 70;
+  display: none;
+  width: 380px;
+  margin: 0;
+  padding: 10px 0;
+  list-style: none;
+  background: #fffdf7;
+  border: 1px solid #171207;
+  box-shadow: 0 18px 40px rgba(23, 18, 7, 0.12);
+}
+.servicesItem:hover .servicesMenu,
+.servicesItem:focus-within .servicesMenu {
+  display: block;
+}
+.servicesMenu a {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 24px;
+}
+.servicesMenu a:hover {
+  background: #ffc933;
+}
+.servicesLine {
+  color: #655f54;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.servicesMenu a:hover .servicesLine {
+  color: #171207;
 }
 .navigation .contact {
   display: flex;
@@ -192,10 +234,34 @@
   .header[data-overlay="true"][data-menu-open="true"] {
     background: #f3eee2;
   }
-  .navigation > a {
+  .navigation > a,
+  .servicesItem > a {
+    display: block;
     font-size: 22px;
     border-top: 1px solid #d7cfbf;
     padding-block: 13px;
+  }
+  .servicesMenu,
+  .servicesItem:hover .servicesMenu,
+  .servicesItem:focus-within .servicesMenu {
+    position: static;
+    display: block;
+    width: auto;
+    padding: 0 0 10px 16px;
+    background: none;
+    border: 0;
+    box-shadow: none;
+  }
+  .servicesMenu a {
+    padding: 7px 0;
+    font-size: 16px;
+  }
+  .servicesMenu a:hover {
+    background: none;
+    text-decoration: underline;
+  }
+  .servicesLine {
+    display: none;
   }
   .navigation .contact {
     margin-top: 10px;

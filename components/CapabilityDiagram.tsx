@@ -131,46 +131,45 @@ export function CapabilityDiagram({ mode }: { mode: number }) {
           </g>
         </>
       ) : mode === 4 ? (
-        /* Tech consulting: options compared, one decision, a costed roadmap. */
+        /* Enterprise platforms: your software, a yellow integration layer, the platforms below. */
         <>
           <g stroke="currentColor" strokeWidth="1.5">
-            <rect x="22" y="30" width="140" height="60" />
-            <rect x="22" y="125" width="140" height="60" />
-            <rect x="22" y="220" width="140" height="60" />
-            <path d="M162 60h30c30 0 28 95 58 95M162 155h88M162 250h30c30 0 28-95 58-95M350 155h40" />
-            <rect x="390" y="95" width="148" height="120" />
+            <rect x="150" y="22" width="260" height="58" />
+            <path d="M280 80v34M110 178v44M280 178v44M450 178v44" />
+            <rect x="40" y="222" width="140" height="66" />
+            <rect x="210" y="222" width="140" height="66" />
+            <rect x="380" y="222" width="140" height="66" />
           </g>
-          <path
-            d="M300 105l50 50-50 50-50-50z"
+          <rect
+            x="40"
+            y="114"
+            width="480"
+            height="64"
             fill="#ffc933"
             stroke="currentColor"
             strokeWidth="1.5"
           />
+          <text
+            x="280"
+            y="155"
+            textAnchor="middle"
+            className={styles.diagramMedium}
+          >
+            Integration layer
+          </text>
           <g className={styles.diagramLabel} textAnchor="middle">
-            <text x="92" y="65">
-              Build
+            <text x="280" y="56">
+              Your software
             </text>
-            <text x="92" y="160">
-              Buy
+            <text x="110" y="260">
+              Salesforce · CRM
             </text>
-            <text x="92" y="255">
-              Extend
+            <text x="280" y="260">
+              SAP · Oracle ERP
             </text>
-            <text x="300" y="160">
-              Decide
+            <text x="450" y="260">
+              Microsoft 365
             </text>
-            <text x="464" y="245">
-              Cost · Risk · Timeline
-            </text>
-          </g>
-          <g className={styles.diagramLabel}>
-            <text x="409" y="129">
-              Roadmap
-            </text>
-          </g>
-          <g stroke="currentColor" strokeWidth="1.5">
-            <path d="M409 150h93M409 164h57" />
-            <path d="m445 185 12 12 26-29" strokeWidth="3" />
           </g>
         </>
       ) : (

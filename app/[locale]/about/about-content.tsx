@@ -192,8 +192,8 @@ export function AboutContent() {
               Better systems.
             </h1>
             <div className={styles.heroLead}>
-              <strong>A custom software development company.</strong> We ship
-              software, cloud security, AI automation and tech consulting for
+              <strong>A custom software development company.</strong> Product,
+              AI/ML, data and cloud engineering, and enterprise platforms, for
               financial and industrial companies.
             </div>
           </div>
@@ -207,7 +207,7 @@ export function AboutContent() {
                 Our team has designed and built business-critical systems since
                 2010, starting with planning, control and reporting for
                 international oil and gas projects. Today the same engineers
-                ship software, cloud security and AI automation.
+                build products, AI systems and cloud platforms.
               </span>
               <Link href={localePath("/case-studies")} className={styles.textLink}>
                 See the case studies <Arrow />
