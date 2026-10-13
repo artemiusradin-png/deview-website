@@ -108,8 +108,7 @@ function ProjectLogos({ duplicate = false }: { duplicate?: boolean }) {
 }
 
 /**
- * Directory badges under the hero buttons. Clutch shows its five stars (rated 5.0 there);
- * GoodFirms has no review yet, so it says "Listed" until one is published. Review counts are
+ * Directory ratings under the hero buttons: name and five stars, no frame. Review counts are
  * left out on purpose until there are more reviews.
  */
 function ReviewBadges() {
@@ -125,9 +124,8 @@ function ReviewBadges() {
           <span className={styles.stars} aria-hidden="true">
             ★★★★★
           </span>
-          <span className={styles.badgeScore}>5.0</span>
           <span className="sr-only">
-            Rated 5.0 out of 5 on Clutch (opens in a new tab)
+            Rated 5 out of 5 on Clutch (opens in a new tab)
           </span>
         </a>
       </li>
@@ -138,8 +136,12 @@ function ReviewBadges() {
           rel="noopener noreferrer"
         >
           <span className={styles.badgeName}>GoodFirms</span>
-          <span className={styles.badgeScore}>Listed</span>
-          <span className="sr-only"> (opens in a new tab)</span>
+          <span className={styles.stars} aria-hidden="true">
+            ★★★★★
+          </span>
+          <span className="sr-only">
+            Rated 5 out of 5 on GoodFirms (opens in a new tab)
+          </span>
         </a>
       </li>
     </ul>

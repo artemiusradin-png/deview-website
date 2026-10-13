@@ -54,23 +54,28 @@ export function HeroInquiryForm() {
       aria-label="Tell us about your project"
       aria-busy={status === "sending"}
     >
-      <p className={styles.heroFormTitle}>Tell us what you need built.</p>
-      <label>
-        Name
-        <input name="name" autoComplete="name" required maxLength={200} />
-      </label>
-      <label>
-        Work email
-        <input
-          name="email"
-          type="email"
-          autoComplete="email"
-          required
-          maxLength={320}
-          placeholder="name@company.com"
-        />
-      </label>
-      <label>
+      <div className={styles.heroFormHead}>
+        <p className={styles.eyebrow}>Start a project</p>
+        <p className={styles.heroFormTitle}>Tell us what you need built.</p>
+      </div>
+      <div className={styles.heroFormRow}>
+        <label>
+          Name
+          <input name="name" autoComplete="name" required maxLength={200} />
+        </label>
+        <label>
+          Work email
+          <input
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+            maxLength={320}
+            placeholder="you@company.com"
+          />
+        </label>
+      </div>
+      <label className={styles.heroFormOptional}>
         Company <span>(optional)</span>
         <input name="company" autoComplete="organization" maxLength={200} />
       </label>
@@ -101,6 +106,9 @@ export function HeroInquiryForm() {
           <path d="M7 25 25 7M7 7h18v18" stroke="currentColor" strokeWidth="1.5" />
         </svg>
       </button>
+      <p className={styles.heroFormNote}>
+        A reply from an engineer within 1–2 business days.
+      </p>
       <div aria-live="polite" role="status" className={styles.formFeedback}>
         {status === "success" && (
           <p>Thanks. We reply within 1–2 business days.</p>
