@@ -4,7 +4,7 @@ import { AboutContent } from "./about-content";
 export const metadata: Metadata = {
   title: "About | DeView",
   description:
-    "DeView is an AI consulting and engineering firm with teams in Hong Kong, Vancouver, Edinburgh, and Stuttgart: building AI systems that reduce manual work and automate workflows for operations and finance teams.",
+    "DeView is a tech strategy advisor and delivery partner with 15+ years of delivery experience across finance, insurance, energy, agriculture and e-commerce, with teams in Hong Kong, Vancouver, Edinburgh, and Stuttgart.",
   alternates: { canonical: "/en/about" },
 };
 

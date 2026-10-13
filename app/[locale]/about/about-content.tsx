@@ -158,9 +158,13 @@ export function AboutContent() {
               Better systems.
             </h1>
             <div className={styles.heroLead}>
-              <strong>An AI consulting and engineering firm.</strong> We build
-              the AI, software and data systems that take manual work off
-              operations and finance teams.
+              <strong>
+                A tech strategy advisor and delivery partner, with 15+ years
+                of delivery experience.
+              </strong>{" "}
+              With a consulting mindset and domain expertise in finance,
+              insurance, energy, agriculture and e-commerce, we turn business
+              ambitions into measurable results.
             </div>
           </div>
           <dl className={styles.facts}>
@@ -193,8 +197,10 @@ export function AboutContent() {
               deployed in weeks.
             </div>
             <div className={styles.statementNote}>
-              Specific processes that cost time or money today, automated and
-              connected to the systems you already use.
+              Every engagement runs on our AI-enabled advisory and delivery
+              framework: grounded in enterprise systems work since 2010, built
+              with AI at its core, and refined after every project to deliver
+              faster.
             </div>
           </div>
         </section>

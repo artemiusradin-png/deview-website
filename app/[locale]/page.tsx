@@ -25,7 +25,7 @@ const structuredData = {
       url: SITE_URL,
       email: SITE_INQUIRY_EMAIL,
       description:
-        "AI consulting and engineering firm building AI automation, custom software platforms, and data pipelines for operations and finance teams.",
+        "Tech strategy advisor and delivery partner with 15+ years of delivery experience in finance, insurance, energy, agriculture and e-commerce, building AI, software and data systems through an AI-enabled advisory and delivery framework.",
       address: {
         "@type": "PostalAddress",
         streetAddress: LEGAL_ENTITY.streetAddress,
