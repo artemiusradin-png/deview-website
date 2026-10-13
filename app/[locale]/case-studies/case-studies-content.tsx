@@ -34,6 +34,15 @@ const caseMedia: Record<string, { video: string; poster?: string }> = {
   },
 };
 
+/** Loan management systems built for five Hong Kong lenders (tenants of the lending portal). */
+const LENDING_PROJECTS = [
+  { name: "Grand Finance", nameZh: "高昇財務" },
+  { name: "KK Credit", nameZh: "KK信貸" },
+  { name: "Wah Wei Credit", nameZh: "華威信貸" },
+  { name: "Every Success Credit", nameZh: "萬成信貸" },
+  { name: "Rich Eagle Capital", nameZh: null },
+];
+
 /** Industry groups for the production case studies, keyed by case number. */
 const productionGroups = [
   {
@@ -45,8 +54,9 @@ const productionGroups = [
   {
     id: "finance",
     title: "Finance",
-    teaser: "A unified lending platform from enquiry intake to final repayment.",
+    teaser: "Loan management systems for five Hong Kong lenders, and the unified portal that connects them.",
     numbers: ["02"],
+    lendingProjects: true,
   },
   {
     id: "senior-care",
@@ -163,6 +173,7 @@ export function CaseStudiesContent() {
                 group.numbers.includes(c.number),
               );
               if (groupCases.length === 0) return null;
+              const lending = "lendingProjects" in group && group.lendingProjects;
               return (
                 <CaseGroup
                   key={group.id}
@@ -170,8 +181,28 @@ export function CaseStudiesContent() {
                   index={groupIndex + 2}
                   title={group.title}
                   teaser={group.teaser}
-                  count={groupCases.length}
+                  count={groupCases.length + (lending ? LENDING_PROJECTS.length : 0)}
                 >
+                  {lending ? (
+                    <ul className="lending-projects" aria-label="Loan management systems">
+                      {LENDING_PROJECTS.map((project, projectIndex) => (
+                        <li key={project.name}>
+                          <span className="lending-projects-meta">
+                            {String(projectIndex + 1).padStart(2, "0")} · Hong Kong
+                          </span>
+                          <span className="lending-projects-name">
+                            {project.name}
+                            {project.nameZh ? (
+                              <span lang="zh-HK"> {project.nameZh}</span>
+                            ) : null}
+                          </span>
+                          <span className="lending-projects-type">
+                            Loan management system
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
                   {groupCases.map((c, i) => {
                     const media = caseMedia[c.number];
                     return (
