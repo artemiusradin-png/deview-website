@@ -203,6 +203,15 @@ export function CaseStudiesContent() {
                       ))}
                     </ul>
                   ) : null}
+                  {lending ? (
+                    <p className="case-group-intro">
+                      Running a lending business? Get the free{" "}
+                      <Link href="/en/resources/loan-management-system-checklist">
+                        loan management system checklist
+                      </Link>
+                      .
+                    </p>
+                  ) : null}
                   {groupCases.map((c, i) => {
                     const media = caseMedia[c.number];
                     return (

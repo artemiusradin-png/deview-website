@@ -9,7 +9,7 @@ import {
   PLAYBOOK_ACCESS_KEY,
   PLAYBOOK_GUIDE_PATH,
 } from "@/lib/workflow-offers";
-import styles from "./playbook.module.css";
+import styles from "@/components/lead-magnet.module.css";
 
 const INSIDE = [
   "The three workflows worth automating first in each of five industries.",

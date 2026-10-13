@@ -10,6 +10,24 @@ export const PLAYBOOK_GUIDE_PATH = "/resources/automation-playbook/guide";
 /** Set in sessionStorage after a successful sign-up; the guide checks it before showing. */
 export const PLAYBOOK_ACCESS_KEY = "deview-playbook";
 
+/** Further gated guides. Each `source` is registered in app/api/lead-magnet/route.ts. */
+export const LEAD_MAGNETS = {
+  lmsChecklist: {
+    source: "lms-checklist",
+    path: "/resources/loan-management-system-checklist",
+    guidePath: "/resources/loan-management-system-checklist/guide",
+    accessKey: "deview-lms-checklist",
+    label: "Loan management system checklist",
+  },
+  aiSecurityChecklist: {
+    source: "ai-security-checklist",
+    path: "/resources/ai-security-checklist",
+    guidePath: "/resources/ai-security-checklist/guide",
+    accessKey: "deview-ai-security-checklist",
+    label: "AI security checklist",
+  },
+} as const;
+
 export type ServiceLine = {
   id: string;
   name: string;

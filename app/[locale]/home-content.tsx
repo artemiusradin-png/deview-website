@@ -13,6 +13,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { INSIGHT_ARTICLES } from "@/lib/insights";
 import { SERVICE_LINES } from "@/lib/workflow-offers";
+import { servicePageFor, servicePagePath } from "@/lib/service-pages";
 import { SITE_INQUIRY_EMAIL, buildInquiryMailto } from "@/lib/site-contact";
 import styles from "./home.module.css";
 
@@ -366,7 +367,11 @@ export function HomeContent({
                   <h3>{line.name}</h3>
                   <p>{line.title}</p>
                   <Link
-                    href={localePath(`/services#${line.id}`)}
+                    href={localePath(
+                      servicePageFor(line.id)
+                        ? servicePagePath(servicePageFor(line.id)!.slug)
+                        : `/services#${line.id}`,
+                    )}
                     className={styles.shipLink}
                   >
                     More <Arrow diagonal />

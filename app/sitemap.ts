@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { MARKET_SLUGS } from "@/lib/markets";
+import { SERVICE_PAGES, servicePagePath } from "@/lib/service-pages";
 import {
   OIL_GAS_CASE_SLUGS,
   OIL_GAS_HUB_PATH,
@@ -8,6 +9,7 @@ import {
 } from "@/lib/oil-gas-cases";
 
 const SITE_URL = "https://deviewai.com";
+const SERVICE_PAGES_UPDATED = "2026-10-13";
 
 const publicEnglishPaths = [
   "",
@@ -26,8 +28,9 @@ const publicEnglishPaths = [
   "/insights/why-most-ai-pilots-fail",
   "/outcomes",
   "/resources/ai-guide-lending",
-  "/resources/ai-guide-lending/guide",
   "/resources/automation-playbook",
+  "/resources/ai-security-checklist",
+  "/resources/loan-management-system-checklist",
   "/roi-calculator",
   "/services",
   "/stack",
@@ -61,5 +64,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
-  return [...existingPages, ...marketPages, ...oilGasPages];
+  const servicePages = SERVICE_PAGES.map((page) => ({
+    url: `${SITE_URL}/en${servicePagePath(page.slug)}`,
+    lastModified: SERVICE_PAGES_UPDATED,
+  }));
+
+  return [...existingPages, ...servicePages, ...marketPages, ...oilGasPages];
 }

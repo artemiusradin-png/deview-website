@@ -1,0 +1,21 @@
+name: IndexNow after production deploy
+
+# Vercel reports each deployment to GitHub; when the production one succeeds, tell IndexNow
+# (Bing and friends) about every URL in the live sitemap.
+on:
+  deployment_status:
+
+permissions:
+  contents: read
+
+jobs:
+  indexnow:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Submit sitemap URLs to IndexNow
+        run: node scripts/indexnow.mjs https://deviewai.com

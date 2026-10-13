@@ -18,7 +18,7 @@ type CaseStudy = {
 
 export const en = {
   site: {
-    title: "DeView | Custom Software Development: Product, AI/ML, Data & Cloud Engineering",
+    title: "DeView | Software Development Company in Hong Kong: Custom Software, AI & Cloud",
     description:
       "Custom software development for financial and industrial companies: digital product engineering, AI/ML engineering, data engineering, cloud and DevOps, and enterprise platforms, from a team with 15+ years of enterprise delivery.",
   },
@@ -794,11 +794,11 @@ export const en = {
     ctaButton: "Discuss your stack →",
   },
   lendingPage: {
-    metaTitle: "AI for Lending & Finance Operations | DeView",
+    metaTitle: "Loan Management System & Lending Software for Hong Kong Lenders | DeView",
     metaDescription:
       "AI automation for lending and credit teams: borrower intelligence, loan document processing, credit analyst copilots, and regulatory reporting. Built for HKMA, PDPO, MAS TRM, and GDPR. Deployed in 3–6 weeks.",
     sectionLabel: "LENDING & FINANCE · INDUSTRY",
-    h1: "AI for lending operations: borrower intelligence, document automation, and credit-team productivity.",
+    h1: "Loan management systems and AI for lending companies.",
     subtitleP1:
       "Lending teams sit on years of borrower data spread across loan books, application systems, and document archives. The work that drives risk and revenue: knowing a borrower, processing files faster, reporting accurately: is exactly where AI compounds.",
     subtitleP2:

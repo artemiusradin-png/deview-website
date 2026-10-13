@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Footer4Col from "@/components/ui/footer-column";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
+import { SERVICE_PAGES, servicePagePath } from "@/lib/service-pages";
+import { SERVICE_LINES } from "@/lib/workflow-offers";
 
 type SiteFooterProps = {
   rootPrefix?: string;
@@ -55,6 +57,15 @@ export function SiteFooter({ rootPrefix = "", hideCta = false }: SiteFooterProps
       }}
       columns={[
         {
+          title: "Services",
+          links: SERVICE_PAGES.map((page) => ({
+            text:
+              SERVICE_LINES.find((line) => line.id === page.serviceId)?.name ??
+              page.h1,
+            href: localePath(servicePagePath(page.slug)),
+          })),
+        },
+        {
           title: f.about,
           links: [
             { text: f.links.aboutDeView, href: localePath("/about") },
@@ -73,6 +84,8 @@ export function SiteFooter({ rootPrefix = "", hideCta = false }: SiteFooterProps
             { text: "Tech Stack", href: localePath("/stack") },
             { text: "Automation playbook", href: localePath("/resources/automation-playbook"), hasIndicator: true },
             { text: f.links.aiGuide, href: localePath("/resources/ai-guide-lending") },
+            { text: "Loan system checklist", href: localePath("/resources/loan-management-system-checklist") },
+            { text: "AI security checklist", href: localePath("/resources/ai-security-checklist") },
           ],
         },
         {
