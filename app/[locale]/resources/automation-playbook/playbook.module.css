@@ -1,0 +1,534 @@
+/* Automation playbook: sign-up page and guide, in the landing-page language (paper, ink,
+   Deview yellow, Satoshi display type). Body text sits in spans/divs because interior pages
+   force every <p> to 17px with a high-specificity rule. */
+.page {
+  --paper: #fffdf7;
+  --cream: #f3eee2;
+  --ink: #171207;
+  --muted: #655f54;
+  --line: #d7cfbf;
+  --accent: #ffc933;
+  --signal: #806000;
+  color: var(--ink);
+  padding-bottom: 40px;
+}
+.container {
+  width: min(100% - 112px, 1280px);
+  margin-inline: auto;
+}
+.page :is(h1, h2, h3) {
+  margin: 0;
+  color: inherit;
+  font-family: var(--font-satoshi), var(--font-archivo), sans-serif;
+  font-weight: 500;
+}
+.kicker {
+  display: block;
+  color: var(--signal);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.lead {
+  display: block;
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+/* ── Sign-up page ── */
+.signup {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 72px;
+  align-items: start;
+  padding-top: 34px;
+}
+.page .signupTitle {
+  margin: 26px 0 26px;
+  font-size: clamp(52px, 6.4vw, 100px);
+  line-height: 0.96;
+  letter-spacing: -0.05em;
+}
+.inside {
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--ink);
+}
+.page .inside li {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 12px;
+  padding-block: 16px;
+  border-bottom: 1px solid var(--line);
+  font-size: 17px;
+  line-height: 1.45;
+}
+.page .inside li > span:first-child {
+  color: var(--signal);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding-top: 3px;
+}
+.industries {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.page .industries li {
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  font-size: 13px;
+}
+.formCard {
+  padding: 34px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+}
+.page .formTitle {
+  margin: 14px 0 26px;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.form {
+  display: grid;
+  gap: 18px;
+}
+.field {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.field :is(input, select) {
+  min-height: 50px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.field select {
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%),
+    linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) 50%,
+    calc(100% - 15px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+.field :is(input, select):focus {
+  border-color: var(--ink);
+}
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.button {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  min-height: 52px;
+  padding: 14px 22px;
+  border: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font: inherit;
+  font-size: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 180ms,
+    color 180ms;
+}
+.button:hover {
+  background: var(--accent);
+  color: var(--ink);
+}
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.formNote {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.error {
+  display: block;
+  color: #a1260d;
+  font-size: 14px;
+}
+.page :is(a, button, input, select):focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ── Guide ── */
+.cover {
+  padding: 34px 0 64px;
+  border-bottom: 1px solid var(--ink);
+}
+.page .coverTitle {
+  margin: 26px 0 26px;
+  max-width: 14ch;
+  font-size: clamp(52px, 7vw, 112px);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+.cover .lead {
+  max-width: 52ch;
+}
+.jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 36px;
+}
+.jump a {
+  padding: 9px 14px;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  font-size: 13px;
+  text-decoration: none;
+  transition: background 180ms;
+}
+.jump a:hover {
+  background: var(--accent);
+}
+.section {
+  padding-block: 72px;
+  border-bottom: 1px solid var(--line);
+}
+.page .sectionTitle {
+  margin-top: 20px;
+  max-width: 18ch;
+  font-size: clamp(38px, 4.4vw, 66px);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+.rules {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 44px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.page .rules li {
+  padding: 22px 28px 0 0;
+  border-top: 1px solid var(--ink);
+}
+.page .rules li + li {
+  padding-left: 28px;
+  border-left: 1px solid var(--line);
+}
+.page .rules h3 {
+  margin: 30px 0 12px;
+  font-size: 26px;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+.body {
+  display: block;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+.num {
+  color: var(--signal);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+/* One industry chapter. */
+.chapter {
+  padding-block: 80px;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 90px;
+}
+.chapterHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: end;
+}
+.chapterHead .lead {
+  font-size: 18px;
+}
+.chapterGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0;
+  margin-top: 48px;
+  border: 1px solid var(--line);
+}
+.chapterGrid > div {
+  padding: 32px;
+}
+.chapterGrid > div + div {
+  border-left: 1px solid var(--line);
+}
+.example {
+  background: var(--cream);
+}
+.blockLabel {
+  display: block;
+  margin-bottom: 16px;
+  color: var(--signal);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.page .exampleTitle {
+  margin-bottom: 18px;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.page .steps li {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 14px;
+  align-items: baseline;
+  padding-block: 12px;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  line-height: 1.45;
+}
+.page .steps li > span:first-child {
+  display: inline-flex;
+  justify-content: center;
+  padding: 3px 0;
+  border: 1px solid var(--ink);
+  font-size: 11px;
+}
+.page .steps li:last-child > span:first-child {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.offers {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.page .offers li + li {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.page .offers h3 {
+  margin-bottom: 6px;
+  font-size: 21px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.chapterFoot {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 0;
+  border: 1px solid var(--line);
+  border-top: 0;
+}
+.chapterFoot > div {
+  padding: 26px 32px 30px;
+}
+.chapterFoot > div + div {
+  border-left: 1px solid var(--line);
+}
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.page .list li {
+  display: flex;
+  gap: 10px;
+  padding-block: 6px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+.page .list li::before {
+  content: "+";
+  color: var(--signal);
+}
+.page .questions li::before {
+  content: "?";
+}
+.stays {
+  display: block;
+  padding-left: 14px;
+  border-left: 2px solid var(--accent);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.stays + .stays {
+  margin-top: 18px;
+}
+
+/* Four building blocks. */
+.blocks {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 44px;
+  border-top: 1px solid var(--ink);
+}
+.blocks > div {
+  padding: 24px 24px 8px 0;
+}
+.blocks > div + div {
+  padding-left: 24px;
+  border-left: 1px solid var(--line);
+}
+.page .blocks h3 {
+  margin: 26px 0 10px;
+  font-size: 23px;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+.blocks .body {
+  font-size: 15px;
+}
+
+/* Closing call to action on ink. */
+.cta {
+  margin-top: 72px;
+  padding: 56px;
+  background: var(--ink);
+  color: var(--paper);
+}
+.cta .kicker {
+  color: var(--accent);
+}
+.page .ctaTitle {
+  margin: 20px 0 18px;
+  max-width: 18ch;
+  font-size: clamp(36px, 4vw, 58px);
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+}
+.cta .body {
+  max-width: 56ch;
+  margin-bottom: 30px;
+  color: rgba(255, 253, 247, 0.7);
+}
+.cta .button {
+  background: var(--accent);
+  color: var(--ink);
+}
+.cta .button:hover {
+  background: var(--paper);
+}
+.loading {
+  display: flex;
+  min-height: 60vh;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    width: calc(100% - 64px);
+  }
+  .signup,
+  .chapterHead {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .chapterGrid {
+    grid-template-columns: 1fr;
+  }
+  .chapterGrid > div + div {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .chapterFoot {
+    grid-template-columns: 1fr;
+  }
+  .chapterFoot > div + div {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .blocks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 30px;
+  }
+  .blocks > div:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+@media (max-width: 760px) {
+  .container {
+    width: calc(100% - 32px);
+  }
+  .lead {
+    font-size: 18px;
+  }
+  .formCard {
+    padding: 24px 20px;
+  }
+  .rules {
+    grid-template-columns: 1fr;
+  }
+  .rules li,
+  .rules li + li {
+    padding: 20px 0 24px;
+    border-left: 0;
+  }
+  .rules h3 {
+    margin-top: 16px;
+  }
+  .section,
+  .chapter {
+    padding-block: 56px;
+  }
+  .chapterGrid > div,
+  .chapterFoot > div {
+    padding: 24px 20px;
+  }
+  .blocks {
+    grid-template-columns: 1fr;
+    row-gap: 0;
+  }
+  .blocks > div,
+  .blocks > div + div {
+    padding: 22px 0 24px;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .cta {
+    padding: 36px 22px;
+  }
+}
+.successAction {
+  margin-top: 24px;
+}
+.labelGap {
+  margin-top: 24px;
+}

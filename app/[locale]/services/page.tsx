@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import { SiteFooter } from "@/components/SiteFooter";
 import { HomeServicesSection } from "@/components/HomeServicesSection";
 import { ServicesPracticeSections } from "@/components/ServicesPracticeSections";
+import { ServicesSolutions } from "@/components/ServicesSolutions";
 import { SubpageNav } from "@/components/SubpageNav";
 import { RETRO_FEATURE_CARDS_ID } from "@/components/RetroFeatureCards";
 
 const homeWithRetroCards = `/#${RETRO_FEATURE_CARDS_ID}`;
 
 export const metadata: Metadata = {
-  title: "Services: AI, Software Engineering & Data Engineering | DeView",
+  title: "Services: Document, Quote, Reporting & Request Automation | DeView",
   description:
-    "Three practices: AI solutions, software engineering, and data engineering: that reduce manual work, cut operating costs, and ship working systems in 1–8 weeks.",
+    "Four solutions for document-heavy work in lending, ventilation, agriculture, construction and oil and gas: document processing, quotation automation, reporting and request automation.",
   alternates: { canonical: "/en/services" },
 };
 
@@ -21,7 +22,8 @@ export default function ServicesPage() {
         <div className="section-gutter mx-auto max-w-6xl">
           <SubpageNav backHref={homeWithRetroCards} />
         </div>
-        <ServicesPracticeSections />
+        <ServicesSolutions />
+        <ServicesPracticeSections supporting />
         <HomeServicesSection />
       </main>
       <SiteFooter />

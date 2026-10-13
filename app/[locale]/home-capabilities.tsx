@@ -1,43 +1,33 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
-import { CapabilityDiagram } from "@/components/CapabilityDiagram";
+import {
+  INDUSTRY_OFFERS,
+  PLAYBOOK_PATH,
+  SOLUTIONS,
+} from "@/lib/workflow-offers";
 import { useMotionOnView } from "./home-motion";
 import styles from "./home-capabilities.module.css";
 
-const directions = [
-  {
-    problem: "Too much manual work.",
-    title: "Give your people their time back.",
-    note: "From incoming work to a clear next step.",
-    copy: "AI that reads, sorts, drafts, and routes the everyday work. Your team stays in control of the decisions that matter.",
-  },
-  {
-    problem: "Tools that don’t connect.",
-    title: "Make the whole business click.",
-    note: "Separate tools. One connected way of working.",
-    copy: "Purpose-built software that brings your people, processes, and existing tools together. Less switching. Fewer gaps. A system that fits.",
-  },
-  {
-    problem: "Data without answers.",
-    title: "Turn the noise into a clear view.",
-    note: "Your information, ready to work with.",
-    copy: "Reliable pipelines, useful dashboards, and models built around your own data. Find the signal and make your next decision with confidence.",
-  },
-];
+const COUNT = INDUSTRY_OFFERS.length;
 
+/**
+ * "What we can do for you": one tab per industry. Each panel shows a worked example of the
+ * workflow we automate (left) and what we build, why we are credible and what stays with the
+ * client's people (right). Below, the four solutions every industry draws on.
+ */
 export function HomeCapabilities() {
-  const { dict, localePath } = useLocaleContext();
+  const { localePath } = useLocaleContext();
   const [active, setActive] = useState(0);
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
-  // The drawing traces in when the panel scrolls into view, and again on every tab change
+  // The example steps play in when the panel scrolls into view, and again on every tab change
   // (the panel remounts, so its animation restarts).
   const panels = useRef<HTMLDivElement>(null);
   useMotionOnView(panels);
-  const practice = dict.practices.items[active];
-  const direction = directions[active];
+  const offer = INDUSTRY_OFFERS[active];
+
   return (
     <section
       id="expertise"
@@ -47,28 +37,28 @@ export function HomeCapabilities() {
       <div id="retro-feature-cards" />
       <div className={styles.heading}>
         <div>
-          <p className={styles.kicker}>01 / A better way to work</p>
+          <p className={styles.kicker}>01 / What we can do for you</p>
           <h2 id="expertise-title">
-            Less friction.
+            Your industry.
             <br />
-            More possibility.
+            Your bottleneck.
           </h2>
         </div>
         <p>
-          Start with what’s getting in the way.
+          Pick your industry and see the work
           <br />
-          We’ll build what moves you forward.
+          we would take off your team’s plate.
         </p>
       </div>
       <div
         id="practices"
         role="tablist"
-        aria-label="What is slowing your business down?"
+        aria-label="Choose your industry"
         className={styles.tabs}
       >
-        {directions.map((item, index) => (
+        {INDUSTRY_OFFERS.map((item, index) => (
           <button
-            key={item.problem}
+            key={item.id}
             type="button"
             role="tab"
             id={`capability-tab-${index}`}
@@ -78,17 +68,33 @@ export function HomeCapabilities() {
             ref={(el) => {
               buttons.current[index] = el;
             }}
-            onClick={() => setActive(index)}
+            onClick={() => {
+              setActive(index);
+              // Stacked tabs (phones, small tablets) put the panel below all five tabs:
+              // bring it into view so the tap visibly does something.
+              if (window.matchMedia("(max-width: 960px)").matches) {
+                requestAnimationFrame(() =>
+                  panels.current?.scrollIntoView({
+                    behavior: window.matchMedia(
+                      "(prefers-reduced-motion: reduce)",
+                    ).matches
+                      ? "auto"
+                      : "smooth",
+                    block: "start",
+                  }),
+                );
+              }
+            }}
             onKeyDown={(event) => {
               const next =
-                event.key === "ArrowRight"
-                  ? (active + 1) % 3
-                  : event.key === "ArrowLeft"
-                    ? (active + 2) % 3
+                event.key === "ArrowRight" || event.key === "ArrowDown"
+                  ? (active + 1) % COUNT
+                  : event.key === "ArrowLeft" || event.key === "ArrowUp"
+                    ? (active + COUNT - 1) % COUNT
                     : event.key === "Home"
                       ? 0
                       : event.key === "End"
-                        ? 2
+                        ? COUNT - 1
                         : null;
               if (next !== null) {
                 event.preventDefault();
@@ -99,7 +105,7 @@ export function HomeCapabilities() {
           >
             <span className={styles.tabMeta}>
               0{index + 1}
-              <span>{dict.practices.items[index].heading}</span>
+              <span>{item.name}</span>
             </span>
             <span className={styles.problem}>{item.problem}</span>
             <span className={styles.tabArrow} aria-hidden="true">
@@ -108,10 +114,10 @@ export function HomeCapabilities() {
           </button>
         ))}
       </div>
-      <div ref={panels}>
-        {directions.map((item, index) => (
+      <div ref={panels} className={styles.panels}>
+        {INDUSTRY_OFFERS.map((item, index) => (
           <div
-            key={item.problem}
+            key={item.id}
             role="tabpanel"
             id={`capability-panel-${index}`}
             aria-labelledby={`capability-tab-${index}`}
@@ -120,23 +126,48 @@ export function HomeCapabilities() {
           >
             {index === active && (
               <div className={styles.panel}>
-                <div className={styles.diagram}>
-                  <CapabilityDiagram mode={active} />
-                  <p>{direction.note}</p>
+                <div className={styles.example}>
+                  <p className={styles.kicker}>Example</p>
+                  <p className={styles.exampleTitle}>{offer.example.title}</p>
+                  <ol className={styles.flow}>
+                    {offer.example.steps.map((step, stepIndex) => (
+                      <li
+                        key={step}
+                        style={{ "--step": stepIndex } as CSSProperties}
+                      >
+                        <span className={styles.flowNum}>
+                          {String(stepIndex + 1).padStart(2, "0")}
+                        </span>
+                        <span>{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                  <p className={styles.guardrail}>{offer.guardrail}</p>
                 </div>
                 <div className={styles.panelCopy}>
-                  <p className={styles.kicker}>{practice.heading}</p>
-                  <h3>{direction.title}</h3>
-                  <p>{direction.copy}</p>
-                  <ul>
-                    {practice.subs.slice(0, 4).map((capability) => (
-                      <li key={capability}>{capability}</li>
+                  <p className={styles.kicker}>{offer.name}</p>
+                  <h3>{offer.headline}</h3>
+                  <p>{offer.summary}</p>
+                  <ul className={styles.offers}>
+                    {offer.offers.map((o) => (
+                      <li key={o.name}>{o.name}</li>
                     ))}
                   </ul>
-                  <Link href={localePath(`/services#${practice.id}`)}>
-                    Explore {practice.heading.toLowerCase()}{" "}
-                    <span aria-hidden="true">↗</span>
-                  </Link>
+                  <p className={styles.experience}>
+                    <span>Why us</span>
+                    {offer.experience}
+                  </p>
+                  <div className={styles.panelLinks}>
+                    <Link href={localePath("/contact")}>
+                      Show us your workflow <span aria-hidden="true">↗</span>
+                    </Link>
+                    <Link
+                      href={localePath(PLAYBOOK_PATH)}
+                      className={styles.secondaryLink}
+                    >
+                      Get the full playbook <span aria-hidden="true">↗</span>
+                    </Link>
+                  </div>
                 </div>
               </div>
             )}
@@ -145,17 +176,23 @@ export function HomeCapabilities() {
       </div>
       <div id="services" className={styles.services}>
         <div>
-          <p className={styles.kicker}>A place to start</p>
+          <p className={styles.kicker}>Under the hood</p>
           <h3>
-            One useful change
+            Four things we automate,
             <br />
-            can change a lot.
+            in every industry.
           </h3>
         </div>
         <div className={styles.serviceLinks}>
-          {dict.services.items.map((service) => (
-            <Link key={service.id} href={localePath(`/services#${service.id}`)}>
-              <span>{service.label}</span>
+          {SOLUTIONS.map((solution) => (
+            <Link
+              key={solution.id}
+              href={localePath(`/services#${solution.id}`)}
+            >
+              <span>
+                <strong>{solution.name}</strong>
+                {solution.title}
+              </span>
               <span aria-hidden="true">↗</span>
             </Link>
           ))}

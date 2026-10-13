@@ -11,6 +11,7 @@ import { CountUp, useMotionOnView } from "./home-motion";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { INSIGHT_ARTICLES } from "@/lib/insights";
+import { WHY_US } from "@/lib/workflow-offers";
 import { SITE_INQUIRY_EMAIL, buildInquiryMailto } from "@/lib/site-contact";
 import styles from "./home.module.css";
 
@@ -202,8 +203,8 @@ export function HomeContent({
             )}
             <div className={`${styles.heroContent} ${styles.container}`}>
               <div className={styles.heroEyebrow}>
-                <p className={styles.eyebrow}>AI + software + data</p>
-                <span>Built for the real world.</span>
+                <p className={styles.eyebrow}>Workflow automation</p>
+                <span>For financial and industrial teams.</span>
               </div>
               <h1 id="hero-title" className={styles.heroTitle}>
                 <span>Less busywork.</span>
@@ -215,8 +216,9 @@ export function HomeContent({
               <div className={styles.heroBottom}>
                 <div className={styles.heroIntro}>
                   <p>
-                    We build AI, software, and data systems that take the
-                    busywork off your plate. So your people can get back to what
+                    We build AI and software that take the document-heavy work
+                    out of lending, technical quotes, field sales, engineering
+                    documents and reporting. So your people can get back to what
                     matters.
                   </p>
                   <div className={styles.heroActions}>
@@ -276,12 +278,49 @@ export function HomeContent({
         <HomeCapabilities />
 
         <section
+          id="why-us"
+          className={styles.whySection}
+          aria-labelledby="why-title"
+        >
+          <div className={styles.container}>
+            <SectionHeading
+              number="02"
+              label="Why us"
+              title={
+                <>
+                  We know the work.
+                  <br />
+                  Not just the tech.
+                </>
+              }
+              id="why-title"
+            >
+              <p>
+                Plenty of firms can build an AI assistant. We start from how
+                your loan files, quotes and reports actually get done.
+              </p>
+            </SectionHeading>
+            <ol className={styles.whyList}>
+              {WHY_US.map((point, index) => (
+                <li key={point.title}>
+                  <span className={styles.whyNum}>
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3>{point.title}</h3>
+                  <p>{point.body}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section
           id="work"
           className={`${styles.section} ${styles.container}`}
           aria-labelledby="work-title"
         >
           <SectionHeading
-            number="02"
+            number="03"
             label="Selected work"
             title={
               <>
@@ -436,7 +475,7 @@ export function HomeContent({
           aria-labelledby="approach-title"
         >
           <SectionHeading
-            number="03"
+            number="04"
             label={dict.process.sectionLabel}
             title={
               <>
@@ -497,7 +536,7 @@ export function HomeContent({
         >
           <div className={styles.container}>
             <SectionHeading
-              number="04"
+              number="05"
               label="The people"
               title={
                 <>
@@ -530,7 +569,7 @@ export function HomeContent({
         >
           <div className={styles.container}>
             <SectionHeading
-              number="05"
+              number="06"
               label={dict.insights.sectionLabel}
               title={
                 <>

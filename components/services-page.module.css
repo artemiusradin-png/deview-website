@@ -363,3 +363,70 @@
     padding: 16px 12px;
   }
 }
+
+/* Four solutions (ServicesSolutions): four jump links, and a "where it applies" panel in the
+   drawing slot of each section. */
+.indexFour {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.applies {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 22px;
+}
+.appliesLabel {
+  color: #806000;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.appliesList {
+  margin: 0;
+  border-top: 1px solid #171207;
+}
+.appliesList > div {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 24px;
+  padding-block: 18px;
+  border-bottom: 1px solid #d7cfbf;
+}
+.appliesList dt {
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.appliesList dd {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+@media (max-width: 1100px) {
+  .indexFour {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .indexFour a:nth-child(3) {
+    border-left: 0;
+  }
+  .indexFour a:nth-child(n + 3) {
+    border-top: 1px solid #d7cfbf;
+  }
+}
+@media (max-width: 760px) {
+  .indexFour {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* The drawing slot runs edge to edge on phones; text needs the normal gutter. */
+  .practiceDiagram.applies {
+    padding: 28px 20px;
+  }
+  .appliesList > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .appliesList dd {
+    font-size: 17px;
+  }
+}

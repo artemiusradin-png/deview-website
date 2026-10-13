@@ -159,12 +159,12 @@ export function AboutContent() {
             </h1>
             <div className={styles.heroLead}>
               <strong>
-                A tech strategy advisor and delivery partner, with 15+ years
-                of delivery experience.
+                AI and software for the document-heavy work in financial and
+                industrial companies.
               </strong>{" "}
-              With a consulting mindset and domain expertise in finance,
-              insurance, energy, agriculture and e-commerce, we turn business
-              ambitions into measurable results.
+              Lending operations, technical quotes, field sales, engineering
+              documents and reporting, built into the tools your team already
+              uses.
             </div>
           </div>
           <dl className={styles.facts}>
@@ -197,10 +197,9 @@ export function AboutContent() {
               deployed in weeks.
             </div>
             <div className={styles.statementNote}>
-              Every engagement runs on our AI-enabled advisory and delivery
-              framework: grounded in enterprise systems work since 2010, built
-              with AI at its core, and refined after every project to deliver
-              faster.
+              We start with the one workflow that costs you most. AI prepares
+              the work, your people approve it, and it runs inside the systems
+              you already use.
             </div>
           </div>
         </section>
