@@ -75,9 +75,9 @@ export function SiteHeader({ home = false }: { home?: boolean }) {
           DEVIEW
         </Link>
         <span className={styles.note}>
-          Workflow automation.
+          Software development.
           <br />
-          Finance. Industry.
+          Cloud · AI · Consulting.
         </span>
         <nav
           id="site-navigation"

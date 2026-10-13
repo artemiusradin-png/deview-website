@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/SiteFooter";
 import { HomeServicesSection } from "@/components/HomeServicesSection";
-import { ServicesPracticeSections } from "@/components/ServicesPracticeSections";
 import { ServicesSolutions } from "@/components/ServicesSolutions";
+import { ServicesAutomation } from "@/components/ServicesAutomation";
 import { SubpageNav } from "@/components/SubpageNav";
 import { RETRO_FEATURE_CARDS_ID } from "@/components/RetroFeatureCards";
 
 const homeWithRetroCards = `/#${RETRO_FEATURE_CARDS_ID}`;
 
 export const metadata: Metadata = {
-  title: "Services: Document, Quote, Reporting & Request Automation | DeView",
+  title: "Services: Software Development, Cloud Security, AI Automation & Tech Consulting | DeView",
   description:
-    "Four solutions for document-heavy work in lending, ventilation, agriculture, construction and oil and gas: document processing, quotation automation, reporting and request automation.",
+    "Deview ships software development, cloud security, AI automation and tech consulting for financial and industrial companies, built by a team with 15+ years of enterprise delivery.",
   alternates: { canonical: "/en/services" },
 };
 
@@ -23,8 +23,8 @@ export default function ServicesPage() {
           <SubpageNav backHref={homeWithRetroCards} />
         </div>
         <ServicesSolutions />
-        <ServicesPracticeSections supporting />
         <HomeServicesSection />
+        <ServicesAutomation />
       </main>
       <SiteFooter />
     </>

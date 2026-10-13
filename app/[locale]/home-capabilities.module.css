@@ -36,13 +36,13 @@
 }
 .tabs {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   border: 1px solid #d7cfbf;
 }
 .tabs button {
   position: relative;
-  padding: 25px 24px 34px;
-  min-height: 200px;
+  padding: 25px 30px 34px;
+  min-height: 214px;
   text-align: left;
   border: 0;
   background: transparent;
@@ -70,7 +70,7 @@
 .problem {
   display: block;
   max-width: 12ch;
-  font-size: clamp(22px, 1.9vw, 30px);
+  font-size: clamp(26px, 2.5vw, 37px);
   line-height: 1.08;
   letter-spacing: -0.035em;
   margin-top: 40px;
@@ -90,83 +90,107 @@
   border-top: 0;
   min-height: 425px;
 }
-/* Left of the panel: a worked example, one numbered step per line. The last step is the
-   human decision, so it carries the accent. Steps play in one after another when the panel
-   scrolls into view (data-motion is set by useMotionOnView in home-motion.tsx). */
-.example {
+.diagram {
   display: flex;
   flex-direction: column;
-  padding: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 35px;
   border-right: 1px solid #d7cfbf;
 }
-.exampleTitle {
-  margin-top: 14px;
-  font-family: var(--font-satoshi), var(--font-archivo), system-ui, sans-serif;
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+.drawing {
+  width: 100%;
+  max-width: 580px;
+  height: auto;
 }
-.flow {
-  list-style: none;
-  margin: 26px 0 0;
-  padding: 0;
-  counter-reset: none;
+.drawing text {
+  fill: currentColor;
+  font-family: var(--font-archivo), sans-serif;
 }
-.flow li {
-  position: relative;
-  display: grid;
-  grid-template-columns: 44px 1fr;
-  gap: 14px;
-  align-items: baseline;
-  padding: 13px 0;
-  border-top: 1px solid #d7cfbf;
-  font-size: 15px;
-  line-height: 1.45;
+.diagramBig {
+  font-size: 34px;
+  letter-spacing: -0.04em;
 }
-.flow li:last-child {
-  border-bottom: 1px solid #d7cfbf;
+.diagramMedium {
+  font-size: 26px;
+  letter-spacing: -0.025em;
 }
-.flowNum {
-  display: inline-flex;
-  justify-content: center;
-  padding: 3px 0;
-  border: 1px solid #171207;
-  font-size: 11px;
-  letter-spacing: 0.06em;
+.diagramLabel {
+  font-size: 14px;
 }
-.flow li:last-child .flowNum {
-  background: #ffc933;
-  border-color: #ffc933;
-}
-.guardrail {
-  display: flex;
-  gap: 10px;
-  margin-top: auto;
-  padding-top: 22px;
+.diagram > p {
   color: #655f54;
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 15px;
 }
-.guardrail::before {
-  content: "";
-  flex: none;
-  width: 10px;
-  height: 10px;
-  margin-top: 5px;
-  background: #806000;
+/* Line drawing (CapabilityDiagram is shared, so it is animated from here; see home-motion.tsx):
+   the strokes trace in, then the yellow shape settles and the bars rise. A fixed dash longer
+   than any stroke keeps an even pen speed without editing the shared SVG. */
+[data-motion="in"] .diagram svg g[stroke] > *,
+[data-motion="in"] .diagram svg > path[stroke] {
+  animation: diagramDraw 1400ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
 }
-[data-motion="in"] .flow li {
-  animation: stepIn 520ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
-  animation-delay: calc(120ms + var(--step, 0) * 110ms);
+[data-motion="in"] .diagram svg g[stroke] ~ g[stroke] > *,
+[data-motion="in"] .diagram svg > rect ~ path[stroke] {
+  animation-delay: 450ms;
 }
-[data-motion="armed"] .flow li {
+[data-motion="in"] .diagram svg > :is(circle, rect)[stroke] {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: diagramFocal 800ms cubic-bezier(0.2, 0.7, 0.2, 1) 500ms backwards;
+}
+[data-motion="in"] .diagram svg > rect:not([stroke]) {
+  transform-box: fill-box;
+  transform-origin: bottom;
+  animation: diagramBar 800ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  animation-delay: calc(250ms + var(--bar, 0) * 70ms);
+}
+.diagram svg > rect:nth-of-type(2) {
+  --bar: 1;
+}
+.diagram svg > rect:nth-of-type(3) {
+  --bar: 2;
+}
+.diagram svg > rect:nth-of-type(4) {
+  --bar: 3;
+}
+.diagram svg > rect:nth-of-type(5) {
+  --bar: 4;
+}
+.diagram svg > rect:nth-of-type(6) {
+  --bar: 5;
+}
+[data-motion="armed"] .diagram svg g[stroke] > *,
+[data-motion="armed"] .diagram svg > path[stroke] {
+  stroke-dasharray: 700;
+  stroke-dashoffset: 700;
+}
+[data-motion="armed"] .diagram svg > :is(circle, rect)[stroke] {
   opacity: 0;
 }
-@keyframes stepIn {
+[data-motion="armed"] .diagram svg > rect:not([stroke]) {
+  transform: scaleY(0);
+}
+@keyframes diagramDraw {
+  from {
+    stroke-dasharray: 700;
+    stroke-dashoffset: 700;
+  }
+  to {
+    stroke-dasharray: 700;
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes diagramFocal {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: scale(0.92);
+  }
+}
+@keyframes diagramBar {
+  from {
+    transform: scaleY(0);
   }
 }
 .panelCopy {
@@ -186,46 +210,20 @@
   color: #655f54;
   max-width: 47ch;
 }
-.panelCopy .offers {
+.panelCopy ul {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 18px;
   list-style: none;
   padding: 0;
-  margin: 22px 0 26px;
-  font-size: 13px;
-  color: #171207;
+  margin: 22px 0 28px;
+  font-size: 11px;
+  color: #655f54;
 }
-.offers li::before {
+.panelCopy li::before {
   content: "+";
   margin-right: 7px;
   color: #806000;
-}
-.panelCopy > p.experience {
-  margin: 0 0 30px;
-  padding-left: 14px;
-  border-left: 2px solid #ffc933;
-  font-size: 14px;
-  line-height: 1.55;
-  color: #171207;
-  max-width: 50ch;
-}
-.experience span {
-  display: block;
-  margin-bottom: 4px;
-  color: #806000;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-.panelLinks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px 34px;
-}
-.panelCopy a.secondaryLink {
-  border-bottom-color: #d7cfbf;
-  color: #655f54;
 }
 .panelCopy a {
   display: flex;
@@ -265,17 +263,6 @@
   padding-block: 15px;
   font-size: 14px;
 }
-.serviceLinks strong {
-  display: block;
-  margin-bottom: 3px;
-  font-weight: 500;
-}
-.serviceLinks a > span:first-child {
-  color: #655f54;
-}
-.serviceLinks strong {
-  color: #171207;
-}
 .serviceLinks a:hover {
   border-color: #171207;
 }
@@ -300,46 +287,8 @@
   .panelCopy {
     padding: 30px;
   }
-  .example {
-    padding: 30px;
-  }
-  .problem {
-    font-size: 21px;
-  }
-}
-@media (max-width: 960px) {
-  .tabs {
-    grid-template-columns: 1fr;
-  }
-  .tabs button {
-    min-height: 0;
-    padding: 20px 50px 22px 20px;
-  }
-  .tabs button + button {
-    border-left: 0;
-    border-top: 1px solid #d7cfbf;
-  }
-  .tabMeta {
-    flex-direction: row;
-    justify-content: start;
-    gap: 20px;
-  }
-  .problem {
-    max-width: none;
-    font-size: 24px;
-    margin-top: 12px;
-  }
-  .tabArrow {
-    right: 20px;
-    bottom: 21px;
-    font-size: 25px;
-  }
-  .panel {
-    grid-template-columns: 1fr;
-  }
-  .example {
-    border-right: 0;
-    border-bottom: 1px solid #d7cfbf;
+  .diagram {
+    padding: 20px;
   }
 }
 @media (max-width: 760px) {
@@ -388,13 +337,10 @@
   .panel {
     grid-template-columns: 1fr;
   }
-  .example {
-    padding: 26px 22px;
-  }
-  .flow li {
-    grid-template-columns: 38px 1fr;
-    gap: 12px;
-    font-size: 14px;
+  .diagram {
+    padding: 18px 12px 25px;
+    border-right: 0;
+    border-bottom: 1px solid #d7cfbf;
   }
   .panelCopy {
     padding: 28px 24px;
@@ -420,12 +366,4 @@
   .tabs button {
     transition: none;
   }
-  [data-motion] .flow li {
-    animation: none;
-    opacity: 1;
-  }
-}
-/* Room above the panel for the fixed header when a tab tap scrolls it into view. */
-.panels {
-  scroll-margin-top: 90px;
 }

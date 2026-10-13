@@ -11,7 +11,7 @@ import { CountUp, useMotionOnView } from "./home-motion";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { INSIGHT_ARTICLES } from "@/lib/insights";
-import { WHY_US } from "@/lib/workflow-offers";
+import { SERVICE_LINES } from "@/lib/workflow-offers";
 import { SITE_INQUIRY_EMAIL, buildInquiryMailto } from "@/lib/site-contact";
 import styles from "./home.module.css";
 
@@ -203,23 +203,22 @@ export function HomeContent({
             )}
             <div className={`${styles.heroContent} ${styles.container}`}>
               <div className={styles.heroEyebrow}>
-                <p className={styles.eyebrow}>Workflow automation</p>
-                <span>For financial and industrial teams.</span>
+                <p className={styles.eyebrow}>Custom software development</p>
+                <span>Cloud security. AI automation. Tech consulting.</span>
               </div>
               <h1 id="hero-title" className={styles.heroTitle}>
-                <span>Less busywork.</span>
+                <span>Custom software.</span>
                 <span className={styles.heroSecondLine}>
-                  More impact.
+                  Real impact.
                   <Arrow className={styles.heroArrow} />
                 </span>
               </h1>
               <div className={styles.heroBottom}>
                 <div className={styles.heroIntro}>
                   <p>
-                    We build AI and software that take the document-heavy work
-                    out of lending, technical quotes, field sales, engineering
-                    documents and reporting. So your people can get back to what
-                    matters.
+                    We ship software development, cloud security, AI automation
+                    and tech consulting for financial and industrial companies.
+                    Our team has built enterprise systems since 2010.
                   </p>
                   <div className={styles.heroActions}>
                     <Link
@@ -278,36 +277,39 @@ export function HomeContent({
         <HomeCapabilities />
 
         <section
-          id="why-us"
+          id="what-we-ship"
           className={styles.whySection}
-          aria-labelledby="why-title"
+          aria-labelledby="ship-title"
         >
           <div className={styles.container}>
             <SectionHeading
               number="02"
-              label="Why us"
+              label="What we ship"
               title={
                 <>
-                  We know the work.
+                  Four things.
                   <br />
-                  Not just the tech.
+                  Done properly.
                 </>
               }
-              id="why-title"
+              id="ship-title"
             >
-              <p>
-                Plenty of firms can build an AI assistant. We start from how
-                your loan files, quotes and reports actually get done.
-              </p>
+              <p>One senior team, from first design to running in production.</p>
             </SectionHeading>
             <ol className={styles.whyList}>
-              {WHY_US.map((point, index) => (
-                <li key={point.title}>
+              {SERVICE_LINES.map((line, index) => (
+                <li key={line.id}>
                   <span className={styles.whyNum}>
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <h3>{point.title}</h3>
-                  <p>{point.body}</p>
+                  <h3>{line.name}</h3>
+                  <p>{line.title}</p>
+                  <Link
+                    href={localePath(`/services#${line.id}`)}
+                    className={styles.shipLink}
+                  >
+                    More <Arrow diagonal />
+                  </Link>
                 </li>
               ))}
             </ol>
