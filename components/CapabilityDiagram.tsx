@@ -89,6 +89,90 @@ export function CapabilityDiagram({ mode }: { mode: number }) {
             One system.
           </text>
         </>
+      ) : mode === 3 ? (
+        /* Cloud security: apps, data and AI models inside your cloud, under one yellow shield. */
+        <>
+          <g stroke="currentColor" strokeWidth="1.5">
+            <rect x="22" y="58" width="516" height="230" />
+            <rect x="52" y="150" width="130" height="84" />
+            <rect x="215" y="150" width="130" height="84" />
+            <rect x="378" y="150" width="130" height="84" />
+            <path d="M182 192h33M345 192h33" />
+          </g>
+          <path
+            d="M280 14l52 18v34c0 32-22 52-52 62-30-10-52-30-52-62V32z"
+            fill="#ffc933"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
+          <path
+            d="m264 70 12 12 26-29"
+            stroke="currentColor"
+            strokeWidth="3"
+          />
+          <g className={styles.diagramLabel}>
+            <text x="42" y="88">
+              Your cloud
+            </text>
+          </g>
+          <g className={styles.diagramLabel} textAnchor="middle">
+            <text x="117" y="197">
+              Apps
+            </text>
+            <text x="280" y="197">
+              Data
+            </text>
+            <text x="443" y="197">
+              AI models
+            </text>
+            <text x="280" y="268">
+              Access control · Encryption · Audit logs
+            </text>
+          </g>
+        </>
+      ) : mode === 4 ? (
+        /* Tech consulting: options compared, one decision, a costed roadmap. */
+        <>
+          <g stroke="currentColor" strokeWidth="1.5">
+            <rect x="22" y="30" width="140" height="60" />
+            <rect x="22" y="125" width="140" height="60" />
+            <rect x="22" y="220" width="140" height="60" />
+            <path d="M162 60h30c30 0 28 95 58 95M162 155h88M162 250h30c30 0 28-95 58-95M350 155h40" />
+            <rect x="390" y="95" width="148" height="120" />
+          </g>
+          <path
+            d="M300 105l50 50-50 50-50-50z"
+            fill="#ffc933"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
+          <g className={styles.diagramLabel} textAnchor="middle">
+            <text x="92" y="65">
+              Build
+            </text>
+            <text x="92" y="160">
+              Buy
+            </text>
+            <text x="92" y="255">
+              Extend
+            </text>
+            <text x="300" y="160">
+              Decide
+            </text>
+            <text x="464" y="245">
+              Cost · Risk · Timeline
+            </text>
+          </g>
+          <g className={styles.diagramLabel}>
+            <text x="409" y="129">
+              Roadmap
+            </text>
+          </g>
+          <g stroke="currentColor" strokeWidth="1.5">
+            <path d="M409 150h93M409 164h57" />
+            <path d="m445 185 12 12 26-29" strokeWidth="3" />
+          </g>
+        </>
       ) : (
         <>
           <text x="40" y="57" className={styles.diagramMedium}>
