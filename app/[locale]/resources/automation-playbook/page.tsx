@@ -13,7 +13,7 @@ import styles from "./playbook.module.css";
 
 const INSIDE = [
   "The three workflows worth automating first in each of five industries.",
-  "A step-by-step example of each, from incoming request to the human decision.",
+  "What a typical build includes, module by module.",
   "Where AI does the preparation, and where your experts stay in charge.",
   "Three questions to check whether your own process is ready.",
 ];

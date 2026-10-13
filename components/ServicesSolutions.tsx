@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { PageIntro } from "./PageIntro";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
-import { SOLUTIONS } from "@/lib/workflow-offers";
+import { SERVICE_LINES } from "@/lib/workflow-offers";
 import styles from "./services-page.module.css";
 
 const reveal = {
@@ -13,9 +13,9 @@ const reveal = {
 } as const;
 
 /**
- * Top of /services: the four solutions we sell, each with what we build and where it shows up
- * in every industry we serve. Anchors (#document-processing, …) are the homepage link targets.
- * The three engineering practices follow lower on the page as "how we build it".
+ * Top of /services: the four service lines, software development first, each with what we
+ * build and where it shows up in every industry we serve. Anchors (#software-development, …)
+ * are the homepage link targets; the old practice anchors are kept as aliases.
  */
 export function ServicesSolutions() {
   const { localePath } = useLocaleContext();
@@ -28,16 +28,16 @@ export function ServicesSolutions() {
             label="What we do"
             title={
               <>
-                Four things
+                Custom software,
                 <br />
-                we automate.
+                end to end.
               </>
             }
           >
             <p>
-              The document-heavy, manual work in lending, ventilation,
-              agriculture, construction and oil and gas. Built into the tools
-              you already use, with your people approving what matters.
+              We ship four things for financial and industrial companies:
+              software development, cloud security, AI automation and tech
+              consulting.
             </p>
           </PageIntro>
 
@@ -45,7 +45,7 @@ export function ServicesSolutions() {
             aria-label="Solutions"
             className={`${styles.index} ${styles.indexFour}`}
           >
-            {SOLUTIONS.map((solution, index) => (
+            {SERVICE_LINES.map((solution, index) => (
               <a key={solution.id} href={`#${solution.id}`}>
                 <span className={styles.indexMeta}>
                   {String(index + 1).padStart(2, "0")}
@@ -58,7 +58,7 @@ export function ServicesSolutions() {
         </div>
       </section>
 
-      {SOLUTIONS.map((solution, index) => (
+      {SERVICE_LINES.map((solution, index) => (
         <section
           key={solution.id}
           id={solution.id}
@@ -69,6 +69,14 @@ export function ServicesSolutions() {
             className={`mx-auto max-w-6xl ${styles.practiceGrid}`}
           >
             <div className={styles.practiceHead}>
+              {solution.aliases?.map((alias) => (
+                <span
+                  key={alias}
+                  id={alias}
+                  className="scroll-margin-header"
+                  aria-hidden="true"
+                />
+              ))}
               <p className="section-label">
                 {String(index + 1).padStart(2, "0")} / {solution.name}
               </p>
@@ -97,7 +105,7 @@ export function ServicesSolutions() {
               </ul>
               <div className={styles.practiceFooter}>
                 <a href={localePath("/contact")}>
-                  Show us your workflow
+                  Tell us what you need built
                   <span aria-hidden="true">→</span>
                 </a>
                 <span className={styles.proof}>{solution.proof}</span>

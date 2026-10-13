@@ -18,9 +18,9 @@ type CaseStudy = {
 
 export const en = {
   site: {
-    title: "DeView | AI Workflow Automation for Financial & Industrial Companies",
+    title: "DeView | Software Development, Cloud Security, AI Automation & Tech Consulting",
     description:
-      "AI and software that automate document-heavy work in lending, ventilation, agriculture, construction and oil and gas: built into your existing tools, approved by your people.",
+      "Deview ships software development, cloud security, AI automation and tech consulting for financial and industrial companies, built by a team with 15+ years of enterprise delivery.",
   },
   nav: {
     aiConsulting: "HOME",
@@ -275,10 +275,10 @@ export const en = {
   services: {
     clientsLabel: "SELECTED CLIENTS",
     clientsIntro: "Companies we have helped reduce manual work, automate workflows, and implement AI across operations, finance, and customer service.",
-    sectionLabel: "AI SOLUTIONS / SIX SERVICES",
-    titleL1: "Six ways to start.",
-    titleL2: "Each one fixes one costly problem.",
-    intro: "Scoped and priced up front, delivered in weeks. No retainer needed to start.",
+    sectionLabel: "STARTING POINTS",
+    titleL1: "Not ready for a full build?",
+    titleL2: "Start with one of these.",
+    intro: "Six focused AI projects, each scoped up front and delivered in weeks. Most grow into a larger system.",
     contactCta: "Discuss this service",
     items: [
       {

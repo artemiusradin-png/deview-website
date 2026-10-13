@@ -25,6 +25,40 @@ function Arrow() {
   );
 }
 
+/* Track record under the hero: the team's years, then a few projects (facts as on /case-studies). */
+const PROJECTS = [
+  {
+    meta: "2010–2020 · Oil & gas",
+    name: "Planning, control and reporting systems",
+    text: "Built for international oil and gas projects, from project planning to management reporting.",
+  },
+  {
+    meta: "Agriculture",
+    name: "AgroPlatforma",
+    text: "Three AI agents in Salesforce and a mobile app take field diagnosis to a quote in under 30 seconds.",
+  },
+  {
+    meta: "Lending",
+    name: "Unified lending portal",
+    text: "Borrower data, credit analysis and documents for five lending companies in one portal.",
+  },
+  {
+    meta: "Lending · Hong Kong",
+    name: "Covenant Desk",
+    text: "A lending platform for licensed money lenders, from application to repayments and audit exports.",
+  },
+  {
+    meta: "E-commerce",
+    name: "StorePilot for EVDEV",
+    text: "Sharper AI conversion insights and more reliable A/B testing in a Shopify app.",
+  },
+  {
+    meta: "Ventilation",
+    name: "Jetfans",
+    text: "A technical site on car-park ventilation, smoke extraction and CFD modelling.",
+  },
+];
+
 /* Line pictograms for the four principles: ink strokes with one DeView-yellow element each. */
 const ink = { stroke: "currentColor", strokeWidth: 1.5, fill: "none" } as const;
 const YELLOW = "#ffc933";
@@ -158,33 +192,37 @@ export function AboutContent() {
               Better systems.
             </h1>
             <div className={styles.heroLead}>
-              <strong>
-                AI and software for the document-heavy work in financial and
-                industrial companies.
-              </strong>{" "}
-              Lending operations, technical quotes, field sales, engineering
-              documents and reporting, built into the tools your team already
-              uses.
+              <strong>A custom software development company.</strong> We ship
+              software, cloud security, AI automation and tech consulting for
+              financial and industrial companies.
             </div>
           </div>
-          <dl className={styles.facts}>
-            <div className={styles.fact}>
-              <dt>From first conversation to a live system</dt>
-              <dd>1–8 weeks</dd>
+          <div className={styles.record} aria-label="Track record">
+            <div className={styles.recordYears}>
+              <span className={styles.recordNumber}>15+</span>
+              <span className={styles.recordLabel}>
+                years building enterprise software
+              </span>
+              <span className={styles.recordText}>
+                Our team has designed and built business-critical systems since
+                2010, starting with planning, control and reporting for
+                international oil and gas projects. Today the same engineers
+                ship software, cloud security and AI automation.
+              </span>
+              <Link href={localePath("/case-studies")} className={styles.textLink}>
+                See the case studies <Arrow />
+              </Link>
             </div>
-            <div className={styles.fact}>
-              <dt>Agreed in writing before any build starts</dt>
-              <dd>Fixed price</dd>
-            </div>
-            <div className={styles.fact}>
-              <dt>Code, models and data stay in your environment</dt>
-              <dd>100% yours</dd>
-            </div>
-            <div className={styles.fact}>
-              <dt>Hong Kong · Vancouver · Edinburgh · Stuttgart</dt>
-              <dd>4 cities</dd>
-            </div>
-          </dl>
+            <ol className={styles.projects}>
+              {PROJECTS.map((project) => (
+                <li key={project.name}>
+                  <span className={styles.projectMeta}>{project.meta}</span>
+                  <span className={styles.projectName}>{project.name}</span>
+                  <span className={styles.projectText}>{project.text}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
         </section>
 
         <section className={styles.statement} aria-label="What we deliver">
@@ -197,9 +235,8 @@ export function AboutContent() {
               deployed in weeks.
             </div>
             <div className={styles.statementNote}>
-              We start with the one workflow that costs you most. AI prepares
-              the work, your people approve it, and it runs inside the systems
-              you already use.
+              Designed around your process, built in your cloud, secured from
+              the first sprint, and run by the team that built it.
             </div>
           </div>
         </section>

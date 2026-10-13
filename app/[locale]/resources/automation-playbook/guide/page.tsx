@@ -9,7 +9,7 @@ import {
   INDUSTRY_OFFERS,
   PLAYBOOK_ACCESS_KEY,
   PLAYBOOK_PATH,
-  SOLUTIONS,
+  AUTOMATION_SOLUTIONS,
 } from "@/lib/workflow-offers";
 import styles from "../playbook.module.css";
 
@@ -122,7 +122,7 @@ export default function AutomationPlaybookGuidePage() {
 
             <div className={styles.chapterGrid}>
               <div>
-                <span className={styles.blockLabel}>Worth automating first</span>
+                <span className={styles.blockLabel}>What we build</span>
                 <ul className={styles.offers}>
                   {industry.offers.map((offer) => (
                     <li key={offer.name}>
@@ -133,10 +133,10 @@ export default function AutomationPlaybookGuidePage() {
                 </ul>
               </div>
               <div className={styles.example}>
-                <span className={styles.blockLabel}>How it works</span>
-                <h3 className={styles.exampleTitle}>{industry.example.title}</h3>
+                <span className={styles.blockLabel}>What a build includes</span>
+                <h3 className={styles.exampleTitle}>{industry.build.title}</h3>
                 <ol className={styles.steps}>
-                  {industry.example.steps.map((step, stepIndex) => (
+                  {industry.build.modules.map((step, stepIndex) => (
                     <li key={step}>
                       <span>{String(stepIndex + 1).padStart(2, "0")}</span>
                       <span>{step}</span>
@@ -165,7 +165,7 @@ export default function AutomationPlaybookGuidePage() {
               </div>
               <div>
                 <span className={styles.blockLabel}>What stays with people</span>
-                <span className={styles.stays}>{industry.guardrail}</span>
+                <span className={styles.stays}>{industry.control}</span>
                 <span className={`${styles.blockLabel} ${styles.labelGap}`}>
                   Our experience
                 </span>
@@ -185,7 +185,7 @@ export default function AutomationPlaybookGuidePage() {
             The same four building blocks, in every industry.
           </h2>
           <div className={styles.blocks}>
-            {SOLUTIONS.map((solution, index) => (
+            {AUTOMATION_SOLUTIONS.map((solution, index) => (
               <div key={solution.id}>
                 <span className={styles.num}>
                   {String(index + 1).padStart(2, "0")} / {solution.name}

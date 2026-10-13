@@ -1,7 +1,8 @@
 /**
- * What we automate, by industry and by solution. One source for the homepage industry tabs,
- * the four solutions on /services and the automation playbook, so every page tells the
- * same story. English only (the site has no translations).
+ * What we ship (four service lines) and what we build per industry. Service lines feed the
+ * homepage and /services; the industry chapters feed the playbook. Deview is a custom
+ * software development company that also ships cloud security, AI automation and consulting.
+ * English only (the site has no translations).
  */
 
 export const PLAYBOOK_PATH = "/resources/automation-playbook";
@@ -9,23 +10,126 @@ export const PLAYBOOK_GUIDE_PATH = "/resources/automation-playbook/guide";
 /** Set in sessionStorage after a successful sign-up; the guide checks it before showing. */
 export const PLAYBOOK_ACCESS_KEY = "deview-playbook";
 
+export type ServiceLine = {
+  id: string;
+  name: string;
+  /** One short line: used on the homepage. */
+  title: string;
+  body: string;
+  builds: string[];
+  /** Where this service line shows up, by industry name. */
+  applies: { industry: string; example: string }[];
+  proof: string;
+  /** Older anchors (the three practices) that should still land on this section. */
+  aliases?: string[];
+};
+
+/** What we ship. Software development is the specialisation; the other three support it. */
+export const SERVICE_LINES: ServiceLine[] = [
+  {
+    id: "software-development",
+    name: "Software development",
+    title: "Custom platforms, portals, apps and integrations.",
+    body: "Web platforms, client portals, internal systems, mobile apps and SaaS products, engineered from architecture to production. You own the code.",
+    builds: [
+      "Web platforms and client portals",
+      "Internal business systems",
+      "Mobile apps",
+      "SaaS products",
+      "APIs, integrations and data pipelines",
+    ],
+    applies: [
+      { industry: "Lending & finance", example: "Loan management platforms and borrower portals" },
+      { industry: "Ventilation & HVAC", example: "Product selection and quoting tools" },
+      { industry: "Agriculture", example: "Field apps and dealer platforms" },
+      { industry: "Construction", example: "Project control and reporting systems" },
+      { industry: "Oil & gas", example: "Planning, control and reporting systems" },
+    ],
+    proof: "AgroPlatforma, Covenant Desk and a five-company lending portal.",
+    aliases: ["software-engineering", "data-science"],
+  },
+  {
+    id: "cloud-security",
+    name: "Cloud security",
+    title: "Secure cloud infrastructure, including the AI inside it.",
+    body: "We build, migrate and secure infrastructure on AWS, Google Cloud and Azure, and protect the AI systems running in it.",
+    builds: [
+      "Cloud architecture and migration",
+      "Access control, encryption and data residency",
+      "Monitoring, logging and alerts",
+      "AI security: private models, prompt-injection and data-leak protection",
+      "Compliance with GDPR, PDPO, HKMA and MAS TRM",
+    ],
+    applies: [
+      { industry: "Lending & finance", example: "Borrower data and regulator audits" },
+      { industry: "Ventilation & HVAC", example: "Customer projects and pricing" },
+      { industry: "Agriculture", example: "Grower and supplier data" },
+      { industry: "Construction", example: "Tender and contract documents" },
+      { industry: "Oil & gas", example: "Separation from operational technology" },
+    ],
+    proof: "Every system we deliver runs in the client’s own cloud.",
+  },
+  {
+    id: "ai-automation",
+    name: "AI automation",
+    title: "AI agents and automation built into your systems.",
+    body: "AI agents, document processing, knowledge search and automated reporting, connected to your data. Your people keep the final say.",
+    builds: [
+      "AI agents and assistants",
+      "Document processing and data extraction",
+      "Search over your own documents",
+      "Automated reports and dashboards",
+      "Forecasting models",
+    ],
+    applies: [
+      { industry: "Lending & finance", example: "Credit document checks" },
+      { industry: "Ventilation & HVAC", example: "RFQ specifications to draft quotes" },
+      { industry: "Agriculture", example: "Field diagnostics" },
+      { industry: "Construction", example: "Tender and revision analysis" },
+      { industry: "Oil & gas", example: "Production reporting" },
+    ],
+    proof: "AgroPlatforma: field diagnosis to quote in under 30 seconds.",
+    aliases: ["ai-solutions"],
+  },
+  {
+    id: "tech-consulting",
+    name: "Tech consulting",
+    title: "Clear technical decisions before you spend on a build.",
+    body: "Architecture, technology choices and AI plans reviewed by engineers who build systems, with costs and risks set out up front.",
+    builds: [
+      "Technology strategy and roadmaps",
+      "Architecture and code reviews",
+      "Build-or-buy and vendor selection",
+      "AI readiness and use-case assessment",
+    ],
+    applies: [
+      { industry: "Lending & finance", example: "Platform and compliance architecture" },
+      { industry: "Ventilation & HVAC", example: "Digital sales and quoting roadmap" },
+      { industry: "Agriculture", example: "Field and CRM system choices" },
+      { industry: "Construction", example: "Project system selection" },
+      { industry: "Oil & gas", example: "Reporting and data architecture" },
+    ],
+    proof: "Grounded in 15+ years of building enterprise systems.",
+  },
+];
+
 export type IndustryOffer = {
   id: "lending" | "ventilation" | "agriculture" | "construction" | "oil-and-gas";
   /** Tab and chapter name. */
   name: string;
-  /** The bottleneck, short enough for a tab. */
+  /** The problem, short enough for a tab. */
   problem: string;
-  /** What changes once we have built it. */
+  /** What we build, in one line. */
   headline: string;
   summary: string;
-  /** A worked example: the last step is always the human decision. */
-  example: { title: string; steps: string[] };
+  /** What a typical build includes: the last module is always about control and security. */
+  build: { title: string; modules: string[] };
   offers: { name: string; body: string }[];
   /** Work we have done that makes this credible. */
   experience: string;
-  /** What stays with the client's people. */
-  guardrail: string;
-  /** Playbook only: who it is for, and questions to check their own process. */
+  /** What stays with the client's people, and how the system stays safe. */
+  control: string;
+  /** Playbook only: who it is for, and questions to check their own situation. */
   whoFor: string[];
   selfCheck: string[];
 };
@@ -34,37 +138,38 @@ export const INDUSTRY_OFFERS: IndustryOffer[] = [
   {
     id: "lending",
     name: "Lending & finance",
-    problem: "Loan files built by hand.",
-    headline: "Borrower files ready before your credit officer opens them.",
+    problem: "Lending run on spreadsheets.",
+    headline: "Lending platforms built for how your team lends.",
     summary:
-      "We automate document intake, borrower checks and credit-file preparation for lending companies, and give multi-company groups one view of every borrower.",
-    example: {
-      title: "A new SME loan application",
-      steps: [
-        "The application, bank statements and company documents arrive by email or portal.",
-        "Key figures are extracted and checked against each other.",
-        "Missing documents and unusual cash-flow movements are flagged.",
-        "A standard borrower summary is written into your lending system.",
-        "Your credit officer reviews the file and makes the decision.",
+      "We build loan management platforms, borrower portals, and the AI and security around them, so every loan runs from enquiry to final repayment in one system.",
+    build: {
+      title: "A typical lending platform",
+      modules: [
+        "Borrower portal for applications and documents",
+        "Credit workflow with document AI and automatic checks",
+        "Loan servicing, repayments and collections",
+        "One borrower view across every company in the group",
+        "Access control, audit trails and regulatory exports",
       ],
     },
     offers: [
       {
-        name: "Loan processing automation",
-        body: "Document intake, data extraction, completeness checks and a ready-to-review credit file.",
+        name: "Loan management platforms",
+        body: "Enquiry, credit review, agreements, repayments and collections in one system.",
       },
       {
-        name: "Unified borrower view",
-        body: "One record per borrower across every company in your group: exposure, repayment history and source documents.",
+        name: "Borrower and client portals",
+        body: "Applications, documents and repayment status online for your borrowers.",
       },
       {
-        name: "Portfolio monitoring",
-        body: "Daily portfolio summaries, overdue alerts and exposure reports, built from your servicing data.",
+        name: "AI and security for lending data",
+        body: "Document AI and risk flags with audit-ready security. Credit decisions stay with your team.",
       },
     ],
     experience:
-      "We built the portal that brings borrower data, credit analysis and documents together for five lending companies.",
-    guardrail: "Approvals and rejections stay with your credit team.",
+      "We built the lending platform behind Covenant Desk and a portal that gives five lending companies one view of every borrower.",
+    control:
+      "Credit decisions stay with your team. Borrower data stays in your cloud, and every action is logged.",
     whoFor: [
       "Private lenders and licensed money lenders",
       "SME and consumer finance companies",
@@ -72,46 +177,45 @@ export const INDUSTRY_OFFERS: IndustryOffer[] = [
       "Loan servicing businesses",
     ],
     selfCheck: [
-      "Which steps in loan processing are still done by hand?",
-      "How long does it take to prepare one complete borrower file?",
+      "Which parts of lending still run on spreadsheets or email?",
       "How many systems hold information about the same borrower?",
+      "Could you show an auditor who changed what, and when?",
     ],
   },
   {
     id: "ventilation",
     name: "Ventilation & HVAC",
-    problem: "Quotes waiting on engineers.",
-    headline: "Technical enquiries turned into draft quotes your engineers approve.",
+    problem: "Selection and quotes in spreadsheets.",
+    headline: "Software that selects, quotes and sells technical equipment.",
     summary:
-      "We automate specification analysis, product lookup and quote preparation for ventilation manufacturers and distributors, and route service requests with the full equipment history.",
-    example: {
-      title: "An RFQ for an underground car park",
-      steps: [
-        "The specification, drawings and equipment schedule arrive with the RFQ.",
-        "Airflow, operating modes, noise limits and certifications are extracted.",
-        "Candidate products are matched from your own catalogue data.",
-        "Unclear requirements become a list of questions for the customer.",
-        "A draft equipment schedule and quote go to your engineer for approval.",
+      "We build product selection and quoting software, customer and distributor portals, and technical websites for ventilation manufacturers and distributors.",
+    build: {
+      title: "A typical selection and quoting platform",
+      modules: [
+        "Product catalogue with technical data and datasheets",
+        "Selection tool built on your own calculation rules",
+        "RFQ intake, with AI reading the specification",
+        "Quotes generated and synced to your CRM",
+        "Engineer approval before any quote goes out",
       ],
     },
     offers: [
       {
-        name: "Technical quotation automation",
-        body: "From incoming RFQ to a draft equipment schedule, quote, assumptions and exclusions.",
+        name: "Selection and quoting software",
+        body: "Your catalogue, calculation rules and pricing in one tool that drafts quotes for engineers to approve.",
       },
       {
-        name: "Product knowledge assistant",
-        body: "Answers from your catalogues and datasheets, with the source attached, for sales and engineering.",
+        name: "Customer and distributor portals",
+        body: "Orders, documents, project status and spare parts online for your partners.",
       },
       {
-        name: "Service request automation",
-        body: "Requests matched to the unit, warranty and service history, then routed with a draft reply.",
+        name: "Technical websites",
+        body: "Sites that explain your engineering to designers and developers and bring in project enquiries.",
       },
     ],
     experience:
       "We built the Jetfans site on car-park ventilation, smoke extraction and CFD modelling, so we know how this equipment is specified and sold.",
-    guardrail:
-      "Equipment selection, smoke control and compliance stay with qualified engineers.",
+    control: "Equipment selection, smoke control and compliance stay with qualified engineers.",
     whoFor: [
       "Ventilation equipment manufacturers",
       "Equipment distributors",
@@ -119,45 +223,45 @@ export const INDUSTRY_OFFERS: IndustryOffer[] = [
       "Installation contractors",
     ],
     selfCheck: [
-      "How does your team handle an incoming technical RFQ today?",
-      "How much engineering time goes into preparing offers?",
-      "Where do product-selection data and datasheets live?",
+      "Where do your product data, calculation rules and datasheets live today?",
+      "How long does it take to turn an RFQ into a quote?",
+      "What do your distributors still have to email or phone you for?",
     ],
   },
   {
     id: "agriculture",
     name: "Agriculture",
-    problem: "Field visits that end in paperwork.",
-    headline: "From field visit to quote before the rep leaves the farm.",
+    problem: "Field work disconnected from sales.",
+    headline: "Field, sales and supply connected in one platform.",
     summary:
-      "We connect field notes, product information, pricing and your CRM, so agricultural suppliers turn every visit into a proposal fast.",
-    example: {
-      title: "A fertiliser enquiry for 120 hectares",
-      steps: [
-        "The rep dictates notes and attaches the soil analysis on a phone.",
-        "The notes become structured data, linked to the right customer and field.",
-        "Approved products and your pricing rules are applied.",
-        "A draft recommendation and quote are synced to the CRM.",
-        "An agronomist or manager approves wherever your rules require it.",
+      "We build mobile field apps, dealer and ordering platforms and the AI behind them, so agricultural suppliers run field visits, quotes and orders in one place.",
+    build: {
+      title: "AgroPlatforma, as built",
+      modules: [
+        "Mobile app for field consultants",
+        "AI agents for field diagnostics and product choice",
+        "Live catalogue of more than 20,000 products",
+        "Quote drafts created inside Salesforce",
+        "Consultant review before a quote reaches the farmer",
       ],
     },
     offers: [
       {
-        name: "Field-to-quote automation",
-        body: "Mobile field capture, product matching and CRM-ready quotes in one flow.",
+        name: "Field apps",
+        body: "Mobile apps for agronomists and sales reps that work at the farm and sync to your CRM.",
       },
       {
-        name: "Dealer portal",
-        body: "Catalogue, customer pricing, ordering and order status for your dealers, in one place.",
+        name: "Dealer and ordering platforms",
+        body: "Catalogue, customer pricing, orders and delivery status for your dealers.",
       },
       {
-        name: "Sales and demand insight",
-        body: "Seasonal demand, slow-moving stock and customers who have not reordered.",
+        name: "Sales and demand analytics",
+        body: "Seasonal demand, stock and reorder patterns from your own data.",
       },
     ],
     experience:
       "AgroPlatforma: three AI agents built into Salesforce and a mobile app, taking field diagnosis to a quote in under 30 seconds.",
-    guardrail: "Agronomic advice stays with your agronomists.",
+    control: "Agronomic advice stays with your agronomists.",
     whoFor: [
       "Fertiliser and crop-input distributors",
       "Seed and crop-protection suppliers",
@@ -166,44 +270,44 @@ export const INDUSTRY_OFFERS: IndustryOffer[] = [
     ],
     selfCheck: [
       "How do field reps record what a customer needs?",
-      "How are quotes prepared and approved after a visit?",
       "Is field information connected to your CRM and stock?",
+      "How do your dealers place orders and check delivery today?",
     ],
   },
   {
     id: "construction",
     name: "Construction",
-    problem: "Engineers buried in documents.",
-    headline: "Tender packages and revisions turned into clear next steps.",
+    problem: "Projects tracked in spreadsheets.",
+    headline: "Project control software built for contractors.",
     summary:
-      "We automate tender analysis, revision tracking and project reporting for mechanical and specialist contractors, alongside the project tools you already use.",
-    example: {
-      title: "A revised mechanical specification",
-      steps: [
-        "The new revision is imported and matched to its project.",
-        "Changed requirements are compared with the previous version.",
-        "Affected submittals, orders and open RFIs are identified.",
-        "A change summary goes to the responsible engineer.",
-        "The engineer confirms the impact, and the review is logged.",
+      "We build project planning, control and reporting systems, tender and document platforms, and site apps for mechanical and specialist contractors.",
+    build: {
+      title: "A typical project control system",
+      modules: [
+        "Plans, budgets and schedules in one place",
+        "Site reports and timesheets from a mobile app",
+        "Tender and document management with revision tracking",
+        "Cost and schedule dashboards with early warnings",
+        "Role-based access for staff, subcontractors and clients",
       ],
     },
     offers: [
       {
-        name: "Tender and estimation assistant",
-        body: "Requirements, quantities and gaps pulled from tender packages into an estimation worksheet.",
+        name: "Project control and reporting",
+        body: "Plans, budgets, progress and cost in one system, with reports that assemble themselves.",
       },
       {
-        name: "Project document intelligence",
-        body: "Search, revision comparison and draft RFIs across specifications, contracts and drawings.",
+        name: "Tender and document platforms",
+        body: "Tender packages, specifications and revisions in one searchable place, with AI to compare versions.",
       },
       {
-        name: "Project reporting",
-        body: "Progress and cost reports assembled from the systems your teams already update.",
+        name: "Site and field apps",
+        body: "Daily reports, timesheets and issues captured on site and synced to the office.",
       },
     ],
     experience:
       "Our team built project planning, control and reporting systems for large energy projects from 2010 to 2020.",
-    guardrail: "Design, calculations and code compliance stay with your engineers.",
+    control: "Design, calculations and code compliance stay with your engineers.",
     whoFor: [
       "Mechanical and electrical contractors",
       "Specialist subcontractors",
@@ -211,48 +315,48 @@ export const INDUSTRY_OFFERS: IndustryOffer[] = [
       "General contractors with heavy document control",
     ],
     selfCheck: [
-      "How does your team prepare tenders today?",
+      "Where do budgets, schedules and progress live today?",
       "How do you find out what changed between two revisions?",
-      "Which systems would a new tool need to work alongside?",
+      "How long does the weekly project report take to assemble?",
     ],
   },
   {
     id: "oil-and-gas",
     name: "Oil & gas",
-    problem: "Reports stitched from spreadsheets.",
-    headline: "Field data and technical documents in one clear daily view.",
+    problem: "Operations data in silos.",
+    headline: "Planning, control and reporting systems for oil and gas.",
     summary:
-      "We consolidate production, maintenance and document data into automated reports and searchable knowledge, through read-only connections that leave control systems alone.",
-    example: {
-      title: "The morning production report",
-      steps: [
-        "Production and downtime data are pulled from approved sources.",
-        "Missing or inconsistent records are flagged.",
-        "Each well or facility is compared with its baseline.",
-        "Maintenance notes are linked to the wells that underperformed.",
-        "The operations manager reads the report and decides what to investigate.",
+      "We build planning, control and reporting systems, engineering document platforms and operations data platforms, connected to the systems you already run.",
+    build: {
+      title: "A typical operations reporting platform",
+      modules: [
+        "Read-only connections to production and maintenance systems",
+        "Data checks before anything reaches a report",
+        "Daily production and downtime reporting",
+        "Technical documents searchable by equipment tag",
+        "Access control and audit trails across every site",
       ],
     },
     offers: [
       {
-        name: "Automated operational reporting",
-        body: "Daily and weekly production, downtime and maintenance reports, checked before they are sent.",
+        name: "Planning, control and reporting systems",
+        body: "The kind of system our team built for international oil and gas projects from 2010 to 2020.",
       },
       {
-        name: "Technical documentation assistant",
-        body: "Procedures, manuals and inspection records searchable by equipment tag, always pointing to the approved revision.",
+        name: "Engineering document platforms",
+        body: "Procedures, manuals and vendor documents, versioned and searchable.",
       },
       {
-        name: "Operations intelligence",
-        body: "For larger companies: production, maintenance and ERP data connected for management decisions.",
+        name: "Operations data platforms",
+        body: "Production, maintenance and ERP data connected for management decisions, without replacing existing systems.",
       },
     ],
     experience:
       "Planning, control and reporting systems for international oil and gas projects, from 2010 to 2020.",
-    guardrail: "Read-only connections first. Operating decisions stay with your engineers.",
+    control: "Read-only connections first. Operating decisions stay with your engineers.",
     whoFor: [
-      "Operators and service companies with 30 to 100 staff: one costly process, automated fast",
-      "Larger operators: systems connected that do not talk today",
+      "Operators and service companies with 30 to 100 staff",
+      "Larger operators whose systems do not talk to each other",
       "Engineering consultancies",
       "Maintenance and equipment contractors",
     ],
@@ -264,7 +368,8 @@ export const INDUSTRY_OFFERS: IndustryOffer[] = [
   },
 ];
 
-export type Solution = {
+/** The four automations behind AI automation, shown at the bottom of /services as they first shipped. */
+export type AutomationSolution = {
   id: string;
   name: string;
   title: string;
@@ -275,7 +380,7 @@ export type Solution = {
   proof: string;
 };
 
-export const SOLUTIONS: Solution[] = [
+export const AUTOMATION_SOLUTIONS: AutomationSolution[] = [
   {
     id: "document-processing",
     name: "Document processing",
@@ -354,25 +459,5 @@ export const SOLUTIONS: Solution[] = [
       { industry: "Oil & gas", example: "Maintenance and field service requests" },
     ],
     proof: "Works inside the email, CRM or ticketing tools your team already uses.",
-  },
-];
-
-/** Why a client should pick us: the four points on the homepage. */
-export const WHY_US = [
-  {
-    title: "We learn your process first.",
-    body: "We have worked inside lending, ventilation, agriculture and oil and gas. We talk about loan files, RFQs and field visits, not models.",
-  },
-  {
-    title: "One workflow, not a transformation.",
-    body: "We start with the single process that costs you most and get it live in weeks. Then we expand from there.",
-  },
-  {
-    title: "Prepared by AI. Approved by your people.",
-    body: "Every system drafts, checks and routes the work. Decisions with consequences stay with your team, and every step is logged.",
-  },
-  {
-    title: "Built into the tools you already use.",
-    body: "We connect to your CRM, ERP, lending system or catalogue. Nothing gets replaced, and the code is yours.",
   },
 ];

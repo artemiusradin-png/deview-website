@@ -25,7 +25,7 @@ const structuredData = {
       url: SITE_URL,
       email: SITE_INQUIRY_EMAIL,
       description:
-        "AI and software engineering firm that automates document-heavy workflows for financial and industrial companies: lending operations, technical quotations, field sales, engineering documents and operational reporting.",
+        "Custom software development company shipping software development, cloud security, AI automation and tech consulting for financial and industrial companies, with 15+ years of enterprise delivery.",
       address: {
         "@type": "PostalAddress",
         streetAddress: LEGAL_ENTITY.streetAddress,
