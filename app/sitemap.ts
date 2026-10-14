@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { MARKET_SLUGS } from "@/lib/markets";
+import { PRODUCTION_CASES } from "@/lib/case-studies";
 import { SERVICE_PAGES, servicePagePath } from "@/lib/service-pages";
 import {
   OIL_GAS_CASE_SLUGS,
@@ -69,5 +70,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: SERVICE_PAGES_UPDATED,
   }));
 
-  return [...existingPages, ...servicePages, ...marketPages, ...oilGasPages];
+  const productionCasePages = PRODUCTION_CASES.map(({ slug }) => ({
+    url: `${SITE_URL}/en/case-studies/${slug}`,
+  }));
+
+  return [...existingPages, ...servicePages, ...productionCasePages, ...marketPages, ...oilGasPages];
 }
