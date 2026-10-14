@@ -5,7 +5,7 @@ import { OIL_GAS_CASES_NEWEST_FIRST, oilGasCasePath, type OilGasLogo } from "@/l
 const COVENANT_LOGO: OilGasLogo = { src: "/client-logos/covenant-desk.png", width: 1855, height: 427, alt: "Covenant Desk" };
 const STOREPILOT_LOGO: OilGasLogo = { src: "/client-logos/storepilot.svg", width: 168, height: 32, alt: "StorePilot AI" };
 const AGRO_ARENA_LOGO: OilGasLogo = { src: "/client-logos/agro-arena.svg", width: 144, height: 48, alt: "Agro Arena" };
-const GRAND_FINANCE_LOGO: OilGasLogo = { src: "/client-logos/grandfg-transparent.png", width: 266, height: 62, alt: "Grand Finance Group" };
+const GRAND_FINANCE_LOGO: OilGasLogo = { src: "/client-logos/grand-finance.png", width: 149, height: 47, alt: "Grand Finance" };
 const JETFANS_LOGO: OilGasLogo = { src: "/client-logos/jetfans-eu.png", width: 181, height: 242, alt: "Jetfans" };
 const NEXTAIR_LOGO: OilGasLogo = { src: "/client-logos/nextair.png", width: 50, height: 48, alt: "Nextair" };
 const ENERQUEST_LOGO: OilGasLogo = { src: "/client-logos/enerquest.png", width: 383, height: 91, alt: "EnerQuest Energy" };
