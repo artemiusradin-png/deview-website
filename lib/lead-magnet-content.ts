@@ -172,3 +172,101 @@ export const AI_GOVERNANCE_CHECKS = [
   "Map your controls to PDPO and your regulator’s guidance, such as HKMA, MAS TRM or GDPR",
   "Name an owner for each AI system and review it on a schedule",
 ];
+
+/**
+ * The Cap. 653 readiness checklist follows the Protection of Critical Infrastructures
+ * (Computer Systems) Ordinance (Cap. 653, in force 1 January 2026), the Commissioner's Code of
+ * Practice (v1.0) and the HKMA's sectoral code for stored value facility licensees (12 June 2026).
+ * Deadlines run from the date an operator is designated in writing.
+ */
+export const CAP653_AREAS: ChecklistArea[] = [
+  {
+    title: "1. Know whether you are in scope",
+    risk: "You are bound only once the Commissioner or your sector regulator designates you in writing. The list of operators is not public.",
+    checks: [
+      "Check your sector: energy, information technology, banking and financial services, air, land and maritime transport, healthcare, telecommunications and broadcasting",
+      "Check whether you run major venues, parks or other infrastructure the Ordinance also covers",
+      "List the computer systems your core service cannot run without",
+      "Name who receives a designation notice and who decides the response",
+    ],
+  },
+  {
+    title: "2. Organisation",
+    risk: "A security unit and a qualified supervisor are due about a month after designation.",
+    checks: [
+      "An office in Hong Kong where real business is run, not only a mailing address",
+      "A computer-system security management unit, in house or run by a service provider",
+      "A supervising employee with professional knowledge, such as CISP, CISA, CISM or CISSP, notified to the regulator",
+      "A routine to notify the regulator within a month if the operator changes",
+    ],
+  },
+  {
+    title: "3. Security management plan",
+    risk: "Due within three months of designation, then it has to be carried out, not just filed.",
+    checks: [
+      "The plan covers every matter in Schedule 3: unit roles, critical systems, risk and incident policies, access, change control, secure development, availability, supplier contracts and training",
+      "Endorsed by the Board, a Board committee or senior management",
+      "Reviewed after material changes and at least every two years",
+      "Any revised plan sent to the regulator within a month",
+    ],
+  },
+  {
+    title: "4. Material changes",
+    risk: "Changes to critical systems must be notified within a month.",
+    checks: [
+      "An inventory of critical computer systems and what they depend on",
+      "A change process that flags migrations, major upgrades, removals and new systems the core service relies on",
+      "A named owner who files the notification",
+    ],
+  },
+  {
+    title: "5. Risk assessment",
+    risk: "First assessment within 12 months of designation, then at least every 12 months.",
+    checks: [
+      "Vulnerability assessment: scanning, configuration review and source code review of custom and vendor-supplied applications",
+      "Penetration test from an attacker’s point of view",
+      "Risks ranked, with the level you can tolerate and a treatment plan",
+      "Qualified assessors, and the report sent to the regulator within three months",
+    ],
+  },
+  {
+    title: "6. Security audit",
+    risk: "First audit within 24 months of designation, then at least every 24 months.",
+    checks: [
+      "An auditor who is objective and impartial",
+      "The audit checks that the plan is actually implemented",
+      "Report sent to the regulator within three months",
+      "Findings tracked to closure",
+    ],
+  },
+  {
+    title: "7. Suppliers and third parties",
+    risk: "Your plan must cover contracts and communications with the suppliers of your critical systems.",
+    checks: [
+      "Security requirements written into supplier contracts",
+      "Supplier due diligence before onboarding, including secure software development practices",
+      "Access by supplier staff approved and monitored",
+      "Supply-chain risk reviewed: open-source components, fourth parties, dependence on a single supplier",
+      "Application security review and penetration test of high-risk software before it goes live",
+    ],
+  },
+  {
+    title: "8. Incident response",
+    risk: "An emergency response plan is due within three months, and incidents are reported on a clock.",
+    checks: [
+      "A response team with roles, a trigger threshold and a recovery plan for essential services",
+      "Serious incidents reported to the Commissioner within 12 hours, others within 48 hours",
+      "Procedures for investigation, communication with stakeholders and post-incident measures",
+      "Ready to take part in a Commissioner-run drill",
+    ],
+  },
+];
+
+export const CAP653_SUPPLIER_QUESTIONS = [
+  "Which secure development practices do you follow, and can you show evidence?",
+  "Who on your side can access our systems and data, and how is it approved and logged?",
+  "How do you track and update open-source and third-party components?",
+  "How soon will you tell us about an incident that touches our systems?",
+  "Can you support our risk assessment and audit, including source code review?",
+  "If you stop working with us, can we take over the code and infrastructure?",
+];

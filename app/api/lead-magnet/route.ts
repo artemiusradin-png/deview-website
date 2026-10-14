@@ -9,6 +9,7 @@ const GUIDES = {
   "automation-playbook": "The automation playbook",
   "lms-checklist": "Loan management system checklist",
   "ai-security-checklist": "AI security checklist for LLM applications",
+  "cap653-checklist": "Cap. 653 readiness checklist",
 } as const;
 type GuideSource = keyof typeof GUIDES;
 

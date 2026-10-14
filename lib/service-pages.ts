@@ -202,9 +202,9 @@ export const SERVICE_PAGES: ServicePage[] = [
       { label: "Lending platforms run in each lender’s own environment", href: "/case-studies#finance" },
     ],
     leadMagnet: {
-      label: "Free AI security checklist",
-      line: "Check the AI systems running in your cloud against the ten LLM risks.",
-      href: "/resources/ai-security-checklist",
+      label: "Free Cap. 653 readiness checklist",
+      line: "What Hong Kong’s critical infrastructure cybersecurity law asks of an operator and its suppliers.",
+      href: "/resources/cap-653-checklist",
     },
     faqs: [
       {
@@ -218,6 +218,10 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         q: "Do you secure AI systems as well as infrastructure?",
         a: "Yes. Cloud security covers the AI inside it too: private models, protection against prompt injection and data leaks, and audit trails.",
+      },
+      {
+        q: "Can you help with Hong Kong’s critical infrastructure cybersecurity law?",
+        a: "We build and harden the systems that the law’s obligations point to: access control, logging, secure development, supplier controls and incident-response tooling. The formal security audit is done by an independent assessor.",
       },
     ],
   },
