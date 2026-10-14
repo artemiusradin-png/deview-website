@@ -115,7 +115,11 @@ function CaseLibrary({ search, hash }: { search: string; hash: string }) {
                     <div className="case-library-card-media case-split">
                       <span className="case-split-logo">
                         {c.logo ? (
-                          <Image src={c.logo.src} alt={c.logo.alt} width={c.logo.width} height={c.logo.height} unoptimized />
+                          <>
+                            <Image src={c.logo.src} alt={c.logo.alt} width={c.logo.width} height={c.logo.height} unoptimized />
+                            {/* An icon-only logo is too small to read on its own, so the name sits under it. */}
+                            {c.logo.width < 80 ? <span className="case-split-name" aria-hidden="true">{c.company}</span> : null}
+                          </>
                         ) : (
                           <span className="case-split-name">{c.company}</span>
                         )}

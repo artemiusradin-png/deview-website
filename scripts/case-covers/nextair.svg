@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- An apartment building in section: one prefabricated ventilation shaft with a satellite channel on every floor. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="440" y="160" width="480" height="480" fill="#fffdf7"/>
+    <path d="M440 256h480M440 352h480M440 448h480M440 544h480"/>
+    <path d="M380 640h600"/>
+    <rect x="490" y="186" width="56" height="44"/><rect x="490" y="282" width="56" height="44"/><rect x="490" y="378" width="56" height="44"/><rect x="490" y="474" width="56" height="44"/><rect x="490" y="570" width="56" height="44"/>
+    <rect x="814" y="186" width="56" height="44"/><rect x="814" y="282" width="56" height="44"/><rect x="814" y="378" width="56" height="44"/><rect x="814" y="474" width="56" height="44"/><rect x="814" y="570" width="56" height="44"/>
+    <rect x="660" y="120" width="72" height="520" fill="#ffc933"/>
+    <path d="M660 256h72M660 352h72M660 448h72M660 544h72"/>
+    <path d="M646 120h100"/>
+    <path d="M674 104h44"/>
+    <rect x="620" y="196" width="26" height="54" fill="#fffdf7"/><rect x="620" y="292" width="26" height="54" fill="#fffdf7"/><rect x="620" y="388" width="26" height="54" fill="#fffdf7"/><rect x="620" y="484" width="26" height="54" fill="#fffdf7"/><rect x="620" y="580" width="26" height="54" fill="#fffdf7"/>
+    <path d="M646 204h14M646 300h14M646 396h14M646 492h14M646 588h14"/>
+    <path d="M696 92V40m-14 14 14-14 14 14"/>
+    <path d="M590 210h18M590 222h18M590 306h18M590 318h18M590 402h18M590 414h18M590 498h18M590 510h18M590 594h18M590 606h18"/>
+  </g>
+</svg>
