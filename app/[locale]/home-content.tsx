@@ -44,11 +44,11 @@ function Arrow({
 function ProjectLogos({ duplicate = false }: { duplicate?: boolean }) {
   const logos = [
     {
-      name: "Grand Finance",
-      src: "/client-logos/grand-finance.png",
-      width: 149,
-      height: 47,
-      className: styles.clientGrand,
+      name: "EnerQuest Energy",
+      src: "/client-logos/enerquest.png",
+      width: 383,
+      height: 91,
+      className: styles.clientEnerquest,
     },
     {
       name: "EVDEV",
@@ -79,11 +79,11 @@ function ProjectLogos({ duplicate = false }: { duplicate?: boolean }) {
       className: styles.clientJetfans,
     },
     {
-      name: "EnerQuest Energy",
-      src: "/client-logos/enerquest.png",
-      width: 383,
-      height: 91,
-      className: styles.clientEnerquest,
+      name: "Grand Finance",
+      src: "/client-logos/grand-finance.png",
+      width: 149,
+      height: 47,
+      className: styles.clientGrand,
     },
   ];
 
