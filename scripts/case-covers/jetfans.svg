@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- A car park ventilated by two jet fans: exhaust drawn up and pushed along the ceiling. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M280 180h800"/>
+    <path d="M400 180v50M540 180v50M780 180v50M920 180v50"/>
+    <rect x="340" y="230" width="260" height="80" rx="40" fill="#fffdf7"/>
+    <circle cx="384" cy="270" r="26"/>
+    <path d="M384 248v44M362 270h44"/>
+    <path d="M440 254h120M440 286h120"/>
+    <rect x="720" y="230" width="260" height="80" rx="40" fill="#ffc933"/>
+    <circle cx="764" cy="270" r="26" fill="#fffdf7"/>
+    <path d="M764 248v44M742 270h44"/>
+    <path d="M820 254h120M820 286h120"/>
+    <path d="M620 256h70m-14-12 14 12-14 12"/>
+    <path d="M620 290h70m-14-12 14 12-14 12"/>
+    <path d="M1000 256c40 0 60 10 70 30m-6-18 6 18-18 4"/>
+    <path d="M1000 290c30 0 46 6 56 20"/>
+    <path d="M280 640h800"/>
+    <path d="M330 640v-14M610 640v-14M680 640v-14M960 640v-14"/>
+    <path d="M360 600v-36q0-16 18-16h28l34-36h64l34 36h16q16 0 16 16v36z" fill="#fffdf7"/>
+    <circle cx="400" cy="604" r="18" fill="#fffdf7"/><circle cx="520" cy="604" r="18" fill="#fffdf7"/>
+    <path d="M730 600v-36q0-16 18-16h28l34-36h64l34 36h16q16 0 16 16v36z" fill="#fffdf7"/>
+    <circle cx="770" cy="604" r="18" fill="#fffdf7"/><circle cx="890" cy="604" r="18" fill="#fffdf7"/>
+  </g>
+</svg>

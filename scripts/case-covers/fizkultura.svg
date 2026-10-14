@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- CRM, schedule, billing and email feeding one weekly report with an AI-drafted note. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="260" y="180" width="150" height="86" fill="#fffdf7"/>
+    <circle cx="335" cy="210" r="14"/><path d="M309 250c4-16 14-24 26-24s22 8 26 24"/>
+    <rect x="260" y="290" width="150" height="86" fill="#fffdf7"/>
+    <path d="M290 312h90v50h-90zM290 328h90M312 304v14M358 304v14"/>
+    <rect x="260" y="400" width="150" height="86" fill="#fffdf7"/>
+    <path d="M290 424h90v40h-90zM290 436h90M302 452h24"/>
+    <rect x="260" y="510" width="150" height="86" fill="#fffdf7"/>
+    <path d="M290 534h90v40h-90zM290 534l45 22 45-22"/>
+    <path d="M410 223c90 0 90 160 180 160M410 333c90 0 90 50 180 50M410 443c90 0 90-60 180-60M410 553c90 0 90-170 180-170"/>
+    <path d="M576 371l14 12-14 12"/>
+    <rect x="620" y="160" width="440" height="470" fill="#fffdf7"/>
+    <path d="M620 216h440"/>
+    <path d="M652 188h120"/>
+    <path d="M660 420h360"/>
+    <rect x="680" y="340" width="40" height="80"/>
+    <rect x="750" y="300" width="40" height="120"/>
+    <rect x="820" y="320" width="40" height="100"/>
+    <rect x="890" y="270" width="40" height="150"/>
+    <rect x="960" y="250" width="40" height="170" fill="#ffc933"/>
+    <rect x="660" y="460" width="360" height="130" fill="#ffc933"/>
+    <path d="M690 498h220M690 528h290M690 558h180"/>
+  </g>
+</svg>

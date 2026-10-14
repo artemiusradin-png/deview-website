@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- A pump jack and wellhead, with field data flowing one way into an operating workspace that flags one exception. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M220 620h460"/>
+    <rect x="270" y="590" width="320" height="30" fill="#fffdf7"/>
+    <path d="M420 590l40-250 40 250M436 490h48"/>
+    <path d="M280 320l330 40" stroke-width="5"/>
+    <path d="M606 336c34 4 52 30 44 76l-36-4z" fill="#fffdf7"/>
+    <rect x="290" y="510" width="80" height="80" fill="#fffdf7"/>
+    <circle cx="330" cy="460" r="46" fill="#fffdf7"/>
+    <circle cx="330" cy="460" r="8"/>
+    <path d="M300 324l26 130"/>
+    <circle cx="460" cy="340" r="8" fill="#fffdf7"/>
+    <path d="M632 410v150"/>
+    <rect x="614" y="560" width="36" height="30" fill="#fffdf7"/>
+    <path d="M600 575h14M650 575h14"/>
+    <path d="M664 575h86V380h30" stroke-dasharray="10 12"/>
+    <path d="M770 368l14 12-14 12"/>
+    <rect x="800" y="210" width="340" height="250" fill="#fffdf7"/>
+    <path d="M800 254h340"/>
+    <circle cx="826" cy="232" r="7"/><circle cx="850" cy="232" r="7"/>
+    <path d="M830 400l50-30 40 16 50-46 40 24 50-34"/>
+    <path d="M830 410h280"/>
+    <rect x="980" y="276" width="140" height="40" fill="#ffc933"/>
+    <path d="M998 296h90"/>
+    <path d="M970 460v60M900 520h140"/>
+  </g>
+</svg>

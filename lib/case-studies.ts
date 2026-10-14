@@ -6,6 +6,9 @@ const COVENANT_LOGO: OilGasLogo = { src: "/client-logos/covenant-desk.png", widt
 const STOREPILOT_LOGO: OilGasLogo = { src: "/client-logos/storepilot.svg", width: 168, height: 32, alt: "StorePilot AI" };
 const AGRO_ARENA_LOGO: OilGasLogo = { src: "/client-logos/agro-arena.svg", width: 144, height: 64, alt: "Agro Arena" };
 const GRAND_FINANCE_LOGO: OilGasLogo = { src: "/client-logos/grandfg-transparent.png", width: 266, height: 62, alt: "Grand Finance Group" };
+const JETFANS_LOGO: OilGasLogo = { src: "/client-logos/jetfans-eu.png", width: 181, height: 242, alt: "Jetfans" };
+const NEXTAIR_LOGO: OilGasLogo = { src: "/client-logos/nextair.png", width: 50, height: 48, alt: "Nextair" };
+const FIZKULTURA_LOGO: OilGasLogo = { src: "/client-logos/fizkultura.png", width: 118, height: 79, alt: "Fizkultura" };
 
 /** Screens from the demo films, for the "how the work looks" gallery on project pages. */
 const AGRO_GALLERY = [
@@ -28,6 +31,10 @@ export const PRODUCTION_CASES = [
   { number: "02", slug: "covenant-desk", company: "Covenant Desk", industry: "Finance", services: ["Digital product engineering", "AI/ML engineering"], image: "/images/cases/covers/covenant-desk.webp", imageAlt: "Drawing: five lending companies feeding one portal", video: "/deview-unified-portal-demo.mp4", logo: COVENANT_LOGO, gallery: PORTAL_GALLERY },
   { number: "03", slug: "senior-care-documentation", company: "Swiss senior-care provider", industry: "Senior care", services: ["AI/ML engineering"], image: "/images/cases/covers/senior-care-documentation.webp", imageAlt: "Drawing: bilingual care notes and a compliance checklist", video: undefined, logo: undefined, gallery: undefined },
   { number: "04", slug: "storepilot", company: "EVDEV · StorePilot", industry: "E-commerce", services: ["AI/ML engineering", "Data engineering", "Digital product engineering"], image: "/images/cases/covers/storepilot.webp", imageAlt: "Drawing: an A/B test where variant B wins", video: undefined, logo: STOREPILOT_LOGO, gallery: undefined },
+  { number: "05", slug: "jetfans", company: "Jetfans", industry: "Ventilation & HVAC", services: ["Digital product engineering"], image: "/images/cases/covers/jetfans.webp", imageAlt: "Drawing: two jet fans ventilating a car park", video: undefined, logo: JETFANS_LOGO, gallery: undefined },
+  { number: "06", slug: "nextair", company: "Nextair", industry: "Ventilation & HVAC", services: ["Digital product engineering"], image: "/images/cases/covers/nextair.webp", imageAlt: "Drawing: an apartment building with one ventilation shaft", video: undefined, logo: NEXTAIR_LOGO, gallery: undefined },
+  { number: "07", slug: "fizkultura", company: "Fizkultura", industry: "Fitness", services: ["Data engineering", "AI/ML engineering"], image: "/images/cases/covers/fizkultura.webp", imageAlt: "Drawing: four data sources feeding one weekly report", video: undefined, logo: FIZKULTURA_LOGO, gallery: undefined },
+  { number: "08", slug: "enerquest", company: "EnerQuest Energy", industry: "Oil & gas", services: ["AI/ML engineering", "Data engineering", "Enterprise platforms"], image: "/images/cases/covers/enerquest.webp", imageAlt: "Drawing: a pump jack feeding an operating dashboard", video: undefined, logo: undefined, gallery: undefined },
 ] as const;
 
 /** Loan management systems built for five Hong Kong lenders, the tenants of the Covenant Desk portal. */
