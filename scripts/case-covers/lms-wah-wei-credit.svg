@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- A borrower profile with a risk score. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="250" y="220" width="380" height="360" fill="#fffdf7"/>
+    <circle cx="330" cy="310" r="44"/>
+    <path d="M300 360c6-20 18-28 30-28s24 8 30 28"/>
+    <path d="M400 290h180"/>
+    <path d="M400 324h130"/>
+
+    <path d="M290 420h300"/>
+    <path d="M290 456h240"/>
+    <path d="M290 492h280"/>
+    <path d="M290 528h200"/>
+
+    <path d="M760 520a220 220 0 0 1 440 0"/>
+    <path d="M760 520a220 220 0 0 1 64-156l40 40a164 164 0 0 0-48 116z" fill="#ffc933"/>
+    <path d="M980 520l-90-130" stroke-width="6"/>
+    <circle cx="980" cy="520" r="14" fill="#171207"/>
+    <path d="M760 560h440"/>
+  </g>
+</svg>

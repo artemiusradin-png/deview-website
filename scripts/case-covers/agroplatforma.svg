@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- Field photo to AI app to quote. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="200" y="250" width="240" height="240" fill="#fffdf7"/>
+    <path d="M320 450v-120M320 380c-30-6-48-26-52-52 28 2 48 22 52 52zM320 350c26-8 42-30 44-56-28 4-44 26-44 56zM240 450h160"/>
+    <path d="M470 370h70m-14-14 14 14-14 14"/>
+    <rect x="570" y="170" width="220" height="460" rx="30" fill="#fffdf7"/>
+    <path d="M650 196h60"/>
+    <circle cx="680" cy="300" r="52" fill="#ffc933"/>
+    <path d="M680 326v-44M680 300c-16-2-26-12-28-28 16 1 26 12 28 28zM680 290c14-4 22-14 24-30-16 2-24 14-24 30z"/>
+    <path d="M610 400h140"/>
+    <path d="M610 434h100"/>
+    <path d="M610 468h120"/>
+    <path d="M610 502h80"/>
+
+    <path d="M820 370h70m-14-14 14 14-14 14"/>
+    <path d="M920 230h170l40 40v260H920z" fill="#fffdf7"/>
+    <path d="M1090 230v40h40"/>
+    <path d="M950 300h120"/>
+    <path d="M950 332h90"/>
+    <path d="M950 364h140"/>
+    <path d="M950 396h100"/>
+
+    <path d="M950 470h150" stroke-width="5"/>
+  </g>
+</svg>

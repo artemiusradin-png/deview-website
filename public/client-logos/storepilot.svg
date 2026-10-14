@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168 32" width="168" height="32">
+  <!-- StorePilot AI: the mark from usestorepilot.com/favicon.svg beside the header wordmark. -->
+  <rect width="32" height="32" rx="7" fill="#0B0D10"/>
+  <path d="M6 22l6-6 5 4 8-11" stroke="#FBFBF9" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="25" cy="9" r="2.6" fill="#0E9F6E"/>
+  <text x="42" y="22.5" font-family="Inter, -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="600" letter-spacing="-0.3" fill="#0B0D10">StorePilot<tspan dx="5" fill="#0E9F6E">AI</tspan></text>
+</svg>

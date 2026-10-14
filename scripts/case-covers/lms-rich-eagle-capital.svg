@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- A loan ledger with one account highlighted. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="270" y="160" width="820" height="480" fill="#fffdf7"/>
+    <path d="M270 210h820" stroke-width="5"/>
+    <path d="M330 250h140M520 250h160M730 250h120M900 250h120"/>
+    <path d="M330 312h140M520 312h160M730 312h120M900 312h120"/>
+    <path d="M330 374h140M520 374h160M730 374h120M900 374h120"/>
+    <rect x="300" y="414" width="760" height="50" fill="#ffc933"/>
+    <path d="M330 436h140M520 436h160M730 436h120M900 436h120"/>
+    <path d="M330 498h140M520 498h160M730 498h120M900 498h120"/>
+    <path d="M330 560h140M520 560h160M730 560h120M900 560h120"/>
+  </g>
+</svg>

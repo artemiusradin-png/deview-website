@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- A project schedule with the critical task. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M460 190v400h620"/>
+    <path d="M300 246h120"/>
+    <rect x="480" y="230" width="180" height="32" fill="none"/>
+    <path d="M300 304h120"/>
+    <rect x="540" y="288" width="240" height="32" fill="none"/>
+    <path d="M300 362h120"/>
+    <rect x="660" y="346" width="180" height="32" fill="none"/>
+    <path d="M300 420h120"/>
+    <rect x="720" y="404" width="300" height="32" fill="#ffc933"/>
+    <path d="M300 478h120"/>
+    <rect x="840" y="462" width="180" height="32" fill="none"/>
+    <path d="M300 536h120"/>
+    <rect x="960" y="520" width="180" height="32" fill="none"/>
+    <path d="M840 180v430" stroke-dasharray="10 10"/>
+  </g>
+</svg>

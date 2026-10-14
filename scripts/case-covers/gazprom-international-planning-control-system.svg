@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- Every asset reporting into one plan. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M680 400L680 153"/>
+    <circle cx="680" cy="153" r="40" fill="#fffdf7"/>
+    <path d="M680 400L961 276"/>
+    <circle cx="961" cy="276" r="40" fill="#fffdf7"/>
+    <path d="M680 400L961 524"/>
+    <circle cx="961" cy="524" r="40" fill="#fffdf7"/>
+    <path d="M680 400L680 647"/>
+    <circle cx="680" cy="647" r="40" fill="#fffdf7"/>
+    <path d="M680 400L399 524"/>
+    <circle cx="399" cy="524" r="40" fill="#fffdf7"/>
+    <path d="M680 400L399 276"/>
+    <circle cx="399" cy="276" r="40" fill="#fffdf7"/>
+    <rect x="610" y="330" width="140" height="140" fill="#ffc933"/>
+    <path d="M640 430v-30M670 430v-50M700 430v-70M730 430v-40" stroke-width="5"/>
+  </g>
+</svg>
