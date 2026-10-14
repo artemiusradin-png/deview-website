@@ -44,6 +44,13 @@ function Arrow({
 function ProjectLogos({ duplicate = false }: { duplicate?: boolean }) {
   const logos = [
     {
+      name: "Grand Finance",
+      src: "/client-logos/grand-finance.png",
+      width: 149,
+      height: 47,
+      className: styles.clientGrand,
+    },
+    {
       name: "EVDEV",
       src: "/client-logos/evdev.svg",
       width: 96,
@@ -72,11 +79,11 @@ function ProjectLogos({ duplicate = false }: { duplicate?: boolean }) {
       className: styles.clientJetfans,
     },
     {
-      name: "Covenant Desk",
-      src: "/client-logos/covenant-desk.png",
-      width: 1855,
-      height: 427,
-      className: styles.clientCovenant,
+      name: "EnerQuest Energy",
+      src: "/client-logos/enerquest.png",
+      width: 383,
+      height: 91,
+      className: styles.clientEnerquest,
     },
   ];
 
@@ -86,9 +93,6 @@ function ProjectLogos({ duplicate = false }: { duplicate?: boolean }) {
       aria-label={duplicate ? undefined : "Selected project companies"}
       aria-hidden={duplicate || undefined}
     >
-      <li className={styles.clientGrand}>
-        GRAND<span>FINANCE GROUP</span>
-      </li>
       <li className={styles.clientNextair}>
         nextair<span aria-hidden="true">↗</span>
       </li>

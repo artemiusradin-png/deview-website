@@ -362,21 +362,6 @@
     animation-play-state: paused;
   }
 }
-.clientGrand {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: Georgia, serif;
-  font-size: 26px;
-  letter-spacing: 0.055em;
-  line-height: 1;
-}
-.clientGrand > span {
-  font-family: var(--font-archivo), sans-serif;
-  font-size: 8px;
-  letter-spacing: 0.17em;
-  margin-top: 5px;
-}
 .clientLogo {
   display: flex;
   align-items: center;
@@ -411,8 +396,11 @@
 .clientJetfans {
   width: 51px;
 }
-.clientCovenant {
-  width: 204px;
+.clientGrand {
+  width: 132px;
+}
+.clientEnerquest {
+  width: 176px;
 }
 
 /* The final supplied film can sit behind the hero, with a bright reading layer. */
@@ -1586,12 +1574,6 @@
 }
 
 @media (max-width: 760px) {
-  .clientGrand {
-    font-size: 20px;
-  }
-  .clientGrand > span {
-    font-size: 6px;
-  }
   .clientNextair {
     font-size: 23px;
   }
@@ -1611,14 +1593,14 @@
   .clientJetfans {
     width: 42px;
   }
-  .clientCovenant {
-    width: 172px;
+  .clientGrand {
+    width: 110px;
+  }
+  .clientEnerquest {
+    width: 146px;
   }
 }
 @media (max-width: 390px) {
-  .clientGrand {
-    font-size: 17px;
-  }
   .clientNextair {
     font-size: 20px;
   }
