@@ -61,6 +61,24 @@ export type CaseLibraryEntry = {
   year?: number;
 };
 
+/** The order the library shows first; every other project follows in its usual order. */
+const LIBRARY_ORDER = [
+  "storepilot",
+  "jetfans",
+  "nextair",
+  "fizkultura",
+  "enerquest",
+  "lms-grand-finance",
+  "gazprom-international-management-reporting-analytics-portal",
+  "agroplatforma",
+  "covenant-desk",
+  "senior-care-documentation",
+];
+const libraryRank = (id: string) => {
+  const rank = LIBRARY_ORDER.indexOf(id);
+  return rank === -1 ? LIBRARY_ORDER.length : rank;
+};
+
 export const CASE_LIBRARY: CaseLibraryEntry[] = [
   ...PRODUCTION_CASES.map((project) => {
     const content = en.caseStudiesPage.cases.find((c) => c.number === project.number)!;
@@ -98,7 +116,7 @@ export const CASE_LIBRARY: CaseLibraryEntry[] = [
     imageAlt: `Drawing: ${project.project.toLowerCase()}`,
     year: project.year,
   })),
-];
+].sort((a, b) => libraryRank(a.id) - libraryRank(b.id));
 
 export const CASE_INDUSTRIES = [...new Set(CASE_LIBRARY.map((c) => c.industry))].sort();
 export const CASE_SERVICES = [...new Set(CASE_LIBRARY.flatMap((c) => [...c.services]))].sort();
