@@ -26,6 +26,13 @@ export const LEAD_MAGNETS = {
     accessKey: "deview-ai-security-checklist",
     label: "AI security checklist",
   },
+  cap653Checklist: {
+    source: "cap653-checklist",
+    path: "/resources/cap-653-checklist",
+    guidePath: "/resources/cap-653-checklist/guide",
+    accessKey: "deview-cap653-checklist",
+    label: "Cap. 653 readiness checklist",
+  },
 } as const;
 
 export type ServiceLine = {
