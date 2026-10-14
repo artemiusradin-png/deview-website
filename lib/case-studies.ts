@@ -4,10 +4,11 @@ import { OIL_GAS_CASES_NEWEST_FIRST, oilGasCasePath, type OilGasLogo } from "@/l
 /** Client logos already on the site, shown on a plate over each card's work visual. */
 const COVENANT_LOGO: OilGasLogo = { src: "/client-logos/covenant-desk.png", width: 1855, height: 427, alt: "Covenant Desk" };
 const STOREPILOT_LOGO: OilGasLogo = { src: "/client-logos/storepilot.svg", width: 168, height: 32, alt: "StorePilot AI" };
-const AGRO_ARENA_LOGO: OilGasLogo = { src: "/client-logos/agro-arena.svg", width: 144, height: 64, alt: "Agro Arena" };
+const AGRO_ARENA_LOGO: OilGasLogo = { src: "/client-logos/agro-arena.svg", width: 144, height: 48, alt: "Agro Arena" };
 const GRAND_FINANCE_LOGO: OilGasLogo = { src: "/client-logos/grandfg-transparent.png", width: 266, height: 62, alt: "Grand Finance Group" };
 const JETFANS_LOGO: OilGasLogo = { src: "/client-logos/jetfans-eu.png", width: 181, height: 242, alt: "Jetfans" };
 const NEXTAIR_LOGO: OilGasLogo = { src: "/client-logos/nextair.png", width: 50, height: 48, alt: "Nextair" };
+const ENERQUEST_LOGO: OilGasLogo = { src: "/client-logos/enerquest.png", width: 383, height: 91, alt: "EnerQuest Energy" };
 const FIZKULTURA_LOGO: OilGasLogo = { src: "/client-logos/fizkultura.png", width: 118, height: 79, alt: "Fizkultura" };
 
 /** Screens from the demo films, for the "how the work looks" gallery on project pages. */
@@ -34,7 +35,7 @@ export const PRODUCTION_CASES = [
   { number: "05", slug: "jetfans", company: "Jetfans", industry: "Ventilation & HVAC", services: ["Digital product engineering"], image: "/images/cases/covers/jetfans.webp", imageAlt: "Drawing: two jet fans ventilating a car park", video: undefined, logo: JETFANS_LOGO, gallery: undefined },
   { number: "06", slug: "nextair", company: "Nextair", industry: "Ventilation & HVAC", services: ["Digital product engineering"], image: "/images/cases/covers/nextair.webp", imageAlt: "Drawing: an apartment building with one ventilation shaft", video: undefined, logo: NEXTAIR_LOGO, gallery: undefined },
   { number: "07", slug: "fizkultura", company: "Fizkultura", industry: "Fitness", services: ["Data engineering", "AI/ML engineering"], image: "/images/cases/covers/fizkultura.webp", imageAlt: "Drawing: four data sources feeding one weekly report", video: undefined, logo: FIZKULTURA_LOGO, gallery: undefined },
-  { number: "08", slug: "enerquest", company: "EnerQuest Energy", industry: "Oil & gas", services: ["AI/ML engineering", "Data engineering", "Enterprise platforms"], image: "/images/cases/covers/enerquest.webp", imageAlt: "Drawing: a pump jack feeding an operating dashboard", video: undefined, logo: undefined, gallery: undefined },
+  { number: "08", slug: "enerquest", company: "EnerQuest Energy", industry: "Oil & gas", services: ["AI/ML engineering", "Data engineering", "Enterprise platforms"], image: "/images/cases/covers/enerquest.webp", imageAlt: "Drawing: a pump jack feeding an operating dashboard", video: undefined, logo: ENERQUEST_LOGO, gallery: undefined },
 ] as const;
 
 /** Loan management systems built for five Hong Kong lenders, the tenants of the Covenant Desk portal. */
