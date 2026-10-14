@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { CaseStudyDetail } from "@/components/CaseStudyDetail";
 import { LENDING_PROJECTS, PRODUCTION_CASES, getProductionCase } from "@/lib/case-studies";
+import "../case-studies.css";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 

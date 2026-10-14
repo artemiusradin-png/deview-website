@@ -113,6 +113,7 @@ function CaseLibrary({ search, hash }: { search: string; hash: string }) {
                   <Link href={c.href} className="case-library-card-link">
                     <div className={`case-library-card-media ${c.year ? "case-library-card-media--portfolio" : ""}`}>
                       {c.image ? <Image src={c.image} alt={c.imageAlt ?? ""} fill sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw" loading={i < 3 ? "eager" : "lazy"} /> : c.logo ? <span className="case-library-logo-frame"><Image src={c.logo.src} alt={c.logo.alt} fill sizes="(max-width: 640px) 180px, 230px" /></span> : <span className="case-library-wordmark">{c.company}</span>}
+                      {c.image && c.logo ? <span className="case-library-logo-badge"><Image src={c.logo.src} alt={c.logo.alt} width={c.logo.width} height={c.logo.height} unoptimized /></span> : null}
                       {c.year ? <span className="case-library-year">Project archive · {c.year}</span> : null}
                       <span className="case-library-card-arrow" aria-hidden="true"><ArrowUpRight size={22} /></span>
                     </div>

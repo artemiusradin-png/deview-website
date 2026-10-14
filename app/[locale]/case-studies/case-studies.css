@@ -82,3 +82,14 @@
   .case-library-card-media > img:not(.case-library-logo), .case-library-card-arrow { transition: none; }
   .case-library-card-link:hover .case-library-card-media > img:not(.case-library-logo) { transform: none; }
 }
+
+/* Client logo on a paper plate over the work visual. */
+.case-library-logo-badge { position: absolute; left: 14px; bottom: 14px; z-index: 1; display: flex; align-items: center; height: 40px; padding: 8px 12px; background: var(--case-paper); }
+.case-library-logo-badge img { display: block; width: auto; height: 22px; max-width: 150px; object-fit: contain; }
+/* "How the work looks" gallery on project pages. */
+.case-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0 0 48px; padding: 0; list-style: none; }
+.case-gallery figure { margin: 0; }
+.case-gallery-frame { position: relative; display: block; aspect-ratio: 1.7; overflow: hidden; background: #0b0b0f; border: 1px solid #d7cfbf; }
+.case-gallery-frame img { object-fit: cover; }
+.case-gallery figcaption { margin-top: 8px; color: #655f54; font-size: 13px; line-height: 1.45; }
+@media (max-width: 700px) { .case-gallery { grid-template-columns: 1fr; } }

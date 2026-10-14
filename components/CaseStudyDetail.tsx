@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { en } from "@/lib/i18n/dict-en";
 import type { getProductionCase } from "@/lib/case-studies";
 
@@ -35,6 +36,27 @@ export function CaseStudyDetail({ project }: { project: NonNullable<ReturnType<t
             Your browser does not support embedded video.
           </video>
         </div>
+      ) : null}
+
+      {/* How the work looks: screens from the demo film */}
+      {"gallery" in project && project.gallery ? (
+        <section aria-labelledby="gallery-title" className="mb-4">
+          <p id="gallery-title" className="mb-4 text-[0.6rem] uppercase tracking-[0.2em] text-[var(--white-40)]">
+            How the work looks
+          </p>
+          <ul className="case-gallery">
+            {project.gallery.map((shot) => (
+              <li key={shot.src}>
+                <figure>
+                  <span className="case-gallery-frame">
+                    <Image src={shot.src} alt={shot.alt} fill sizes="(max-width: 700px) 100vw, 50vw" />
+                  </span>
+                  <figcaption>{shot.alt}</figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </section>
       ) : null}
 
       {/* Challenge / Solution */}
