@@ -93,3 +93,14 @@
 .case-gallery-frame img { object-fit: cover; }
 .case-gallery figcaption { margin-top: 8px; color: #655f54; font-size: 13px; line-height: 1.45; }
 @media (max-width: 700px) { .case-gallery { grid-template-columns: 1fr; } }
+
+/* Split card picture: logo half on paper, drawing half on cream. */
+.case-split { display: grid; grid-template-columns: 1fr 1fr; background: var(--case-paper); }
+.case-split-logo { position: relative; display: flex; align-items: center; justify-content: center; padding: 22px; border-right: 1px solid var(--case-line); background: var(--case-paper); }
+.case-split-logo img { display: block; width: auto; height: auto; max-width: 86%; max-height: 50%; object-fit: contain; }
+.case-split-name { max-width: 88%; font-family: var(--font-satoshi), var(--font-archivo), sans-serif; font-size: clamp(19px, 1.7vw, 24px); font-weight: 500; line-height: 1.15; letter-spacing: -0.02em; text-align: center; color: var(--case-ink); }
+.case-split-art { position: relative; overflow: hidden; background: #f3eee2; }
+.case-split-art img { object-fit: cover; transition: transform 240ms var(--ease-out); }
+.case-library-card-link:hover .case-split-art img { transform: scale(1.035); }
+.case-split .case-library-year { left: 16px; bottom: 14px; }
+@media (prefers-reduced-motion: reduce) { .case-split-art img { transition: none; } .case-library-card-link:hover .case-split-art img { transform: none; } }
