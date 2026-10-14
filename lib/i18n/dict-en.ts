@@ -1394,11 +1394,11 @@ export const en = {
       {
         number: "08",
         sector: "OIL & GAS · NIGERIA",
-        service: "Digital Oil Field Platform",
-        headline: "EnerQuest: Demo for Digital Oil Field workspace, from wellhead to boardroom",
+        service: "Upstream Production Management Software · Pilot",
+        headline: "EnerQuest: Upstream production management software – Pilot",
         website: { href: "https://enerquestenergy.com/", label: "Visit EnerQuest Energy →" },
         challenge: "EnerQuest Energy needed to show Nigerian asset teams how production, equipment, exceptions and decisions could be managed in one operating picture, from the field to management, before any operational data was released.",
-        solution: "DeView built a working Digital Oil Field demonstrator on an illustrative model: one operating workspace with production and equipment views, exception tracking and an AI assistant. Field data flows one way into the analytics layer, so the platform never touches operational control.",
+        solution: "DeView built a pilot of upstream production management software on an illustrative model: one operating workspace with production and equipment views, exception tracking and an AI assistant. Field data flows one way into the analytics layer, so the platform never touches operational control.",
         capabilitiesLabel: "Project Scope",
         capabilities: [
           { name: "One Operating Picture", body: "Production, equipment status and exceptions in one workspace, from wellhead to boardroom." },
