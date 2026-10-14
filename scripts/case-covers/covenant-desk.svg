@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- Five lending companies in one portal. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="190" y="150" width="150" height="64" fill="#fffdf7"/>
+    <path d="M340 182c120 0 150 254 300 218"/>
+    <rect x="190" y="254" width="150" height="64" fill="#fffdf7"/>
+    <path d="M340 286c120 0 150 150 300 114"/>
+    <rect x="190" y="358" width="150" height="64" fill="#fffdf7"/>
+    <path d="M340 390c120 0 150 46 300 10"/>
+    <rect x="190" y="462" width="150" height="64" fill="#fffdf7"/>
+    <path d="M340 494c120 0 150 -58 300 -94"/>
+    <rect x="190" y="566" width="150" height="64" fill="#fffdf7"/>
+    <path d="M340 598c120 0 150 -162 300 -198"/>
+    <rect x="760" y="220" width="420" height="360" fill="#fffdf7"/>
+    <rect x="760" y="220" width="420" height="56" fill="#ffc933"/>
+    <circle cx="790" cy="248" r="7"/><circle cx="814" cy="248" r="7"/>
+    <path d="M800 320h220"/>
+    <path d="M800 358h300"/>
+    <path d="M800 396h180"/>
+    <path d="M800 434h260"/>
+    <path d="M800 472h200"/>
+    <path d="M800 510h240"/>
+  </g>
+</svg>

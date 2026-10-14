@@ -146,6 +146,17 @@ export function CaseStudyDetail({ project }: { project: NonNullable<ReturnType<t
           ) : null}
         </blockquote>
       ) : null}
+      {c.reviewLink ? (
+        <a
+          href={c.reviewLink.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-block text-sm underline underline-offset-4"
+        >
+          {c.reviewLink.label}
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      ) : null}
     </article>
   );
 }

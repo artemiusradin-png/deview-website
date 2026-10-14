@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- Project milestones on one timeline. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M220 420h930"/>
+    <path d="M270 420l26-26 26 26-26 26z" fill="#fffdf7"/>
+    <rect x="226" y="250" width="140" height="90" fill="#fffdf7"/>
+    <path d="M296 340v54"/>
+    <path d="M435 420l26-26 26 26-26 26z" fill="#fffdf7"/>
+    <rect x="391" y="500" width="140" height="90" fill="#fffdf7"/>
+    <path d="M461 500v-54"/>
+    <path d="M600 420l26-26 26 26-26 26z" fill="#fffdf7"/>
+    <rect x="556" y="250" width="140" height="90" fill="#fffdf7"/>
+    <path d="M626 340v54"/>
+    <path d="M765 420l26-26 26 26-26 26z" fill="#ffc933"/>
+    <rect x="721" y="500" width="140" height="90" fill="#fffdf7"/>
+    <path d="M791 500v-54"/>
+    <path d="M930 420l26-26 26 26-26 26z" fill="#fffdf7"/>
+    <rect x="886" y="250" width="140" height="90" fill="#fffdf7"/>
+    <path d="M956 340v54"/>
+    <path d="M1095 420l26-26 26 26-26 26z" fill="#fffdf7"/>
+    <rect x="1051" y="500" width="140" height="90" fill="#fffdf7"/>
+    <path d="M1121 500v-54"/>
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- A management reporting dashboard. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="250" y="160" width="860" height="480" fill="#fffdf7"/>
+    <path d="M250 210h860"/>
+    <circle cx="276" cy="185" r="7"/><circle cx="300" cy="185" r="7"/>
+    <rect x="290" y="250" width="180" height="100" fill="#ffc933"/>
+    <rect x="500" y="250" width="180" height="100"/>
+    <rect x="710" y="250" width="180" height="100"/>
+    <rect x="920" y="250" width="150" height="100"/>
+    <path d="M320 290h70M530 290h90M740 290h60M950 290h80" stroke-width="5"/>
+    <path d="M290 600V390M290 600h500"/>
+    <path d="m300 560 80-40 80 20 80-60 80 10 80-70 80 20"/>
+    <path d="M840 410h230"/>
+    <path d="M840 450h200"/>
+    <path d="M840 490h230"/>
+    <path d="M840 530h170"/>
+    <path d="M840 570h210"/>
+  </g>
+</svg>

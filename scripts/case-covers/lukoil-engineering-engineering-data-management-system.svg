@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- Engineering drawings managed as one data set. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="460" y="250" width="440" height="340" fill="#fffdf7"/>
+    <rect x="430" y="220" width="440" height="340" fill="#fffdf7"/>
+    <rect x="400" y="190" width="440" height="340" fill="#fffdf7"/>
+    <path d="M450 450h120l60-40h90l40 30h40M570 450v-90h60v50M730 410v-80h40"/>
+    <circle cx="630" cy="410" r="12" fill="#fffdf7"/>
+    <path d="M440 240h140"/>
+    <path d="M880 520h120l40 40-40 40H880z" fill="#ffc933"/>
+    <circle cx="905" cy="560" r="8" fill="#171207"/>
+  </g>
+</svg>

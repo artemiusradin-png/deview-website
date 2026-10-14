@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- A loan portfolio report. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M420 200v400h580"/>
+    <rect x="470" y="450" width="54" height="150" fill="none"/>
+    <rect x="560" y="390" width="54" height="210" fill="none"/>
+    <rect x="650" y="420" width="54" height="180" fill="none"/>
+    <rect x="740" y="340" width="54" height="260" fill="none"/>
+    <rect x="830" y="370" width="54" height="230" fill="none"/>
+    <rect x="920" y="300" width="54" height="300" fill="#ffc933"/>
+    <path d="M497 430 587 370 677 400 767 320 857 350 947 270" stroke-dasharray="2 12"/>
+  </g>
+</svg>

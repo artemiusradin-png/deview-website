@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- An A/B test where variant B wins. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="250" y="200" width="380" height="400" fill="#fffdf7"/>
+    <path d="M250 248h380"/>
+    <circle cx="274" cy="224" r="7"/><circle cx="298" cy="224" r="7"/>
+    <path d="M290 540h300"/>
+    <rect x="310" y="430" width="44" height="110" fill="none"/>
+    <rect x="390" y="390" width="44" height="150" fill="none"/>
+    <rect x="470" y="410" width="44" height="130" fill="none"/>
+    <rect x="550" y="370" width="44" height="170" fill="none"/>
+    <rect x="730" y="200" width="380" height="400" fill="#fffdf7"/>
+    <path d="M730 248h380"/>
+    <circle cx="754" cy="224" r="7"/><circle cx="778" cy="224" r="7"/>
+    <path d="M770 540h300"/>
+    <rect x="790" y="400" width="44" height="140" fill="none"/>
+    <rect x="870" y="350" width="44" height="190" fill="none"/>
+    <rect x="950" y="310" width="44" height="230" fill="none"/>
+    <rect x="1030" y="280" width="44" height="260" fill="#ffc933"/>
+  </g>
+</svg>

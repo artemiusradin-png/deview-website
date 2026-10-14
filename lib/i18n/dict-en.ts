@@ -14,6 +14,7 @@ type CaseStudy = {
   outcomesNote?: string;
   quote?: string;
   quoteRole?: string;
+  reviewLink?: { href: string; label: string };
 };
 
 export const en = {
@@ -1341,7 +1342,10 @@ export const en = {
           { metric: "17%", label: "more precise issue detection, with fewer false alarms" },
           { metric: "26%", label: "improvement in StorePilot's merchant acquisition funnel" },
         ],
-        outcomesNote: "Results reported by EVDEV for this engagement. The acquisition improvement relates to merchants discovering, installing, and starting to use StorePilot.",
+        outcomesNote: "Results from the verified Clutch review by StorePilotAI's CTO. The acquisition improvement relates to merchants discovering, installing, and starting to use StorePilot.",
+        quote: "What stood out most about working with DeView was their ability to connect data and AI with real business outcomes. Rather than focusing on models for their own sake, they consistently asked the right question: how will this improvement translate into revenue and value for merchants?",
+        quoteRole: "Mike Gavura, CTO, StorePilotAI · Verified Clutch review",
+        reviewLink: { href: "https://clutch.co/profile/deview#reviews", label: "Read the full review on Clutch →" },
       },
     ] as CaseStudy[],
     ctaLabel: "Start a conversation",
