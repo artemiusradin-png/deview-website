@@ -16,14 +16,15 @@ for (const file of await readdir(here)) {
     .resize(1360, 800, { fit: "cover" })
     .webp({ quality: 90 })
     .toFile(path.join(out, `${name}.webp`));
-  // Half-card version for the split card (logo left, drawing right): the drawing trimmed to its
-  // own bounds and centred on cream at 680×800, so nothing is cropped at the card edge.
+  // Half-card version for the split card (logo left, drawing right): the drawing cut to its own
+  // bounds, scaled to one common size and centred on cream at 680×800, so every card matches.
   // Thicker strokes: the half version is shown smaller, so 3px lines would turn to hairlines.
   const bold = Buffer.from(svg.toString().replace(/stroke-width="3"/g, 'stroke-width="5"'));
-  const drawing = await sharp(bold, { density: 200 })
-    .resize(1360, 800)
-    .trim({ background: "#f3eee2", threshold: 8 })
-    .resize(632, 740, { fit: "inside" })
+  const full = await sharp(bold, { density: 200 }).resize(1360, 800).png().toBuffer();
+  const { data, info } = await sharp(full).raw().toBuffer({ resolveWithObject: true });
+  const drawing = await sharp(full)
+    .extract(contentBox(data, info))
+    .resize(500, 460, { fit: "inside" })
     .toBuffer({ resolveWithObject: true });
   const { width, height } = drawing.info;
   await sharp({ create: { width: 680, height: 800, channels: 3, background: "#f3eee2" } })
@@ -31,4 +32,21 @@ for (const file of await readdir(here)) {
     .webp({ quality: 90 })
     .toFile(path.join(out, "half", `${name}.webp`));
   console.log(`rendered ${name}`);
+}
+
+/** The bounding box of everything that is not the cream background. */
+function contentBox(data, { width, height, channels }) {
+  let left = width, top = height, right = -1, bottom = -1;
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const i = (y * width + x) * channels;
+      if (Math.abs(data[i] - 0xf3) + Math.abs(data[i + 1] - 0xee) + Math.abs(data[i + 2] - 0xe2) > 24) {
+        if (x < left) left = x;
+        if (x > right) right = x;
+        if (y < top) top = y;
+        if (y > bottom) bottom = y;
+      }
+    }
+  }
+  return { left, top, width: right - left + 1, height: bottom - top + 1 };
 }
