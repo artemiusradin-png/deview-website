@@ -332,7 +332,8 @@ export function AboutContent() {
               </h2>
             </div>
             <span className={styles.sectionLead}>
-              The people who scope your project are the people who build it.
+              A team of {dict.aboutPage.team.size} across four offices. The
+              people who scope your project are the people who build it.
             </span>
           </div>
           <TeamGrid variant="grid" />
