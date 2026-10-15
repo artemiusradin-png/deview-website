@@ -1,0 +1,121 @@
+.processVisual {
+  color: var(--ink);
+  width: 100%;
+}
+.processVisual svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.guide {
+  stroke: var(--line);
+}
+.industryMark {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 44px;
+  background: var(--cream);
+  color: var(--signal);
+}
+.industryMark > svg {
+  width: 24px;
+  height: 24px;
+}
+.teamNetwork {
+  position: absolute;
+  z-index: -1;
+  width: 640px;
+  height: auto;
+  top: -45px;
+  right: -60px;
+  color: var(--signal);
+  opacity: 0.13;
+  pointer-events: none;
+  mask-image: linear-gradient(#000 20%, transparent 95%);
+}
+.locations {
+  display: flex;
+  list-style: none;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.locations li {
+  position: relative;
+  padding: 20px 38px 0 0;
+}
+.locations li:last-child {
+  padding-right: 0;
+}
+.locations li:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 4px;
+  height: 1px;
+  background: var(--line);
+}
+.locations li > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--signal);
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* Decorative elements settle once. Copy and controls never wait for an animation. */
+@media (prefers-reduced-motion: no-preference) {
+  .processVisual[data-motion="armed"] :is(.accent, .detail) {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .processVisual[data-motion="in"] .accent {
+    animation: diagramSettle 650ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  .processVisual[data-motion="in"] .detail {
+    animation: diagramSettle 550ms cubic-bezier(0.23, 1, 0.32, 1) 180ms both;
+  }
+  .reveal[data-reveal="portraits"][data-motion="armed"] > ul > li {
+    opacity: 0.65;
+    transform: translateY(12px);
+  }
+  .reveal[data-reveal="portraits"][data-motion="in"] > ul > li {
+    animation: portraitSettle 650ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  .reveal[data-reveal="portraits"] > ul > li:nth-child(2) { animation-delay: 70ms; }
+  .reveal[data-reveal="portraits"] > ul > li:nth-child(3) { animation-delay: 140ms; }
+  .reveal[data-reveal="portraits"] > ul > li:nth-child(4) { animation-delay: 210ms; }
+  .reveal[data-reveal="portraits"] > ul > li:nth-child(5) { animation-delay: 280ms; }
+  .reveal[data-reveal="portraits"] > ul > li:nth-child(6) { animation-delay: 350ms; }
+  .reveal[data-reveal="artwork"][data-motion="armed"] {
+    opacity: 0.65;
+    transform: translateY(12px);
+  }
+  .reveal[data-reveal="artwork"][data-motion="in"] {
+    animation: portraitSettle 650ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+}
+@keyframes diagramSettle {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes portraitSettle {
+  from { opacity: 0.65; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 760px) {
+  .industryMark { width: 30px; height: 38px; }
+  .industryMark > svg { width: 21px; height: 21px; }
+  .teamNetwork { width: 480px; right: -250px; top: -10px; opacity: 0.1; }
+  .locations { width: 100%; justify-content: space-between; font-size: 10px; }
+  .locations li { flex: 1; padding-right: 12px; }
+  .locations li:last-child { flex: 0; }
+}

@@ -738,14 +738,18 @@
   justify-content: space-between;
   color: var(--signal);
   font-size: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 12px;
 }
 .processStepTop svg {
   width: 23px;
   height: 23px;
 }
-.processSteps > li:last-child svg {
+.processSteps > li:last-child .processStepTop svg {
   visibility: hidden;
+}
+.processVisualSlot {
+  margin-bottom: 25px;
+  max-width: 220px;
 }
 .processSteps h3 {
   font-size: 32px;
@@ -760,9 +764,10 @@
 }
 .industries {
   display: flex;
-  gap: 30px;
-  align-items: center;
-  padding-block: 26px;
+  flex-direction: column;
+  gap: 20px;
+  align-items: start;
+  padding-block: 24px 30px;
   border-block: 1px solid var(--line);
   margin-bottom: 82px;
 }
@@ -771,20 +776,22 @@
   font-size: 10px;
 }
 .industries nav {
-  display: flex;
-  flex: 1;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 16px 24px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  width: 100%;
+  gap: 16px;
 }
 .industries nav a {
-  display: inline-flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 17px;
   align-items: center;
   gap: 10px;
   text-transform: capitalize;
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 1.4;
+  min-height: 48px;
 }
-.industries svg {
+.industries nav a > svg {
   width: 17px;
   height: 17px;
 }
@@ -794,6 +801,9 @@
 }
 
 .teamSection {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
   background: var(--cream);
 }
 .teamFooter {
@@ -822,6 +832,18 @@
   display: flex;
   flex-direction: column;
 }
+.insightArtwork {
+  overflow: hidden;
+  aspect-ratio: 600 / 338;
+  margin-bottom: 24px;
+  background: var(--cream);
+}
+.insightArtwork img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .insightMeta {
   display: flex;
   flex-wrap: wrap;
@@ -844,6 +866,52 @@
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 5px;
+}
+/* Keep the process readable before five columns become too narrow on tablets. */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .processSteps {
+    grid-template-columns: 1fr;
+  }
+  .processSteps > li,
+  .processSteps > li + li {
+    display: grid;
+    grid-template-columns: 24px 116px 100px minmax(0, 1fr);
+    align-items: center;
+    gap: 22px;
+    border-left: 0;
+    padding: 22px 0;
+  }
+  .processStepTop,
+  .processVisualSlot,
+  .processSteps h3 {
+    margin: 0;
+  }
+  .processStepTop svg {
+    display: none;
+  }
+  .industries nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .insightArtwork img,
+  .insightCard > .textLink svg,
+  .industries nav a > svg {
+    transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .insightCard:hover .insightArtwork img {
+    transform: scale(1.025);
+  }
+  .insightCard:hover > .textLink svg,
+  .industries nav a:hover > svg {
+    transform: translate(2px, -2px);
+  }
+  .insightCard:active .insightArtwork img {
+    transform: scale(1);
+  }
+  .industries nav a:active > svg {
+    transform: scale(0.97);
+  }
 }
 
 .contact {
@@ -1062,10 +1130,10 @@
     font-size: 30px;
   }
   .processSteps > li {
-    padding-right: 15px;
+    padding-right: 0;
   }
   .processSteps > li + li {
-    padding-left: 15px;
+    padding-left: 0;
   }
   .processSteps h3 {
     font-size: 28px;
@@ -1353,40 +1421,50 @@
   .processSteps > li,
   .processSteps > li + li {
     display: grid;
-    grid-template-columns: 24px 90px 1fr;
-    gap: 14px;
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 9px 22px;
     align-items: start;
     border-left: 0;
     padding: 22px 0;
   }
   .processStepTop {
+    grid-column: 2;
     font-size: 10px;
-    margin: 5px 0 0;
+    margin: 0;
+  }
+  .processVisualSlot {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    align-self: center;
+    margin: 0;
   }
   .processStepTop svg {
     display: none;
   }
   .processSteps h3 {
+    grid-column: 2;
     font-size: 24px;
     margin: 0;
   }
   .processSteps p {
+    grid-column: 2;
     font-size: 14px;
   }
   .industries {
     margin-bottom: 62px;
   }
   .industries nav {
-    justify-content: start;
-    gap: 18px 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 22px;
   }
   .industries nav a {
-    font-size: 13px;
+    gap: 7px;
+    font-size: 12px;
   }
   .teamFooter {
     flex-direction: column;
     align-items: start;
-    gap: 12px;
+    gap: 24px;
   }
   .insightGrid {
     grid-template-columns: 1fr;
@@ -1537,8 +1615,8 @@
   }
   .processSteps > li,
   .processSteps > li + li {
-    grid-template-columns: 19px 76px 1fr;
-    gap: 10px;
+    grid-template-columns: 80px minmax(0, 1fr);
+    gap: 9px 16px;
   }
   .processSteps h3 {
     font-size: 21px;
@@ -1651,17 +1729,39 @@
   }
 }
 
-/* "Why us": four reasons on an ink band, between the industry tabs and the selected work. */
+/* A single architectural image fades into the ink canvas behind the services. */
 .whySection {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
   padding-block: 92px;
   background: var(--ink);
   color: var(--paper);
+}
+.shipBackdrop {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.shipImage {
+  object-fit: cover;
+  object-position: center;
+}
+.shipBackdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, var(--ink) 0%, #171207f0 20%, #171207cc 55%, #1712070d 100%),
+    linear-gradient(90deg, var(--ink) 0%, #171207b3 25%, transparent 75%);
 }
 .whySection .eyebrow {
   color: var(--accent);
 }
 .whySection .sectionIntro > p {
-  color: rgba(255, 253, 247, 0.66);
+  color: rgba(255, 253, 247, 0.86);
 }
 .whyList {
   display: grid;
@@ -1697,6 +1797,10 @@
   color: rgba(255, 253, 247, 0.66);
 }
 @media (max-width: 1100px) {
+  .shipBackdrop {
+    bottom: auto;
+    height: 560px;
+  }
   .whyList {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     row-gap: 36px;
@@ -1709,6 +1813,14 @@
 @media (max-width: 760px) {
   .whySection {
     padding-block: 64px;
+  }
+  .shipImage {
+    object-position: 68% top;
+  }
+  .shipBackdrop::after {
+    background:
+      linear-gradient(0deg, var(--ink) 0%, #171207b3 45%, #17120740 100%),
+      linear-gradient(90deg, #171207b3, #17120733);
   }
   .whyList {
     grid-template-columns: 1fr;

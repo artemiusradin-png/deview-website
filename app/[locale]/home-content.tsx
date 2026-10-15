@@ -9,6 +9,7 @@ import { HomeCapabilities } from "./home-capabilities";
 import { HeroBackgroundVideo } from "./home-hero-video";
 import { HeroInquiryForm } from "./home-hero-form";
 import { CountUp, useMotionOnView } from "./home-motion";
+import { EditorialReveal, IndustryMark, ProcessVisual, TeamLocations, TeamNetwork } from "./home-editorial-visuals";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { INSIGHT_ARTICLES } from "@/lib/insights";
@@ -347,6 +348,16 @@ export function HomeContent({
           className={styles.whySection}
           aria-labelledby="ship-title"
         >
+          <div className={styles.shipBackdrop} aria-hidden="true">
+            <Image
+              src="/images/home/services-architecture.webp"
+              alt=""
+              fill
+              sizes="100vw"
+              className={styles.shipImage}
+              unoptimized
+            />
+          </div>
           <div className={styles.container}>
             <SectionHeading
               number="02"
@@ -565,12 +576,13 @@ export function HomeContent({
             </p>
           </SectionHeading>
           <ol ref={processRef} className={styles.processSteps}>
-            {dict.process.steps.map((step) => (
+            {dict.process.steps.map((step, index) => (
               <li key={step.number}>
                 <div className={styles.processStepTop}>
                   <span>{step.number}</span>
                   <Arrow />
                 </div>
+                <ProcessVisual step={index} className={styles.processVisualSlot} />
                 <h3>
                   {step.label.charAt(0) + step.label.slice(1).toLowerCase()}
                 </h3>
@@ -591,11 +603,13 @@ export function HomeContent({
           <p className={styles.eyebrow}>Experience across</p>
           <nav aria-label="Industries">
             <Link href={localePath("/industries/oil-and-gas")}>
-              Oil &amp; gas <Arrow diagonal />
+              <IndustryMark industry="oil-and-gas" />
+              <span>Oil &amp; gas</span> <Arrow diagonal />
             </Link>
             {dict.industries.tiles.map((industry) => (
               <Link key={industry.id} href={localePath(industry.href)}>
-                {industry.label.toLowerCase()} <Arrow diagonal />
+                <IndustryMark industry={industry.id} />
+                <span>{industry.label.toLowerCase()}</span> <Arrow diagonal />
               </Link>
             ))}
           </nav>
@@ -606,6 +620,7 @@ export function HomeContent({
           className={`${styles.section} ${styles.teamSection}`}
           aria-labelledby="team-title"
         >
+          <TeamNetwork />
           <div className={styles.container}>
             <SectionHeading
               number="05"
@@ -624,9 +639,11 @@ export function HomeContent({
                 people you talk to are the people who build it.
               </p>
             </SectionHeading>
-            <TeamGrid />
+            <EditorialReveal kind="portraits">
+              <TeamGrid />
+            </EditorialReveal>
             <div className={styles.teamFooter}>
-              <p>Hong Kong · Vancouver · Edinburgh · Stuttgart</p>
+              <TeamLocations />
               <Link href={localePath("/about")} className={styles.textLink}>
                 More about DeView <Arrow diagonal />
               </Link>
@@ -665,6 +682,16 @@ export function HomeContent({
                     href={localePath(`/insights/${meta.slug}`)}
                     className={styles.insightCard}
                   >
+                    <EditorialReveal kind="artwork" className={styles.insightArtwork}>
+                      <Image
+                        src={meta.coverSmall}
+                        alt=""
+                        width={600}
+                        height={338}
+                        sizes="(max-width: 760px) 100vw, 33vw"
+                        unoptimized
+                      />
+                    </EditorialReveal>
                     <div className={styles.insightMeta}>
                       <span>{article.label}</span>
                       <span>{article.readTime}</span>
