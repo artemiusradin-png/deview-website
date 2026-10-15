@@ -1,6 +1,5 @@
 "use client";
 
-import type { CSSProperties } from "react";
 import { motion } from "framer-motion";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { PageIntro } from "@/components/PageIntro";
@@ -8,15 +7,6 @@ import { PhaseDiagram } from "@/components/PhaseDiagram";
 import { SubpageNav } from "@/components/SubpageNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import styles from "./how-we-work.module.css";
-
-/** Timeline bar sizes, roughly in proportion to each phase's typical duration:
- *  flex weights on wide screens, bar widths when the rows stack on phones. */
-const PHASE_SIZE: Record<string, { grow: number; width: string }> = {
-  "01": { grow: 3, width: "40%" },
-  "02": { grow: 1.6, width: "22%" },
-  "03": { grow: 6, width: "100%" },
-  "04": { grow: 1.6, width: "22%" },
-};
 
 const reveal = {
   initial: { opacity: 0, y: 20 },
@@ -66,12 +56,6 @@ export function HowWeWorkContent() {
                   <li
                     key={p.number}
                     className={p.number === "03" ? styles.accent : undefined}
-                    style={
-                      {
-                        "--grow": PHASE_SIZE[p.number].grow,
-                        "--w": PHASE_SIZE[p.number].width,
-                      } as CSSProperties
-                    }
                   >
                     <a href={`#phase-${p.number}`}>
                       <span
@@ -80,10 +64,7 @@ export function HowWeWorkContent() {
                         {mark.text}
                       </span>
                       <span className={styles.bar} aria-hidden="true" />
-                      <span className={styles.phaseMeta}>
-                        {p.number}
-                        <span>{p.duration}</span>
-                      </span>
+                      <span className={styles.phaseMeta}>{p.number}</span>
                       <span className={styles.phaseName}>
                         {phaseName(p.label)}
                       </span>
@@ -110,7 +91,6 @@ export function HowWeWorkContent() {
                   <p className="section-label">
                     {p.number} / {phaseName(p.label)}
                   </p>
-                  <span className={styles.duration}>{p.duration}</span>
                 </div>
                 <h2 className={styles.phaseTitle}>{p.title}</h2>
                 <p className={styles.phaseBody}>{p.body}</p>

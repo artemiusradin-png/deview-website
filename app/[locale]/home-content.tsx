@@ -571,7 +571,7 @@ export function HomeContent({
           >
             <p>
               You work directly with the people who design and build your
-              system. We scope the problem, ship in weeks, and stay for what
+              system. We scope the problem, build the system, and stay for what
               comes next.
             </p>
           </SectionHeading>

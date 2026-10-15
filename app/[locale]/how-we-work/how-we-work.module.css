@@ -2,7 +2,7 @@
    Selectors pair two classes where they must beat the `.site-interior main h2/h3`
    type rules in app/editorial.css. */
 
-/* Four phases sized by how long each one takes. */
+/* Equal phase markers show sequence without implying duration. */
 .timeline {
   margin-bottom: 120px;
 }
@@ -17,7 +17,7 @@
   padding: 0;
 }
 .track > li {
-  flex: var(--grow) 1 0;
+  flex: 1 1 0;
   min-width: 0;
 }
 .track a {
@@ -67,12 +67,6 @@
   font-size: 12px;
   letter-spacing: 0.08em;
 }
-.phaseMeta span:last-child {
-  color: #655f54;
-  letter-spacing: 0;
-  font-size: 14px;
-  white-space: nowrap;
-}
 .phaseName {
   margin-top: 10px;
   font-size: clamp(24px, 2.3vw, 36px);
@@ -109,13 +103,6 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-}
-.duration {
-  padding: 5px 11px;
-  border: 1px solid #d7cfbf;
-  color: #171207;
-  font-size: 13px;
-  white-space: nowrap;
 }
 .phase .phaseTitle {
   margin-top: 22px;
@@ -233,7 +220,7 @@
 }
 
 @media (max-width: 900px) {
-  /* Stacked rows; each bar keeps its length relative to the longest phase. */
+  /* Stack the phase markers on smaller screens. */
   .track {
     flex-direction: column;
     gap: 22px;
@@ -246,7 +233,7 @@
   }
   .bar {
     order: 1;
-    width: var(--w);
+    width: 100%;
     height: 14px;
     margin-top: 12px;
   }
