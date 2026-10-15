@@ -417,7 +417,7 @@ export const en = {
   footer: {
     brand: "DeView",
     headline: "AI that reduces costs, automates workflows, and works inside your existing systems.",
-    intro: "From workflow audit to live deployment: delivered in weeks, not quarters.",
+    intro: "From workflow audit to live deployment: built around your business.",
     ctaLabel: "Tell us what to automate",
     ctaCopy: "Describe the workflow that's costing the most time or money. We reply with a specific recommendation within 1–2 business days.",
     contactUs: "Contact us",
@@ -509,12 +509,12 @@ export const en = {
   process: {
     sectionLabel: "HOW WE WORK",
     titleL1: "From first conversation",
-    titleL2: "to live system in weeks.",
+    titleL2: "to a live system.",
     steps: [
       { number: "01", label: "SCOPE", title: "Define the problem", body: "We map the workflow that's costing you the most and size the opportunity." },
       { number: "02", label: "DESIGN", title: "Architecture & plan", body: "Solution architecture, data flow, timeline, and a fixed-price scope: before any build starts." },
       { number: "03", label: "BUILD", title: "Develop & integrate", body: "We build the system, connect it to your tools, and test it with your real data." },
-      { number: "04", label: "DEPLOY", title: "Go live & monitor", body: "Deployed into your stack with monitoring, alerts, and audit logging from day one." },
+      { number: "04", label: "DEPLOY", title: "Go live & monitor", body: "Deployed into your stack with monitoring, alerts, and audit logging built in." },
       { number: "05", label: "SUPPORT", title: "Iterate & improve", body: "Post-launch support, drift monitoring, and continuous improvement as your needs change." },
     ],
     cta: "See our full process →",
@@ -1204,7 +1204,7 @@ export const en = {
   },
   howWeWorkPage: {
     sectionLabel: "HOW WE WORK",
-    h1: "From first conversation to live deployment: in 1–8 weeks.",
+    h1: "From first conversation to live deployment.",
     subtitle: "Four phases. A fixed price agreed before the build starts. No retainer needed.",
     timelineLabel: "First call to live system",
     timelineMarks: {
@@ -1214,13 +1214,12 @@ export const en = {
     },
     columnLabels: {
       deliverable: "You get",
-      whoJoins: "Your time",
+      whoJoins: "Who joins",
     },
     phases: [
       {
         number: "01",
         label: "DISCOVERY",
-        duration: "1–2 weeks",
         title: "We map the workflow and find the costliest step.",
         body: "A short interview with your team: what comes in, what happens to it, how long it takes and what it costs.",
         deliverable: "A written recommendation with an ROI estimate and a cost range.",
@@ -1229,7 +1228,6 @@ export const en = {
       {
         number: "02",
         label: "SCOPING",
-        duration: "3–5 days",
         title: "We agree exactly what gets built, and what doesn't.",
         body: "Inputs, outputs, integrations and success criteria, written down and signed off before work starts.",
         deliverable: "A signed scope and a fixed-price quote.",
@@ -1238,20 +1236,18 @@ export const en = {
       {
         number: "03",
         label: "BUILD & TEST",
-        duration: "2–6 weeks",
         title: "We build in short sprints, tested on your real data.",
         body: "A working demo every sprint. You decide where the AI acts alone and where people review. If it misses the agreed accuracy, we keep iterating.",
         deliverable: "A working system, tested on your real data.",
-        whoJoins: "One hour per sprint to review the demo.",
+        whoJoins: "Your team to review each demo.",
       },
       {
         number: "04",
         label: "HANDOVER",
-        duration: "3–5 days",
         title: "Your team takes over, fully documented.",
-        body: "Deployed in your environment, your team trained, and 30 days of support after launch. No lock-in.",
+        body: "Deployed in your environment, your team trained, and support after launch. No lock-in.",
         deliverable: "A live system your team owns, with full documentation.",
-        whoJoins: "Your team for one 2-hour training session.",
+        whoJoins: "Your team for a training session.",
       },
     ],
     promisesLabel: "What you can count on",
@@ -1259,7 +1255,7 @@ export const en = {
     promises: [
       { title: "Fixed price", body: "In writing, before any build work starts." },
       { title: "Your tools", body: "We build into the stack you already use." },
-      { title: "4–8 weeks", body: "From the first call to a live system." },
+      { title: "Clear progress", body: "Working demos and agreed milestones throughout the build." },
       { title: "Yours to keep", body: "Code, models and data stay in your environment." },
     ],
   },

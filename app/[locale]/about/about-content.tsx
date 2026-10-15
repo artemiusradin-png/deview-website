@@ -1,6 +1,6 @@
 "use client";
 
-import { useSyncExternalStore, type CSSProperties, type ReactNode } from "react";
+import { useSyncExternalStore, type ReactNode } from "react";
 import Link from "next/link";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SubpageNav } from "@/components/SubpageNav";
@@ -134,13 +134,6 @@ const PHASE_RESULTS: Record<string, string> = {
   "02": "A signed scope and a fixed-price quote.",
   "03": "A working system, tested on your real data.",
   "04": "A live system your team owns, fully documented.",
-};
-/** Bar length on phones, roughly in proportion to each phase's typical duration. */
-const PHASE_WIDTH: Record<string, string> = {
-  "01": "40%",
-  "02": "22%",
-  "03": "100%",
-  "04": "22%",
 };
 
 const INDUSTRY_LINKS = [
@@ -292,13 +285,11 @@ export function AboutContent() {
                 key={phase.number}
                 className={styles.phase}
                 data-accent={phase.number === "03"}
-                style={{ "--w": PHASE_WIDTH[phase.number] } as CSSProperties}
               >
                 <div className={styles.phaseBar} aria-hidden="true" />
                 <div className={styles.phaseBody}>
                   <div className={styles.phaseTop}>
                     <span>{phase.number}</span>
-                    <span>{phase.duration}</span>
                   </div>
                   <h3>
                     {phase.label.charAt(0) + phase.label.slice(1).toLowerCase()}
