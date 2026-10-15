@@ -26,12 +26,12 @@ interface TeamMemberCardProps {
 
 export default function TeamMemberCard({
   position = "left",
-  jobPosition = "Managing Director",
+  jobPosition = "Sales & Operations",
   firstName = "Artemis",
   lastName = "Radin",
   imageUrl = "/team/artemis-radin.jpg",
   initials,
-  description = "Artemis leads DeView's engagements end to end: from scoping the workflows that cost clients the most to shipping the AI systems that fix them.",
+  description = "Artemis runs Deview's sales and operations: from the first client conversation to projects delivered on schedule.",
   href = "/contact",
   className,
 }: TeamMemberCardProps) {
