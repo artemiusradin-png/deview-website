@@ -556,11 +556,11 @@ export const en = {
   },
   leadership: {
     sectionLabel: "LEADERSHIP",
-    jobPosition: "Managing Director & Operations",
+    jobPosition: "Sales & Operations",
     firstName: "Artemis",
     lastName: "Radin",
     description:
-      "Artemis brings experience from BNP Paribas and Covenant Desk to leading DeView's engagements end to end: from scoping the costliest workflows to shipping measurable systems in weeks.",
+      "Artemis brings experience from BNP Paribas and Covenant Desk to Deview's sales and operations: from the first client conversation to projects delivered on schedule.",
   },
   industries: {
     sectionLabel: "INDUSTRIES WE SERVE",
@@ -1111,10 +1111,10 @@ export const en = {
       members: [
         {
           name: "Artemis Radin",
-          role: "Managing Director & Operations",
+          role: "Sales & Operations",
           photo: "/team/artemis-radin-800.webp",
           initials: "AR",
-          bio: "Founder and Managing Director of Covenant Desk Limited, the registered company behind DeView. Brings experience from BNP Paribas to leading DeView's engagements: from scoping the costliest workflows to shipping measurable systems in weeks.",
+          bio: "Runs Deview's sales and operations, bringing experience from BNP Paribas: from the first client conversation to projects delivered on schedule.",
         },
         {
           name: "Mikhail Shishlenin",
@@ -1131,7 +1131,7 @@ export const en = {
           initials: "YL",
           bio: "Builds software, manages project delivery, and coordinates teams and client work across DeView engagements.",
         },
-        { name: "Stepan Pashchenko", role: "Head of Sales & Key Account Manager", photo: "/team/stepan-pashchenko-800.webp", initials: "SP", bio: "Leads new business development: from first conversation to signed scope." },
+        { name: "Stepan Pashchenko", role: "Client Relations & Key Account Manager", photo: "/team/stepan-pashchenko-800.webp", initials: "SP", bio: "Looks after Deview's key client accounts, from the first conversation to the long-term relationship." },
         { name: "Stanislav Dupliakov", role: "Switzerland Customer Relations", photo: "/team/stanislav-dupllyakov-800.webp", initials: "SD", bio: "The main point of contact for DeView's clients in Switzerland, from delivery through ongoing support." },
         { name: "Alberto Castiñeiras", role: "Business Development", photo: "/team/alberto-castineiras-800.webp", initials: "AC", bio: "Develops Deview's client relationships and supports scoping on new engagements." },
         { name: "Yu Fu Kuo", role: "Junior Business Analyst", photo: "/team/yu-fu-kuo-800.webp", initials: "YK", bio: "Supports project analysis and client work across Deview's engagements." },
