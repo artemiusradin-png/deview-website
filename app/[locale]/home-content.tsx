@@ -551,7 +551,7 @@ export function HomeContent({
             label={dict.process.sectionLabel}
             title={
               <>
-                Small team.
+                Dedicated team.
                 <br />
                 Full follow-through.
               </>
@@ -620,8 +620,8 @@ export function HomeContent({
               id="team-title"
             >
               <p>
-                The people you talk to are the people who build it. Meet the
-                team behind your next move.
+                A team of {dict.aboutPage.team.size} across four offices. The
+                people you talk to are the people who build it.
               </p>
             </SectionHeading>
             <TeamGrid />

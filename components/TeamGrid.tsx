@@ -16,79 +16,94 @@ const PORTRAIT_CROPS: Record<string, { focus: string; zoom: number }> = {
   "/team/yevhen-lahodiuk-800.webp": { focus: "60% 16%", zoom: 1 },
   "/team/stepan-pashchenko-800.webp": { focus: "52% 30%", zoom: 1.1 },
   "/team/stanislav-dupllyakov-800.webp": { focus: "50% 14%", zoom: 1.75 },
+  "/team/alberto-castineiras-800.webp": { focus: "50% 20%", zoom: 1.05 },
+  "/team/yu-fu-kuo-800.webp": { focus: "50% 10%", zoom: 1 },
 };
 
 /**
- * The team as full-bleed portrait cards with the name set on the photo. "strip" puts all six in
- * one row (landing page); "grid" is three larger cards per row (About page). Portraits share a warm
- * monochrome grade; hovering a card brings back its colour and slides the bio up. On touch screens
- * the "grid" variant prints the bio under the photo instead.
+ * The team as full-bleed portrait cards with the name set on the photo, closed by a "+N more"
+ * tile for the people not listed. "strip" is five cards per row (landing page); "grid" is three
+ * larger cards per row (About page). Portraits share a warm monochrome grade; hovering a card
+ * brings back its colour and slides the bio up. On touch screens the "grid" variant prints the
+ * bio under the photo instead.
  */
 export function TeamGrid({ variant = "strip" }: { variant?: "strip" | "grid" }) {
   const { dict } = useLocaleContext();
+  const { team } = dict.aboutPage;
   const leadName = `${dict.leadership.firstName} ${dict.leadership.lastName}`;
+  const members = team.members.filter((member) => member.name);
+  const unlisted = team.size - members.length;
   return (
     <ul
       className={styles.grid}
       data-variant={variant}
       aria-label="The DeView team"
     >
-      {dict.aboutPage.team.members
-        .filter((member) => member.name)
-        .map((member, index) => {
-          const crop = member.photo ? PORTRAIT_CROPS[member.photo] : undefined;
-          const bio =
-            member.name === leadName && variant === "strip"
-              ? dict.leadership.description
-              : member.bio;
-          return (
-            <li key={member.name} className={styles.member}>
-              <div className={styles.card}>
+      {members.map((member, index) => {
+        const crop = member.photo ? PORTRAIT_CROPS[member.photo] : undefined;
+        const bio =
+          member.name === leadName && variant === "strip"
+            ? dict.leadership.description
+            : member.bio;
+        return (
+          <li key={member.name} className={styles.member}>
+            <div className={styles.card}>
+              <div
+                className={styles.portrait}
+                style={
+                  {
+                    "--focus": crop?.focus,
+                    "--zoom": crop?.zoom,
+                  } as CSSProperties
+                }
+              >
+                {member.photo ? (
+                  <Image
+                    src={member.photo}
+                    alt=""
+                    fill
+                    unoptimized
+                    sizes={
+                      variant === "grid"
+                        ? "(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                        : "(max-width: 760px) 50vw, (max-width: 1100px) 33vw, 300px"
+                    }
+                  />
+                ) : (
+                  <span>{member.initials}</span>
+                )}
+              </div>
+              <span className={styles.index} aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div className={styles.caption}>
+                <h3 className={styles.name}>{member.name}</h3>
+                <span className={styles.role}>{member.role}</span>
                 <div
-                  className={styles.portrait}
-                  style={
-                    {
-                      "--focus": crop?.focus,
-                      "--zoom": crop?.zoom,
-                    } as CSSProperties
-                  }
+                  className={styles.bio}
+                  aria-hidden={variant === "grid" || undefined}
                 >
-                  {member.photo ? (
-                    <Image
-                      src={member.photo}
-                      alt=""
-                      fill
-                      unoptimized
-                      sizes={
-                        variant === "grid"
-                          ? "(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 33vw"
-                          : "(max-width: 760px) 50vw, (max-width: 1100px) 33vw, 240px"
-                      }
-                    />
-                  ) : (
-                    <span>{member.initials}</span>
-                  )}
-                </div>
-                <span className={styles.index} aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div className={styles.caption}>
-                  <h3 className={styles.name}>{member.name}</h3>
-                  <span className={styles.role}>{member.role}</span>
-                  <div
-                    className={styles.bio}
-                    aria-hidden={variant === "grid" || undefined}
-                  >
-                    <span>{bio}</span>
-                  </div>
+                  <span>{bio}</span>
                 </div>
               </div>
-              {variant === "grid" ? (
-                <div className={styles.bioBelow}>{bio}</div>
-              ) : null}
-            </li>
-          );
-        })}
+            </div>
+            {variant === "grid" ? (
+              <div className={styles.bioBelow}>{bio}</div>
+            ) : null}
+          </li>
+        );
+      })}
+      {unlisted > 0 ? (
+        <li className={`${styles.member} ${styles.more}`}>
+          <div className={styles.moreCard}>
+            <span className={styles.moreLabel}>{team.moreLabel}</span>
+            <p className={styles.moreBody}>
+              <strong>+{unlisted}</strong>
+              <span>{team.moreBody}</span>
+            </p>
+          </div>
+        </li>
+      ) : null}
     </ul>
   );
 }

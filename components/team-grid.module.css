@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 14px;
 }
 .grid[data-variant="grid"] {
@@ -41,10 +41,11 @@
     filter 500ms ease,
     transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
+/* Initials sit in the upper part of the card, clear of a two-line name and role. */
 .portrait > span {
   display: grid;
   place-items: center;
-  height: 100%;
+  height: 60%;
   color: #171207;
   font-size: 40px;
 }
@@ -129,6 +130,62 @@
   display: none;
 }
 
+/* "+N more" tile that closes the grid. Laid out for nine named members: the fifth card of the
+   strip's second row, and a full-width band under the About page's three rows of three. */
+.moreCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  aspect-ratio: 5 / 7;
+  padding: 14px 16px 16px;
+  background: #171207;
+  color: #fffdf7;
+}
+.moreLabel {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 253, 247, 0.72);
+}
+.moreBody {
+  margin: 0;
+  color: rgba(255, 253, 247, 0.84);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.moreBody strong {
+  display: block;
+  margin-bottom: 10px;
+  color: #fffdf7;
+  font-family: var(--font-satoshi), var(--font-archivo), sans-serif;
+  font-size: clamp(44px, 4.4vw, 72px);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+.grid[data-variant="grid"] .more {
+  grid-column: 1 / -1;
+}
+.grid[data-variant="grid"] .moreCard {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 56px;
+  aspect-ratio: auto;
+  padding: 28px 32px;
+}
+.grid[data-variant="grid"] .moreBody {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  max-width: 640px;
+  font-size: 17px;
+}
+.grid[data-variant="grid"] .moreBody strong {
+  margin: 0;
+}
+
 /* About page: larger cards and type. */
 .grid[data-variant="grid"] .index {
   top: 20px;
@@ -198,6 +255,42 @@
   .grid[data-variant="grid"] .name {
     font-size: 26px;
   }
+  /* Strip: three rows of three, so the tile becomes a band. About: it pairs with the ninth card. */
+  .grid[data-variant="strip"] .more {
+    grid-column: 1 / -1;
+  }
+  .grid[data-variant="strip"] .moreCard {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+    aspect-ratio: auto;
+    padding: 22px 24px;
+  }
+  .grid[data-variant="strip"] .moreBody {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .grid[data-variant="strip"] .moreBody strong {
+    margin: 0;
+  }
+  .grid[data-variant="grid"] .more {
+    grid-column: auto;
+  }
+  .grid[data-variant="grid"] .moreCard {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    aspect-ratio: 4 / 5;
+    padding: 20px 22px 24px;
+  }
+  .grid[data-variant="grid"] .moreBody {
+    display: block;
+  }
+  .grid[data-variant="grid"] .moreBody strong {
+    margin-bottom: 12px;
+  }
 }
 
 @media (max-width: 760px) {
@@ -238,6 +331,33 @@
     left: 18px;
     right: 18px;
     bottom: 18px;
+  }
+  /* Strip: the tile pairs with the ninth card again. About: a band under the single column. */
+  .grid[data-variant="strip"] .more {
+    grid-column: auto;
+  }
+  .grid[data-variant="strip"] .moreCard {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 8px;
+    aspect-ratio: 1;
+    padding: 10px 12px 12px;
+  }
+  .grid[data-variant="strip"] .moreBody {
+    display: block;
+    font-size: 12px;
+  }
+  .grid[data-variant="strip"] .moreBody strong {
+    margin-bottom: 6px;
+    font-size: 40px;
+  }
+  .moreLabel {
+    font-size: 9px;
+  }
+  .grid[data-variant="grid"] .moreCard {
+    aspect-ratio: auto;
+    padding: 22px 18px;
   }
 }
 
