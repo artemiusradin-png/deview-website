@@ -20,6 +20,29 @@ export type DiagramId =
   | "upstream-production"
   | "mes";
 
+/**
+ * A reference architecture drawn from data: inputs on the left, the platform's own modules in
+ * the middle, the systems it feeds on the right. Used by pages without a hand-drawn diagram.
+ */
+export type FlowDiagram = {
+  /** Accessible name and description of the drawing. */
+  title: string;
+  desc: string;
+  leftLabel: string;
+  platformLabel: string;
+  rightLabel: string;
+  platformTitle: string;
+  /** 2-4 boxes: first line is the heading, up to three detail lines (about 30 characters each). */
+  left: string[][];
+  /** 4-8 modules, as heading and one detail line. */
+  modules: [string, string][];
+  /** One line under the modules: what runs through the whole platform. */
+  strip: string;
+  right: string[][];
+  /** If set, a dashed boundary is drawn between the inputs and the platform with this label. */
+  boundary?: string;
+};
+
 export type SolutionPage = {
   slug: string;
   vertical: SolutionVertical;
@@ -32,7 +55,7 @@ export type SolutionPage = {
   intro: string;
   /** What the system does: 6-10 modules, one heading and one sentence each. */
   modules: { title: string; body: string }[];
-  diagram: DiagramId;
+  diagram: DiagramId | FlowDiagram;
   diagramCaption: string;
   /** Standards and interfaces the system is designed against. */
   standards: { name: string; note: string }[];

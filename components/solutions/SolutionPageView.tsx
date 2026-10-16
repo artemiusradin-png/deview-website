@@ -188,7 +188,7 @@ export function SolutionPageView({ page }: { page: SolutionPage }) {
               Reference architecture.
             </h2>
             <figure className={styles.diagram}>
-              <SolutionDiagram id={page.diagram} />
+              <SolutionDiagram diagram={page.diagram} />
               <figcaption>{page.diagramCaption}</figcaption>
             </figure>
           </section>

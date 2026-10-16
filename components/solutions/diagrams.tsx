@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { DiagramId } from "@/lib/solutions/types";
+import type { DiagramId, FlowDiagram } from "@/lib/solutions/types";
 
 /**
  * Architecture drawings for the solution pages, in the line-drawing style of the case-study
@@ -308,13 +308,78 @@ function Mes() {
   );
 }
 
+/** The data-driven reference architecture: inputs, platform modules, outputs. */
+function Flow({ data }: { data: FlowDiagram }) {
+  const id = "d-flow";
+  const rows = Math.ceil(data.modules.length / 2);
+  const modulesEnd = 120 + rows * 115 - 20;
+  const platformBottom = modulesEnd + 60;
+  const height = platformBottom + 50;
+  const sideBoxes = (items: string[][], x: number) => {
+    const span = platformBottom - 70;
+    const h = Math.min(104, (span - (items.length - 1) * 18) / items.length);
+    const gap = items.length > 1 ? (span - items.length * h) / (items.length - 1) : 0;
+    return items.map((lines, i) => {
+      const y = 70 + i * (h + gap);
+      return { lines, y, h, mid: y + h / 2 };
+    });
+  };
+  const left = sideBoxes(data.left, 30);
+  const right = sideBoxes(data.right, 930);
+  return (
+    <Frame id={id} width={1200} height={height} title={data.title} desc={data.desc}>
+      <Label x={30} y={40}>{data.leftLabel}</Label>
+      <Label x={340} y={40}>{data.platformLabel}</Label>
+      <Label x={930} y={40}>{data.rightLabel}</Label>
+      {left.map((b) => (
+        <g key={b.lines[0]}>
+          <Box x={30} y={b.y} w={240} h={b.h} lines={b.lines} />
+          <Arrow id={id} d={`M270 ${b.mid}H340`} />
+        </g>
+      ))}
+      <Platform x={340} y={50} w={520} h={platformBottom - 50} title={data.platformTitle} />
+      {data.modules.map(([head, line], i) => (
+        <Box
+          key={head}
+          x={i % 2 === 0 ? 360 : 615}
+          y={120 + Math.floor(i / 2) * 115}
+          w={235}
+          h={95}
+          lines={[head, line]}
+        />
+      ))}
+      <line x1={360} y1={modulesEnd + 15} x2={850} y2={modulesEnd + 15} stroke={INK} strokeWidth="1.5" />
+      <text x={605} y={modulesEnd + 40} fontSize={13} fill={MUTED} textAnchor="middle">
+        {data.strip}
+      </text>
+      {right.map((b) => (
+        <g key={b.lines[0]}>
+          <Box x={930} y={b.y} w={240} h={b.h} lines={b.lines} />
+          <Arrow id={id} d={`M860 ${b.mid}H930`} />
+        </g>
+      ))}
+      {data.boundary ? (
+        <g>
+          <line x1={305} y1={60} x2={305} y2={height - 30} stroke={INK} strokeWidth="2" strokeDasharray="8 8" />
+          <text x={298} y={height - 12} fontSize={12} fill={MUTED} textAnchor="end">
+            {data.boundary}
+          </text>
+        </g>
+      ) : null}
+    </Frame>
+  );
+}
+
 export const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   "sme-lending": SmeLending,
   "upstream-production": UpstreamProduction,
   mes: Mes,
 };
 
-export function SolutionDiagram({ id }: { id: DiagramId }) {
-  const Diagram = DIAGRAMS[id];
-  return <Diagram />;
+export function SolutionDiagram({ diagram }: { diagram: DiagramId | FlowDiagram }) {
+  if (typeof diagram === "string") {
+    const Diagram = DIAGRAMS[diagram];
+    return <Diagram />;
+  }
+  return <Flow data={diagram} />;
 }

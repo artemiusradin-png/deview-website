@@ -1,9 +1,12 @@
 import { SOLUTION_ASSETS } from "./assets";
 import { BANKING_PAGES } from "./banking";
+import { BANKING_LENDING_PAGES } from "./banking-lending";
+import { BANKING_PAYMENTS_PAGES } from "./banking-payments";
+import { BANKING_DIGITAL_PAGES } from "./banking-digital";
 import { MANUFACTURING_PAGES } from "./manufacturing";
 import { OIL_GAS_PAGES } from "./oil-gas";
 import { SOLUTION_HUBS } from "./hubs";
-import type { SolutionHub, SolutionPage, SolutionVertical } from "./types";
+import { solutionPath, type SolutionHub, type SolutionPage, type SolutionVertical } from "./types";
 
 export { SOLUTION_ASSETS, assetById } from "./assets";
 export { SOLUTION_HUBS, publishedHubs } from "./hubs";
@@ -12,6 +15,9 @@ export * from "./types";
 /** Every solution page, in the order the library lists them. */
 export const SOLUTION_PAGES: SolutionPage[] = [
   ...BANKING_PAGES,
+  ...BANKING_LENDING_PAGES,
+  ...BANKING_PAYMENTS_PAGES,
+  ...BANKING_DIGITAL_PAGES,
   ...OIL_GAS_PAGES,
   ...MANUFACTURING_PAGES,
 ];
@@ -70,6 +76,17 @@ function validate() {
     if (/\$\s?\d|USD|HK\$|\b(weeks?|months?)\b/i.test(text.replace(/per month|a month/gi, "")))
       errors.push(`${tag}: mentions a price or a duration`);
     if (/gazprom|lukoil|tomskneft|fubon|fudon/i.test(text)) errors.push(`${tag}: names a company that must not be named`);
+  }
+  const known = new Set([
+    ...SOLUTION_PAGES.map((p) => solutionPath(p.slug)),
+    ...SOLUTION_HUBS.filter((h) => h.published).map((h) => solutionPath(h.slug)),
+    "/solutions",
+  ]);
+  for (const page of SOLUTION_PAGES) {
+    for (const link of [...page.proof, ...page.related]) {
+      if (link.href.startsWith("/solutions") && !known.has(link.href))
+        errors.push(`page ${page.slug}: link ${link.href} does not exist`);
+    }
   }
   for (const asset of SOLUTION_ASSETS) {
     if (!pageBySlug(asset.primaryPage)) errors.push(`asset ${asset.id}: primary page ${asset.primaryPage} does not exist`);

@@ -1,3 +1,4 @@
+import { BANKING_ASSETS } from "./assets-banking";
 import type { SolutionAsset } from "./types";
 
 /**
@@ -6,6 +7,7 @@ import type { SolutionAsset } from "./types";
  * builds its list from this file.
  */
 export const SOLUTION_ASSETS: SolutionAsset[] = [
+  ...BANKING_ASSETS,
   {
     id: "sme-lending-rfp",
     source: "sol-sme-lending-rfp",
