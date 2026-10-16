@@ -1,6 +1,7 @@
 import { BANKING_ASSETS } from "./assets-banking";
 import { BANKING_FINANCE_ASSETS } from "./assets-banking-finance";
 import { OIL_GAS_ASSETS } from "./assets-oil-gas";
+import { CROSS_ASSETS } from "./assets-cross";
 import type { SolutionAsset } from "./types";
 
 /**
@@ -12,6 +13,7 @@ export const SOLUTION_ASSETS: SolutionAsset[] = [
   ...BANKING_ASSETS,
   ...BANKING_FINANCE_ASSETS,
   ...OIL_GAS_ASSETS,
+  ...CROSS_ASSETS,
   {
     id: "sme-lending-rfp",
     source: "sol-sme-lending-rfp",

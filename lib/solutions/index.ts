@@ -8,6 +8,10 @@ import { MANUFACTURING_PAGES } from "./manufacturing";
 import { OIL_GAS_PAGES } from "./oil-gas";
 import { OIL_GAS_OPS_PAGES } from "./oil-gas-ops";
 import { OIL_GAS_PROJECTS_PAGES } from "./oil-gas-projects";
+import { MANUFACTURING_OPS_PAGES } from "./manufacturing-ops";
+import { AGRICULTURE_PAGES } from "./agriculture";
+import { IOT_PAGES } from "./iot";
+import { INTEGRATION_PAGES } from "./integration";
 import { SOLUTION_HUBS } from "./hubs";
 import { solutionPath, type SolutionHub, type SolutionPage, type SolutionVertical } from "./types";
 
@@ -26,6 +30,10 @@ export const SOLUTION_PAGES: SolutionPage[] = [
   ...OIL_GAS_OPS_PAGES,
   ...OIL_GAS_PROJECTS_PAGES,
   ...MANUFACTURING_PAGES,
+  ...MANUFACTURING_OPS_PAGES,
+  ...AGRICULTURE_PAGES,
+  ...IOT_PAGES,
+  ...INTEGRATION_PAGES,
 ];
 
 export const pageBySlug = (slug: string) => SOLUTION_PAGES.find((p) => p.slug === slug);

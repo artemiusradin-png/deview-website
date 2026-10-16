@@ -168,17 +168,108 @@ export const SOLUTION_HUBS: SolutionHub[] = [
   {
     slug: "agriculture-software",
     vertical: "agriculture",
-    published: false,
+    published: true,
     navLabel: "Agriculture software",
     seoTitle: "Agriculture Software Development | Deview",
     seoDescription:
-      "Custom software for agricultural enterprises: farm management, dealer and ordering platforms, traceability, field apps and agronomy analytics.",
+      "Custom software for agricultural enterprises: farm management, dealer and ordering platforms, grain and commodity systems, traceability, field apps and sensor networks.",
     kicker: "Enterprise solutions · Agriculture",
     h1: "Agriculture software development",
     intro:
-      "We build custom software for agricultural enterprises: farm management, dealer and ordering platforms, traceability and field apps.",
-    needs: [],
-    faqs: [],
+      "We build custom software for agricultural enterprises: farm and field management, dealer and ordering platforms, grain and commodity systems, traceability for deforestation and food safety rules, field apps and sensor networks. Field work, sales and supply connect in one platform, and you own the code.",
+    needs: [
+      {
+        title: "Farm and field management",
+        body: "Plots, crops, inputs, operations and costs for agricultural enterprises, from planning through harvest and reporting.",
+      },
+      {
+        title: "Dealer and ordering platforms",
+        body: "Catalogues, quotes, orders and credit for dealers and distributors, with product and agronomy knowledge built in.",
+      },
+      {
+        title: "Grain and commodity handling",
+        body: "Contracts, weighbridge, grading, storage and settlement for grain, oilseeds and other commodities.",
+      },
+      {
+        title: "Traceability and compliance",
+        body: "Plot-level geolocation, chain of custody and records for deforestation regulation and food traceability rules.",
+      },
+      {
+        title: "Field apps",
+        body: "Offline-first apps for agronomists and crews: scouting, sampling, recommendations and photos with location.",
+      },
+      {
+        title: "Sensors and precision agriculture",
+        body: "Soil, weather and machinery data from the field, brought together for decisions and automation.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Do you build systems for individual farms or for agribusinesses?",
+        a: "For agricultural enterprises: large farms and farming groups, input suppliers and distributors, grain handlers and processors, where several teams and systems have to work from the same data.",
+      },
+      {
+        q: "Do the field apps work without a mobile signal?",
+        a: "Yes. Field apps are built offline first: they record data in the field and synchronise when a connection returns, with conflicts shown for review.",
+      },
+      {
+        q: "Where can I see agricultural work from the team?",
+        a: "The AgroPlatforma case study shows AI field diagnostics for a national agricultural network, with a Flutter app and quotation drafting written into Salesforce for human approval.",
+      },
+    ],
+  },
+  {
+    slug: "enterprise-engineering-solutions",
+    vertical: "cross-industry",
+    published: true,
+    navLabel: "IoT, integration and AI",
+    seoTitle: "IoT, Integration, Data and AI Engineering for Enterprises | Deview",
+    seoDescription:
+      "Cross-industry engineering for enterprises: IoT platforms, SCADA and edge integration, systems integration, legacy modernisation, data platforms, AI, cloud and security.",
+    kicker: "Enterprise solutions · Cross-industry",
+    h1: "IoT, integration, data and AI engineering for enterprises",
+    intro:
+      "Some systems are not specific to one industry. We build IoT platforms and edge software, integrate and modernise enterprise applications, engineer data platforms and AI, and harden cloud and security, for banks, energy companies, manufacturers and agricultural enterprises alike. Each page below describes one of these engineering areas in technical terms, and you own the code.",
+    needs: [
+      {
+        title: "IoT and edge",
+        body: "Device management, telemetry, gateways, tracking and digital twins, software and integration around devices.",
+      },
+      {
+        title: "Integration and APIs",
+        body: "Connecting ERP, CRM, operational and partner systems through APIs, events and files.",
+      },
+      {
+        title: "Legacy modernisation",
+        body: "Moving ageing applications and databases to maintainable platforms in steps, without stopping the business.",
+      },
+      {
+        title: "Data platforms",
+        body: "Lakehouses, pipelines, master data and analytics on governed, documented data.",
+      },
+      {
+        title: "AI and automation",
+        body: "Private language models, agents and machine learning that work on your own data and systems.",
+      },
+      {
+        title: "Cloud and security",
+        body: "Cloud migration, DevSecOps, zero trust, resilience and compliance engineering.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Do you design hardware?",
+        a: "We build the software and integration around devices: data collection, edge gateways, terminals, dashboards and cloud back-ends. Electronics and firmware design stay with your equipment suppliers.",
+      },
+      {
+        q: "Can you work with our existing systems?",
+        a: "Yes. Most of our work connects to systems you already run, such as ERP, core banking, historians and CRM, through APIs, messages or files.",
+      },
+      {
+        q: "Who owns the code?",
+        a: "You do. The code, the data and any models stay yours.",
+      },
+    ],
   },
 ];
 
