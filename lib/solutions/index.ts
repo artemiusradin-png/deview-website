@@ -16,6 +16,8 @@ import { AI_INDUSTRIAL_PAGES } from "./ai-industrial";
 import { AI_ENTERPRISE_PAGES } from "./ai-enterprise";
 import { DATA_BANKING_OG_PAGES } from "./data-banking-og";
 import { DATA_OTHERS_PAGES } from "./data-others";
+import { CLOUD_BANKING_PAGES } from "./cloud-banking";
+import { CLOUD_OTHERS_PAGES } from "./cloud-others";
 import { SOLUTION_HUBS } from "./hubs";
 import { solutionPath, type SolutionHub, type SolutionPage, type SolutionVertical } from "./types";
 
@@ -42,6 +44,8 @@ export const SOLUTION_PAGES: SolutionPage[] = [
   ...AI_ENTERPRISE_PAGES,
   ...DATA_BANKING_OG_PAGES,
   ...DATA_OTHERS_PAGES,
+  ...CLOUD_BANKING_PAGES,
+  ...CLOUD_OTHERS_PAGES,
 ];
 
 export const pageBySlug = (slug: string) => SOLUTION_PAGES.find((p) => p.slug === slug);

@@ -4,6 +4,7 @@ import { OIL_GAS_ASSETS } from "./assets-oil-gas";
 import { CROSS_ASSETS } from "./assets-cross";
 import { AI_ASSETS } from "./assets-ai";
 import { METHANE_ASSETS } from "./assets-methane";
+import { CLOUD_ASSETS } from "./assets-cloud";
 import type { SolutionAsset } from "./types";
 
 /**
@@ -18,6 +19,7 @@ export const SOLUTION_ASSETS: SolutionAsset[] = [
   ...CROSS_ASSETS,
   ...AI_ASSETS,
   ...METHANE_ASSETS,
+  ...CLOUD_ASSETS,
   {
     id: "sme-lending-rfp",
     source: "sol-sme-lending-rfp",
