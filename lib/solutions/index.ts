@@ -3,6 +3,7 @@ import { BANKING_PAGES } from "./banking";
 import { BANKING_LENDING_PAGES } from "./banking-lending";
 import { BANKING_PAYMENTS_PAGES } from "./banking-payments";
 import { BANKING_DIGITAL_PAGES } from "./banking-digital";
+import { BANKING_CONTROLLING_PAGES } from "./banking-controlling";
 import { MANUFACTURING_PAGES } from "./manufacturing";
 import { OIL_GAS_PAGES } from "./oil-gas";
 import { SOLUTION_HUBS } from "./hubs";
@@ -18,6 +19,7 @@ export const SOLUTION_PAGES: SolutionPage[] = [
   ...BANKING_LENDING_PAGES,
   ...BANKING_PAYMENTS_PAGES,
   ...BANKING_DIGITAL_PAGES,
+  ...BANKING_CONTROLLING_PAGES,
   ...OIL_GAS_PAGES,
   ...MANUFACTURING_PAGES,
 ];
@@ -73,7 +75,7 @@ function validate() {
     const n = words(page);
     if (n < 1000) errors.push(`${tag}: only ${n} words`);
     const text = JSON.stringify(page);
-    if (/\$\s?\d|USD|HK\$|\b(weeks?|months?)\b/i.test(text.replace(/per month|a month/gi, "")))
+    if (/\$\s?\d|USD|HK\$|\b(weeks?|months?)\b/i.test(text.replace(/month-end|per month|a month/gi, "")))
       errors.push(`${tag}: mentions a price or a duration`);
     if (/gazprom|lukoil|tomskneft|fubon|fudon/i.test(text)) errors.push(`${tag}: names a company that must not be named`);
   }

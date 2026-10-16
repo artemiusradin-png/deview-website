@@ -16,4 +16,7 @@ export const COVERS = {
   "real-time-payment-fraud-detection": ["card", "eye", "shield"],
   "ai-document-processing-for-banks": ["doc", "chip", "db"],
   "genai-credit-memo-copilot": ["people", "network", "doc"],
+  "treasury-and-liquidity-management-system": ["coins", "scales", "chart"],
+  "regulatory-reporting-system-for-banks": ["db", "doc", "bank"],
+  "financial-controlling-and-management-reporting": ["ledger", "gear", "monitor"],
 };
