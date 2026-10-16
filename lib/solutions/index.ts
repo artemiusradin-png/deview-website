@@ -6,6 +6,8 @@ import { BANKING_DIGITAL_PAGES } from "./banking-digital";
 import { BANKING_CONTROLLING_PAGES } from "./banking-controlling";
 import { MANUFACTURING_PAGES } from "./manufacturing";
 import { OIL_GAS_PAGES } from "./oil-gas";
+import { OIL_GAS_OPS_PAGES } from "./oil-gas-ops";
+import { OIL_GAS_PROJECTS_PAGES } from "./oil-gas-projects";
 import { SOLUTION_HUBS } from "./hubs";
 import { solutionPath, type SolutionHub, type SolutionPage, type SolutionVertical } from "./types";
 
@@ -21,6 +23,8 @@ export const SOLUTION_PAGES: SolutionPage[] = [
   ...BANKING_DIGITAL_PAGES,
   ...BANKING_CONTROLLING_PAGES,
   ...OIL_GAS_PAGES,
+  ...OIL_GAS_OPS_PAGES,
+  ...OIL_GAS_PROJECTS_PAGES,
   ...MANUFACTURING_PAGES,
 ];
 
