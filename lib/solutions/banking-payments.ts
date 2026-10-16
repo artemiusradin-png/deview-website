@@ -529,7 +529,7 @@ export const BANKING_PAYMENTS_PAGES: SolutionPage[] = [
       strip: "Rule governance · audit trail · data lineage",
       right: [
         ["Investigators", "Cases and workspace"],
-        ["Financial intelligence unit", "Suspicious reports"],
+        ["Intelligence unit (FIU)", "Suspicious reports"],
         ["Compliance management", "Metrics, effectiveness"],
         ["Onboarding", "Risk rating updates"],
       ],

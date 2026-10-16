@@ -756,8 +756,8 @@ export const DATA_BANKING_OG_PAGES: SolutionPage[] = [
       ],
       strip: "Platform APIs · identity integration · audit trail",
       right: [
-        ["Interpretation applications", "Via APIs"],
-        ["Analytics and machine learning", "Notebooks, pipelines"],
+        ["Interpretation tools", "Via APIs"],
+        ["Analytics and ML", "Notebooks, pipelines"],
         ["Partners and regulators", "Governed sharing"],
         ["Data governance", "Stewards, quality"],
       ],
@@ -987,7 +987,7 @@ export const DATA_BANKING_OG_PAGES: SolutionPage[] = [
       right: [
         ["Data platform", "History, analytics"],
         ["Production systems", "Reporting, allocation"],
-        ["Digital twin and dashboards", "Live views"],
+        ["Twin and dashboards", "Live views"],
         ["Machine learning", "Training data"],
       ],
     },
@@ -1428,7 +1428,7 @@ export const DATA_BANKING_OG_PAGES: SolutionPage[] = [
       rightLabel: "Consumers",
       platformTitle: "Methane monitoring and reporting platform",
       left: [
-        ["Production and activity data", "Flaring, venting, fuel"],
+        ["Production, activity data", "Flaring, venting, fuel"],
         ["Measurement", "OGI, monitors, drones, satellite"],
         ["Maintenance and equipment", "Components, work orders"],
       ],

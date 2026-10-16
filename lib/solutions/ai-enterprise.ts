@@ -73,7 +73,7 @@ export const AI_ENTERPRISE_PAGES: SolutionPage[] = [
       strip: "Permissions per tool · kill switch · full audit log",
       right: [
         ["ERP and finance", "Postings, matches"],
-        ["Document and ticket systems", "Cases, records"],
+        ["Document, ticket systems", "Cases, records"],
         ["Reviewers", "Approve, correct"],
         ["Audit and management", "Logs, results"],
       ],

@@ -72,7 +72,7 @@ export const CLOUD_BANKING_PAGES: SolutionPage[] = [
       ],
       strip: "Guardrails as code · exit plan · audit evidence",
       right: [
-        ["Payment networks and partners", "Private connectivity"],
+        ["Payment networks, partners", "Private connectivity"],
         ["Data centre (hybrid)", "Staged migration"],
         ["Supervisors and auditors", "Evidence"],
         ["Board and risk", "Reports"],
@@ -515,7 +515,7 @@ export const CLOUD_BANKING_PAGES: SolutionPage[] = [
       rightLabel: "Consumers",
       platformTitle: "DORA resilience platform",
       left: [
-        ["Applications and infrastructure", "On-premise and cloud"],
+        ["Apps and infrastructure", "On-premise and cloud"],
         ["ICT third parties", "Providers, contracts"],
         ["Incidents and events", "Alerts, tickets"],
       ],
@@ -531,7 +531,7 @@ export const CLOUD_BANKING_PAGES: SolutionPage[] = [
       right: [
         ["Management body", "Risk and metrics"],
         ["Supervisors", "Incident and register data"],
-        ["Internal and external audit", "Evidence"],
+        ["Audit (internal, external)", "Evidence"],
         ["ICT providers", "Requirements, reviews"],
       ],
     },
@@ -744,7 +744,7 @@ export const CLOUD_BANKING_PAGES: SolutionPage[] = [
       platformTitle: "Cyber resilience programme",
       left: [
         ["Endpoints, network, cloud", "Logs, sensors"],
-        ["Identity and privileged access", "Authentication events"],
+        ["Identity and admin access", "Authentication events"],
         ["Applications and data", "Telemetry, backups"],
       ],
       modules: [
@@ -968,10 +968,10 @@ export const CLOUD_BANKING_PAGES: SolutionPage[] = [
       desc: "Important business services depend on applications, data, networks and third parties in a primary site. A resilience design with replication, a secondary site or region, failover automation, backups and a testing programme keeps services within their impact tolerances. Results go to management, supervisors and auditors.",
       leftLabel: "Primary site",
       platformLabel: "Resilience design",
-      rightLabel: "Secondary site and assurance",
+      rightLabel: "Secondary site, assurance",
       platformTitle: "Disaster recovery and continuity",
       left: [
-        ["Important business services", "Payments, accounts, trading"],
+        ["Important services", "Payments, accounts, trading"],
         ["Applications and data", "Core, hub, databases, queues"],
         ["Networks and third parties", "Connectivity, providers"],
       ],

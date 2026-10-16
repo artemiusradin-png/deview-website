@@ -303,7 +303,7 @@ export const BANKING_CONTROLLING_PAGES: SolutionPage[] = [
         ["Supervisory portals", "Formats, XBRL"],
         ["Finance and risk", "Review, explain"],
         ["Committees", "Pack and approvals"],
-        ["Internal and external audit", "Evidence"],
+        ["Audit (internal, external)", "Evidence"],
       ],
     },
     diagramCaption:

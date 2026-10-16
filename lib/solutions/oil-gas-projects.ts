@@ -759,7 +759,7 @@ export const OIL_GAS_PROJECTS_PAGES: SolutionPage[] = [
         ["Procurement and ERP", "Orders, suppliers"],
         ["Finance", "Invoices, payments"],
         ["Document control", "Deliverables"],
-        ["Project controls and safety", "Progress, access"],
+        ["Project controls, safety", "Progress, access"],
       ],
     },
     diagramCaption:

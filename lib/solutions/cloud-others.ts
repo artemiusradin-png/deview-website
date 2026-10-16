@@ -73,7 +73,7 @@ export const CLOUD_OTHERS_PAGES: SolutionPage[] = [
       ],
       strip: "Safety first · change control · audit trail",
       right: [
-        ["Historians and data platform", "DMZ, one-way data"],
+        ["Historians, data platform", "DMZ, one-way data"],
         ["Vendors and engineers", "Controlled access"],
         ["Security operations", "OT alerts"],
         ["Management and regulators", "Risk and evidence"],
@@ -744,7 +744,7 @@ export const CLOUD_OTHERS_PAGES: SolutionPage[] = [
       platformTitle: "Edge platform at the site",
       boundary: "Intermittent link",
       left: [
-        ["Control and monitoring systems", "Read-only access"],
+        ["Control and monitoring", "Read-only access"],
         ["Sensors and meters", "Telemetry"],
         ["Local users and devices", "Dashboards, apps"],
       ],
@@ -988,7 +988,7 @@ export const CLOUD_OTHERS_PAGES: SolutionPage[] = [
       strip: "Policy as code · exit plan · continuous evidence",
       right: [
         ["Permitted regions", "In-country, in-region"],
-        ["Sovereign and local providers", "Operational control"],
+        ["Sovereign, local providers", "Operational control"],
         ["Regulators and auditors", "Evidence"],
         ["Customers", "Assurance"],
       ],

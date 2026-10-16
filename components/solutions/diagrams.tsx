@@ -315,7 +315,7 @@ function Flow({ data }: { data: FlowDiagram }) {
   const modulesEnd = 120 + rows * 115 - 20;
   const platformBottom = modulesEnd + 60;
   const height = platformBottom + 50;
-  const sideBoxes = (items: string[][], x: number) => {
+  const sideBoxes = (items: string[][]) => {
     const span = platformBottom - 70;
     const h = Math.min(104, (span - (items.length - 1) * 18) / items.length);
     const gap = items.length > 1 ? (span - items.length * h) / (items.length - 1) : 0;
@@ -324,8 +324,8 @@ function Flow({ data }: { data: FlowDiagram }) {
       return { lines, y, h, mid: y + h / 2 };
     });
   };
-  const left = sideBoxes(data.left, 30);
-  const right = sideBoxes(data.right, 930);
+  const left = sideBoxes(data.left);
+  const right = sideBoxes(data.right);
   return (
     <Frame id={id} width={1200} height={height} title={data.title} desc={data.desc}>
       <Label x={30} y={40}>{data.leftLabel}</Label>

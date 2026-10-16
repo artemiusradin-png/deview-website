@@ -58,7 +58,7 @@ export const AGRICULTURE_PAGES: SolutionPage[] = [
       rightLabel: "Consumers",
       platformTitle: "Farm management platform",
       left: [
-        ["Field crews and agronomists", "Operations, scouting"],
+        ["Crews and agronomists", "Operations, scouting"],
         ["Machines and sensors", "Telematics, task files"],
         ["Satellite and weather", "Imagery, forecasts"],
       ],
@@ -303,7 +303,7 @@ export const AGRICULTURE_PAGES: SolutionPage[] = [
         ["ERP", "Orders, stock, invoices"],
         ["CRM", "Accounts, quotes"],
         ["Warehouse and logistics", "Picking, dispatch"],
-        ["Registration and weather data", "Permitted products"],
+        ["Registers and weather data", "Permitted products"],
       ],
     },
     diagramCaption:

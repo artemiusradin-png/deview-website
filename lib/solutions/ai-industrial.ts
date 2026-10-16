@@ -289,7 +289,7 @@ export const AI_INDUSTRIAL_PAGES: SolutionPage[] = [
       boundary: "One-way from OT",
       left: [
         ["Condition monitoring", "Vibration, temperature"],
-        ["Process and electrical data", "Pressure, flow, current"],
+        ["Process, electrical data", "Pressure, flow, current"],
         ["Maintenance history", "Failures, repairs"],
       ],
       modules: [

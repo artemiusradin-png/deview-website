@@ -59,7 +59,7 @@ export const OIL_GAS_OPS_PAGES: SolutionPage[] = [
       platformTitle: "Production allocation platform",
       boundary: "One-way from OT",
       left: [
-        ["Fiscal and allocation meters", "Volumes, quality flags"],
+        ["Fiscal and well meters", "Volumes, quality flags"],
         ["Test separators and wells", "Rates, phase fractions"],
         ["Laboratory and tank data", "Composition, dips"],
       ],
@@ -975,7 +975,7 @@ export const OIL_GAS_OPS_PAGES: SolutionPage[] = [
       left: [
         ["Work requests", "Maintenance, projects"],
         ["Field crews", "Permits, incidents, photos"],
-        ["Gas detection and plant data", "Readings, alarms"],
+        ["Gas detection, plant data", "Readings, alarms"],
       ],
       modules: [
         ["Electronic permits", "Types, steps, roles"],
@@ -987,7 +987,7 @@ export const OIL_GAS_OPS_PAGES: SolutionPage[] = [
       ],
       strip: "Gas test limits · audit trail · offline capture",
       right: [
-        ["Supervisors and control room", "Live permit status"],
+        ["Supervisors, control room", "Live permit status"],
         ["Maintenance system", "Work order status"],
         ["Management", "Safety indicators"],
         ["Regulators", "Incident reports"],

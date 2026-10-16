@@ -73,7 +73,7 @@ export const IOT_PAGES: SolutionPage[] = [
       ],
       strip: "Per-device authentication · multi-tenancy · audit trail",
       right: [
-        ["Applications and dashboards", "Operations, customers"],
+        ["Apps and dashboards", "Operations, customers"],
         ["Enterprise systems", "ERP, CMMS, CRM"],
         ["Analytics and AI", "Models, history"],
         ["Support and service", "Tickets, diagnostics"],

@@ -1670,7 +1670,7 @@ export const DATA_OTHERS_PAGES: SolutionPage[] = [
       strip: "Source cross-reference · change history · audit trail",
       right: [
         ["Operational systems", "Golden records"],
-        ["Analytics and data platform", "Consistent keys"],
+        ["Analytics, data platform", "Consistent keys"],
         ["Partners and exchanges", "Product and party data"],
         ["Governance", "Quality metrics"],
       ],

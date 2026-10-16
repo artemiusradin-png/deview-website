@@ -13,7 +13,7 @@ export const SOLUTION_HUBS: SolutionHub[] = [
     navLabel: "Banking & payments",
     seoTitle: "Banking and Payments Software Development | Deview",
     seoDescription:
-      "Custom software for banks, lenders and payment companies: SME lending platforms, payment and transaction infrastructure, reconciliation, controlling and regulatory reporting.",
+      "Custom software for banks, lenders and payment companies: SME lending, payment infrastructure, reconciliation, controlling and regulatory reporting.",
     kicker: "Enterprise solutions · Banking and payments",
     h1: "Software development for banks and payment companies",
     intro:
@@ -66,7 +66,7 @@ export const SOLUTION_HUBS: SolutionHub[] = [
     navLabel: "Oil & gas software",
     seoTitle: "Oil and Gas Software Development | Deview",
     seoDescription:
-      "Custom software for oil and gas operators: upstream production management, allocation, exploration and subsurface data, drilling reporting, project controls and methane reporting.",
+      "Custom software for oil and gas operators: production management, allocation, subsurface data, drilling reporting, project controls and methane reporting.",
     kicker: "Enterprise solutions · Oil and gas",
     h1: "Oil and gas software development",
     intro:
@@ -172,7 +172,7 @@ export const SOLUTION_HUBS: SolutionHub[] = [
     navLabel: "Agriculture software",
     seoTitle: "Agriculture Software Development | Deview",
     seoDescription:
-      "Custom software for agricultural enterprises: farm management, dealer and ordering platforms, grain and commodity systems, traceability, field apps and sensor networks.",
+      "Custom software for agricultural enterprises: farm management, dealer platforms, grain systems, traceability, field apps and sensor networks.",
     kicker: "Enterprise solutions · Agriculture",
     h1: "Agriculture software development",
     intro:
@@ -225,7 +225,7 @@ export const SOLUTION_HUBS: SolutionHub[] = [
     navLabel: "IoT, integration and AI",
     seoTitle: "IoT, Integration, Data and AI Engineering for Enterprises | Deview",
     seoDescription:
-      "Cross-industry engineering for enterprises: IoT platforms, SCADA and edge integration, systems integration, legacy modernisation, data platforms, AI, cloud and security.",
+      "Cross-industry engineering for enterprises: IoT and edge, systems integration, legacy modernisation, data platforms, AI, cloud and security.",
     kicker: "Enterprise solutions · Cross-industry",
     h1: "IoT, integration, data and AI engineering for enterprises",
     intro:

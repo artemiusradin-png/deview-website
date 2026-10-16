@@ -302,7 +302,7 @@ export const INTEGRATION_PAGES: SolutionPage[] = [
       right: [
         ["ERP and finance", "Orders, ledgers"],
         ["CRM and service", "Accounts, cases"],
-        ["Core and operational systems", "Banking, plant, field"],
+        ["Core and plant systems", "Banking, plant, field"],
         ["Data platform", "Events, history"],
       ],
     },
