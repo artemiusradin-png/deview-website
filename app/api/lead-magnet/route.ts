@@ -1,20 +1,22 @@
 import { NextResponse } from "next/server";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
+import { SOLUTION_ASSETS } from "@/lib/solutions/assets";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
 const MAX = { name: 200, email: 320, company: 200, industry: 100, challenge: 200 } as const;
 /** Guides that collect sign-ups here, keyed by the `source` the form sends. */
-const GUIDES = {
+const GUIDES: Record<string, string> = {
   "ai-guide-lending": "10 Practical AI Use Cases for Lending Companies",
   "automation-playbook": "The automation playbook",
   "lms-checklist": "Loan management system checklist",
   "ai-security-checklist": "AI security checklist for LLM applications",
-} as const;
-type GuideSource = keyof typeof GUIDES;
+  ...Object.fromEntries(SOLUTION_ASSETS.map((asset) => [asset.source, asset.title])),
+};
+type GuideSource = string;
 
 function guideSource(value: unknown): GuideSource {
-  return typeof value === "string" && value in GUIDES
-    ? (value as GuideSource)
+  return typeof value === "string" && Object.hasOwn(GUIDES, value)
+    ? value
     : "ai-guide-lending";
 }
 const PERSONAL_EMAIL_DOMAINS = new Set([

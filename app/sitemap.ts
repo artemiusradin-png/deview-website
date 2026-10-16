@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { MARKET_SLUGS } from "@/lib/markets";
 import { PRODUCTION_CASES } from "@/lib/case-studies";
 import { SERVICE_PAGES, servicePagePath } from "@/lib/service-pages";
+import { SOLUTION_PAGES, publishedHubs, solutionPath } from "@/lib/solutions";
 import {
   OIL_GAS_CASE_SLUGS,
   OIL_GAS_HUB_PATH,
@@ -70,9 +71,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: SERVICE_PAGES_UPDATED,
   }));
 
+  const solutionsUpdated = SOLUTION_PAGES.map((p) => p.updated).sort().at(-1);
+  const solutionPages = [
+    { url: `${SITE_URL}/en/solutions`, lastModified: solutionsUpdated },
+    ...publishedHubs().map((hub) => ({
+      url: `${SITE_URL}/en${solutionPath(hub.slug)}`,
+      lastModified: solutionsUpdated,
+    })),
+    ...SOLUTION_PAGES.map((page) => ({
+      url: `${SITE_URL}/en${solutionPath(page.slug)}`,
+      lastModified: page.updated,
+    })),
+  ];
+
   const productionCasePages = PRODUCTION_CASES.map(({ slug }) => ({
     url: `${SITE_URL}/en/case-studies/${slug}`,
   }));
 
-  return [...existingPages, ...servicePages, ...productionCasePages, ...marketPages, ...oilGasPages];
+  return [
+    ...existingPages,
+    ...servicePages,
+    ...solutionPages,
+    ...productionCasePages,
+    ...marketPages,
+    ...oilGasPages,
+  ];
 }
