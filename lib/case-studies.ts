@@ -36,6 +36,7 @@ export const PRODUCTION_CASES = [
   { number: "06", slug: "nextair", company: "Nextair", industry: "Ventilation & HVAC", services: ["Digital product engineering"], image: "/images/cases/covers/nextair.webp", imageAlt: "Drawing: an apartment building with one ventilation shaft", video: undefined, logo: NEXTAIR_LOGO, gallery: undefined },
   { number: "07", slug: "fizkultura", company: "Fizkultura", industry: "Fitness", services: ["Data engineering", "AI/ML engineering"], image: "/images/cases/covers/fizkultura.webp", imageAlt: "Drawing: four data sources feeding one weekly report", video: undefined, logo: FIZKULTURA_LOGO, gallery: undefined },
   { number: "08", slug: "enerquest", company: "EnerQuest Energy", industry: "Oil & gas", services: ["AI/ML engineering", "Data engineering", "Enterprise platforms"], image: "/images/cases/covers/enerquest.webp", imageAlt: "Drawing: a pump jack feeding an operating dashboard", video: undefined, logo: ENERQUEST_LOGO, gallery: undefined },
+  { number: "09", slug: "siimplytrade", company: "SiimplyTrade", industry: "Finance", services: ["Digital product engineering"], image: undefined, imageAlt: undefined, video: undefined, logo: undefined, gallery: undefined },
 ] as const;
 
 /** Loan management systems built for five Hong Kong lenders, the tenants of the Covenant Desk portal. */
