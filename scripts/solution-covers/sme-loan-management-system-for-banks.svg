@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- An SME shop front applies; a document with a check; the bank facade approves. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M110 650h1140"/>
+    <!-- shop front -->
+    <path d="M130 330h290l-24-64H154z" fill="#ffc933"/>
+    <path d="M130 330c0 18 24 18 24 0 0 18 24 18 24 0 0 18 24 18 24 0 0 18 24 18 24 0 0 18 24 18 24 0 0 18 24 18 24 0 0 18 24 18 24 0 0 18 24 18 24 0" fill="#fffdf7"/>
+    <rect x="150" y="348" width="250" height="302" fill="#fffdf7"/>
+    <rect x="250" y="450" width="76" height="200" fill="#f3eee2"/>
+    <circle cx="310" cy="552" r="5" fill="#171207"/>
+    <rect x="172" y="380" width="62" height="70" fill="#f3eee2"/>
+    <rect x="342" y="380" width="38" height="70" fill="#f3eee2"/>
+    <!-- arrow -->
+    <path d="M448 470h96m-16-16 16 16-16 16"/>
+    <!-- application document -->
+    <path d="M600 240h172l56 56v354H600z" fill="#fffdf7"/>
+    <path d="M772 240v56h56"/>
+    <path d="M640 330h150M640 376h120M640 422h150M640 468h100"/>
+    <rect x="640" y="520" width="90" height="34" fill="#f3eee2"/>
+    <circle cx="790" cy="590" r="52" fill="#ffc933"/>
+    <path d="M764 590l18 20 34-42" stroke-width="5"/>
+    <!-- arrow -->
+    <path d="M870 470h86m-16-16 16 16-16 16"/>
+    <!-- bank facade -->
+    <path d="M990 380l150-122 150 122z" fill="#fffdf7"/>
+    <circle cx="1140" cy="340" r="16" fill="#ffc933"/>
+    <rect x="990" y="380" width="300" height="30" fill="#fffdf7"/>
+    <rect x="1014" y="410" width="34" height="190" fill="#fffdf7"/>
+    <rect x="1089" y="410" width="34" height="190" fill="#fffdf7"/>
+    <rect x="1157" y="410" width="34" height="190" fill="#fffdf7"/>
+    <rect x="1232" y="410" width="34" height="190" fill="#fffdf7"/>
+    <rect x="990" y="600" width="300" height="26" fill="#fffdf7"/>
+    <rect x="966" y="626" width="348" height="24" fill="#fffdf7"/>
+  </g>
+</svg>

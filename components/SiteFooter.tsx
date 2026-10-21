@@ -6,6 +6,8 @@ import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 import { SERVICE_PAGES, servicePagePath } from "@/lib/service-pages";
 import { SERVICE_LINES } from "@/lib/workflow-offers";
+import { publishedHubs } from "@/lib/solutions/hubs";
+import { solutionPath } from "@/lib/solutions/types";
 
 type SiteFooterProps = {
   rootPrefix?: string;
@@ -98,6 +100,16 @@ export function SiteFooter({ rootPrefix = "", hideCta = false }: SiteFooterProps
             { text: "Legal AI", href: localePath("/industries/legal") },
             { text: "Oil & gas", href: localePath("/industries/oil-and-gas") },
             { text: f.inquiryForm, href: localePath("/contact") },
+          ],
+        },
+        {
+          title: "Enterprise solutions",
+          links: [
+            { text: "Solutions library", href: localePath("/solutions") },
+            ...publishedHubs().map((hub) => ({
+              text: hub.navLabel,
+              href: localePath(solutionPath(hub.slug)),
+            })),
           ],
         },
       ]}
