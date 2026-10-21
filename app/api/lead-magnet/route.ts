@@ -94,7 +94,7 @@ export async function POST(req: Request) {
     }
   }
 
-  const subject = `[DeView Lead] ${name || email}: ${guide}`;
+  const subject = `[Deview Lead] ${name || email}: ${guide}`;
   const message = [
     `Name: ${name || "-"}`,
     `Email: ${email}`,

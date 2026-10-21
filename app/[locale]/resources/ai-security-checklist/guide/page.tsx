@@ -10,7 +10,7 @@ const m = LEAD_MAGNETS.aiSecurityChecklist;
 
 /** Behind the sign-up form, so kept out of search results. */
 export const metadata: Metadata = {
-  title: "The AI Security Checklist | DeView",
+  title: "The AI Security Checklist | Deview",
   robots: { index: false, follow: true },
 };
 

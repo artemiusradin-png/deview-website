@@ -1,4 +1,4 @@
-/* About page: same language as the landing page (paper, ink, DeView yellow, Satoshi display
+/* About page: same language as the landing page (paper, ink, Deview yellow, Satoshi display
    type over Archivo text). Text sits in spans/divs because the interior pages force every <p>
    to 17px with a high-specificity rule. */
 .about {

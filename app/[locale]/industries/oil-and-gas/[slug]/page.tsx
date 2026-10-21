@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
       title: c.seoTitle,
       description: c.seoDescription,
       url: canonicalUrl,
-      siteName: "DeView",
+      siteName: "Deview",
       type: "website",
     },
   };
@@ -82,8 +82,8 @@ export default async function OilGasCasePage({ params }: CasePageProps) {
         description: c.seoDescription,
         inLanguage: "en",
         dateModified: OIL_GAS_PAGES_UPDATED,
-        isPartOf: { "@type": "WebSite", "@id": `${SITE_URL}/#website`, name: "DeView", url: SITE_URL },
-        publisher: { "@type": "Organization", "@id": `${SITE_URL}/#organization`, name: "DeView" },
+        isPartOf: { "@type": "WebSite", "@id": `${SITE_URL}/#website`, name: "Deview", url: SITE_URL },
+        publisher: { "@type": "Organization", "@id": `${SITE_URL}/#organization`, name: "Deview" },
         about: { "@type": "Thing", name: c.project },
         ...(c.location ? { contentLocation: { "@type": "Place", name: c.location } } : {}),
         mentions: { "@type": "Organization", name: c.company },
@@ -93,7 +93,7 @@ export default async function OilGasCasePage({ params }: CasePageProps) {
         "@type": "BreadcrumbList",
         "@id": `${canonicalUrl}#breadcrumb`,
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "DeView", item: `${SITE_URL}/en` },
+          { "@type": "ListItem", position: 1, name: "Deview", item: `${SITE_URL}/en` },
           { "@type": "ListItem", position: 2, name: "Oil & gas", item: hubUrl },
           { "@type": "ListItem", position: 3, name: title, item: canonicalUrl },
         ],

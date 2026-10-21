@@ -119,8 +119,8 @@ export function AnimatedFeatureSpotlightDemo() {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: web3Key,
-          subject: "[DeView] Lending guide requested",
-          from_name: "DeView website",
+          subject: "[Deview] Lending guide requested",
+          from_name: "Deview website",
           name: "Website visitor",
           email,
           replyto: email,
@@ -179,7 +179,7 @@ export function AnimatedFeatureSpotlightDemo() {
                 </p>
                 <h3 className="mb-3 text-2xl font-semibold text-[#f0f0fa]">Check your email.</h3>
                 <p className="max-w-md text-sm leading-relaxed text-[rgba(240,240,250,0.6)]">
-                  We sent the AI use-case guide to {email}. The DeView team may follow up with a short
+                  We sent the AI use-case guide to {email}. The Deview team may follow up with a short
                   note if your company looks like a fit for an AI workflow audit.
                 </p>
               </div>

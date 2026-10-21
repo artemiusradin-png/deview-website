@@ -8,7 +8,7 @@ import { LEAD_MAGNETS } from "@/lib/workflow-offers";
 const m = LEAD_MAGNETS.aiSecurityChecklist;
 
 export const metadata: Metadata = {
-  title: "AI Security Checklist for LLM Applications (OWASP Top 10) | DeView",
+  title: "AI Security Checklist for LLM Applications (OWASP Top 10) | Deview",
   description:
     "A free AI security checklist for LLM apps and AI agents, based on the OWASP Top 10 for LLM Applications: prompt injection, data leaks, excessive agency and more, plus governance checks for PDPO, HKMA and GDPR.",
   alternates: { canonical: `/en${m.path}` },

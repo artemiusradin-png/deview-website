@@ -7,7 +7,7 @@ import { RETRO_FEATURE_CARDS_ID } from "@/components/RetroFeatureCards";
 const homeWithRetroCards = `/#${RETRO_FEATURE_CARDS_ID}`;
 
 export const metadata: Metadata = {
-  title: "Outcomes | DeView",
+  title: "Outcomes | Deview",
   description:
     "Business value from implemented AI systems: efficiency, service quality, decision support, and cost control.",
   alternates: { canonical: "/en/outcomes" },

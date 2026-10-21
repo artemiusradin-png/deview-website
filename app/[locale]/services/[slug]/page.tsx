@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: page.seoTitle,
       description: page.seoDescription,
       url,
-      siteName: "DeView",
+      siteName: "Deview",
       type: "website",
     },
   };
@@ -81,7 +81,7 @@ export default async function ServicePage({ params }: Props) {
         "@type": "BreadcrumbList",
         "@id": `${url}#breadcrumb`,
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "DeView", item: `${SITE_URL}/en` },
+          { "@type": "ListItem", position: 1, name: "Deview", item: `${SITE_URL}/en` },
           { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/en/services` },
           { "@type": "ListItem", position: 3, name: page.h1, item: url },
         ],
@@ -96,7 +96,7 @@ export default async function ServicePage({ params }: Props) {
         provider: {
           "@type": "Organization",
           "@id": `${SITE_URL}/#organization`,
-          name: "DeView",
+          name: "Deview",
           legalName: LEGAL_ENTITY.name.toUpperCase(),
         },
         areaServed: ["Hong Kong", "Asia-Pacific", "Europe", "North America"],

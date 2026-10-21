@@ -10,7 +10,7 @@ const m = LEAD_MAGNETS.lmsChecklist;
 
 /** Behind the sign-up form, so kept out of search results. */
 export const metadata: Metadata = {
-  title: "The Loan Management System Checklist | DeView",
+  title: "The Loan Management System Checklist | Deview",
   robots: { index: false, follow: true },
 };
 

@@ -468,13 +468,13 @@ export function HomeContent({
               id="featured-deployment-finance"
               href={localePath("/case-studies")}
               className={styles.project}
-              aria-label="Read the DeView Unified Portal case study"
+              aria-label="Read the Deview Unified Portal case study"
             >
               <div
                 className={`${styles.projectArtwork} ${styles.portalArtwork}`}
               >
                 <div className={styles.artworkTop}>
-                  <span>DeView Unified Portal</span>
+                  <span>Deview Unified Portal</span>
                   <span className={styles.projectTag}>Connected finance</span>
                 </div>
                 <div className={styles.portalTitle}>
@@ -645,7 +645,7 @@ export function HomeContent({
             <div className={styles.teamFooter}>
               <TeamLocations />
               <Link href={localePath("/about")} className={styles.textLink}>
-                More about DeView <Arrow diagonal />
+                More about Deview <Arrow diagonal />
               </Link>
             </div>
           </div>

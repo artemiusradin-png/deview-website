@@ -1,4 +1,4 @@
-/* Isolated landing-page design: Archivo, warm whites, ink, and DeView gold. */
+/* Isolated landing-page design: Archivo, warm whites, ink, and Deview gold. */
 .page {
   --paper: #fffdf7;
   --cream: #f3eee2;
@@ -249,7 +249,7 @@
 .button:hover svg {
   transform: translate(2px, -2px);
 }
-/* Hero call to action: DeView yellow, flipping to ink with a yellow arrow on hover. */
+/* Hero call to action: Deview yellow, flipping to ink with a yellow arrow on hover. */
 .page .buttonAccent {
   background: var(--accent);
   border-color: var(--accent);

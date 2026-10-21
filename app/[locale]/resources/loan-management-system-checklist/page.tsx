@@ -8,7 +8,7 @@ import { LEAD_MAGNETS } from "@/lib/workflow-offers";
 const m = LEAD_MAGNETS.lmsChecklist;
 
 export const metadata: Metadata = {
-  title: "Loan Management System Checklist for Hong Kong Money Lenders | DeView",
+  title: "Loan Management System Checklist for Hong Kong Money Lenders | Deview",
   description:
     "A free checklist for choosing or upgrading a loan management system: borrower onboarding, credit assessment, repayments, collections, reporting and audit, from the team behind five Hong Kong lending systems.",
   alternates: { canonical: `/en${m.path}` },
