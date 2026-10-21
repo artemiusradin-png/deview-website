@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 800" fill="none">
+  <!-- A factory with a sawtooth roof, a conveyor carrying boxes, and a tablet with an OEE gauge and checklist. -->
+  <rect width="1360" height="800" fill="#f3eee2"/>
+  <g stroke="#171207" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M80 660h1200"/>
+    <!-- factory -->
+    <rect x="400" y="236" width="44" height="120" fill="#fffdf7"/>
+    <path d="M110 660V330l90 70V330l90 70V330l90 70V330l90 70v260z" fill="#fffdf7"/>
+    <rect x="140" y="470" width="70" height="56" fill="#f3eee2"/>
+    <rect x="250" y="470" width="70" height="56" fill="#f3eee2"/>
+    <rect x="360" y="470" width="70" height="56" fill="#ffc933"/>
+    <rect x="240" y="560" width="110" height="100" fill="#f3eee2"/>
+    <!-- conveyor -->
+    <rect x="530" y="570" width="380" height="32" fill="#fffdf7"/>
+    <circle cx="560" cy="632" r="18" fill="#fffdf7"/>
+    <circle cx="720" cy="632" r="18" fill="#fffdf7"/>
+    <circle cx="880" cy="632" r="18" fill="#fffdf7"/>
+    <rect x="560" y="500" width="70" height="70" fill="#fffdf7"/>
+    <rect x="680" y="500" width="70" height="70" fill="#ffc933"/>
+    <rect x="800" y="500" width="70" height="70" fill="#fffdf7"/>
+    <path d="M560 535h70M595 500v70" />
+    <path d="M800 535h70M835 500v70" />
+    <!-- signal line to the tablet -->
+    <path d="M715 478V400h206m-16-14 16 14-16 14" stroke-dasharray="10 10"/>
+    <!-- tablet -->
+    <rect x="940" y="220" width="320" height="440" rx="28" fill="#fffdf7"/>
+    <rect x="964" y="248" width="272" height="384" fill="#f3eee2"/>
+    <circle cx="1030" cy="330" r="46" fill="#fffdf7"/>
+    <path d="M984 330a46 46 0 0 1 80-31" stroke="#ffc933" stroke-width="12"/>
+    <path d="M1100 300h110M1100 330h80M1100 360h96"/>
+    <rect x="990" y="430" width="22" height="22" fill="#fffdf7"/>
+    <path d="M994 441l6 7 10-14" stroke-width="3"/>
+    <path d="M1032 441h170"/>
+    <rect x="990" y="480" width="22" height="22" fill="#fffdf7"/>
+    <path d="M994 491l6 7 10-14" stroke-width="3"/>
+    <path d="M1032 491h140"/>
+    <rect x="990" y="530" width="22" height="22" fill="#ffc933"/>
+    <path d="M1032 541h156"/>
+    <path d="M1060 640h80"/>
+  </g>
+</svg>
