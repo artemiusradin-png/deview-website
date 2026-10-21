@@ -47,7 +47,7 @@ export function SolutionHubView({ hub }: { hub: SolutionHub }) {
         publisher: {
           "@type": "Organization",
           "@id": `${SITE_URL}/#organization`,
-          name: "DeView",
+          name: "Deview",
           legalName: LEGAL_ENTITY.name.toUpperCase(),
         },
       },
@@ -55,7 +55,7 @@ export function SolutionHubView({ hub }: { hub: SolutionHub }) {
         "@type": "BreadcrumbList",
         "@id": `${url}#breadcrumb`,
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "DeView", item: `${SITE_URL}/en` },
+          { "@type": "ListItem", position: 1, name: "Deview", item: `${SITE_URL}/en` },
           { "@type": "ListItem", position: 2, name: "Solutions", item: `${SITE_URL}/en/solutions` },
           { "@type": "ListItem", position: 3, name: hub.navLabel, item: url },
         ],

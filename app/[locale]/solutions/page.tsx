@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: seoTitle,
   description: seoDescription,
   alternates: { canonical: url },
-  openGraph: { title: seoTitle, description: seoDescription, url, siteName: "DeView", type: "website" },
+  openGraph: { title: seoTitle, description: seoDescription, url, siteName: "Deview", type: "website" },
 };
 
 export default function SolutionsLibraryPage() {
@@ -47,7 +47,7 @@ export default function SolutionsLibraryPage() {
         publisher: {
           "@type": "Organization",
           "@id": `${SITE_URL}/#organization`,
-          name: "DeView",
+          name: "Deview",
           legalName: LEGAL_ENTITY.name.toUpperCase(),
         },
       },
@@ -55,7 +55,7 @@ export default function SolutionsLibraryPage() {
         "@type": "BreadcrumbList",
         "@id": `${url}#breadcrumb`,
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "DeView", item: `${SITE_URL}/en` },
+          { "@type": "ListItem", position: 1, name: "Deview", item: `${SITE_URL}/en` },
           { "@type": "ListItem", position: 2, name: "Solutions", item: url },
         ],
       },
@@ -73,7 +73,7 @@ export default function SolutionsLibraryPage() {
       <main className={styles.page}>
         <div className={styles.container}>
           <nav aria-label="Breadcrumb" className={styles.breadcrumb}>
-            <Link href="/en">DeView</Link>
+            <Link href="/en">Deview</Link>
             <span aria-hidden="true">/</span>
             <span aria-current="page">Solutions</span>
           </nav>

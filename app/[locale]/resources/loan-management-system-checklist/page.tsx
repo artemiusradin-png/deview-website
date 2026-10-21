@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { LeadMagnetSignup } from "@/components/LeadMagnet";
+import { LeadMagnetDetails } from "@/components/LeadMagnetDetails";
 import { SiteFooter } from "@/components/SiteFooter";
 import styles from "@/components/lead-magnet.module.css";
 import { LMS_AREAS } from "@/lib/lead-magnet-content";
+import { LMS_CHECKLIST_DETAILS } from "@/lib/lead-magnet-details";
 import { LEAD_MAGNETS } from "@/lib/workflow-offers";
 
 const m = LEAD_MAGNETS.lmsChecklist;
@@ -47,6 +49,7 @@ export default function LmsChecklistPage() {
             ))}
           </ul>
         </section>
+        <LeadMagnetDetails details={LMS_CHECKLIST_DETAILS} />
       </main>
       <SiteFooter />
     </>

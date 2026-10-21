@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: entry.seoTitle,
       description: entry.seoDescription,
       url,
-      siteName: "DeView",
+      siteName: "Deview",
       type: "website",
       ...(coverSlug
         ? { images: [{ url: ogCoverPath(coverSlug), width: 1200, height: 630 }] }

@@ -29,7 +29,7 @@ export function SolutionPageView({ page }: { page: SolutionPage }) {
   const hubUrl = hub ? `${SITE_URL}/en${solutionPath(hub.slug)}` : null;
 
   const crumbs = [
-    { name: "DeView", item: `${SITE_URL}/en` },
+    { name: "Deview", item: `${SITE_URL}/en` },
     { name: "Solutions", item: `${SITE_URL}/en/solutions` },
     ...(hub && hubUrl ? [{ name: hub.navLabel, item: hubUrl }] : []),
     { name: page.h1, item: url },
@@ -70,7 +70,7 @@ export function SolutionPageView({ page }: { page: SolutionPage }) {
         provider: {
           "@type": "Organization",
           "@id": `${SITE_URL}/#organization`,
-          name: "DeView",
+          name: "Deview",
           legalName: LEGAL_ENTITY.name.toUpperCase(),
         },
         areaServed: ["Hong Kong", "Asia-Pacific", "Middle East", "Europe", "North America"],

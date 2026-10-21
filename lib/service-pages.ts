@@ -57,6 +57,11 @@ export const SERVICE_PAGES: ServicePage[] = [
       { label: "Loan management systems for five Hong Kong lenders", href: "/case-studies#finance" },
       { label: "Planning, control and reporting systems for oil & gas", href: "/industries/oil-and-gas" },
     ],
+    leadMagnet: {
+      label: "Free loan management system checklist",
+      line: "Eight areas a lending system has to cover, from the team behind five Hong Kong lending systems.",
+      href: "/resources/loan-management-system-checklist",
+    },
     faqs: [
       {
         q: "Who owns the code of the custom software you build?",
@@ -158,6 +163,11 @@ export const SERVICE_PAGES: ServicePage[] = [
       { label: "Planning, control and reporting systems for oil & gas, 2010 to 2020", href: "/industries/oil-and-gas" },
       { label: "Loan portfolio and borrower reporting for Hong Kong lenders", href: "/case-studies#finance" },
     ],
+    leadMagnet: {
+      label: "Free automation playbook",
+      line: "The workflows worth automating first in five industries, step by step.",
+      href: "/resources/automation-playbook",
+    },
     faqs: [
       {
         q: "Can you work with the BI tool we already have?",
@@ -249,6 +259,11 @@ export const SERVICE_PAGES: ServicePage[] = [
     proof: [
       { label: "AgroPlatforma: quoting built inside Salesforce", href: "/case-studies#agriculture" },
     ],
+    leadMagnet: {
+      label: "Free automation playbook",
+      line: "Where automation between your CRM, ERP and spreadsheets pays off first, industry by industry.",
+      href: "/resources/automation-playbook",
+    },
     faqs: [
       {
         q: "Can you build inside our existing Salesforce org?",

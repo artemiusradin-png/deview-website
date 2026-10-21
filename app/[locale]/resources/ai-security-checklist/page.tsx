@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { LeadMagnetSignup } from "@/components/LeadMagnet";
+import { LeadMagnetDetails } from "@/components/LeadMagnetDetails";
 import { SiteFooter } from "@/components/SiteFooter";
 import styles from "@/components/lead-magnet.module.css";
 import { AI_SECURITY_AREAS } from "@/lib/lead-magnet-content";
+import { AI_SECURITY_CHECKLIST_DETAILS } from "@/lib/lead-magnet-details";
 import { LEAD_MAGNETS } from "@/lib/workflow-offers";
 
 const m = LEAD_MAGNETS.aiSecurityChecklist;
@@ -50,6 +52,7 @@ export default function AiSecurityChecklistPage() {
             Based on the OWASP Top 10 for Large Language Model Applications (2025).
           </span>
         </section>
+        <LeadMagnetDetails details={AI_SECURITY_CHECKLIST_DETAILS} />
       </main>
       <SiteFooter />
     </>

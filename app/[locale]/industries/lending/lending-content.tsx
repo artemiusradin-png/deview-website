@@ -5,6 +5,40 @@ import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SubpageNav } from "@/components/SubpageNav";
 import { SiteFooter } from "@/components/SiteFooter";
 
+/** Links to the lending resources and the bank-side lending systems under /solutions. */
+const LENDING_LINKS = [
+  {
+    label: "Loan management system checklist",
+    note: "Eight areas a Hong Kong lending system has to cover, free.",
+    href: "/resources/loan-management-system-checklist",
+  },
+  {
+    label: "10 AI use cases for lending companies",
+    note: "Ten workflows rated by impact, complexity and risk, free.",
+    href: "/resources/ai-guide-lending",
+  },
+  {
+    label: "SME loan management system for banks",
+    note: "Intake, credit, collateral, servicing and reporting next to core banking.",
+    href: "/solutions/sme-loan-management-system-for-banks",
+  },
+  {
+    label: "Credit approval workflow software",
+    note: "Who may approve what, routing, escalation and a decision log.",
+    href: "/solutions/credit-approval-workflow-software",
+  },
+  {
+    label: "Digital SME loan application portal",
+    note: "Guided applications, document upload, e-signature and status tracking.",
+    href: "/solutions/digital-sme-loan-application-portal",
+  },
+  {
+    label: "AI credit scoring for SME lending",
+    note: "Cash-flow models with reason codes, governance and monitoring.",
+    href: "/solutions/ai-credit-scoring-for-sme-lending",
+  },
+];
+
 export function LendingContent() {
   const { dict } = useLocaleContext();
   const lp = dict.lendingPage;
@@ -186,6 +220,31 @@ export function LendingContent() {
               ))}
             </div>
           </div>
+
+          {/* Free resources and related systems */}
+          <nav aria-labelledby="lending-resources-title" className="mb-16 sm:mb-20">
+            <p className="section-label mb-3">FREE RESOURCES AND RELATED SYSTEMS</p>
+            <div className="rule mb-6" />
+            <h2
+              id="lending-resources-title"
+              className="mb-6 text-[clamp(1.1rem,3vw,1.4rem)] text-[var(--white-100)]"
+            >
+              Checklists, guides and the systems around lending.
+            </h2>
+            <ul className="grid gap-px border border-[var(--white-10)] bg-[var(--white-10)] sm:grid-cols-2 lg:grid-cols-3">
+              {LENDING_LINKS.map((link) => (
+                <li key={link.href} className="bg-[var(--background)]">
+                  <LocaleLink
+                    href={link.href}
+                    className="flex h-full flex-col gap-1 p-5 transition-colors hover:bg-[var(--surface)]"
+                  >
+                    <span className="text-sm text-[var(--white-90)]">{link.label} ↗</span>
+                    <span className="text-xs leading-relaxed text-[var(--text-muted)]">{link.note}</span>
+                  </LocaleLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           {/* CTA */}
           <div className="border border-[var(--white-20)] bg-[var(--surface)] p-8 sm:p-12">
