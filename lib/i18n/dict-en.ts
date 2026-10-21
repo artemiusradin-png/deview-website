@@ -19,7 +19,7 @@ type CaseStudy = {
 
 export const en = {
   site: {
-    title: "DeView | Software Development Company in Hong Kong: Custom Software, AI & Cloud",
+    title: "Deview | Software Development Company in Hong Kong: Custom Software, AI & Cloud",
     description:
       "Custom software development for financial and industrial companies: digital product engineering, AI/ML engineering, data engineering, cloud and DevOps, and enterprise platforms, from a team with 15+ years of enterprise delivery.",
   },
@@ -68,7 +68,7 @@ export const en = {
     statement1: "AI THAT JUST CHATS IS NOT AI THAT SAVES MONEY.",
     statement2: "REAL SAVINGS COME FROM AI THAT ACTS INSIDE YOUR SYSTEMS.",
     opener:
-      "Most AI tools generate answers. They don't update your CRM, file your documents, route your tickets, or flag the exceptions that need a human. DeView builds AI that does all of that: connected to your real systems, with a full audit trail, and without requiring your team to change how they work.",
+      "Most AI tools generate answers. They don't update your CRM, file your documents, route your tickets, or flag the exceptions that need a human. Deview builds AI that does all of that: connected to your real systems, with a full audit trail, and without requiring your team to change how they work.",
     compare: {
       interfaceOnly: "CHATBOT / GENERIC TOOL",
       operational: "DEVIEW-BUILT SYSTEM",
@@ -136,7 +136,7 @@ export const en = {
     label: "WHAT CLIENTS ACTUALLY GAIN",
     titleL1: "Measurable results,",
     titleL2: "not vague potential.",
-    subtitle: "Every DeView engagement is scoped around one or more of these four outcomes. We define what success looks like in numbers before we start building.",
+    subtitle: "Every Deview engagement is scoped around one or more of these four outcomes. We define what success looks like in numbers before we start building.",
     items: [
       {
         number: "01",
@@ -185,11 +185,11 @@ export const en = {
   architecture: {
     sectionLabel: "PUBLIC TOOL VS. ENTERPRISE SYSTEM",
     headline: "Most AI tools were not built for your compliance, your data, or your audit requirements.",
-    sub: "DeView builds the version that is. Here is what changes when you move from a public AI service to a purpose-built enterprise deployment.",
+    sub: "Deview builds the version that is. Here is what changes when you move from a public AI service to a purpose-built enterprise deployment.",
     publicChip: "PUBLIC AI SERVICE",
     enterpriseChip: "ENTERPRISE AI DEPLOYMENT",
     closing:
-      "If your team is using a public AI service for anything that touches client data, financial records, or regulated workflows: you are taking on compliance risk that a proper deployment eliminates. This is what DeView fixes.",
+      "If your team is using a public AI service for anything that touches client data, financial records, or regulated workflows: you are taking on compliance risk that a proper deployment eliminates. This is what Deview fixes.",
     publicLabel: "PUBLIC AI SERVICE",
     enterpriseLabel: "ENTERPRISE AI DEPLOYMENT",
     publicPoints: [
@@ -363,10 +363,10 @@ export const en = {
     p1: "A connected AI deployment reads from your CRM, writes back to it, logs every action for compliance, and alerts your team when something needs attention: all without your team changing how they work. That requires five layers of engineering, not a chat interface and an API key.",
     p2: "The diagram below shows how each layer connects: your business goals drive the application layer; your applications sit on a data foundation; the data foundation feeds the AI core; and infrastructure governs all of it: security, compliance, monitoring, and uptime.",
     figcaption:
-      "DeView's five-layer enterprise AI architecture. Every engagement is built to this standard: from data ingestion to production monitoring.",
+      "Deview's five-layer enterprise AI architecture. Every engagement is built to this standard: from data ingestion to production monitoring.",
   },
   architecturePage: {
-    title: "Why architecture matters | DeView",
+    title: "Why architecture matters | Deview",
     description:
       "The difference between an AI that works in a demo and one that works in your regulated, integrated, production environment.",
   },
@@ -415,14 +415,14 @@ export const en = {
     mobileServing: "Serving",
   },
   footer: {
-    brand: "DeView",
+    brand: "Deview",
     headline: "AI that reduces costs, automates workflows, and works inside your existing systems.",
     intro: "From workflow audit to live deployment: built around your business.",
     ctaLabel: "Tell us what to automate",
     ctaCopy: "Describe the workflow that's costing the most time or money. We reply with a specific recommendation within 1–2 business days.",
     contactUs: "Contact us",
     emailDirect: "Email direct",
-    brandStrong: "DeView AI consulting",
+    brandStrong: "Deview AI consulting",
     loc: "Asia-Pacific, Europe, Americas",
     stack: "AI connected to your CRM, ERP, documents, and workflows: not alongside them.",
     about: "About",
@@ -446,7 +446,7 @@ export const en = {
       sendInquiry: "Send inquiry",
       clientPortal: "Client Portal",
       aiGuide: "AI guide: lending",
-      aboutDeView: "About DeView",
+      aboutDeview: "About Deview",
       howWeWork: "How We Work",
       caseStudies: "Case Studies",
       roiCalculator: "ROI Calculator",
@@ -457,19 +457,19 @@ export const en = {
     },
   },
   subpages: {
-    servicesTitle: "Services: AI, Software Engineering & Data Engineering | DeView",
+    servicesTitle: "Services: AI, Software Engineering & Data Engineering | Deview",
     servicesDesc:
       "Three practices: AI solutions, software engineering, and data engineering: that reduce manual work, cut operating costs, and ship working systems in 1–8 weeks.",
-    useCasesTitle: "Where We're Deployed | DeView",
+    useCasesTitle: "Where We're Deployed | Deview",
     useCasesDesc:
       "Real AI deployments across customer operations, document processing, and internal knowledge: each one replacing manual work with automation.",
-    outcomesTitle: "What Clients Gain | DeView",
+    outcomesTitle: "What Clients Gain | Deview",
     outcomesDesc:
       "Measurable results from AI deployments: efficiency gains, cost reduction, faster decisions, and improved service quality.",
-    whatMakesTitle: "Why Architecture Matters | DeView",
+    whatMakesTitle: "Why Architecture Matters | Deview",
     whatMakesDesc:
       "The difference between an AI that works in a demo and one that works in your regulated, integrated, production environment.",
-    contactDocumentTitle: "Start a Project | DeView",
+    contactDocumentTitle: "Start a Project | Deview",
     contactDocumentDesc:
       "Describe the workflow you want to automate or the cost you want to reduce: we reply with a specific, scoped recommendation.",
     contactTitle: "START A PROJECT",
@@ -639,7 +639,7 @@ export const en = {
   },
   featuredPortal: {
     sectionLabel: "FEATURED DEPLOYMENT · FINANCE / LENDING",
-    title: "DeView Unified Portal: AI-powered borrower intelligence for a multi-company lending network.",
+    title: "Deview Unified Portal: AI-powered borrower intelligence for a multi-company lending network.",
     subtitle: "A single platform serving five lending companies. What used to take hours of manual spreadsheet work: looking up a borrower, checking their loans across companies, reading overdue notices, assessing risk: now happens in one search.",
     phasedTitle: "Built in phases.",
     phasedBody: "Each phase adds a new capability on top of the same foundation: one shared portal, one borrower database, one audit trail.",
@@ -707,9 +707,9 @@ export const en = {
     ctaDisclaimer: "No newsletter signup. We send the guide and, only if useful, one practical next-step option for your team.",
   },
   stackPage: {
-    title: "Tech Stack & Integrations | DeView",
+    title: "Tech Stack & Integrations | Deview",
     description:
-      "The AI models, cloud platforms, enterprise integrations, and engineering tools DeView uses to build production AI systems.",
+      "The AI models, cloud platforms, enterprise integrations, and engineering tools Deview uses to build production AI systems.",
     sectionLabel: "TECH STACK & INTEGRATIONS",
     h1: "Model-agnostic. Enterprise-integrated. Deployed in your environment.",
     subtitle:
@@ -730,7 +730,7 @@ export const en = {
       {
         label: "CLOUD PLATFORMS",
         description:
-          "All cloud deployments go into your own account. DeView does not operate shared cloud infrastructure for client workloads.",
+          "All cloud deployments go into your own account. Deview does not operate shared cloud infrastructure for client workloads.",
         items: [
           { name: "Amazon Web Services (AWS)", detail: "Bedrock, Lambda, RDS, S3: primary cloud for clients in finance and lending" },
           { name: "Microsoft Azure", detail: "Azure OpenAI Service, Azure AI Foundry: preferred for clients with existing Microsoft licensing" },
@@ -788,22 +788,22 @@ export const en = {
       { name: "CCPA", region: "California / US", coverage: "Data access controls, consumer rights compliance" },
     ],
     footnote:
-      "DeView does not currently hold SOC 2 or ISO 27001 certifications. Architecture documentation and completed security questionnaires are available on request for enterprise procurement.",
+      "Deview does not currently hold SOC 2 or ISO 27001 certifications. Architecture documentation and completed security questionnaires are available on request for enterprise procurement.",
     ctaTitle: "Have specific stack requirements?",
     ctaBody:
       "Tell us your existing systems and any compliance constraints. We'll tell you how we'd approach it and whether there are any gaps.",
     ctaButton: "Discuss your stack →",
   },
   lendingPage: {
-    metaTitle: "Loan Management System & Lending Software for Hong Kong Lenders | DeView",
+    metaTitle: "Loan Management System & Lending Software for Hong Kong Lenders | Deview",
     metaDescription:
-      "AI automation for lending and credit teams: borrower intelligence, loan document processing, credit analyst copilots, and regulatory reporting. Built for HKMA, PDPO, MAS TRM, and GDPR. Deployed in 3–6 weeks.",
+      "AI automation for lending and credit teams: borrower intelligence, loan document processing, credit analyst copilots, and regulatory reporting. Built for HKMA, PDPO, MAS TRM, and GDPR.",
     sectionLabel: "LENDING & FINANCE · INDUSTRY",
     h1: "Loan management systems and AI for lending companies.",
     subtitleP1:
       "Lending teams sit on years of borrower data spread across loan books, application systems, and document archives. The work that drives risk and revenue: knowing a borrower, processing files faster, reporting accurately: is exactly where AI compounds.",
     subtitleP2:
-      "DeView builds lending-grade AI systems that respect regulatory boundaries and keep underwriters in control.",
+      "Deview builds lending-grade AI systems that respect regulatory boundaries and keep underwriters in control.",
     stats: [
       { metric: "94%", label: "reduction in manual document handling (live)" },
       { metric: "3–6 wks", label: "from scoping to live deployment" },
@@ -811,7 +811,7 @@ export const en = {
     ],
     featuredLabel: "Featured deployment",
     featuredTitle:
-      "DeView Unified Portal: one platform serving five lending companies, with five AI capabilities built on top.",
+      "Deview Unified Portal: one platform serving five lending companies, with five AI capabilities built on top.",
     featuredBody:
       "Shared backbone for portal, database, and audit trail. AI Credit Analyst, Agentic AI Assistant, AI Email Processing, AI Document Processing, and AI Prompt Management: each reading from the same borrower database and writing back to the same audit trail. No silos, no copy-paste between systems.",
     featuredLink: "See the build",
@@ -884,7 +884,7 @@ export const en = {
       {
         label: "BORROWER INTELLIGENCE",
         title: "Replace the spreadsheet shuffle with a 360° borrower view",
-        body: "Credit teams lose hours every day reconciling borrower information across systems: loan books, application records, overdue notices, repayment histories, KYC files. DeView builds a unified borrower view that pulls every record for any borrower into one searchable case file, scoped by permission. Underwriters and credit officers see complete history at a glance: across products, across companies if you operate as a network, across years.",
+        body: "Credit teams lose hours every day reconciling borrower information across systems: loan books, application records, overdue notices, repayment histories, KYC files. Deview builds a unified borrower view that pulls every record for any borrower into one searchable case file, scoped by permission. Underwriters and credit officers see complete history at a glance: across products, across companies if you operate as a network, across years.",
         metrics: [
           "One search replaces hours of cross-system lookups",
           "Permission-scoped: staff see only what they’re authorised to see",
@@ -904,7 +904,7 @@ export const en = {
       {
         label: "AI CREDIT ANALYST",
         title: "One-click case summaries: loan history, repayment behaviour, risk signals",
-        body: "Credit officers spend 15–20 minutes reading a borrower file before every meeting or decision. DeView’s AI credit analyst generates a complete narrative summary in seconds: loan history, repayment patterns, overdue status across all products, risk flags, recent activity. Officers spend their time on judgment, not on file assembly.",
+        body: "Credit officers spend 15–20 minutes reading a borrower file before every meeting or decision. Deview’s AI credit analyst generates a complete narrative summary in seconds: loan history, repayment patterns, overdue status across all products, risk flags, recent activity. Officers spend their time on judgment, not on file assembly.",
         metrics: [
           "Replaces the 20-minute manual file review",
           "Pulls from live data: never out of date",
@@ -930,7 +930,7 @@ export const en = {
       },
       {
         q: "Our borrower data is regulated under HKMA, PDPO, and MAS rules. Where does AI run?",
-        a: "Every deployment runs inside your cloud environment or on-premises infrastructure. No borrower data passes through DeView-operated systems. Role-based access controls, encryption in transit and at rest, full audit logging, and configurable data-residency boundaries come standard. We advise on the regulatory mapping before code is written.",
+        a: "Every deployment runs inside your cloud environment or on-premises infrastructure. No borrower data passes through Deview-operated systems. Role-based access controls, encryption in transit and at rest, full audit logging, and configurable data-residency boundaries come standard. We advise on the regulatory mapping before code is written.",
       },
       {
         q: "Our borrower data is spread across loan management, CRM, scanned documents, and spreadsheets. Can AI work with that?",
@@ -950,12 +950,12 @@ export const en = {
     ctaCaseStudies: "See case studies →",
   },
   legalPage: {
-    metaTitle: "AI for Legal Operations | DeView",
-    metaDescription: "AI automation for legal and professional services teams: contract review, document processing, research, and internal knowledge management. Deployed in 3–6 weeks.",
+    metaTitle: "AI for Legal Operations | Deview",
+    metaDescription: "AI automation for legal and professional services teams: contract review, document processing, research, and internal knowledge management.",
     sectionLabel: "LEGAL · INDUSTRY",
     h1: "AI for legal and professional services: built for document complexity, privilege, and fee-earner productivity.",
     introP1: "Legal work is document-intensive and time-sensitive. Every hour a fee earner spends searching for information, reviewing standard contracts, or drafting first-draft documents is an hour not spent on the work that requires legal judgment.",
-    introP2: "DeView builds AI systems for legal teams that handle the mechanical work: retrieval, extraction, first-draft generation: so lawyers spend their time on the analysis and advice that only they can provide.",
+    introP2: "Deview builds AI systems for legal teams that handle the mechanical work: retrieval, extraction, first-draft generation: so lawyers spend their time on the analysis and advice that only they can provide.",
     stats: [
       { metric: "60–80%", label: "reduction in initial contract review time" },
       { metric: "Minutes", label: "to search across your entire document library" },
@@ -991,7 +991,7 @@ export const en = {
     ],
     objectionsSectionLabel: "Common questions from legal teams",
     objections: [
-      { q: "Legal documents contain privileged information. How is confidentiality maintained?", a: "All data stays in your environment: either your own cloud account or on-premises. Nothing passes through DeView infrastructure. Access is scoped by matter and seniority level. The audit trail documents exactly who accessed what and when." },
+      { q: "Legal documents contain privileged information. How is confidentiality maintained?", a: "All data stays in your environment: either your own cloud account or on-premises. Nothing passes through Deview infrastructure. Access is scoped by matter and seniority level. The audit trail documents exactly who accessed what and when." },
       { q: "Our contracts are highly variable. Can AI handle non-standard structures?", a: "Modern LLMs handle structural variation well: they read documents the way a human does, not by matching fixed templates. We test the system against a sample of your actual contracts before deployment to verify extraction accuracy across your specific document variety." },
       { q: "We're concerned about liability if AI misses something in a contract review.", a: "AI assists the review; the lawyer remains responsible for the advice. The system flags issues and extracts terms: it doesn't make legal judgments. We configure it explicitly to surface uncertainty rather than give false confidence." },
     ],
@@ -1002,7 +1002,7 @@ export const en = {
     ctaCaseStudies: "See case studies →",
   },
   insightsPage: {
-    metaTitle: "Insights | DeView",
+    metaTitle: "Insights | Deview",
     metaDescription: "Practical AI guidance for operations and finance teams: what works, what doesn't, and where to start.",
     sectionLabel: "INSIGHTS",
     h1: "Practical AI guidance: no hype, no vendor pitches.",
@@ -1019,7 +1019,7 @@ export const en = {
     ],
   },
   articlePilotsFail: {
-    metaTitle: "Why most AI pilots fail | DeView Insights",
+    metaTitle: "Why most AI pilots fail | Deview Insights",
     metaDescription: "Three-quarters of enterprise AI pilots never make it to production. The cause is almost never the technology: here's what actually goes wrong.",
     label: "AI IMPLEMENTATION", date: "14 April 2025", readTime: "6 min read",
     title: "Why most AI pilots fail: and what the ones that work have in common",
@@ -1047,7 +1047,7 @@ export const en = {
     moreLabel: "More articles", moreLink1: "Document automation: four questions to answer before you build →", moreLink2: "The four AI projects that pay for themselves fastest →",
   },
   articleDocAutomation: {
-    metaTitle: "Document automation: where to start | DeView Insights",
+    metaTitle: "Document automation: where to start | Deview Insights",
     metaDescription: "Four questions that determine whether a document automation project will succeed: before a single line of code is written.",
     label: "DOCUMENT AUTOMATION", date: "28 March 2025", readTime: "5 min read",
     title: "Document automation: the four questions to answer before you build anything",
@@ -1079,7 +1079,7 @@ export const en = {
     moreLabel: "More articles", moreLink1: "Why most AI pilots fail →", moreLink2: "The four AI projects that pay for themselves fastest →",
   },
   articleFourProjects: {
-    metaTitle: "The four AI projects that pay for themselves fastest | DeView Insights",
+    metaTitle: "The four AI projects that pay for themselves fastest | Deview Insights",
     metaDescription: "Not all AI use cases are created equal. Four specific projects that consistently deliver measurable ROI within the first 90 days in operations teams.",
     label: "AI STRATEGY", date: "10 March 2025", readTime: "7 min read",
     title: "The four AI projects that pay for themselves fastest in operations teams",
@@ -1121,18 +1121,18 @@ export const en = {
           role: "Data Science & Software Engineering",
           photo: "/team/mikhail-shishlenin-800.webp",
           initials: "MS",
-          bio: "Leads DeView's software engineering practice and architecture for complex enterprise systems, bringing experience from Gazprom and the delivery of a digital platform for a major oil and gas company.",
+          bio: "Leads Deview's software engineering practice and architecture for complex enterprise systems, bringing experience from Gazprom and the delivery of a digital platform for a major oil and gas company.",
         },
-        { name: "Eden Lam", role: "Software Engineer & Hong Kong Relations", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "Builds the platforms behind DeView's client work and is the main point of contact for clients in Hong Kong." },
+        { name: "Eden Lam", role: "Software Engineer & Hong Kong Relations", photo: "/team/eden-lam-800.webp", initials: "EL", bio: "Builds the platforms behind Deview's client work and is the main point of contact for clients in Hong Kong." },
         {
           name: "Yevhen Lahodiuk",
           role: "Software Engineer, Project Manager & Coordinator",
           photo: "/team/yevhen-lahodiuk-800.webp",
           initials: "YL",
-          bio: "Builds software, manages project delivery, and coordinates teams and client work across DeView engagements.",
+          bio: "Builds software, manages project delivery, and coordinates teams and client work across Deview engagements.",
         },
         { name: "Stepan Pashchenko", role: "Client Relations & Key Account Manager", photo: "/team/stepan-pashchenko-800.webp", initials: "SP", bio: "Looks after Deview's key client accounts, from the first conversation to the long-term relationship." },
-        { name: "Stanislav Dupliakov", role: "Switzerland Customer Relations", photo: "/team/stanislav-dupllyakov-800.webp", initials: "SD", bio: "The main point of contact for DeView's clients in Switzerland, from delivery through ongoing support." },
+        { name: "Stanislav Dupliakov", role: "Switzerland Customer Relations", photo: "/team/stanislav-dupllyakov-800.webp", initials: "SD", bio: "The main point of contact for Deview's clients in Switzerland, from delivery through ongoing support." },
         { name: "Alberto Castiñeiras", role: "Business Development", photo: "/team/alberto-castineiras-800.webp", initials: "AC", bio: "Develops Deview's client relationships and supports scoping on new engagements." },
         { name: "Yu Fu Kuo", role: "Junior Business Analyst", photo: "/team/yu-fu-kuo-800.webp", initials: "YK", bio: "Supports project analysis and client work across Deview's engagements." },
         { name: "Sebastian Alarie-Lacerte", role: "US Market Development & Sales", photo: "", initials: "SA", bio: "Builds Deview's presence in the United States and leads sales to US clients." },
@@ -1143,8 +1143,8 @@ export const en = {
       moreBody: "more engineers and specialists across our four offices.",
     },
     h1: "We build AI that does the work: not AI that answers questions about it.",
-    introHK: "DeView is an AI consulting and engineering firm headquartered in Hong Kong, with sales offices in Vancouver, Edinburgh, and Stuttgart. We work with operations and finance teams at mid-market and enterprise companies to build AI systems that reduce manual work, cut operating costs, and automate repetitive workflows.",
-    introNonHK: "DeView is an AI consulting and engineering firm with teams in Hong Kong, Vancouver, Edinburgh, and Stuttgart. We work with operations and finance teams at mid-market and enterprise companies to build AI systems that reduce manual work, cut operating costs, and automate repetitive workflows.",
+    introHK: "Deview is an AI consulting and engineering firm headquartered in Hong Kong, with sales offices in Vancouver, Edinburgh, and Stuttgart. We work with operations and finance teams at mid-market and enterprise companies to build AI systems that reduce manual work, cut operating costs, and automate repetitive workflows.",
+    introNonHK: "Deview is an AI consulting and engineering firm with teams in Hong Kong, Vancouver, Edinburgh, and Stuttgart. We work with operations and finance teams at mid-market and enterprise companies to build AI systems that reduce manual work, cut operating costs, and automate repetitive workflows.",
     introP2: "We focus on practical outcomes: specific processes that are currently costing time or money, automated and connected to the systems already in use. Not demos. Not roadmaps. Working systems, deployed in weeks.",
     whatWeAreNotLabel: "What we are not",
     whatWeAreNotItems: [
@@ -1167,11 +1167,11 @@ export const en = {
       },
       {
         label: "YOUR DATA STAYS YOURS",
-        body: "Every deployment lives in the client's environment. We do not operate shared AI platforms or store client data in DeView infrastructure. You own the system we build.",
+        body: "Every deployment lives in the client's environment. We do not operate shared AI platforms or store client data in Deview infrastructure. You own the system we build.",
       },
       {
         label: "HUMAN JUDGMENT STAYS IN PLACE",
-        body: "AI handles volume. Humans handle exceptions and high-stakes decisions. Every DeView system includes a clear escalation path: the AI flags; your team decides.",
+        body: "AI handles volume. Humans handle exceptions and high-stakes decisions. Every Deview system includes a clear escalation path: the AI flags; your team decides.",
       },
     ],
     expertiseLabel: "Technical expertise",
@@ -1273,7 +1273,7 @@ export const en = {
         service: "AI Field Diagnostics",
         headline: "AgroPlatforma: field diagnostics and quotation drafting in under 30 seconds",
         challenge: "Field consultants needed roughly 40 minutes to diagnose crop issues, search a catalogue of more than 20,000 products, choose a suitable treatment, and prepare a quotation. The work happened across separate tools, making every recommendation slow to produce and difficult to analyse at network level.",
-        solution: "DeView built a three-agent system on Claude via Vertex AI, Salesforce, and Flutter. A consultant photographs the affected crop; the system identifies the likely issue, ranks suitable catalogue products, and writes a draft quotation directly into Salesforce for human approval. The same event trail powers anonymised vendor analytics.",
+        solution: "Deview built a three-agent system on Claude via Vertex AI, Salesforce, and Flutter. A consultant photographs the affected crop; the system identifies the likely issue, ranks suitable catalogue products, and writes a draft quotation directly into Salesforce for human approval. The same event trail powers anonymised vendor analytics.",
         capabilities: [
           { name: "Multimodal Field Diagnosis", body: "Crop photographs and field context are analysed together to produce a diagnosis and ranked treatment recommendations." },
           { name: "Catalogue-Grounded Recommendations", body: "Every recommendation is matched against the live 20,000-product catalogue, so consultants receive products they can actually quote." },
@@ -1290,7 +1290,7 @@ export const en = {
         number: "02",
         sector: "FINANCE / LENDING · HONG KONG",
         service: "Lending Operations Platform",
-        headline: "Covenant Desk: the DeView Unified Portal for the complete lending lifecycle",
+        headline: "Covenant Desk: the Deview Unified Portal for the complete lending lifecycle",
         challenge: "Borrower intake, identity checks, credit review, loan servicing, repayments, collections, and reporting were split across spreadsheets, inboxes, messaging apps, and separate company ledgers. Staff had no single borrower view and cross-company exposure checks required manual searches.",
         solution: "Covenant Desk brings the workflow into one permission-scoped platform: a management portal, staff tools, and borrower self-service connected to the same record. It supports enquiry intake, eKYC and AML, lender-defined scoring rules, human approvals, agreements, repayment servicing, collections, reporting, and auditable AI-assisted review.",
         capabilities: [
@@ -1311,7 +1311,7 @@ export const en = {
         service: "Document Automation",
         headline: "Nursing documentation time cut by 74%, returning two hours per shift to resident care",
         challenge: "A Swiss senior-care provider operates three residential homes across German- and French-speaking cantons, supporting 210 residents around the clock. Nursing staff spent 2.5–3 hours of every shift recording medication, vital signs, mobility, meals, and incidents by hand or in an unstructured legacy system. Shift handovers relied on scattered notes, while monthly cantonal reporting took a senior nurse two full days.",
-        solution: "DeView built a bilingual documentation and reporting system tailored to Swiss cantonal care standards. Nurses dictate or type notes in German or French; the system extracts structured entries into each resident's record, flags anomalies for review, generates the next team's handover summary, and compiles the monthly compliance report for sign-off.",
+        solution: "Deview built a bilingual documentation and reporting system tailored to Swiss cantonal care standards. Nurses dictate or type notes in German or French; the system extracts structured entries into each resident's record, flags anomalies for review, generates the next team's handover summary, and compiles the monthly compliance report for sign-off.",
         capabilities: [
           { name: "Bilingual Care Note Extraction", body: "German and French shift notes are converted into structured medication, vital-sign, mobility, incident, and meal records." },
           { name: "Automated Shift Handover", body: "Each shift closes with a structured summary of changes, follow-ups, and flagged anomalies for the incoming team." },
@@ -1330,9 +1330,9 @@ export const en = {
         service: "AI Analytics, Experimentation & Product Design",
         headline: "StorePilot: sharper AI conversion insights for Shopify merchants",
         website: { href: "https://www.usestorepilot.com/pricing/", label: "Visit StorePilot →" },
-        challenge: "EVDEV, a Shopify agency with 180+ e-commerce stores delivered, had already built StorePilot: an AI app that finds where shoppers drop off and tests fixes. The team brought DeView in to improve detection accuracy, make recommendations more specific to each store, and give merchants clearer, more reliable experiment results.",
+        challenge: "EVDEV, a Shopify agency with 180+ e-commerce stores delivered, had already built StorePilot: an AI app that finds where shoppers drop off and tests fixes. The team brought Deview in to improve detection accuracy, make recommendations more specific to each store, and give merchants clearer, more reliable experiment results.",
         solutionLabel: "What We Improved",
-        solution: "DeView worked as an extension of EVDEV's team to improve the existing app's analytics, AI recommendations, A/B testing, reporting, and interface. We focused on helping merchants understand which problems cost them sales, which fixes to test, and what the results mean. EVDEV retained ownership of the product, merchant experience, and client relationships.",
+        solution: "Deview worked as an extension of EVDEV's team to improve the existing app's analytics, AI recommendations, A/B testing, reporting, and interface. We focused on helping merchants understand which problems cost them sales, which fixes to test, and what the results mean. EVDEV retained ownership of the product, merchant experience, and client relationships.",
         capabilitiesLabel: "Project Scope",
         capabilities: [
           { name: "More Precise Drop-off Detection", body: "Improved how StorePilot identifies friction on product pages, add-to-cart flows, cart, mobile layouts, and checkout, catching more real issues with fewer false alarms." },
@@ -1346,7 +1346,7 @@ export const en = {
           { metric: "26%", label: "improvement in StorePilot's merchant acquisition funnel" },
         ],
         outcomesNote: "Results from the verified Clutch review by StorePilotAI's CTO. The acquisition improvement relates to merchants discovering, installing, and starting to use StorePilot.",
-        quote: "What stood out most about working with DeView was their ability to connect data and AI with real business outcomes. Rather than focusing on models for their own sake, they consistently asked the right question: how will this improvement translate into revenue and value for merchants?",
+        quote: "What stood out most about working with Deview was their ability to connect data and AI with real business outcomes. Rather than focusing on models for their own sake, they consistently asked the right question: how will this improvement translate into revenue and value for merchants?",
         quoteRole: "Mike Gavura, CTO, StorePilotAI · Verified Clutch review",
         reviewLink: { href: "https://clutch.co/profile/deview#reviews", label: "Read the full review on Clutch →" },
       },
@@ -1357,7 +1357,7 @@ export const en = {
         headline: "Jetfans: one domain, three regional sites for a Wolter ventilation distributor",
         website: { href: "https://www.jetfans.eu", label: "Visit Jetfans →" },
         challenge: "Jetfans imports and distributes Wolter and Himpel ventilation equipment across Ukraine, Eastern Europe and Central Asia. Each region needed its own languages, contacts and offer, while search engines and AI assistants kept repeating outdated company details.",
-        solution: "DeView built jetfans.eu as one domain with three regional sites in Ukrainian, English and Russian. Visitors reach their region automatically, every form feeds one lead pipeline, and each site carries its own topic pages, guides, structured data and sitemaps.",
+        solution: "Deview built jetfans.eu as one domain with three regional sites in Ukrainian, English and Russian. Visitors reach their region automatically, every form feeds one lead pipeline, and each site carries its own topic pages, guides, structured data and sitemaps.",
         capabilitiesLabel: "Project Scope",
         capabilities: [
           { name: "Three Regional Sites", body: "Ukraine, Eastern Europe and Central Asia, each with its own languages, contacts and product range." },
@@ -1372,7 +1372,7 @@ export const en = {
         service: "Website, Operations & SEO/GEO",
         headline: "Nextair: one clear company story across search and AI answers",
         challenge: "NEXTAIR makes prefabricated ventilation blocks for apartment buildings and is the same company as Jetfans. Two websites, three related legal entities and an old phone number in business registries meant search results and AI answers often showed the wrong details.",
-        solution: "DeView works on Nextair's website, digital operations and search presence: one canonical company description, matching details across both sites and directories, and the cross-links that tell search engines and AI assistants NEXTAIR and Jetfans are one company.",
+        solution: "Deview works on Nextair's website, digital operations and search presence: one canonical company description, matching details across both sites and directories, and the cross-links that tell search engines and AI assistants NEXTAIR and Jetfans are one company.",
         capabilitiesLabel: "Project Scope",
         capabilities: [
           { name: "Website & Product Content", body: "Content and structure for the NEXTAIR ventilation-block system, written for developers, designers and builders." },
@@ -1386,7 +1386,7 @@ export const en = {
         service: "Data Engineering & AI Reporting",
         headline: "Fizkultura: weekly member and operations reports, built automatically",
         challenge: "Fizkultura's member and operations reports were compiled by hand from separate sources: CRM, scheduling, billing and email.",
-        solution: "DeView built a reporting pipeline that pulls data from those systems, reconciles it and produces branded weekly reports with commentary drafted by AI. The team now reviews and sends instead of building each report from scratch.",
+        solution: "Deview built a reporting pipeline that pulls data from those systems, reconciles it and produces branded weekly reports with commentary drafted by AI. The team now reviews and sends instead of building each report from scratch.",
         capabilitiesLabel: "Project Scope",
         capabilities: [
           { name: "Connected Sources", body: "CRM, scheduling, billing and email data pulled into one place on a schedule." },
@@ -1401,7 +1401,7 @@ export const en = {
         headline: "EnerQuest: Upstream production management software – Pilot",
         website: { href: "https://enerquestenergy.com/", label: "Visit EnerQuest Energy →" },
         challenge: "EnerQuest Energy needed to show Nigerian asset teams how production, equipment, exceptions and decisions could be managed in one operating picture, from the field to management, before any operational data was released.",
-        solution: "DeView built a pilot of upstream production management software on an illustrative model: one operating workspace with production and equipment views, exception tracking and an AI assistant. Field data flows one way into the analytics layer, so the platform never touches operational control.",
+        solution: "Deview built a pilot of upstream production management software on an illustrative model: one operating workspace with production and equipment views, exception tracking and an AI assistant. Field data flows one way into the analytics layer, so the platform never touches operational control.",
         capabilitiesLabel: "Project Scope",
         capabilities: [
           { name: "One Operating Picture", body: "Production, equipment status and exceptions in one workspace, from wellhead to boardroom." },
@@ -1451,11 +1451,11 @@ export const en = {
         items: [
           {
             q: "Where is our data stored?",
-            a: "Your data stays in your environment. For cloud deployments, we deploy into your existing AWS, GCP, or Azure account. For on-premises deployments, everything runs inside your physical network. DeView does not store client data in DeView-operated infrastructure.",
+            a: "Your data stays in your environment. For cloud deployments, we deploy into your existing AWS, GCP, or Azure account. For on-premises deployments, everything runs inside your physical network. Deview does not store client data in Deview-operated infrastructure.",
           },
           {
             q: "Who has access to our data during the project?",
-            a: "Access is scoped to the minimum required for each integration. Any deployment access by DeView staff is time-limited, uses service accounts, and is fully logged. We do not hold standing access to production client data after handover.",
+            a: "Access is scoped to the minimum required for each integration. Any deployment access by Deview staff is time-limited, uses service accounts, and is fully logged. We do not hold standing access to production client data after handover.",
           },
           {
             q: "Does the AI learn from our data and share it with other clients?",
@@ -1476,7 +1476,7 @@ export const en = {
         items: [
           {
             q: "What if the AI gives a wrong answer or makes a mistake?",
-            a: "Every DeView deployment includes a human-in-the-loop escalation path. When the AI’s confidence falls below the agreed threshold, it flags the item for human review rather than acting automatically. All outputs are logged so any errors can be traced, corrected, and used to improve accuracy.",
+            a: "Every Deview deployment includes a human-in-the-loop escalation path. When the AI’s confidence falls below the agreed threshold, it flags the item for human review rather than acting automatically. All outputs are logged so any errors can be traced, corrected, and used to improve accuracy.",
           },
           {
             q: "How do we know it keeps working correctly after launch?",
@@ -1484,7 +1484,7 @@ export const en = {
           },
           {
             q: "What’s the difference between this and us just using ChatGPT ourselves?",
-            a: "ChatGPT has no access to your internal data, no integration with your systems, no audit trail, and no reliability guarantees. A DeView deployment is purpose-built: it knows your company’s specific documents and data, connects to your CRM and workflows, enforces your access controls, and includes production monitoring. The gap is between a consumer tool and an enterprise system.",
+            a: "ChatGPT has no access to your internal data, no integration with your systems, no audit trail, and no reliability guarantees. A Deview deployment is purpose-built: it knows your company’s specific documents and data, connects to your CRM and workflows, enforces your access controls, and includes production monitoring. The gap is between a consumer tool and an enterprise system.",
           },
           {
             q: "Which AI models do you use?",
@@ -1497,11 +1497,11 @@ export const en = {
         items: [
           {
             q: "Who owns the system after handover?",
-            a: "You do. The code, models, configuration, and data all live in your environment. We provide complete handover documentation so your team can operate and extend the system independently. You are not locked into a DeView-controlled platform.",
+            a: "You do. The code, models, configuration, and data all live in your environment. We provide complete handover documentation so your team can operate and extend the system independently. You are not locked into a Deview-controlled platform.",
           },
           {
             q: "What support is available after go-live?",
-            a: "Every handover includes a 30-day post-launch support period for bug fixes and configuration adjustments. Beyond that, we offer a managed service model (DeView monitors and maintains) or a retainer for periodic updates. Both are optional.",
+            a: "Every handover includes a 30-day post-launch support period for bug fixes and configuration adjustments. Beyond that, we offer a managed service model (Deview monitors and maintains) or a retainer for periodic updates. Both are optional.",
           },
           {
             q: "What happens if our data or workflows change after deployment?",
@@ -1568,15 +1568,15 @@ export const en = {
     disclaimer: "Calculations use a blended operational staff rate of $RATE/hr. Actual savings depend on your team composition, automation rate achieved, and volume. Use this as an order-of-magnitude estimate, not a contract.",
   },
   insurancePage: {
-    title: "AI for Insurance Operations | DeView",
+    title: "AI for Insurance Operations | Deview",
     description:
-      "AI automation for insurance operations teams: claims processing, policy document handling, customer support, and compliance reporting. Deployed in 3–6 weeks.",
+      "AI automation for insurance operations teams: claims processing, policy document handling, customer support, and compliance reporting.",
     sectionLabel: "INSURANCE · INDUSTRY",
     h1: "AI for insurance operations: built for claims volume, compliance requirements, and data sensitivity.",
     subtitleP1:
       "Insurance operations are document-heavy, compliance-sensitive, and high-volume. All three characteristics make them particularly suited for AI automation: when it's built correctly.",
     subtitleP2:
-      "DeView builds AI systems for insurance teams that reduce manual processing, handle routine customer enquiries, and generate compliance documentation automatically.",
+      "Deview builds AI systems for insurance teams that reduce manual processing, handle routine customer enquiries, and generate compliance documentation automatically.",
     stats: [
       { metric: "60–85%", label: "Reduction in manual claims intake time" },
       { metric: "3–6 wk", label: "From scoping to live deployment" },
@@ -1630,7 +1630,7 @@ export const en = {
     objections: [
       {
         q: "Insurance data is highly sensitive. How do you protect it?",
-        a: "Every deployment lives in your own cloud environment or on-premises infrastructure. No policyholder data passes through DeView-operated systems. We implement role-based access controls, full audit logging, and can configure the deployment for PDPO, GDPR, and jurisdiction-specific regulatory requirements.",
+        a: "Every deployment lives in your own cloud environment or on-premises infrastructure. No policyholder data passes through Deview-operated systems. We implement role-based access controls, full audit logging, and can configure the deployment for PDPO, GDPR, and jurisdiction-specific regulatory requirements.",
       },
       {
         q: "Our claims processes vary significantly by product line. Can AI handle that?",
@@ -1661,7 +1661,7 @@ export const en = {
     notFound: "Agreement reference not found. Please check your reference and try again.",
     unavailable: "Portal unavailable. Please try again later.",
     connectError: "Could not connect to portal service. Please try again.",
-    footerNote: "Your reference is included in your signed engagement agreement from DeView. Need help?",
+    footerNote: "Your reference is included in your signed engagement agreement from Deview. Need help?",
     projectPortal: "PROJECT PORTAL",
     referenceLabel: "Reference",
     signOut: "Sign out",
@@ -1775,7 +1775,7 @@ export const en = {
     ctaOutputValue: "Written use case recommendations with ROI estimate for your top priority",
     ctaButton: "BOOK YOUR FREE AUDIT →",
     ctaResponse: "We respond within 24 hours to confirm a time.",
-    ctaDisclaimer: "Prepared by DeView: AI automation and workflow consulting for lending and financial services operations. Recommendations in this guide are for planning purposes. All AI implementations should be validated against your specific compliance, data, and regulatory requirements before deployment.",
+    ctaDisclaimer: "Prepared by Deview: AI automation and workflow consulting for lending and financial services operations. Recommendations in this guide are for planning purposes. All AI implementations should be validated against your specific compliance, data, and regulatory requirements before deployment.",
   },
 
   /* ── Enterprise Fine-Tune Diagram ── */
@@ -1808,10 +1808,10 @@ export const en = {
   moreInfoPage: {
     m1Tag: "Module 01",
     m1Title: "The Big Picture",
-    m1Desc: "What DeView builds, how our architecture is structured, and why production-grade AI is different from a demo.",
-    archHeading: "The DeView Enterprise AI Architecture",
-    archIntro: "Every DeView engagement operates within a five-layer model. Understanding these layers lets you explain exactly where our work sits inside a client's existing technology estate.",
-    archCaption: "Fig 1.1: DeView's five-layer enterprise AI architecture. Every engagement touches all five layers.",
+    m1Desc: "What Deview builds, how our architecture is structured, and why production-grade AI is different from a demo.",
+    archHeading: "The Deview Enterprise AI Architecture",
+    archIntro: "Every Deview engagement operates within a five-layer model. Understanding these layers lets you explain exactly where our work sits inside a client's existing technology estate.",
+    archCaption: "Fig 1.1: Deview's five-layer enterprise AI architecture. Every engagement touches all five layers.",
     modesHeading: "The Four AI Operating Modes",
     modes: [
       { icon: "📈", name: "Predictive", badge: "Data-driven", desc: "Uses historical and real-time data to forecast outcomes. Examples: inventory demand forecasting, fraud detection scoring, credit risk assessment, workforce capacity planning.", tags: ["ML models", "time-series", "scoring APIs"] },
@@ -1822,7 +1822,7 @@ export const en = {
     prodHeading: "Production-Grade vs. Proof-of-Concept",
     prodTip: "Sales tip:",
     prodTipText: "Most prospects have already seen an AI demo. The real question they're asking is: \"Can this actually work inside our environment, with our data, under our security policies?\"",
-    prodColumns: { dimension: "Dimension", poc: "Proof-of-Concept", production: "DeView Production-Grade" },
+    prodColumns: { dimension: "Dimension", poc: "Proof-of-Concept", production: "Deview Production-Grade" },
     prodRows: [
       { dim: "Data", poc: "Sample CSV or synthetic data", prod: "Live integrations with real CRM / ERP" },
       { dim: "Security", poc: "No auth, shared API keys", prod: "Role-based access, audit logs, isolated tenants" },
@@ -1834,7 +1834,7 @@ export const en = {
     ],
     m2Tag: "Module 02",
     m2Title: "Services Deep Dive",
-    m2Desc: "A technical breakdown of each DeView service: how it works, what it connects to, and what the client receives.",
+    m2Desc: "A technical breakdown of each Deview service: how it works, what it connects to, and what the client receives.",
     svc1Heading: "AI Workflow Audit",
     svc1WhatTitle: "What it is",
     svc1WhatBody: "A structured analysis of one business process to identify the highest-value AI automation entry point. Delivered as a scoped report with a concrete, costed implementation pathway.",
@@ -1874,12 +1874,12 @@ export const en = {
     svc6DimItems: ["Data readiness: quality, availability, governance", "Integration feasibility: existing systems audit", "Team capability: skill gaps and training needs", "ROI modelling: time and cost savings per use case"],
     m3Tag: "Module 03",
     m3Title: "Data Infrastructure",
-    m3Desc: "How client data flows from existing source systems through DeView's AI pipelines: and back into the business.",
+    m3Desc: "How client data flows from existing source systems through Deview's AI pipelines: and back into the business.",
     dataMapHeading: "Data Integration Map",
     dataMapCaption: "Fig 3.1: Data flow from client source systems through the ETL pipeline into the AI layer and back to business outputs.",
     deployHeading: "Deployment Models",
     deployCloud: "Cloud-hosted",
-    deployCloudBody: "Deployed within the client's own AWS, GCP, or Azure account. Data never leaves their cloud environment. DeView manages the deployment: not the data.",
+    deployCloudBody: "Deployed within the client's own AWS, GCP, or Azure account. Data never leaves their cloud environment. Deview manages the deployment: not the data.",
     deployOnPrem: "On-premises",
     deployOnPremBody: "Fully air-gapped within the client's physical or virtual infrastructure. Uses open-source models (Llama 3, Mistral) running locally. Required for highly regulated environments.",
     deployHybrid: "Hybrid",
@@ -1890,7 +1890,7 @@ export const en = {
     isoItems: ["Separate database schema or dedicated instance per client", "API keys and credentials scoped exclusively to each deployment", "Audit logs are client-specific and fully exportable on request", "Data retention policies configurable per engagement agreement", "Client retains full ownership: system lives in their environment"],
     m4Tag: "Module 04",
     m4Title: "Security & Compliance",
-    m4Desc: "How DeView handles data security, access control, audit trails, and regulated industry requirements.",
+    m4Desc: "How Deview handles data security, access control, audit trails, and regulated industry requirements.",
     secMapHeading: "Security Boundary Map",
     secMapCaption: "Fig 4.1: Security boundaries. Sensitive credentials exist only server-side. The client never touches secrets directly.",
     secMeasuresHeading: "Security Measures",
@@ -1904,8 +1904,8 @@ export const en = {
     secAiItems: ["Prompt injection mitigation: input sanitised before LLM", "Output filtering: AI responses screened before delivery", "Domain guardrails: model constrained to defined scope", "Confidence thresholds: low-confidence outputs escalate to humans"],
     regHeading: "Regulatory Compliance Context",
     regTip: "Sales guidance:",
-    regTipText: "DeView does not currently hold SOC 2 or ISO 27001 certifications. When a prospect asks, pivot to architecture.",
-    regColumns: { regulation: "Regulation", who: "Who it applies to", how: "How DeView addresses it" },
+    regTipText: "Deview does not currently hold SOC 2 or ISO 27001 certifications. When a prospect asks, pivot to architecture.",
+    regColumns: { regulation: "Regulation", who: "Who it applies to", how: "How Deview addresses it" },
     regRows: [
       { reg: "GDPR", who: "EU-based clients or clients handling EU personal data", how: "Data stays in client-controlled cloud; data processing agreements available" },
       { reg: "PDPO", who: "Hong Kong personal data processing", how: "Primary jurisdiction; data residency options built into HK deployments" },
@@ -1915,7 +1915,7 @@ export const en = {
     ],
     m5Tag: "Module 05",
     m5Title: "MLOps & Monitoring",
-    m5Desc: "How DeView ensures AI systems keep working correctly after they go live.",
+    m5Desc: "How Deview ensures AI systems keep working correctly after they go live.",
     mlopsHeading: "The MLOps Lifecycle",
     mlopsCaption: "Fig 5.1: MLOps lifecycle: Deploy → Monitor → Evaluate → Retrain → back to Deploy.",
     monitorTitle: "Monitor: What is tracked",
@@ -1934,8 +1934,8 @@ export const en = {
     hitlCallout: "Why this matters in sales:",
     hitlCalloutBody: "Human-in-the-loop is a professional risk management feature. Frame it as governance, not a limitation.",
     m6Tag: "Module 06",
-    m6Title: "DeView's Own Technical Stack",
-    m6Desc: "The infrastructure DeView runs on: demonstrating we operate with the same engineering standards we build for clients.",
+    m6Title: "Deview's Own Technical Stack",
+    m6Desc: "The infrastructure Deview runs on: demonstrating we operate with the same engineering standards we build for clients.",
     stackColumns: { layer: "Layer", tech: "Technology", version: "Version", purpose: "Purpose" },
     stackRows: [
       { layer: "Frontend", tech: "Next.js + React", version: "16.2 / 19.2", purpose: "Server-side rendering, App Router, API routes" },
@@ -1954,24 +1954,24 @@ export const en = {
     portalSecTitle: "Security design",
     portalSecItems: ["Reference code acts as access token: no password required", "Server-side queries only: Supabase key never in browser", "is_active flag: any portal disabled instantly", "Fallback resilience: Task Manager API if Supabase unavailable"],
     portalCredibility: "Credibility point:",
-    portalCredibilityBody: "When a prospect asks \"have you built production systems like this before?\": walk them through DeView's own infrastructure.",
+    portalCredibilityBody: "When a prospect asks \"have you built production systems like this before?\": walk them through Deview's own infrastructure.",
     m7Tag: "Module 07",
     m7Title: "Sales FAQ",
     m7Desc: "The 15 most common technical questions from enterprise prospects: with answers your sales team can use immediately.",
     faq: [
       { q: "Where is our data stored?", a: "Your data stays in your own environment. For cloud deployments, we deploy into your existing AWS, GCP, or Azure account. For on-premises deployments, nothing leaves your physical network." },
-      { q: "Can this connect to our existing CRM or ERP?", a: "Yes. DeView builds native integrations with Salesforce, HubSpot, SAP, Oracle, and most SQL databases via standard APIs and connectors." },
+      { q: "Can this connect to our existing CRM or ERP?", a: "Yes. Deview builds native integrations with Salesforce, HubSpot, SAP, Oracle, and most SQL databases via standard APIs and connectors." },
       { q: "What LLM do you use: is it OpenAI / ChatGPT?", a: "We are model-agnostic. Options include OpenAI GPT-4o, Anthropic Claude, Google Gemini, or open-source models like Llama 3 and Mistral for on-premises deployments." },
-      { q: "Who has access to our data?", a: "Access is scoped by role and enforced at both application and database level. No DeView engineers hold standing access to production client data." },
+      { q: "Who has access to our data?", a: "Access is scoped by role and enforced at both application and database level. No Deview engineers hold standing access to production client data." },
       { q: "What happens if the AI gives a wrong answer?", a: "Every deployment includes a human-in-the-loop escalation path. Low-confidence items are flagged for human review. All outputs are logged." },
       { q: "Is this GDPR / PDPO compliant?", a: "Our architecture supports compliance with GDPR and Hong Kong's PDPO. Data stays in client-controlled environments with configurable retention and full audit trails." },
       { q: "Can we run this on-premises?", a: "Yes. We deploy fully air-gapped solutions using open-source models. All inference runs locally on your infrastructure." },
       { q: "What is the typical integration timeline?", a: "An AI Workflow Audit delivers in 1–2 weeks. A fully deployed system typically takes 4–8 weeks end-to-end." },
       { q: "How do we know it's working correctly after go-live?", a: "Every deployment includes monitoring dashboards, accuracy scores, drift indicators, and scheduled evaluation pipelines." },
-      { q: "What's the difference between this and ChatGPT?", a: "A DeView deployment is purpose-built: it integrates with your systems, enforces access controls, and includes monitoring. ChatGPT is a general-purpose consumer tool." },
+      { q: "What's the difference between this and ChatGPT?", a: "A Deview deployment is purpose-built: it integrates with your systems, enforces access controls, and includes monitoring. ChatGPT is a general-purpose consumer tool." },
       { q: "Does your AI learn from our data and share it?", a: "No. Each deployment is fully isolated. Your data is never used to train shared models." },
       { q: "Do you have SOC 2 or ISO 27001?", a: "Not yet, though our architecture follows these principles. We provide detailed security documentation for your review." },
-      { q: "What if we stop working with DeView?", a: "Deployments live in your environment. You retain full ownership of code, models, configuration, and data." },
+      { q: "What if we stop working with Deview?", a: "Deployments live in your environment. You retain full ownership of code, models, configuration, and data." },
       { q: "Can the AI handle industry-specific terminology?", a: "Yes. We configure prompts and retrieval using your own documents, glossaries, and procedures." },
       { q: "What support after launch?", a: "Post-launch includes monitoring, escalation paths, and review cycles. We offer managed service or retainer models." },
     ],

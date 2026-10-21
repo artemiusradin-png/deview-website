@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Editorial-style team member card: adapted to DeView's theme tokens.
+ * Editorial-style team member card: adapted to Deview's theme tokens.
  * Same overlapping layout at every breakpoint (portrait + large display name
  * overlapping it, circular CTA, left/right mirroring for alternating cards);
  * the portrait, name and CTA just scale down on small screens so the whole

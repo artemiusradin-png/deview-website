@@ -8,12 +8,12 @@ import { MARKETS, MARKET_SLUGS } from "@/lib/markets";
 const canonicalUrl = "https://deviewai.com/en/markets";
 
 export const metadata: Metadata = {
-  title: "AI Consulting Across Asia-Pacific Markets | DeView",
+  title: "AI Consulting Across Asia-Pacific Markets | Deview",
   description:
-    "Explore DeView's AI consulting, software engineering, and data engineering services for teams in Hong Kong, Singapore, and Taiwan.",
+    "Explore Deview's AI consulting, software engineering, and data engineering services for teams in Hong Kong, Singapore, and Taiwan.",
   alternates: { canonical: canonicalUrl },
   openGraph: {
-    title: "DeView in Asia-Pacific",
+    title: "Deview in Asia-Pacific",
     description:
       "Production AI and software engineering for Hong Kong, Singapore, and Taiwan operations teams.",
     url: canonicalUrl,

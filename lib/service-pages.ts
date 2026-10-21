@@ -30,7 +30,7 @@ export const SERVICE_PAGES: ServicePage[] = [
   {
     serviceId: "product-engineering",
     slug: "custom-software-development",
-    seoTitle: "Custom Software Development Services in Hong Kong | DeView",
+    seoTitle: "Custom Software Development Services in Hong Kong | Deview",
     seoDescription:
       "Custom software development for financial and industrial companies: custom applications, software product engineering, application modernization and API integration. Hong Kong team, you own the code.",
     kicker: "Digital product engineering",
@@ -57,6 +57,11 @@ export const SERVICE_PAGES: ServicePage[] = [
       { label: "Loan management systems for five Hong Kong lenders", href: "/case-studies#finance" },
       { label: "Planning, control and reporting systems for oil & gas", href: "/industries/oil-and-gas" },
     ],
+    leadMagnet: {
+      label: "Free loan management system checklist",
+      line: "Eight areas a lending system has to cover, from the team behind five Hong Kong lending systems.",
+      href: "/resources/loan-management-system-checklist",
+    },
     faqs: [
       {
         q: "Who owns the code of the custom software you build?",
@@ -79,7 +84,7 @@ export const SERVICE_PAGES: ServicePage[] = [
   {
     serviceId: "ai-ml",
     slug: "ai-development",
-    seoTitle: "AI Development Company: Generative AI, AI Agents & Machine Learning | DeView",
+    seoTitle: "AI Development Company: Generative AI, AI Agents & Machine Learning | Deview",
     seoDescription:
       "AI and machine learning development: generative AI and LLM applications, AI agents and agentic workflows, document AI and predictive models, with AI security built in. Hong Kong based.",
     kicker: "AI/ML engineering",
@@ -132,7 +137,7 @@ export const SERVICE_PAGES: ServicePage[] = [
   {
     serviceId: "data-engineering",
     slug: "data-engineering",
-    seoTitle: "Data Engineering Services: Pipelines, Data Warehouses & BI | DeView",
+    seoTitle: "Data Engineering Services: Pipelines, Data Warehouses & BI | Deview",
     seoDescription:
       "Data engineering services: data pipelines and ETL, data warehouses, Power BI, Tableau and Looker dashboards, and automated reporting for financial and industrial companies.",
     kicker: "Data engineering",
@@ -158,6 +163,11 @@ export const SERVICE_PAGES: ServicePage[] = [
       { label: "Planning, control and reporting systems for oil & gas, 2010 to 2020", href: "/industries/oil-and-gas" },
       { label: "Loan portfolio and borrower reporting for Hong Kong lenders", href: "/case-studies#finance" },
     ],
+    leadMagnet: {
+      label: "Free automation playbook",
+      line: "The workflows worth automating first in five industries, step by step.",
+      href: "/resources/automation-playbook",
+    },
     faqs: [
       {
         q: "Can you work with the BI tool we already have?",
@@ -176,7 +186,7 @@ export const SERVICE_PAGES: ServicePage[] = [
   {
     serviceId: "cloud-devops",
     slug: "cloud-devops",
-    seoTitle: "Cloud, DevOps & Cloud Security Services in Hong Kong | DeView",
+    seoTitle: "Cloud, DevOps & Cloud Security Services in Hong Kong | Deview",
     seoDescription:
       "Cloud and DevOps engineering on AWS, Google Cloud and Azure: cloud architecture and migration, CI/CD and Kubernetes, monitoring, and cloud security with GDPR, PDPO, HKMA and MAS TRM compliance.",
     kicker: "Cloud & DevOps engineering",
@@ -224,7 +234,7 @@ export const SERVICE_PAGES: ServicePage[] = [
   {
     serviceId: "enterprise-platforms",
     slug: "enterprise-platforms",
-    seoTitle: "Salesforce, CRM & ERP Integration Services | DeView",
+    seoTitle: "Salesforce, CRM & ERP Integration Services | Deview",
     seoDescription:
       "Enterprise platform services: Salesforce development and integration, HubSpot and CRM integration, SAP and Oracle ERP integration, Microsoft 365 and API integration layers.",
     kicker: "Enterprise platforms",
@@ -249,6 +259,11 @@ export const SERVICE_PAGES: ServicePage[] = [
     proof: [
       { label: "AgroPlatforma: quoting built inside Salesforce", href: "/case-studies#agriculture" },
     ],
+    leadMagnet: {
+      label: "Free automation playbook",
+      line: "Where automation between your CRM, ERP and spreadsheets pays off first, industry by industry.",
+      href: "/resources/automation-playbook",
+    },
     faqs: [
       {
         q: "Can you build inside our existing Salesforce org?",

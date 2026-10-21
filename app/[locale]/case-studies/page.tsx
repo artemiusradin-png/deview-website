@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { CaseStudiesContent } from "./case-studies-content";
 
 export const metadata: Metadata = {
-  title: "Case Studies: Custom Software, AI and Loan Management Systems | DeView",
+  title: "Case Studies: Custom Software, AI and Loan Management Systems | Deview",
   description:
-    "DeView projects across oil & gas, agriculture, lending, senior care, e-commerce, ventilation and fitness, including AI conversion improvements for EVDEV's StorePilot.",
+    "Deview projects across oil & gas, agriculture, lending, senior care, e-commerce, ventilation and fitness, including AI conversion improvements for EVDEV's StorePilot.",
   alternates: { canonical: "/en/case-studies" },
 };
 

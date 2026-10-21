@@ -20,7 +20,7 @@ function buildUrl(): string {
   return `${SITE_BOOKING_URL}?background_color=fffdf7&text_color=171207&primary_color=806000`;
 }
 
-/** Embeds the DeView Calendly booking page (30-min call) inline on the contact page. */
+/** Embeds the Deview Calendly booking page (30-min call) inline on the contact page. */
 export function CalendlyInlineWidget() {
   const containerRef = useRef<HTMLDivElement | null>(null);
 

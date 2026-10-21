@@ -26,6 +26,13 @@ export const LEAD_MAGNETS = {
     accessKey: "deview-ai-security-checklist",
     label: "AI security checklist",
   },
+  aiGuideLending: {
+    source: "ai-guide-lending",
+    path: "/resources/ai-guide-lending",
+    guidePath: "/resources/ai-guide-lending/guide",
+    accessKey: "deview-guide-lending",
+    label: "10 AI use cases for lending companies",
+  },
 } as const;
 
 export type ServiceLine = {

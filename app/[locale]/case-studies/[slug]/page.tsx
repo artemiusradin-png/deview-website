@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProductionCase(slug);
   if (!project) return { robots: { index: false, follow: false } };
   return {
-    title: `${project.company} Case Study | DeView`,
+    title: `${project.company} Case Study | Deview`,
     description: project.content.headline,
     alternates: { canonical: `/en/case-studies/${project.slug}` },
     openGraph: { title: project.content.headline, description: project.content.solution, url: `/en/case-studies/${project.slug}`, type: "article" },

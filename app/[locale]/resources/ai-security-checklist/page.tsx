@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import { LeadMagnetSignup } from "@/components/LeadMagnet";
+import { LeadMagnetDetails } from "@/components/LeadMagnetDetails";
 import { SiteFooter } from "@/components/SiteFooter";
 import styles from "@/components/lead-magnet.module.css";
 import { AI_SECURITY_AREAS } from "@/lib/lead-magnet-content";
+import { AI_SECURITY_CHECKLIST_DETAILS } from "@/lib/lead-magnet-details";
 import { LEAD_MAGNETS } from "@/lib/workflow-offers";
 
 const m = LEAD_MAGNETS.aiSecurityChecklist;
 
 export const metadata: Metadata = {
-  title: "AI Security Checklist for LLM Applications (OWASP Top 10) | DeView",
+  title: "AI Security Checklist for LLM Applications (OWASP Top 10) | Deview",
   description:
     "A free AI security checklist for LLM apps and AI agents, based on the OWASP Top 10 for LLM Applications: prompt injection, data leaks, excessive agency and more, plus governance checks for PDPO, HKMA and GDPR.",
   alternates: { canonical: `/en${m.path}` },
@@ -50,6 +52,7 @@ export default function AiSecurityChecklistPage() {
             Based on the OWASP Top 10 for Large Language Model Applications (2025).
           </span>
         </section>
+        <LeadMagnetDetails details={AI_SECURITY_CHECKLIST_DETAILS} />
       </main>
       <SiteFooter />
     </>

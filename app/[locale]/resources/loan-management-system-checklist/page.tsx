@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import { LeadMagnetSignup } from "@/components/LeadMagnet";
+import { LeadMagnetDetails } from "@/components/LeadMagnetDetails";
 import { SiteFooter } from "@/components/SiteFooter";
 import styles from "@/components/lead-magnet.module.css";
 import { LMS_AREAS } from "@/lib/lead-magnet-content";
+import { LMS_CHECKLIST_DETAILS } from "@/lib/lead-magnet-details";
 import { LEAD_MAGNETS } from "@/lib/workflow-offers";
 
 const m = LEAD_MAGNETS.lmsChecklist;
 
 export const metadata: Metadata = {
-  title: "Loan Management System Checklist for Hong Kong Money Lenders | DeView",
+  title: "Loan Management System Checklist for Hong Kong Money Lenders | Deview",
   description:
     "A free checklist for choosing or upgrading a loan management system: borrower onboarding, credit assessment, repayments, collections, reporting and audit, from the team behind five Hong Kong lending systems.",
   alternates: { canonical: `/en${m.path}` },
@@ -47,6 +49,7 @@ export default function LmsChecklistPage() {
             ))}
           </ul>
         </section>
+        <LeadMagnetDetails details={LMS_CHECKLIST_DETAILS} />
       </main>
       <SiteFooter />
     </>

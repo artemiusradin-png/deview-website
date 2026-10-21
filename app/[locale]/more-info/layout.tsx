@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "Enterprise AI Architecture | DeView",
+  title: "Enterprise AI Architecture | Deview",
   description:
-    "What DeView builds, how our architecture is structured, and why production-grade AI is different from a demo.",
+    "What Deview builds, how our architecture is structured, and why production-grade AI is different from a demo.",
   alternates: { canonical: "/en/more-info" },
   robots: { index: false, follow: true },
 };

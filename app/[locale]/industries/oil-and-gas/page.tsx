@@ -12,7 +12,7 @@ import {
 
 const SITE_URL = "https://deviewai.com";
 const canonicalUrl = `${SITE_URL}${OIL_GAS_HUB_PATH}`;
-const seoTitle = "Oil & Gas Planning, Control & Reporting Software | DeView";
+const seoTitle = "Oil & Gas Planning, Control & Reporting Software | Deview";
 const seoDescription =
   "Scheduling, project management, engineering data, planning and control, and reporting systems for international oil & gas companies. Six projects, 2010–2020.";
 
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title: seoTitle,
     description: seoDescription,
     url: canonicalUrl,
-    siteName: "DeView",
+    siteName: "Deview",
     type: "website",
   },
 };
@@ -51,8 +51,8 @@ const structuredData = {
       description: seoDescription,
       inLanguage: "en",
       dateModified: OIL_GAS_PAGES_UPDATED,
-      isPartOf: { "@type": "WebSite", "@id": `${SITE_URL}/#website`, name: "DeView", url: SITE_URL },
-      publisher: { "@type": "Organization", "@id": `${SITE_URL}/#organization`, name: "DeView" },
+      isPartOf: { "@type": "WebSite", "@id": `${SITE_URL}/#website`, name: "Deview", url: SITE_URL },
+      publisher: { "@type": "Organization", "@id": `${SITE_URL}/#organization`, name: "Deview" },
       breadcrumb: { "@id": `${canonicalUrl}#breadcrumb` },
       mainEntity: {
         "@type": "ItemList",
@@ -70,7 +70,7 @@ const structuredData = {
       "@type": "BreadcrumbList",
       "@id": `${canonicalUrl}#breadcrumb`,
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "DeView", item: `${SITE_URL}/en` },
+        { "@type": "ListItem", position: 1, name: "Deview", item: `${SITE_URL}/en` },
         { "@type": "ListItem", position: 2, name: "Oil & gas", item: canonicalUrl },
       ],
     },
@@ -164,7 +164,7 @@ export default function OilAndGasPage() {
             </div>
             <div className="space-y-4 text-sm leading-relaxed text-[var(--text-muted)] md:text-base">
               <p>
-                DeView builds custom software, data pipelines and AI systems for operations teams: connect the data a
+                Deview builds custom software, data pipelines and AI systems for operations teams: connect the data a
                 team already has, build the tools the team works in, and report from one governed record.
               </p>
               <p>

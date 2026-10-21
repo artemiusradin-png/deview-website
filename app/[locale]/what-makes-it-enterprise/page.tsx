@@ -8,7 +8,7 @@ import { WhatMakesEnterpriseContent } from "./what-makes-enterprise-content";
 const homeWithRetroCards = `/#${RETRO_FEATURE_CARDS_ID}`;
 
 export const metadata: Metadata = {
-  title: "What makes it enterprise | DeView",
+  title: "What makes it enterprise | Deview",
   description:
     "Enterprise AI architecture across business systems, data foundation, infrastructure, and AI/ML operations.",
   alternates: { canonical: "/en/what-makes-it-enterprise" },

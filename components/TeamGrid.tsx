@@ -37,7 +37,7 @@ export function TeamGrid({ variant = "strip" }: { variant?: "strip" | "grid" }) 
     <ul
       className={styles.grid}
       data-variant={variant}
-      aria-label="The DeView team"
+      aria-label="The Deview team"
     >
       {members.map((member, index) => {
         const crop = member.photo ? PORTRAIT_CROPS[member.photo] : undefined;

@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { asset } = await params;
   const found = assetById(asset);
   return {
-    title: found ? `${found.title} | DeView` : "DeView",
+    title: found ? `${found.title} | Deview` : "Deview",
     robots: { index: false, follow: true },
   };
 }

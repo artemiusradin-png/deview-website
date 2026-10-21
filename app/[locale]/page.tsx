@@ -8,14 +8,14 @@ export const metadata: Metadata = {
 
 const SITE_URL = "https://deviewai.com";
 
-/** Tells search engines who DeView is, so brand searches resolve to one clear entity. */
+/** Tells search engines who Deview is, so brand searches resolve to one clear entity. */
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
-      name: "DeView",
+      name: "Deview",
       legalName: LEGAL_ENTITY.name.toUpperCase(),
       identifier: {
         "@type": "PropertyValue",
@@ -38,7 +38,7 @@ const structuredData = {
     {
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
-      name: "DeView",
+      name: "Deview",
       url: SITE_URL,
       inLanguage: "en",
       publisher: { "@id": `${SITE_URL}/#organization` },

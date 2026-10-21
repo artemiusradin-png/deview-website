@@ -38,7 +38,7 @@ async function saveInquiry(req: Request, input: InquiryInput) {
 }
 
 async function sendNotification(input: InquiryInput) {
-  const subject = `[DeView inquiry] ${input.name}`;
+  const subject = `[Deview inquiry] ${input.name}`;
   const message = buildInquiryText(input);
   const text = `Name: ${input.name}\n${message}`;
   const resendApiKey = process.env.RESEND_API_KEY?.trim();

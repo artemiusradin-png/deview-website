@@ -383,3 +383,44 @@
   margin-top: 8px;
   font-size: 18px;
 }
+
+/* Solutions by industry: links to the /solutions pages under this service. */
+.solutions {
+  padding-block: 72px 8px;
+}
+.solutionGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0 32px;
+  margin-top: 28px;
+  border-top: 1px solid var(--ink);
+}
+.solutionGrid > div {
+  padding-block: 22px 8px;
+}
+.solutionGrid h3 {
+  margin: 0 0 10px;
+  font-size: 19px;
+  letter-spacing: -0.02em;
+}
+.solutionGrid h3 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.solutionGrid ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.solutionGrid li a {
+  display: block;
+  padding-block: 8px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.4;
+  text-decoration: none;
+}
+.solutionGrid :is(h3, li) a:hover {
+  color: var(--ink);
+}

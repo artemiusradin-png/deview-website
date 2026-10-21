@@ -19,7 +19,7 @@ const INDUSTRY_IMAGES: Record<string, string> = {
 };
 
 const FALLBACK_IMAGE =
-  "https://placehold.co/400x450/14161c/8a8f99?text=DeView";
+  "https://placehold.co/400x450/14161c/8a8f99?text=Deview";
 
 type AccordionPanelProps = {
   label: string;

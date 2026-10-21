@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SubpageNav } from "@/components/SubpageNav";
 import { SERVICE_PAGES, servicePagePath } from "@/lib/service-pages";
 import { LEGAL_ENTITY } from "@/lib/site-contact";
+import { SOLUTION_PAGES, hubFor, solutionPath, type SolutionVertical } from "@/lib/solutions";
 import { SERVICE_LINES } from "@/lib/workflow-offers";
 import styles from "./service-page.module.css";
 
@@ -19,6 +20,15 @@ const DRAWING_MODE: Record<string, number> = {
   "cloud-devops": 3,
   "enterprise-platforms": 4,
 };
+
+/** Order of the industry columns in "Solutions by industry". */
+const SOLUTION_VERTICALS: SolutionVertical[] = [
+  "banking",
+  "oil-gas",
+  "manufacturing",
+  "agriculture",
+  "cross-industry",
+];
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -48,7 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: page.seoTitle,
       description: page.seoDescription,
       url,
-      siteName: "DeView",
+      siteName: "Deview",
       type: "website",
     },
   };
@@ -62,6 +72,10 @@ export default async function ServicePage({ params }: Props) {
 
   const url = `${SITE_URL}/en${servicePagePath(page.slug)}`;
   const others = SERVICE_PAGES.filter((p) => p.slug !== page.slug);
+  const solutionGroups = SOLUTION_VERTICALS.map((vertical) => ({
+    hub: hubFor(vertical),
+    pages: SOLUTION_PAGES.filter((s) => s.serviceId === line.id && s.vertical === vertical),
+  })).filter((group) => group.hub?.published && group.pages.length > 0);
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -81,7 +95,7 @@ export default async function ServicePage({ params }: Props) {
         "@type": "BreadcrumbList",
         "@id": `${url}#breadcrumb`,
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "DeView", item: `${SITE_URL}/en` },
+          { "@type": "ListItem", position: 1, name: "Deview", item: `${SITE_URL}/en` },
           { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/en/services` },
           { "@type": "ListItem", position: 3, name: page.h1, item: url },
         ],
@@ -96,7 +110,7 @@ export default async function ServicePage({ params }: Props) {
         provider: {
           "@type": "Organization",
           "@id": `${SITE_URL}/#organization`,
-          name: "DeView",
+          name: "Deview",
           legalName: LEGAL_ENTITY.name.toUpperCase(),
         },
         areaServed: ["Hong Kong", "Asia-Pacific", "Europe", "North America"],
@@ -220,6 +234,31 @@ export default async function ServicePage({ params }: Props) {
               </ul>
             </div>
           </section>
+
+          {solutionGroups.length ? (
+            <section className={styles.solutions} aria-labelledby="solutions-title">
+              <span className={styles.kicker}>Solutions by industry</span>
+              <h2 id="solutions-title" className={styles.sectionTitle}>
+                {line.name} for your industry.
+              </h2>
+              <div className={styles.solutionGrid}>
+                {solutionGroups.map(({ hub, pages }) => (
+                  <div key={hub!.slug}>
+                    <h3>
+                      <Link href={`/en${solutionPath(hub!.slug)}`}>{hub!.navLabel}</Link>
+                    </h3>
+                    <ul>
+                      {pages.map((solution) => (
+                        <li key={solution.slug}>
+                          <Link href={`/en${solutionPath(solution.slug)}`}>{solution.h1}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
           {page.leadMagnet ? (
             <Link href={`/en${page.leadMagnet.href}`} className={styles.magnet}>

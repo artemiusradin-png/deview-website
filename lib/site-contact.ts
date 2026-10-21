@@ -1,7 +1,7 @@
 /** Primary inbox for inquiries (mailto links + form delivery). */
 export const SITE_INQUIRY_EMAIL = "info@deviewai.com";
 
-/** The registered company that operates DeView (Hong Kong Companies Registry). */
+/** The registered company that operates Deview (Hong Kong Companies Registry). */
 export const LEGAL_ENTITY = {
   name: "Covenant Desk Limited",
   registryNumber: "80827838",
@@ -29,7 +29,7 @@ export function buildInquiryMailto(input: {
   company: string;
   details: string;
 }): string {
-  const subject = `DeView inquiry from ${input.name}`;
+  const subject = `Deview inquiry from ${input.name}`;
   const body = `Name: ${input.name}\n${buildInquiryText(input)}`;
   const encSubject = encodeURIComponent(subject.slice(0, 500));
   const encBody = encodeURIComponent(body.slice(0, 1900));

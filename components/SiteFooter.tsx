@@ -45,7 +45,7 @@ export function SiteFooter({ rootPrefix = "", hideCta = false }: SiteFooterProps
       rootPrefix={rootPrefix}
       showCta={!hideCta}
       brand={{
-        name: "DeView",
+        name: "Deview",
         description: f.intro,
         location: f.loc,
       }}
@@ -70,7 +70,7 @@ export function SiteFooter({ rootPrefix = "", hideCta = false }: SiteFooterProps
         {
           title: f.about,
           links: [
-            { text: f.links.aboutDeView, href: localePath("/about") },
+            { text: f.links.aboutDeview, href: localePath("/about") },
             { text: f.links.howWeWork, href: localePath("/how-we-work") },
             { text: f.links.caseStudies, href: localePath("/case-studies") },
             { text: f.links.clientPortal, href: localePath("/client-portal") },
@@ -118,7 +118,7 @@ export function SiteFooter({ rootPrefix = "", hideCta = false }: SiteFooterProps
         inquiryLabel: f.inquiryForm,
       }}
       legal={{
-        copyright: `© ${new Date().getFullYear()} DeView`,
+        copyright: `© ${new Date().getFullYear()} Deview`,
         tagline: f.tagline,
       }}
     />

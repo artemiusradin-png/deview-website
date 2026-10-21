@@ -56,7 +56,7 @@ export default async function MarketPage({ params }: MarketPageProps) {
     serviceType: "AI consulting, custom software engineering, and data engineering",
     provider: {
       "@type": "Organization",
-      name: "DeView",
+      name: "Deview",
       url: "https://deviewai.com",
     },
     areaServed: {

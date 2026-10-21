@@ -2,7 +2,9 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { LeadMagnetDetails } from "@/components/LeadMagnetDetails";
 import { SiteFooter } from "@/components/SiteFooter";
+import { AUTOMATION_PLAYBOOK_DETAILS } from "@/lib/lead-magnet-details";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import {
   INDUSTRY_OFFERS,
@@ -201,6 +203,26 @@ export default function AutomationPlaybookPage() {
             )}
           </div>
         </section>
+        <section
+          className={`${styles.container} ${styles.covered}`}
+          aria-labelledby="covered-title"
+        >
+          <span className={styles.kicker}>What the playbook covers</span>
+          <h2 id="covered-title" className={styles.sectionTitle}>
+            Five industries, one chapter each.
+          </h2>
+          <ul className={styles.coveredList}>
+            {INDUSTRY_OFFERS.map((industry) => (
+              <li key={industry.id}>
+                <strong>
+                  {industry.name}: {industry.headline}
+                </strong>
+                <span className={styles.body}>{industry.summary}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+        <LeadMagnetDetails details={AUTOMATION_PLAYBOOK_DETAILS} />
       </main>
       <SiteFooter />
     </>
