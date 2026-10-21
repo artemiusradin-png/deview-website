@@ -4,7 +4,7 @@ import { CaseStudiesContent } from "./case-studies-content";
 export const metadata: Metadata = {
   title: "Case Studies: Custom Software, AI and Loan Management Systems | Deview",
   description:
-    "Deview projects across oil & gas, agriculture, lending, senior care, e-commerce, ventilation and fitness, including AI conversion improvements for EVDEV's StorePilot.",
+    "Deview projects across oil & gas, agriculture, lending, fintech, senior care, e-commerce, ventilation and fitness, including AI conversion improvements for EVDEV's StorePilot.",
   alternates: { canonical: "/en/case-studies" },
 };
 
