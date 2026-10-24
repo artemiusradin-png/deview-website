@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
   const c = OIL_GAS_CASES[slug];
   const canonicalUrl = `${SITE_URL}${oilGasCasePath(slug)}`;
 
-  return {
+  return withSocialMetadata({
     title: c.seoTitle,
     description: c.seoDescription,
     alternates: { canonical: canonicalUrl },
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
       siteName: "Deview",
       type: "website",
     },
-  };
+  });
 }
 
 export default async function OilGasCasePage({ params }: CasePageProps) {

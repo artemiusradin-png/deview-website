@@ -53,8 +53,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     stack: ["Next.js", "Node.js", "Flutter", "PostgreSQL", "Supabase", "Docker", "Salesforce"],
     proof: [
-      { label: "AgroPlatforma: field app and Salesforce quoting", href: "/case-studies#agriculture" },
-      { label: "Loan management systems for five Hong Kong lenders", href: "/case-studies#finance" },
+      { label: "AgroPlatforma: field app and Salesforce quoting", href: "/case-studies/agroplatforma" },
+      { label: "Loan management systems for five Hong Kong lenders", href: "/case-studies/covenant-desk" },
       { label: "Planning, control and reporting systems for oil & gas", href: "/industries/oil-and-gas" },
     ],
     leadMagnet: {
@@ -107,8 +107,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     stack: ["Anthropic Claude", "OpenAI", "Google Gemini", "Llama", "Mistral", "Vertex AI", "pgvector", "LangChain"],
     proof: [
-      { label: "AgroPlatforma: three AI agents, field diagnosis to quote in under 30 seconds", href: "/case-studies#agriculture" },
-      { label: "StorePilot: AI conversion insights for Shopify merchants", href: "/case-studies#e-commerce" },
+      { label: "AgroPlatforma: three AI agents, field diagnosis to quote in under 30 seconds", href: "/case-studies/agroplatforma" },
+      { label: "StorePilot: AI conversion insights for Shopify merchants", href: "/case-studies/storepilot" },
     ],
     leadMagnet: {
       label: "Free AI security checklist",
@@ -161,7 +161,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     stack: ["PostgreSQL", "SQL databases", "Power BI", "Tableau", "Looker", "Docker"],
     proof: [
       { label: "Planning, control and reporting systems for oil & gas, 2010 to 2020", href: "/industries/oil-and-gas" },
-      { label: "Loan portfolio and borrower reporting for Hong Kong lenders", href: "/case-studies#finance" },
+      { label: "Loan portfolio and borrower reporting for Hong Kong lenders", href: "/case-studies/covenant-desk" },
     ],
     leadMagnet: {
       label: "Free automation playbook",
@@ -209,7 +209,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     stack: ["AWS", "Google Cloud", "Microsoft Azure", "Docker", "Kubernetes", "Vercel", "Supabase"],
     proof: [
-      { label: "Lending platforms run in each lender’s own environment", href: "/case-studies#finance" },
+      { label: "Lending platforms run in each lender’s own environment", href: "/case-studies/covenant-desk" },
     ],
     leadMagnet: {
       label: "Free AI security checklist",
@@ -257,7 +257,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     stack: ["Salesforce", "HubSpot", "SAP", "Oracle", "Microsoft 365", "SharePoint", "REST APIs"],
     proof: [
-      { label: "AgroPlatforma: quoting built inside Salesforce", href: "/case-studies#agriculture" },
+      { label: "AgroPlatforma: quoting built inside Salesforce", href: "/case-studies/agroplatforma" },
     ],
     leadMagnet: {
       label: "Free automation playbook",

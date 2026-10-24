@@ -1,10 +1,11 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { LEGAL_ENTITY, SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 import { HomeContent } from "./home-content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   alternates: { canonical: "/en" },
-};
+});
 
 const SITE_URL = "https://deviewai.com";
 

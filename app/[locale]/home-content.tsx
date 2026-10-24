@@ -424,7 +424,7 @@ export function HomeContent({
           <div className={styles.projectGrid}>
             <Link
               id="featured-deployment"
-              href={localePath("/case-studies")}
+              href={localePath("/case-studies/agroplatforma")}
               className={styles.project}
               aria-label="Read the AgroPlatforma case study"
             >
@@ -466,7 +466,7 @@ export function HomeContent({
             </Link>
             <Link
               id="featured-deployment-finance"
-              href={localePath("/case-studies")}
+              href={localePath("/case-studies/covenant-desk")}
               className={styles.project}
               aria-label="Read the Deview Unified Portal case study"
             >

@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: MarketPageProps): Promise<Met
   const market = MARKETS[marketSlug];
   const canonicalUrl = `https://deviewai.com/en/markets/${market.slug}`;
 
-  return {
+  return withSocialMetadata({
     title: market.seoTitle,
     description: market.seoDescription,
     alternates: { canonical: canonicalUrl },
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: MarketPageProps): Promise<Met
       type: "website",
       locale: `en_${market.countryCode}`,
     },
-  };
+  });
 }
 
 export default async function MarketPage({ params }: MarketPageProps) {

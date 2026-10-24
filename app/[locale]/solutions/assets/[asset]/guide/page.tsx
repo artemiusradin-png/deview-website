@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GatedGuide } from "@/components/LeadMagnet";
@@ -18,10 +19,10 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { asset } = await params;
   const found = assetById(asset);
-  return {
+  return withSocialMetadata({
     title: found ? `${found.title} | Deview` : "Deview",
     robots: { index: false, follow: true },
-  };
+  });
 }
 
 export default async function SolutionAssetGuide({ params }: Props) {

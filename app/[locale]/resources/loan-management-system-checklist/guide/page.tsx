@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GatedGuide } from "@/components/LeadMagnet";
@@ -9,10 +10,10 @@ import { LEAD_MAGNETS } from "@/lib/workflow-offers";
 const m = LEAD_MAGNETS.lmsChecklist;
 
 /** Behind the sign-up form, so kept out of search results. */
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "The Loan Management System Checklist | Deview",
   robots: { index: false, follow: true },
-};
+});
 
 export default function LmsChecklistGuidePage() {
   return (

@@ -1,13 +1,14 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/SiteFooter";
 import { StackContent } from "./stack-content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "Tech Stack & Integrations | Deview",
   description:
     "The AI models, cloud platforms, enterprise integrations, and engineering tools Deview uses to build production AI systems.",
   alternates: { canonical: "/en/stack" },
-};
+});
 
 export default function StackPage() {
   return (

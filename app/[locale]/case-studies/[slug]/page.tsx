@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -18,12 +19,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = getProductionCase(slug);
   if (!project) return { robots: { index: false, follow: false } };
-  return {
+  return withSocialMetadata({
     title: `${project.company} Case Study | Deview`,
     description: project.content.headline,
     alternates: { canonical: `/en/case-studies/${project.slug}` },
     openGraph: { title: project.content.headline, description: project.content.solution, url: `/en/case-studies/${project.slug}`, type: "article" },
-  };
+  });
 }
 
 export default async function CaseStudyPage({ params }: Props) {

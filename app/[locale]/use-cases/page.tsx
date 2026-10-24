@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/SiteFooter";
 import { HomeSolutionsSection } from "@/components/HomeSolutionsSection";
@@ -6,12 +7,12 @@ import { RETRO_FEATURE_CARDS_ID } from "@/components/RetroFeatureCards";
 
 const homeWithRetroCards = `/#${RETRO_FEATURE_CARDS_ID}`;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "Use cases | Deview",
   description:
     "AI solutions built around concrete operational problems: customer operations, internal knowledge, and operations.",
   alternates: { canonical: "/en/use-cases" },
-};
+});
 
 export default function UseCasesPage() {
   return (

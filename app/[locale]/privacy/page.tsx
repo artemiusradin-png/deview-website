@@ -1,14 +1,15 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { LEGAL_ENTITY, SITE_INQUIRY_EMAIL } from "@/lib/site-contact";
 
 /** Plain privacy notice. Not linked from the navigation and kept out of search and the sitemap;
  *  it exists for visitors who look for it and for Google's OAuth consent screen. */
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "Privacy policy | Deview",
   description: "How Deview handles personal data.",
   alternates: { canonical: "/en/privacy" },
   robots: { index: false, follow: false },
-};
+});
 
 const address = `${LEGAL_ENTITY.streetAddress}, ${LEGAL_ENTITY.addressLocality}, ${LEGAL_ENTITY.addressRegion}`;
 

@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { OilGasProjectList } from "@/components/OilGasProjectList";
@@ -16,7 +17,7 @@ const seoTitle = "Oil & Gas Planning, Control & Reporting Software | Deview";
 const seoDescription =
   "Scheduling, project management, engineering data, planning and control, and reporting systems for international oil & gas companies. Six projects, 2010–2020.";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: seoTitle,
   description: seoDescription,
   alternates: { canonical: canonicalUrl },
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     siteName: "Deview",
     type: "website",
   },
-};
+});
 
 /** Disciplines in portfolio order, each with the projects that belong to it. */
 const areas = OIL_GAS_CASE_LIST.reduce<Array<{ discipline: string; cases: typeof OIL_GAS_CASE_LIST }>>(
