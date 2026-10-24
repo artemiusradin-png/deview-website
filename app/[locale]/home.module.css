@@ -598,84 +598,23 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 30px;
 }
+.project {
+  transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.project:active {
+  transform: scale(0.985);
+}
 .projectArtwork {
-  height: 420px;
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
+  aspect-ratio: 17 / 10;
   overflow: hidden;
-}
-.agroArtwork {
-  background: var(--accent);
-}
-.portalArtwork {
   background: #eee7d7;
 }
-.artworkTop,
-.artworkBottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 14px;
-}
-.projectTag {
-  border: 1px solid #17120755;
-  border-radius: 20px;
-  padding: 5px 10px;
-  font-size: 10px;
-  white-space: nowrap;
-}
-.timeResult {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.oldTime {
-  width: fit-content;
-  font-size: 45px;
-  line-height: 1;
-  text-decoration: line-through;
-  text-decoration-thickness: 2px;
-  color: #51401a;
-  letter-spacing: -0.03em;
-}
-.newTime {
-  display: flex;
-  align-items: baseline;
-  gap: 17px;
-  font-size: clamp(96px, 11vw, 168px);
-  font-weight: 500;
-  letter-spacing: -0.06em;
-  line-height: 1.15;
-}
-.newTime > span:last-child {
-  font-size: 39px;
-  letter-spacing: -0.025em;
-  font-weight: 400;
-}
-.artworkBottom {
-  font-size: 12px;
-}
-.artworkBottom svg {
-  width: 27px;
-  height: 27px;
-}
-.portalTitle {
-  font-size: clamp(34px, 3.6vw, 53px);
-  letter-spacing: -0.035em;
-  line-height: 1.08;
-  margin-top: 32px;
-}
-.portalDrawing {
-  flex: 1;
-  min-height: 0;
-  width: min(100%, 450px);
-  margin-inline: auto;
-}
-.diagramNode {
-  fill: #eee7d7;
+.projectImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 240ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 .projectCaption {
   display: flex;
@@ -683,6 +622,15 @@
   gap: 20px;
   align-items: start;
   margin-top: 24px;
+}
+.projectName {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--signal);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 .projectCaption h3 {
   font-size: 34px;
@@ -715,6 +663,9 @@
 }
 .project:hover .projectCaption svg {
   transform: translate(3px, -3px);
+}
+.project:hover .projectImage {
+  transform: scale(1.015);
 }
 
 .processSteps {
@@ -1115,17 +1066,6 @@
   .serviceCard h3 {
     font-size: 21px;
   }
-  .projectArtwork {
-    height: 365px;
-    padding: 23px;
-  }
-  .artworkTop {
-    font-size: 12px;
-  }
-  .projectTag {
-    font-size: 9px;
-    padding: 4px 7px;
-  }
   .projectCaption h3 {
     font-size: 30px;
   }
@@ -1384,22 +1324,6 @@
     grid-template-columns: 1fr;
     gap: 42px;
   }
-  .projectArtwork {
-    height: 380px;
-    padding: 23px;
-  }
-  .artworkTop {
-    font-size: 14px;
-  }
-  .newTime {
-    font-size: 135px;
-  }
-  .portalTitle {
-    font-size: 44px;
-  }
-  .portalDrawing {
-    max-height: 200px;
-  }
   .projectCaption {
     margin-top: 22px;
   }
@@ -1589,30 +1513,6 @@
   .practiceSummary h3 {
     font-size: 23px;
   }
-  .projectArtwork {
-    height: 335px;
-    padding: 19px;
-  }
-  .artworkTop {
-    font-size: 12px;
-  }
-  .projectTag {
-    font-size: 8px;
-    padding: 4px 6px;
-  }
-  .newTime {
-    font-size: 112px;
-    gap: 12px;
-  }
-  .newTime > span:last-child {
-    font-size: 30px;
-  }
-  .portalTitle {
-    font-size: 37px;
-  }
-  .artworkBottom {
-    font-size: 10px;
-  }
   .processSteps > li,
   .processSteps > li + li {
     grid-template-columns: 80px minmax(0, 1fr);
@@ -1684,17 +1584,8 @@
   }
 }
 
-/* Motion (see home-motion.tsx): only the drawings, arrows and the AgroPlatforma number move.
+/* Motion (see home-motion.tsx): only the drawings and arrows move.
    `data-motion="armed"` holds the opening frame below the fold; "in" plays it once. */
-.portalDrawing[data-motion="in"] .portalLinks {
-  animation: traceStroke 1300ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
-}
-.portalDrawing[data-motion="in"] .portalLines {
-  animation: traceStroke 700ms ease-out 900ms backwards;
-}
-.portalDrawing[data-motion="in"] .portalTick {
-  animation: traceStroke 600ms ease-out 1300ms backwards;
-}
 .processSteps[data-motion="in"] .processStepTop path {
   animation: traceStroke 600ms ease-out backwards;
 }
@@ -1711,7 +1602,6 @@
   animation: traceStroke 1100ms cubic-bezier(0.2, 0.7, 0.2, 1) 150ms backwards;
 }
 :is(
-    .portalDrawing[data-motion="armed"] :is(.portalLinks, .portalLines, .portalTick),
     .processSteps[data-motion="armed"] .processStepTop path,
     .contact[data-motion="armed"] .contactArrow path
   ) {
