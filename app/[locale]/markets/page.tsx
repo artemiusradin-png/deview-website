@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -7,7 +8,7 @@ import { MARKETS, MARKET_SLUGS } from "@/lib/markets";
 
 const canonicalUrl = "https://deviewai.com/en/markets";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "AI Consulting Across Asia-Pacific Markets | Deview",
   description:
     "Explore Deview's AI consulting, software engineering, and data engineering services for teams in Hong Kong, Singapore, and Taiwan.",
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     url: canonicalUrl,
     type: "website",
   },
-};
+});
 
 export default function MarketsPage() {
   return (

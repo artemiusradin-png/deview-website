@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -50,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!found) return { robots: { index: false, follow: false } };
   const { page } = found;
   const url = `${SITE_URL}/en${servicePagePath(page.slug)}`;
-  return {
+  return withSocialMetadata({
     title: page.seoTitle,
     description: page.seoDescription,
     alternates: { canonical: url },
@@ -61,7 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "Deview",
       type: "website",
     },
-  };
+  });
 }
 
 export default async function ServicePage({ params }: Props) {

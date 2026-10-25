@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SubpageNav } from "@/components/SubpageNav";
@@ -7,12 +8,12 @@ import { WhatMakesEnterpriseContent } from "./what-makes-enterprise-content";
 
 const homeWithRetroCards = `/#${RETRO_FEATURE_CARDS_ID}`;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "What makes it enterprise | Deview",
   description:
     "Enterprise AI architecture across business systems, data foundation, infrastructure, and AI/ML operations.",
   alternates: { canonical: "/en/what-makes-it-enterprise" },
-};
+});
 
 export default function WhatMakesItEnterprisePage() {
   return (

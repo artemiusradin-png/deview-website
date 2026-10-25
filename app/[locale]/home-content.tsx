@@ -8,7 +8,7 @@ import { TeamGrid } from "@/components/TeamGrid";
 import { HomeCapabilities } from "./home-capabilities";
 import { HeroBackgroundVideo } from "./home-hero-video";
 import { HeroInquiryForm } from "./home-hero-form";
-import { CountUp, useMotionOnView } from "./home-motion";
+import { useMotionOnView } from "./home-motion";
 import { EditorialReveal, IndustryMark, ProcessVisual, TeamLocations, TeamNetwork } from "./home-editorial-visuals";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
@@ -201,10 +201,8 @@ export function HomeContent({
 }: { heroVideoSrc?: string; heroVideoPoster?: string } = {}) {
   const { dict, localePath } = useLocaleContext();
   const [logosPaused, setLogosPaused] = useState(false);
-  const portalRef = useRef<SVGSVGElement>(null);
   const processRef = useRef<HTMLOListElement>(null);
   const contactRef = useRef<HTMLElement>(null);
-  useMotionOnView(portalRef);
   useMotionOnView(processRef, 0.5);
   useMotionOnView(contactRef);
   const [inquiryStatus, setInquiryStatus] = useState<
@@ -422,133 +420,122 @@ export function HomeContent({
             </Link>
           </SectionHeading>
           <div className={styles.projectGrid}>
-            <Link
-              id="featured-deployment"
-              href={localePath("/case-studies")}
-              className={styles.project}
-              aria-label="Read the AgroPlatforma case study"
-            >
-              <div className={`${styles.projectArtwork} ${styles.agroArtwork}`}>
-                <div className={styles.artworkTop}>
-                  <span>AgroPlatforma</span>
-                  <span className={styles.projectTag}>AI in the field</span>
-                </div>
-                <div className={styles.timeResult}>
-                  <span className={styles.oldTime}>~40 min</span>
-                  <div className={styles.newTime}>
-                    <span>
-                      &lt;
-                      <CountUp to={30} />
+            <article className={styles.project}>
+              <Link
+                id="featured-deployment"
+                href={localePath("/case-studies/jetfans")}
+                className={styles.projectCaseStudy}
+                aria-label="Read the Jetfans case study"
+              >
+                <div className={styles.projectArtwork}>
+                  <div className={styles.projectBrowserBar} aria-hidden="true">
+                    <span className={styles.projectBrowserDots}>
+                      <span />
+                      <span />
+                      <span />
                     </span>
-                    <span>sec.</span>
+                    <span>jetfans.eu / eastern europe</span>
+                    <span>Live website</span>
+                  </div>
+                  <div className={styles.projectScreenshotViewport}>
+                    <Image
+                      src="/images/home/selected-work-jetfans-eastern-europe.webp"
+                      alt="Jetfans Eastern Europe website showing Wolter car park ventilation systems"
+                      width={1360}
+                      height={850}
+                      sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1200px) 50vw, 595px"
+                      className={styles.projectImage}
+                    />
                   </div>
                 </div>
-                <div className={styles.artworkBottom}>
-                  <span>From field diagnosis to quote.</span>
+                <div className={styles.projectCaption}>
+                  <div>
+                    <span className={styles.projectName}>Jetfans</span>
+                    <h3>
+                      One domain.
+                      <br />
+                      Three regional sites.
+                    </h3>
+                  </div>
                   <Arrow diagonal />
                 </div>
-              </div>
-              <div className={styles.projectCaption}>
-                <h3>
-                  A whole new pace
-                  <br />
-                  for agriculture.
-                </h3>
-                <Arrow diagonal />
-              </div>
-              <p>
-                Three connected AI agents. One field-to-quote workflow. Built
-                into the tools the team already uses.
-              </p>
-              <span className={styles.projectCategory}>
-                AI automation / Software engineering
-              </span>
-            </Link>
-            <Link
-              id="featured-deployment-finance"
-              href={localePath("/case-studies")}
-              className={styles.project}
-              aria-label="Read the Deview Unified Portal case study"
-            >
-              <div
-                className={`${styles.projectArtwork} ${styles.portalArtwork}`}
-              >
-                <div className={styles.artworkTop}>
-                  <span>Deview Unified Portal</span>
-                  <span className={styles.projectTag}>Connected finance</span>
-                </div>
-                <div className={styles.portalTitle}>
-                  Five companies.
-                  <br />
-                  One clear view.
-                </div>
-                <svg
-                  ref={portalRef}
-                  className={styles.portalDrawing}
-                  viewBox="0 0 500 220"
-                  fill="none"
-                  aria-hidden="true"
+                <p className={styles.projectSummary}>
+                  A multilingual website, geo-routing, lead capture, and search
+                  system for a ventilation distributor across three regions.
+                </p>
+              </Link>
+              <div className={styles.projectFooter}>
+                <span className={styles.projectCategory}>
+                  Website engineering / SEO
+                </span>
+                <a
+                  href="https://www.jetfans.eu/eastern-europe/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.projectWebsiteLink}
                 >
-                  <g stroke="currentColor" strokeWidth="1.5">
-                    <path
-                      className={styles.portalLinks}
-                      d="M80 33h64c36 0 17 77 64 77h77M80 71h42c36 0 22 39 68 39M80 110h205M80 149h42c36 0 22-39 68-39M80 187h64c36 0 17-77 64-77h77"
-                      pathLength={1}
+                  Visit Jetfans <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </article>
+            <article className={styles.project}>
+              <Link
+                id="featured-deployment-finance"
+                href={localePath("/case-studies/covenant-desk")}
+                className={styles.projectCaseStudy}
+                aria-label="Read the Covenant Desk case study"
+              >
+                <div className={styles.projectArtwork}>
+                  <div className={styles.projectBrowserBar} aria-hidden="true">
+                    <span className={styles.projectBrowserDots}>
+                      <span />
+                      <span />
+                      <span />
+                    </span>
+                    <span>covenantdesk.hk</span>
+                    <span>Product view</span>
+                  </div>
+                  <div className={styles.projectScreenshotViewport}>
+                    <Image
+                      src="/images/home/selected-work-covenant-desk.webp"
+                      alt="Covenant Desk lending portal shown across desktop, tablet, and mobile"
+                      width={1360}
+                      height={907}
+                      sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1200px) 50vw, 595px"
+                      className={styles.projectImage}
                     />
-                    {[15, 53, 92, 131, 169].map((y) => (
-                      <rect
-                        key={y}
-                        x="43"
-                        y={y}
-                        width="36"
-                        height="36"
-                        className={styles.diagramNode}
-                      />
-                    ))}
-                    <rect
-                      x="285"
-                      y="48"
-                      width="160"
-                      height="124"
-                      fill="#171207"
-                    />
-                  </g>
-                  <path
-                    className={styles.portalLines}
-                    d="M310 75h39m-39 13h66m-66 15h110"
-                    stroke="#f3eee2"
-                    strokeWidth="2"
-                    pathLength={1}
-                  />
-                  <path
-                    className={styles.portalTick}
-                    d="m332 137 19 14 46-38"
-                    stroke="#ffc933"
-                    strokeWidth="5"
-                    pathLength={1}
-                  />
-                </svg>
-                <div className={styles.artworkBottom}>
-                  <span>Borrower intelligence, brought together.</span>
+                  </div>
+                </div>
+                <div className={styles.projectCaption}>
+                  <div>
+                    <span className={styles.projectName}>Covenant Desk</span>
+                    <h3>
+                      The lending lifecycle.
+                      <br />
+                      In one place.
+                    </h3>
+                  </div>
                   <Arrow diagonal />
                 </div>
+                <p className={styles.projectSummary}>
+                  One permission-scoped platform brings borrower intake, credit
+                  review, servicing, repayments, and reporting together.
+                </p>
+              </Link>
+              <div className={styles.projectFooter}>
+                <span className={styles.projectCategory}>
+                  Enterprise platform / AI engineering
+                </span>
+                <a
+                  href="https://covenantdesk.hk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.projectWebsiteLink}
+                >
+                  Visit Covenant Desk <span aria-hidden="true">↗</span>
+                </a>
               </div>
-              <div className={styles.projectCaption}>
-                <h3>
-                  The full picture.
-                  <br />
-                  Finally in one place.
-                </h3>
-                <Arrow diagonal />
-              </div>
-              <p>
-                One portal brings borrower data, credit analysis, and document
-                processing together for five lending companies.
-              </p>
-              <span className={styles.projectCategory}>
-                Custom platform / Data engineering
-              </span>
-            </Link>
+            </article>
           </div>
         </section>
 

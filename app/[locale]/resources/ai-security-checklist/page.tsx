@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { LeadMagnetSignup } from "@/components/LeadMagnet";
 import { LeadMagnetDetails } from "@/components/LeadMagnetDetails";
@@ -9,12 +10,12 @@ import { LEAD_MAGNETS } from "@/lib/workflow-offers";
 
 const m = LEAD_MAGNETS.aiSecurityChecklist;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "AI Security Checklist for LLM Applications (OWASP Top 10) | Deview",
   description:
     "A free AI security checklist for LLM apps and AI agents, based on the OWASP Top 10 for LLM Applications: prompt injection, data leaks, excessive agency and more, plus governance checks for PDPO, HKMA and GDPR.",
   alternates: { canonical: `/en${m.path}` },
-};
+});
 
 export default function AiSecurityChecklistPage() {
   return (

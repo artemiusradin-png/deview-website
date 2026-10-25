@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { LeadMagnetSignup } from "@/components/LeadMagnet";
 import { LeadMagnetDetails } from "@/components/LeadMagnetDetails";
@@ -9,12 +10,12 @@ import { LEAD_MAGNETS } from "@/lib/workflow-offers";
 
 const m = LEAD_MAGNETS.lmsChecklist;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "Loan Management System Checklist for Hong Kong Money Lenders | Deview",
   description:
     "A free checklist for choosing or upgrading a loan management system: borrower onboarding, credit assessment, repayments, collections, reporting and audit, from the team behind five Hong Kong lending systems.",
   alternates: { canonical: `/en${m.path}` },
-};
+});
 
 export default function LmsChecklistPage() {
   return (

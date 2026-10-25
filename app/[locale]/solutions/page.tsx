@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -11,12 +12,12 @@ const seoTitle = "Enterprise Software Solutions by Industry | Deview";
 const seoDescription =
   "Custom enterprise software for banking and payments, oil and gas, manufacturing and agriculture: lending platforms, production management, MES, data platforms and cloud security.";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: seoTitle,
   description: seoDescription,
   alternates: { canonical: url },
   openGraph: { title: seoTitle, description: seoDescription, url, siteName: "Deview", type: "website" },
-};
+});
 
 export default function SolutionsLibraryPage() {
   const hubs = publishedHubs();

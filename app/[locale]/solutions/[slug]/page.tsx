@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SolutionHubView } from "@/components/solutions/SolutionHubView";
@@ -33,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!entry) return { robots: { index: false, follow: false } };
   const url = `${SITE_URL}/en${solutionPath(slug)}`;
   const coverSlug = page ? page.slug : pagesIn(hub!.vertical)[0]?.slug;
-  return {
+  return withSocialMetadata({
     title: entry.seoTitle,
     description: entry.seoDescription,
     alternates: { canonical: url },
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ? { images: [{ url: ogCoverPath(coverSlug), width: 1200, height: 630 }] }
         : {}),
     },
-  };
+  });
 }
 
 export default async function SolutionRoute({ params }: Props) {

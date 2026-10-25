@@ -2,7 +2,8 @@
 
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { LocaleLink } from "@/components/LocaleLink";
-import { SubpageNav } from "@/components/SubpageNav";
+import { InsightBreadcrumbs } from "@/components/InsightBreadcrumbs";
+import { InsightByline } from "@/components/InsightByline";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export function FourProjectsContent() {
@@ -13,7 +14,7 @@ export function FourProjectsContent() {
     <>
       <main className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid pb-[max(2rem,env(safe-area-inset-bottom))] pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:pb-16 sm:pt-24">
         <div className="section-gutter mx-auto max-w-3xl">
-          <SubpageNav backHref="/insights" />
+          <InsightBreadcrumbs title={d.title} />
 
       <div className="mb-10">
         <div className="mb-4 flex flex-wrap items-center gap-3">
@@ -33,6 +34,7 @@ export function FourProjectsContent() {
         <p className="text-base leading-relaxed text-[var(--text-muted)]">
           {d.lead}
         </p>
+        <InsightByline />
       </div>
 
       {/* Cover */}
@@ -92,6 +94,9 @@ export function FourProjectsContent() {
         <p>{d.selectionP1}</p>
         <p>{d.selectionP2}</p>
         <p>{d.selectionP3}</p>
+        <p>
+          Explore our <LocaleLink href="/solutions/ai-agents-for-back-office-operations" className="underline underline-offset-4">AI agents for back-office operations</LocaleLink> and <LocaleLink href="/solutions/private-llm-deployment" className="underline underline-offset-4">private LLM deployment</LocaleLink> services to see what implementation involves. The <LocaleLink href="/case-studies/covenant-desk" className="underline underline-offset-4">Covenant Desk case study</LocaleLink> shows how several AI capabilities can work from one permission-scoped operational record.
+        </p>
       </div>
 
       <div className="mt-12 border-t border-[var(--white-20)] pt-10">

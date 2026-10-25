@@ -2,7 +2,8 @@
 
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { LocaleLink } from "@/components/LocaleLink";
-import { SubpageNav } from "@/components/SubpageNav";
+import { InsightBreadcrumbs } from "@/components/InsightBreadcrumbs";
+import { InsightByline } from "@/components/InsightByline";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export function DocAutomationContent() {
@@ -13,7 +14,7 @@ export function DocAutomationContent() {
     <>
       <main className="min-h-screen overflow-x-clip bg-[var(--background)] bg-grid pb-[max(2rem,env(safe-area-inset-bottom))] pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:pb-16 sm:pt-24">
         <div className="section-gutter mx-auto max-w-3xl">
-          <SubpageNav backHref="/insights" />
+          <InsightBreadcrumbs title={d.title} />
 
       <div className="mb-10">
         <div className="mb-4 flex flex-wrap items-center gap-3">
@@ -33,6 +34,7 @@ export function DocAutomationContent() {
         <p className="text-base leading-relaxed text-[var(--text-muted)]">
           {d.lead}
         </p>
+        <InsightByline />
       </div>
 
       {/* Cover */}
@@ -76,6 +78,9 @@ export function DocAutomationContent() {
         <p>{d.q4p1}</p>
         <p>{d.q4p2}</p>
         <p>{d.q4p3}</p>
+        <p>
+          For lending workflows, our <LocaleLink href="/solutions/ai-document-processing-for-banks" className="underline underline-offset-4">AI document processing service</LocaleLink> covers intake, extraction and human review. The <LocaleLink href="/case-studies/covenant-desk" className="underline underline-offset-4">Covenant Desk case study</LocaleLink> shows how document processing connects to borrower records and the wider lending workflow.
+        </p>
 
         <h2 className="text-base uppercase tracking-[0.15em] text-[var(--white-80)]">
           {d.startHeading}

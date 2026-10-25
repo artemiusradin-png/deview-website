@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/SiteFooter";
 import { HomeServicesSection } from "@/components/HomeServicesSection";
@@ -8,12 +9,12 @@ import { RETRO_FEATURE_CARDS_ID } from "@/components/RetroFeatureCards";
 
 const homeWithRetroCards = `/#${RETRO_FEATURE_CARDS_ID}`;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "Services: Product, AI/ML, Data and Cloud Engineering | Deview",
   description:
     "Digital product engineering, AI/ML engineering, data engineering, cloud and DevOps engineering, and enterprise platforms for financial and industrial companies.",
   alternates: { canonical: "/en/services" },
-};
+});
 
 export default function ServicesPage() {
   return (

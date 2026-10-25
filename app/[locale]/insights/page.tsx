@@ -1,13 +1,14 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/SiteFooter";
 import { InsightsContent } from "./insights-content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "Insights | Deview",
   description:
     "Practical AI guidance for operations and finance teams: what works, what doesn't, and where to start.",
   alternates: { canonical: "/en/insights" },
-};
+});
 
 export default function InsightsPage() {
   return (

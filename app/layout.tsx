@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/seo";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -33,14 +34,14 @@ const satoshi = localFont({
   display: "swap",
 });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   metadataBase: new URL("https://deviewai.com"),
   title: "Deview | Software Development Company in Hong Kong: Custom Software, AI & Cloud",
   description:
     "Custom software development for financial and industrial companies: digital product engineering, AI/ML engineering, data engineering, cloud and DevOps, and enterprise platforms, from a team with 15+ years of enterprise delivery.",
   /** Search Console ownership for the https://deviewai.com/ URL-prefix property. Removing it un-verifies the site. */
   verification: { google: "SQp0k0tERoRnCl3ZnDc1Z4ypLXfYr7DIy8SeJe6Kdlk" },
-};
+});
 
 export const viewport: Viewport = {
   width: "device-width",
