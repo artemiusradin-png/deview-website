@@ -599,13 +599,53 @@
   gap: 30px;
 }
 .project {
+  min-width: 0;
+}
+.projectCaseStudy {
+  display: block;
   transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
 }
-.project:active {
+.projectCaseStudy:active {
   transform: scale(0.985);
 }
 .projectArtwork {
-  aspect-ratio: 17 / 10;
+  overflow: hidden;
+  background: #eee7d7;
+  border: 1px solid var(--line);
+}
+.projectBrowserBar {
+  min-height: 38px;
+  padding: 0 14px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--line);
+  background: var(--cream);
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.projectBrowserBar > span:last-child {
+  justify-self: end;
+}
+.projectBrowserDots {
+  display: flex;
+  gap: 5px;
+}
+.projectBrowserDots > span {
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--muted);
+  border-radius: 50%;
+}
+.projectBrowserDots > span:first-child {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.projectScreenshotViewport {
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   background: #eee7d7;
 }
@@ -642,29 +682,52 @@
   height: 27px;
   transition: transform 180ms;
 }
-.project > p {
+.projectSummary {
   font-size: 16px;
   line-height: 1.6;
   color: var(--muted);
   margin-top: 17px;
   max-width: 540px;
 }
+.projectFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 20px;
+}
 .projectCategory {
   display: block;
   font-size: 10px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  margin-top: 20px;
 }
-.project:hover .projectCaption h3 {
+.projectWebsiteLink {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-size: 11px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: color 140ms, transform 140ms;
+}
+.projectWebsiteLink:hover {
+  color: var(--signal);
+}
+.projectWebsiteLink:active {
+  transform: scale(0.97);
+}
+.projectCaseStudy:hover .projectCaption h3 {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 5px;
 }
-.project:hover .projectCaption svg {
+.projectCaseStudy:hover .projectCaption svg {
   transform: translate(3px, -3px);
 }
-.project:hover .projectImage {
+.projectCaseStudy:hover .projectImage {
   transform: scale(1.015);
 }
 
@@ -1330,13 +1393,18 @@
   .projectCaption h3 {
     font-size: 31px;
   }
-  .project > p {
+  .projectSummary {
     font-size: 15px;
     margin-top: 13px;
   }
+  .projectFooter {
+    align-items: flex-start;
+  }
   .projectCategory {
     font-size: 9px;
-    margin-top: 15px;
+  }
+  .projectWebsiteLink {
+    font-size: 11px;
   }
   .processSteps {
     grid-template-columns: 1fr;

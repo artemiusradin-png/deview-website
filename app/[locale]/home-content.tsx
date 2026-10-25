@@ -420,76 +420,122 @@ export function HomeContent({
             </Link>
           </SectionHeading>
           <div className={styles.projectGrid}>
-            <Link
-              id="featured-deployment"
-              href={localePath("/case-studies/jetfans")}
-              className={styles.project}
-              aria-label="Read the JetFans case study"
-            >
-              <div className={styles.projectArtwork}>
-                <Image
-                  src="/images/cases/covers/jetfans.webp"
-                  alt="Illustration of two JetFans ventilation units serving a car park"
-                  width={1360}
-                  height={800}
-                  sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1200px) 50vw, 595px"
-                  className={styles.projectImage}
-                />
-              </div>
-              <div className={styles.projectCaption}>
-                <div>
-                  <span className={styles.projectName}>Jetfans</span>
-                  <h3>
-                    One domain.
-                    <br />
-                    Three regional sites.
-                  </h3>
+            <article className={styles.project}>
+              <Link
+                id="featured-deployment"
+                href={localePath("/case-studies/jetfans")}
+                className={styles.projectCaseStudy}
+                aria-label="Read the Jetfans case study"
+              >
+                <div className={styles.projectArtwork}>
+                  <div className={styles.projectBrowserBar} aria-hidden="true">
+                    <span className={styles.projectBrowserDots}>
+                      <span />
+                      <span />
+                      <span />
+                    </span>
+                    <span>jetfans.eu</span>
+                    <span>Live website</span>
+                  </div>
+                  <div className={styles.projectScreenshotViewport}>
+                    <Image
+                      src="/images/home/selected-work-jetfans.webp"
+                      alt="Jetfans website homepage showing Wolter parking ventilation systems"
+                      width={1360}
+                      height={850}
+                      sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1200px) 50vw, 595px"
+                      className={styles.projectImage}
+                    />
+                  </div>
                 </div>
-                <Arrow diagonal />
-              </div>
-              <p>
-                A multilingual website, geo-routing, lead capture, and search
-                system for a ventilation distributor across three regions.
-              </p>
-              <span className={styles.projectCategory}>
-                Website engineering / SEO
-              </span>
-            </Link>
-            <Link
-              id="featured-deployment-finance"
-              href={localePath("/case-studies/covenant-desk")}
-              className={styles.project}
-              aria-label="Read the Covenant Desk case study"
-            >
-              <div className={styles.projectArtwork}>
-                <Image
-                  src="/images/cases/covers/covenant-desk.webp"
-                  alt="Illustration of five lending companies connected to Covenant Desk"
-                  width={1360}
-                  height={800}
-                  sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1200px) 50vw, 595px"
-                  className={styles.projectImage}
-                />
-              </div>
-              <div className={styles.projectCaption}>
-                <div>
-                  <span className={styles.projectName}>Covenant Desk</span>
-                  <h3>
-                    The lending lifecycle.
-                    <br />
-                    In one place.
-                  </h3>
+                <div className={styles.projectCaption}>
+                  <div>
+                    <span className={styles.projectName}>Jetfans</span>
+                    <h3>
+                      One domain.
+                      <br />
+                      Three regional sites.
+                    </h3>
+                  </div>
+                  <Arrow diagonal />
                 </div>
-                <Arrow diagonal />
+                <p className={styles.projectSummary}>
+                  A multilingual website, geo-routing, lead capture, and search
+                  system for a ventilation distributor across three regions.
+                </p>
+              </Link>
+              <div className={styles.projectFooter}>
+                <span className={styles.projectCategory}>
+                  Website engineering / SEO
+                </span>
+                <a
+                  href="https://www.jetfans.eu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.projectWebsiteLink}
+                >
+                  Visit Jetfans <span aria-hidden="true">↗</span>
+                </a>
               </div>
-              <p>
-                One permission-scoped platform brings borrower intake, credit
-                review, servicing, repayments, and reporting together.
-              </p>
-              <span className={styles.projectCategory}>
-                Enterprise platform / AI engineering
-              </span>
-            </Link>
+            </article>
+            <article className={styles.project}>
+              <Link
+                id="featured-deployment-finance"
+                href={localePath("/case-studies/covenant-desk")}
+                className={styles.projectCaseStudy}
+                aria-label="Read the Covenant Desk case study"
+              >
+                <div className={styles.projectArtwork}>
+                  <div className={styles.projectBrowserBar} aria-hidden="true">
+                    <span className={styles.projectBrowserDots}>
+                      <span />
+                      <span />
+                      <span />
+                    </span>
+                    <span>covenantdesk.hk</span>
+                    <span>Product view</span>
+                  </div>
+                  <div className={styles.projectScreenshotViewport}>
+                    <Image
+                      src="/images/home/selected-work-covenant-desk.webp"
+                      alt="Covenant Desk lending portal shown across desktop, tablet, and mobile"
+                      width={1360}
+                      height={907}
+                      sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1200px) 50vw, 595px"
+                      className={styles.projectImage}
+                    />
+                  </div>
+                </div>
+                <div className={styles.projectCaption}>
+                  <div>
+                    <span className={styles.projectName}>Covenant Desk</span>
+                    <h3>
+                      The lending lifecycle.
+                      <br />
+                      In one place.
+                    </h3>
+                  </div>
+                  <Arrow diagonal />
+                </div>
+                <p className={styles.projectSummary}>
+                  One permission-scoped platform brings borrower intake, credit
+                  review, servicing, repayments, and reporting together.
+                </p>
+              </Link>
+              <div className={styles.projectFooter}>
+                <span className={styles.projectCategory}>
+                  Enterprise platform / AI engineering
+                </span>
+                <a
+                  href="https://covenantdesk.hk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.projectWebsiteLink}
+                >
+                  Visit Covenant Desk <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </article>
           </div>
         </section>
 
