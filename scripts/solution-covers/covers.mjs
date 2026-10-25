@@ -56,6 +56,7 @@ export const COVERS = {
   "crop-disease-detection-and-yield-prediction": ["field", "eye", "chart"],
   "ai-agents-for-back-office-operations": ["doc", "network", "ledger"],
   "private-llm-deployment": ["server", "lock", "network"],
+  "enterprise-rag-development": ["doc", "magnifier", "network"],
   "rag-assistant-for-engineering-documents": ["doc", "magnifier", "tablet"],
   "ai-model-risk-management": ["chip", "scales", "shield"],
   "banking-data-warehouse-and-lakehouse": ["server", "db", "chart"],

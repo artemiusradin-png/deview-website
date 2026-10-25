@@ -5,13 +5,13 @@ export const AI_ENTERPRISE_PAGES: SolutionPage[] = [
     slug: "ai-agents-for-back-office-operations",
     vertical: "cross-industry",
     serviceId: "ai-ml",
-    seoTitle: "AI Agents for Back-Office Operations | Deview",
+    seoTitle: "Enterprise AI Agent Development for Back-Office Work | Deview",
     seoDescription:
-      "AI agents for back-office operations: invoice processing, reconciliation, reporting and KYC refresh with tool permissions, human approval, evaluation and audit logs.",
+      "Enterprise AI agent development and AI workflow automation services for document work, reconciliation and reporting, with permissions, approval and audit logs.",
     kicker: "AI/ML engineering · Operations",
-    h1: "AI agents for back-office operations",
+    h1: "Enterprise AI agent development",
     intro:
-      "We build AI agents for back-office operations: software that carries out multi-step work such as invoice processing, reconciliation, report assembly and customer file refresh, using your systems through narrowly permissioned tools, with human approval where it matters. Each agent has a defined job, tested behaviour, a full log and a measured result, and you own the agents, the prompts and the code.",
+      "Our enterprise AI agent development focuses on back-office work: software that carries out multi-step tasks such as invoice processing, reconciliation, report assembly and customer file refresh. These AI workflow automation services use your systems through narrowly permissioned tools, with human approval where it matters. Each agent has a defined job, tested behaviour and a full log, and you own the agents, prompts and code.",
     modules: [
       {
         title: "Process selection and design",
@@ -224,26 +224,27 @@ export const AI_ENTERPRISE_PAGES: SolutionPage[] = [
     assetId: "enterprise-ai-readiness",
     related: [
       { label: "Private LLM deployment", href: "/solutions/private-llm-deployment" },
+      { label: "Enterprise RAG development", href: "/solutions/enterprise-rag-development" },
       { label: "AI model risk management", href: "/solutions/ai-model-risk-management" },
       { label: "AI security checklist", href: "/resources/ai-security-checklist" },
     ],
-    updated: "2026-10-15",
+    updated: "2026-10-25",
   },
   {
     slug: "private-llm-deployment",
     vertical: "cross-industry",
     serviceId: "ai-ml",
-    seoTitle: "Private LLM Deployment On-Premise and in Your Cloud | Deview",
+    seoTitle: "Private LLM Deployment: On-Premise or Private Cloud | Deview",
     seoDescription:
       "Private LLM deployment on-premise or in your cloud: model hosting, network isolation, gateway, access control, logging, retrieval, evaluation and capacity planning.",
     kicker: "AI/ML engineering · Infrastructure",
     h1: "Private LLM deployment",
     intro:
-      "We carry out private LLM deployment for enterprises that cannot send data to a public service: hosting language models in your own cloud account, region or data centre, with network isolation, a gateway that controls and logs access, retrieval over your own documents, evaluation and capacity planning. Staff get the benefit of generative AI, and your data stays within the boundary you set. You own the platform and the code.",
+      "We carry out private LLM deployment for enterprises that cannot send data to a public service. On-premise LLM deployment and private cloud LLM deployment both combine controlled model access, network isolation, permission-aware retrieval, evaluation and capacity planning. Staff get the benefit of generative AI while data stays within the boundary you set, and you own the platform and code.",
     modules: [
       {
-        title: "Deployment options",
-        body: "Assessment of hosted models in your own cloud tenancy and region, private endpoints of managed services, and self-hosted open-weight models on your own GPUs.",
+        title: "Self-hosted LLM for business",
+        body: "Assessment of models in your cloud tenancy or data centre, including private endpoints of managed services and self-hosted open-weight models on infrastructure you control.",
       },
       {
         title: "Model selection and evaluation",
@@ -266,8 +267,8 @@ export const AI_ENTERPRISE_PAGES: SolutionPage[] = [
         body: "Redaction of sensitive data, input and output checks, defences against prompt injection and policies for what may be sent to which model.",
       },
       {
-        title: "Serving and capacity",
-        body: "Inference servers, batching, quantisation and autoscaling sized to actual load, with a plan for peak use and failure of a node.",
+        title: "Enterprise LLM hosting architecture",
+        body: "Inference servers, batching, quantisation and autoscaling are sized to actual load. We design and implement the hosting boundary in your environment rather than reselling an opaque shared hosting product.",
       },
       {
         title: "Logging, audit and monitoring",
@@ -453,10 +454,247 @@ export const AI_ENTERPRISE_PAGES: SolutionPage[] = [
     assetId: "enterprise-ai-readiness",
     related: [
       { label: "AI agents for back-office operations", href: "/solutions/ai-agents-for-back-office-operations" },
+      { label: "Enterprise RAG development", href: "/solutions/enterprise-rag-development" },
       { label: "RAG assistant for engineering documents", href: "/solutions/rag-assistant-for-engineering-documents" },
       { label: "AI model risk management", href: "/solutions/ai-model-risk-management" },
     ],
-    updated: "2026-10-15",
+    updated: "2026-10-25",
+  },
+  {
+    slug: "enterprise-rag-development",
+    vertical: "cross-industry",
+    serviceId: "ai-ml",
+    seoTitle: "Enterprise RAG Development & Private AI Search | Deview",
+    seoDescription:
+      "Enterprise RAG development for permission-aware knowledge assistants and AI search, with citations, evaluation, private deployment and business-system integration.",
+    kicker: "AI/ML engineering · Enterprise knowledge",
+    h1: "Enterprise RAG development",
+    intro:
+      "Enterprise RAG development connects language models to the documents, records and knowledge your teams already rely on. We build private AI knowledge assistants and enterprise search that retrieve only material each user may access, cite the source behind every answer and say when the evidence is insufficient. Ingestion, identity, retrieval, evaluation and workflow integration are engineered as one governed system, deployed within the boundary you choose, and you own the application and code.",
+    modules: [
+      {
+        title: "Source discovery and ingestion",
+        body: "Connectors bring approved content from document stores, SharePoint, knowledge bases, databases and line-of-business systems into controlled ingestion pipelines. Each source keeps its owner, classification, revision and access metadata, while failed or incomplete documents enter a review queue instead of silently disappearing from the index.",
+      },
+      {
+        title: "Document structure and enrichment",
+        body: "PDFs, scans, Office files, tables and structured records are parsed according to their layout and meaning. Sections, clauses, product identifiers, dates and relationships become retrieval metadata, so a result includes the context needed to interpret it rather than an isolated fragment of text.",
+      },
+      {
+        title: "Permission-aware retrieval",
+        body: "Identity groups and document access lists are carried into every search. Filtering happens before evidence reaches the model, which means a private knowledge assistant cannot reveal a passage that the signed-in user could not open in the source system themselves.",
+      },
+      {
+        title: "Hybrid search and ranking",
+        body: "Keyword search, semantic retrieval, metadata filters and reranking are combined for the material and questions in scope. Retrieval quality is tested separately from answer quality, making it possible to see whether a failure came from missing evidence, poor ranking or the model's interpretation.",
+      },
+      {
+        title: "Answers with verifiable citations",
+        body: "Responses link to the supporting document, section, page or record and preserve the relevant revision. Users can inspect the source immediately, while unsupported questions produce an explicit no-answer response or a route to the responsible person instead of a plausible invention.",
+      },
+      {
+        title: "Conversation and task context",
+        body: "The assistant can use the current case, customer, asset or project as scoped context without creating an uncontrolled memory store. Conversation history is retained only where needed, separated by user and purpose, and governed by the same retention and access rules as the underlying work.",
+      },
+      {
+        title: "Application and workflow integration",
+        body: "Search and answers can appear inside portals, CRM screens, service desks and operational tools through documented APIs. Where the assistant prepares a record or next action, typed integrations and approval steps keep retrieval separate from authority to change a business system.",
+      },
+      {
+        title: "Evaluation and continuous improvement",
+        body: "A representative set of real questions records the expected sources, acceptable answer and refusal behaviour. It runs whenever documents, chunking, embeddings, ranking, prompts or models change, while production feedback is reviewed before it becomes new evaluation material.",
+      },
+      {
+        title: "Operations, monitoring and governance",
+        body: "Teams can see index freshness, failed ingestion, retrieval quality, unanswered questions, latency, usage and model changes. Versioned configuration and audit logs make each response traceable to the sources, retrieval settings and application release that produced it.",
+      },
+    ],
+    diagram: {
+      title: "Enterprise RAG development: reference architecture",
+      desc: "Employees and business applications call a permission-aware knowledge layer. Inside the governed platform, source connectors ingest documents and records, identity filters retrieval, hybrid search and reranking select evidence, and a model produces cited answers. Evaluation, monitoring and audit controls cover the complete path before results return to users and workflows.",
+      leftLabel: "Company knowledge",
+      platformLabel: "Enterprise RAG platform",
+      rightLabel: "Users and workflows",
+      platformTitle: "Permission-aware knowledge layer",
+      boundary: "Your chosen data boundary",
+      left: [
+        ["Documents", "Policies, contracts, reports"],
+        ["Knowledge systems", "SharePoint, wikis, files"],
+        ["Business records", "CRM, ERP, service data"],
+        ["Identity", "Users, groups, access lists"],
+      ],
+      modules: [
+        ["Ingestion", "Parse, classify, refresh"],
+        ["Access filtering", "Identity, document rights"],
+        ["Retrieval", "Hybrid search, reranking"],
+        ["Answer generation", "Citations, refusal"],
+        ["Evaluation", "Sources, answers, regression"],
+        ["Operations", "Freshness, traces, feedback"],
+      ],
+      strip: "Private deployment · source citations · versioned configuration · audit trail",
+      right: [
+        ["Knowledge assistant", "Search and cited answers"],
+        ["Internal AI chatbot", "Role-aware conversations"],
+        ["Enterprise search", "Documents and records"],
+        ["Business workflows", "Draft, review, approve"],
+      ],
+    },
+    diagramCaption:
+      "Reference architecture: identity and source permissions constrain retrieval before the model receives evidence, while evaluation and audit cover the complete answer path.",
+    standards: [
+      {
+        name: "OWASP Top 10 for LLM Applications",
+        note: "Prompt injection, sensitive information disclosure and excessive agency are treated as application risks across ingestion, retrieval, generation and any connected tools.",
+      },
+      {
+        name: "NIST AI Risk Management Framework",
+        note: "Govern, map, measure and manage activities provide a practical structure for ownership, evaluation, monitoring and review of the knowledge assistant.",
+      },
+      {
+        name: "ISO/IEC 42001",
+        note: "AI management-system concepts inform documented responsibilities, risk treatment and change control where an organisation adopts that governance framework.",
+      },
+      {
+        name: "OpenID Connect, SAML and enterprise identity",
+        note: "The application uses the organisation's established identity and group membership rather than maintaining a separate permission model that can drift from source systems.",
+      },
+      {
+        name: "Data protection and retention policy",
+        note: "Personal and confidential data is minimised, processed for an agreed purpose and retained in prompts, traces and feedback only according to the organisation's rules.",
+      },
+      {
+        name: "OpenTelemetry and structured audit logs",
+        note: "Trace context links application requests, retrieval results, model calls and responses without making sensitive content broadly visible to operators.",
+      },
+    ],
+    dataModel: [
+      {
+        entity: "Source and collection",
+        holds: "System owner, connector, approved scope, classification, refresh policy and operational status.",
+      },
+      {
+        entity: "Document and revision",
+        holds: "Source identifier, title, version, status, access list, extracted structure and last successful ingestion.",
+      },
+      {
+        entity: "Passage and evidence",
+        holds: "Document location, text or structured value, metadata, embedding reference and the revision from which it was derived.",
+      },
+      {
+        entity: "Identity and entitlement",
+        holds: "User, group, role and source-system rights used to filter every retrieval request.",
+      },
+      {
+        entity: "Question and answer trace",
+        holds: "Application, user, query, retrieved evidence, answer, citations, model and configuration version, subject to retention policy.",
+      },
+      {
+        entity: "Evaluation case",
+        holds: "Representative question, expected sources, acceptable answer criteria, refusal expectation and results by system version.",
+      },
+      {
+        entity: "Feedback and review",
+        holds: "User signal, issue category, reviewer decision, correction and whether the case should join the evaluation set.",
+      },
+    ],
+    buildOptions: [
+      {
+        title: "Buy",
+        body: "Use a knowledge assistant included in an existing productivity or document platform when the content is concentrated there, its permission model is sufficient and teams do not need specialised retrieval, evaluation or workflow integration.",
+      },
+      {
+        title: "Extend",
+        body: "Add governed ingestion, permission filters, evaluation and application integration around a managed search or model service. This keeps infrastructure responsibility smaller while making the experience specific to your sources and controls.",
+      },
+      {
+        title: "Build",
+        body: "Build a dedicated enterprise RAG application when knowledge spans several systems, access rules must be preserved end to end, domain retrieval needs careful evaluation or the assistant must work inside a custom business workflow.",
+      },
+    ],
+    security: [
+      {
+        title: "Permissions before generation",
+        body: "Access checks filter candidate evidence before any passage is placed in model context. The answer cannot cite or summarise content that was removed for the signed-in user.",
+      },
+      {
+        title: "Untrusted-content isolation",
+        body: "Instructions found inside documents, web pages or retrieved records are treated as data, not authority. They cannot modify system policy, reveal hidden prompts or expand available tools.",
+      },
+      {
+        title: "Private data flow",
+        body: "Network paths, model endpoints, logs and retention are designed around the agreed boundary. Sensitive prompts and retrieved passages are not copied into unrelated analytics or training datasets.",
+      },
+      {
+        title: "Controlled workflow actions",
+        body: "Retrieval and answer generation do not automatically grant permission to change a source system. Typed tools, separate service identities, limits and human approval govern any downstream action.",
+      },
+      {
+        title: "Traceable change control",
+        body: "Connector, index, ranking, prompt and model changes are versioned and evaluated before release, with rollback to a previously accepted configuration when quality or safety regresses.",
+      },
+    ],
+    phases: [
+      {
+        title: "Knowledge and access discovery",
+        body: "We identify the users, questions, source owners, document classes, identity systems and access rules. A small, representative content scope is selected with explicit exclusions and accountable owners.",
+      },
+      {
+        title: "Evaluation set and retrieval design",
+        body: "Real questions are paired with expected sources and refusal cases. We design ingestion, document structure, filtering, search and ranking against this set before choosing prompts or polishing a chat interface.",
+      },
+      {
+        title: "Working assistant in a controlled environment",
+        body: "Connectors, index, identity integration, cited answers and operational traces are implemented for the first scope. Reviewers test quality, permissions and no-answer behaviour with representative accounts.",
+      },
+      {
+        title: "Workflow integration and assisted use",
+        body: "The assistant is placed in the portal, service desk or internal application where the work happens. Early use keeps clear review paths, captures failure categories and separates answer quality from user-interface feedback.",
+      },
+      {
+        title: "Governed expansion",
+        body: "Additional sources and teams join only after ownership, access mapping, evaluation coverage and operational capacity are ready. Quality, freshness, unanswered questions and configuration changes are reviewed as an ongoing product practice.",
+      },
+    ],
+    proof: [
+      { label: "Private LLM deployment architecture and controls", href: "/solutions/private-llm-deployment" },
+      { label: "RAG assistant for engineering standards and procedures", href: "/solutions/rag-assistant-for-engineering-documents" },
+      { label: "AI and machine learning development", href: "/services/ai-development" },
+      { label: "Senior-care documentation: unstructured notes into governed records", href: "/case-studies/senior-care-documentation" },
+    ],
+    faqs: [
+      {
+        q: "What is enterprise RAG development?",
+        a: "It is the engineering of a retrieval-augmented generation application around company knowledge, identity and workflows. The work includes ingestion, access filtering, search and ranking, cited answer generation, evaluation, monitoring and the application in which people use the result.",
+      },
+      {
+        q: "How is internal AI chatbot development different from a private AI knowledge assistant?",
+        a: "A chatbot describes the interface. A private AI knowledge assistant also defines which sources are authoritative, who may retrieve each document, how citations work, how unsupported questions are refused and how quality is evaluated as content changes.",
+      },
+      {
+        q: "Can Enterprise RAG respect SharePoint and document permissions?",
+        a: "Yes, when source identities and access lists are mapped into the index and checked on every query. The design must also handle permission changes and document removal so stale access does not survive in search results or caches.",
+      },
+      {
+        q: "How do you evaluate RAG development services?",
+        a: "We separate retrieval from answer generation. Evaluation checks whether the right authorised evidence was found, whether citations support the answer, whether the system refused unsupported questions and whether changes improve one group of questions while harming another.",
+      },
+      {
+        q: "Can the same platform support AI enterprise search development and workflow assistance?",
+        a: "Yes. A governed retrieval layer can support search, cited answers and drafting inside business workflows. Actions that change records remain separate, using explicit tools, permissions and approval rather than inheriting authority from the ability to retrieve information.",
+      },
+      {
+        q: "Does Enterprise RAG require fine-tuning a model?",
+        a: "Usually not at the start. Retrieval supplies current company knowledge at request time, while evaluation reveals whether remaining failures come from missing content, search quality, instructions or the model. Fine-tuning is considered only when a defined task and evidence show it is the appropriate intervention.",
+      },
+    ],
+    assetId: "enterprise-ai-readiness",
+    related: [
+      { label: "Private LLM deployment", href: "/solutions/private-llm-deployment" },
+      { label: "AI agents for back-office operations", href: "/solutions/ai-agents-for-back-office-operations" },
+      { label: "RAG assistant for engineering documents", href: "/solutions/rag-assistant-for-engineering-documents" },
+      { label: "AI security checklist", href: "/resources/ai-security-checklist" },
+    ],
+    updated: "2026-10-25",
   },
   {
     slug: "rag-assistant-for-engineering-documents",
@@ -680,6 +918,7 @@ export const AI_ENTERPRISE_PAGES: SolutionPage[] = [
     ],
     assetId: "enterprise-ai-readiness",
     related: [
+      { label: "Enterprise RAG development", href: "/solutions/enterprise-rag-development" },
       { label: "Private LLM deployment", href: "/solutions/private-llm-deployment" },
       { label: "Engineering data and document management", href: "/solutions/engineering-data-and-document-management" },
       { label: "Oil and gas software development", href: "/solutions/oil-and-gas-software" },

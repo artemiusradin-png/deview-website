@@ -30,13 +30,13 @@ export const SERVICE_PAGES: ServicePage[] = [
   {
     serviceId: "product-engineering",
     slug: "custom-software-development",
-    seoTitle: "Custom Software Development Services in Hong Kong | Deview",
+    seoTitle: "Custom Enterprise Software Development in Hong Kong | Deview",
     seoDescription:
-      "Custom software development for financial and industrial companies: custom applications, software product engineering, application modernization and API integration. Hong Kong team, you own the code.",
+      "Custom enterprise software development for financial and industrial companies: platforms, customer portals, modernization and API integration. Hong Kong team; you own the code.",
     kicker: "Digital product engineering",
-    h1: "Custom software development",
+    h1: "Custom enterprise software development",
     intro:
-      "We design and build custom software around how your business runs: web platforms, client portals, internal systems, mobile apps and SaaS products. From discovery and architecture to launch and continuous engineering, and you own the code.",
+      "Our custom enterprise software development is built around how your business runs: web platforms, customer portals, internal systems, mobile apps and SaaS products. We work from discovery and architecture through launch and continuous engineering, and you own the code.",
     points: [
       {
         title: "Built around your process",
@@ -47,8 +47,8 @@ export const SERVICE_PAGES: ServicePage[] = [
         body: "Legacy applications and databases are rearchitected and migrated step by step, without stopping the business.",
       },
       {
-        title: "Connected from day one",
-        body: "APIs and integrations link the new software to your CRM, ERP, lending system or catalogue.",
+        title: "Customer portal development",
+        body: "Secure portals give customers and partners the right self-service workflows while APIs connect the experience to your CRM, ERP, lending system or catalogue.",
       },
     ],
     stack: ["Next.js", "Node.js", "Flutter", "PostgreSQL", "Supabase", "Docker", "Salesforce"],
@@ -84,25 +84,25 @@ export const SERVICE_PAGES: ServicePage[] = [
   {
     serviceId: "ai-ml",
     slug: "ai-development",
-    seoTitle: "AI Development Company: Generative AI, AI Agents & Machine Learning | Deview",
+    seoTitle: "Enterprise LLM Development & Private AI Services | Deview",
     seoDescription:
-      "AI and machine learning development: generative AI and LLM applications, AI agents and agentic workflows, document AI and predictive models, with AI security built in. Hong Kong based.",
+      "Enterprise LLM development and private AI services: secure assistants, RAG, AI agents, document AI and domain-specific applications, evaluated for production use.",
     kicker: "AI/ML engineering",
-    h1: "AI and machine learning development",
+    h1: "Enterprise LLM development",
     intro:
-      "We build AI into your software: generative AI and LLM applications, AI agents and multi-agent workflows, document processing, search over your own data and machine learning models. Every system is evaluated, monitored and secured in production.",
+      "Our enterprise LLM development work turns private company data and workflows into secure assistants, search, document processing and AI agents. We design the application, retrieval, model access, evaluation and operational controls together, so the result can be monitored and improved in production.",
     points: [
       {
-        title: "Generative AI that works on your data",
-        body: "Copilots, summaries and search connected to your documents and systems, with the source of every answer.",
+        title: "Private LLM development services",
+        body: "Assistants, summaries and search connected to your documents and systems, with permissions, citations and deployment boundaries defined for your organisation.",
       },
       {
-        title: "AI agents that finish the job",
-        body: "Agentic AI development for search, classification, support and process automation, with people approving what matters.",
+        title: "Domain-specific LLM development",
+        body: "Retrieval, task evaluation and model adaptation are designed around your terminology, decisions and source material rather than a generic chatbot demo.",
       },
       {
-        title: "AI security from the first sprint",
-        body: "Private deployment, protection against prompt injection and data leaks, evaluation and audit trails.",
+        title: "Custom LLM development for real workflows",
+        body: "We connect models to approved tools and business systems, protect against prompt injection and data leaks, and keep consequential actions under human control.",
       },
     ],
     stack: ["Anthropic Claude", "OpenAI", "Google Gemini", "Llama", "Mistral", "Vertex AI", "pgvector", "LangChain"],
@@ -116,6 +116,10 @@ export const SERVICE_PAGES: ServicePage[] = [
       href: "/resources/ai-security-checklist",
     },
     faqs: [
+      {
+        q: "What should a custom LLM development company deliver?",
+        a: "A production application needs more than a model call. We define the task and evaluation set, connect approved data and systems, design security and human review, and provide the application, operational controls and code.",
+      },
       {
         q: "Which AI models do you work with?",
         a: "We work with Anthropic Claude, OpenAI, Google Gemini, Llama and Mistral, and choose per project on accuracy, cost and where your data may go.",
@@ -234,21 +238,21 @@ export const SERVICE_PAGES: ServicePage[] = [
   {
     serviceId: "enterprise-platforms",
     slug: "enterprise-platforms",
-    seoTitle: "Salesforce, CRM & ERP Integration Services | Deview",
+    seoTitle: "Enterprise Platform Development & CRM/ERP Integration | Deview",
     seoDescription:
-      "Enterprise platform services: Salesforce development and integration, HubSpot and CRM integration, SAP and Oracle ERP integration, Microsoft 365 and API integration layers.",
+      "Enterprise platform development and CRM/ERP integration services across Salesforce, HubSpot, SAP, Oracle, Microsoft 365 and custom API integration layers.",
     kicker: "Enterprise platforms",
-    h1: "Salesforce, CRM and ERP integration",
+    h1: "Enterprise platform development",
     intro:
-      "We customise and extend the enterprise platforms you already run, from Salesforce and HubSpot to SAP and Oracle ERP, and connect them to each other and to your own software through APIs and integration layers.",
+      "Our enterprise platform development extends the systems you already run, from Salesforce and HubSpot to SAP and Oracle ERP, and connects them to each other and to your own software through governed APIs and integration layers.",
     points: [
       {
         title: "Salesforce development",
         body: "Custom objects, flows and apps inside Salesforce, such as quoting built directly into the CRM.",
       },
       {
-        title: "CRM and ERP integration",
-        body: "HubSpot, SAP, Oracle and Microsoft 365 connected so data is entered once.",
+        title: "CRM/ERP integration services",
+        body: "HubSpot, SAP, Oracle and Microsoft 365 are connected through supported interfaces so data is entered once and ownership stays clear.",
       },
       {
         title: "An integration layer you own",
