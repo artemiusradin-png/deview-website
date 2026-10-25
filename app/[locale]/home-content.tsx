@@ -434,13 +434,13 @@ export function HomeContent({
                       <span />
                       <span />
                     </span>
-                    <span>jetfans.eu</span>
+                    <span>jetfans.eu / eastern europe</span>
                     <span>Live website</span>
                   </div>
                   <div className={styles.projectScreenshotViewport}>
                     <Image
-                      src="/images/home/selected-work-jetfans.webp"
-                      alt="Jetfans website homepage showing Wolter parking ventilation systems"
+                      src="/images/home/selected-work-jetfans-eastern-europe.webp"
+                      alt="Jetfans Eastern Europe website showing Wolter car park ventilation systems"
                       width={1360}
                       height={850}
                       sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1200px) 50vw, 595px"
@@ -469,7 +469,7 @@ export function HomeContent({
                   Website engineering / SEO
                 </span>
                 <a
-                  href="https://www.jetfans.eu"
+                  href="https://www.jetfans.eu/eastern-europe/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.projectWebsiteLink}
