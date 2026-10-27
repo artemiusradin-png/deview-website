@@ -45,53 +45,11 @@ function Arrow({
 function ProjectLogos({ duplicate = false }: { duplicate?: boolean }) {
   const logos = [
     {
-      name: "Lukoil",
-      src: "/client-logos/oil-gas/lukoil.svg",
-      width: 157,
-      height: 32,
-      className: styles.clientLukoil,
-    },
-    {
-      name: "Gazprom Neft",
-      src: "/client-logos/oil-gas/gazprom-neft.png",
-      width: 878,
-      height: 433,
-      className: styles.clientGazpromNeft,
-    },
-    {
-      name: "Gazprom International",
-      src: "/client-logos/oil-gas/gazprom-international.png",
-      width: 203,
-      height: 100,
-      className: styles.clientGazprom,
-    },
-    {
-      name: "Covenant Desk",
-      src: "/client-logos/covenant-desk.png",
-      width: 1855,
-      height: 427,
-      className: styles.clientCovenant,
-    },
-    {
-      name: "Grand Finance",
-      src: "/client-logos/grand-finance.png",
-      width: 149,
-      height: 47,
-      className: styles.clientGrand,
-    },
-    {
       name: "EnerQuest Energy",
       src: "/client-logos/enerquest.png",
       width: 383,
       height: 91,
       className: styles.clientEnerquest,
-    },
-    {
-      name: "Jetfans",
-      src: "/client-logos/jetfans-eu.png",
-      width: 181,
-      height: 242,
-      className: styles.clientJetfans,
     },
     {
       name: "EVDEV",
@@ -106,6 +64,27 @@ function ProjectLogos({ duplicate = false }: { duplicate?: boolean }) {
       width: 118,
       height: 79,
       className: styles.clientFizkultura,
+    },
+    {
+      name: "Gazprom International",
+      src: "/client-logos/oil-gas/gazprom-international.png",
+      width: 203,
+      height: 100,
+      className: styles.clientGazprom,
+    },
+    {
+      name: "Jetfans",
+      src: "/client-logos/jetfans-eu.png",
+      width: 181,
+      height: 242,
+      className: styles.clientJetfans,
+    },
+    {
+      name: "Grand Finance",
+      src: "/client-logos/grand-finance.png",
+      width: 149,
+      height: 47,
+      className: styles.clientGrand,
     },
   ];
 

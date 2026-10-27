@@ -402,15 +402,6 @@
 .clientEnerquest {
   width: 176px;
 }
-.clientLukoil {
-  width: 110px;
-}
-.clientGazpromNeft {
-  width: 120px;
-}
-.clientCovenant {
-  width: 140px;
-}
 
 /* The final supplied film can sit behind the hero, with a bright reading layer. */
 .heroMedia {
@@ -1653,15 +1644,6 @@
   }
   .clientEnerquest {
     width: 146px;
-  }
-  .clientLukoil {
-    width: 90px;
-  }
-  .clientGazpromNeft {
-    width: 100px;
-  }
-  .clientCovenant {
-    width: 115px;
   }
 }
 @media (max-width: 390px) {
