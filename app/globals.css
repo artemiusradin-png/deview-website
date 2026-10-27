@@ -42,6 +42,21 @@
 
   /* Section vertical rhythm */
   --section-gap: clamp(4rem, 8vw, 6rem);
+
+  /* Editorial industry-page aliases, mapped to the existing Deview theme. */
+  --ds-canvas: var(--background);
+  --ds-surface: var(--surface);
+  --ds-elevated: var(--surface-elevated);
+  --ds-ink: var(--text);
+  --ds-muted: var(--text-muted);
+  --ds-line: var(--white-20);
+  --ds-line-subtle: var(--white-10);
+  --ds-accent: #ffc933;
+  --ds-accent-ink: #171207;
+  --ds-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ds-duration-fast: 140ms;
+  --ds-duration: 220ms;
+  --ds-content: 1200px;
 }
 
 html[data-theme="light"] {

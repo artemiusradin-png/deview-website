@@ -600,6 +600,8 @@
 }
 .project {
   min-width: 0;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
 }
 .projectCaseStudy {
   display: block;
@@ -655,6 +657,9 @@
   height: 100%;
   object-fit: cover;
   transition: transform 240ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.projectImage:is(video) {
+  background: #171717;
 }
 .projectCaption {
   display: flex;

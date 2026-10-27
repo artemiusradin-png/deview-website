@@ -223,7 +223,7 @@ export const INDUSTRY_OFFERS: IndustryOffer[] = [
       },
     ],
     experience:
-      "We built the lending platform behind Covenant Desk and a portal that gives five lending companies one view of every borrower.",
+      "We built the lending platform behind Covenant Desk, supporting 17,000+ borrower records in one permission-scoped operating view.",
     control:
       "Credit decisions stay with your team. Borrower data stays in your cloud, and every action is logged.",
     whoFor: [

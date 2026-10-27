@@ -645,16 +645,16 @@ export const en = {
   featuredPortal: {
     sectionLabel: "FEATURED DEPLOYMENT · FINANCE / LENDING",
     title: "Deview Unified Portal: AI-powered borrower intelligence for a multi-company lending network.",
-    subtitle: "A single platform serving five lending companies. What used to take hours of manual spreadsheet work: looking up a borrower, checking their loans across companies, reading overdue notices, assessing risk: now happens in one search.",
+    subtitle: "A single platform supporting 17,000+ borrower records. Work that once required manual spreadsheet searches—finding a borrower, checking facilities, reading overdue notices and assessing risk—now happens in one authorised view.",
     phasedTitle: "Built in phases.",
     phasedBody: "Each phase adds a new capability on top of the same foundation: one shared portal, one borrower database, one audit trail.",
     readCaseStudy: "Read the full case study",
-    mobileSummary: "One platform, five lending companies. AI-powered borrower intelligence, credit analysis, email processing, and document handling: all on the same shared database and audit trail.",
+    mobileSummary: "One platform supporting 17,000+ borrower records. AI-powered borrower intelligence, credit analysis, email processing and document handling all share the same database and audit trail.",
     phases: [
       {
-        title: "Shared backbone for five companies",
+        title: "Shared, permission-scoped backbone",
         subtitle: "Foundation · Portal + Database",
-        description: "The shared backbone everything else runs on. One secure login, one database, one audit trail. Staff from any of the five companies log in and see only what they're authorised to see: their companies, their borrowers, their data. Every action is logged.",
+        description: "The shared backbone everything else runs on. One secure login, one database and one audit trail. Staff see only the companies, borrowers and data they are authorised to access. Every action is logged.",
       },
       {
         title: "Five AI capabilities, one audit trail",
@@ -663,7 +663,7 @@ export const en = {
         capabilities: [
           {
             name: "AI Credit Analyst",
-            body: "One click generates a full case summary for any borrower: their loan history, repayment behaviour, risk signals, and overdue status across all five companies, distilled into a readable narrative. Replaces the 20-minute manual file review.",
+            body: "One click generates a full case summary for any borrower: loan history, repayment behaviour, risk signals and overdue status across the authorised portfolio, distilled into a readable narrative. Replaces the 20-minute manual file review.",
           },
           {
             name: "Agentic AI Assistant",
@@ -816,9 +816,9 @@ export const en = {
     ],
     featuredLabel: "Featured deployment",
     featuredTitle:
-      "Covenant Desk: one platform deployed across all five lending companies in the network + Covenant Desk.",
+      "Deview Unified Portal: 17,000+ borrower records with five AI capabilities built on one governed foundation.",
     featuredBody:
-      "Shared backbone for loan management, borrower intake, database, and audit trail across Grand Finance, Every Success Credit, KK Credit, Rich Eagle Capital, and Wah Wei Credit + Covenant Desk. Supporting 17,000+ borrower records with credit risk analysis, automated email intake, financial document processing, and regulatory compliance reporting.",
+      "Shared backbone for portal, database, and audit trail. AI Credit Analyst, Agentic AI Assistant, AI Email Processing, AI Document Processing, and AI Prompt Management: each reading from the same borrower database and writing back to the same audit trail. No silos, no copy-paste between systems.",
     featuredLink: "See the build",
     adoptionGrid: {
       sectionLabel: "AI ADOPTION & INTEGRATION",
@@ -1306,7 +1306,7 @@ export const en = {
         number: "02",
         sector: "FINANCE / LENDING · HONG KONG",
         service: "Lending Operations Platform",
-        headline: "Covenant Desk: deployed across all 5 lending companies in the network + Covenant Desk",
+        headline: "Covenant Desk: one governed lending record for 17,000+ borrower profiles",
         challenge: "Borrower intake, identity checks, credit review, loan servicing, repayments, collections, and reporting were split across spreadsheets, inboxes, messaging apps, and separate company ledgers. Staff had no single borrower view and cross-company exposure checks required manual searches.",
         solution: "Covenant Desk brings the workflow into one permission-scoped platform: a management portal, staff tools, and borrower self-service connected to the same record. It supports enquiry intake, eKYC and AML, lender-defined scoring rules, human approvals, agreements, repayment servicing, collections, reporting, and auditable AI-assisted review.",
         capabilities: [
@@ -1369,17 +1369,17 @@ export const en = {
       {
         number: "05",
         sector: "VENTILATION · UKRAINE, EASTERN EUROPE, CENTRAL ASIA",
-        service: "Multi-region Website, SEO & Lead Capture",
-        headline: "Jetfans: one domain, three regional sites for a Wolter ventilation distributor",
+        service: "OCR Operations, Custom CRM & Inquiry Automation",
+        headline: "Jetfans: an internal OCR and CRM system for regional inquiry operations",
         website: { href: "https://www.jetfans.eu", label: "Visit Jetfans →" },
-        challenge: "Jetfans imports and distributes Wolter and Himpel ventilation equipment across Ukraine, Eastern Europe and Central Asia. Each region needed its own languages, contacts and offer, while search engines and AI assistants kept repeating outdated company details.",
-        solution: "Deview built jetfans.eu as one domain with three regional sites in Ukrainian, English and Russian. Visitors reach their region automatically, every form feeds one lead pipeline, and each site carries its own topic pages, guides, structured data and sitemaps.",
+        challenge: "Jetfans handles technical inquiries and supporting documents across Central Asia and Eastern Europe. Regional teams needed a consistent way to capture each request, process its documents, and move the right information into one operational record without repeated manual entry.",
+        solution: "Deview built an internal OCR management workflow and a custom CRM for the regional operation. Incoming inquiries are captured automatically, supporting documents move through OCR review, and the resulting information is structured inside the CRM for the responsible team to continue the work.",
         capabilitiesLabel: "Project Scope",
         capabilities: [
-          { name: "Three Regional Sites", body: "Ukraine, Eastern Europe and Central Asia, each with its own languages, contacts and product range." },
-          { name: "Geo-routing That Respects Search", body: "Visitors land on their region; search crawlers are never redirected, so every page stays indexable." },
-          { name: "One Lead Pipeline", body: "Quote, consultation and download forms from all three regions post to a single endpoint." },
-          { name: "Search & AI Visibility", body: "Keyword research per region, topic pages and lead magnets, structured data, IndexNow and Search Console." },
+          { name: "Internal OCR Management", body: "Documents attached to an inquiry move through a controlled extraction and review workflow before their data becomes operational." },
+          { name: "Custom CRM", body: "Regional teams work from a purpose-built customer and inquiry record instead of transferring the same information between disconnected tools." },
+          { name: "Automated Inquiry Intake", body: "New inquiries are captured and entered into the CRM automatically, preserving the source context for follow-up." },
+          { name: "Regional Workflow", body: "The operating model supports teams handling Central Asia and Eastern Europe from one consistent process." },
         ],
       },
       {

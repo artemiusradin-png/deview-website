@@ -11,6 +11,7 @@ import { HeroInquiryForm } from "./home-hero-form";
 import { useMotionOnView } from "./home-motion";
 import { EditorialReveal, IndustryMark, ProcessVisual, TeamLocations, TeamNetwork } from "./home-editorial-visuals";
 import { SiteFooter } from "@/components/SiteFooter";
+import { SilentCaseVideo } from "@/components/SilentCaseVideo";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { INSIGHT_ARTICLES } from "@/lib/insights";
 import { SERVICE_LINES } from "@/lib/workflow-offers";
@@ -434,16 +435,13 @@ export function HomeContent({
                       <span />
                       <span />
                     </span>
-                    <span>jetfans.eu / eastern europe</span>
-                    <span>Live website</span>
+                    <span>Jetfans / Operations</span>
+                    <span>OCR + CRM</span>
                   </div>
                   <div className={styles.projectScreenshotViewport}>
-                    <Image
-                      src="/images/home/selected-work-jetfans-eastern-europe.webp"
-                      alt="Jetfans Eastern Europe website showing Wolter car park ventilation systems"
-                      width={1360}
-                      height={850}
-                      sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1200px) 50vw, 595px"
+                    <SilentCaseVideo
+                      src="/video/cases/jetfans-ocr-crm.mp4"
+                      poster="/images/cases/video-posters/jetfans-ocr-crm.jpg"
                       className={styles.projectImage}
                     />
                   </div>
@@ -452,30 +450,28 @@ export function HomeContent({
                   <div>
                     <span className={styles.projectName}>Jetfans</span>
                     <h3>
-                      One domain.
+                      Inquiries in.
                       <br />
-                      Three regional sites.
+                      Structured work out.
                     </h3>
                   </div>
                   <Arrow diagonal />
                 </div>
                 <p className={styles.projectSummary}>
-                  A multilingual website, geo-routing, lead capture, and search
-                  system for a ventilation distributor across three regions.
+                  An internal OCR workflow, custom CRM, and automated inquiry
+                  intake for Central Asia and Eastern Europe.
                 </p>
               </Link>
               <div className={styles.projectFooter}>
                 <span className={styles.projectCategory}>
-                  Website engineering / SEO
+                  OCR operations / Custom CRM
                 </span>
-                <a
-                  href="https://www.jetfans.eu/eastern-europe/"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href={localePath("/case-studies/jetfans")}
                   className={styles.projectWebsiteLink}
                 >
-                  Visit Jetfans <span aria-hidden="true">↗</span>
-                </a>
+                  View the system <span aria-hidden="true">↗</span>
+                </Link>
               </div>
             </article>
             <article className={styles.project}>
@@ -518,10 +514,8 @@ export function HomeContent({
                   <Arrow diagonal />
                 </div>
                 <p className={styles.projectSummary}>
-                  One unified platform serving all 5 lending companies in the network
-                  (Grand Finance, Every Success Credit, KK Credit, Rich Eagle Capital,
-                  Wah Wei Credit) + Covenant Desk, bringing borrower intake, credit
-                  decisioning, servicing, and reporting together.
+                  One permission-scoped platform supports 17,000+ borrower
+                  records from enquiry intake through final repayment.
                 </p>
               </Link>
               <div className={styles.projectFooter}>
@@ -536,6 +530,85 @@ export function HomeContent({
                 >
                   Visit Covenant Desk <span aria-hidden="true">↗</span>
                 </a>
+              </div>
+            </article>
+            <article className={styles.project}>
+              <Link
+                href={localePath("/case-studies/enerquest")}
+                className={styles.projectCaseStudy}
+                aria-label="Read the EnerQuest Energy case study"
+              >
+                <div className={styles.projectArtwork}>
+                  <div className={styles.projectBrowserBar} aria-hidden="true">
+                    <span className={styles.projectBrowserDots}><span /><span /><span /></span>
+                    <span>EnerQuest / Nigeria</span>
+                    <span>DOF pilot</span>
+                  </div>
+                  <div className={styles.projectScreenshotViewport}>
+                    <SilentCaseVideo
+                      src="/video/cases/enerquest-dof.mp4"
+                      poster="/images/cases/video-posters/enerquest-dof.jpg"
+                      className={styles.projectImage}
+                    />
+                  </div>
+                </div>
+                <div className={styles.projectCaption}>
+                  <div>
+                    <span className={styles.projectName}>EnerQuest Energy</span>
+                    <h3>One operating picture.<br />Field to management.</h3>
+                  </div>
+                  <Arrow diagonal />
+                </div>
+                <p className={styles.projectSummary}>
+                  A digital oilfield pilot unifying production, equipment,
+                  exceptions, and decisions without touching operational control.
+                </p>
+              </Link>
+              <div className={styles.projectFooter}>
+                <span className={styles.projectCategory}>Upstream operations / Data engineering</span>
+                <Link href={localePath("/industries/oil-and-gas")} className={styles.projectWebsiteLink}>
+                  Energy work <span aria-hidden="true">↗</span>
+                </Link>
+              </div>
+            </article>
+            <article className={styles.project}>
+              <Link
+                id="featured-deployment-grand-finance"
+                href={localePath("/industries/lending#grand-finance")}
+                className={styles.projectCaseStudy}
+                aria-label="View the Grand Finance deployment"
+              >
+                <div className={styles.projectArtwork}>
+                  <div className={styles.projectBrowserBar} aria-hidden="true">
+                    <span className={styles.projectBrowserDots}><span /><span /><span /></span>
+                    <span>Grand Finance / Hong Kong</span>
+                    <span>Live deployment</span>
+                  </div>
+                  <div className={styles.projectScreenshotViewport}>
+                    <SilentCaseVideo
+                      src="/video/cases/grand-finance-lending.mp4"
+                      poster="/images/cases/video-posters/grand-finance-lending.jpg"
+                      className={styles.projectImage}
+                    />
+                  </div>
+                </div>
+                <div className={styles.projectCaption}>
+                  <div>
+                    <span className={styles.projectName}>Grand Finance 高昇財務</span>
+                    <h3>Credit operations.<br />One governed record.</h3>
+                  </div>
+                  <Arrow diagonal />
+                </div>
+                <p className={styles.projectSummary}>
+                  A lender-specific deployment connecting borrower intake,
+                  document review, credit decisions, servicing, and reporting.
+                </p>
+              </Link>
+              <div className={styles.projectFooter}>
+                <span className={styles.projectCategory}>Lending operations / Workflow engineering</span>
+                <Link href={localePath("/industries/lending")} className={styles.projectWebsiteLink}>
+                  Lending work <span aria-hidden="true">↗</span>
+                </Link>
               </div>
             </article>
           </div>
