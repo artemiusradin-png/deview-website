@@ -1,0 +1,154 @@
+{
+  "direction": "Editorial Precision",
+  "authority": "Existing app/editorial.css brand rules override generated fallback tokens.",
+  "tokens": {
+    "canvas": "#fffdf7",
+    "surface": "#f3eee2",
+    "text": "#171207",
+    "mutedText": "#655f54",
+    "line": "#d7cfbf",
+    "accent": "#ffc933",
+    "font": "Archivo"
+  },
+  "task": "Search and filter real case studies, scan their outcomes and open the full project.",
+  "structure": "docs/ui/page-structure.json",
+  "components": "docs/ui/component-catalog.json",
+  "exceptions": [
+    "Equal project cards are requested by the user and support comparison; generic anti-grid rules do not apply.",
+    "Existing brand styling remains authoritative.",
+    "Filtering is immediate. Existing project videos explain the workflow on detail pages."
+  ],
+  "motion": {
+    "hover": "transform only, <=240ms, ease-out",
+    "press": "0.97",
+    "reduced": "follow existing near-zero duration rules; no image zoom"
+  },
+  "acceptance": {
+    "targetScore": 8.5,
+    "dimensions": [
+      {
+        "name": "信息层级",
+        "weight": 20,
+        "pass": "5 秒内能指出页面主任务、当前状态和主要动作。"
+      },
+      {
+        "name": "版式与留白",
+        "weight": 20,
+        "pass": "分区清晰、对齐稳定、空白有节奏，不靠卡片填满画面。"
+      },
+      {
+        "name": "风格一致性",
+        "weight": 15,
+        "pass": "字体、颜色、圆角、边界和状态表达来自同一套规则。"
+      },
+      {
+        "name": "内容密度",
+        "weight": 15,
+        "pass": "密度符合任务，不出现无意义空白或信息堆叠。"
+      },
+      {
+        "name": "组件克制程度",
+        "weight": 10,
+        "pass": "没有卡片瀑布、嵌套卡片和平均强调。"
+      },
+      {
+        "name": "品牌辨识度",
+        "weight": 10,
+        "pass": "通过内容、排版和单一强调策略形成识别，不依赖特效。"
+      },
+      {
+        "name": "响应式表现",
+        "weight": 10,
+        "pass": "1440px 与 390px 都保持任务顺序、可读性和可操作性。"
+      }
+    ],
+    "requiredViewports": [
+      "1440x900",
+      "390x844"
+    ],
+    "blockingFailures": [
+      "Horizontal page overflow",
+      "Unusable keyboard controls",
+      "Invented outcomes or missing original content",
+      "No actual desktop/mobile screenshots",
+      "Unresolved runtime errors"
+    ]
+  },
+  "craft": {
+    "tokensFile": "docs/design-system.theme.css",
+    "checks": [
+      {
+        "id": "depth-line-not-heavy-shadow",
+        "severity": "block",
+        "how": "screenshot",
+        "rule": "默认用背景分层和 1px --line；阴影只给浮层、拖拽或临时反馈。"
+      },
+      {
+        "id": "no-double-depth",
+        "severity": "block",
+        "how": "screenshot",
+        "rule": "禁止实线框与厚阴影叠成两套层级。"
+      },
+      {
+        "id": "press-scale",
+        "severity": "block",
+        "how": "source",
+        "rule": "可点控件须有 :active 或等价 press，scale 约 0.97，时长 100-160ms。"
+      },
+      {
+        "id": "no-transition-all",
+        "severity": "block",
+        "how": "source",
+        "rule": "禁止 transition: all。"
+      },
+      {
+        "id": "no-scale-zero",
+        "severity": "block",
+        "how": "source",
+        "rule": "若有进入动画，禁止 scale(0)；须 opacity 加 scale >= 0.9。"
+      },
+      {
+        "id": "ease-out-enter",
+        "severity": "block",
+        "how": "source",
+        "rule": "进入/出现动画使用 ease-out；禁止 UI 进入使用 ease-in。"
+      },
+      {
+        "id": "duration-caps",
+        "severity": "warn",
+        "how": "source",
+        "rule": "下拉/浮层 <= 250ms；模态/抽屉 <= 500ms；常规 UI 动效默认 < 300ms。"
+      },
+      {
+        "id": "no-keyboard-chrome-motion",
+        "severity": "block",
+        "how": "both",
+        "rule": "键盘触发的命令面板或快捷操作不得使用打开/关闭动画。"
+      },
+      {
+        "id": "popover-origin",
+        "severity": "warn",
+        "how": "source",
+        "rule": "Popover 从 trigger 设置 transform-origin；Modal 保持居中。"
+      },
+      {
+        "id": "tooltip-instant-followup",
+        "severity": "warn",
+        "how": "source",
+        "rule": "Tooltip 首次可延迟；相邻后续 hover 应立刻出现。"
+      },
+      {
+        "id": "no-default-inter",
+        "severity": "block",
+        "how": "source",
+        "rule": "无品牌字体时使用系统栈，禁止默认引入 Inter。"
+      },
+      {
+        "id": "mobile-not-scaled-desktop",
+        "severity": "block",
+        "how": "screenshot",
+        "rule": "390 视口须重组任务流，不得只缩小桌面布局。"
+      }
+    ]
+  }
+}

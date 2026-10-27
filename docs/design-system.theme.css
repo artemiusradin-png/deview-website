@@ -1,0 +1,26 @@
+/* Fallback tokens from the visual-direction contract. Prefer docs/design-system.* or brand colors. */
+/* Craft clauses derived from Emil Kowalski skills (MIT). */
+:root {
+  --canvas: oklch(0.975 0.004 95);
+  --surface: oklch(1 0 0);
+  --text: oklch(0.22 0.012 75);
+  --muted-text: oklch(0.52 0.012 75);
+  --line: oklch(0.89 0.008 90);
+  --accent: oklch(0.48 0.085 165);
+  --accent-strong: oklch(0.40 0.09 165);
+  --success: oklch(0.55 0.12 145);
+  --warning: oklch(0.68 0.13 75);
+  --danger: oklch(0.55 0.18 25);
+  --radius-control: 6px;
+  --radius-panel: 8px;
+  --radius-card: 10px;
+  --radius-overlay: 12px;
+  --shadow-subtle: 0 1px 2px rgb(0 0 0 / 0.05);
+  --shadow-overlay: 0 12px 32px rgb(0 0 0 / 0.12);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --motion-policy: expressive;
+  --press-scale: 0.97;
+  --press-duration: 140ms;
+}
+
