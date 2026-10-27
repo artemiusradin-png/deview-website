@@ -51,6 +51,9 @@ Task Manager - App/
 .claude/
 .agents/
 .codex/
+.mcp-probe-kit/
+docs/history-session/
+docs/.mcp-probe/
 plugins/
 LOGOS/
 COPY_REWRITE_PLAN.md

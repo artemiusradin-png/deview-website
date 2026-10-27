@@ -45,7 +45,7 @@ export default async function CaseStudyPage({ params }: Props) {
           {project.slug === "covenant-desk" ? (
             <section className="mt-12 border-t border-[var(--border)] pt-10" aria-labelledby="lenders-title">
               <p className="page-kicker mb-4">Loan management systems</p>
-              <h2 id="lenders-title" className="mb-6">Built for five Hong Kong lenders.</h2>
+              <h2 id="lenders-title" className="mb-6">Deployed across all 5 lending firms in the network + Covenant Desk.</h2>
               <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-5">
                 {LENDING_PROJECTS.map((lender) => (
                   <li key={lender.slug} className="border-t border-[var(--border)] pt-3">

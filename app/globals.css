@@ -417,11 +417,6 @@ html[data-theme="light"] .pixel-field {
   filter: brightness(0) invert(1);
 }
 
-/* Novartis — white on dark, original on light */
-.service-client__logo--novartis {
-  filter: brightness(0) invert(1);
-}
-
 /* FACT — white on dark, black on light */
 .service-client__logo--fact {
   filter: brightness(0) invert(1);
@@ -439,10 +434,6 @@ html[data-theme="light"] .service-client__logo--evdev {
 }
 
 html[data-theme="light"] .service-client__logo--fizkultura {
-  filter: none;
-}
-
-html[data-theme="light"] .service-client__logo--novartis {
   filter: none;
 }
 

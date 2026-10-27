@@ -25,6 +25,7 @@ const publicEnglishPaths = [
   "/industries/legal",
   "/industries/lending",
   "/insights",
+  "/insights/loan-management-system-cost",
   "/insights/document-automation-where-to-start",
   "/insights/four-ai-projects-worth-doing",
   "/insights/why-most-ai-pilots-fail",

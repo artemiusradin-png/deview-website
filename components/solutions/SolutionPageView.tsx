@@ -327,6 +327,24 @@ export function SolutionPageView({ page }: { page: SolutionPage }) {
           <nav className={styles.others} aria-label="More solutions">
             <span className={styles.kicker}>{hub ? hub.navLabel : "Solutions"}</span>
             <ul>
+              {page.slug === "sme-loan-management-system-for-banks" ||
+              page.slug === "credit-approval-workflow-software" ||
+              page.vertical === "banking" ? (
+                <li>
+                  <Link href="/en/industries/lending" style={{ color: "#ffc933", fontWeight: 500 }}>
+                    Lending &amp; Finance Silo · Covenant Desk Platform <span aria-hidden="true">↗</span>
+                  </Link>
+                </li>
+              ) : null}
+              {page.slug === "upstream-production-management-system" ||
+              page.slug === "rag-assistant-for-engineering-documents" ||
+              page.vertical === "oil-gas" ? (
+                <li>
+                  <Link href="/en/industries/oil-and-gas" style={{ color: "#ffc933", fontWeight: 500 }}>
+                    Oil &amp; Gas Silo · Deview DOF Platform <span aria-hidden="true">↗</span>
+                  </Link>
+                </li>
+              ) : null}
               {hub ? (
                 <li>
                   <Link href={`/en${solutionPath(hub.slug)}`}>

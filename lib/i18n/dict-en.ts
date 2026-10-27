@@ -526,6 +526,11 @@ export const en = {
     viewAll: "View all insights →",
     articles: [
       {
+        label: "LENDING ARCHITECTURE",
+        title: "How much does a custom loan management system cost? Scope, architecture & timelines",
+        readTime: "7 min read",
+      },
+      {
         label: "AI IMPLEMENTATION",
         title: "Why most AI pilots fail: and what the ones that work have in common",
         readTime: "6 min read",
@@ -795,11 +800,11 @@ export const en = {
     ctaButton: "Discuss your stack →",
   },
   lendingPage: {
-    metaTitle: "Loan Management System & Lending Software for Hong Kong Lenders | Deview",
+    metaTitle: "Custom Loan Management Systems & Lending Software Development | Deview",
     metaDescription:
-      "AI automation for lending and credit teams: borrower intelligence, loan document processing, credit analyst copilots, and regulatory reporting. Built for HKMA, PDPO, MAS TRM, and GDPR.",
+      "Custom loan management systems (LMS) and AI automation for commercial lenders, private debt funds, and fintechs globally. Multi-currency ledgers, borrower portals, automated underwriting, and proven multi-tenant deployments.",
     sectionLabel: "LENDING & FINANCE · INDUSTRY",
-    h1: "Loan management systems and AI for lending companies.",
+    h1: "Custom loan management systems & AI for commercial lenders, private debt & fintechs.",
     subtitleP1:
       "Lending teams sit on years of borrower data spread across loan books, application systems, and document archives. The work that drives risk and revenue: knowing a borrower, processing files faster, reporting accurately: is exactly where AI compounds.",
     subtitleP2:
@@ -811,9 +816,9 @@ export const en = {
     ],
     featuredLabel: "Featured deployment",
     featuredTitle:
-      "Deview Unified Portal: one platform serving five lending companies, with five AI capabilities built on top.",
+      "Covenant Desk: one platform deployed across all five lending companies in the network + Covenant Desk.",
     featuredBody:
-      "Shared backbone for portal, database, and audit trail. AI Credit Analyst, Agentic AI Assistant, AI Email Processing, AI Document Processing, and AI Prompt Management: each reading from the same borrower database and writing back to the same audit trail. No silos, no copy-paste between systems.",
+      "Shared backbone for loan management, borrower intake, database, and audit trail across Grand Finance, Every Success Credit, KK Credit, Rich Eagle Capital, and Wah Wei Credit + Covenant Desk. Supporting 17,000+ borrower records with credit risk analysis, automated email intake, financial document processing, and regulatory compliance reporting.",
     featuredLink: "See the build",
     adoptionGrid: {
       sectionLabel: "AI ADOPTION & INTEGRATION",
@@ -1013,10 +1018,21 @@ export const en = {
     ctaBody: "We publish one article per month: specific, useful, and written from direct project experience. No newsletter filler.",
     ctaLink: "Contact us to stay in touch →",
     articles: [
+      { slug: "loan-management-system-cost", date: "2025-05-02", readTime: "7 min read", label: "LENDING ARCHITECTURE", title: "How much does a custom loan management system cost? Scope, architecture & timelines", lead: "A candid breakdown of building versus buying loan management software for commercial lenders and debt funds: modular cost blocks, architecture, and realistic delivery horizons." },
       { slug: "why-most-ai-pilots-fail", date: "2025-04-14", readTime: "6 min read", label: "AI IMPLEMENTATION", title: "Why most AI pilots fail: and what the ones that work have in common", lead: "Three-quarters of enterprise AI pilots never make it to production. The cause is almost never the technology." },
       { slug: "document-automation-where-to-start", date: "2025-03-28", readTime: "5 min read", label: "DOCUMENT AUTOMATION", title: "Document automation: the four questions to answer before you build anything", lead: "Before automating any document workflow, four things determine whether the project will succeed or stall at the prototype stage." },
       { slug: "four-ai-projects-worth-doing", date: "2025-03-10", readTime: "7 min read", label: "AI STRATEGY", title: "The four AI projects that pay for themselves fastest in operations teams", lead: "Not all AI use cases are created equal. Some pay back in weeks; others require years of behaviour change before they show ROI." },
     ],
+  },
+  articleLmsCost: {
+    metaTitle: "How Much Does a Custom Loan Management System Cost? | Deview Insights",
+    metaDescription:
+      "A candid breakdown of building versus buying loan management software: modular components, cost drivers, integration realities, and delivery timelines.",
+    label: "LENDING ARCHITECTURE",
+    date: "2 May 2025",
+    readTime: "7 min read",
+    title: "How much does a custom loan management system cost? Scope, architecture & timelines",
+    lead: "Building versus buying loan management software for commercial lenders, private debt funds, and licensed money lenders: what drives the budget, where off-the-shelf SaaS fails, and what realistic delivery timelines look like.",
   },
   articlePilotsFail: {
     metaTitle: "Why most AI pilots fail | Deview Insights",
@@ -1290,7 +1306,7 @@ export const en = {
         number: "02",
         sector: "FINANCE / LENDING · HONG KONG",
         service: "Lending Operations Platform",
-        headline: "Covenant Desk: the Deview Unified Portal for the complete lending lifecycle",
+        headline: "Covenant Desk: deployed across all 5 lending companies in the network + Covenant Desk",
         challenge: "Borrower intake, identity checks, credit review, loan servicing, repayments, collections, and reporting were split across spreadsheets, inboxes, messaging apps, and separate company ledgers. Staff had no single borrower view and cross-company exposure checks required manual searches.",
         solution: "Covenant Desk brings the workflow into one permission-scoped platform: a management portal, staff tools, and borrower self-service connected to the same record. It supports enquiry intake, eKYC and AML, lender-defined scoring rules, human approvals, agreements, repayment servicing, collections, reporting, and auditable AI-assisted review.",
         capabilities: [

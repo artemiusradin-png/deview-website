@@ -12,6 +12,12 @@ export type InsightArticle = {
 
 export const INSIGHT_ARTICLES: InsightArticle[] = [
   {
+    slug: "loan-management-system-cost",
+    date: "2025-05-02",
+    cover: "/images/insights/loan-management-system-cost-1200.webp",
+    coverSmall: "/images/insights/loan-management-system-cost-600.webp",
+  },
+  {
     slug: "why-most-ai-pilots-fail",
     date: "2025-04-14",
     cover: "/images/insights/why-most-ai-pilots-fail-1200.webp",
