@@ -1151,7 +1151,7 @@ export const en = {
         { name: "Stanislav Dupliakov", role: "Switzerland Customer Relations", photo: "/team/stanislav-dupllyakov-800.webp", initials: "SD", bio: "The main point of contact for Deview's clients in Switzerland, from delivery through ongoing support." },
         { name: "Alberto Castiñeiras", role: "Business Development", photo: "/team/alberto-castineiras-800.webp", initials: "AC", bio: "Develops Deview's client relationships and supports scoping on new engagements." },
         { name: "Yu Fu Kuo", role: "Junior Business Analyst", photo: "/team/yu-fu-kuo-800.webp", initials: "YK", bio: "Supports project analysis and client work across Deview's engagements." },
-        { name: "Sebastian Alarie-Lacerte", role: "US Market Development & Sales", photo: "", initials: "SA", bio: "Builds Deview's presence in the United States and leads sales to US clients." },
+        { name: "Sebastian Alarie-Lacerte", role: "US Market Development & Sales", photo: "/team/sebastian-alarie-lacerte-800.webp", initials: "SA", bio: "Builds Deview's presence in the United States and leads sales to US clients." },
       ],
       /** Total headcount. The people not listed above are shown as one "+N more" tile. */
       size: 15,

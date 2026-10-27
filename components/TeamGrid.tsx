@@ -18,6 +18,7 @@ const PORTRAIT_CROPS: Record<string, { focus: string; zoom: number }> = {
   "/team/stanislav-dupllyakov-800.webp": { focus: "50% 14%", zoom: 1.75 },
   "/team/alberto-castineiras-800.webp": { focus: "50% 20%", zoom: 1.05 },
   "/team/yu-fu-kuo-800.webp": { focus: "50% 10%", zoom: 1 },
+  "/team/sebastian-alarie-lacerte-800.webp": { focus: "50% 20%", zoom: 1 },
 };
 
 /**
