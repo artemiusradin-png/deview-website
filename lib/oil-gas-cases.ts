@@ -133,6 +133,9 @@ export const OIL_GAS_CASES: Record<OilGasCaseSlug, OilGasCase> = {
     slug: "joc-vietgazprom-planning-control-system",
     year: 2016,
     company: "JOC Vietgazprom",
+    // The JOC is represented by its Gazprom International operator mark; the
+    // company name remains visible beside the project details.
+    logo: LOGOS.gazpromInternational,
     companyNote: { label: "Company type", value: "Joint operating company" },
     project: "Planning and Control System",
     workType: "Development and implementation",

@@ -41,6 +41,10 @@ const areas = OIL_GAS_CASE_LIST.reduce<Array<{ discipline: string; cases: typeof
   return groups;
 }, []);
 
+const projectLogoCredits = [...new Map(
+  OIL_GAS_CASE_LIST.flatMap((project) => project.logo?.credit ? [[project.logo.src, project.logo.credit] as const] : []),
+).values()];
+
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
@@ -98,6 +102,7 @@ export default function OilAndGasPage() {
                 <article key={project.slug} className={styles.projectCard}>
                   <Link href={oilGasCasePath(project.slug)} className={styles.projectVisual}>
                     <Image src={`/images/cases/covers/${project.slug}.webp`} alt={`Architectural drawing for ${project.company}: ${project.project}`} fill sizes="(max-width: 760px) 100vw, 50vw" />
+                    {project.logo ? <span className={styles.projectLogo}><Image src={project.logo.src} alt={project.logo.alt} width={project.logo.width} height={project.logo.height} unoptimized /></span> : null}
                     <span>View case ↗</span>
                   </Link>
                   <div className={styles.projectMeta}><span>0{index + 1} / {project.year}</span><em>{project.discipline}</em></div>
@@ -107,6 +112,7 @@ export default function OilAndGasPage() {
                 </article>
               ))}
             </div>
+            {projectLogoCredits.length ? <p className={styles.logoCredits}>{projectLogoCredits.map((credit) => <a key={credit.href} href={credit.href}>{credit.text}</a>)}</p> : null}
           </section>
 
           <section className={styles.matrix} aria-labelledby="matrix-heading">

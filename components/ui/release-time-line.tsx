@@ -138,10 +138,6 @@ export default function TimeLine_01({
     return () => cancelAnimationFrame(frame);
   }, [activeIndex]);
 
-  useEffect(() => {
-    setActiveIndex(0);
-  }, []);
-
   return (
     <section className="py-16 md:py-32">
       <div className="container">

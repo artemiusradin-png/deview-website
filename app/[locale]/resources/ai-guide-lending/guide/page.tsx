@@ -50,12 +50,12 @@ export default function AiGuideLendingPage() {
 
   /* Build use-case data from dict (the EN dict stores all 10 use cases) */
   const useCases = "useCases" in t
-    ? (t as any).useCases as Array<{ number: string; title: string; problem: string; useCase: string; value: string[]; note: string | null; impact: string; complexity: string; risk: string }>
+    ? (t as unknown as Record<string, unknown>).useCases as Array<{ number: string; title: string; problem: string; useCase: string; value: string[]; note: string | null; impact: string; complexity: string; risk: string }>
     : [];
 
   /* Build scoring rows from dict if present, else fall back to EN shape */
   const scoringRows = "scoringRows" in t
-    ? (t as any).scoringRows as Array<{ useCase: string; impact: string; complexity: string; risk: string; recommended: boolean }>
+    ? (t as unknown as Record<string, unknown>).scoringRows as Array<{ useCase: string; impact: string; complexity: string; risk: string; recommended: boolean }>
     : [];
 
   return (
