@@ -4,7 +4,7 @@ import { Suspense, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { ArrowDown, ArrowUpRight, Search, X } from "lucide-react";
+import { ArrowUpRight, Search, X } from "lucide-react";
 import { SilentCaseVideo } from "@/components/SilentCaseVideo";
 import { SiteFooter } from "@/components/SiteFooter";
 import { CASE_INDUSTRIES, CASE_LIBRARY, CASE_SERVICES } from "@/lib/case-studies";
@@ -170,8 +170,7 @@ function CaseLibrary({ search, hash }: { search: string; hash: string }) {
       <main className="case-library">
         <header className="case-library-hero">
           <div className="case-library-hero-shell">
-            <p className="featured-case-kicker"><span>Selected work</span>Systems in the real world</p>
-            <div className="case-library-hero-grid"><h1>Built work.<br />Not theatre.</h1><div><p>Three operating systems, seen up close. Then the wider record of what we have delivered across industries.</p><a href="#featured-work">Watch the work <ArrowDown size={17} aria-hidden="true" /></a></div></div>
+            <h1>Selected Work</h1>
           </div>
         </header>
 
