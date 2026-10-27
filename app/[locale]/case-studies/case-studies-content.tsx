@@ -180,7 +180,7 @@ function CaseLibrary({ search, hash }: { search: string; hash: string }) {
 
         <section className="case-library-archive" aria-labelledby="case-library-archive-title">
           <div className="case-library-archive-shell">
-            <header className="case-library-archive-heading"><p className="featured-case-kicker"><span>04</span>More work</p><div><h2 id="case-library-archive-title">The wider project record.</h2><p>Filter the archive by industry, capability or the problem you are trying to solve.</p></div></header>
+            <header className="case-library-archive-heading"><p className="featured-case-kicker"><span>04</span>+ others</p><div><h2 id="case-library-archive-title">+ others</h2><p>Filter the archive by industry, capability or the problem you are trying to solve.</p></div></header>
             <div className="case-library-filters">
               <div className="case-library-search"><label htmlFor="case-search">Search case studies</label><div className="case-search-field"><Search size={19} aria-hidden="true" /><input id="case-search" type="search" placeholder="Company, project or keyword" value={query} onChange={(e) => updateFilters({ q: e.target.value })} aria-controls="case-library-results" /></div></div>
               <div><label htmlFor="case-industry">Industry</label><select id="case-industry" value={industry} onChange={(e) => updateFilters({ industry: e.target.value })} aria-controls="case-library-results"><option value="">All industries</option>{CASE_INDUSTRIES.map((value) => <option key={value}>{value}</option>)}</select></div>
