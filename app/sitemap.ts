@@ -34,7 +34,6 @@ const publicEnglishPaths = [
   "/resources/automation-playbook",
   "/resources/ai-security-checklist",
   "/resources/loan-management-system-checklist",
-  "/roi-calculator",
   "/services",
   "/stack",
   "/use-cases",

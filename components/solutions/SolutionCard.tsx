@@ -66,3 +66,4 @@ export function SolutionCard({ page, priority = false }: SolutionCardProps) {
     </article>
   );
 }
+

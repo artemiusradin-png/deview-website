@@ -127,10 +127,18 @@ export async function POST(req: Request) {
   const input = { name, email, company, details };
   const saveResult = await saveInquiry(req, input);
   if ("error" in saveResult) {
-    return NextResponse.json({ ok: false, error: "save_failed" }, { status: 500 });
+    console.warn("[contact] inquiry not saved to database, attempting email notification");
   }
 
-  if (await sendNotification(input)) return NextResponse.json({ ok: true });
+  const notified = await sendNotification(input);
+  if (notified) {
+    return NextResponse.json({ ok: true });
+  }
+
+  // If saved to DB but notification failed, still treat as received
+  if ("saved" in saveResult && saveResult.saved) {
+    return NextResponse.json({ ok: true });
+  }
 
   return NextResponse.json({ ok: false, mailto: true });
 }
