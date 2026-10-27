@@ -496,20 +496,12 @@ export function HomeContent({
                 aria-label="Read the Jetfans case study"
               >
                 <div className={styles.projectArtwork}>
-                  <div className={styles.projectBrowserBar} aria-hidden="true">
-                    <span className={styles.projectBrowserDots}>
-                      <span />
-                      <span />
-                      <span />
-                    </span>
-                    <span>Jetfans / Operations</span>
-                    <span>OCR + CRM</span>
-                  </div>
                   <div className={styles.projectScreenshotViewport}>
                     <SilentCaseVideo
                       src="/video/cases/jetfans-ocr-crm.mp4"
                       poster="/images/cases/video-posters/jetfans-ocr-crm.jpg"
                       className={styles.projectImage}
+                      playOnHover
                     />
                   </div>
                 </div>
@@ -549,15 +541,6 @@ export function HomeContent({
                 aria-label="Read the Covenant Desk case study"
               >
                 <div className={styles.projectArtwork}>
-                  <div className={styles.projectBrowserBar} aria-hidden="true">
-                    <span className={styles.projectBrowserDots}>
-                      <span />
-                      <span />
-                      <span />
-                    </span>
-                    <span>covenantdesk.hk</span>
-                    <span>Product view</span>
-                  </div>
                   <div className={styles.projectScreenshotViewport}>
                     <Image
                       src="/images/home/selected-work-covenant-desk.webp"
@@ -606,16 +589,12 @@ export function HomeContent({
                 aria-label="Read the EnerQuest Energy case study"
               >
                 <div className={styles.projectArtwork}>
-                  <div className={styles.projectBrowserBar} aria-hidden="true">
-                    <span className={styles.projectBrowserDots}><span /><span /><span /></span>
-                    <span>EnerQuest / Nigeria</span>
-                    <span>DOF pilot</span>
-                  </div>
                   <div className={styles.projectScreenshotViewport}>
                     <SilentCaseVideo
                       src="/video/cases/enerquest-dof.mp4"
                       poster="/images/cases/video-posters/enerquest-dof.jpg"
                       className={styles.projectImage}
+                      playOnHover
                     />
                   </div>
                 </div>
@@ -646,16 +625,12 @@ export function HomeContent({
                 aria-label="View the Grand Finance deployment"
               >
                 <div className={styles.projectArtwork}>
-                  <div className={styles.projectBrowserBar} aria-hidden="true">
-                    <span className={styles.projectBrowserDots}><span /><span /><span /></span>
-                    <span>Grand Finance / Hong Kong</span>
-                    <span>Live deployment</span>
-                  </div>
                   <div className={styles.projectScreenshotViewport}>
                     <SilentCaseVideo
                       src="/video/cases/grand-finance-lending.mp4"
                       poster="/images/cases/video-posters/grand-finance-lending.jpg"
                       className={styles.projectImage}
+                      playOnHover
                     />
                   </div>
                 </div>

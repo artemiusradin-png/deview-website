@@ -633,37 +633,6 @@
   background: #eee7d7;
   border: 1px solid var(--line);
 }
-.projectBrowserBar {
-  min-height: 32px;
-  padding: 0 12px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 1px solid var(--line);
-  background: var(--cream);
-  color: var(--muted);
-  font-size: 8.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.projectBrowserBar > span:last-child {
-  justify-self: end;
-}
-.projectBrowserDots {
-  display: flex;
-  gap: 4px;
-}
-.projectBrowserDots > span {
-  width: 5px;
-  height: 5px;
-  border: 1px solid var(--muted);
-  border-radius: 50%;
-}
-.projectBrowserDots > span:first-child {
-  background: var(--accent);
-  border-color: var(--accent);
-}
 .projectScreenshotViewport {
   aspect-ratio: 16 / 10;
   overflow: hidden;
