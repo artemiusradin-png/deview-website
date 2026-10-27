@@ -6,7 +6,10 @@
     "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "keywords": "node scripts/free-keyword-miner.mjs",
+    "sitemap-miner": "node scripts/competitor-sitemap-miner.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
