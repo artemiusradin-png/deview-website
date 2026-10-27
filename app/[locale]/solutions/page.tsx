@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import styles from "@/components/solutions/solutions.module.css";
 import { LEGAL_ENTITY } from "@/lib/site-contact";
 import { SOLUTION_PAGES, pagesIn, publishedHubs, solutionPath } from "@/lib/solutions";
+import { SolutionsExplorer } from "@/components/solutions/SolutionsExplorer";
 
 const SITE_URL = "https://deviewai.com";
 const url = `${SITE_URL}/en/solutions`;
@@ -79,65 +80,127 @@ export default function SolutionsLibraryPage() {
             <span aria-current="page">Solutions</span>
           </nav>
 
-          <header className={`${styles.hero} ${styles.heroSingle}`}>
-            <div>
-              <span className={styles.kicker}>Enterprise solutions</span>
+          <header className={`${styles.heroSection} ${styles.heroLibrary}`}>
+            <div className={styles.heroText}>
+              <div className={styles.heroBadgeRow}>
+                <span className={styles.kickerBadge}>ENTERPRISE ARCHITECTURE CATALOG</span>
+                <span className={styles.heroSystemCount}>
+                  {SOLUTION_PAGES.length} Production Systems
+                </span>
+              </div>
               <h1 className={styles.title}>Enterprise software solutions by industry</h1>
-              <span className={styles.intro}>
+              <p className={styles.intro}>
                 Custom platforms for banks and payment companies, oil and gas operators,
                 manufacturers and agricultural enterprises. Each page describes one system in
                 engineering terms: what it does, how it connects, what it must satisfy and when
-                custom development is the right call. Every page has a free requirements
-                document you can adapt for your own project.
-              </span>
+                custom development is the right call. Every system includes an engineering specification
+                or RFP template you can adapt for your enterprise.
+              </p>
+
+              {/* Master Catalog Stats */}
+              <div className={styles.heroMetricsStrip}>
+                <div className={styles.metricItem}>
+                  <span className={styles.metricValue}>{SOLUTION_PAGES.length}</span>
+                  <span className={styles.metricLabel}>Production Architectures</span>
+                </div>
+                <div className={styles.metricItem}>
+                  <span className={styles.metricValue}>{hubs.length}</span>
+                  <span className={styles.metricLabel}>Core Industry Sectors</span>
+                </div>
+                <div className={styles.metricItem}>
+                  <span className={styles.metricValue}>{SOLUTION_PAGES.length}</span>
+                  <span className={styles.metricLabel}>Free Included Specs</span>
+                </div>
+                <div className={styles.metricItem}>
+                  <span className={styles.metricValue}>100%</span>
+                  <span className={styles.metricLabel}>Client IP Ownership</span>
+                </div>
+              </div>
+
               <div className={styles.heroActions}>
-                <Link href="/en/contact" className={styles.button}>
+                <a href="#catalogue" className={styles.button}>
+                  Browse Catalogue <span aria-hidden="true">↓</span>
+                </a>
+                <Link href="/en/contact" className={styles.buttonGhost}>
                   Talk to an engineer <span aria-hidden="true">↗</span>
                 </Link>
               </div>
             </div>
           </header>
 
-          {hubs.map((hub) => (
-            <section
-              key={hub.slug}
-              className={styles.section}
-              aria-labelledby={`${hub.slug}-title`}
-            >
-              <span className={styles.kicker}>{hub.kicker.replace("Enterprise solutions · ", "")}</span>
-              <h2 id={`${hub.slug}-title`} className={styles.sectionTitle}>
-                <Link href={`/en${solutionPath(hub.slug)}`}>{hub.h1}</Link>
+          {/* Industry Hubs Deep-Dive Grid */}
+          <section className={styles.section} aria-labelledby="hubs-grid-title">
+            <div className={styles.sectionHeader}>
+              <span className={styles.kicker}>INDUSTRY SECTOR HUBS</span>
+              <h2 id="hubs-grid-title" className={styles.sectionTitle}>
+                Dedicated sector portals.
               </h2>
-              <ul className={styles.cards}>
-                {pagesIn(hub.vertical).map((p) => (
-                  <li key={p.slug}>
-                    <Link href={`/en${solutionPath(p.slug)}`} className={styles.cardLink}>
-                      <h3>{p.h1}</h3>
-                      <span className={styles.body}>{p.seoDescription}</span>
-                      <span className={styles.linkRow}>
-                        Read the page <span aria-hidden="true">↗</span>
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
+              <p className={styles.sectionLead}>
+                Dive into deep domain architectures, compliance frameworks, and common requirements for each major sector.
+              </p>
+            </div>
 
+            <div className={styles.othersGrid}>
+              {hubs.map((hub) => {
+                const count = pagesIn(hub.vertical).length;
+                return (
+                  <Link
+                    key={hub.slug}
+                    href={`/en${solutionPath(hub.slug)}`}
+                    className={styles.otherHubCard}
+                  >
+                    <div className={styles.otherHubHeader}>
+                      <span className={styles.otherHubKicker}>
+                        {hub.kicker.replace("Enterprise solutions · ", "")}
+                      </span>
+                      <span className={styles.otherHubCount}>{count} Systems</span>
+                    </div>
+                    <h3 className={styles.otherHubTitle}>{hub.navLabel}</h3>
+                    <p className={styles.otherHubDesc}>{hub.seoDescription}</p>
+                    <div className={styles.otherHubLink}>
+                      <span>Explore Sector Hub</span>
+                      <span aria-hidden="true">↗</span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* Master Systems Catalogue Explorer */}
+          <section id="catalogue" className={styles.section} aria-labelledby="catalogue-title">
+            <div className={styles.sectionHeader}>
+              <span className={styles.kicker}>SYSTEMS CATALOGUE</span>
+              <h2 id="catalogue-title" className={styles.sectionTitle}>
+                All {SOLUTION_PAGES.length} enterprise software solutions.
+              </h2>
+              <p className={styles.sectionLead}>
+                Filter by industry sector, functional area, or search by technical keyword, protocol, or regulatory standard.
+              </p>
+            </div>
+
+            <SolutionsExplorer
+              pages={SOLUTION_PAGES}
+              showVerticalTabs={true}
+              searchPlaceholder="Search 91 systems by keyword, protocol, or standard (e.g. SME, OSDU, MES, EUDR, RAG)..."
+            />
+          </section>
+
+          {/* CTA Banner */}
           <section className={styles.cta} aria-labelledby="cta-title">
             <span className={styles.kicker}>Next step</span>
             <h2 id="cta-title" className={styles.ctaTitle}>
               Tell us what you need built.
             </h2>
-            <span className={styles.body}>
+            <p className={styles.body}>
               Describe the system and the systems around it. An engineer replies within 1–2
               business days.
-            </span>
+            </p>
             <Link href="/en/contact" className={styles.button}>
               Start a project <span aria-hidden="true">↗</span>
             </Link>
           </section>
-          <div style={{ height: 56 }} />
+          <div style={{ height: 48 }} />
         </div>
       </main>
       <SiteFooter />
