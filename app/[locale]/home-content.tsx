@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TeamGrid } from "@/components/TeamGrid";
 import { HomeCapabilities } from "./home-capabilities";
@@ -211,6 +212,41 @@ export function HomeContent({
   >("idle");
   const [emailDraft, setEmailDraft] = useState<string | null>(null);
 
+  const workCarouselRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScrollState = useCallback(() => {
+    const el = workCarouselRef.current;
+    if (!el) return;
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    setCanScrollLeft(scrollLeft > 4);
+    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 4);
+  }, []);
+
+  useEffect(() => {
+    const el = workCarouselRef.current;
+    if (!el) return;
+    checkScrollState();
+    el.addEventListener("scroll", checkScrollState, { passive: true });
+    window.addEventListener("resize", checkScrollState);
+    return () => {
+      el.removeEventListener("scroll", checkScrollState);
+      window.removeEventListener("resize", checkScrollState);
+    };
+  }, [checkScrollState]);
+
+  const scrollWork = (direction: "left" | "right") => {
+    const el = workCarouselRef.current;
+    if (!el) return;
+    const firstCard = el.querySelector<HTMLElement>(`.${styles.project}`);
+    const step = firstCard ? firstCard.offsetWidth + 24 : 340;
+    el.scrollBy({
+      left: direction === "left" ? -step : step,
+      behavior: "smooth",
+    });
+  };
+
   async function submitInquiry(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (inquiryStatus === "sending") return;
@@ -413,14 +449,45 @@ export function HomeContent({
             }
             id="work-title"
           >
-            <Link
-              href={localePath("/case-studies")}
-              className={styles.textLink}
-            >
-              All case studies <Arrow diagonal />
-            </Link>
+            <div className={styles.workHeadingControls}>
+              <Link
+                href={localePath("/case-studies")}
+                className={styles.textLink}
+              >
+                All case studies <Arrow diagonal />
+              </Link>
+              <div
+                className={styles.carouselNav}
+                aria-label="Selected work carousel controls"
+              >
+                <button
+                  type="button"
+                  className={styles.carouselButton}
+                  onClick={() => scrollWork("left")}
+                  disabled={!canScrollLeft}
+                  aria-label="Previous case study"
+                >
+                  <ArrowLeft size={16} aria-hidden="true" />
+                </button>
+                <button
+                  type="button"
+                  className={styles.carouselButton}
+                  onClick={() => scrollWork("right")}
+                  disabled={!canScrollRight}
+                  aria-label="Next case study"
+                >
+                  <ArrowRight size={16} aria-hidden="true" />
+                </button>
+              </div>
+            </div>
           </SectionHeading>
-          <div className={styles.projectGrid}>
+          <div
+            ref={workCarouselRef}
+            className={styles.projectCarouselTrack}
+            role="region"
+            aria-label="Selected work carousel"
+            tabIndex={0}
+          >
             <article className={styles.project}>
               <Link
                 id="featured-deployment"
@@ -497,7 +564,7 @@ export function HomeContent({
                       alt="Covenant Desk lending portal shown across desktop, tablet, and mobile"
                       width={1360}
                       height={907}
-                      sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1200px) 50vw, 595px"
+                      sizes="(max-width: 760px) 80vw, 380px"
                       className={styles.projectImage}
                     />
                   </div>

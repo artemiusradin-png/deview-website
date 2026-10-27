@@ -593,18 +593,36 @@
   text-decoration-thickness: 1px;
 }
 
-.projectGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 30px;
+.projectGrid,
+.projectCarouselTrack {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 20px;
+}
+.projectCarouselTrack::-webkit-scrollbar,
+.projectGrid::-webkit-scrollbar {
+  display: none;
 }
 .project {
+  flex: 0 0 clamp(300px, 28vw, 380px);
   min-width: 0;
-  padding-bottom: 28px;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 22px;
   border-bottom: 1px solid var(--line);
 }
 .projectCaseStudy {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 .projectCaseStudy:active {
@@ -616,16 +634,16 @@
   border: 1px solid var(--line);
 }
 .projectBrowserBar {
-  min-height: 38px;
-  padding: 0 14px;
+  min-height: 32px;
+  padding: 0 12px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   border-bottom: 1px solid var(--line);
   background: var(--cream);
   color: var(--muted);
-  font-size: 9px;
+  font-size: 8.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -634,11 +652,11 @@
 }
 .projectBrowserDots {
   display: flex;
-  gap: 5px;
+  gap: 4px;
 }
 .projectBrowserDots > span {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border: 1px solid var(--muted);
   border-radius: 50%;
 }
@@ -664,13 +682,13 @@
 .projectCaption {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: 16px;
   align-items: start;
-  margin-top: 24px;
+  margin-top: 18px;
 }
 .projectName {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: var(--signal);
   font-size: 10px;
   font-weight: 500;
@@ -678,37 +696,41 @@
   text-transform: uppercase;
 }
 .projectCaption h3 {
-  font-size: 34px;
+  font-size: clamp(20px, 1.6vw, 24px);
   letter-spacing: -0.025em;
-  line-height: 1.13;
+  line-height: 1.18;
 }
 .projectCaption svg {
-  width: 27px;
-  height: 27px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
   transition: transform 180ms;
 }
 .projectSummary {
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 13.5px;
+  line-height: 1.55;
   color: var(--muted);
-  margin-top: 17px;
+  margin-top: 12px;
   max-width: 540px;
+  flex-grow: 1;
 }
 .projectFooter {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 16px;
 }
 .projectCategory {
   display: block;
-  font-size: 10px;
+  font-size: 9.5px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  color: var(--muted);
 }
 .projectWebsiteLink {
-  min-height: 44px;
+  min-height: 36px;
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
@@ -734,6 +756,45 @@
 }
 .projectCaseStudy:hover .projectImage {
   transform: scale(1.015);
+}
+
+.workHeadingControls {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 8px;
+}
+.carouselNav {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.carouselButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--cream);
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 160ms cubic-bezier(0.23, 1, 0.32, 1);
+  padding: 0;
+}
+.carouselButton:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.carouselButton:active:not(:disabled) {
+  transform: scale(0.92);
+}
+.carouselButton:disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+  border-color: var(--line);
 }
 
 .processSteps {
@@ -1135,7 +1196,7 @@
     font-size: 21px;
   }
   .projectCaption h3 {
-    font-size: 30px;
+    font-size: 22px;
   }
   .processSteps > li {
     padding-right: 0;
@@ -1388,22 +1449,32 @@
   .serviceCard > p {
     font-size: 15px;
   }
-  .projectGrid {
-    grid-template-columns: 1fr;
-    gap: 42px;
+  .projectGrid,
+  .projectCarouselTrack {
+    gap: 16px;
+  }
+  .project {
+    flex: 0 0 clamp(270px, 80vw, 340px);
+    padding-bottom: 18px;
+  }
+  .workHeadingControls {
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 0;
   }
   .projectCaption {
-    margin-top: 22px;
+    margin-top: 14px;
   }
   .projectCaption h3 {
-    font-size: 31px;
+    font-size: 20px;
   }
   .projectSummary {
-    font-size: 15px;
-    margin-top: 13px;
+    font-size: 13px;
+    margin-top: 10px;
   }
   .projectFooter {
-    align-items: flex-start;
+    align-items: center;
+    padding-top: 14px;
   }
   .projectCategory {
     font-size: 9px;
