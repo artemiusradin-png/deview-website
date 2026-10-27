@@ -11,7 +11,7 @@ import {
 } from "@/lib/oil-gas-cases";
 
 const SITE_URL = "https://deviewai.com";
-const SERVICE_PAGES_UPDATED = "2026-10-13";
+const SERVICE_PAGES_UPDATED = "2026-10-25";
 
 const publicEnglishPaths = [
   "",
