@@ -110,7 +110,8 @@ export type LegacyAnalyticsEventName =
   | "lead_magnet_download"
   | "assessment_completed"
   | "citation_click"
-  | "cta_click";
+  | "cta_click"
+  | "consent_update";
 
 export type AllAnalyticsEventName = PRDAnalyticsEvent["name"] | LegacyAnalyticsEventName;
 
@@ -257,6 +258,15 @@ export function setAnalyticsConsent(granted: boolean): void {
   } catch {
     // Ignore storage quota errors
   }
+
+  // Standardize Google Tag Manager / Analytics dataLayer state
+  const win = window as unknown as { dataLayer?: Array<Record<string, unknown>> };
+  win.dataLayer = win.dataLayer || [];
+  win.dataLayer.push({
+    event: "consent_update",
+    analytics_storage: granted ? "granted" : "denied",
+    timestamp: new Date().toISOString(),
+  });
 }
 
 /**
@@ -298,11 +308,10 @@ export function emitAnalyticsEvent(
     ...sanitizedProperties,
   };
 
-  // Push to dataLayer if present (Google Tag Manager / Analytics standard)
+  // Push to dataLayer (Google Tag Manager / Analytics standard)
   const win = window as unknown as { dataLayer?: Array<Record<string, unknown>> };
-  if (Array.isArray(win.dataLayer)) {
-    win.dataLayer.push(eventPayload);
-  }
+  win.dataLayer = win.dataLayer || [];
+  win.dataLayer.push(eventPayload);
 
   // Developer console dispatch
   if (process.env.NODE_ENV === "development") {

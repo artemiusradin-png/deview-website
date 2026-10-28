@@ -18,7 +18,7 @@ export default function PrivacyPage() {
     <main className="min-h-screen bg-[var(--background)] pb-16 pt-[calc(5.5rem+env(safe-area-inset-top))] text-[var(--text)] sm:pt-24">
       <div className="section-gutter mx-auto max-w-3xl space-y-6 text-sm leading-relaxed text-[var(--text-muted)]">
         <h1 className="text-xl font-medium text-[var(--text)]">Privacy policy</h1>
-        <p>Last updated 14 October 2026.</p>
+        <p>Last updated 28 October 2026.</p>
 
         <p>
           Deview (deviewai.com) is operated by {LEGAL_ENTITY.name}, {address}. Questions or requests:{" "}
@@ -30,11 +30,40 @@ export default function PrivacyPage() {
 
         <h2 className="text-base font-medium text-[var(--text)]">What this website collects</h2>
         <p>
-          Only what you type into a form: the contact form (name, email, company, message), guide downloads
-          (email, and name and company if you give them) and the newsletter (email). We use it to reply to you,
-          send what you asked for and, for the newsletter, send occasional updates you can unsubscribe from at any
-          time. The site remembers your light or dark theme in your browser. It uses no advertising or analytics
-          cookies.
+          We collect personal data submitted directly through our forms: the contact form (name, email, company,
+          message), technical workbook requests (name, business email, company, diagnostic assessment inputs, and
+          explicit marketing consent where granted), and newsletter subscriptions (email). We use this information to
+          respond to your inquiry, deliver the requested technical deliverable, and—strictly where you have granted
+          unambiguous opt-in consent—provide relevant engineering updates. You may opt out of marketing follow-up at
+          any time. The site remembers your visual theme preference in your browser.
+        </p>
+
+        <h2 className="text-base font-medium text-[var(--text)]">Technical metadata &amp; security logs</h2>
+        <p>
+          When you interact with our forms or download technical resources, our servers automatically log technical
+          request metadata, including your IP address, HTTP User-Agent header, referring URL, and request timestamps.
+        </p>
+        <p>
+          <strong>Purposes:</strong> Infrastructure defense, distributed rate limiting to prevent denial-of-service and
+          form abuse, audit trail compliance, and server-side acquisition attribution.
+        </p>
+        <p>
+          <strong>Lawful basis:</strong> Legitimate Interest under GDPR Article 6(1)(f) and equivalent global data
+          protection frameworks (specifically, ensuring network and information security and preventing fraudulent or
+          automated form abuse).
+        </p>
+        <p>
+          <strong>Retention periods:</strong> Technical rate-limiting records and security logs are retained for a
+          maximum of 90 days before automated purge. Qualified inquiry and commercial communication records are
+          retained for up to 12 months, or as required by applicable commercial accounting laws.
+        </p>
+
+        <h2 className="text-base font-medium text-[var(--text)]">Analytics &amp; consent preferences</h2>
+        <p>
+          We use non-invasive first-party analytics to measure regional traffic, evaluate resource downloads, and
+          improve page performance. Analytics tracking is disabled by default and requires your explicit opt-in via
+          our consent banner. When consent is granted, telemetry is transmitted without cross-site profiling or third-party
+          advertising cookies. You can revoke or change your analytics preferences at any time.
         </p>
 
         <h2 className="text-base font-medium text-[var(--text)]">Business email</h2>

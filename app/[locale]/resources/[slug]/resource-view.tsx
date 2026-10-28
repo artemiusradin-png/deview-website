@@ -61,8 +61,8 @@ export function ResourceInteractiveView({ resource, locale }: Props) {
       company,
       industry: "Oil & Gas / Energy",
       source: resource.slug,
-      challenge: `Readiness score: ${scorePercentage}%. Download request for ${resource.fileDeliverable}`,
-      assessmentScore: scorePercentage,
+      challenge: `Download request for ${resource.fileDeliverable}`,
+      answers,
       attribution,
       consent: consentChecked,
       consentTimestamp,
@@ -98,7 +98,7 @@ export function ResourceInteractiveView({ resource, locale }: Props) {
         resourceId: resource.id,
         resourceSlug: resource.slug,
         fileDeliverable: resource.fileDeliverable,
-        scorePercentage,
+        scorePercentage: typeof json.score === "number" ? json.score : scorePercentage,
         qualificationTier: json.qualificationTier || "subscriber",
       });
 

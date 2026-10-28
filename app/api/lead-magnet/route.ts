@@ -122,7 +122,15 @@ export async function POST(req: Request) {
           .eq("ip_address", clientIp)
           .gte("created_at", tenMinutesAgo);
 
-        if (!ipErr && typeof ipCount === "number" && ipCount >= MAX_PER_IP) {
+        if (ipErr) {
+          console.error("[lead-magnet] durable rate limiting query failed (IP):", ipErr.message);
+          return NextResponse.json(
+            { ok: false, error: "service_unavailable", message: "Service temporarily unavailable. Please try again later." },
+            { status: 503 }
+          );
+        }
+
+        if (typeof ipCount === "number" && ipCount >= MAX_PER_IP) {
           return NextResponse.json(
             { ok: false, error: "rate_limited", message: "Too many requests. Please try again later." },
             { status: 429 }
@@ -136,14 +144,26 @@ export async function POST(req: Request) {
         .eq("email", email.toLowerCase())
         .gte("created_at", tenMinutesAgo);
 
-      if (!emailErr && typeof emailCount === "number" && emailCount >= MAX_PER_EMAIL) {
+      if (emailErr) {
+        console.error("[lead-magnet] durable rate limiting query failed (Email):", emailErr.message);
+        return NextResponse.json(
+          { ok: false, error: "service_unavailable", message: "Service temporarily unavailable. Please try again later." },
+          { status: 503 }
+        );
+      }
+
+      if (typeof emailCount === "number" && emailCount >= MAX_PER_EMAIL) {
         return NextResponse.json(
           { ok: false, error: "rate_limited", message: "Too many requests for this email. Please try again later." },
           { status: 429 }
         );
       }
     } catch (err) {
-      console.warn("[lead-magnet] durable rate limiting query failed, falling back to memory:", err);
+      console.error("[lead-magnet] durable rate limiting exception:", err);
+      return NextResponse.json(
+        { ok: false, error: "service_unavailable", message: "Service temporarily unavailable. Please try again later." },
+        { status: 503 }
+      );
     }
   }
 
@@ -182,14 +202,36 @@ export async function POST(req: Request) {
       : {},
   };
 
-  const assessmentScore = typeof data.assessmentScore === "number" && !isNaN(data.assessmentScore)
-    ? Math.max(0, Math.min(100, Math.round(data.assessmentScore)))
-    : typeof data.qualificationScore === "number" && !isNaN(data.qualificationScore)
-    ? Math.max(0, Math.min(100, Math.round(data.qualificationScore)))
-    : undefined;
+  // Server-authoritative assessment scoring:
+  // Client-supplied assessmentScore, qualificationScore, or qualification tiers are ignored.
+  // The server calculates the score directly from submitted answers against LEAD_MAGNET_RESOURCES[source].assessmentQuestions.
+  const resource = LEAD_MAGNET_RESOURCES[source];
+  let calculatedScore: number | undefined = undefined;
+
+  if (resource?.assessmentQuestions?.length && typeof data.answers === "object" && data.answers !== null) {
+    const userAnswers = data.answers as Record<string, unknown>;
+    let totalEarned = 0;
+    const totalPossible = resource.assessmentQuestions.length * 25;
+    let validAnswersCount = 0;
+
+    resource.assessmentQuestions.forEach((q, idx) => {
+      const val = userAnswers[String(idx)] ?? userAnswers[idx];
+      if (typeof val === "number" && !isNaN(val)) {
+        const matching = q.options.find((opt) => opt.score === val);
+        if (matching) {
+          totalEarned += matching.score;
+          validAnswersCount++;
+        }
+      }
+    });
+
+    if (validAnswersCount > 0 && totalPossible > 0) {
+      calculatedScore = Math.max(0, Math.min(100, Math.round((totalEarned / totalPossible) * 100)));
+    }
+  }
 
   // Server-authoritative evaluation: client qualification tier is ignored to prevent spoofing
-  const serverEval = evaluateLeadQualification(email, company, assessmentScore);
+  const serverEval = evaluateLeadQualification(email, company, calculatedScore);
   const validatedTier: LeadQualificationTier = serverEval.tier;
   const validatedScore = serverEval.score;
 
@@ -349,6 +391,7 @@ export async function POST(req: Request) {
           downloadUrl,
           fileDeliverable: resObj?.fileDeliverable,
           qualificationTier: validatedTier,
+          score: validatedScore,
         });
       }
     } catch {
@@ -378,6 +421,7 @@ export async function POST(req: Request) {
           downloadUrl,
           fileDeliverable: resObj?.fileDeliverable,
           qualificationTier: validatedTier,
+          score: validatedScore,
         });
       }
     } catch {
@@ -391,5 +435,6 @@ export async function POST(req: Request) {
     downloadUrl,
     fileDeliverable: resObj?.fileDeliverable,
     qualificationTier: validatedTier,
+    score: validatedScore,
   });
 }

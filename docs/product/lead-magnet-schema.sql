@@ -27,10 +27,17 @@ ALTER TABLE public.lead_magnet_signups
   ADD COLUMN IF NOT EXISTS consent_timestamp TIMESTAMPTZ DEFAULT null,
   ADD COLUMN IF NOT EXISTS ip_address TEXT;
 
+-- Drop default so denied consent stays null
+ALTER TABLE public.lead_magnet_signups
+  ALTER COLUMN consent_timestamp DROP DEFAULT;
+
 -- Index for CRM qualification querying
 CREATE INDEX IF NOT EXISTS idx_lead_magnet_qualification_tier 
   ON public.lead_magnet_signups(qualification_tier);
 
 CREATE INDEX IF NOT EXISTS idx_lead_magnet_source 
   ON public.lead_magnet_signups(source);
+
+CREATE INDEX IF NOT EXISTS idx_lead_magnet_ip_address
+  ON public.lead_magnet_signups(ip_address);
 
