@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { PageIntro } from "@/components/PageIntro";
 import { SubpageNav } from "@/components/SubpageNav";
@@ -14,6 +14,14 @@ const rise = {
   animate: { opacity: 1, y: 0 },
 };
 
+const TOPIC_LABELS: Record<string, string> = {
+  "production-workflow-review": "45-Minute Production Workflow Review",
+  "it-ot-boundary-review": "IT/OT Integration Boundary Review",
+  "project-controls-assessment": "Project-Controls & JV Reporting Assessment",
+  "osdu-readiness-review": "OSDU Exploration Data Readiness Review",
+  "sovereign-ai-workshop": "Sovereign AI Architecture Workshop",
+};
+
 export default function ContactPage() {
   const { dict } = useLocaleContext();
   const sp = dict.subpages;
@@ -22,6 +30,17 @@ export default function ContactPage() {
     "idle" | "sending" | "success" | "error"
   >("idle");
   const [feedback, setFeedback] = useState<string | null>(null);
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const topic = params.get("topic");
+      if (topic) {
+        setSelectedTopic(topic);
+      }
+    }
+  }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -37,7 +56,11 @@ export default function ContactPage() {
     const name = String(fd.get("name") ?? "").trim();
     const email = String(fd.get("email") ?? "").trim();
     const company = String(fd.get("company") ?? "").trim();
-    const details = String(fd.get("details") ?? "").trim();
+    let details = String(fd.get("details") ?? "").trim();
+    if (selectedTopic) {
+      const topicLabel = TOPIC_LABELS[selectedTopic] || selectedTopic;
+      details = `[Session: ${topicLabel}]\n${details}`;
+    }
 
     setStatus("sending");
     setFeedback(null);
@@ -135,6 +158,24 @@ export default function ContactPage() {
                   aria-hidden
                   className="pointer-events-none absolute left-[-10000px] h-0 w-0 opacity-0"
                 />
+
+                {selectedTopic && (
+                  <div className="flex items-center justify-between rounded border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3.5 py-2.5 text-xs text-[var(--gold)]">
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold uppercase tracking-wider">Requested Session:</span>
+                      <span className="font-medium text-[var(--white-90)]">{TOPIC_LABELS[selectedTopic] || selectedTopic}</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedTopic(null)}
+                      className="text-[var(--white-60)] hover:text-white"
+                      title="Clear session"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                )}
+
                 <div className="grid gap-5 sm:grid-cols-2">
                   <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
                     <span>

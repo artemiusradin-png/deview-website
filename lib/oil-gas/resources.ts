@@ -101,10 +101,10 @@ export const LEAD_MAGNET_RESOURCES: Record<string, LeadMagnetResource> = {
       },
     ],
     commercialFollowUp: {
-      title: "Review Your Completed Requirements With Our Engineers",
-      description: "Once your team has customized this workbook, our upstream software architects can conduct a 60-minute technical review to identify integration risks with your existing historians and ERP.",
-      ctaLabel: "Schedule a Requirements Review Call",
-      ctaHref: "/en/contact",
+      title: "45-Minute Production Workflow Review",
+      description: "Walk through your field allocation rules, loss deferment categories, and SCADA historian telemetry with our senior petroleum systems architects to identify operational friction points.",
+      ctaLabel: "Book a 45-Minute Production Workflow Review",
+      ctaHref: "/en/contact?topic=production-workflow-review",
     },
   },
 
@@ -170,10 +170,10 @@ export const LEAD_MAGNET_RESOURCES: Record<string, LeadMagnetResource> = {
       },
     ],
     commercialFollowUp: {
-      title: "Map Your Reporting Workflow With Our Architects",
-      description: "Book an architecture mapping session to review your existing Primavera P6 and SAP integration points and identify contractor billing bottlenecks.",
-      ctaLabel: "Book a Workflow Mapping Workshop",
-      ctaHref: "/en/contact",
+      title: "Project-Controls & JV Reporting Assessment",
+      description: "Book an architecture mapping session to evaluate Primavera P6 WBS alignment, SAP/Oracle commitment tracking, and partner billing audit trails before commencing procurement.",
+      ctaLabel: "Schedule a Project-Controls & JV Assessment",
+      ctaHref: "/en/contact?topic=project-controls-assessment",
     },
   },
 
@@ -229,10 +229,10 @@ export const LEAD_MAGNET_RESOURCES: Record<string, LeadMagnetResource> = {
       },
     ],
     commercialFollowUp: {
-      title: "Request a Technical Architecture Review",
-      description: "Our industrial integration specialists will review your proposed firewall configurations, diode topologies, and historian brokers against IEC 62443 standards.",
-      ctaLabel: "Schedule an Architecture Review",
-      ctaHref: "/en/contact",
+      title: "IT/OT Integration Boundary Review & Sovereign AI Workshop",
+      description: "Our industrial systems architects review your Purdue Model L2/L3 DMZ boundaries, unidirectional data diode topologies, and sovereign on-premise AI inference readiness against IEC 62443.",
+      ctaLabel: "Request an IT/OT Boundary Review",
+      ctaHref: "/en/contact?topic=it-ot-boundary-review",
     },
   },
 
@@ -330,10 +330,10 @@ export const LEAD_MAGNET_RESOURCES: Record<string, LeadMagnetResource> = {
       },
     ],
     commercialFollowUp: {
-      title: "Discuss Your OSDU Readiness Gaps With Our Geoscientists",
-      description: "Review your diagnostic score with our exploration data platform architects to build a phased migration roadmap and OSDU pilot plan.",
-      ctaLabel: "Schedule a Readiness Diagnostic Review",
-      ctaHref: "/en/contact",
+      title: "OSDU Exploration Data Readiness Review",
+      description: "Review your diagnostic readiness score with our exploration data architects to build a phased subsurface data migration roadmap and initial ingestion pilot.",
+      ctaLabel: "Schedule an OSDU Readiness Review",
+      ctaHref: "/en/contact?topic=osdu-readiness-review",
     },
   },
 };
