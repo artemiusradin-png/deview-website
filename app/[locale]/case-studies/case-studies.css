@@ -12,16 +12,21 @@
   color: var(--case-ink);
 }
 
-.site-interior main.case-library { padding-top: 0; }
+.site-interior main.case-library {
+  padding-top: var(--header-stack-height, 90px);
+}
 .case-library-hero {
   position: sticky;
   top: 90px;
   z-index: 1;
-  padding: clamp(4.8rem, 6.5vw, 6.2rem) 0 clamp(1.2rem, 2vw, 2rem);
+  padding: clamp(2.5rem, 4vw, 4rem) 0 clamp(2.5rem, 4vw, 4rem);
   background: var(--case-paper);
   border-bottom: 1px solid var(--case-line);
 }
 @media (max-width: 900px) {
+  .site-interior main.case-library {
+    padding-top: 78px;
+  }
   .case-library-hero {
     top: 78px;
   }
@@ -160,7 +165,7 @@
   .case-library-hero-shell,
   .featured-case-shell,
   .case-library-archive-shell { width: min(calc(100% - 28px), 1380px); }
-  .case-library-hero { padding-top: 4.8rem; padding-bottom: 1.1rem; }
+  .case-library-hero { padding: 24px 0 20px; }
   .site-interior main.case-library .case-library-hero h1 { font-size: clamp(2rem, 8.4vw, 3.6rem); white-space: nowrap; }
   .featured-case { padding: 72px 0; }
   .site-interior main.case-library .featured-case-lead h2 { font-size: clamp(3rem, 15vw, 4.5rem); }
