@@ -1,0 +1,212 @@
+.banner {
+  position: fixed;
+  z-index: 9999;
+  left: max(24px, env(safe-area-inset-left, 0px));
+  bottom: max(24px, env(safe-area-inset-bottom, 0px));
+  width: min(470px, calc(100vw - 48px));
+  overflow: hidden;
+  padding: 24px;
+  color: var(--ds-ink, #171207);
+  background: var(--ds-elevated, #fffdf7);
+  box-shadow:
+    0 24px 60px rgba(23, 18, 7, 0.16),
+    0 3px 12px rgba(23, 18, 7, 0.08);
+  font-family: var(--font-archivo), sans-serif;
+  animation: consent-enter 360ms var(--ds-ease-out, cubic-bezier(0.23, 1, 0.32, 1)) both;
+}
+
+.banner::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--ds-accent, #ffc933);
+  content: "";
+}
+
+.header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+}
+
+.iconFrame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ds-ink, #171207);
+  background: transparent;
+  border: none;
+  flex-shrink: 0;
+}
+
+.cookieIcon {
+  width: 38px;
+  height: 38px;
+  display: block;
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  color: var(--ds-muted, #655f54);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  color: var(--ds-ink, #171207);
+  font-family: var(--font-clash-display), var(--font-archivo), sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.description {
+  margin: 20px 0 22px;
+  color: var(--ds-muted, #655f54);
+  font-size: 13px;
+  line-height: 1.62;
+}
+
+.privacyLink {
+  color: var(--ds-ink, #171207);
+  font-weight: 500;
+  text-decoration-color: var(--ds-accent, #ffc933);
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition:
+    color var(--ds-duration-fast, 140ms) var(--ds-ease-out, ease-out),
+    text-decoration-color var(--ds-duration-fast, 140ms) var(--ds-ease-out, ease-out);
+}
+
+.privacyLink:hover {
+  color: #806000;
+  text-decoration-color: currentColor;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  padding-top: 18px;
+  border-top: 1px solid var(--ds-line, #d7cfbf);
+}
+
+.button {
+  min-height: 46px;
+  padding: 10px 15px;
+  border: 1px solid var(--ds-ink, #171207);
+  border-radius: 0;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.015em;
+  cursor: pointer;
+  transition:
+    color var(--ds-duration-fast, 140ms) var(--ds-ease-out, ease-out),
+    background-color var(--ds-duration-fast, 140ms) var(--ds-ease-out, ease-out),
+    transform var(--ds-duration-fast, 140ms) var(--ds-ease-out, ease-out);
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+.button:focus-visible,
+.privacyLink:focus-visible {
+  outline: 2px solid var(--ds-ink, #171207);
+  outline-offset: 4px;
+}
+
+.secondaryButton {
+  color: var(--ds-ink, #171207);
+  background: transparent;
+}
+
+.secondaryButton:hover {
+  background: var(--ds-surface, #f3eee2);
+}
+
+.primaryButton {
+  color: var(--ds-accent-ink, #171207);
+  background: var(--ds-accent, #ffc933);
+}
+
+.primaryButton:hover {
+  background: #ffd762;
+}
+
+@keyframes consent-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 520px) {
+  .banner {
+    left: max(10px, env(safe-area-inset-left, 0px));
+    bottom: max(10px, env(safe-area-inset-bottom, 0px));
+    width: calc(100vw - 20px);
+    padding: 19px;
+  }
+
+  .header {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .iconFrame {
+    width: auto;
+    height: auto;
+  }
+
+  .cookieIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .title {
+    font-size: 21px;
+  }
+
+  .description {
+    margin: 17px 0 18px;
+    font-size: 12.5px;
+    line-height: 1.58;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-top: 15px;
+  }
+
+  .button {
+    min-height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner {
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+  }
+
+  .button,
+  .privacyLink {
+    transition-duration: 1ms;
+  }
+}

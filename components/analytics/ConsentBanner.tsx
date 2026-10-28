@@ -2,14 +2,17 @@
 
 import { useSyncExternalStore } from "react";
 import Link from "next/link";
+import { Cookie } from "lucide-react";
 import {
   getAnalyticsConsentState,
   setAnalyticsConsent,
   type ConsentState,
 } from "@/lib/analytics/events";
+import styles from "./ConsentBanner.module.css";
 
 const CONSENT_CHANGE_EVENT = "deview_consent_change";
 
+// Keep consent state synchronized across tabs and any future preferences controls.
 function subscribe(onChange: () => void) {
   if (typeof window === "undefined") return () => {};
   window.addEventListener("storage", onChange);
@@ -55,102 +58,48 @@ export function ConsentBanner() {
 
   return (
     <aside
-      aria-label="Privacy & Analytics Preferences"
+      aria-labelledby="consent-title"
+      aria-describedby="consent-description"
       role="region"
-      style={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        zIndex: 9999,
-        backgroundColor: "var(--ds-surface, #ffffff)",
-        borderTop: "1px solid var(--ds-line, rgba(0, 0, 0, 0.1))",
-        boxShadow: "0 -4px 20px rgba(0, 0, 0, 0.08)",
-        padding: "16px 24px calc(16px + env(safe-area-inset-bottom, 0px))",
-        color: "var(--ds-ink, #12100e)",
-        fontSize: "13px",
-        lineHeight: 1.5,
-      }}
+      className={styles.banner}
     >
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          display: "flex",
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: "16px",
-        }}
-      >
-        <div style={{ flex: "1 1 500px", minWidth: "260px" }}>
-          <p style={{ margin: 0, color: "var(--ds-muted, #555047)" }}>
-            We use cookies to understand how our technical guides are read and to improve site performance.
-            We never run ads or track you across the web. Review our{" "}
-            <Link
-              href="/en/privacy"
-              style={{
-                color: "var(--ds-ink, #12100e)",
-                textDecoration: "underline",
-                textUnderlineOffset: "3px",
-                fontWeight: 500,
-              }}
-            >
-              Privacy Policy
-            </Link>{" "}
-            for full details.
-          </p>
+      <div className={styles.header}>
+        <div className={styles.iconFrame} aria-hidden="true">
+          <Cookie className={styles.cookieIcon} strokeWidth={1.65} />
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            flexShrink: 0,
-          }}
-        >
-          <button
-            type="button"
-            onClick={handleDecline}
-            style={{
-              padding: "7px 14px",
-              fontSize: "12px",
-              fontWeight: 500,
-              letterSpacing: "0.02em",
-              borderRadius: "4px",
-              border: "1px solid var(--ds-line, #ded5c5)",
-              backgroundColor: "transparent",
-              color: "var(--ds-ink, #12100e)",
-              cursor: "pointer",
-              transition: "background 0.15s ease",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
-          >
-            Essential only
-          </button>
-          <button
-            type="button"
-            onClick={handleAccept}
-            style={{
-              padding: "7px 16px",
-              fontSize: "12px",
-              fontWeight: 600,
-              letterSpacing: "0.02em",
-              borderRadius: "4px",
-              border: "1px solid var(--ds-ink, #12100e)",
-              backgroundColor: "var(--ds-ink, #12100e)",
-              color: "var(--ds-canvas, #ffffff)",
-              cursor: "pointer",
-              transition: "opacity 0.15s ease",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.88")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-          >
-            Accept
-          </button>
+        <div>
+          <p className={styles.eyebrow}>Privacy, by design</p>
+          <h2 id="consent-title" className={styles.title}>
+            A small cookie. No trail.
+          </h2>
         </div>
+      </div>
+
+      <p id="consent-description" className={styles.description}>
+        We use cookies to understand how our technical guides are read and to improve site performance.
+        We never run ads or track you across the web. Review our{" "}
+        <Link href="/en/privacy" className={styles.privacyLink}>
+          Privacy Policy
+        </Link>{" "}
+        for full details.
+      </p>
+
+      <div className={styles.actions}>
+        <button
+          type="button"
+          onClick={handleDecline}
+          className={`${styles.button} ${styles.secondaryButton}`}
+        >
+          Essential only
+        </button>
+        <button
+          type="button"
+          onClick={handleAccept}
+          className={`${styles.button} ${styles.primaryButton}`}
+        >
+          Accept
+        </button>
       </div>
     </aside>
   );

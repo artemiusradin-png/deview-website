@@ -1,0 +1,27 @@
+{
+  "component": "analytics-consent-banner",
+  "selected": "compact editorial decision card",
+  "reason": "Consent needs one short explanation and two equally available choices without interrupting the page as a modal or full-width strip.",
+  "regions": [
+    "bitten-cookie identity icon",
+    "privacy-first heading",
+    "plain-language analytics explanation and Privacy Policy link",
+    "Essential only and Accept actions"
+  ],
+  "responsive": {
+    "desktop": "Bottom-left 470px overlay card with two equal-width actions.",
+    "mobile": "Inset card with the same reading order and full-width stacked actions using 48px touch targets."
+  },
+  "constraints": [
+    "preserve the existing consent storage and event behavior",
+    "no advertising or cross-site tracking language",
+    "no modal focus trap",
+    "keyboard focus remains visible",
+    "respect safe-area insets and reduced-motion preferences"
+  ],
+  "rejected": {
+    "full-width bottom bar": "The current treatment makes the explanation and controls feel compressed and visually generic.",
+    "centered modal": "Too disruptive for an optional analytics decision.",
+    "single emphasized choice": "Would create a dark pattern instead of a balanced privacy decision."
+  }
+}
