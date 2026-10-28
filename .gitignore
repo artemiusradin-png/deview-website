@@ -71,3 +71,4 @@ output/
 *.jpeg
 *.mov
 *.MOV
+.env*.local
