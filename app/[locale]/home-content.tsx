@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useRef, useState, type FormEvent, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Landmark, Flame, Factory } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TeamGrid } from "@/components/TeamGrid";
 import { HomeCapabilities } from "./home-capabilities";
@@ -12,7 +12,7 @@ import { HeroInquiryForm } from "./home-hero-form";
 import { useMotionOnView } from "./home-motion";
 import { EditorialReveal, IndustryMark, ProcessVisual, TeamLocations, TeamNetwork } from "./home-editorial-visuals";
 import { SiteFooter } from "@/components/SiteFooter";
-import { SilentCaseVideo } from "@/components/SilentCaseVideo";
+import GlassFolder, { type ArtRecipe } from "@/components/ui/glass-folder-cards";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { INSIGHT_ARTICLES } from "@/lib/insights";
 import { SERVICE_LINES } from "@/lib/workflow-offers";
@@ -178,17 +178,19 @@ function SectionHeading({
   id,
   children,
 }: {
-  number: string;
-  label: string;
+  number?: string;
+  label?: string;
   title: ReactNode;
   id: string;
   children?: ReactNode;
 }) {
   return (
     <>
-      <p className={styles.eyebrow}>
-        {number} / {label}
-      </p>
+      {number && label ? (
+        <p className={styles.eyebrow}>
+          {number} / {label}
+        </p>
+      ) : null}
       <div className={styles.sectionIntro}>
         <h2 id={id}>{title}</h2>
         {children}
@@ -197,12 +199,155 @@ function SectionHeading({
   );
 }
 
+// Brand-colored procedural liquid recipes for GlassFolder cards
+const FOLDER_ART_RECIPES = {
+  // Folder 1: Finance & Lending
+  financeFolder: {
+    style: "marble",
+    colors: ["#0b1220", "#14284b", "#1c65b7", "#5caaff", "#ffc933", "#f3eee2"],
+    scale: 0.68,
+    warp: 3.4,
+    angle: 0.65,
+    gloss: 0.5,
+    veins: 0.4,
+  } satisfies ArtRecipe,
+  covenantDesk: {
+    style: "marble",
+    colors: ["#081226", "#0f2b5c", "#1c65b7", "#5caaff", "#ffc933", "#fef3c7"],
+    scale: 0.65,
+    warp: 3.5,
+    angle: 0.7,
+    gloss: 0.55,
+    veins: 0.45,
+  } satisfies ArtRecipe,
+  grandFinance: {
+    style: "streak",
+    colors: ["#120e06", "#3b2608", "#8a5800", "#d97706", "#ffc933", "#ffedd5"],
+    scale: 0.72,
+    warp: 2.4,
+    angle: -0.45,
+    gloss: 0.45,
+    veins: 0.25,
+  } satisfies ArtRecipe,
+  everySuccess: {
+    style: "marble",
+    colors: ["#0b1021", "#1e295d", "#314cb6", "#60a5fa", "#ffc933", "#ffffff"],
+    scale: 0.66,
+    warp: 3.6,
+    angle: 1.2,
+    gloss: 0.5,
+    veins: 0.5,
+  } satisfies ArtRecipe,
+  financeOthers: {
+    style: "marble",
+    colors: ["#0a192f", "#134e4a", "#0d9488", "#5eead4", "#ffc933", "#f0fdf4"],
+    scale: 0.7,
+    warp: 3.2,
+    angle: -0.8,
+    gloss: 0.48,
+    veins: 0.4,
+  } satisfies ArtRecipe,
+
+  // Folder 2: Oil & Gas / Energy
+  energyFolder: {
+    style: "marble",
+    colors: ["#090a0d", "#1c1007", "#7c2d12", "#c2410c", "#ea580c", "#ffc933"],
+    scale: 0.65,
+    warp: 3.5,
+    angle: -0.5,
+    gloss: 0.55,
+    veins: 0.6,
+  } satisfies ArtRecipe,
+  enerquest: {
+    style: "marble",
+    colors: ["#09090b", "#1a120b", "#7c2d12", "#c2410c", "#f97316", "#ffc933"],
+    scale: 0.65,
+    warp: 3.5,
+    angle: -0.6,
+    gloss: 0.6,
+    veins: 0.6,
+  } satisfies ArtRecipe,
+  gazpromNeft: {
+    style: "streak",
+    colors: ["#060d1a", "#0c2854", "#1d4ed8", "#38bdf8", "#ffc933", "#fef9c3"],
+    scale: 0.7,
+    warp: 2.1,
+    angle: 0.45,
+    gloss: 0.42,
+    veins: 0.2,
+  } satisfies ArtRecipe,
+  lukoil: {
+    style: "marble",
+    colors: ["#060c08", "#122a1c", "#1e5e3a", "#34d399", "#d97706", "#ffc933"],
+    scale: 0.68,
+    warp: 3.3,
+    angle: 1.8,
+    gloss: 0.52,
+    veins: 0.5,
+  } satisfies ArtRecipe,
+  energyOthers: {
+    style: "marble",
+    colors: ["#0f0505", "#3f100a", "#9a1e12", "#ea580c", "#ffc933", "#fffbeb"],
+    scale: 0.72,
+    warp: 3.4,
+    angle: -0.9,
+    gloss: 0.55,
+    veins: 0.55,
+  } satisfies ArtRecipe,
+
+  // Folder 3: Operations & Industrial
+  opsFolder: {
+    style: "marble",
+    colors: ["#080e0a", "#12281c", "#087a55", "#8de7bd", "#d97706", "#ffc933"],
+    scale: 0.7,
+    warp: 3.3,
+    angle: 2.1,
+    gloss: 0.5,
+    veins: 0.45,
+  } satisfies ArtRecipe,
+  jetfans: {
+    style: "marble",
+    colors: ["#0a120e", "#153324", "#059669", "#34d399", "#ffc933", "#f3eee2"],
+    scale: 0.66,
+    warp: 3.4,
+    angle: 2.0,
+    gloss: 0.52,
+    veins: 0.45,
+  } satisfies ArtRecipe,
+  nextair: {
+    style: "streak",
+    colors: ["#081726", "#0f3a5a", "#0284c7", "#38bdf8", "#8de7bd", "#ffc933"],
+    scale: 0.72,
+    warp: 2.4,
+    angle: -0.55,
+    gloss: 0.38,
+    veins: 0.2,
+  } satisfies ArtRecipe,
+  storepilot: {
+    style: "marble",
+    colors: ["#140a26", "#371b6b", "#7c3aed", "#c084fc", "#ffc933", "#ffffff"],
+    scale: 0.68,
+    warp: 3.5,
+    angle: 0.95,
+    gloss: 0.5,
+    veins: 0.4,
+  } satisfies ArtRecipe,
+  opsOthers: {
+    style: "marble",
+    colors: ["#0c140a", "#1b3314", "#4d7c0f", "#a3e635", "#ffc933", "#fefce8"],
+    scale: 0.7,
+    warp: 3.2,
+    angle: -1.3,
+    gloss: 0.5,
+    veins: 0.45,
+  } satisfies ArtRecipe,
+} as const;
+
 export function HomeContent({
   heroVideoSrc,
   heroVideoPoster,
 }: { heroVideoSrc?: string; heroVideoPoster?: string } = {}) {
   const { dict, localePath } = useLocaleContext();
-  const [logosPaused, setLogosPaused] = useState(false);
   const processRef = useRef<HTMLOListElement>(null);
   const contactRef = useRef<HTMLElement>(null);
   useMotionOnView(processRef, 0.5);
@@ -211,41 +356,6 @@ export function HomeContent({
     "idle" | "sending" | "success" | "error"
   >("idle");
   const [emailDraft, setEmailDraft] = useState<string | null>(null);
-
-  const workCarouselRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-
-  const checkScrollState = useCallback(() => {
-    const el = workCarouselRef.current;
-    if (!el) return;
-    const { scrollLeft, scrollWidth, clientWidth } = el;
-    setCanScrollLeft(scrollLeft > 4);
-    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 4);
-  }, []);
-
-  useEffect(() => {
-    const el = workCarouselRef.current;
-    if (!el) return;
-    checkScrollState();
-    el.addEventListener("scroll", checkScrollState, { passive: true });
-    window.addEventListener("resize", checkScrollState);
-    return () => {
-      el.removeEventListener("scroll", checkScrollState);
-      window.removeEventListener("resize", checkScrollState);
-    };
-  }, [checkScrollState]);
-
-  const scrollWork = (direction: "left" | "right") => {
-    const el = workCarouselRef.current;
-    if (!el) return;
-    const firstCard = el.querySelector<HTMLElement>(`.${styles.project}`);
-    const step = firstCard ? firstCard.offsetWidth + 24 : 340;
-    el.scrollBy({
-      left: direction === "left" ? -step : step,
-      behavior: "smooth",
-    });
-  };
 
   async function submitInquiry(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -337,10 +447,7 @@ export function HomeContent({
               </div>
             </div>
           </div>
-          <div
-            className={`${styles.clients} ${styles.container}`}
-            data-paused={logosPaused}
-          >
+          <div className={`${styles.clients} ${styles.container}`}>
             <p>
               Good company.
               <br /> Real projects.
@@ -351,28 +458,6 @@ export function HomeContent({
                 <ProjectLogos duplicate />
               </div>
             </div>
-            <button
-              type="button"
-              className={styles.clientPause}
-              aria-label={
-                logosPaused
-                  ? "Resume scrolling companies"
-                  : "Pause scrolling companies"
-              }
-              onClick={() => setLogosPaused((paused) => !paused)}
-            >
-              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                {logosPaused ? (
-                  <path d="m7 4 9 6-9 6V4Z" fill="currentColor" />
-                ) : (
-                  <path
-                    d="M7 4v12M13 4v12"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  />
-                )}
-              </svg>
-            </button>
           </div>
         </section>
 
@@ -395,15 +480,7 @@ export function HomeContent({
           </div>
           <div className={styles.container}>
             <SectionHeading
-              number="02"
-              label="What we ship"
-              title={
-                <>
-                  Five services.
-                  <br />
-                  One senior team.
-                </>
-              }
+              title="Our services"
               id="ship-title"
             >
               <p>From first design to running in production, with security built in.</p>
@@ -434,19 +511,11 @@ export function HomeContent({
 
         <section
           id="work"
-          className={`${styles.section} ${styles.container}`}
+          className={`${styles.section} ${styles.container} ${styles.workSection}`}
           aria-labelledby="work-title"
         >
           <SectionHeading
-            number="03"
-            label="Selected work"
-            title={
-              <>
-                Less talk.
-                <br />
-                More working.
-              </>
-            }
+            title="Selected Work"
             id="work-title"
           >
             <div className={styles.workHeadingControls}>
@@ -456,204 +525,131 @@ export function HomeContent({
               >
                 All case studies <Arrow diagonal />
               </Link>
-              <div
-                className={styles.carouselNav}
-                aria-label="Selected work carousel controls"
-              >
-                <button
-                  type="button"
-                  className={styles.carouselButton}
-                  onClick={() => scrollWork("left")}
-                  disabled={!canScrollLeft}
-                  aria-label="Previous case study"
-                >
-                  <ArrowLeft size={16} aria-hidden="true" />
-                </button>
-                <button
-                  type="button"
-                  className={styles.carouselButton}
-                  onClick={() => scrollWork("right")}
-                  disabled={!canScrollRight}
-                  aria-label="Next case study"
-                >
-                  <ArrowRight size={16} aria-hidden="true" />
-                </button>
-              </div>
             </div>
           </SectionHeading>
+
           <div
-            ref={workCarouselRef}
-            className={styles.projectCarouselTrack}
+            className={styles.folderGrid}
             role="region"
-            aria-label="Selected work carousel"
-            tabIndex={0}
+            aria-label="Selected work by industry"
           >
-            <article className={styles.project}>
-              <Link
-                id="featured-deployment"
-                href={localePath("/case-studies/jetfans")}
-                className={styles.projectCaseStudy}
-                aria-label="Read the Jetfans case study"
-              >
-                <div className={styles.projectArtwork}>
-                  <div className={styles.projectScreenshotViewport}>
-                    <SilentCaseVideo
-                      src="/video/cases/jetfans-ocr-crm.mp4"
-                      poster="/images/cases/video-posters/jetfans-ocr-crm.jpg"
-                      className={styles.projectImage}
-                      playOnHover
-                    />
-                  </div>
-                </div>
-                <div className={styles.projectCaption}>
-                  <div>
-                    <span className={styles.projectName}>Jetfans</span>
-                    <h3>
-                      Inquiries in.
-                      <br />
-                      Structured work out.
-                    </h3>
-                  </div>
-                  <Arrow diagonal />
-                </div>
-                <p className={styles.projectSummary}>
-                  An internal OCR workflow, custom CRM, and automated inquiry
-                  intake for Central Asia and Eastern Europe.
-                </p>
-              </Link>
-              <div className={styles.projectFooter}>
-                <span className={styles.projectCategory}>
-                  OCR operations / Custom CRM
-                </span>
-                <Link
-                  href={localePath("/case-studies/jetfans")}
-                  className={styles.projectWebsiteLink}
-                >
-                  View the system <span aria-hidden="true">↗</span>
-                </Link>
-              </div>
-            </article>
-            <article className={styles.project}>
-              <Link
-                id="featured-deployment-finance"
-                href={localePath("/case-studies/covenant-desk")}
-                className={styles.projectCaseStudy}
-                aria-label="Read the Covenant Desk case study"
-              >
-                <div className={styles.projectArtwork}>
-                  <div className={styles.projectScreenshotViewport}>
-                    <Image
-                      src="/images/home/selected-work-covenant-desk.webp"
-                      alt="Covenant Desk lending portal shown across desktop, tablet, and mobile"
-                      width={1360}
-                      height={907}
-                      sizes="(max-width: 760px) 80vw, 380px"
-                      className={styles.projectImage}
-                    />
-                  </div>
-                </div>
-                <div className={styles.projectCaption}>
-                  <div>
-                    <span className={styles.projectName}>Covenant Desk</span>
-                    <h3>
-                      The lending lifecycle.
-                      <br />
-                      In one place.
-                    </h3>
-                  </div>
-                  <Arrow diagonal />
-                </div>
-                <p className={styles.projectSummary}>
-                  One permission-scoped platform supports 17,000+ borrower
-                  records from enquiry intake through final repayment.
-                </p>
-              </Link>
-              <div className={styles.projectFooter}>
-                <span className={styles.projectCategory}>
-                  Enterprise platform / AI engineering
-                </span>
-                <a
-                  href="https://covenantdesk.hk"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.projectWebsiteLink}
-                >
-                  Visit Covenant Desk <span aria-hidden="true">↗</span>
-                </a>
-              </div>
-            </article>
-            <article className={styles.project}>
-              <Link
-                href={localePath("/case-studies/enerquest")}
-                className={styles.projectCaseStudy}
-                aria-label="Read the EnerQuest Energy case study"
-              >
-                <div className={styles.projectArtwork}>
-                  <div className={styles.projectScreenshotViewport}>
-                    <SilentCaseVideo
-                      src="/video/cases/enerquest-dof.mp4"
-                      poster="/images/cases/video-posters/enerquest-dof.jpg"
-                      className={styles.projectImage}
-                      playOnHover
-                    />
-                  </div>
-                </div>
-                <div className={styles.projectCaption}>
-                  <div>
-                    <span className={styles.projectName}>EnerQuest Energy</span>
-                    <h3>One operating picture.<br />Field to management.</h3>
-                  </div>
-                  <Arrow diagonal />
-                </div>
-                <p className={styles.projectSummary}>
-                  A digital oilfield pilot unifying production, equipment,
-                  exceptions, and decisions without touching operational control.
-                </p>
-              </Link>
-              <div className={styles.projectFooter}>
-                <span className={styles.projectCategory}>Upstream operations / Data engineering</span>
-                <Link href={localePath("/industries/oil-and-gas")} className={styles.projectWebsiteLink}>
-                  Energy work <span aria-hidden="true">↗</span>
-                </Link>
-              </div>
-            </article>
-            <article className={styles.project}>
-              <Link
-                id="featured-deployment-grand-finance"
-                href={localePath("/industries/lending#grand-finance")}
-                className={styles.projectCaseStudy}
-                aria-label="View the Grand Finance deployment"
-              >
-                <div className={styles.projectArtwork}>
-                  <div className={styles.projectScreenshotViewport}>
-                    <SilentCaseVideo
-                      src="/video/cases/grand-finance-lending.mp4"
-                      poster="/images/cases/video-posters/grand-finance-lending.jpg"
-                      className={styles.projectImage}
-                      playOnHover
-                    />
-                  </div>
-                </div>
-                <div className={styles.projectCaption}>
-                  <div>
-                    <span className={styles.projectName}>Grand Finance 高昇財務</span>
-                    <h3>Credit operations.<br />One governed record.</h3>
-                  </div>
-                  <Arrow diagonal />
-                </div>
-                <p className={styles.projectSummary}>
-                  A lender-specific deployment connecting borrower intake,
-                  document review, credit decisions, servicing, and reporting.
-                </p>
-              </Link>
-              <div className={styles.projectFooter}>
-                <span className={styles.projectCategory}>Lending operations / Workflow engineering</span>
-                <Link href={localePath("/industries/lending")} className={styles.projectWebsiteLink}>
-                  Lending work <span aria-hidden="true">↗</span>
-                </Link>
-              </div>
-            </article>
+            <GlassFolder
+              label="Finance & Lending"
+              icon={<Landmark size={17} aria-hidden="true" />}
+              meta="Hong Kong & Global · Credit operations"
+              art={FOLDER_ART_RECIPES.financeFolder}
+              tone="light"
+              action="none"
+              labelPlacement="bottom-left"
+              width={320}
+              appearDelay={0}
+              files={[
+                {
+                  name: "Covenant Desk",
+                  meta: "17,000+ borrower records",
+                  art: FOLDER_ART_RECIPES.covenantDesk,
+                  href: localePath("/case-studies/covenant-desk"),
+                },
+                {
+                  name: "Grand Finance 高昇財務",
+                  meta: "Governed lending deployment",
+                  art: FOLDER_ART_RECIPES.grandFinance,
+                  href: localePath("/industries/lending#grand-finance"),
+                },
+                {
+                  name: "Every Success Credit",
+                  meta: "Credit approval & risk checks",
+                  art: FOLDER_ART_RECIPES.everySuccess,
+                  href: localePath("/industries/lending"),
+                },
+                {
+                  name: "+ Others",
+                  meta: "Wah Wei, KK Credit, Rich Eagle",
+                  art: FOLDER_ART_RECIPES.financeOthers,
+                  href: localePath("/industries/lending"),
+                },
+              ]}
+            />
+
+            <GlassFolder
+              label="Oil & Gas / Energy"
+              icon={<Flame size={17} aria-hidden="true" />}
+              meta="Digital oilfield & capital systems"
+              art={FOLDER_ART_RECIPES.energyFolder}
+              tone="dark"
+              action="none"
+              labelPlacement="bottom-left"
+              width={320}
+              appearDelay={140}
+              files={[
+                {
+                  name: "EnerQuest Energy",
+                  meta: "DOF pilot · Nigeria",
+                  art: FOLDER_ART_RECIPES.enerquest,
+                  href: localePath("/case-studies/enerquest"),
+                },
+                {
+                  name: "Gazprom Neft",
+                  meta: "Project scheduling & controls",
+                  art: FOLDER_ART_RECIPES.gazpromNeft,
+                  href: localePath("/industries/oil-and-gas/gazprom-neft-project-scheduling-control-system"),
+                },
+                {
+                  name: "Lukoil Engineering",
+                  meta: "Drawing RAG & EDM",
+                  art: FOLDER_ART_RECIPES.lukoil,
+                  href: localePath("/industries/oil-and-gas/lukoil-engineering-engineering-data-management-system"),
+                },
+                {
+                  name: "+ Others",
+                  meta: "Tomskneft & Vietgazprom",
+                  art: FOLDER_ART_RECIPES.energyOthers,
+                  href: localePath("/industries/oil-and-gas"),
+                },
+              ]}
+            />
+
+            <GlassFolder
+              label="Operations & Industrial"
+              icon={<Factory size={17} aria-hidden="true" />}
+              meta="Inquiry capture, OCR & workflows"
+              art={FOLDER_ART_RECIPES.opsFolder}
+              tone="light"
+              action="none"
+              labelPlacement="bottom-left"
+              width={320}
+              appearDelay={280}
+              files={[
+                {
+                  name: "Jetfans",
+                  meta: "Inquiries in · Structured out",
+                  art: FOLDER_ART_RECIPES.jetfans,
+                  href: localePath("/case-studies/jetfans"),
+                },
+                {
+                  name: "Nextair",
+                  meta: "Ventilation systems engineering",
+                  art: FOLDER_ART_RECIPES.nextair,
+                  href: localePath("/case-studies/nextair"),
+                },
+                {
+                  name: "StorePilot (EVDEV)",
+                  meta: "E-commerce AI conversion",
+                  art: FOLDER_ART_RECIPES.storepilot,
+                  href: localePath("/case-studies/storepilot"),
+                },
+                {
+                  name: "+ Others",
+                  meta: "Agroplatforma & logistics",
+                  art: FOLDER_ART_RECIPES.opsOthers,
+                  href: localePath("/case-studies"),
+                },
+              ]}
+            />
           </div>
+          <p className={styles.folderHint} aria-hidden="true">
+            Hover to lean · Click to open · Click a project to read case study
+          </p>
         </section>
 
         <section
@@ -662,8 +658,6 @@ export function HomeContent({
           aria-labelledby="approach-title"
         >
           <SectionHeading
-            number="04"
-            label={dict.process.sectionLabel}
             title={
               <>
                 Dedicated team.
@@ -727,15 +721,7 @@ export function HomeContent({
           <TeamNetwork />
           <div className={styles.container}>
             <SectionHeading
-              number="05"
-              label="The people"
-              title={
-                <>
-                  Good minds.
-                  <br />
-                  Better together.
-                </>
-              }
+              title="Our team"
               id="team-title"
             >
               <p>
@@ -762,15 +748,7 @@ export function HomeContent({
         >
           <div className={styles.container}>
             <SectionHeading
-              number="06"
-              label={dict.insights.sectionLabel}
-              title={
-                <>
-                  Good questions.
-                  <br />
-                  Useful answers.
-                </>
-              }
+              title="Insights"
               id="insights-title"
             >
               <Link href={localePath("/insights")} className={styles.textLink}>
@@ -951,18 +929,6 @@ export function HomeContent({
       </main>
       <div className={styles.footerShell}>
         <SiteFooter hideCta />
-        <details className={`${styles.logoCredits} ${styles.container}`}>
-          <summary>Logo credits</summary>
-          <p>
-            Gazprom International logo by Gazprom International, via{" "}
-            <a href="https://commons.wikimedia.org/wiki/File:GInt_Blue.png">
-              Wikimedia Commons
-            </a>
-            , displayed in monochrome and licensed under{" "}
-            <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
-            .
-          </p>
-        </details>
       </div>
     </div>
   );

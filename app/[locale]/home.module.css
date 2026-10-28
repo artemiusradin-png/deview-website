@@ -286,7 +286,7 @@
 }
 .clients {
   display: grid;
-  grid-template-columns: 1fr minmax(0, 4.4fr) auto;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 30px;
   padding-block: 31px;
@@ -329,37 +329,9 @@
   flex-shrink: 0;
   white-space: nowrap;
 }
-.clients[data-paused="true"] .clientTrack {
-  animation-play-state: paused;
-}
-.clientPause {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: transparent;
-  color: var(--ink);
-  cursor: pointer;
-}
-.clientPause svg {
-  width: 14px;
-  height: 14px;
-}
-.clientPause:hover {
-  background: var(--accent);
-  border-color: var(--ink);
-}
 @keyframes clientScroll {
   to {
     transform: translateX(-50%);
-  }
-}
-@media (hover: hover) {
-  .clientMarquee:hover .clientTrack {
-    animation-play-state: paused;
   }
 }
 .clientLogo {
@@ -608,6 +580,45 @@
 .projectCarouselTrack::-webkit-scrollbar,
 .projectGrid::-webkit-scrollbar {
   display: none;
+}
+
+.folderGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px;
+  justify-items: center;
+  align-items: end;
+  padding-top: 36px;
+  padding-bottom: 0px;
+  margin-top: 8px;
+}
+
+@media (max-width: 1140px) {
+  .folderGrid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 48px;
+    padding-top: 24px;
+  }
+}
+
+.folderHint {
+  text-align: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
+.workSection {
+  padding-block: 44px 36px;
+}
+.workSection .sectionIntro {
+  margin-top: 0;
+  margin-bottom: 24px;
 }
 .project {
   flex: 0 0 clamp(300px, 28vw, 380px);
@@ -1101,22 +1112,6 @@
   --white-20: var(--line);
   --white-10: var(--line);
 }
-.logoCredits {
-  padding-bottom: 24px;
-  color: var(--muted);
-  font-size: 11px;
-}
-.logoCredits summary {
-  width: fit-content;
-  cursor: pointer;
-}
-.logoCredits p {
-  margin-top: 10px;
-}
-.logoCredits a {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
 
 @media (max-width: 1100px) {
   .container,
@@ -1310,7 +1305,7 @@
     gap: 12px;
   }
   .clients {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
     gap: 16px;
     padding-block: 21px;
   }
@@ -1331,12 +1326,6 @@
       #000 calc(100% - 8px),
       transparent
     );
-  }
-  .clientPause {
-    grid-column: 2;
-    grid-row: 1;
-    width: 26px;
-    height: 26px;
   }
   .sectionIntro {
     flex-direction: column;
@@ -1658,8 +1647,7 @@
     gap: 28px 40px;
     padding: 0;
   }
-  .clientList[aria-hidden="true"],
-  .clientPause {
+  .clientList[aria-hidden="true"] {
     display: none;
   }
 }

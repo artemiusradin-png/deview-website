@@ -11,27 +11,6 @@ const INSIGHTS = [
 
 const CHIPS = ["Risk-scored", "Pilot-ready", "Borrower-data aware"];
 
-const PERSONAL_EMAIL_DOMAINS = new Set([
-  "gmail.com",
-  "googlemail.com",
-  "icloud.com",
-  "me.com",
-  "mac.com",
-  "outlook.com",
-  "hotmail.com",
-  "live.com",
-  "msn.com",
-  "yahoo.com",
-  "aol.com",
-  "proton.me",
-  "protonmail.com",
-  "pm.me",
-  "mail.com",
-  "gmx.com",
-  "zoho.com",
-  "yandex.com",
-]);
-
 function isLikelyWorkEmail(email: string) {
   // Accept any well-formed email (personal providers allowed).
   const domain = email.split("@")[1]?.toLowerCase();

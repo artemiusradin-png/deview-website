@@ -5,6 +5,7 @@ import { LocaleLink } from "@/components/LocaleLink";
 import { PageIntro } from "@/components/PageIntro";
 import { SubpageNav } from "@/components/SubpageNav";
 import { getInsightArticle } from "@/lib/insights";
+import { getAllArticles } from "@/lib/oil-gas/insights";
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", {
@@ -89,6 +90,52 @@ export function InsightsContent() {
             </LocaleLink>
           );
         })}
+      </div>
+
+      {/* Energy & Industrial Architecture Technical Papers */}
+      <div className="mt-20">
+        <div className="mb-8 border-b border-[var(--white-20)] pb-4">
+          <p className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-[var(--accent,#ff3b00)]">
+            Technical Authority Papers
+          </p>
+          <h2 className="mt-2 text-[clamp(1.4rem,3vw,2rem)] font-medium text-[var(--white-100)]">
+            Industrial & Energy Infrastructure Architecture
+          </h2>
+        </div>
+        <div className="space-y-0">
+          {getAllArticles().map((paper, pIdx, arr) => (
+            <LocaleLink
+              key={paper.slug}
+              href={`/insights/${paper.slug}`}
+              className={`group block border-t border-[var(--white-20)] py-8 transition-colors hover:bg-[var(--surface)] ${
+                pIdx === arr.length - 1 ? "border-b" : ""
+              }`}
+            >
+              <div className="flex flex-wrap items-center gap-3 mb-3">
+                <span className="text-[0.55rem] font-semibold uppercase tracking-[0.18em] text-[var(--accent,#ff3b00)]">
+                  {paper.category}
+                </span>
+                <span className="text-[0.55rem] text-[var(--white-30)]">&middot;</span>
+                <span className="text-[0.55rem] uppercase tracking-[0.18em] text-[var(--white-40)]">
+                  {paper.readingTime}
+                </span>
+                <span className="text-[0.55rem] text-[var(--white-30)]">&middot;</span>
+                <span className="text-[0.55rem] uppercase tracking-[0.18em] text-[var(--white-40)]">
+                  {paper.publishedAt}
+                </span>
+              </div>
+              <h3 className="mb-2 text-[clamp(1.1rem,2.5vw,1.4rem)] font-medium leading-snug text-[var(--white-100)] transition-colors group-hover:text-[var(--accent,#ff3b00)]">
+                {paper.title}
+              </h3>
+              <p className="max-w-3xl text-sm leading-relaxed text-[var(--text-muted)]">
+                {paper.summary}
+              </p>
+              <p className="mt-3 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[var(--white-40)] transition-colors group-hover:text-[var(--white-70)]">
+                Read Architectural Paper &rarr;
+              </p>
+            </LocaleLink>
+          ))}
+        </div>
       </div>
 
       {/* CTA */}

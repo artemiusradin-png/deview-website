@@ -1,0 +1,39 @@
+{
+  "selected": "editorial-product-story-with-secondary-library",
+  "reason": "The user explicitly chose the Deview DOF editorial composition as the model for three video-led cases; filtering remains useful as a secondary discovery tool.",
+  "rejected": {
+    "catalog-decision-grid": "Useful for the remaining archive, but too uniform to make the three supplied films feel like flagship evidence.",
+    "detail-decision-page": "Appropriate only for an individual case page, not a three-story index."
+  },
+  "regions": [
+    "editorial collection hero and jump navigation",
+    "three numbered cinematic case chapters",
+    "case-specific four-part operating model below each film",
+    "search and industry/service filters for remaining work",
+    "result count, clear filters and compact project library",
+    "contact CTA"
+  ],
+  "responsive": {
+    "desktop": "Full-width alternating film/caption compositions; four capability columns; three archive columns and inline controls.",
+    "tablet": "Film and caption stack; capability rows become two columns; archive becomes two columns.",
+    "mobile": "Value and company context precede film; capability rows and archive become a single reading column; filters stack without horizontal overflow."
+  },
+  "states": [
+    "all remaining projects",
+    "video playing only while visible",
+    "reduced-motion poster state",
+    "industry filter",
+    "service filter",
+    "combined filters and text search",
+    "empty results",
+    "reset",
+    "keyboard focus"
+  ],
+  "constraints": [
+    "preserve real copy",
+    "keep historic dates",
+    "link full details",
+    "use existing brand",
+    "no new dependencies"
+  ]
+}

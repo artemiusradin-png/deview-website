@@ -47,7 +47,6 @@ export function HomeCapabilities() {
       <div id="retro-feature-cards" />
       <div className={styles.heading}>
         <div>
-          <p className={styles.kicker}>01 / A better way to work</p>
           <h2 id="expertise-title">
             Less friction.
             <br />

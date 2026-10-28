@@ -38,10 +38,6 @@ const LOGOS = {
     width: 203,
     height: 100,
     alt: "Gazprom International logo",
-    credit: {
-      text: "Gazprom International logo: Wikimedia Commons, CC BY 3.0",
-      href: "https://commons.wikimedia.org/wiki/File:GInt_Blue.png",
-    },
   },
 } satisfies Record<string, OilGasLogo>;
 

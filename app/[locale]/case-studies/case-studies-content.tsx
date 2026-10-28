@@ -10,6 +10,14 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { CASE_INDUSTRIES, CASE_LIBRARY, CASE_SERVICES } from "@/lib/case-studies";
 import "./case-studies.css";
 
+type FeaturedCaseLogo = {
+  white: string;
+  black: string;
+  width: number;
+  height: number;
+  alt: string;
+};
+
 type FeaturedCase = {
   number: string;
   label: string;
@@ -23,6 +31,7 @@ type FeaturedCase = {
   href: string;
   linkLabel: string;
   tone: "gold" | "ink" | "paper";
+  logo: FeaturedCaseLogo;
   pillars: ReadonlyArray<{ number: string; label: string; title: string; body: string; proof: string }>;
 };
 
@@ -40,6 +49,13 @@ const FEATURED_CASES: ReadonlyArray<FeaturedCase> = [
     href: "/en/case-studies/jetfans",
     linkLabel: "Read the case",
     tone: "gold",
+    logo: {
+      white: "/client-logos/jetfans-horizontal-white.png",
+      black: "/client-logos/jetfans-horizontal-black.png",
+      width: 245,
+      height: 70,
+      alt: "Jetfans",
+    },
     pillars: [
       { number: "01", label: "Intake", title: "Automated Inquiry Capture", body: "Incoming technical inquiries enter a consistent process with their source, contact and regional context intact.", proof: "Inquiry → owned record → next action" },
       { number: "02", label: "Document intelligence", title: "OCR Management Workspace", body: "Supporting files are extracted into structured fields, then held for operational review rather than lost inside inbox threads.", proof: "Document → extracted data → review" },
@@ -60,6 +76,13 @@ const FEATURED_CASES: ReadonlyArray<FeaturedCase> = [
     href: "/en/case-studies/enerquest",
     linkLabel: "Read the pilot",
     tone: "ink",
+    logo: {
+      white: "/client-logos/enerquest-white.png",
+      black: "/client-logos/enerquest-black.png",
+      width: 383,
+      height: 91,
+      alt: "EnerQuest Energy",
+    },
     pillars: [
       { number: "01", label: "Controls", title: "Capital Project Controls & Scheduling", body: "A governed schedule, actuals and exceptions across the capital portfolio, with Primavera P6 and SAP PM synchronisation where the environment requires it.", proof: "Planning → actuals → management action" },
       { number: "02", label: "Engineering intelligence", title: "Engineering Data & Drawing RAG", body: "Source-grounded retrieval across P&IDs, isometric drawings and technical records, with ASME and API context preserved for expert review.", proof: "Question → cited source → human review" },
@@ -80,6 +103,13 @@ const FEATURED_CASES: ReadonlyArray<FeaturedCase> = [
     href: "/en/industries/lending#grand-finance",
     linkLabel: "See the deployment",
     tone: "paper",
+    logo: {
+      white: "/client-logos/grand-finance-white.png",
+      black: "/client-logos/grand-finance-black.png",
+      width: 149,
+      height: 47,
+      alt: "Grand Finance 高昇財務",
+    },
     pillars: [
       { number: "01", label: "Borrower intake", title: "One Application Record", body: "Borrower details, applications and supporting context enter one structured record instead of separate hand-offs.", proof: "Application → complete borrower file" },
       { number: "02", label: "Document operations", title: "AI Document & Email Intake", body: "Inbound documents and email attachments are classified and extracted into the workflow for controlled review.", proof: "Inbox → extracted fields → verification" },
@@ -122,12 +152,29 @@ function FeaturedCaseChapter({ project, index }: { project: FeaturedCase; index:
     <article className="featured-case" data-tone={project.tone} aria-labelledby={`featured-case-${project.number}`}>
       <div className="featured-case-shell">
         <header className="featured-case-lead">
-          <div><p className="featured-case-kicker"><span>{project.number}</span>{project.label}</p><h2 id={`featured-case-${project.number}`}>{project.title}</h2></div>
+          <div>
+            <p className="featured-case-kicker"><span>{project.number}</span>{project.label}</p>
+            <h2 id={`featured-case-${project.number}`}>{project.title}</h2>
+          </div>
           <p>{project.description}</p>
         </header>
         <div className="featured-case-film" data-reverse={index === 1 ? "true" : undefined}>
           <SilentCaseVideo src={project.video} poster={project.poster} className="featured-case-video" />
-          <div className="featured-case-caption"><span>{project.location}</span><strong>{project.company}</strong><p>{project.caption}</p><Link href={project.href}>{project.linkLabel}<span aria-hidden="true">↗</span></Link></div>
+          <div className="featured-case-caption">
+            <div className="featured-case-caption-brand">
+              <Image
+                src={project.logo.white}
+                alt={`${project.company} logo`}
+                width={project.logo.width}
+                height={project.logo.height}
+                unoptimized
+              />
+            </div>
+            <span>{project.location}</span>
+            <strong>{project.company}</strong>
+            <p>{project.caption}</p>
+            <Link href={project.href}>{project.linkLabel}<span aria-hidden="true">↗</span></Link>
+          </div>
         </div>
         <ol className="featured-case-pillars">
           {project.pillars.map((pillar) => <li key={pillar.number}><div className="featured-case-pillar-top"><span>{pillar.number}</span><em>{pillar.label}</em></div><h3>{pillar.title}</h3><p>{pillar.body}</p><small>{pillar.proof}</small></li>)}
@@ -150,7 +197,6 @@ function CaseLibrary({ search, hash }: { search: string; hash: string }) {
     return (!industry || c.industry === industry) && (!service || c.services.includes(service)) && terms.every((term) => text.includes(term));
   });
   const hasFilters = Boolean(query || industry || service);
-  const credits = [...new Map(filtered.flatMap((c) => c.logo?.credit ? [[c.logo.src, c.logo.credit] as const] : [])).values()];
 
   function updateFilters(changes: { q?: string; industry?: string; service?: string }) {
     const next = new URL(window.location.href);
@@ -178,9 +224,8 @@ function CaseLibrary({ search, hash }: { search: string; hash: string }) {
           {FEATURED_CASES.map((project, index) => <FeaturedCaseChapter key={project.number} project={project} index={index} />)}
         </section>
 
-        <section className="case-library-archive" aria-labelledby="case-library-archive-title">
+        <section className="case-library-archive" aria-label="Case studies archive">
           <div className="case-library-archive-shell">
-            <header className="case-library-archive-heading"><p className="featured-case-kicker"><span>04</span>+ others</p><div><h2 id="case-library-archive-title">+ others</h2><p>Filter the archive by industry, capability or the problem you are trying to solve.</p></div></header>
             <div className="case-library-filters">
               <div className="case-library-search"><label htmlFor="case-search">Search case studies</label><div className="case-search-field"><Search size={19} aria-hidden="true" /><input id="case-search" type="search" placeholder="Company, project or keyword" value={query} onChange={(e) => updateFilters({ q: e.target.value })} aria-controls="case-library-results" /></div></div>
               <div><label htmlFor="case-industry">Industry</label><select id="case-industry" value={industry} onChange={(e) => updateFilters({ industry: e.target.value })} aria-controls="case-library-results"><option value="">All industries</option>{CASE_INDUSTRIES.map((value) => <option key={value}>{value}</option>)}</select></div>
@@ -189,9 +234,37 @@ function CaseLibrary({ search, hash }: { search: string; hash: string }) {
             <div className="case-library-results-bar"><p role="status" aria-live="polite" aria-atomic="true"><strong>{filtered.length}</strong> {filtered.length === 1 ? "case study" : "case studies"}{hasFilters ? " found" : " beyond the featured work"}</p>{hasFilters ? <button type="button" className="case-clear" onClick={clearFilters}>Clear filters <X size={15} aria-hidden="true" /></button> : <span>Ideas put into practice.</span>}</div>
             <div id="case-library-results" className="case-library-grid">
               {filtered.map((c, i) => <article className="case-library-card" key={c.id}><Link href={c.href} className="case-library-card-link"><div className="case-library-card-media case-split"><span className="case-split-logo">{c.logo ? <><Image src={c.logo.src} alt={c.logo.alt} width={c.logo.width} height={c.logo.height} unoptimized style={c.logo.width < 80 ? { maxWidth: c.logo.width * 1.4, maxHeight: c.logo.height * 1.4 } : undefined} />{c.logo.width < 80 ? <span className="case-split-name" aria-hidden="true">{c.company}</span> : null}</> : <span className="case-split-name">{c.company}</span>}{c.year ? <span className="case-library-year">Project archive · {c.year}</span> : null}</span>{c.image ? <span className="case-split-art"><Image src={c.image.replace("/covers/", "/covers/half/")} alt={c.imageAlt ?? ""} fill sizes="(max-width: 640px) 50vw, (max-width: 1000px) 25vw, 17vw" loading={i < 3 ? "eager" : "lazy"} /></span> : null}<span className="case-library-card-arrow" aria-hidden="true"><ArrowUpRight size={22} /></span></div><div className="case-library-card-body"><p className="case-library-company">{c.company}</p><h3>{c.headline}</h3><div className="case-library-tags"><span>{c.industry}</span><span>{service || c.services[0]}</span></div><span className="case-library-read">View case study <ArrowUpRight size={16} aria-hidden="true" /></span></div></Link></article>)}
+              {(!hasFilters || filtered.some((c) => c.company === "Gazprom Neft")) && (
+                <article className="case-library-card case-library-card-others" key="others">
+                  <Link href="/en/contact" className="case-library-card-link">
+                    <div className="case-library-card-media case-split">
+                      <span className="case-split-logo">
+                        <span className="case-split-name">+ Others</span>
+                        <span className="case-library-year">Project archive</span>
+                      </span>
+                      <span className="case-split-art case-split-others-pattern" aria-hidden="true">
+                        <span className="case-split-others-plus">+</span>
+                      </span>
+                      <span className="case-library-card-arrow" aria-hidden="true">
+                        <ArrowUpRight size={22} />
+                      </span>
+                    </div>
+                    <div className="case-library-card-body">
+                      <p className="case-library-company">+ Others</p>
+                      <h3>Undisclosed enterprise systems, digital platforms &amp; AI workflows</h3>
+                      <div className="case-library-tags">
+                        <span>Enterprise</span>
+                        <span>Confidential</span>
+                      </div>
+                      <span className="case-library-read">
+                        Discuss under NDA <ArrowUpRight size={16} aria-hidden="true" />
+                      </span>
+                    </div>
+                  </Link>
+                </article>
+              )}
             </div>
             {filtered.length === 0 ? <div className="case-library-empty"><Search size={30} aria-hidden="true" /><h2>No matching case studies.</h2><p>Try another keyword or clear your filters to explore the project archive.</p><button type="button" className="btn-outline" onClick={clearFilters}>Show all case studies</button></div> : null}
-            {credits.length > 0 ? <p className="case-library-credits">{credits.map((credit) => <a key={credit.href} href={credit.href}>{credit.text}</a>)}</p> : null}
             <section className="case-library-cta" aria-labelledby="case-cta-title"><div><p className="featured-case-kicker"><span>Next</span>Your operating gap</p><h2 id="case-cta-title">Your next challenge.<br />Our next case study.</h2><p>Bring us the process that is still held together by spreadsheets, inboxes and manual reporting.</p></div><Link href="/en/contact" className="btn-outline">Discuss your project <ArrowUpRight size={18} aria-hidden="true" /></Link></section>
           </div>
         </section>

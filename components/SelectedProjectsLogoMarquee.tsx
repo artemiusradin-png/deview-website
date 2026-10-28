@@ -5,10 +5,11 @@ import { PerspectiveMarquee, type LogoItem } from "@/components/ui/perspective-m
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 
 const CLIENT_LOGOS: LogoItem[] = [
-  { name: "EVDEV",               src: "/client-logos/evdev.svg",         width: 96,  height: 19  },
-  { name: "Fizkultura",          src: "/client-logos/fizkultura.png",    width: 118, height: 79  },
-  { name: "Nextair",             src: "/client-logos/nextair.png",       width: 104, height: 100 },
-  { name: "Lending Platform",    src: "/client-logos/grandfg-white.png", width: 266, height: 62  },
+  { name: "EVDEV",               src: "/client-logos/evdev.svg",               width: 96,  height: 19  },
+  { name: "Fizkultura",          src: "/client-logos/fizkultura.png",          width: 118, height: 79  },
+  { name: "Nextair",             src: "/client-logos/nextair.png",             width: 104, height: 100 },
+  { name: "Grand Finance",       src: "/client-logos/grand-finance-white.png", width: 149, height: 47  },
+  { name: "SiimplyTrade",        src: "/client-logos/siimplytrade-white.png",  width: 997, height: 187 },
 ];
 
 function useIsMobileMarquee() {

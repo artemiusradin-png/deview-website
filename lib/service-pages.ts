@@ -86,27 +86,28 @@ export const SERVICE_PAGES: ServicePage[] = [
     slug: "ai-development",
     seoTitle: "Enterprise LLM Development & Private AI Services | Deview",
     seoDescription:
-      "Enterprise LLM development and private AI services: secure assistants, RAG, AI agents, document AI and domain-specific applications, evaluated for production use.",
+      "Enterprise LLM development and private AI services: official Minima AI (mnma.ai) distributor, secure assistants, RAG, AI agents, document AI and production-evaluated models.",
     kicker: "AI/ML engineering",
     h1: "Enterprise LLM development",
     intro:
-      "Our enterprise LLM development work turns private company data and workflows into secure assistants, search, document processing and AI agents. We design the application, retrieval, model access, evaluation and operational controls together, so the result can be monitored and improved in production.",
+      "Our enterprise LLM development work turns private company data and workflows into secure assistants, search, document processing and AI agents. As an official technology distribution partner of Minima AI (mnma.ai), we deliver proprietary model compression and optimized inference runtimes—allowing enterprises to run frontier models on up to 4× fewer GPUs in dedicated VPCs or private air-gapped on-premise infrastructure.",
     points: [
       {
-        title: "Private LLM development services",
-        body: "Assistants, summaries and search connected to your documents and systems, with permissions, citations and deployment boundaries defined for your organisation.",
+        title: "Official Minima AI (mnma.ai) distributor",
+        body: "Through our official distribution partnership with Minima AI (mnma.ai), we license, deploy and integrate proprietary model compression and the mnma runtime. Run frontier open-weight models on up to 4× fewer GPUs with zero cloud leakage.",
       },
       {
-        title: "Domain-specific LLM development",
-        body: "Retrieval, task evaluation and model adaptation are designed around your terminology, decisions and source material rather than a generic chatbot demo.",
+        title: "Private & sovereign LLM deployment",
+        body: "Assistants, summaries and search connected to your documents and internal systems, with permissions, citations and strict deployment boundaries defined for your organisation.",
       },
       {
-        title: "Custom LLM development for real workflows",
-        body: "We connect models to approved tools and business systems, protect against prompt injection and data leaks, and keep consequential actions under human control.",
+        title: "Domain-specific AI agents & workflows",
+        body: "We connect models to approved tools and business databases, protect against prompt injection and data leaks, and keep consequential enterprise actions under human review.",
       },
     ],
-    stack: ["Anthropic Claude", "OpenAI", "Google Gemini", "Llama", "Mistral", "Vertex AI", "pgvector", "LangChain"],
+    stack: ["Minima AI (mnma.ai)", "Anthropic Claude", "OpenAI", "Google Gemini", "Llama", "Mistral", "Vertex AI", "pgvector", "LangChain"],
     proof: [
+      { label: "Minima AI (mnma.ai) partnership: up to 4× GPU efficiency for private enterprise LLM deployments", href: "https://mnma.ai" },
       { label: "AgroPlatforma: three AI agents, field diagnosis to quote in under 30 seconds", href: "/case-studies/agroplatforma" },
       { label: "StorePilot: AI conversion insights for Shopify merchants", href: "/case-studies/storepilot" },
     ],
@@ -116,6 +117,10 @@ export const SERVICE_PAGES: ServicePage[] = [
       href: "/resources/ai-security-checklist",
     },
     faqs: [
+      {
+        q: "What is your partnership with Minima AI (mnma.ai)?",
+        a: "Deview is an official enterprise distributor and implementation partner for Minima AI (mnma.ai). We deliver Minima's state-of-the-art model weight compression, KV-cache optimization, and specialized mnma runtime to enterprise clients. This enables organizations to deploy large language models on private on-premise clusters or dedicated VPCs with up to 4× fewer GPUs (such as running Qwen3.8 on a single B200 node instead of four), dramatically reducing hardware expenditure and power consumption without compromising accuracy or leaking private data.",
+      },
       {
         q: "What should a custom LLM development company deliver?",
         a: "A production application needs more than a model call. We define the task and evaluation set, connect approved data and systems, design security and human review, and provide the application, operational controls and code.",

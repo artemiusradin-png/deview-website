@@ -84,8 +84,9 @@ export const SERVICE_LINES: ServiceLine[] = [
     id: "ai-ml",
     name: "AI/ML engineering",
     title: "Generative AI, AI agents and machine learning in production.",
-    body: "AI built into your software, connected to your data and secured from the first sprint.",
+    body: "AI built into your software, connected to your data and secured from the first sprint. Official Minima AI (mnma.ai) enterprise distribution partner.",
     offerings: [
+      { name: "Minima AI (mnma.ai) enterprise distribution", line: "Official partner for Minima AI model compression and runtime: up to 4× GPU efficiency for private deployments." },
       { name: "AI & GenAI application engineering", line: "Search, summaries, copilots and GenAI workflows inside your software." },
       { name: "Agentic AI development", line: "AI agents and multi-agent workflows that carry out tasks end to end." },
       { name: "Machine learning", line: "Forecasting and predictive models trained on your own data." },

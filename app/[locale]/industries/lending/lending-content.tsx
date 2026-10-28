@@ -10,8 +10,6 @@ import styles from "./lending.module.css";
 
 const METRICS = [
   { metric: "17,000+", label: "borrower records supported" },
-  { metric: "94%", label: "less manual document handling" },
-  { metric: "3–6 weeks", label: "for a scoped deployment" },
 ];
 
 const ARCHITECTURE = [
@@ -19,13 +17,6 @@ const ARCHITECTURE = [
   ["02", "Rules with human authority", "Lender policies and AI assistance accelerate review; authorised staff make the decision."],
   ["03", "Tenant-level permissions", "Each company controls roles, fields and access while sharing the same product foundation."],
   ["04", "An auditable event trail", "Documents, changes, approvals and servicing events stay attributable and reviewable."],
-] as const;
-
-const WORKFLOWS = [
-  { src: "/images/cases/grand-finance.jpg", title: "One-Click Credit Decisioning", body: "A complete credit picture, lender policy checks and a recorded human decision in one workflow." },
-  { src: "/images/cases/kk-credit.jpg", title: "AI Document & Email Intake", body: "Inbound material is classified, matched to the borrower and prepared for review without re-keying." },
-  { src: "/images/cases/every-success-credit.jpg", title: "Borrower 360 & Exposure Search", body: "Authorised teams can find identity, facilities, repayment status and exposure from one search." },
-  { src: "/images/cases/wah-wei-credit.jpg", title: "Permissioned Governance Architecture", body: "Tenant boundaries, role-based access and an audit trail are designed into the operating model." },
 ] as const;
 
 const COMPLIANCE = [
@@ -49,7 +40,6 @@ export function LendingContent() {
         <div className={styles.shell}>
           <SubpageNav backHref="/" />
           <header className={styles.hero}>
-            <div className={styles.kicker}><span>01</span> Lending &amp; financial operations</div>
             <div className={styles.heroGrid}>
               <h1>Turn lending operations into one clear record.</h1>
               <div className={styles.heroAside}>
@@ -60,13 +50,17 @@ export function LendingContent() {
           </header>
 
           <section className={styles.metricStrip} aria-label="Lending platform outcomes">
-            {METRICS.map((item, index) => <div key={item.metric}><span className={styles.metricIndex}>0{index + 1}</span><strong>{item.metric}</strong><p>{item.label}</p></div>)}
+            {METRICS.map((item) => (
+              <div key={item.metric}>
+                <strong>{item.metric}</strong>
+                <p>{item.label}</p>
+              </div>
+            ))}
           </section>
 
           <section className={styles.showcase} aria-labelledby="covenant-heading">
-            <div className={styles.sectionLead}>
-              <p className={styles.kicker}><span>02</span> Flagship product</p>
-              <h2 id="covenant-heading">Covenant Desk.<br />The lending lifecycle, visible.</h2>
+            <div className={styles.sectionLeadWide}>
+              <div><h2 id="covenant-heading">Covenant Desk.<br />The lending lifecycle, visible.</h2></div>
               <p>A multi-device operating system for management, staff and borrowers, sharing one permission-scoped source of truth.</p>
             </div>
             <div className={styles.productBrowser}>
@@ -82,7 +76,7 @@ export function LendingContent() {
 
           <section className={styles.deployments} aria-labelledby="deployments-heading">
             <div className={styles.sectionLeadWide}>
-              <div><p className={styles.kicker}><span>03</span> Five deployments</p><h2 id="deployments-heading">One foundation.<br />Five lender operations.</h2></div>
+              <div><h2 id="deployments-heading">One foundation.<br />Five lender operations.</h2></div>
               <p>Each tenant is treated as its own operating environment—with its own identity, workflows, permissions and portfolio view.</p>
             </div>
             <div className={styles.caseFilm}>
@@ -99,25 +93,12 @@ export function LendingContent() {
             </div>
           </section>
 
-          <section className={styles.workflows} aria-labelledby="workflows-heading">
-            <div className={styles.sectionLeadWide}>
-              <div><p className={styles.kicker}><span>04</span> Production workflows</p><h2 id="workflows-heading">Four moments where the system earns its place.</h2></div>
-              <p>Real interface evidence from document intake to governed decisions and portfolio oversight.</p>
-            </div>
-            <div className={styles.workflowGrid}>
-              {WORKFLOWS.map((workflow, index) => (
-                <article key={workflow.title}><div className={styles.workflowImage}><Image src={workflow.src} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" /></div><div className={styles.workflowCopy}><span>0{index + 1}</span><h3>{workflow.title}</h3><p>{workflow.body}</p></div></article>
-              ))}
-            </div>
-          </section>
-
           <section className={styles.governance} aria-labelledby="governance-heading">
-            <div><p className={styles.kicker}><span>05</span> Governance by design</p><h2 id="governance-heading">Controls belong inside the workflow.</h2><p>These frameworks shape access, traceability and operating controls. Final applicability is confirmed with each client&rsquo;s legal and compliance teams.</p></div>
+            <div><h2 id="governance-heading">Controls belong inside the workflow.</h2><p>These frameworks shape access, traceability and operating controls. Final applicability is confirmed with each client&rsquo;s legal and compliance teams.</p></div>
             <ul>{COMPLIANCE.map(([badge, label]) => <li key={badge}><strong>{badge}</strong><span>{label}</span></li>)}</ul>
           </section>
 
           <nav className={styles.resources} aria-label="Lending resources">
-            <p className={styles.kicker}><span>06</span> Go deeper</p>
             <ul>{RESOURCES.map(([label, href]) => <li key={href}><LocaleLink href={href}>{label}<span>↗</span></LocaleLink></li>)}</ul>
           </nav>
 

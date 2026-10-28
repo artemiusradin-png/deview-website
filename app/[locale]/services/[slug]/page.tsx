@@ -176,6 +176,45 @@ export default async function ServicePage({ params }: Props) {
             ))}
           </section>
 
+          {page.slug === "ai-development" && (
+            <section className={styles.partnerSection} aria-label="Minima AI Partnership">
+              <span className={styles.partnerBadge}>Official Technology Distribution Partner</span>
+              <h2 className={styles.sectionTitle}>
+                Minima AI (mnma.ai) Enterprise Partnership
+              </h2>
+              <span className={styles.partnerLead}>
+                Deview is an official distributor and implementation partner of Minima AI (mnma.ai). Minima combines breakthrough model-weight compression, KV-cache compression and an optimized runtime to deliver up to 4× GPU efficiency for enterprise models. Four nodes become one—enabling frontier open-weight models to execute inside your private cloud, sovereign VPC, or air-gapped data center with zero cloud data egress.
+              </span>
+              <div className={styles.partnerGrid}>
+                <div className={styles.partnerItem}>
+                  <strong>Up to 4× Fewer GPUs</strong>
+                  <p>Run massive foundation models (such as Qwen and Llama) on one GPU node instead of four, drastically reducing capital and operating expenditure.</p>
+                </div>
+                <div className={styles.partnerItem}>
+                  <strong>Total Data Sovereignty</strong>
+                  <p>Inference executes strictly inside your infrastructure or air-gapped perimeter with zero unapproved external API telemetry or data leaks.</p>
+                </div>
+                <div className={styles.partnerItem}>
+                  <strong>Enterprise Implementation</strong>
+                  <p>We provide enterprise licensing, model adaptation, and end-to-end integration into your internal databases and business systems.</p>
+                </div>
+              </div>
+              <div className={styles.partnerActions}>
+                <a
+                  href="https://mnma.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.partnerExternalLink}
+                >
+                  Visit Minima AI (mnma.ai) <span aria-hidden="true">↗</span>
+                </a>
+                <Link href="/en/contact" className={styles.button}>
+                  Request an Efficiency Benchmark <span aria-hidden="true">↗</span>
+                </Link>
+              </div>
+            </section>
+          )}
+
           <section className={styles.split} aria-labelledby="offer-title">
             <div>
               <span className={styles.kicker}>What we build</span>
@@ -219,9 +258,19 @@ export default async function ServicePage({ params }: Props) {
               <ul className={styles.proof}>
                 {page.proof.map((item) => (
                   <li key={item.href + item.label}>
-                    <Link href={`/en${item.href}`}>
-                      {item.label} <span aria-hidden="true">↗</span>
-                    </Link>
+                    {item.href.startsWith("http") ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {item.label} <span aria-hidden="true">↗</span>
+                      </a>
+                    ) : (
+                      <Link href={`/en${item.href}`}>
+                        {item.label} <span aria-hidden="true">↗</span>
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

@@ -424,3 +424,91 @@
 .solutionGrid :is(h3, li) a:hover {
   color: var(--ink);
 }
+
+/* Minima AI Technology Partnership block */
+.partnerSection {
+  margin-top: 56px;
+  padding: clamp(36px, 5vw, 56px);
+  background: var(--cream);
+  border: 1px solid var(--line);
+}
+.partnerBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.partnerSection h2 {
+  font-family: var(--font-satoshi), var(--font-archivo), sans-serif;
+  font-size: clamp(26px, 3.2vw, 40px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0 0 16px;
+  max-width: 26ch;
+}
+.partnerLead {
+  display: block;
+  max-width: 64ch;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+.partnerGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+  margin-bottom: 36px;
+}
+.partnerItem strong {
+  display: block;
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.partnerItem p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
+}
+.partnerActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+}
+.partnerExternalLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: opacity 150ms ease;
+}
+.partnerExternalLink:hover {
+  opacity: 0.7;
+}
+@media (max-width: 900px) {
+  .partnerGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+

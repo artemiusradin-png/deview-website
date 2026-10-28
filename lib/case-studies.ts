@@ -10,6 +10,7 @@ const JETFANS_LOGO: OilGasLogo = { src: "/client-logos/jetfans-eu.png", width: 1
 const NEXTAIR_LOGO: OilGasLogo = { src: "/client-logos/nextair.png", width: 50, height: 48, alt: "Nextair" };
 const ENERQUEST_LOGO: OilGasLogo = { src: "/client-logos/enerquest.png", width: 383, height: 91, alt: "EnerQuest Energy" };
 const FIZKULTURA_LOGO: OilGasLogo = { src: "/client-logos/fizkultura.png", width: 118, height: 79, alt: "Fizkultura" };
+const SIIMPLYTRADE_LOGO: OilGasLogo = { src: "/client-logos/siimplytrade.png", width: 997, height: 187, alt: "SiimplyTrade" };
 
 /** Screens from the demo films, for the "how the work looks" gallery on project pages. */
 const AGRO_GALLERY = [
@@ -36,7 +37,7 @@ export const PRODUCTION_CASES = [
   { number: "06", slug: "nextair", company: "Nextair", industry: "Ventilation & HVAC", services: ["Digital product engineering"], image: "/images/cases/covers/nextair.webp", imageAlt: "Drawing: an apartment building with one ventilation shaft", video: undefined, logo: NEXTAIR_LOGO, gallery: undefined },
   { number: "07", slug: "fizkultura", company: "Fizkultura", industry: "Fitness", services: ["Data engineering", "AI/ML engineering"], image: "/images/cases/covers/fizkultura.webp", imageAlt: "Drawing: four data sources feeding one weekly report", video: undefined, logo: FIZKULTURA_LOGO, gallery: undefined },
   { number: "08", slug: "enerquest", company: "EnerQuest Energy", industry: "Oil & gas", services: ["AI/ML engineering", "Data engineering", "Enterprise platforms"], image: "/images/cases/video-posters/enerquest-dof.jpg", imageAlt: "EnerQuest oil field at sunrise", video: "/video/cases/enerquest-dof.mp4", logo: ENERQUEST_LOGO, gallery: undefined },
-  { number: "09", slug: "siimplytrade", company: "SiimplyTrade", industry: "Finance", services: ["Digital product engineering"], image: undefined, imageAlt: undefined, video: undefined, logo: undefined, gallery: undefined },
+  { number: "09", slug: "siimplytrade", company: "SiimplyTrade", industry: "Finance", services: ["Digital product engineering"], image: "/images/cases/covers/siimplytrade.webp", imageAlt: "Drawing: mobile savings, trading and investing in one fintech app", video: undefined, logo: SIIMPLYTRADE_LOGO, gallery: undefined },
 ] as const;
 
 /** Loan management systems built for five Hong Kong lenders, the tenants of the Covenant Desk portal. */
