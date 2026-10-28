@@ -3,7 +3,7 @@
 **Campaign Name:** West Africa Digital Oilfield & Production Visibility  
 **Target Markets:** Nigeria (NUPRC / NCDMB) & Angola (ANPG / Sonangol)  
 **Primary Focus:** Independent Upstream Operators, Marginal Field Concessionaires, Indigenous E&P  
-**Strategic Lead:** Lead with Nigeria and Angola leveraging EnerQuest operating proof  
+**Strategic Lead:** Lead with Nigeria and Angola leveraging the EnerQuest upstream production management pilot  
 
 ---
 
@@ -15,7 +15,7 @@
 | **Conversion Asset (Lead Magnet)** | Upstream Production System Requirements Workbook (`LM-01`) |
 | **Owner Page** | `/en/industries/oil-and-gas/regions/west-central-africa` & `/en/industries/oil-and-gas/markets/nigeria` |
 | **Asset Deliverable** | `Deview_Upstream_Production_Requirements_v2026.xlsx` |
-| **Proof Anchor** | **EnerQuest Architecture Benchmark:** Telemetry architecture and digital field prototype designed for 12,000+ bpd across remote wellpads with intermittent satellite connectivity, automated back-allocation, and zero cloud data lock-in. |
+| **Proof Anchor** | **EnerQuest pilot:** upstream production management pilot in Nigeria showing production, equipment status and exceptions in one operating view, on an illustrative model before any operational data was released. Do not quote volumes, uptime or operating results. |
 | **Target Next Action** | Book a structured 45-minute technical review of well testing, loss deferment, and telemetry intake logic. |
 
 ---
@@ -62,8 +62,8 @@ Deview builds **custom, sovereign production management systems** designed for l
 - **Offer CTA:** Offer the *45-Minute Production Workflow Review*.
 
 #### Post 3 (Proof & Case Spotlight):
-- **Hook:** *“Architecting edge telemetry for 12,000 bpd: How to decouple field data acquisition from vendor cloud lock-in.”*
-- **Angle:** Breakdown of the telemetry topology, sensor intake (Modbus/OPC-UA), and operator daily sign-off workflow based on our EnerQuest field telemetry architecture.
+- **Hook:** *“Designing field data intake for remote wellpads: how to decouple field data acquisition from vendor cloud lock-in.”*
+- **Angle:** Breakdown of the telemetry topology, sensor intake (Modbus/OPC-UA), and operator daily sign-off workflow as shown in the EnerQuest pilot views.
 - **Asset CTA:** Direct link to explore the Nigeria concessions engineering overview.
 
 ---
@@ -81,7 +81,7 @@ Deview builds **custom, sovereign production management systems** designed for l
 > *Most independent operators managing mature and marginal assets in [Nigeria / Angola] struggle with two recurring bottlenecks: manual spreadsheet reconciliation between field flowstations and export terminals, and software downtime during satellite dropouts.*  
 > *We designed a testable engineering workbook specifically for evaluating upstream production and allocation systems against intermittent field connectivity:*  
 > *https://deviewai.com/en/resources/upstream-production-system-requirements*  
-> *It includes the exact telemetry buffering and back-allocation criteria developed in our 12,000 bpd digital field prototype. Would you find it helpful to run a 45-minute production workflow review with our systems architects to map your current intake points?*  
+> *It includes the intake, buffering and back-allocation questions we work through when scoping a production data pilot. Would you find it helpful to run a 45-minute production workflow review with our systems architects to map your current intake points?*  
 > *Best regards,*  
 > *[Deview Energy Practice]*
 
@@ -92,7 +92,7 @@ Deview builds **custom, sovereign production management systems** designed for l
 ```mermaid
 flowchart TD
     D0["Day 0: Deliver Workbook (Automated XLSX file link)"] --> D2["Day 2: Guide to Customizing Well Allocation Schemas"]
-    D2 --> D5["Day 5: Case Evidence (EnerQuest 12,000 bpd Telemetry Architecture)"]
+    D2 --> D5["Day 5: Case Evidence (EnerQuest pilot: one operating view)"]
     D5 --> D9["Day 9: Invitation to 45-Minute Production Workflow Review"]
 ```
 
@@ -103,7 +103,7 @@ flowchart TD
    - *Subject:* How to evaluate your well test allocation math (Section 3)
    - *Body:* Guidance on configuring dynamic well potential curves vs static test rates. Common failure modes in joint venture audits.
 3. **Email 3 (Day 5 - Operational Proof):**
-   - *Subject:* Managing 12,000 bpd with edge telemetry: The EnerQuest architecture
+   - *Subject:* One operating view from wellhead to management: the EnerQuest pilot
    - *Body:* Architectural teardown: sensor acquisition at the wellhead, unidirectional diodes, and offline-first mobile inspection logs.
 4. **Email 4 (Day 9 - Productized Conversion):**
    - *Subject:* Complimentary 45-minute production workflow review for [Company]

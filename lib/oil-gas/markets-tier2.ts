@@ -56,7 +56,7 @@ export const TIER_2_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "Ministry of Oil, Basra Oil Company (BOC), Dhi Qar Oil Company, Missan Oil Company, and international consortia (bp, PetroChina, Eni, TotalEnergies, Lukoil)."
     },
     deploymentAndSovereignty: {
-      legalMandate: "Hydrocarbon extraction data is considered sovereign property of the State of Iraq; cloud hosting must be vetted or hosted on-premise.",
+      legalMandate: "Iraqi authorities treat hydrocarbon data as state-controlled; operators commonly host it on-premise or in a vetted environment. Confirm the current position with local counsel.",
       buyerPreference: "Air-gapped on-premise deployment in Basra or Baghdad operator headquarters with field edge nodes.",
       recommendedArchitecture: "Decentralized edge-hub deployment: ruggedized edge servers at degassing stations syncing to a central on-premise database in Basra."
     },
@@ -90,7 +90,7 @@ export const TIER_2_MARKETS: Record<string, MarketPageData> = {
       ownership: "Perpetual enterprise software license with local engineering maintenance empowerment."
     },
     proofContext: {
-      relevantExperience: "Deview's engineers have delivered enterprise software for complex production accounting, AFE tracking, and project controls between 2010 and 2020, reinforced by the EnerQuest digital oilfield deployment in challenging operating environments.",
+      relevantExperience: "Deview's engineers have delivered enterprise software for complex production accounting, AFE tracking, and project controls between 2010 and 2020, reinforced by the EnerQuest upstream production management pilot.",
       boundaries: "Deview provides software development and architecture. We do not claim local corporate incorporation in Basra or direct commercial prequalification with the Ministry of Oil without consortium representation."
     },
     buyingTeamChecklist: {
@@ -203,7 +203,7 @@ export const TIER_2_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "National Oil Corporation (NOC), operating subsidiaries (Waha, Agoco, Sirte Oil), and international joint-venture partners (Eni, TotalEnergies, OMV, Repsol, ConocoPhillips)."
     },
     deploymentAndSovereignty: {
-      legalMandate: "Hydrocarbon extraction records must remain within national jurisdiction and be accessible to NOC regulatory audits.",
+      legalMandate: "Operators are generally expected to keep hydrocarbon records accessible to NOC and regulator audits; check in-country retention expectations with local counsel.",
       buyerPreference: "On-premise deployment in Tripoli or Benghazi headquarters with ruggedized edge servers at desert gathering stations.",
       recommendedArchitecture: "Decoupled edge-hub architecture: local databases at desert stations buffering records and syncing via encrypted satellite bursts."
     },
@@ -237,7 +237,7 @@ export const TIER_2_MARKETS: Record<string, MarketPageData> = {
       ownership: "Perpetual enterprise software license with complete deployment self-sufficiency."
     },
     proofContext: {
-      relevantExperience: "Deview's engineers have designed robust enterprise project controls, production reporting systems, and asset tracking platforms across 2010–2020, reinforced by the EnerQuest digital oilfield deployment in challenging West African environments.",
+      relevantExperience: "Deview's engineers have designed robust enterprise project controls, production reporting systems, and asset tracking platforms across 2010–2020, reinforced by the EnerQuest upstream production management pilot in Nigeria.",
       boundaries: "Deview is a software engineering firm. We do not claim local corporate incorporation in Tripoli or Benghazi without local partner sponsorship."
     },
     buyingTeamChecklist: {
@@ -350,7 +350,7 @@ export const TIER_2_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "Ministry of Mines and Energy, NAMCOR, international operators (TotalEnergies, Shell, Galp, Chevron, QatarEnergy), and local joint-venture concessionaires."
     },
     deploymentAndSovereignty: {
-      legalMandate: "The Petroleum Act requires all exploration and appraisal data to be lodged with the Ministry of Mines and Energy and NAMCOR as national archives.",
+      legalMandate: "Namibia's petroleum framework provides for exploration and appraisal data to be submitted to the Ministry of Mines and Energy and NAMCOR. Confirm hosting implications with local counsel.",
       buyerPreference: "Hybrid cloud architecture: national archive repositories hosted securely in Windhoek with encrypted cloud mirrors for international collaboration.",
       recommendedArchitecture: "OSDU-compliant repository hosted in single-tenant cloud VPC with customer-managed cryptographic keys and sovereign Windhoek backup."
     },
@@ -497,7 +497,7 @@ export const TIER_2_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "Petroleum Commission Ghana, GNPC, Tullow Oil, Eni, Kosmos Energy, and domestic oilfield service providers."
     },
     deploymentAndSovereignty: {
-      legalMandate: "Act 919 mandates that petroleum data must be archived within Ghana and accessible to the Petroleum Commission for fiscal auditing.",
+      legalMandate: "Ghana's Petroleum (Exploration and Production) Act, 2016 (Act 919) sets data and reporting obligations to the Petroleum Commission. Confirm whether these affect where systems are hosted.",
       buyerPreference: "Hybrid deployment: edge processing aboard FPSO vessels with primary enterprise database hosted in accredited Accra data centers.",
       recommendedArchitecture: "Edge-to-hub architecture: containerized edge databases aboard vessels syncing delta changes to an Accra-hosted enterprise cluster."
     },
@@ -531,7 +531,7 @@ export const TIER_2_MARKETS: Record<string, MarketPageData> = {
       ownership: "Perpetual enterprise software license with local engineering handover."
     },
     proofContext: {
-      relevantExperience: "Deview's engineers have delivered enterprise software for production reporting, AFE controls, and project governance from 2010 to 2020, reinforced by the EnerQuest digital oilfield pilot in West Africa.",
+      relevantExperience: "Deview's engineers have delivered enterprise software for production reporting, AFE controls, and project governance from 2010 to 2020, reinforced by the EnerQuest upstream production management pilot in Nigeria.",
       boundaries: "Deview provides software engineering services. We do not claim local corporate registration in Accra without local joint venture partnership."
     },
     buyingTeamChecklist: {
@@ -644,7 +644,7 @@ export const TIER_2_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "Petrosen, Ministry of Energy, Woodside Energy, bp, Kosmos Energy, and international offshore engineering contractors."
     },
     deploymentAndSovereignty: {
-      legalMandate: "Loi No. 2019-03 requires that all upstream production, geological, and financial records must be archived in Senegal and accessible to state auditors.",
+      legalMandate: "Senegal's Petroleum Code (Loi No. 2019-03) sets record-keeping and audit-access obligations. Confirm hosting and retention implications with local counsel.",
       buyerPreference: "Hybrid cloud architecture: on-vessel edge logging with primary database hosting in accredited Dakar data centers (e.g., Senegal National Data Center / Datacenter de Diamniadio).",
       recommendedArchitecture: "Edge-to-hub deployment: containerized edge databases on the FPSO syncing via encrypted links to sovereign cloud hosting in Diamniadio."
     },
@@ -678,7 +678,7 @@ export const TIER_2_MARKETS: Record<string, MarketPageData> = {
       ownership: "Perpetual enterprise software license with local Senegalese engineering capacity building."
     },
     proofContext: {
-      relevantExperience: "Deview's team brings deep enterprise software experience (2010–2020) in production management, AFE tracking, and digital oilfield architecture demonstrated by our EnerQuest deployment in West Africa.",
+      relevantExperience: "Deview's team brings deep enterprise software experience (2010–2020) in production management, AFE tracking, and a digital oilfield operating view shown in our EnerQuest upstream production management pilot in Nigeria.",
       boundaries: "Deview provides software engineering services. We do not claim local corporate registration in Dakar without local joint venture partnership."
     },
     buyingTeamChecklist: {
@@ -791,7 +791,7 @@ export const TIER_2_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "Petroci, Ministry of Mines, Petroleum and Energy, Eni, and international subsea engineering contractors (Saipem, Subsea7)."
     },
     deploymentAndSovereignty: {
-      legalMandate: "Ivorian regulations require national petroleum extraction, production accounting, and concession records to remain accessible within national jurisdiction.",
+      legalMandate: "Ivorian petroleum regulations set record-keeping and audit-access obligations for concession and production data. Confirm hosting implications with local counsel.",
       buyerPreference: "Hybrid cloud architecture: on-vessel edge logging with primary database hosting in accredited Abidjan data centers.",
       recommendedArchitecture: "Edge-to-hub deployment: containerized edge databases on the FPSO syncing via encrypted links to sovereign cloud hosting in Abidjan."
     },
@@ -825,7 +825,7 @@ export const TIER_2_MARKETS: Record<string, MarketPageData> = {
       ownership: "Perpetual enterprise software license with local Ivorian technical capacity building."
     },
     proofContext: {
-      relevantExperience: "Deview's engineers have delivered enterprise software for production reporting, AFE controls, and project governance from 2010 to 2020, reinforced by the EnerQuest digital oilfield pilot in West Africa.",
+      relevantExperience: "Deview's engineers have delivered enterprise software for production reporting, AFE controls, and project governance from 2010 to 2020, reinforced by the EnerQuest upstream production management pilot in Nigeria.",
       boundaries: "Deview provides software engineering services. We do not claim local corporate registration in Abidjan without local joint venture partnership."
     },
     buyingTeamChecklist: {
@@ -938,7 +938,7 @@ export const TIER_2_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "Sasol, PetroSA, National Petroleum Refinery of South Africa (Natref), Strategic Fuel Fund (SFF), and industrial engineering contractors."
     },
     deploymentAndSovereignty: {
-      legalMandate: "POPIA compliance mandates strict governance of data processing, with local hosting preferred for critical national infrastructure telemetry.",
+      legalMandate: "POPIA governs personal data processing; operators of critical infrastructure often prefer local hosting for operational telemetry. Confirm requirements with local counsel.",
       buyerPreference: "Domestic enterprise cloud VPCs hosted in AWS Africa (Cape Town) or Microsoft Azure South Africa North (Johannesburg).",
       recommendedArchitecture: "Enterprise cloud deployment inside local South African hyperscale regions with encrypted multi-zone redundancy."
     },
@@ -1085,7 +1085,7 @@ export const TIER_2_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "TPDC, PURA, Ministry of Energy, Equinor, Shell, ExxonMobil, TotalEnergies (EACOP), and domestic engineering service firms."
     },
     deploymentAndSovereignty: {
-      legalMandate: "Petroleum Act 2015 requires that all upstream petroleum data, concession records, and operational logs must be retained within sovereign Tanzanian territory.",
+      legalMandate: "Tanzania's Petroleum Act, 2015 sets data and record obligations for upstream operators. Confirm whether these require in-country hosting with local counsel.",
       buyerPreference: "On-premise deployment in TPDC/PURA data centers in Dar es Salaam or hosting in the Tanzania National Data Centre (NDC).",
       recommendedArchitecture: "Private sovereign deployment inside the Tanzania National Data Centre with encrypted offsite replication."
     },
@@ -1119,7 +1119,7 @@ export const TIER_2_MARKETS: Record<string, MarketPageData> = {
       ownership: "Perpetual enterprise software license with complete national operational autonomy."
     },
     proofContext: {
-      relevantExperience: "Deview's team brings deep enterprise software experience (2010–2020) in project controls, upstream reporting, and remote operations, reinforced by our EnerQuest digital oilfield deployment in Africa.",
+      relevantExperience: "Deview's team brings deep enterprise software experience (2010–2020) in project controls, upstream reporting, and remote operations, reinforced by our EnerQuest upstream production management pilot in Nigeria.",
       boundaries: "Deview is a specialized software engineering firm. We do not claim local corporate registration in Dar es Salaam without local consortium representation."
     },
     buyingTeamChecklist: {

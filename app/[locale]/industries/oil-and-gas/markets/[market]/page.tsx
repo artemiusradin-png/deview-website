@@ -297,12 +297,12 @@ export default async function MarketPage({ params }: PageProps) {
                   Sovereign Architecture in {market.name}
                 </h2>
                 <p className={styles.sectionLead} style={{ marginBottom: "24px" }}>
-                  Operating in {market.name} requires complete compliance with local cyber standards, in-country hosting frameworks, and strict data confidentiality.
+                  Where data may be hosted in {market.name} depends on how it is classified. The summary below is a starting point for planning, not legal advice; confirm the current position with local counsel.
                 </p>
                 <div className={styles.specList}>
                   <div className={styles.specCard}>
-                    <span className={styles.specLabel}>Legal Mandate</span>
-                    <h3 className={styles.specTitle}>National Regulatory Framework</h3>
+                    <span className={styles.specLabel}>Regulatory Context</span>
+                    <h3 className={styles.specTitle}>Frameworks to Review</h3>
                     <p className={styles.specText}>{market.deploymentAndSovereignty.legalMandate}</p>
                   </div>
                   <div className={styles.specCard}>

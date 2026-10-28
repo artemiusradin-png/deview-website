@@ -79,7 +79,7 @@ Rather than cold-pitching NOCs, Deview partners with established regional engine
 > *Subject: Sovereign AI & IEC 62443 data diode architectures for GCC energy bids*  
 > *Hi [First Name],*  
 > *When your team bids on digital oilfield and plant monitoring packages in the UAE and Saudi Arabia, customer cybersecurity teams almost invariably push back on cloud-based analytics due to TDRA and NCA data residency rules.*  
-> *We have compiled an engineering checklist for architecting unidirectional SCADA extraction and air-gapped LLM inference that complies strictly with IEC 62443 Level 3.5 boundaries:*  
+> *We have compiled an engineering checklist for architecting unidirectional SCADA extraction and air-gapped LLM inference that follows IEC 62443 zone-and-conduit principles at the Level 3.5 DMZ:*  
 > *https://deviewai.com/en/resources/oil-gas-it-ot-architecture-checklist*  
 > *As official technology distributors of Minima AI (mnma.ai), we help regional engineering partners deploy private enterprise models that run on-premise with 4x fewer GPUs. Would you be open to an introductory 30-minute architecture review to explore how we can support your upcoming integration tenders?*  
 > *Best regards,*  
@@ -104,7 +104,7 @@ flowchart TD
    - *Body:* Why optical data diodes are required for true Level 3 isolation. How to structure mirrored historian replicas on the corporate IT side.
 3. **Email 3 (Day 6 - Private AI Economics):**
    - *Subject:* Running enterprise LLMs on-premise without a massive GPU data center
-   - *Body:* Technical analysis of model compression and private VPC deployments. Zero data egress guarantees under GCC privacy laws.
+   - *Body:* Technical analysis of model compression and private VPC deployments. How to design for no data egress, and what to confirm with counsel under GCC privacy laws.
 4. **Email 4 (Day 10 - Productized Conversion):**
    - *Subject:* Invitation: Sovereign AI Architecture Workshop for your technical team
    - *Body:* Offer a structured technical workshop with Deview's industrial architects to map your current telemetry boundaries and evaluate private LLM feasibility (`/en/contact?topic=it-ot-boundary-review`).
