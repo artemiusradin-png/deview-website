@@ -109,6 +109,45 @@ export async function POST(req: Request) {
     req.headers.get("x-real-ip") ||
     "unknown-ip";
 
+  const supabase = getSupabaseAdmin();
+
+  // Durable Rate Limiting via Supabase with in-memory fallback
+  const tenMinutesAgo = new Date(Date.now() - WINDOW_MS).toISOString();
+  if (supabase) {
+    try {
+      if (clientIp !== "unknown-ip") {
+        const { count: ipCount, error: ipErr } = await supabase
+          .from("lead_magnet_signups")
+          .select("id", { count: "exact", head: true })
+          .eq("ip_address", clientIp)
+          .gte("created_at", tenMinutesAgo);
+
+        if (!ipErr && typeof ipCount === "number" && ipCount >= MAX_PER_IP) {
+          return NextResponse.json(
+            { ok: false, error: "rate_limited", message: "Too many requests. Please try again later." },
+            { status: 429 }
+          );
+        }
+      }
+
+      const { count: emailCount, error: emailErr } = await supabase
+        .from("lead_magnet_signups")
+        .select("id", { count: "exact", head: true })
+        .eq("email", email.toLowerCase())
+        .gte("created_at", tenMinutesAgo);
+
+      if (!emailErr && typeof emailCount === "number" && emailCount >= MAX_PER_EMAIL) {
+        return NextResponse.json(
+          { ok: false, error: "rate_limited", message: "Too many requests for this email. Please try again later." },
+          { status: 429 }
+        );
+      }
+    } catch (err) {
+      console.warn("[lead-magnet] durable rate limiting query failed, falling back to memory:", err);
+    }
+  }
+
+  // In-memory sliding window rate limiting
   if (clientIp !== "unknown-ip" && !checkRateLimit(ipRateLimits, clientIp, MAX_PER_IP)) {
     return NextResponse.json(
       { ok: false, error: "rate_limited", message: "Too many requests. Please try again later." },
@@ -143,29 +182,27 @@ export async function POST(req: Request) {
       : {},
   };
 
-  const submittedScore = typeof data.qualificationScore === "number" && !isNaN(data.qualificationScore)
+  const assessmentScore = typeof data.assessmentScore === "number" && !isNaN(data.assessmentScore)
+    ? Math.max(0, Math.min(100, Math.round(data.assessmentScore)))
+    : typeof data.qualificationScore === "number" && !isNaN(data.qualificationScore)
     ? Math.max(0, Math.min(100, Math.round(data.qualificationScore)))
     : undefined;
 
-  // Server-side authoritative evaluation to prevent client spoofing
-  const serverEval = evaluateLeadQualification(email, company, submittedScore);
-
-  const allowedTiers: LeadQualificationTier[] = ["sql", "qualified_mql", "standard_lead", "subscriber"];
-  const validatedTier: LeadQualificationTier =
-    typeof data.leadQualificationTier === "string" && allowedTiers.includes(data.leadQualificationTier as LeadQualificationTier)
-      ? (data.leadQualificationTier as LeadQualificationTier)
-      : serverEval.tier;
-
-  const validatedScore = submittedScore ?? serverEval.score;
+  // Server-authoritative evaluation: client qualification tier is ignored to prevent spoofing
+  const serverEval = evaluateLeadQualification(email, company, assessmentScore);
+  const validatedTier: LeadQualificationTier = serverEval.tier;
+  const validatedScore = serverEval.score;
 
   // CRITICAL CONSENT FIX: Strictly explicit opt-in. Defaults to false if omitted, null, or false.
   const consentGranted = Boolean(data.consent === true || data.marketing_consent === true);
-  const consentTimestamp = typeof data.consentTimestamp === "string"
-    ? String(data.consentTimestamp).slice(0, 50)
-    : new Date().toISOString();
+  // Consent timestamp is strictly null when consent is not granted
+  const consentTimestamp = consentGranted
+    ? (typeof data.consentTimestamp === "string" && data.consentTimestamp
+        ? String(data.consentTimestamp).slice(0, 50)
+        : new Date().toISOString())
+    : null;
 
   // --- PERSISTENCE: SUPABASE CRM ---
-  const supabase = getSupabaseAdmin();
   if (supabase) {
     const extendedRecord = {
       name: name || "(not given)",
@@ -179,6 +216,7 @@ export async function POST(req: Request) {
       attribution: sanitizedAttribution,
       consent: consentGranted,
       consent_timestamp: consentTimestamp,
+      ip_address: clientIp !== "unknown-ip" ? clientIp : null,
     };
 
     const { error } = await supabase.from("lead_magnet_signups").insert(extendedRecord);
@@ -196,6 +234,23 @@ export async function POST(req: Request) {
       const { error: fallbackError } = await supabase.from("lead_magnet_signups").insert(fallbackRecord);
       if (fallbackError) {
         console.error("[lead-magnet] supabase fallback insert failed:", fallbackError.message);
+      }
+    }
+
+    // Persist qualified lead into client inquiries queue
+    if (validatedTier === "sql" || validatedTier === "qualified_mql") {
+      const { error: inquiryError } = await supabase.from("client_inquiries").insert({
+        name: name || "(not given)",
+        email,
+        company: company || null,
+        details: `[CRM ${validatedTier.toUpperCase()}] Asset: ${guide} (${source}). Score: ${validatedScore}/100. Factors: ${serverEval.factors.join("; ")}. Attribution: ${sanitizedAttribution.firstTouchSource} -> ${sanitizedAttribution.lastTouchSource}. Challenge: ${challenge || "None"}. Marketing Consent: ${consentGranted ? "Granted" : "Denied"}`,
+        source: `lead_magnet:${source}`,
+        status: "new",
+        user_agent: req.headers.get("user-agent"),
+        ip_address: clientIp !== "unknown-ip" ? clientIp : null,
+      });
+      if (inquiryError) {
+        console.warn("[lead-magnet] client_inquiries qualified lead persistence failed:", inquiryError.message);
       }
     }
   }

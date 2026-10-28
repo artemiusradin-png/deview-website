@@ -5,10 +5,7 @@ import Link from "next/link";
 import type { LeadMagnetResource } from "@/lib/oil-gas/resources";
 import {
   emitAnalyticsEvent,
-  evaluateLeadQualification,
   getAttributionContext,
-  getAnalyticsConsentState,
-  setAnalyticsConsent,
 } from "@/lib/analytics/events";
 
 interface Props {
@@ -30,10 +27,6 @@ export function ResourceInteractiveView({ resource, locale }: Props) {
   const [consentChecked, setConsentChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    // Explicit opt-in only: sync consent if user previously explicitly granted it
-    const state = getAnalyticsConsentState();
-    setConsentChecked(state === "granted");
-
     // PRD Section 20.2: resource_preview event
     emitAnalyticsEvent("resource_preview", {
       source_asset_id: "hub-oil-gas",
@@ -59,15 +52,8 @@ export function ResourceInteractiveView({ resource, locale }: Props) {
 
     const email = String(formData.get("email") || "");
     const company = String(formData.get("company") || "");
-    const qualification = evaluateLeadQualification(email, company, scorePercentage);
     const attribution = getAttributionContext();
-    const consentTimestamp = new Date().toISOString();
-
-    if (consentChecked) {
-      setAnalyticsConsent(true);
-    } else {
-      setAnalyticsConsent(false);
-    }
+    const consentTimestamp = consentChecked ? new Date().toISOString() : null;
 
     const payload = {
       name: formData.get("name"),
@@ -76,8 +62,7 @@ export function ResourceInteractiveView({ resource, locale }: Props) {
       industry: "Oil & Gas / Energy",
       source: resource.slug,
       challenge: `Readiness score: ${scorePercentage}%. Download request for ${resource.fileDeliverable}`,
-      leadQualificationTier: qualification.tier,
-      qualificationScore: qualification.score,
+      assessmentScore: scorePercentage,
       attribution,
       consent: consentChecked,
       consentTimestamp,
@@ -114,7 +99,7 @@ export function ResourceInteractiveView({ resource, locale }: Props) {
         resourceSlug: resource.slug,
         fileDeliverable: resource.fileDeliverable,
         scorePercentage,
-        qualificationTier: qualification.tier,
+        qualificationTier: json.qualificationTier || "subscriber",
       });
 
       // Automated client download trigger
@@ -513,9 +498,7 @@ export function ResourceInteractiveView({ resource, locale }: Props) {
                   name="marketing_consent"
                   checked={consentChecked}
                   onChange={(e) => {
-                    const val = e.target.checked;
-                    setConsentChecked(val);
-                    setAnalyticsConsent(val);
+                    setConsentChecked(e.target.checked);
                   }}
                   style={{ marginTop: "2px" }}
                 />

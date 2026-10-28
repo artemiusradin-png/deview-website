@@ -279,7 +279,7 @@ export function emitAnalyticsEvent(
   if (typeof window === "undefined") return;
 
   const consentState = getAnalyticsConsentState();
-  if (consentState === "denied") {
+  if (consentState !== "granted") {
     return;
   }
 
