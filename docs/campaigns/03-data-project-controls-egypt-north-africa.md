@@ -15,7 +15,7 @@
 | **Conversion Assets (Lead Magnets)** | 1. Oil & Gas Project Controls / JV Reporting Checklist (`LM-02`)<br/>2. OSDU Exploration Data Readiness Assessment (`LM-04`) |
 | **Owner Pages** | `/en/industries/oil-and-gas/regions/north-africa` & `/en/industries/oil-and-gas/markets/egypt` |
 | **Asset Deliverables** | `Deview_Project_Controls_JV_Checklist_v2026.xlsx`<br/>`Deview_OSDU_Readiness_Diagnostic_v2026.xlsx` |
-| **Proof Anchors** | **1. Capital Project Scheduling Controls:** Tomskneft & Gazprom Neft multi-tier project network (1,400+ schedule items, critical path tracking across contractor packages).<br/>**2. Engineering Data Management:** Lukoil Engineering platform (unifying technical document revisions and subsurface equipment hierarchies). |
+| **Proof Anchors** | **1. Capital Project Scheduling Controls:** Historical enterprise capital scheduling architectures (e.g. Tomskneft & Gazprom Neft systems managing 1,400+ multi-tier schedule items and critical-path tracking across contractor packages).<br/>**2. Engineering Data Management:** Lukoil Engineering platform architecture reference (unifying technical document revisions and equipment hierarchies across complex operations). |
 | **Target Next Actions** | 1. Book a Project-Controls & JV Assessment to map Primavera P6 WBS with ERP cost centers.<br/>2. Schedule an OSDU Readiness Review to evaluate subsurface data silos and migration roadmaps. |
 
 ---
@@ -63,9 +63,9 @@ Deview builds **custom project-controls middleware and open subsurface data plat
 - **Angle:** Teardown of the four prerequisites for OSDU migration: geodetic CRS harmonization, unique wellbore identifiers, DLIS curve standardization, and open API entitlements.
 - **Asset CTA:** Link to take the *OSDU Exploration Data Readiness Diagnostic*.
 
-#### Post 3 (Proof & Case Study Teardown):
-- **Hook:** *“Managing 1,400+ project tasks across multi-contractor gas field developments: Lessons from large-scale project controls.”*
-- **Angle:** How Tomskneft and Gazprom Neft eliminated schedule blind spots by automating milestone verification across engineering and procurement packages.
+#### Post 3 (Proof & Architecture Teardown):
+- **Hook:** *“Managing 1,400+ project tasks across multi-contractor field developments: Architecture patterns for capital project controls.”*
+- **Angle:** Technical patterns from enterprise capital scheduling systems: multi-tier milestone linking, critical path recalculation, and automated progress verification across engineering and procurement packages.
 - **Offer CTA:** Book a *Project-Controls & JV Reporting Assessment*.
 
 ---

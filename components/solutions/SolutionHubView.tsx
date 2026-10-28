@@ -10,6 +10,7 @@ import {
 } from "@/lib/solutions";
 import { coverPath } from "./covers";
 import { SolutionsExplorer } from "./SolutionsExplorer";
+import { SolutionEngagementTracker } from "@/components/analytics/SolutionEngagementTracker";
 import styles from "./solutions.module.css";
 
 const SITE_URL = "https://deviewai.com";
@@ -76,6 +77,11 @@ export function SolutionHubView({ hub }: { hub: SolutionHub }) {
 
   return (
     <>
+      <SolutionEngagementTracker
+        assetId={hub.slug}
+        solution={hub.slug}
+        locale="en"
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

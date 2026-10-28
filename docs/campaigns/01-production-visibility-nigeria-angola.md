@@ -15,7 +15,7 @@
 | **Conversion Asset (Lead Magnet)** | Upstream Production System Requirements Workbook (`LM-01`) |
 | **Owner Page** | `/en/industries/oil-and-gas/regions/west-central-africa` & `/en/industries/oil-and-gas/markets/nigeria` |
 | **Asset Deliverable** | `Deview_Upstream_Production_Requirements_v2026.xlsx` |
-| **Proof Anchor** | **EnerQuest Operating Proof:** Production telemetry monitoring 12,000+ bpd across remote wellpads with intermittent satellite connectivity, automated back-allocation, and zero cloud data lock-in. |
+| **Proof Anchor** | **EnerQuest Architecture Benchmark:** Telemetry architecture and digital field prototype designed for 12,000+ bpd across remote wellpads with intermittent satellite connectivity, automated back-allocation, and zero cloud data lock-in. |
 | **Target Next Action** | Book a structured 45-minute technical review of well testing, loss deferment, and telemetry intake logic. |
 
 ---
@@ -52,8 +52,8 @@ Deview builds **custom, sovereign production management systems** designed for l
 ### A. Founder-Led LinkedIn Publishing Schedule (3x / Week)
 
 #### Post 1 (Operational Reality):
-- **Hook:** *“Why 60% of digital oilfield projects in the Niger Delta fail to deliver real-time visibility.”*
-- **Angle:** Critique SaaS vendors selling cloud-only dashboards to platforms with 128 kbps VSAT links. Explain local edge buffering, SQLite local cache, and asynchronous burst-sync architecture.
+- **Hook:** *“Why digital oilfield visibility frequently breaks down in remote swamp and offshore operations.”*
+- **Angle:** Critique the fragility of cloud-dependent architectures on remote 128 kbps VSAT links. Explain local edge buffering, SQLite local cache, and asynchronous burst-sync architecture.
 - **Asset CTA:** Link to download the *Upstream Production Requirements Workbook*.
 
 #### Post 2 (Technical Deep Dive - Telemetry & Diode Architecture):
@@ -62,8 +62,8 @@ Deview builds **custom, sovereign production management systems** designed for l
 - **Offer CTA:** Offer the *45-Minute Production Workflow Review*.
 
 #### Post 3 (Proof & Case Spotlight):
-- **Hook:** *“How EnerQuest monitors 12,000 bpd across remote well sites without vendor cloud lock-in.”*
-- **Angle:** Breakdown of the telemetry topology, sensor intake (Modbus/OPC-UA), and operator daily sign-off workflow.
+- **Hook:** *“Architecting edge telemetry for 12,000 bpd: How to decouple field data acquisition from vendor cloud lock-in.”*
+- **Angle:** Breakdown of the telemetry topology, sensor intake (Modbus/OPC-UA), and operator daily sign-off workflow based on our EnerQuest field telemetry architecture.
 - **Asset CTA:** Direct link to explore the Nigeria concessions engineering overview.
 
 ---
@@ -81,7 +81,7 @@ Deview builds **custom, sovereign production management systems** designed for l
 > *Most independent operators managing mature and marginal assets in [Nigeria / Angola] struggle with two recurring bottlenecks: manual spreadsheet reconciliation between field flowstations and export terminals, and software downtime during satellite dropouts.*  
 > *We designed a testable engineering workbook specifically for evaluating upstream production and allocation systems against intermittent field connectivity:*  
 > *https://deviewai.com/en/resources/upstream-production-system-requirements*  
-> *It includes the exact telemetry buffering and back-allocation criteria we implemented for EnerQuest (monitoring 12,000+ bpd). Would you find it helpful to run a 45-minute production workflow review with our systems architects to map your current intake points?*  
+> *It includes the exact telemetry buffering and back-allocation criteria developed in our 12,000 bpd digital field prototype. Would you find it helpful to run a 45-minute production workflow review with our systems architects to map your current intake points?*  
 > *Best regards,*  
 > *[Deview Energy Practice]*
 

@@ -1,13 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, Suspense, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { SiteFooter } from "@/components/SiteFooter";
 import { PageIntro } from "@/components/PageIntro";
 import { SubpageNav } from "@/components/SubpageNav";
 import { CalendlyInlineWidget } from "@/components/ui/calendly-inline-widget";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL, buildInquiryMailto } from "@/lib/site-contact";
+import { emitAnalyticsEvent } from "@/lib/analytics/events";
 
 const rise = {
   initial: { opacity: 0, y: 20 },
@@ -22,25 +24,29 @@ const TOPIC_LABELS: Record<string, string> = {
   "sovereign-ai-workshop": "Sovereign AI Architecture Workshop",
 };
 
-export default function ContactPage() {
-  const { dict } = useLocaleContext();
-  const sp = dict.subpages;
+function ContactFormInner() {
+  const { dict, locale } = useLocaleContext();
+  const searchParams = useSearchParams();
   const f = dict.contactForm;
   const [status, setStatus] = useState<
     "idle" | "sending" | "success" | "error"
   >("idle");
   const [feedback, setFeedback] = useState<string | null>(null);
-  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+  const [clearedTopic, setClearedTopic] = useState(false);
+  const hasStartedRef = useRef(false);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const topic = params.get("topic");
-      if (topic) {
-        setSelectedTopic(topic);
-      }
+  const topicParam = searchParams.get("topic");
+  const selectedTopic = clearedTopic ? null : topicParam;
+
+  function handleFormFocus() {
+    if (!hasStartedRef.current) {
+      hasStartedRef.current = true;
+      emitAnalyticsEvent("contact_start", {
+        source_asset_id: selectedTopic || "contact-general",
+        cta_variant: "standard_form",
+      });
     }
-  }, []);
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -83,11 +89,25 @@ export default function ContactPage() {
       if (res.ok && data?.ok) {
         setStatus("success");
         setFeedback(f.submitSuccess);
+        emitAnalyticsEvent("contact_submit", {
+          source_asset_id: selectedTopic || "contact-general",
+          use_case: selectedTopic || "general_inquiry",
+          market: "general",
+          locale,
+          lead_id: email,
+        });
         form.reset();
         return;
       }
 
       if (data?.mailto) {
+        emitAnalyticsEvent("contact_submit", {
+          source_asset_id: selectedTopic || "contact-general",
+          use_case: selectedTopic || "general_inquiry",
+          market: "general",
+          locale,
+          lead_id: email,
+        });
         window.location.href = buildInquiryMailto({
           name,
           email,
@@ -102,6 +122,13 @@ export default function ContactPage() {
       setStatus("error");
       setFeedback(f.submitError ?? "Something went wrong. Please try again.");
     } catch {
+      emitAnalyticsEvent("contact_submit", {
+        source_asset_id: selectedTopic || "contact-general",
+        use_case: selectedTopic || "general_inquiry",
+        market: "general",
+        locale,
+        lead_id: email,
+      });
       window.location.href = buildInquiryMailto({
         name,
         email,
@@ -112,6 +139,124 @@ export default function ContactPage() {
       setFeedback(f.submitSuccessMailto);
     }
   }
+
+  return (
+    <motion.form
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2, duration: 0.55 }}
+      className="space-y-5"
+      onFocusCapture={handleFormFocus}
+      onSubmit={handleSubmit}
+    >
+      <input
+        type="text"
+        name="company_website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden
+        className="pointer-events-none absolute left-[-10000px] h-0 w-0 opacity-0"
+      />
+
+      {selectedTopic && (
+        <div className="flex items-center justify-between rounded border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3.5 py-2.5 text-xs text-[var(--gold)]">
+          <div className="flex items-center gap-2">
+            <span className="font-semibold uppercase tracking-wider">
+              Requested Session:
+            </span>
+            <span className="font-medium text-[var(--white-90)]">
+              {TOPIC_LABELS[selectedTopic] || selectedTopic}
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setClearedTopic(true)}
+            className="text-[var(--white-60)] hover:text-white"
+            title="Clear session"
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
+      <div className="grid gap-5 sm:grid-cols-2">
+        <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+          <span>
+            {f.fullName} <span className="text-red-500">*</span>
+          </span>
+          <input
+            type="text"
+            name="name"
+            required
+            placeholder={f.placeholders.name}
+            className="min-h-11 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
+          />
+        </label>
+        <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+          <span>
+            {f.workEmail} <span className="text-red-500">*</span>
+          </span>
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder={f.placeholders.email}
+            className="min-h-11 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
+          />
+        </label>
+      </div>
+
+      <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+        {f.company}
+        <input
+          type="text"
+          name="company"
+          placeholder={f.placeholders.company}
+          className="min-h-11 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
+        <span>
+          {f.problem} <span className="text-red-500">*</span>
+        </span>
+        <textarea
+          name="details"
+          required
+          rows={6}
+          placeholder={f.placeholders.details}
+          className="w-full resize-none border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:text-sm"
+        />
+      </label>
+
+      <motion.button
+        whileHover={{ y: -1 }}
+        whileTap={{ scale: 0.99 }}
+        type="submit"
+        disabled={status === "sending"}
+        className="btn-outline w-full sm:w-auto disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        {status === "sending" ? f.submitSending : f.submit}
+      </motion.button>
+
+      {feedback ? (
+        <p
+          className={`text-sm leading-snug ${
+            status === "error" ? "text-red-400" : "text-[var(--white-90)]"
+          }`}
+          role="status"
+        >
+          {feedback}
+        </p>
+      ) : null}
+    </motion.form>
+  );
+}
+
+export default function ContactPage() {
+  const { dict } = useLocaleContext();
+  const sp = dict.subpages;
+  const f = dict.contactForm;
 
   return (
     <>
@@ -143,112 +288,15 @@ export default function ContactPage() {
                 <br />A good start.
               </h2>
 
-              <motion.form
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.55 }}
-                className="space-y-5"
-                onSubmit={handleSubmit}
-              >
-                <input
-                  type="text"
-                  name="company_website"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  aria-hidden
-                  className="pointer-events-none absolute left-[-10000px] h-0 w-0 opacity-0"
-                />
-
-                {selectedTopic && (
-                  <div className="flex items-center justify-between rounded border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3.5 py-2.5 text-xs text-[var(--gold)]">
-                    <div className="flex items-center gap-2">
-                      <span className="font-semibold uppercase tracking-wider">Requested Session:</span>
-                      <span className="font-medium text-[var(--white-90)]">{TOPIC_LABELS[selectedTopic] || selectedTopic}</span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setSelectedTopic(null)}
-                      className="text-[var(--white-60)] hover:text-white"
-                      title="Clear session"
-                    >
-                      ✕
-                    </button>
+              <Suspense
+                fallback={
+                  <div className="animate-pulse py-12 text-center text-sm text-[var(--white-40)]">
+                    Loading contact form...
                   </div>
-                )}
-
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                    <span>
-                      {f.fullName} <span className="text-red-500">*</span>
-                    </span>
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      placeholder={f.placeholders.name}
-                      className="min-h-11 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
-                    />
-                  </label>
-                  <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                    <span>
-                      {f.workEmail} <span className="text-red-500">*</span>
-                    </span>
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      placeholder={f.placeholders.email}
-                      className="min-h-11 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
-                    />
-                  </label>
-                </div>
-
-                <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                  {f.company}
-                  <input
-                    type="text"
-                    name="company"
-                    placeholder={f.placeholders.company}
-                    className="min-h-11 w-full border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors [-webkit-appearance:none] placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:min-h-0 sm:text-sm"
-                  />
-                </label>
-
-                <label className="flex flex-col gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--white-60)]">
-                  <span>
-                    {f.problem} <span className="text-red-500">*</span>
-                  </span>
-                  <textarea
-                    name="details"
-                    required
-                    rows={6}
-                    placeholder={f.placeholders.details}
-                    className="w-full resize-none border border-[var(--white-20)] bg-[var(--surface-elevated)] px-4 py-3 text-base text-[var(--white-90)] outline-none transition-colors placeholder:text-[var(--white-40)] focus:border-[var(--white-80)] sm:text-sm"
-                  />
-                </label>
-
-                <motion.button
-                  whileHover={{ y: -1 }}
-                  whileTap={{ scale: 0.99 }}
-                  type="submit"
-                  disabled={status === "sending"}
-                  className="btn-outline w-full sm:w-auto disabled:cursor-not-allowed disabled:opacity-60"
-                >
-                  {status === "sending" ? f.submitSending : f.submit}
-                </motion.button>
-
-                {feedback ? (
-                  <p
-                    className={`text-sm leading-snug ${
-                      status === "error"
-                        ? "text-red-400"
-                        : "text-[var(--white-90)]"
-                    }`}
-                    role="status"
-                  >
-                    {feedback}
-                  </p>
-                ) : null}
-              </motion.form>
+                }
+              >
+                <ContactFormInner />
+              </Suspense>
             </motion.section>
 
             <motion.aside

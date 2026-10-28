@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SilentCaseVideo } from "@/components/SilentCaseVideo";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SubpageNav } from "@/components/SubpageNav";
+import { ProofLink } from "@/components/analytics/ProofLink";
 import { withSocialMetadata } from "@/lib/seo";
 import { OIL_GAS_CASE_LIST, OIL_GAS_HUB_PATH, OIL_GAS_PAGES_UPDATED, oilGasCasePath } from "@/lib/oil-gas-cases";
 import { getAllRegions } from "@/lib/oil-gas/regions";
@@ -114,13 +115,26 @@ export default function OilAndGasPage() {
             <div className={styles.projectGrid}>
               {OIL_GAS_CASE_LIST.map((project, index) => (
                 <article key={project.slug} className={styles.projectCard}>
-                  <Link href={oilGasCasePath(project.slug)} className={styles.projectVisual}>
+                  <ProofLink
+                    href={oilGasCasePath(project.slug)}
+                    sourceAssetId="oil-and-gas-industry"
+                    proofId={project.slug}
+                    className={styles.projectVisual}
+                  >
                     <Image src={`/images/cases/covers/${project.slug}.webp`} alt={`Architectural drawing for ${project.company}: ${project.project}`} fill sizes="(max-width: 760px) 100vw, 50vw" />
                     {project.logo ? <span className={styles.projectLogo}><Image src={project.logo.src} alt={project.logo.alt} width={project.logo.width} height={project.logo.height} unoptimized /></span> : null}
                     <span>View case ↗</span>
-                  </Link>
+                  </ProofLink>
                   <div className={styles.projectMeta}><span>0{index + 1} / {project.year}</span><em>{project.discipline}</em></div>
-                  <h3><Link href={oilGasCasePath(project.slug)}>{project.company}<br /><span>{project.project}</span></Link></h3>
+                  <h3>
+                    <ProofLink
+                      href={oilGasCasePath(project.slug)}
+                      sourceAssetId="oil-and-gas-industry"
+                      proofId={project.slug}
+                    >
+                      {project.company}<br /><span>{project.project}</span>
+                    </ProofLink>
+                  </h3>
                   <p>{project.summary}</p>
                   {project.scope ? <ul>{project.scope.map((item) => <li key={item}>{item}</li>)}</ul> : null}
                 </article>
@@ -132,7 +146,7 @@ export default function OilAndGasPage() {
           <section className={styles.matrix} aria-labelledby="matrix-heading">
             <div><p className={styles.kicker}><span>04</span> Discipline matrix</p><h2 id="matrix-heading">Find the work by operational discipline.</h2></div>
             <ul>
-              {areas.map((area, index) => <li key={area.discipline}><span>0{index + 1}</span><h3>{area.discipline}</h3><div>{area.cases.map((project) => <Link key={project.slug} href={oilGasCasePath(project.slug)}>{project.company} · {project.year}<b>↗</b></Link>)}</div></li>)}
+              {areas.map((area, index) => <li key={area.discipline}><span>0{index + 1}</span><h3>{area.discipline}</h3><div>{area.cases.map((project) => <ProofLink key={project.slug} sourceAssetId="oil-and-gas-discipline-matrix" proofId={project.slug} href={oilGasCasePath(project.slug)}>{project.company} · {project.year}<b>↗</b></ProofLink>)}</div></li>)}
             </ul>
           </section>
 

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SubpageNav } from "@/components/SubpageNav";
+import { MarketPageViewTracker } from "@/components/analytics/MarketPageViewTracker";
 import { isMarketSlug, MARKETS, MARKET_SLUGS } from "@/lib/markets";
 
 type MarketPageProps = {
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }: MarketPageProps): Promise<Met
 }
 
 export default async function MarketPage({ params }: MarketPageProps) {
-  const { market: marketSlug } = await params;
+  const { locale, market: marketSlug } = await params;
 
   if (!isMarketSlug(marketSlug)) notFound();
 
@@ -68,6 +69,12 @@ export default async function MarketPage({ params }: MarketPageProps) {
 
   return (
     <>
+      <MarketPageViewTracker
+        assetId={market.slug}
+        country={market.name}
+        region="asia-pacific"
+        locale={locale}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}

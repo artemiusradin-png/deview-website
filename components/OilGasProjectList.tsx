@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { ProofLink } from "@/components/analytics/ProofLink";
 import { oilGasCasePath, type OilGasCase } from "@/lib/oil-gas-cases";
 
 type OilGasProjectListProps = {
@@ -14,8 +14,10 @@ export function OilGasProjectList({ cases, variant = "full" }: OilGasProjectList
       <ol className="border-t border-[var(--white-20)]">
         {cases.map((c) => (
           <li key={c.slug} className="border-b border-[var(--white-20)]">
-            <Link
+            <ProofLink
               href={oilGasCasePath(c.slug)}
+              sourceAssetId="oil-gas-project-list"
+              proofId={c.slug}
               className="group grid gap-1 py-4 transition sm:grid-cols-[4rem_1fr_auto] sm:items-baseline sm:gap-6"
             >
               <span className="text-xs tabular-nums text-[var(--white-40)]">{c.year}</span>
@@ -25,7 +27,7 @@ export function OilGasProjectList({ cases, variant = "full" }: OilGasProjectList
               <span className="text-[var(--white-40)] transition group-hover:translate-x-1 group-hover:text-[var(--white-80)]" aria-hidden="true">
                 →
               </span>
-            </Link>
+            </ProofLink>
           </li>
         ))}
       </ol>
@@ -41,23 +43,27 @@ export function OilGasProjectList({ cases, variant = "full" }: OilGasProjectList
             <div>
               <p className="text-[0.62rem] uppercase tracking-[0.18em] text-[var(--white-40)]">{c.discipline}</p>
               <h3 className="mt-2 text-lg leading-snug text-[var(--white-100)]">
-                <Link
+                <ProofLink
                   href={oilGasCasePath(c.slug)}
+                  sourceAssetId="oil-gas-project-list"
+                  proofId={c.slug}
                   className="underline decoration-[var(--white-20)] underline-offset-4 transition hover:decoration-[var(--white-60)]"
                 >
                   {c.company}: {c.project}
-                </Link>
+                </ProofLink>
               </h3>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--text-muted)]">{c.summary}</p>
             </div>
-            <Link
+            <ProofLink
               href={oilGasCasePath(c.slug)}
+              sourceAssetId="oil-gas-project-list"
+              proofId={c.slug}
               aria-label={`Read about ${c.company}: ${c.project}`}
               className="inline-flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.15em] text-[var(--white-80)] hover:text-[var(--white-100)] md:justify-self-end"
             >
               Read project
               <span aria-hidden="true">→</span>
-            </Link>
+            </ProofLink>
           </article>
         </li>
       ))}

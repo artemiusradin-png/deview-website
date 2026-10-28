@@ -27,14 +27,13 @@ export function ResourceInteractiveView({ resource, locale }: Props) {
   const [downloadStatus, setDownloadStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [downloadError, setDownloadError] = useState<string | null>(null);
   const [downloadUrlState, setDownloadUrlState] = useState<string | null>(null);
-  const [consentChecked, setConsentChecked] = useState<boolean>(true);
+  const [consentChecked, setConsentChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    // Sync initial consent state from storage if explicit
+    // Explicit opt-in only: sync consent if user previously explicitly granted it
     const state = getAnalyticsConsentState();
-    if (state === "denied") {
-      setConsentChecked(false);
-    }
+    setConsentChecked(state === "granted");
+
     // PRD Section 20.2: resource_preview event
     emitAnalyticsEvent("resource_preview", {
       source_asset_id: "hub-oil-gas",
@@ -52,6 +51,12 @@ export function ResourceInteractiveView({ resource, locale }: Props) {
     setDownloadError(null);
 
     const formData = new FormData(e.currentTarget);
+    const honeypot = String(formData.get("b_comment") || formData.get("honeypot") || "").trim();
+    if (honeypot) {
+      setDownloadStatus("success");
+      return;
+    }
+
     const email = String(formData.get("email") || "");
     const company = String(formData.get("company") || "");
     const qualification = evaluateLeadQualification(email, company, scorePercentage);
@@ -60,6 +65,8 @@ export function ResourceInteractiveView({ resource, locale }: Props) {
 
     if (consentChecked) {
       setAnalyticsConsent(true);
+    } else {
+      setAnalyticsConsent(false);
     }
 
     const payload = {
@@ -487,10 +494,23 @@ export function ResourceInteractiveView({ resource, locale }: Props) {
                 />
               </div>
 
+              <input
+                type="text"
+                name="b_comment"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden
+                style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, width: 0, pointerEvents: "none" }}
+              />
+
+              <div style={{ padding: "12px 14px", background: "rgba(18, 16, 14, 0.03)", border: "1px solid var(--ds-line, #ded5c5)", fontSize: "12px", color: "var(--ds-muted, #555047)", lineHeight: 1.5 }}>
+                Workbook file delivery is immediate. Your work email is used solely to transmit the spreadsheet workbook download link.
+              </div>
+
               <label style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "12px", color: "var(--ds-muted, #555047)", cursor: "pointer", marginTop: "4px" }}>
                 <input
                   type="checkbox"
-                  name="consent"
+                  name="marketing_consent"
                   checked={consentChecked}
                   onChange={(e) => {
                     const val = e.target.checked;
@@ -500,7 +520,7 @@ export function ResourceInteractiveView({ resource, locale }: Props) {
                   style={{ marginTop: "2px" }}
                 />
                 <span>
-                  I consent to Deview processing my business contact details to deliver this workbook and energy engineering benchmarks in accordance with the Privacy Policy.
+                  <strong>Optional:</strong> I consent to receiving technical briefings, benchmark reports, and architectural scoping follow-up from Deview&apos;s energy practice. (You can download the workbook without opting in).
                 </span>
               </label>
 

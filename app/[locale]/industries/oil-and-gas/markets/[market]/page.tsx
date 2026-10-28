@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SubpageNav } from "@/components/SubpageNav";
+import { MarketPageViewTracker } from "@/components/analytics/MarketPageViewTracker";
 import { withSocialMetadata } from "@/lib/seo";
 import { getAllMarkets, getMarketBySlug, getMarketsByRegion } from "@/lib/oil-gas/markets";
 import { getRegionBySlug } from "@/lib/oil-gas/regions";
@@ -114,6 +115,12 @@ export default async function MarketPage({ params }: PageProps) {
 
   return (
     <>
+      <MarketPageViewTracker
+        assetId={market.slug}
+        country={market.name}
+        region={market.regionSlug}
+        locale={locale}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

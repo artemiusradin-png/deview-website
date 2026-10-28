@@ -14,6 +14,7 @@ import {
 import { SolutionDiagram } from "./diagrams";
 import { SolutionAssetForm } from "./SolutionAssetForm";
 import { coverPath } from "./covers";
+import { SolutionEngagementTracker } from "@/components/analytics/SolutionEngagementTracker";
 import styles from "./solutions.module.css";
 
 const SITE_URL = "https://deviewai.com";
@@ -97,6 +98,11 @@ export function SolutionPageView({ page }: { page: SolutionPage }) {
 
   return (
     <>
+      <SolutionEngagementTracker
+        assetId={page.assetId}
+        solution={page.slug}
+        locale="en"
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

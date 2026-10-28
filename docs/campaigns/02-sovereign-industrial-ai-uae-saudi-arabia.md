@@ -37,10 +37,10 @@
 ## 3. Core Narrative & Positioning
 
 ### The Pain Point:
-GCC energy operators are under executive pressure to modernize with AI, but statutory data residency mandates (UAE Federal Decree-Law No. 45, Saudi Personal Data Protection Law, National Cybersecurity Authority standards) strictly prohibit streaming proprietary reservoir models, pipeline coordinates, and DCS telemetry to public cloud LLM endpoints (OpenAI, Anthropic, AWS us-east-1).
+GCC energy operators are modernizing with AI under rigorous statutory frameworks. Regional compliance rules (including UAE Federal Decree-Law No. 45, Saudi Personal Data Protection Law, and NCA Essential Cybersecurity Controls) restrict outbound transfer of sensitive operational telemetry, grid topology, and critical infrastructure metadata to overseas public cloud APIs. For industrial automation and OT-adjacent workloads, domestic hosting, customer-held encryption keys, or private air-gapped deployments are standard prerequisites.
 
 ### Deview Solution & Positioning:
-- **Strictly Architecture-Led:** We do not claim past execution for sovereign national champions. Instead, we demonstrate deep architectural mastery of **sovereign, air-gapped systems**.
+- **Strictly Architecture-Led:** We focus strictly on architectural rigor and technology capabilities, without claiming past delivery for sovereign national champions.
 - **Minima AI Technology Distribution:** As official distribution and implementation partners of Minima AI (`mnma.ai`), Deview deploys private LLMs on certified domestic infrastructure or inside on-premise server rooms with up to 4× fewer GPU nodes (four-node clusters compressed into one).
 - **Physical Unidirectional Diodes:** Data flows out of the industrial plant into mirrored read-only replicas in an Industrial DMZ (IDMZ). Zero return write-path into safety instrumented systems.
 
@@ -51,8 +51,8 @@ GCC energy operators are under executive pressure to modernize with AI, but stat
 ### A. Founder-Led LinkedIn Publishing Schedule (3x / Week)
 
 #### Post 1 (Regulatory Reality in the GCC):
-- **Hook:** *“Why 90% of US-built AI solutions violate GCC energy data sovereignty the moment they ping an API.”*
-- **Angle:** Analysis of UAE Federal Decree-Law 45 and Saudi PDPL in relation to industrial telemetry. Explain the architecture of private VPCs and air-gapped on-premise inference.
+- **Hook:** *“Deploying enterprise AI under UAE Decree-Law 45 and Saudi PDPL: The architectural challenge of public API endpoints.”*
+- **Angle:** Analysis of statutory data localization frameworks in the UAE and Saudi Arabia. Contrast public multi-tenant APIs with certified domestic private VPCs and air-gapped on-premise deployment.
 - **Asset CTA:** Link to the technical briefing: *GCC Oil & Gas AI Data Residency & Compliance Guide*.
 
 #### Post 2 (Technical Teardown - Purdue Model & Unidirectional Diodes):

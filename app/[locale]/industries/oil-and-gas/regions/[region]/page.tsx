@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SubpageNav } from "@/components/SubpageNav";
+import { MarketPageViewTracker } from "@/components/analytics/MarketPageViewTracker";
 import { withSocialMetadata } from "@/lib/seo";
 import { getAllRegions, getRegionBySlug } from "@/lib/oil-gas/regions";
 import styles from "../../oil-gas-subpage.module.css";
@@ -109,6 +110,12 @@ export default async function RegionalHubPage({ params }: PageProps) {
 
   return (
     <>
+      <MarketPageViewTracker
+        assetId={hub.slug}
+        country={hub.name}
+        region={hub.slug}
+        locale={locale}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { OilGasProjectList } from "@/components/OilGasProjectList";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SubpageNav } from "@/components/SubpageNav";
+import { SolutionEngagementTracker } from "@/components/analytics/SolutionEngagementTracker";
 import {
   OIL_GAS_CASES,
   OIL_GAS_CASE_LIST,
@@ -52,7 +53,7 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
 }
 
 export default async function OilGasCasePage({ params }: CasePageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
 
   if (!isOilGasCaseSlug(slug)) notFound();
 
@@ -104,6 +105,11 @@ export default async function OilGasCasePage({ params }: CasePageProps) {
 
   return (
     <>
+      <SolutionEngagementTracker
+        assetId={slug}
+        solution={c.project}
+        locale={locale}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}

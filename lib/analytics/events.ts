@@ -278,16 +278,24 @@ export function emitAnalyticsEvent(
 ): void {
   if (typeof window === "undefined") return;
 
-  if (!hasAnalyticsConsent()) {
+  const consentState = getAnalyticsConsentState();
+  if (consentState === "denied") {
     return;
+  }
+
+  // PRD Section 20.2: lead_id where consented
+  const sanitizedProperties = { ...properties };
+  if (!hasAnalyticsConsent() && "lead_id" in sanitizedProperties) {
+    delete sanitizedProperties.lead_id;
   }
 
   const attribution = getAttributionContext();
   const eventPayload = {
     event: eventName,
     timestamp: new Date().toISOString(),
+    consent_state: consentState,
     attribution,
-    ...properties,
+    ...sanitizedProperties,
   };
 
   // Push to dataLayer if present (Google Tag Manager / Analytics standard)

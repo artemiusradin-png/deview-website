@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS public.lead_magnet_signups (
   qualification_tier TEXT,
   qualification_score INTEGER,
   attribution JSONB,
-  consent BOOLEAN DEFAULT true,
+  consent BOOLEAN DEFAULT false,
   consent_timestamp TIMESTAMPTZ DEFAULT timezone('utc'::text, now())
 );
 
@@ -22,7 +22,7 @@ ALTER TABLE public.lead_magnet_signups
   ADD COLUMN IF NOT EXISTS qualification_tier TEXT,
   ADD COLUMN IF NOT EXISTS qualification_score INTEGER,
   ADD COLUMN IF NOT EXISTS attribution JSONB,
-  ADD COLUMN IF NOT EXISTS consent BOOLEAN DEFAULT true,
+  ADD COLUMN IF NOT EXISTS consent BOOLEAN DEFAULT false,
   ADD COLUMN IF NOT EXISTS consent_timestamp TIMESTAMPTZ DEFAULT timezone('utc'::text, now());
 
 -- Index for CRM qualification querying
