@@ -85,8 +85,8 @@ export function ConsentBanner() {
       >
         <div style={{ flex: "1 1 500px", minWidth: "260px" }}>
           <p style={{ margin: 0, color: "var(--ds-muted, #555047)" }}>
-            We use non-invasive analytics to evaluate regional performance and deliver gated technical workbooks.
-            We do not use advertising trackers or cross-site profiling. Review our{" "}
+            We use cookies to understand how our technical guides are read and to improve site performance.
+            We never run ads or track you across the web. Review our{" "}
             <Link
               href="/en/privacy"
               style={{
@@ -128,7 +128,7 @@ export function ConsentBanner() {
             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")}
             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
           >
-            Essential Only
+            Essential only
           </button>
           <button
             type="button"
@@ -148,7 +148,7 @@ export function ConsentBanner() {
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.88")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
-            Accept Analytics
+            Accept
           </button>
         </div>
       </div>
