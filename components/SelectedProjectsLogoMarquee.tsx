@@ -9,7 +9,7 @@ const CLIENT_LOGOS: LogoItem[] = [
   { name: "Fizkultura",          src: "/client-logos/fizkultura.png",          width: 118, height: 79  },
   { name: "Nextair",             src: "/client-logos/nextair.png",             width: 104, height: 100 },
   { name: "Grand Finance",       src: "/client-logos/grand-finance-white.png", width: 149, height: 47  },
-  { name: "SiimplyTrade",        src: "/client-logos/siimplytrade-white.png",  width: 997, height: 187 },
+  { name: "Jetfans",             src: "/client-logos/jetfans-horizontal-white.png", width: 245, height: 70 },
 ];
 
 function useIsMobileMarquee() {
