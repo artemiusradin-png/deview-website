@@ -6,6 +6,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SubpageNav } from "@/components/SubpageNav";
 import { withSocialMetadata } from "@/lib/seo";
 import { OIL_GAS_CASE_LIST, OIL_GAS_HUB_PATH, OIL_GAS_PAGES_UPDATED, oilGasCasePath } from "@/lib/oil-gas-cases";
+import { getAllRegions } from "@/lib/oil-gas/regions";
+import { getAllMarkets } from "@/lib/oil-gas/markets";
 import styles from "./oil-gas.module.css";
 
 const SITE_URL = "https://deviewai.com";
@@ -85,7 +87,19 @@ export default function OilAndGasPage() {
             </div>
             <div className={styles.film}>
               <SilentCaseVideo src="/video/cases/enerquest-dof.mp4" poster="/images/cases/video-posters/enerquest-dof.jpg" className={styles.filmVideo} />
-              <div className={styles.filmCaption}><span>Nigeria / Pilot</span><strong>EnerQuest Energy</strong><p>Production, equipment and exceptions in one upstream operating view.</p><Link href="/en/case-studies/enerquest">Read the pilot <span>↗</span></Link></div>
+              <div className={styles.filmCaption}>
+                <div style={{ marginBottom: "20px" }}>
+                  <Image
+                    src="/client-logos/enerquest-white.png"
+                    alt="EnerQuest Energy"
+                    width={383}
+                    height={91}
+                    style={{ height: "28px", width: "auto", objectFit: "contain" }}
+                    unoptimized
+                  />
+                </div>
+                <span>Nigeria / Pilot</span><strong>EnerQuest Energy</strong><p>Production, equipment and exceptions in one upstream operating view.</p><Link href="/en/case-studies/enerquest">Read the pilot <span>↗</span></Link>
+              </div>
             </div>
             <ol className={styles.pillars}>
               {PILLARS.map((pillar) => <li key={pillar.number}><div className={styles.pillarTop}><span>{pillar.number}</span><em>{pillar.label}</em></div><h3>{pillar.title}</h3><p>{pillar.body}</p><small>{pillar.proof}</small></li>)}
@@ -120,6 +134,68 @@ export default function OilAndGasPage() {
             <ul>
               {areas.map((area, index) => <li key={area.discipline}><span>0{index + 1}</span><h3>{area.discipline}</h3><div>{area.cases.map((project) => <Link key={project.slug} href={oilGasCasePath(project.slug)}>{project.company} · {project.year}<b>↗</b></Link>)}</div></li>)}
             </ul>
+          </section>
+
+          <section className={styles.matrix} id="regional-hubs" aria-labelledby="regions-heading">
+            <div>
+              <p className={styles.kicker}><span>05</span> Regional hubs &amp; markets</p>
+              <h2 id="regions-heading">5 Regional Hubs. 25 Sovereign Energy Markets.</h2>
+            </div>
+            <div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px", marginBottom: "40px" }}>
+                {getAllRegions().map((region) => (
+                  <Link
+                    key={region.slug}
+                    href={`/en/industries/oil-and-gas/regions/${region.slug}`}
+                    style={{
+                      padding: "24px",
+                      background: "#fff",
+                      border: "1px solid var(--ds-line, #ded5c5)",
+                      textDecoration: "none",
+                      color: "inherit",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <span style={{ fontSize: "11px", fontWeight: 700, color: "#806000", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "6px" }}>
+                      Regional Hub
+                    </span>
+                    <h3 style={{ fontSize: "18px", fontWeight: 600, margin: "0 0 8px" }}>{region.name}</h3>
+                    <p style={{ fontSize: "13px", lineHeight: 1.5, color: "var(--ds-muted, #555047)", margin: "0 0 16px", flexGrow: 1 }}>
+                      {region.title}
+                    </p>
+                    <span style={{ fontSize: "12px", fontWeight: 600, color: "var(--ds-ink, #12100e)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                      Explore Operating Hub →
+                    </span>
+                  </Link>
+                ))}
+              </div>
+
+              <div style={{ padding: "28px", background: "rgba(18, 16, 14, 0.02)", border: "1px solid var(--ds-line, #ded5c5)" }}>
+                <h3 style={{ fontSize: "14px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "16px", color: "var(--ds-ink, #12100e)" }}>
+                  Sovereign Country Concessions &amp; Markets
+                </h3>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                  {getAllMarkets().map((m) => (
+                    <Link
+                      key={m.slug}
+                      href={`/en/industries/oil-and-gas/markets/${m.slug}`}
+                      style={{
+                        padding: "8px 14px",
+                        background: "#fff",
+                        border: "1px solid var(--ds-line, #ded5c5)",
+                        fontSize: "12px",
+                        fontWeight: 500,
+                        textDecoration: "none",
+                        color: "var(--ds-ink, #12100e)",
+                      }}
+                    >
+                      {m.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
           </section>
 
           <section className={styles.closing}><p>Start with the operating gap.</p><h2>What can&rsquo;t management see until someone rebuilds the report?</h2><Link href="/en/contact">Map the system <span>↗</span></Link></section>

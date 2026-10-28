@@ -83,6 +83,7 @@ export function SiteFooter({ rootPrefix = "", hideCta = false }: SiteFooterProps
             { text: f.links.outcomes, href: localePath("/outcomes") },
             { text: f.links.useCases, href: localePath("/use-cases") },
             { text: "Tech Stack", href: localePath("/stack") },
+            { text: "Engineering workbooks", href: localePath("/resources") },
             { text: "Automation playbook", href: localePath("/resources/automation-playbook"), hasIndicator: true },
             { text: f.links.aiGuide, href: localePath("/resources/ai-guide-lending") },
             { text: "Loan system checklist", href: localePath("/resources/loan-management-system-checklist") },
@@ -100,6 +101,20 @@ export function SiteFooter({ rootPrefix = "", hideCta = false }: SiteFooterProps
             { text: "Lending operations", href: localePath("/industries/lending") },
             { text: "Oil & gas", href: localePath("/industries/oil-and-gas") },
             { text: f.inquiryForm, href: localePath("/contact") },
+          ],
+        },
+        {
+          title: "Energy & oilfield",
+          links: [
+            { text: "Oil & gas systems", href: localePath("/industries/oil-and-gas") },
+            { text: "Middle East hub", href: localePath("/industries/oil-and-gas/regions/middle-east") },
+            { text: "North Africa hub", href: localePath("/industries/oil-and-gas/regions/north-africa") },
+            { text: "West & Central Africa", href: localePath("/industries/oil-and-gas/regions/west-central-africa") },
+            { text: "East Africa hub", href: localePath("/industries/oil-and-gas/regions/east-africa") },
+            { text: "Southern Africa hub", href: localePath("/industries/oil-and-gas/regions/southern-africa") },
+            { text: "UAE operations", href: localePath("/industries/oil-and-gas/markets/united-arab-emirates") },
+            { text: "Saudi Arabia systems", href: localePath("/industries/oil-and-gas/markets/saudi-arabia") },
+            { text: "Nigeria concessions", href: localePath("/industries/oil-and-gas/markets/nigeria") },
           ],
         },
         {

@@ -9,6 +9,10 @@ import {
   OIL_GAS_PAGES_UPDATED,
   oilGasCasePath,
 } from "@/lib/oil-gas-cases";
+import { getAllRegions } from "@/lib/oil-gas/regions";
+import { getAllMarkets } from "@/lib/oil-gas/markets";
+import { getAllArticles } from "@/lib/oil-gas/insights";
+import { getAllResources } from "@/lib/oil-gas/resources";
 
 const SITE_URL = "https://deviewai.com";
 const SERVICE_PAGES_UPDATED = "2026-10-25";
@@ -30,6 +34,7 @@ const publicEnglishPaths = [
   "/insights/four-ai-projects-worth-doing",
   "/insights/why-most-ai-pilots-fail",
   "/outcomes",
+  "/resources",
   "/resources/ai-guide-lending",
   "/resources/automation-playbook",
   "/resources/ai-security-checklist",
@@ -88,6 +93,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE_URL}/en/case-studies/${slug}`,
   }));
 
+  const oilGasRegionalPages = getAllRegions().map((r) => ({
+    url: `${SITE_URL}/en/industries/oil-and-gas/regions/${r.slug}`,
+    lastModified: "2026-10-27",
+  }));
+
+  const oilGasMarketPages = getAllMarkets().map((m) => ({
+    url: `${SITE_URL}/en/industries/oil-and-gas/markets/${m.slug}`,
+    lastModified: "2026-10-27",
+  }));
+
+  const oilGasInsightPages = getAllArticles().map((a) => ({
+    url: `${SITE_URL}/en/insights/${a.slug}`,
+    lastModified: a.publishedAt,
+  }));
+
+  const oilGasResourcePages = getAllResources().map((r) => ({
+    url: `${SITE_URL}/en/resources/${r.slug}`,
+    lastModified: "2026-10-27",
+  }));
+
   return [
     ...existingPages,
     ...servicePages,
@@ -95,5 +120,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...productionCasePages,
     ...marketPages,
     ...oilGasPages,
+    ...oilGasRegionalPages,
+    ...oilGasMarketPages,
+    ...oilGasInsightPages,
+    ...oilGasResourcePages,
   ];
 }
