@@ -61,7 +61,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "ADNOC Group operating companies in partnership with international concession holders (bp, TotalEnergies, Eni, CNPC, INPEX) and major EPCs (Technip, Petrofac, NMDC Energy)."
     },
     deploymentAndSovereignty: {
-      legalMandate: "UAE Federal Decree Law No. 45 on Personal Data Protection and National Cyber Security Standards mandate domestic data residency for national critical infrastructure records.",
+      legalMandate: "UAE Federal Decree-Law No. 45 of 2021 (personal data) and national cyber security standards can restrict where critical infrastructure data is held. Confirm the position for your systems with counsel.",
       buyerPreference: "Air-gapped on-premise data centers or sovereign private cloud environments hosted within UAE-based hyperscalers (e.g., G42 Cloud, Microsoft UAE Central, AWS UAE Region).",
       recommendedArchitecture: "Hybrid sovereign deployment: compute and proprietary embeddings execute inside the operator's dedicated VPC with zero external API calls."
     },
@@ -95,7 +95,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       ownership: "Complete source code ownership or enterprise self-hosting licenses with zero per-seat vendor lock-in."
     },
     proofContext: {
-      relevantExperience: "Deview's core engineering team brings experience from enterprise oil and gas software deliveries (2010–2020), including automated production reporting, capital project controls, and the EnerQuest digital oilfield pilot in Nigeria.",
+      relevantExperience: "Deview's core engineering team brings experience from enterprise oil and gas software deliveries (2010–2020), including automated production reporting, capital project controls, and the EnerQuest upstream production management pilot in Nigeria.",
       boundaries: "Deview acts as a specialized software and architecture engineering partner. We do not claim local corporate incorporation in Abu Dhabi, nor do we claim current formal vendor prequalification on the ADNOC commercial register without local consortium sponsorship."
     },
     buyingTeamChecklist: {
@@ -167,7 +167,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
     buyerProblems: [
       {
         role: "VP of Digital & Information Technology",
-        problem: "Strict regulatory prohibitions on transmitting upstream reservoir, production, or pipeline data to cloud infrastructure outside Saudi borders.",
+        problem: "Data classification rules can restrict sending upstream reservoir, production, or pipeline data to cloud infrastructure outside Saudi borders.",
         impact: "Engineering teams cannot leverage modern AI productivity or centralized analytics tools without risking major regulatory non-compliance."
       },
       {
@@ -210,7 +210,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "Saudi Aramco, SABIC, joint-venture refineries, and global EPC contractors (Samsung Engineering, Saipem, Larsen & Toubro, Nesma)."
     },
     deploymentAndSovereignty: {
-      legalMandate: "SDAIA NDMO and NCA regulations mandate that sensitive government, economic, and critical energy sector data remain physically within the Kingdom of Saudi Arabia.",
+      legalMandate: "SDAIA/NDMO data management standards, the PDPL and NCA controls can restrict transfers of sensitive and critical-sector data outside the Kingdom. Confirm the classification of your data with counsel.",
       buyerPreference: "Aramco-approved on-premise data centers or locally certified cloud providers (e.g., Oracle Cloud Riyadh, Google Cloud Dammam, Alibaba Cloud Riyadh).",
       recommendedArchitecture: "Air-gapped on-premise installation or private tenant within locally hosted sovereign cloud with customer-managed cryptographic keys."
     },
@@ -244,7 +244,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       ownership: "Perpetual enterprise licensing with full code escrow or direct source transfer for internal maintenance."
     },
     proofContext: {
-      relevantExperience: "Deview's engineers have designed enterprise planning, budgeting, and project control platforms for large-scale energy operators between 2010 and 2020, as well as digital oilfield production telemetry unification in the EnerQuest pilot.",
+      relevantExperience: "Deview's engineers have designed enterprise planning, budgeting, and project control platforms for large-scale energy operators between 2010 and 2020, as well as a single production operating view in the EnerQuest upstream production management pilot.",
       boundaries: "Deview is an engineering services provider. We do not represent ourselves as an Aramco-prequalified entity independently, but partner with qualified in-kingdom prime contractors."
     },
     buyingTeamChecklist: {
@@ -359,7 +359,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "NNPC Limited, NUIMS, indigenous E&P operators, IOC joint ventures, and oilfield service companies."
     },
     deploymentAndSovereignty: {
-      legalMandate: "NDPA 2023 mandates protection of operational and commercial data; NUPRC requires transparent audit access for national hydrocarbon accounting.",
+      legalMandate: "The Nigeria Data Protection Act 2023 governs personal data, and NUPRC expects auditable hydrocarbon accounting records. Confirm hosting implications with local counsel.",
       buyerPreference: "In-country hosting at certified Tier-3 data centers in Lagos (e.g., MDXi, Rack Centre) or secure hybrid deployments with offshore edge caching.",
       recommendedArchitecture: "Dual-tier architecture: edge runtimes at remote flow stations communicating securely over TLS to an in-country enterprise database cluster in Lagos."
     },
@@ -393,7 +393,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       ownership: "Perpetual licensing with full source code access and local engineering handover."
     },
     proofContext: {
-      relevantExperience: "Deview delivered the EnerQuest digital oilfield pilot in Nigeria, unifying daily field production data, equipment status, downtime exceptions, and executive reporting into a single operational view without altering SCADA control loops.",
+      relevantExperience: "Deview built the EnerQuest upstream production management pilot in Nigeria. It showed daily production, equipment status, downtime exceptions and management reporting in one operating view, on an illustrative model before any operational data was released.",
       boundaries: "Deview is an engineering partner. We do not claim local E&P operator status, nor do we act as an oilfield service contractor for downhole physical services."
     },
     buyingTeamChecklist: {
@@ -433,7 +433,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       },
       {
         q: "What proof does Deview have in the Nigerian oil and gas sector?",
-        a: "We developed the EnerQuest digital oilfield pilot in Nigeria, creating an integrated field-to-management operating picture for production surveillance, equipment uptime, and exception workflows."
+        a: "We built the EnerQuest upstream production management pilot in Nigeria: one field-to-management operating picture for production, equipment status and exceptions, shown on an illustrative model before any operational data was released."
       }
     ],
     ctas: {
@@ -503,7 +503,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "PDO (Government of Oman, Shell, TotalEnergies, PTTEP), OQ Upstream, bp Oman, Daleel, and international service providers."
     },
     deploymentAndSovereignty: {
-      legalMandate: "Oman Royal Decree 6/2022 mandates that personal and sensitive commercial data generated within the Sultanate must be processed in compliance with national privacy guidelines.",
+      legalMandate: "Oman's Personal Data Protection Law (Royal Decree 6/2022) governs personal data processing. Confirm how it applies to your operational and commercial data with counsel.",
       buyerPreference: "On-premise deployment in operator data centers in Muscat/Mina Al Fahal or local sovereign cloud providers (e.g., Oman Data Park).",
       recommendedArchitecture: "Private single-tenant hosting inside Oman Data Park Tier-3 infrastructure with encrypted backup replications."
     },
@@ -537,7 +537,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       ownership: "Perpetual license with full deployment autonomy and local support handover."
     },
     proofContext: {
-      relevantExperience: "Deview's team has delivered enterprise oil and gas software solutions including production management, AFE tracking, and capital project controls across international markets, reinforced by our EnerQuest digital oilfield deployment.",
+      relevantExperience: "Deview's team has delivered enterprise oil and gas software solutions including production management, AFE tracking, and capital project controls across international markets, reinforced by our EnerQuest upstream production management pilot.",
       boundaries: "Deview provides software development and architecture consulting. We do not claim local physical incorporation in Muscat or independent PDO prequalification status."
     },
     buyingTeamChecklist: {
@@ -647,7 +647,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "QatarEnergy, QatarEnergy LNG, international equity partners (ExxonMobil, TotalEnergies, Shell, Eni, ConocoPhillips), and global Tier-1 EPC contractors."
     },
     deploymentAndSovereignty: {
-      legalMandate: "Qatar National Information Assurance (NIA) standards mandate that critical energy infrastructure telemetry must be hosted on secure national or on-premise infrastructure.",
+      legalMandate: "Qatar's National Information Assurance standards set controls for critical infrastructure systems that often lead operators to national or on-premise hosting. Confirm requirements with counsel.",
       buyerPreference: "Air-gapped on-premise installations at operator headquarters in Doha or Ras Laffan, or locally hosted Microsoft Cloud Qatar regions.",
       recommendedArchitecture: "Private enterprise cloud deployment inside Qatar-accredited cloud regions with customer-held encryption keys and hardware security modules (HSM)."
     },
@@ -791,7 +791,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "EGPC, EGAS, GANOPE, international majors (Eni, bp, Shell, Apache), and local operating joint ventures."
     },
     deploymentAndSovereignty: {
-      legalMandate: "Law No. 151 of 2020 on the Protection of Personal Data and national security decrees mandate in-country storage for sovereign energy records.",
+      legalMandate: "Egypt's Personal Data Protection Law (Law No. 151 of 2020) and sector rules can restrict cross-border transfers. Confirm the position for energy records with local counsel.",
       buyerPreference: "Domestic enterprise data centers in Cairo or Alexandria, or certified sovereign government cloud facilities.",
       recommendedArchitecture: "On-premise deployment within operator data centers with private MPLS connections to field operating offices."
     },
@@ -825,7 +825,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       ownership: "Perpetual enterprise licensing with local engineering empowerment."
     },
     proofContext: {
-      relevantExperience: "Deview's team has delivered production reporting, AFE controls, and upstream data integration solutions spanning 2010–2020, reinforced by the EnerQuest digital oilfield pilot.",
+      relevantExperience: "Deview's team has delivered production reporting, AFE controls, and upstream data integration solutions spanning 2010–2020, reinforced by the EnerQuest upstream production management pilot.",
       boundaries: "Deview is an international software engineering firm. We do not claim local corporate incorporation in Cairo or prequalification on the EGPC vendor registry without local consortium representation."
     },
     buyingTeamChecklist: {
@@ -935,7 +935,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "ANPG, Sonangol E.P., Azule Energy (bp/Eni), TotalEnergies, Chevron (CABGOC), ExxonMobil, and international offshore contractors."
     },
     deploymentAndSovereignty: {
-      legalMandate: "ANPG requires operators to maintain auditable, permanent records of all hydrocarbon extraction and cost-recovery accounts within national jurisdiction.",
+      legalMandate: "ANPG expects operators to maintain auditable records of hydrocarbon production and cost-recovery accounts. Confirm hosting and retention implications with local counsel.",
       buyerPreference: "Hybrid architecture: high-availability edge nodes deployed aboard FPSO vessels with central database replication in Luanda.",
       recommendedArchitecture: "Edge-to-hub deployment: containerized local database on board FPSO syncing via encrypted satellite link to Luanda private cloud."
     },
@@ -969,7 +969,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       ownership: "Perpetual enterprise license with full operational independence."
     },
     proofContext: {
-      relevantExperience: "Deview brings extensive historical enterprise software delivery experience (2010–2020) in production management, AFE tracking, and digital oilfield architecture demonstrated by our EnerQuest deployment in West Africa.",
+      relevantExperience: "Deview brings extensive historical enterprise software delivery experience (2010–2020) in production management, AFE tracking, and a digital oilfield operating view shown in our EnerQuest upstream production management pilot in Nigeria.",
       boundaries: "Deview is a software engineering company. We do not claim local corporate presence in Luanda or direct ANPG operator licensing."
     },
     buyingTeamChecklist: {
@@ -1075,11 +1075,11 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
     operatingEnvironment: {
       assetContext: "Giant Sahara oil and gas fields (Hassi Messaoud, Hassi R'Mel, Berkine Basin), extensive domestic pipeline networks, and coastal LNG plants (Arzew, Skikda).",
       connectivity: "Internal Sonatrach fiber backbones at major industrial centers; satellite and private microwave links connecting isolated desert manifolds.",
-      dataGovernance: "Strict compliance with Algerian Law No. 18-07 on personal data protection and national sovereignty mandates for strategic energy records.",
+      dataGovernance: "Alignment with Algerian Law No. 18-07 on personal data protection and sector rules for strategic energy records, confirmed with local counsel.",
       partnerEcosystem: "Sonatrach, ALNAFT (National Agency for Hydrocarbon Resources), ARH, and international operating partners (Eni, TotalEnergies, Repsol, Equinor)."
     },
     deploymentAndSovereignty: {
-      legalMandate: "Algerian law strictly prohibits the hosting of national strategic resource data and hydrocarbon infrastructure records outside sovereign territory.",
+      legalMandate: "Algerian data protection law (Law No. 18-07) and hydrocarbon sector rules can restrict where strategic resource data is held. Confirm the position for your systems with local counsel.",
       buyerPreference: "Air-gapped on-premise installation within Sonatrach corporate data centers in Algiers, Hassi Messaoud, or Oran.",
       recommendedArchitecture: "Self-contained enterprise software stack deployed on Sonatrach-owned servers with zero external internet dependencies."
     },
@@ -1113,7 +1113,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       ownership: "Perpetual source code or enterprise binary license with complete operational autonomy."
     },
     proofContext: {
-      relevantExperience: "Deview's engineers have designed robust enterprise project controls, production reporting systems, and asset tracking software between 2010 and 2020, reinforced by the EnerQuest digital oilfield pilot.",
+      relevantExperience: "Deview's engineers have designed robust enterprise project controls, production reporting systems, and asset tracking software between 2010 and 2020, reinforced by the EnerQuest upstream production management pilot.",
       boundaries: "Deview provides engineering services. We do not claim local corporate incorporation in Algiers or direct prequalification on the Sonatrach commercial register without local consortium sponsorship."
     },
     buyingTeamChecklist: {
@@ -1223,7 +1223,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "Kuwait Petroleum Corporation (KPC), Kuwait Oil Company (KOC), KNPC, KIPIC, and international EPC conglomerates."
     },
     deploymentAndSovereignty: {
-      legalMandate: "CITRA regulations mandate that critical national infrastructure data and government records must be stored within Kuwaiti national borders.",
+      legalMandate: "CITRA's data classification and cloud regulations can require some government and critical-infrastructure data to stay in Kuwait. Confirm the classification of your data with counsel.",
       buyerPreference: "Air-gapped on-premise installation in KOC data centers in Ahmadi or locally accredited Tier-3 data centers.",
       recommendedArchitecture: "Private single-tenant deployment in the operator's dedicated data center with customer-controlled security keys."
     },
@@ -1367,7 +1367,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       partnerEcosystem: "ENH, TotalEnergies, Eni, ExxonMobil, CNPC, KOGAS, Galp, and major international EPC consortia (Technip, JGC, Saipem)."
     },
     deploymentAndSovereignty: {
-      legalMandate: "INP regulations require operators to keep permanent records of concession exploration, production, and cost-recovery accounts accessible to Mozambican authorities.",
+      legalMandate: "INP expects operators to keep exploration, production and cost-recovery records accessible to Mozambican authorities. Confirm hosting implications with local counsel.",
       buyerPreference: "Hybrid architecture: edge servers aboard FLNG and at Afungi construction sites with central replication to operator offices in Maputo.",
       recommendedArchitecture: "Edge-to-cloud topology: local edge caching nodes with automated batch synchronization over satellite to secure private cloud VPCs in Maputo or South Africa."
     },
@@ -1401,7 +1401,7 @@ export const TIER_1_MARKETS: Record<string, MarketPageData> = {
       ownership: "Perpetual enterprise software license with local Mozambican engineering capacity building."
     },
     proofContext: {
-      relevantExperience: "Deview brings deep enterprise software experience (2010–2020) in project controls, upstream reporting, and remote operations, reinforced by our EnerQuest digital oilfield deployment.",
+      relevantExperience: "Deview brings deep enterprise software experience (2010–2020) in project controls, upstream reporting, and remote operations, reinforced by our EnerQuest upstream production management pilot.",
       boundaries: "Deview is a specialized software engineering firm. We do not claim local corporate registration in Maputo or Pemba without local consortium partnership."
     },
     buyingTeamChecklist: {

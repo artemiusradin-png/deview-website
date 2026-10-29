@@ -189,7 +189,7 @@ export const REGIONAL_HUBS: Record<string, RegionalHub> = {
       operators: "State oil and gas corporations (Sonatrach, EGPC, EGAS, NOC Libya, ONHYM), Mediterranean offshore international operators (Eni, bp, TotalEnergies), and regional oilfield service firms.",
       assetTypes: "Mature onshore oilfields with high water cut, giant deepwater gas fields (e.g., Zohr), long-distance transcontinental gas pipelines, and coastal LNG export terminals.",
       procurementRegime: "Bilingual (Arabic/French/English) tender structures, public procurement oversight, local currency settlement considerations, and engineering workforce development requirements.",
-      hostingAndData: "National data sovereignty laws mandating in-country retention of upstream subsurface data and concession records, with government-approved data center hosting.",
+      hostingAndData: "Data classification and sovereignty rules that often keep upstream subsurface data and concession records in-country, frequently in government-approved data centers.",
       connectivity: "Reliable fiber at Mediterranean coastal terminals and central hubs; high latency or intermittent satellite connectivity across deep Sahara exploration and production concessions."
     },
     keyWorkflows: [
@@ -409,7 +409,7 @@ export const REGIONAL_HUBS: Record<string, RegionalHub> = {
     faqs: [
       {
         q: "What concrete track record does Deview bring to upstream operations in this region?",
-        a: "Deview delivered the EnerQuest digital oilfield pilot in Nigeria, unifying daily field production data, equipment status, downtime exceptions, and management reporting into a single operational picture. In addition, our team draws on a decade of 2010–2020 enterprise software deliveries across upstream planning, capital project controls, and operational reporting."
+        a: "Deview built the EnerQuest upstream production management pilot in Nigeria. It showed daily production, equipment status, downtime exceptions and management reporting in one operating picture, on an illustrative model before any operational data was released. In addition, our team draws on a decade of 2010–2020 enterprise software deliveries across upstream planning, capital project controls, and operational reporting."
       },
       {
         q: "How does your JV and AFE software handle multiple partner currencies and audits?",

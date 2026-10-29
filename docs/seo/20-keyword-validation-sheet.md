@@ -13,7 +13,7 @@ The 100-keyword operational registry serves as Deview's research universe. For t
 
 ### Selection Criteria:
 1. **Search & Buyer Intent:** Direct match with enterprise procurement, engineering evaluation, or regional vendor shortlisting.
-2. **Deview Operating Evidence:** Direct tie to verified operational capabilities (EnerQuest 12,000 bpd field telemetry, Minima AI private VPC distribution, Tomskneft capital project controls, or Lukoil engineering data platforms).
+2. **Deview Operating Evidence:** Direct tie to approved proof points (EnerQuest upstream production management pilot (illustrative model), Minima AI private VPC distribution, Tomskneft capital project controls, or Lukoil engineering data platforms).
 3. **1:1 Asset Ownership:** Every target query is mapped to exactly one owner page to eliminate cannibalization.
 4. **Doorway Elimination:** Rooted in distinct regional regulations (NUPRC/NCDMB in Nigeria, ANPG in Angola, TDRA/MoIAT in UAE, PDPL/NCA in Saudi Arabia, EGPC in Egypt).
 
@@ -25,12 +25,12 @@ The 100-keyword operational registry serves as Deview's research universe. For t
 |---|---|---|---|---|---|---|
 | **KW-01** | `oil and gas software development UAE` | Commercial | `CP-01` · `/en/industries/oil-and-gas/markets/united-arab-emirates` | Digital Transformation VP / Regional Asset GM | MoIAT ICV & domestic sovereign hosting | ≥25 impressions, position ≤30 |
 | **KW-02** | `oil and gas software development Saudi Arabia` | Commercial | `CP-02` · `/en/industries/oil-and-gas/markets/saudi-arabia` | VP Information Technology / Petroleum Systems Lead | PDPL data sovereignty & on-premise air-gap | ≥25 impressions, position ≤30 |
-| **KW-03** | `oil and gas software development Nigeria` | Commercial | `CP-03` · `/en/industries/oil-and-gas/markets/nigeria` | Managing Director / Asset Operations Lead | EnerQuest operating proof (12,000 bpd telemetry) | ≥30 impressions, position ≤25 |
+| **KW-03** | `oil and gas software development Nigeria` | Commercial | `CP-03` · `/en/industries/oil-and-gas/markets/nigeria` | Managing Director / Asset Operations Lead | EnerQuest pilot (illustrative model; no volumes) | ≥30 impressions, position ≤25 |
 | **KW-04** | `oil and gas software development Angola` | Commercial | `CP-08` · `/en/industries/oil-and-gas/markets/angola` | Production Operations Lead / Concession GM | Block 0/14 deepwater telemetry & offline edge sync | ≥15 impressions, position ≤35 |
 | **KW-05** | `oil and gas software development Egypt` | Commercial | `CP-07` · `/en/industries/oil-and-gas/markets/egypt` | General Petroleum Company / JV Controller | Multi-concession JV accounting & EGPC compliance | ≥20 impressions, position ≤30 |
 | **KW-06** | `sovereign industrial AI for GCC energy` | Solution | `RG-01` · `/en/industries/oil-and-gas/regions/middle-east` | Chief Information Security Officer / Enterprise Architect | Minima AI (mnma.ai) private VPC distribution | ≥20 impressions, position ≤30 |
 | **KW-07** | `GCC project controls software` | Solution | `SO-01` · `/en/industries/oil-and-gas/gazprom-neft-project-scheduling-control-system` | Capital Projects Director / EPC Program Manager | Tomskneft / Gazprom Neft 1,400+ task network proof | ≥20 impressions, position ≤25 |
-| **KW-08** | `Africa upstream production reporting software` | Solution | `RG-03` · `/en/industries/oil-and-gas/regions/west-central-africa` | VP Upstream Operations / Production Engineering Lead | EnerQuest field telemetry & offline back-allocation | ≥25 impressions, position ≤25 |
+| **KW-08** | `Africa upstream production reporting software` | Solution | `RG-03` · `/en/industries/oil-and-gas/regions/west-central-africa` | VP Upstream Operations / Production Engineering Lead | EnerQuest pilot (production and exception views) | ≥25 impressions, position ≤25 |
 | **KW-09** | `oil and gas JV accounting software` | Solution | `LM-02` · `/en/resources/oil-gas-project-controls-jv-reporting-checklist` | Joint Venture Controller / Commercial Finance Director | Concession audit trails & WBS SAP reconciliation | ≥20 impressions, position ≤25 |
 | **KW-10** | `oil and gas IT OT integration architecture` | Technical | `LM-03` · `/en/resources/oil-gas-it-ot-architecture-checklist` | CISO / SCADA & Automation Engineering Manager | Purdue Level 3.5 IDMZ & optical diode topology | ≥30 impressions, position ≤20 |
 | **KW-11** | `one way SCADA integration` | Technical | `IN-02` · `/en/insights/oil-gas-it-ot-data-platform-architecture` | Principal OT Architect / Industrial Control Systems Lead | Unidirectional optical hardware diode isolation | ≥25 impressions, position ≤20 |
