@@ -1,6 +1,15 @@
 import { NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+const NO_CACHE_HEADERS = {
+  "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
+  Pragma: "no-cache",
+  Expires: "0",
+};
+
 const DEFAULT_TASK_MANAGER_URL = "https://deview-task-manager.netlify.app";
 
 export async function GET(
@@ -40,16 +49,19 @@ export async function GET(
         position: m.position,
       }));
 
-    return NextResponse.json({
-      reference: portal.reference,
-      clientName: portal.client_name,
-      projectTitle: portal.project_title,
-      currentStage: portal.current_stage,
-      createdAt: portal.created_at,
-      updatedAt: portal.updated_at,
-      milestones,
-      documents: [],
-    });
+    return NextResponse.json(
+      {
+        reference: portal.reference,
+        clientName: portal.client_name,
+        projectTitle: portal.project_title,
+        currentStage: portal.current_stage,
+        createdAt: portal.created_at,
+        updatedAt: portal.updated_at,
+        milestones,
+        documents: [],
+      },
+      { headers: NO_CACHE_HEADERS },
+    );
   }
 
   // Fallback: task manager proxy (used only when Supabase env vars are not set)
@@ -58,30 +70,32 @@ export async function GET(
   ).replace(/\/+$/, "");
 
   const upstreamUrl = `${taskManagerUrl}/api/client-portals/${encodeURIComponent(ref)}`;
+  const sep = upstreamUrl.includes("?") ? "&" : "?";
+  const upstreamUrlWithCacheBust = `${upstreamUrl}${sep}_t=${Date.now()}`;
 
   let upstream: Response;
   try {
-    upstream = await fetch(upstreamUrl, {
+    upstream = await fetch(upstreamUrlWithCacheBust, {
       headers: { Accept: "application/json" },
       cache: "no-store",
     });
   } catch {
-    return NextResponse.json({ error: "Service unavailable" }, { status: 503 });
+    return NextResponse.json({ error: "Service unavailable" }, { status: 503, headers: NO_CACHE_HEADERS });
   }
 
   if (upstream.status === 404) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+    return NextResponse.json({ error: "Not found" }, { status: 404, headers: NO_CACHE_HEADERS });
   }
 
   if (!upstream.ok) {
-    return NextResponse.json({ error: "Upstream error" }, { status: 502 });
+    return NextResponse.json({ error: "Upstream error" }, { status: 502, headers: NO_CACHE_HEADERS });
   }
 
   let data: unknown;
   try {
     data = await upstream.json();
   } catch {
-    return NextResponse.json({ error: "Invalid response" }, { status: 502 });
+    return NextResponse.json({ error: "Invalid response" }, { status: 502, headers: NO_CACHE_HEADERS });
   }
 
   // The task manager stores download routes as relative URLs so they remain
@@ -99,5 +113,5 @@ export async function GET(
     });
   }
 
-  return NextResponse.json(data);
+  return NextResponse.json(data, { headers: NO_CACHE_HEADERS });
 }

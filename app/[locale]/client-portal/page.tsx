@@ -292,7 +292,9 @@ function LoginView({
     setErrorMsg("");
 
     try {
-      const res = await fetch(`/api/client-portal/${encodeURIComponent(ref)}`);
+      const res = await fetch(`/api/client-portal/${encodeURIComponent(ref)}`, {
+        cache: "no-store",
+      });
       if (res.status === 404) {
         setStatus("error");
         setErrorMsg(t.notFound);
@@ -409,30 +411,57 @@ export default function ClientPortalPage() {
   const [portal, setPortal] = useState<Portal | null>(null);
   const [hydrated, setHydrated] = useState(false);
 
+  const fetchPortalData = useCallback(async (ref: string, silent = false) => {
+    try {
+      const res = await fetch(
+        `/api/client-portal/${encodeURIComponent(ref)}`,
+        { cache: "no-store" },
+      );
+      if (res.ok) {
+        const data: Portal = await res.json();
+        setPortal(data);
+        return true;
+      } else if (!silent) {
+        sessionStorage.removeItem(STORAGE_KEY);
+        setPortal(null);
+      }
+    } catch {
+      // ignore
+    }
+    return false;
+  }, []);
+
   const tryAutoLoad = useCallback(async () => {
     const saved = sessionStorage.getItem(STORAGE_KEY);
     if (!saved) {
       setHydrated(true);
       return;
     }
-    try {
-      const res = await fetch(
-        `/api/client-portal/${encodeURIComponent(saved)}`,
-      );
-      if (res.ok) {
-        setPortal(await res.json());
-      } else {
-        sessionStorage.removeItem(STORAGE_KEY);
-      }
-    } catch {
-      // ignore
-    }
+    await fetchPortalData(saved);
     setHydrated(true);
-  }, []);
+  }, [fetchPortalData]);
 
   useEffect(() => {
     void Promise.resolve().then(tryAutoLoad);
   }, [tryAutoLoad]);
+
+  useEffect(() => {
+    function handleSync() {
+      if (document.visibilityState === "visible") {
+        const saved = sessionStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          void fetchPortalData(saved, true);
+        }
+      }
+    }
+
+    window.addEventListener("focus", handleSync);
+    document.addEventListener("visibilitychange", handleSync);
+    return () => {
+      window.removeEventListener("focus", handleSync);
+      document.removeEventListener("visibilitychange", handleSync);
+    };
+  }, [fetchPortalData]);
 
   function handleSuccess(p: Portal, reference: string) {
     sessionStorage.setItem(STORAGE_KEY, reference);
