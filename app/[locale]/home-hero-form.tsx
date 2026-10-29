@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { buildInquiryMailto } from "@/lib/site-contact";
+import { getAttributionContext } from "@/lib/analytics/events";
 import styles from "./home.module.css";
 
 /**
@@ -32,7 +33,7 @@ export function HeroInquiryForm() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(inquiry),
+        body: JSON.stringify({ ...inquiry, attribution: getAttributionContext() }),
       });
       const result = await response.json().catch(() => null);
       if (response.ok && result?.ok) {

@@ -9,7 +9,7 @@ import { SubpageNav } from "@/components/SubpageNav";
 import { CalendlyInlineWidget } from "@/components/ui/calendly-inline-widget";
 import { useLocaleContext } from "@/lib/i18n/locale-context";
 import { SITE_INQUIRY_EMAIL, buildInquiryMailto } from "@/lib/site-contact";
-import { emitAnalyticsEvent } from "@/lib/analytics/events";
+import { emitAnalyticsEvent, getAttributionContext } from "@/lib/analytics/events";
 
 const rise = {
   initial: { opacity: 0, y: 20 },
@@ -78,7 +78,7 @@ function ContactFormInner() {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({ name, email, company, details, honeypot }),
+        body: JSON.stringify({ name, email, company, details, honeypot, attribution: getAttributionContext() }),
       });
       const data = (await res.json().catch(() => null)) as {
         ok?: boolean;

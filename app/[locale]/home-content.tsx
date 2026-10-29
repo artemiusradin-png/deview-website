@@ -18,6 +18,7 @@ import { INSIGHT_ARTICLES } from "@/lib/insights";
 import { SERVICE_LINES } from "@/lib/workflow-offers";
 import { servicePageFor, servicePagePath } from "@/lib/service-pages";
 import { SITE_INQUIRY_EMAIL, buildInquiryMailto } from "@/lib/site-contact";
+import { getAttributionContext } from "@/lib/analytics/events";
 import styles from "./home.module.css";
 
 function Arrow({
@@ -378,7 +379,7 @@ export function HomeContent({
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(inquiry),
+        body: JSON.stringify({ ...inquiry, attribution: getAttributionContext() }),
       });
       const result = await response.json().catch(() => null);
       if (response.ok && result?.ok) {
