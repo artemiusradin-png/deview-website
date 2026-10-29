@@ -11,7 +11,54 @@ type InquiryInput = {
   details: string;
 };
 
-async function saveInquiry(req: Request, input: InquiryInput) {
+/** Where the enquiry came from: the page the visit started on, its source and referrer, and the form page. */
+type InquiryAttribution = {
+  landingPage: string;
+  source: string;
+  referrer: string;
+  formPage: string;
+  utm: Record<string, string>;
+};
+
+function readAttribution(req: Request, raw: unknown): InquiryAttribution {
+  const a = raw && typeof raw === "object" ? (raw as Record<string, unknown>) : {};
+  const text = (value: unknown, max: number) => (typeof value === "string" ? value.trim().slice(0, max) : "");
+  const utm =
+    a.utmParams && typeof a.utmParams === "object"
+      ? Object.fromEntries(
+          Object.entries(a.utmParams as Record<string, unknown>)
+            .filter(([k, v]) => k.startsWith("utm_") && typeof v === "string")
+            .slice(0, 10)
+            .map(([k, v]) => [k.slice(0, 50), String(v).slice(0, 200)])
+        )
+      : {};
+  let formPage = "";
+  try {
+    formPage = new URL(req.headers.get("referer") || "").pathname.slice(0, 300);
+  } catch {
+    // No or malformed Referer header: leave the form page blank.
+  }
+  return {
+    landingPage: text(a.firstTouchLanding, 300) || formPage || "unknown",
+    source: text(a.firstTouchSource, 200) || "direct",
+    referrer: text(a.referrer, 500),
+    formPage,
+    utm,
+  };
+}
+
+function attributionText(a: InquiryAttribution) {
+  return [
+    "--- Where this enquiry came from ---",
+    `Landing page: ${a.landingPage}`,
+    `Source: ${a.source}`,
+    `Referrer: ${a.referrer || "none"}`,
+    `Form page: ${a.formPage || "unknown"}`,
+    `UTM: ${Object.keys(a.utm).length ? JSON.stringify(a.utm) : "none"}`,
+  ].join("\n");
+}
+
+async function saveInquiry(req: Request, input: InquiryInput, attribution: InquiryAttribution) {
   const supabase = getSupabaseAdmin();
   if (!supabase) return { skipped: true };
 
@@ -22,6 +69,7 @@ async function saveInquiry(req: Request, input: InquiryInput) {
     details: input.details,
     source: "contact_form",
     status: "new",
+    attribution,
     user_agent: req.headers.get("user-agent"),
     ip_address:
       req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
@@ -37,9 +85,9 @@ async function saveInquiry(req: Request, input: InquiryInput) {
   return { saved: true };
 }
 
-async function sendNotification(input: InquiryInput) {
-  const subject = `[Deview inquiry] ${input.name}`;
-  const message = buildInquiryText(input);
+async function sendNotification(input: InquiryInput, attribution: InquiryAttribution) {
+  const subject = `[Deview inquiry] ${input.name} (${attribution.landingPage})`;
+  const message = `${buildInquiryText(input)}\n\n${attributionText(attribution)}`;
   const text = `Name: ${input.name}\n${message}`;
   const resendApiKey = process.env.RESEND_API_KEY?.trim();
   const emailFrom = process.env.EMAIL_FROM?.trim();
@@ -125,12 +173,13 @@ export async function POST(req: Request) {
   }
 
   const input = { name, email, company, details };
-  const saveResult = await saveInquiry(req, input);
+  const attribution = readAttribution(req, data.attribution);
+  const saveResult = await saveInquiry(req, input, attribution);
   if ("error" in saveResult) {
     console.warn("[contact] inquiry not saved to database, attempting email notification");
   }
 
-  const notified = await sendNotification(input);
+  const notified = await sendNotification(input, attribution);
   if (notified) {
     return NextResponse.json({ ok: true });
   }

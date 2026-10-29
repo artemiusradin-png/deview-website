@@ -1,4 +1,5 @@
 import { SiteFrame } from "@/components/SiteFrame";
+import { AttributionCapture } from "@/components/analytics/AttributionCapture";
 import { ConsentBanner } from "@/components/analytics/ConsentBanner";
 
 export function generateStaticParams() {
@@ -13,6 +14,7 @@ export default function LocaleLayout({
 }) {
   return (
     <SiteFrame>
+      <AttributionCapture />
       {children}
       <ConsentBanner />
     </SiteFrame>

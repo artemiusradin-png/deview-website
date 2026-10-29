@@ -42,6 +42,8 @@ export default function PrivacyPage() {
         <p>
           When you interact with our forms or download technical resources, our servers automatically log technical
           request metadata, including your IP address, HTTP User-Agent header, referring URL, and request timestamps.
+          Your browser also notes, for the current visit only, the page your visit started on and how you arrived
+          (referring site or campaign tags); this is sent to us only together with a form you submit.
         </p>
         <p>
           <strong>Purposes:</strong> Infrastructure defense, distributed rate limiting to prevent denial-of-service and
