@@ -45,7 +45,11 @@ export default async function CaseStudyPage({ params }: Props) {
           {project.slug === "covenant-desk" ? (
             <section className="mt-12 border-t border-[var(--border)] pt-10" aria-labelledby="lenders-title">
               <p className="page-kicker mb-4">Loan management systems</p>
-              <h2 id="lenders-title" className="mb-6">Five independent lender deployments. 17,000+ borrower records supported.</h2>
+              <h2 id="lenders-title" className="mb-6">In production with five Hong Kong lenders. 17,000+ borrower records supported.</h2>
+              <p className="mb-8 max-w-3xl text-[var(--text-muted)]">
+                Covenant Desk is the AI lending system for mid-sized and enterprise banks, and for lending companies with 50 or more staff, across Asia. The lenders below run it in production today. Product, security and integration details are on{" "}
+                <a href="https://covenantdesk.hk/" className="underline underline-offset-4">covenantdesk.hk</a>.
+              </p>
               <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-5">
                 {LENDING_PROJECTS.map((lender) => (
                   <li key={lender.slug} className="border-t border-[var(--border)] pt-3">

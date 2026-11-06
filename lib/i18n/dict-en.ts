@@ -1303,9 +1303,9 @@ export const en = {
       },
       {
         number: "02",
-        sector: "FINANCE / LENDING · HONG KONG",
-        service: "Lending Operations Platform",
-        headline: "Covenant Desk: one governed lending record for 17,000+ borrower profiles",
+        sector: "FINANCE / LENDING · ASIA",
+        service: "AI Lending Platform",
+        headline: "Covenant Desk: the AI lending system for banks, in production with 17,000+ borrower profiles",
         challenge: "Borrower intake, identity checks, credit review, loan servicing, repayments, collections, and reporting were split across spreadsheets, inboxes, messaging apps, and separate company ledgers. Staff had no single borrower view and cross-company exposure checks required manual searches.",
         solution: "Covenant Desk brings the workflow into one permission-scoped platform: a management portal, staff tools, and borrower self-service connected to the same record. It supports enquiry intake, eKYC and AML, lender-defined scoring rules, human approvals, agreements, repayment servicing, collections, reporting, and auditable AI-assisted review.",
         capabilities: [
