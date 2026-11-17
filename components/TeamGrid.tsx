@@ -19,6 +19,7 @@ const PORTRAIT_CROPS: Record<string, { focus: string; zoom: number }> = {
   "/team/alberto-castineiras-800.webp": { focus: "50% 20%", zoom: 1.05 },
   "/team/yu-fu-kuo-800.webp": { focus: "50% 10%", zoom: 1 },
   "/team/sebastian-alarie-lacerte-800.webp": { focus: "50% 20%", zoom: 1 },
+  "/team/andrew-kazantsev-800.webp": { focus: "50% 22%", zoom: 1 },
 };
 
 /**
@@ -27,18 +28,31 @@ const PORTRAIT_CROPS: Record<string, { focus: string; zoom: number }> = {
  * larger cards per row (About page). Portraits share a warm monochrome grade; hovering a card
  * brings back its colour and slides the bio up. On touch screens the "grid" variant prints the
  * bio under the photo instead.
+ *
+ * Pass `people` to render another group (the supervisory board) with the same cards and no
+ * "+N more" tile.
  */
-export function TeamGrid({ variant = "strip" }: { variant?: "strip" | "grid" }) {
+type Person = { name: string; role: string; photo?: string; initials: string; bio: string };
+
+export function TeamGrid({
+  variant = "strip",
+  people,
+  label = "The Deview team",
+}: {
+  variant?: "strip" | "grid";
+  people?: readonly Person[];
+  label?: string;
+}) {
   const { dict } = useLocaleContext();
   const { team } = dict.aboutPage;
   const leadName = `${dict.leadership.firstName} ${dict.leadership.lastName}`;
-  const members = team.members.filter((member) => member.name);
-  const unlisted = team.size - members.length;
+  const members = (people ?? team.members).filter((member) => member.name);
+  const unlisted = people ? 0 : team.size - members.length;
   return (
     <ul
       className={styles.grid}
       data-variant={variant}
-      aria-label="The Deview team"
+      aria-label={label}
     >
       {members.map((member, index) => {
         const crop = member.photo ? PORTRAIT_CROPS[member.photo] : undefined;

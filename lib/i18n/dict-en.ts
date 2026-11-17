@@ -1157,6 +1157,22 @@ export const en = {
       moreLabel: "The wider team",
       moreBody: "more engineers and specialists across our four offices.",
     },
+    /** The supervisory board: shown in its own section on the About page, outside the team headcount. */
+    board: {
+      label: "Supervisory board",
+      title: "Product leadership on the board.",
+      intro:
+        "Our supervisory board brings outside operating experience to Deview's leadership, with a focus on product strategy and scale.",
+      members: [
+        {
+          name: "Andrew Kazantsev",
+          role: "Member of the Supervisory Board",
+          photo: "/team/andrew-kazantsev-800.webp",
+          initials: "AK",
+          bio: "Chief Product Development Officer at Binotel, where he leads a portfolio of 7+ SaaS products and nine Scrum teams of over 70 people. Previously led enterprise products at Creatio. Advises Deview on product strategy and scaling product teams.",
+        },
+      ],
+    },
     h1: "We build AI that does the work: not AI that answers questions about it.",
     introHK: "Deview is an AI consulting and engineering firm headquartered in Hong Kong, with sales offices in Vancouver, Edinburgh, and Stuttgart. We work with operations and finance teams at mid-market and enterprise companies to build AI systems that reduce manual work, cut operating costs, and automate repetitive workflows.",
     introNonHK: "Deview is an AI consulting and engineering firm with teams in Hong Kong, Vancouver, Edinburgh, and Stuttgart. We work with operations and finance teams at mid-market and enterprise companies to build AI systems that reduce manual work, cut operating costs, and automate repetitive workflows.",
