@@ -330,10 +330,30 @@ export function AboutContent() {
           <TeamGrid variant="grid" />
         </section>
 
+        <section
+          className={`${styles.section} ${styles.container}`}
+          aria-labelledby="board-title"
+        >
+          <div className={styles.sectionHead}>
+            <div>
+              <span className={styles.kicker}>04 / {dict.aboutPage.board.label}</span>
+              <h2 id="board-title" className={styles.sectionTitle}>
+                {dict.aboutPage.board.title}
+              </h2>
+            </div>
+            <span className={styles.sectionLead}>{dict.aboutPage.board.intro}</span>
+          </div>
+          <TeamGrid
+            variant="grid"
+            people={dict.aboutPage.board.members}
+            label={dict.aboutPage.board.label}
+          />
+        </section>
+
         <section className={styles.where} aria-labelledby="where-title">
           <div className={`${styles.container} ${styles.whereGrid}`}>
             <div>
-              <span className={styles.kicker}>04 / Where we are</span>
+              <span className={styles.kicker}>05 / Where we are</span>
               <h2 id="where-title" className={styles.sectionTitle}>
                 Four cities.
                 <br />
